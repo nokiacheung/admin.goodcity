@@ -1,0 +1,42 @@
+<div {{bind-attr class=":offer-status isSubmitted isUnderReview isReviewed isScheduled isClosed"}}>
+  <div class='status-message'>
+    {{#if model.isSubmitted}}
+      {{t 'offer.offer_details.submitted_status'}}
+    {{else if isUnderReview}}
+      {{#if reviewedBy.hasImage}}
+        <span>
+          {{view 'custom-img-tag' src=reviewedBy.displayImageUrl class="no-avatar"}}
+        </span>
+      {{else}}
+        <span class="no-avatar">{{model.reviewedBy.nameInitial}}</span>
+      {{/if}}
+      <span>{{t 'offer.offer_details.in_review_status' firstName=model.reviewedBy.firstName}}</span>
+    {{else if isReviewed}}
+      {{t 'offer.offer_details.reviewed_message'}} {{t 'offer.offer_details.please'}} {{#link-to "offer.plan_delivery"}}{{t 'offer.offer_details.transport'}}{{/link-to}}.
+    {{else if isClosed}}
+      {{t 'offer.offer_details.closed_offer_message'}}
+    {{else if isScheduled}}
+      {{#if model.delivery.isAlternate}}
+        {{t 'offer.offer_details.is_collection'}}
+      {{else if model.delivery.isDropOff}}
+        {{t 'offer.offer_details.is_drop_off'}}
+      {{else if model.delivery.isGogovan}}
+        {{t 'offer.offer_details.is_gogovan'}}
+      {{/if}}
+
+      <i class="fa fa-truck"></i>
+      <b>
+        {{#if model.delivery.isGogovan}}
+          {{model.delivery.schedule.slotName}},
+        {{/if}}
+
+        {{schedule-time-status model.delivery.schedule.scheduledAt}}
+
+        {{#if model.delivery.noGogovan}}
+          , {{model.delivery.schedule.dayTime}}
+        {{/if}}
+
+      </b>
+    {{/if}}
+  </div>
+</div>

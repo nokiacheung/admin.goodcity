@@ -1,0 +1,36 @@
+{{#if isDraft}}
+  <div class="row">
+    <div class="small-6 columns">
+      <a href="#" {{action 'addItem'}} class="button secondary expand"><span class="icon-add"></span>{{t "offer.index.add_item"}}</a>
+    </div>
+    <div class="small-6 columns">
+      {{#link-to 'offer.confirm' id='all_done' classNames='button expand'}}{{t "offer.index.confirm"}}{{/link-to}}
+    </div>
+  </div>
+{{else}}
+
+  <div class= 'row'>
+    {{partial 'offer/status_message'}}
+  </div>
+
+  <div class= 'row'>
+    <dl class="tabs">
+      {{#link-to 'offer.offer_details' tagName="dd" classNames="small-6 columns text-center"}}
+        {{#link-to 'offer.offer_details'}}
+          <i class="fa fa-comment-o fa-2x"></i>
+          {{#if model.hasUnreadMessages}}
+            <i class="fa fa-circle fa-1x unread"></i>
+          {{/if}}
+          <span class='tab_title'>{{t 'offer.offer_details.heading'}}</span>
+        {{/link-to}}
+      {{/link-to}}
+
+      {{#link-to 'offer.transport_details' tagName="dd" classNames="small-6 columns text-center"}}
+        {{#link-to 'offer.transport_details'}}
+          <i class="fa fa-truck fa-2x"></i>
+          <span class='tab_title'>{{t 'offer.transport_details.heading'}}</span>
+        {{/link-to}}
+      {{/link-to}}
+    </dl>
+  </div>
+{{/if}}

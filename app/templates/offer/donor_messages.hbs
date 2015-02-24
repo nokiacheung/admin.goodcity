@@ -1,0 +1,41 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'review_offer.items' offer classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Messages</h1>
+  </section>
+</nav>
+
+<section class="main-section offer_details">
+  <div class="row">
+    <div class="small-12 columns">
+
+      <dl class="tabs">
+        {{#link-to 'offer.donor_messages' tagName="dd" classNames="small-6 columns text-center"}}
+          {{#link-to 'offer.donor_messages'}}
+            <i class="fa fa-comment-o fa-2x"></i>
+            {{#if offer.hasUnreadDonorMessages}}
+              <i class="fa fa-circle fa-1x unread"></i>
+            {{/if}}
+            <span class='tab_title'>Donor Messages</span>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'offer.supervisor_messages' tagName="dd" classNames="small-6 columns text-center"}}
+          {{#link-to 'offer.supervisor_messages'}}
+            <i class="fa fa-comment-o fa-2x"></i>
+            {{#if offer.hasUnreadPrivateMessages}}
+              <i class="fa fa-circle fa-1x unread"></i>
+            {{/if}}
+            <span class='tab_title'>Supervisor Messages</span>
+          {{/link-to}}
+        {{/link-to}}
+      </dl>
+
+    </div>
+  </div>
+</section>
+
+{{partial 'message_template'}}

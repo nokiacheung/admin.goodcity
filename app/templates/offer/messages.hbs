@@ -1,0 +1,15 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#if staffMessagesPage}}
+      {{#link-to 'review_offer.items' offer classNames="back"}}{{t "back"}}{{/link-to}}
+    {{else}}
+      {{#link-to 'offer.offer_details' offer classNames="back"}}{{t "back"}}{{/link-to}}
+    {{/if}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Messages</h1>
+  </section>
+</nav>
+
+{{partial 'message_template'}}

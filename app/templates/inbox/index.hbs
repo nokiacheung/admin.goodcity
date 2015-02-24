@@ -1,0 +1,51 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">
+    {{partial 'inbox/offers_list_title'}}
+    </h1>
+  </section>
+</nav>
+
+<section class="main-section">
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="list list-activity">
+        {{#each offer in arrangedContent}}
+          <li>
+            {{#link-to 'review_offer' offer}}
+              <span class="avatar">
+                <span class="no-avatar">{{offer.createdBy.nameInitial}}</span>
+              </span>
+
+              <span class="info">
+                <h3>
+                  {{t "full_name" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
+                </h3>
+                <p>{{t "inbox.new_items"}}: {{offer.itemCount}}</p>
+                {{#if offer.hasUnreadMessages}}
+                  <p>{{t "inbox.unread_messages" unreadMessagesCount=offer.unreadMessagesCount}}</p>
+                {{/if}}
+                <p>{{offer.createdBy.address.district.name}}</p>
+
+                {{#if controller.newOffers}}
+                  {{view 'time-ago' timeValue=offer.submittedAt}}
+                {{else}}
+                  {{view 'time-ago' timeValue=offer.reviewedAt}}
+                {{/if}}
+              </span>
+
+              <span class="list-image">
+                <img {{bind-attr src=offer.displayImageUrl}} class="thumb small" />
+              </span>
+
+            {{/link-to}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+.unread_message {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  float: right;
+  margin-right: 1rem;
+  margin-top: -2.5rem;
+
+  @media #{$small-only} {
+    margin-top: -2.2rem;
+  }
+}

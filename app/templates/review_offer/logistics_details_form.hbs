@@ -1,0 +1,36 @@
+{{#validatable-form class="form-horizontal" action="completeReview" on="submit"}}
+
+  <div class="small-12 columns gogovan-req">
+    <div class='description'>Gogovan Hire Requirement</div>
+
+    <div class='radio-buttons'>
+      {{#each option in gogovanOptions}}
+        <span class="radio">
+          {{view 'radio-button' name="selectionTest" selectionBinding='controller.selectedGogovanOption' value=option.id id=option.id}}
+          <label class="radio-wrap small-only-text-center" {{bind-attr for=option.id}}>
+            {{option.name}}
+          </label>
+        </span>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="small-12 columns gogovan-req">
+    <div class='description'>What portion of the Crossroads truck will this offer take up?</div>
+
+    {{view "select"
+      contentBinding='crossroadsOptions'
+      optionLabelPath='content.name'
+      optionValuePath='content.id'
+      selectionBinding='selectedCrossroadsOption'
+      prompt='Select'
+      required='true'}}
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns complete-review-button">
+      <button class="button expand">Complete Review</button>
+    </div>
+  </div>
+
+{{/validatable-form}}

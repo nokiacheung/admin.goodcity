@@ -1,0 +1,9 @@
+.offer-index {
+  ul {
+    margin-top: 1rem !important;
+
+    li:last-child {
+      border-bottom: 1px solid $light-blue !important;
+    }
+  }
+}

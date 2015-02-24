@@ -1,0 +1,61 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'offer.transport_details' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "plan_delivery.title"}}</h1>
+  </section>
+</nav>
+
+<section class="main-section plan_delivery">
+  <div class="row">
+    <div class="small-12 columns">
+
+      {{#if hasGogovanTransport}}
+        <div class="row">
+          <div class="small-8 columns left">
+            <h3>{{t "plan_delivery.fastest.title"}} <i class="fa fa-check-circle"></i></h3>
+            {{t "plan_delivery.fastest.info"}}<br/>
+            <a href="#" {{action 'startDelivery' 'Gogovan'}} class="button">{{t "plan_delivery.fastest.booking_button"}}</a>
+          </div>
+          <div class="small-4 columns right">
+            <div class="cost">{{t "plan_delivery.fastest.cost" cost=gogovanPrice}}</div>
+            {{#link-to 'offer.gogovan_charges' class='learn_more'}}{{t "plan_delivery.fastest.learn_more"}}{{/link-to}}<br/>
+            <img src="assets/images/gogo-van.jpg" class='delivery-image'/>
+          </div>
+        </div>
+        <hr>
+      {{/if}}
+
+      {{#if offer.hasCrossroadsTransport}}
+        <div class="row">
+          <div class="small-8 columns left">
+            <h3>{{t "plan_delivery.alternate.title"}}</h3>
+            {{t "plan_delivery.alternate.info"}}<br/>
+            <a href="#" {{action 'startDelivery' 'Alternate'}} class="button">{{t "plan_delivery.alternate.booking_button"}}</a>
+          </div>
+          <div class="small-4 columns right">
+            <div class="cost">{{t "plan_delivery.alternate.cost" cost=offer.crossroadsTruckCost}}</div>
+            {{#link-to 'offer.collection_charges' class='learn_more'}}{{t "plan_delivery.fastest.learn_more"}}{{/link-to}}<br/>
+            <img src="assets/images/alternate-delivery.jpg" class='delivery-image'/>
+          </div>
+        </div>
+        <hr>
+      {{/if}}
+
+      <div class="row">
+        <div class="small-8 columns left">
+          <h3>{{t "plan_delivery.crossroads.title"}}</h3>
+          {{t "plan_delivery.crossroads.info"}}<br/>
+          <a href="#" {{action 'startDelivery' 'Drop Off'}} class="button">{{t "plan_delivery.crossroads.booking_button"}}</a>
+        </div>
+        <div class="small-4 columns right">
+          <div class="cost">{{t "plan_delivery.crossroads.free"}}</div>
+          <img src="assets/images/PlanTransport_DropOff.jpg" class='delivery-image'/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+<nav {{bind-attr class=":tab-bar :offer_details_title model.isDraft::non-draft"}}>
+  <section class="left-small">
+    {{#if displayHomeLink}}
+      {{#link-to 'offers.index' classNames="back"}}{{t "back"}}{{/link-to}}
+    {{/if}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t 'offer.offer_details.heading'}}</h1>
+  </section>
+  {{partial 'offer/header_icons'}}
+</nav>
+<section class="main-section offer_details">
+  <div class="row">
+    <div class="small-12 columns">
+      {{partial 'offer/offer_top_section'}}
+      {{partial 'offer/message_section'}}
+    </div>
+  </div>
+</section>
+
+{{#if firstEverItem }}
+  {{partial "offer/display_joyride"}}
+{{/if}}

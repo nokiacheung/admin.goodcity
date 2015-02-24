@@ -1,0 +1,15 @@
+{{#if controller.newOffers}}
+  {{t "inbox.title"}}
+{{else if controller.myOffers}}
+  {{t "inbox.my_offers"}}
+{{else if controller.reviewedOffers}}
+  {{t "inbox.reviewed_offers"}}
+{{else if controller.scheduledOffers}}
+  {{t "inbox.scheduled_offers"}}
+{{else if controller.closedOffers}}
+  {{t "inbox.closed_offers"}}
+{{else if controller.receivedOffers}}
+  {{t "inbox.received_offers"}}
+{{else}}
+  {{t "inbox.in_review"}}
+{{/if}}({{this.length}})

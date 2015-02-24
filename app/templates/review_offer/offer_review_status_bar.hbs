@@ -1,0 +1,94 @@
+{{#if offer.nonEmptyOffer}}
+  {{#if offer.isReceived}}
+    <div class="offer-status is-received">
+      <div class='status-message review_message'>
+        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{view 'time-ago' timeValue=offer.receivedAt}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if offer.isSubmitted}}
+    <a href="#" {{action 'startReview'}} {{bind-attr class="isStartReviewClicked:waiting:start_review_link"}}>
+      <div class="offer-status is-submitted">
+        <div class='status-message'>
+          {{t "review_offer.start_review"}}
+          {{#if isStartReviewClicked}}
+            <img src="/assets/images/waiting.gif" alt="">
+          {{/if}}
+        </div>
+      </div>
+    </a>
+  {{/if}}
+
+  {{#if offer.isReviewed}}
+    <div class="offer-status is-reviewed">
+      <div class='status-message review_message'>
+        {{t "review_offer.reviewed"}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}. {{t "review_offer.plan_transport"}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if offer.isScheduled}}
+    <div class="offer-status is-scheduled">
+      <div class='status-message'>
+        {{#if offer.delivery.isAlternate}}
+          {{t 'offer.offer_details.is_collection'}}
+        {{/if}}
+
+        {{#if offer.delivery.isDropOff}}
+          {{t 'offer.offer_details.is_drop_off'}}
+        {{/if}}
+
+        {{#if offer.delivery.isGogovan}}
+          {{t 'offer.offer_details.is_gogovan'}}
+        {{/if}}
+
+        <i class="fa fa-truck"></i>
+        <b>
+          {{#if offer.delivery.isGogovan}}
+            {{offer.delivery.schedule.slotName}},
+          {{/if}}
+
+          {{schedule-time-status offer.delivery.schedule.scheduledAt}}
+
+          {{#if offer.delivery.noGogovan}}
+            , {{offer.delivery.schedule.dayTime}}
+          {{/if}}
+        </b>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if offer.isClosed}}
+    <div class="offer-status is-closed">
+      <div class='status-message review_message'>
+        {{t "review_offer.offer_closed_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}
+      </div>
+    </div>
+  {{else if offer.allItemsRejected}}
+    <div class="offer-status is-submitted">
+      <div class='status-message'>
+        {{t "review_offer.no_items"}} <i class="fa fa-frown-o"></i> <a href="#" {{action 'closeOffer'}}>{{t "review_offer.close_offer"}}</a>
+      </div>
+    </div>
+  {{else if offer.allItemsReviewed}}
+    <div class="offer-status is-submitted">
+      <div class='status-message'>
+        {{t "review_offer.items_reviewed"}} <i class="fa fa-smile-o"></i> {{#link-to 'review_offer.logistics' offer }}{{t "review_offer.set_logistics"}}{{/link-to}} {{t "review_offer.to_complete"}}
+      </div>
+    </div>
+  {{else if offer.isUnderReview}}
+    <div class="offer-status is-under-review">
+      <div class='status-message review_message'>
+        {{t "review_offer.review_started_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}}
+        {{view 'time-ago' timeValue=offer.reviewedAt}}
+      </div>
+    </div>
+  {{/if}}
+{{else}}
+<div class="offer-status is-closed">
+  <div class='status-message review_message'>
+    Sorry! This offer is empty.
+  </div>
+</div>
+{{/if}}

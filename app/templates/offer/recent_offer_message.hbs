@@ -1,0 +1,29 @@
+<span class="item-image image">
+  <i class="fa fa-bullhorn thumb"></i>
+</span>
+<span class="info">
+  <div class="row item-name">
+    <div class="small-9 columns">
+      {{t 'offer.offer_details.offer_messages'}}
+    </div>
+    <div class="small-3 columns message-time right">
+      {{message-time model.lastMessage.createdAt}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-1 columns">
+      {{#if model.lastMessage}}
+        <span class="no-avatar">{{model.lastMessage.sender.nameInitial}}</span>
+      {{/if}}
+    </div>
+    <div class="small-10 columns">
+      <div class='ellipsis two-line-ellipsis message-text'>{{model.lastMessage.body}}</div>
+    </div>
+    <div class="small-1 columns right">
+      {{#if model.unreadOfferMessages.length}}
+        <span class='unread_length'>{{model.unreadOfferMessagesCount}}</span>
+      {{/if}}
+    </div>
+  </div>
+</span>

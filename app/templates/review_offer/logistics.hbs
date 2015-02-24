@@ -1,0 +1,68 @@
+<div class="tabs-content transport-content">
+  <section class="main-section">
+    <div class="row ui">
+
+      {{#if isScheduled}}
+        {{partial 'offer/delivery_details'}}
+      {{else}}
+        {{#if allItemsRejected}}
+          <div class='noTransportItems'>
+            <i class="fa fa-info-circle fa-5x"></i>
+            <div class='info-text'>{{t "logistics.no_items"}}</div>
+
+            {{#if isClosed}}
+              <div class='info-text'>{{t "logistics.offer_closed"}}</div>
+            {{else}}
+              <div class="row transport-buttons">
+                <div class="small-6 columns">
+                  <a href="#" {{action 'closeOffer'}} class="button secondary expand">{{t "logistics.close_offer"}}</a>
+                </div>
+                <div class="small-6 columns">
+                  {{#link-to 'offer.donor_messages' this classNames='button expand'}}{{t "logistics.message_donor"}}{{/link-to}}
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        {{else}}
+          {{#if pendingItem}}
+            <p>
+              <p><span class="icon-no-items"></span></p>
+              <p class="no-items">
+                {{t "logistics.finish_review_request"}}
+              </p>
+            </p>
+
+          {{else}}
+
+            <div class="small-12 columns">
+              <h3>{{t "logistics.accepted_items"}} ({{accepted.length}})</h3>
+              {{#each item in accepted}}
+                {{#link-to ''}}
+                  <img {{bind-attr src=item.displayImageUrl}} class="thumbnail" />
+                {{/link-to}}
+              {{/each}}
+            </div>
+
+            {{#if isReviewed}}
+
+              <div class="small-12 columns">
+                <div class = 'transport_details'>
+                  {{t "logistics.gogovan_requirement"}}: {{gogovanTransport.name}}
+                </div>
+                <div class = 'transport_details'>
+                  {{t "logistics.crossroads_requirement"}}: {{crossroadsTransport.name}}
+                </div>
+              </div>
+
+            {{else}}
+
+              {{partial 'review_offer/logistics_details_form'}}
+
+            {{/if}}
+
+          {{/if}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </section>
+</div>

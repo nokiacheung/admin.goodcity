@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="small-12 columns detail_container">
+    <div class="row top">
+      <div class="small-3 columns">
+        <img {{bind-attr src=view.itemval.itemDefaultImageId}} class="thumb small">
+      </div>
+      <div class="small-7 columns head">
+        <span class="ui">
+          {{view "select"
+            contentBinding='view.itemval.subItemTypes'
+            optionValuePath="content.itemTypeId"
+            optionLabelPath="content.name"
+            selection="view.packagetype"
+            valueBinding="view.packagetypeid"
+            prompt='Package Type'
+            required='true'
+            value=''
+          }}
+        </span>
+      </div>
+      <div class="small-2 columns icon" {{action "hideComment" on="click" target="view"}}>
+        <i {{ bind-attr class=":fa :fa-lg view.isHide:fa-plus:is-hide" }}></i>
+      </div>
+    </div>
+    <div {{bind-attr class="view.isHide :row :bottom :ui" }}>
+      <div class="small-10 columns head">
+        {{input
+          type="text"
+          name="comment"
+          valueBinding="view.comment"
+          placeholder="Comments"
+          maxlength="50"
+        }}
+      </div>
+      <div class="small-2 columns icon" {{action "hideComment" on="click" target="view"}}>
+        <i class="fa fa-minus fa-lg"></i>
+      </div>
+    </div>
+    <div class="row bottom">
+      <div {{bind-attr class=":small-6 :columns :ui :inner"}}>
+        {{input
+          type="number"
+          name="qty"
+          valueBinding="view.quantity"
+          placeholder="Qty"
+          maxlength="8"
+          required="required"
+        }}
+      </div>
+      <div {{bind-attr class=":small-2 :columns :ui :inner" }}>
+        {{input
+          type="number"
+          name="length"
+          valueBinding="view.length"
+          placeholder="L"
+          maxlength="8"
+        }}
+      </div>
+      <div {{bind-attr class=":small-2 :columns :ui :inner"}}>
+        {{input
+          type="number"
+          name="width"
+          valueBinding="view.width"
+          placeholder="W"
+          maxlength="5"
+        }}
+      </div>
+      <div {{bind-attr class=":small-2 :columns :ui :inner"}}>
+        {{input
+          type="number"
+          name="height"
+          valueBinding="view.height"
+          placeholder="H"
+          maxlength="5"
+        }}
+      </div>
+    </div>
+  </div>
+</div>

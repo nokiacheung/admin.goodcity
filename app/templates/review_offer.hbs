@@ -1,0 +1,44 @@
+<nav class="tab-bar offer_details_title non-draft">
+  <section class="left-small">
+  {{partial 'review_offer/back_navigation_link'}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Review Offer</h1>
+  </section>
+</nav>
+
+<section class="main-section review_offer offer_details">
+  {{partial 'review_offer/offer_review_status_bar'}}
+
+  <div class="row">
+    <div class="small-12 columns">
+      <dl class="tabs" data-tab>
+
+        {{#link-to 'review_offer.items' tagName="dd" classNames="small-4 columns text-center"}}
+          {{#link-to 'review_offer.items'}}
+            <i class="fa fa-comment-o fa-2x"></i>
+            <div>Offer</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'review_offer.donor_details' tagName="dd" classNames="small-4 columns text-center"}}
+          {{#link-to 'review_offer.donor_details'}}
+            <i class="fa fa-user fa-2x"></i>
+            <div>Donor</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'review_offer.logistics' tagName="dd" classNames="small-4 columns text-center"}}
+          {{#link-to 'review_offer.logistics'}}
+            <i class="fa fa-truck fa-2x"></i>
+            <div>Logistics</div>
+          {{/link-to}}
+        {{/link-to}}
+
+      </dl>
+
+      {{outlet}}
+    </div>
+  </div>
+</section>

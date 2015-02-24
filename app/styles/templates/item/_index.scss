@@ -1,0 +1,28 @@
+.item-details {
+  border-bottom: 1px solid $light-blue;
+  margin-bottom: 1rem;
+
+  .ellipsis {
+    margin-bottom: 0;
+  }
+
+  .item_actions {
+    float: right;
+    margin: 0.5rem 0 0.5rem 0;
+
+    a {
+      text-decoration: underline;
+      color: #a3aab6 !important;
+
+      &.edit_item_link {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+.item_details_title {
+  &.tab-bar {
+    margin-bottom: 0;
+  }
+}

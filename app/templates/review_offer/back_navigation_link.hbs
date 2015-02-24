@@ -1,0 +1,13 @@
+{{#if offer.isSubmitted}}
+  {{#link-to 'inbox' classNames="back"}}{{t "back"}}{{/link-to}}
+{{else if offer.isReviewed}}
+  {{#link-to 'inbox.reviewed' classNames="back"}}{{t "back"}}{{/link-to}}
+{{else if offer.isScheduled}}
+  {{#link-to 'inbox.scheduled' classNames="back"}}{{t "back"}}{{/link-to}}
+{{else if offer.isClosed}}
+  {{#link-to 'inbox.closed' classNames="back"}}{{t "back"}}{{/link-to}}
+{{else if offer.isReceived}}
+  {{#link-to 'inbox.received' classNames="back"}}{{t "back"}}{{/link-to}}
+{{else}}
+  {{#link-to 'inbox.under_review' classNames="back"}}{{t "back"}}{{/link-to}}
+{{/if}}

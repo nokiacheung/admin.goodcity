@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Building app.goodcity.hk [production]" && \
+ember build --environment=production && \
+echo "Removing existing files on app.goodcity.hk" && \
+ssh deployer@app.goodcity.hk 'rm -rf /var/www/html/app.goodcity.hk/*' && \
+echo "Uploading new files to app.goodcity.hk" && \
+scp -r dist/* deployer@app.goodcity.hk:/var/www/html/app.goodcity.hk/

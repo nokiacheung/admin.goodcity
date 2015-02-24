@@ -1,0 +1,41 @@
+.joyride-tip-guide {
+  width: 15rem;
+  top: 0rem;
+  border: solid 1px $white;
+  @media #{$small-only} {
+    width: 93%;
+  }
+  .joyride-nub.top {
+      border-color: $white !important;
+      border-top-color: rgba(0, 0, 0, 0) !important;
+      border-left-color: rgba(0, 0, 0, 0) !important;
+      border-right-color: rgba(0, 0, 0, 0) !important;
+    }
+    .button { border: solid 1px $white; }
+}
+.joyride-tip-guide.overridejoy-start {
+  top: 3rem !important;
+
+  @media #{$medium-only} { left: 65% !important; }
+  @media #{$large-only} { left: 78.5% !important; }
+  @media #{$xlarge-only} { left: 80% !important; }
+  @media #{$xxlarge-only} { left: 89% !important;  }
+
+  .joyride-nub.top {
+    top: -1.1rem;
+    border-top-style: solid !important;
+
+    @media #{$small-only} { left: 93%; }
+    @media #{$medium-only} { left: 92%; }
+    @media #{$large-only} { left: 81%; }
+    @media #{$xlarge-only} { left: 75% !important; }
+    @media #{$xxlarge-only} { left: 81% !important; }
+  }
+}
+.joyride-tip-guide.overridejoy-next {
+  .joyride-nub.top {
+    border-top-style: solid !important;
+    top: -1.1rem;
+    @media #{$small-only} { left: 14.5rem; }
+  }
+}

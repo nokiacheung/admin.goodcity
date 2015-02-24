@@ -1,0 +1,86 @@
+<nav class="tab-bar item_details_title">
+  <section class="left-small">
+    {{#link-to 'review_offer' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Review Item</h1>
+  </section>
+</nav>
+<section class="main-section review_item">
+
+  <div class="row" >
+    <div class="small-12 columns">
+      <div class= 'row'>
+        {{partial 'item/status_message'}}
+      </div>
+
+      <div class="row top-bottom-margin">
+        <div class="small-2 columns" id="lightGallery">
+          <div {{bind-attr data-src=displayImage.imageUrl}} >
+            <img {{bind-attr src=displayImageUrl}} class="thumb" style="width:100px;" />
+          </div>
+          {{#each image in nonFavouriteImages}}
+            <div class="hidden" {{bind-attr data-src=image.imageUrl}} >
+              <img {{bind-attr src=image.imageUrl}} />
+            </div >
+          {{/each}}
+        </div>
+        <div class="small-10 columns">
+          <h3 class="ellipsis two-line-ellipsis">{{donorDescription}}</h3>
+          Condition: {{donorCondition.name}}
+        </div>
+      </div>
+
+      <div class="row top-bottom-margin">
+        <div class="small-12 columns link">
+          {{item-type getItemId="getItemId" selectedItemId=itemTypeId selectedItemName=itemTypeName }}
+          <a href="#" class="right">View labeling guide</a>
+        </div>
+      </div>
+
+      <div class="row row-grey">
+        <dl class="tabs" data-tab>
+          {{#link-to 'review_item.accept' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.accept'}}
+              <i class="fa fa-check-circle fa-2x"></i>
+              <div>{{t "review_item.accept"}}</div>
+            {{/link-to}}
+          {{/link-to}}
+
+          {{#link-to 'review_item.reject' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.reject'}}
+              <i class="fa fa-times-circle fa-2x"></i>
+              <div>{{t "review_item.reject"}}</div>
+            {{/link-to}}
+          {{/link-to}}
+
+          {{#link-to 'review_item.donor_messages' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.donor_messages'}}
+              <i class="fa fa-comment-o fa-2x"></i>
+              {{#if hasUnreadDonorMessages}}
+                <i class="fa fa-circle fa-1x unread"></i>
+              {{/if}}
+              <div>{{t "review_item.donor_message"}}</div>
+            {{/link-to}}
+          {{/link-to}}
+
+          {{#link-to 'review_item.supervisor_messages' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.supervisor_messages'}}
+              <i class="fa fa-comment-o fa-2x"></i>
+              {{#if hasUnreadPrivateMessages}}
+                <i class="fa fa-circle fa-1x unread"></i>
+              {{/if}}
+              <div>{{t "review_item.supervisor_message"}}</div>
+            {{/link-to}}
+          {{/link-to}}
+
+        </dl>
+        <div class="tabs-content">
+            <br/>
+            {{outlet}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

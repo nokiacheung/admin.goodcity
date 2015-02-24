@@ -1,0 +1,44 @@
+<span class="item-image">
+  <img {{bind-attr src="item.displayImageUrl"}} class="thumb" />
+  {{#if item.isAccepted}}<div class='accept_badge'>{{t 'offer.offer_details.accepted'}}</div>{{/if}}
+  {{#if item.isRejected}}<div class='reject_badge'>{{t 'offer.offer_details.not_needed'}}</div>{{/if}}
+</span>
+
+<span class="info">
+  {{#if item.lastMessage}}
+    <div class="row item-name">
+      <div class="small-9 columns">
+        <div class="ellipsis one-line-ellipsis item-name">{{{item.donorDescription}}}</div>
+      </div>
+      <div class="small-3 columns message-time right">
+        {{message-time item.lastMessage.createdAt}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-1 columns">
+        {{#if item.lastMessage}}
+          <span class="no-avatar">{{item.lastMessage.sender.nameInitial}}</span>
+        {{/if}}
+      </div>
+      <div class="small-10 columns">
+        <div class='ellipsis two-line-ellipsis message-text'>
+          {{item.lastMessage.body}}
+        </div>
+      </div>
+      <div class="small-1 columns right">
+        {{#if item.unreadMessagesCount}}
+          <span class='unread_length'>{{item.unreadMessagesCount}}</span>
+          {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <div class="row item-name">
+      <div class="small-12 columns">
+        <div class="ellipsis three-line-ellipsis item-name">{{{item.donorDescription}}}</div>
+      </div>
+    </div>
+
+  {{/if}}
+</span>
+

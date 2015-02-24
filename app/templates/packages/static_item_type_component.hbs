@@ -1,0 +1,21 @@
+<div class="row details">
+  <div class="small-2 text-center columns"></div>
+  <div class="small-10 columns">
+    {{view "item-details-ui-control"
+      name="static_child_detail"
+      itemval=this
+      pkgid=view.pkgid
+      itemid=this.itemId
+      itemtypename=this.itemTypeName
+      comment=view.comment
+      subitemtypes=view.subItemTypes
+      packagetype=view.packagetype
+      packagetypeid=view.packagetypeid
+      quantity=view.quantity
+      width=view.width
+      height=view.height
+      length=view.length
+      value=this.itemId}}
+  </div>
+</div>
+<br>

@@ -1,0 +1,11 @@
+dependencies:
+  pre:
+    - "bower install"
+  cache_directories:
+    - "bower_components"    # relative to the build directory
+
+test:
+  pre:
+    - ./node_modules/ember-cli/bin/ember server:
+        background: true
+    - sleep 5

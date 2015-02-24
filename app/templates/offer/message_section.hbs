@@ -1,0 +1,45 @@
+<div class="tabs-content item-content">
+  <ul class="list list-offer-items" id="joyride-end">
+
+    {{#each item in sortedItems}}
+      {{#if item.isOffer}}
+        {{#if staffMessagesPage}}
+          <li>
+            {{#link-to 'offer.donor_messages' model}}
+              {{partial 'offer/recent_offer_message'}}
+            {{/link-to}}
+          </li>
+        {{else if item.displayGeneralMessages}}
+          <li>
+            {{#link-to 'offer.messages' model}}
+              {{partial 'offer/recent_offer_message'}}
+            {{/link-to}}
+          </li>
+        {{/if}}
+      {{else}}
+        <li>
+          {{#if controller.staffPage}}
+            {{#if item.isAccepted}}
+              {{#link-to 'review_item.accept' item}}
+                {{partial 'offer/recent_item_message'}}
+              {{/link-to}}
+            {{else if item.isRejected}}
+              {{#link-to 'review_item.reject' item}}
+                {{partial 'offer/recent_item_message'}}
+              {{/link-to}}
+            {{else}}
+              {{#link-to 'review_item' item}}
+                {{partial 'offer/recent_item_message'}}
+              {{/link-to}}
+            {{/if}}
+
+          {{else}}
+            {{#link-to 'item.messages' item}}
+              {{partial 'offer/recent_item_message'}}
+            {{/link-to}}
+          {{/if}}
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>

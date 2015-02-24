@@ -1,0 +1,47 @@
+<section class="main-section reject-offer">
+  <div class="row">
+    {{#if itemTypeId}}
+      <div class="small-12 columns">
+        <form class="ui">
+          {{#if noReasonSelected}}
+            <div class="error-box">
+              <i class="fa fa-exclamation-triangle"></i>
+              {{t 'reject.option_error'}}
+            </div>
+          {{/if}}
+          <ul>
+            {{#each item in rejectionOptions}}
+              <li>
+                {{view 'radio-button' name="selectReason" selection=controller.selectedId value=item.id id=item.id}}
+                <label {{bind-attr for=item.id}}>
+                  {{item.name}}
+                </label>
+              </li>
+            {{/each}}
+
+            <li>
+              {{view 'radio-button' name="selectReason" selection=controller.selectedId value="-1" id="-1" labelText=rejectReason}}
+              <label class='reject_label' for="-1">
+                {{view 'radio-text-input' value=rejectReason name="rejectReason" id='rejectReason' placeholder="Custom Reason" classBinding="isBlank:error"}}
+              </label>
+            </li>
+          </ul>
+
+          {{reject-message-field selectedId=selectedId itemId=itemId}}
+
+        </form>
+
+        <div class="row">
+          <div class="small-8 small-offset-2 columns">
+            <a href="#" {{action "rejectOffer" }} class="button expand rejectOffer">{{t 'reject.reject_item'}}</a>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <p>
+        <i class="icon-empty-items fa fa-info-circle fa-5x"></i>
+        <p class="no-items">{{t 'reject.select_type'}}</p>
+      </p>
+    {{/if}}
+  </div>
+</section>

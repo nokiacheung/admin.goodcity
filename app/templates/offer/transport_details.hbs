@@ -1,0 +1,102 @@
+<nav {{bind-attr class=":tab-bar :offer_details_title model.isDraft::non-draft"}}>
+  <section class="left-small">
+    {{#link-to 'offers.index' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t 'offer.transport_details.heading'}}</h1>
+  </section>
+</nav>
+<section class="main-section offer_details">
+  <div class="row">
+    <div class="small-12 columns">
+
+      {{partial 'offer/offer_top_section'}}
+
+      <div class="tabs-content transport-content">
+        {{#if model.isClosed}}
+          <div class='wait_transport'>
+            {{t 'offer.transport_details.no_items'}}
+            <i class="fa fa-info-circle fa-4x info-icon"></i>
+          </div>
+
+          <div class="row">
+            <div class="small-8 small-offset-2 columns">
+              <a href="#" {{action 'newOffer'}} class="button expand">{{t "offers.index.new_donation"}}</a>
+            </div>
+          </div>
+
+        {{else}}
+          {{#if model.isScheduled}}
+            {{partial 'offer/delivery_details'}}
+          {{else}}
+
+            {{#if model.isReviewed}}
+
+              <div class="row">
+                <div class="small-8 small-offset-2 columns">
+                  {{#link-to 'offer.plan_delivery' model class="button expand arrange_transport"}}{{t 'offer.transport_details.arrange_transport'}}{{/link-to}}
+                </div>
+              </div>
+
+            {{else}}
+              <div class='wait_transport'>
+                {{t 'offer.transport_details.wait_for_transport'}}
+                <i class="fa fa-info-circle fa-4x info-icon"></i>
+              </div>
+            {{/if}}
+
+            {{#if model.isReviewing}}
+              {{#if model.approvedItems}}
+                <hr>
+                <div class="row">
+                  <div class="small-12 columns">
+                    {{#if model.isReviewed}}
+                      {{t 'offer.transport_details.accepted_items'}}
+                    {{else}}
+                      {{t 'offer.transport_details.accepted_items_count' acceptedCount=model.approvedItems.length}}
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="small-12 columns items_list">
+                     {{#each item in model.approvedItems}}
+                       <img {{bind-attr src="item.displayImageUrl"}} class="thumb" />
+                     {{/each}}
+                  </div>
+                </div>
+              {{/if}}
+            {{/if}}
+
+            <hr>
+            <div class="row">
+              <div class="small-6 columns">
+                {{t 'offer.transport_details.district'}}
+              </div>
+              <div class="small-6 columns right strong">
+                {{district}}
+              </div>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="small-6 columns">
+                {{t 'offer.transport_details.charity_sale'}}
+              </div>
+              <div class="small-6 columns right strong">
+                {{model.isCharitableSale}}
+              </div>
+            </div>
+
+            <hr>
+            <div class="row edit-details">
+              <div class="small-12 columns right">
+                <a href='#'>{{t 'offer.transport_details.modify_transport'}}</a>
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>

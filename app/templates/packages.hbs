@@ -1,0 +1,16 @@
+<div class="row ">
+  {{#if itemTypeId}}
+    {{#validatable-form class="form-horizontal" action="acceptOffer" target="view" on="submit"}}
+      {{view "package-container-view"
+        elementId="package_container_view" noPackages=noPackages noSubItemType=noSubItemType subItemTypes=subItemTypes packagetype=subItemTypes itemid=itemId
+        }}
+
+        {{view "add-component-of-item" controller=controller packages=allPackages subItemTypes=subItemTypes noSubItemType=noSubItemType itemid=itemId}}
+    {{/validatable-form}}
+  {{else}}
+    <p>
+      <i class="icon-empty-items fa fa-info-circle fa-5x"></i>
+      <p class="no-items">Please choose Item Type first!</p>
+    </p>
+  {{/if}}
+</div>

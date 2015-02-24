@@ -1,0 +1,33 @@
+.review_item {
+  .message-textbar{
+    position: relative;
+  }
+  .row-grey {
+    height: 100%;
+    background: $light-grey;
+    .tabs {
+      background: $dark-blue;
+    }
+  }
+
+  i.unread {
+    vertical-align: top;
+    color: $alert-color;
+    font-size: 0.7rem;
+
+    @media #{$small-only} {
+      font-size: 0.5rem;
+    }
+  }
+
+  .fa-compress {
+    padding-top: 0.5rem;
+  }
+
+  .right {
+    span {
+      font-size: 1.1rem;
+      vertical-align: 0.35rem;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#if displayHomeLink}}
+      {{#link-to 'offers' classNames="back"}}{{t "application.home"}}{{/link-to}}
+    {{/if}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "offer.index.item_count" itemCount=itemCount}}</h1>
+  </section>
+</nav>
+
+<section class="main-section offer-index">
+  <div class="row">
+    <div class="small-12 columns">
+
+      <div class="row">
+        <div class="small-12 columns">
+          <p><span class="icon-no-items"></span></p>
+          <p class="no-items">{{t "offer.no_items"}}</p>
+
+          <div class="row">
+            <div class="small-10 small-offset-1 columns">
+              <a href="#" {{action "addItem"}} class="button expand"><span class="icon-add"></span>{{t "offer.index.add_item"}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs-content item-content">
+        <ul class="list list-offer-items">
+
+          {{#each item in sortedItems}}
+            {{#if item.isOffer}}
+              {{#if item.displayGeneralMessages}}
+                <li>
+                  {{#link-to 'offer.messages' model}}
+                    {{partial 'offer/recent_offer_message'}}
+                  {{/link-to}}
+                </li>
+              {{/if}}
+            {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
