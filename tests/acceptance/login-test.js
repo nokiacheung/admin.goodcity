@@ -9,7 +9,7 @@ var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
 module('Acceptance: Login', {
   setup: function() {
-    App = startApp();
+    App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
 
     hk_user = FactoryGuy.build('with_hk_mobile');
@@ -30,7 +30,6 @@ module('Acceptance: Login', {
 
 test("User able to enter mobile number and get the sms code", function() {
   expect(1);
-
   logoutUser('/login');
   fillIn('#mobile', hk_user.mobile);
   triggerEvent('#mobile', 'blur');
@@ -58,14 +57,14 @@ test("User is able to enter sms code and confirm and redirected to offers", func
   click("#submit_pin");
 
   andThen(function(){
-    equal(currentURL(), "/offers");
+    equal(currentURL(), "/inbox");
   });
 });
 
 test("Logout clears authToken", function() {
   expect(1);
 
-  visit("/offers");
+  visit("/inbox");
   click("a:contains('Logout')");
   andThen(function() {
     equal(typeof window.localStorage.authToken, "undefined");

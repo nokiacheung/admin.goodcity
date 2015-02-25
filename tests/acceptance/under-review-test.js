@@ -17,7 +17,6 @@ module('Offers In Review', {
 
 test("redirect to in review offer page", function() {
   visit("/inbox/under_review");
-
   andThen(function(){
     equal(currentURL(), "/inbox/under_review");
     equal(find("ul.list li").length, 1);

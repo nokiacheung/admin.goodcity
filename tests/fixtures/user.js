@@ -1,3 +1,5 @@
+import itemsFactory from './image';
+
 FactoryGuy.define('user', {
   sequences: {
     id: function(num) {
