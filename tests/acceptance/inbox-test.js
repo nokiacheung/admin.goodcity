@@ -37,3 +37,12 @@ test("display submiited offer", function() {
     });
   });
 });
+
+test("offers under review: redirect to in review offer page", function() {
+  visit("/inbox/under_review");
+  andThen(function(){
+    equal(currentURL(), "/inbox/under_review");
+    equal(find("ul.list li").length, 1);
+    equal(find("ul.list img").length, 1);
+  });
+});

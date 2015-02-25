@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 var transportDetails =  Ember.ObjectController.extend({
-  needs: ['offers/index'],
   delivery: Ember.computed.alias('model.delivery'),
 
   user: function(){
@@ -22,11 +21,6 @@ var transportDetails =  Ember.ObjectController.extend({
   }.property('user', 'delivery'),
 
   actions: {
-    newOffer: function(){
-      var offers = this.store.all('offer');
-      this.get('controllers.offers/index').send('newOffer', offers);
-    },
-
     handleBrokenImage: function() {
       this.get("reviewedBy").set("hasImage", null);
     }

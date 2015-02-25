@@ -10,6 +10,7 @@ Router.map(function() {
   this.resource('offers', function () {
 
     this.resource('offer', { path: '/:offer_id'}, function() {
+      this.route('messages');
       this.route('donor_messages');
       this.route('supervisor_messages');
 

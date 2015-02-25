@@ -26,21 +26,6 @@ test("Display tour and register links", function() {
   });
 });
 
-test("redirect to offers page if logged-in as Donor", function() {
-  App = startApp();
-  testHelper = TestHelper.setup(App);
-  syncDataStub(testHelper);
-
-  FactoryGuy.makeList("offer_with_items", 2);
-
-  visit("/");
-
-  andThen(function(){
-    equal(currentURL(), "/offers");
-    Ember.run(function() { testHelper.teardown(); });
-  });
-});
-
 test("redirect to inbox page if logged-in as Reviewer", function() {
   App = startApp({}, 1);
   visit("/");

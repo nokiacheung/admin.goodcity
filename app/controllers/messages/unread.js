@@ -19,23 +19,10 @@ export default Ember.ArrayController.extend({
 
   actions: {
     viewUnread: function() {
-      if (this.get('session.currentUser.isStaff')) {
-        if(this.isEvery('offer.state', 'submitted')) {
-          this.transitionToRoute("inbox");
-        } else {
-          this.transitionToRoute("inbox.under_review");
-        }
-        return;
-      }
-
-      var uniqueOfferIds = this.mapBy('offer.id').uniq();
-
-      if (uniqueOfferIds.length > 1) {
-        this.transitionToRoute("offers.index");
-      }
-      else{
-        var offer = this.store.getById('offer', uniqueOfferIds.get('firstObject'));
-        this.transitionToRoute("offer.messages", offer);
+      if(this.isEvery('offer.state', 'submitted')) {
+        this.transitionToRoute("inbox");
+      } else {
+        this.transitionToRoute("inbox.under_review");
       }
     }
   }
