@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
+    "start": "LRPortOverride=35730 ember server --port 1401",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember test --server --port 7358"
   },
   "repository": "https://github.com/stefanpenner/ember-cli",
   "engines": {

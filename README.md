@@ -4,39 +4,30 @@ The GoodCity initiative is a new way to donate quality goods in Hong Kong. See w
 
 ## Installation
 
-* Install and configure nodejs (see below)
-* `git clone` this repository
-* `npm install`
-* `bower install`
-
-## Setting up your development environment
-
-Install node.js in your home folder and configure it to run there (you will have to deal with sudo issues if you install system-wide). This is much easier.
+Install and configure nodejs https://github.com/creationix/nvm#install-script
 
 ```shell
-mkdir ~/tmp
-cd ~/tmp
-wget http://nodejs.org/dist/v0.10.31/node-v0.10.31.tar.gz
-tar zxvf node-v0.10.31.tar.gz
-cd node-v0.10.31
-./configure --prefix=~/.local && make && make install
-echo prefix = ~/.local >> ~/.npmrc
-curl https://www.npmjs.org/install.sh | sh
 npm install -g ember-cli
 npm install -g bower
 npm install -g phantomjs
+git clone https://github.com/crossroads/ember-goodcity.git
+cd ember-goodcity
+npm link
+cd ..
+git clone https://github.com/crossroads/goodcity.admin.git
+cd goodcity.admin
+npm link ember-goodcity
+ember install
 ```
 
 ## Running
 
-* `ember server`
+* `npm start`
 * Visit your app at http://localhost:4200.
 
 ## Running Tests
 
-* `ember test`
-* `ember test --server`
-* http://localhost:4200/tests
+* `npm test`
 
 ## Building
 
