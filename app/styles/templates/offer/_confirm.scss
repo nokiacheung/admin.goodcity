@@ -1,9 +1,0 @@
-.confirm_order {
-  display: block;
-  text-align: center;
-  p {
-    @media #{$small-only} {
-      font-size: 0.9rem;
-    }
-  }
-}

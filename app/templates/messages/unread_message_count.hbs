@@ -1,7 +1,0 @@
-{{#if controllers.application.isLoggedIn}}
-  {{#if model.length }}
-    <span class='unread_message_count'>
-      <a href="#" {{action "viewUnread"}}>{{t "messages.unread" unreadCount=model.length}}</a>
-    </span>
-  {{/if}}
-{{/if}}

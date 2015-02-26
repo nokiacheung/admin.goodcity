@@ -17,7 +17,7 @@ import '../fixtures/message';
 
 export default function(testHelper) {
   config.APP.PRELOAD_TYPES.concat(config.APP.PRELOAD_AUTHORIZED_TYPES).forEach(function(type) {
-    testHelper.handleFindMany(type, 0);
+    testHelper.handleFindAll(type, 0);
   });
 
   $.mockjax({url:"/api/v1/auth/current_user_profil*",
