@@ -31,7 +31,6 @@ Router.map(function() {
   });
 
   this.resource('item_types');
-  // this.route('messages');
   this.route('packages');
 
   this.resource('inbox', function(){
