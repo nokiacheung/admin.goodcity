@@ -6,6 +6,8 @@ dependencies:
 
 test:
   pre:
-    - ./node_modules/ember-cli/bin/ember server:
+    - ./node_modules/ember-cli/bin/ember server --port 4201:
         background: true
     - sleep 5
+  override:
+    - ./node_modules/ember-cli/bin/ember test

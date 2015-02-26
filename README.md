@@ -23,7 +23,7 @@ ember install
 ## Running
 
 * `npm start`
-* Visit your app at http://localhost:4200.
+* Visit your app at http://localhost:4201.
 
 ## Running Tests
 
