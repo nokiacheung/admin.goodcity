@@ -54,75 +54,6 @@ I18nTranslationsEn =
       "districts":
         "all" : "All"
 
-      "plan_delivery":
-        "title" : "Plan Transport"
-        "fastest" :
-          "title" : "Fastest"
-          "info" : "Hire a vehicle with a few clicks.<br/>Recommended!"
-          "cost" : "From ${{cost}}"
-          "booking_button" : "Go to Booking"
-          "learn_more": "Learn More"
-          "gogovan_charges": "Gogovan Bookings"
-
-        "alternate" :
-          "title" : "Alternative"
-          "info" : "Wait 14+ days until our team<br/>can collect from your area."
-          "cost" : "Fee ${{cost}}"
-          "booking_button" : "Go to Booking"
-          "collection_charges": "Collection Charges"
-
-        "crossroads" :
-          "title" : "Deliver to Us"
-          "info" : "Drop off at Tuen Mun during<br/>our hours of operation."
-          "free" : "Free"
-          "booking_button" : "Details & Booking"
-
-      "gogovan":
-        "porterage":
-          "title" : "Porterage Charges"
-          "driver" : "This needs to be negotiated with driver."
-          "price_factors" : "The price will vary based on many factors, including"
-          "item_count_size" : "How many items of what size"
-          "obstacles" : "Stairs or obstacles"
-          "park_van" : "Ability to park van unattended"
-          "help" : "If you or a friend can help"
-          "unwilling_driver" : "If you have large furniture and/or challenging needs you may find drivers are unwilling to take the job or require a significant price."
-          "thanks" : "Got it, thank you!"
-
-        "confirm_van" :
-          "title" : "Confirm Van"
-          "base_fee" : "Base fee"
-          "porterage" : "Porterage"
-          "speak_english" : "Speak English"
-          "trolley" : "Borrow trolley(s)"
-          "details" : "Details"
-          "other" : "Other"
-          "confirm_with_drivar" : "Please confirm total price with driver before loading."
-          "name" : "Your Name"
-          "phone" : "Phone"
-          "book_delivery" : "Confirm & Book"
-          "negotiate" : "Negotiate with driver"
-          "no_porterage" : "Not Requested"
-
-        "book_van" :
-          "title" : "Book Van"
-          "location" : "Location"
-          "select_day" : "Preferred day/time"
-          "crossroads_time" : "Limited to Crossroads' operating hours"
-          "requirements" : "Extra Requirements"
-          "speak_english" : "Speak English"
-          "trolly_cost" : "Borrow trolley(s) + $20/piece"
-          "porterage" : "Porterage/go up(negotiate with drivers)"
-          "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
-          "get_quote" : "Get Quote"
-
-      "drop-off":
-        "expect_delivery": "When can we expect your delivery?"
-        "find_crossroads": "How to find crossroads"
-        "open_new_tab": "will open in new tab"
-        "message_map_link": "We will also message you a link to our map location so you have it handy when you need it!"
-        "arrive_on_time": "Please arrive during our operating hours to ensure we can successfully receive your kind donation."
-
       "tour":
         "step1.title" : "1. Photograph & describe"
         "quality_items" : "quality items."
@@ -136,57 +67,21 @@ I18nTranslationsEn =
         "make_goodcity" : "How you're making a Good City."
         "faq" : "Frequently Asked Questions"
 
-      "offers":
-        "index":
-          "new_donation" : "Make a New Donation"
-          "my_offers" : "My offers"
-          "total_items" : "Total items: {{itemCount}}"
-          "see_more" : "See more..."
-          "complete_offer" : "Complete this Offer"
-          "unread_messages" : "Unread messages: {{unreadMessagesCount}}"
-
       "offer":
         "disable": "Disable"
         "details" : "Offer details"
-        "no_items" : "You don't have any items in this offer yet. Please add your first item!",
-        "confirm":
-          "heading" : "Confirm"
-          "notice": "Because needs change daily and <br> storage is limited we apologise that <br> we sometimes cannot accept <br> some items."
-          "review": "Expert volunteers will start reviewing <br> your items immediately."
-          "thank": "Thank You!"
-          "next" : "OK! Next"
-        "submit":
-          "heading": "Sale of goods"
-          "message": "Occasionally, the best way <br> for a donated item to help the poor <br> is for a charity to sell it. Is sale <br> of item(s) okay?"
-
-        "index":
-          "item_count" : "Offer items ({{itemCount}})"
-          "add_item" : "Add item"
-          "add_items" : "Add items to offer"
-          "confirm" : "All Done, Next"
-          "review" : "Review Status"
-          "cancel" : "Cancel Offer"
-          "description" : "Description"
-          "condition" : "Condition"
 
         "offer_details" :
           "heading" : "Offer Details"
-          "submitted_status": "Your offer is awaiting review."
-          "in_review_status": "Your offer is being reviewed by {{firstName}}."
           "is_collection": "Collection"
           "is_drop_off": "Drop-off"
           "is_gogovan": "Van Booked"
-          "reviewed_message": "Review complete!"
-          "please": "Please"
-          "transport": "arrange transport"
           "offer_messages": "General Messages"
           "accepted": "Accepted"
           "not_needed": "Not needed"
           "closed_offer_message": "Offer closed. No items needed, Sorry."
 
         "transport_details" :
-          "heading": "Transport Details"
-          "no_items": "There are no items to transport<br> from this offer."
           "accepted_items": "Accepted items to be transported"
           "time": "Booking Time"
           "name": "Contact Name"
@@ -196,40 +91,12 @@ I18nTranslationsEn =
           "charity_sale": "Charity sale ok?"
           "modify": "Modify"
           "cancel_booking": "Cancel Booking"
-          "arrange_transport": "Arrange Transport"
-          "wait_for_transport": "Transport arrangements can be made<br> once the review is complete."
-          "modify_transport": "Modify district or charity sale details"
-          "accepted_items_count": "Items accepted so far ({{acceptedCount}})"
-
-        "display_joyride" :
-          "camera": "Tap <i class='fa fa-camera'></i> to add more items"
-          "delete": "Tap <i class='fa fa-trash'></i> to cancel your offer"
-          "all_done_next": "When all done adding items, proceed to the next step"
-          "first_item": "Select an item to view or modify it."
 
       "items":
-        "edit_images":
-          "add_photo" : "Add photo"
-          "delete_confirm" : "Are you sure you want to delete this image?"
-          "cant_delete_last_image" : "You must have at least one image"
-          "donating_what" : "What are you donating?"
-          "take_photos" : "Take some photos"
-          "fullscreen_tooltip" : "toggle fullscreen"
-          "favourite_tooltip" : "set as cover image"
-          "delete_tooltip" : "delete image"
-
         "add_item":
-          "condition": "Condition?"
-          "edit_image" : "Edit photos"
-          "save" : "Save Details"
           "description_placeholder" : "What is it? How many items? What's the size?"
 
       "item":
-        "item_details" : "Item details"
-        "donor_description": "Description: {{donorDescription}}"
-        "condition": "Condition: {{condition}}"
-        "cancel" : "Cancel Item"
-        "edit" : "Edit Item"
         "submitted_status": "This item is awaiting review."
         "in_review_status": "This item is being reviewed."
         "accepted_status": "This item has been accepted."
@@ -328,21 +195,6 @@ I18nTranslationsEn =
         "quality_message" : "Some categories of items are very difficult for us to distribute unless they are in excellent condition."
         "size_message" : "Very few of our clients are able to accommodate large items in their homes."
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
-
-      # Components
-      "upload-images":
-        "angles" : "Got all the angles of this item?"
-        "favourite" : "Favourite"
-        "add_another" : "Add another image"
-      "upload-image":
-        "upload_error" : "There is an error with your image upload. Please try again after some time."
-
-      # The following are for the I18n example template and can be removed soon.
-      "i18nexample.items.heading": "Items"
-      "i18nexample.item.title.one": "One item"
-      "i18nexample.item.title.other": "{{count}} items"
-      "i18nexample.item.new.title": "New item"
-      "i18nexample.i18n.pluralisation": "Pluralisation"
 
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en
