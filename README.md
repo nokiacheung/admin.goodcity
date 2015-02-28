@@ -86,16 +86,18 @@ For more information on using ember-cli, visit [http://iamstef.net/ember-cli/](h
 * `mklink /d cordova\www ..\dist` (windows)
 
 Android
-* Download SDK manager - http://developer.android.com/tools/help/sdk-manager.html
-* Install Android API 19
+* Install SDK tools - https://developer.android.com/sdk/installing/index.html
+* start SDK manager `android`
+  - install API v19
+  - install system image (performs better if matches host CPU, can be higher API version)
+  - install sdk build tools
 * `sudo apt-get install ant`
-* `android avd` to create an android VM
+* start android avd manager `android avd` to create an android VM
 * `ember cordova platform add android`
 
 Windows Phone
 * Install VS 2013 - http://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx
-* Select "Windows Phone 8.0 SDK" for wp8
-* Select "Tools for Maintaining Store Apps for Win8" for windows
+  - select "Windows Phone 8.0 SDK" for wp8
 * `ember cordova platform add wp8` (for wp8)
 * `ember cordova platform add windows` (for wp8.1/windows8.1)
 
@@ -113,10 +115,19 @@ To start app in browser (use [ripple-emulator](https://chrome.google.com/webstor
 
 `npm run cordova`
 
-### Build APK
+### Build
+Release Build
+
 `ember cordova:build --environment=production --platform=<android|wp8|ios|windows>`
 
-For production Android app needs to be signed (key not in repo):
+Debug Build
+```sh
+ember build --environment=production
+cd cordova
+cordova build android --debug
+```
+
+For Android release build it needs to be manually signed (key not in repo):
 http://developer.android.com/tools/publishing/app-signing.html#signing-manually
 
 ### Other Commands
