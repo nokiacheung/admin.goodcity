@@ -7,8 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "LRPortOverride=35730 ember server --port 4201",
-    "build": "ember build",
+    "start": "EMBER_CLI_CORDOVA=0 LRPortOverride=35730 ember serve --port 4201",
+    "cordova": "LRPortOverride=35730 ember serve --port 4201",
+    "build": "EMBER_CLI_CORDOVA=0 ember build",
     "test": "ember test --server --port 7358"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "cors": "^2.5.2",
     "ember-cli": "0.2.0-beta.1",
     "ember-cli-coffeescript": "^0.6.0",
+    "ember-cli-cordova": "git://github.com/poetic/ember-cli-cordova.git",
     "ember-cli-html5-validation": "git://github.com/swatijadhav/ember-cli-html5-validation.git",
     "ember-cli-htmlbars": "^0.7.4",
     "ember-cli-ic-ajax": "^0.1.1",

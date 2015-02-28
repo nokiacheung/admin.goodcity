@@ -5,7 +5,10 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var app = new EmberApp({
   minifyCSS: { enabled: false },
   minifyJS: { enabled: false },
-  vendorFiles: { 'handlebars.js': null }
+  vendorFiles: { 'handlebars.js': null },
+  fingerprint: {
+    enabled: !!process.env.EMBER_CLI_CORDOVA && process.env.EMBER_ENV === 'production'
+  }
 });
 
 app.import('bower_components/cloudinary/js/jquery.ui.widget.js');

@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'goodcity',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    defaultLocationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -27,6 +27,11 @@ module.exports = function(environment) {
 
       PRELOAD_TYPES: ["territory"],
       PRELOAD_AUTHORIZED_TYPES: ["offer","item_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport"]
+    },
+
+    cordova: {
+      rebuildOnChange: false,
+      emulate: false
     }
   };
 
