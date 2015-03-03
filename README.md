@@ -32,6 +32,10 @@ ember install
 * `npm build`
 * `EMBER_CLI_CORDOVA=0 ember build --environment=production`
 
+## Deployment to production server
+
+Stop any running instance of `ember server` and type `./deploy`. This will build the files in production mode, put them in dist/ and upload them to the goodcity.hk server.
+
 ## Upgrading Ember CLI
 
 Follow these steps to update the project version of ember-cli.
@@ -46,35 +50,6 @@ rm -rf node_modules bower_components dist tmp
 npm install --save-dev ember-cli (SKIP if someone else has updated ember-cli already)
 ember install
 ember init (SKIP if someone else has updated ember-cli already)
-```
-
-## Deployment to production server
-
-Stop any running instance of `ember server` and type `./deploy`. This will build the files in production mode, put them in dist/ and upload them to the goodcity.hk server.
-
-```shell
-echo "Building app.goodcity.hk [production]" && \
-ember build --environment=production && \
-echo "Removing existing files on app.goodcity.hk" && \
-ssh deployer@app.goodcity.hk 'rm -rf /var/www/html/app.goodcity.hk/*' && \
-echo "Uploading new files to app.goodcity.hk" && \
-scp -r dist/* deployer@app.goodcity.hk:/var/www/html/app.goodcity.hk/
-```
-
-For more information on using ember-cli, visit [http://iamstef.net/ember-cli/](http://iamstef.net/ember-cli/).
-
-#### CustomAsynchelper for MockAjax call is mockApi.
-
-*Example to show how to use it*
-
-```
-   mockApi('get', '/route_name', {json:data})
-
-   To use it with FactoryGuy use like given example
-
-    mockApi('get',
-            '/territories',
-            {territories: FactoryGuy.buildList('territory_with_many_districts', 3)});
 ```
 
 ## Cordova
@@ -133,3 +108,20 @@ http://developer.android.com/tools/publishing/app-signing.html#signing-manually
 ### Other Commands
 `ember cordova <arguments>`
 http://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html
+
+## Development Notes
+
+* Cordova loads app like "file://www/index.html" so can't use "/assets" or "//domain.com" style relative paths. In website mode even though the current url might be `goodcity.hk/offers/1/items` ember adds a `<base href'/'>` tag so urls in templates are still relative from the root (in cordova mode config.locationType is set to hash i.e. `goodcity.hk/#/offers/1/items` and no base tag is added).
+
+* CustomAsynchelper for MockAjax call is mockApi, example to show how to use it:
+  ```js
+    mockApi('get', '/route_name', {json:data})
+  ```
+  Example on how to use it with FactoryGuy
+  ```js
+  	mockApi('get',
+              '/territories',
+              {territories: FactoryGuy.buildList('territory_with_many_districts', 3)});
+  ```
+
+* To keep whitespace settings consistent in source code we're using .editorconfig which can be installed in your favourite editor via http://editorconfig.org/#download
