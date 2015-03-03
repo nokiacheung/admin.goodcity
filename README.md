@@ -1,4 +1,4 @@
-# GoodCity App [![Build Status](https://travis-ci.org/crossroads/app.goodcity.svg?branch=master)](https://travis-ci.org/crossroads/app.goodcity)
+# GoodCity Admin App [![Circle CI](https://circleci.com/gh/crossroads/goodcity.admin.svg?style=svg)](https://circleci.com/gh/crossroads/goodcity.admin)
 
 The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
 
