@@ -130,14 +130,20 @@ I18nTranslationsEn =
         "login" : "Login"
 
       "inbox":
+        "quick_links": "Quick Links"
+        "all_offers": "All Offers"
+        "notifications": "Notifications"
+        "new_offers": "New"
         "title" : "New Offers"
         "new_items" : "New Items"
-        "unread_messages" : "Unread Messages: {{unreadMessagesCount}}"
-        "in_review" : "In Review"
+        "scheduled_offers": "Scheduled"
+        "in_review" : "In Progress"
         "my_list" : "My List"
+        "finished": "Finished"
+
+        "unread_messages" : "Unread Messages: {{unreadMessagesCount}}"
         "my_offers" : "My Offers"
         "reviewed_offers": "Reviewed Offers"
-        "scheduled_offers": "Scheduled Offers"
         "closed_offers": "Closed Offers"
         "received_offers": "Received Offers"
 

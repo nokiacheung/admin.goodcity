@@ -14,7 +14,7 @@ export default AuthorizeRoute.extend({
     this.render('appMenuList', {
       into: 'inbox',
       outlet: 'appMenuList',
-      controller: 'application'
+      controller: 'inbox'
     });
   }
 });
