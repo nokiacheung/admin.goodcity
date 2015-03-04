@@ -10,7 +10,9 @@
     "start": "EMBER_CLI_CORDOVA=0 LRPortOverride=35730 ember serve --port 4201",
     "cordova": "LRPortOverride=35730 ember serve --port 4201",
     "build": "EMBER_CLI_CORDOVA=0 ember build",
-    "test": "ember test --server --port 7358"
+    "test": "ember test --server --port 7358",
+    "deploy-staging": "site=admin-staging.goodcity.hk ports=22 ./deploy",
+    "deploy-live": "site=admin.goodcity.hk ports=22,62423 ./deploy"
   },
   "repository": {
     "url": "https://github.com/crossroads/goodcity.admin.git",

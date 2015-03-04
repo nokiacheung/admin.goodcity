@@ -32,9 +32,17 @@ ember install
 * `npm build`
 * `EMBER_CLI_CORDOVA=0 ember build --environment=production`
 
-## Deployment to production server
+## Deployment
 
-Stop any running instance of `ember server` and type `./deploy`. This will build the files in production mode, put them in dist/ and upload them to the goodcity.hk server.
+Staging site
+
+`npm run deploy-staging`
+
+Live site
+
+`npm run deploy-live`
+
+Note you will need to have your SSH key installed on the destination servers before deployment will work.
 
 ## Upgrading Ember CLI
 
