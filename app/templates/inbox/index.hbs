@@ -1,47 +1,51 @@
-<nav class="tab-bar">
+<nav class="tab-bar submitted_page">
   <section class="left-small">
     <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
   </section>
 
   <section class="middle tab-bar-section">
     <h1 class="title">
-    {{partial 'inbox/offers_list_title'}}
+      {{partial 'inbox/offers_list_title'}}
     </h1>
   </section>
 </nav>
 
-<section class="main-section">
+<section class="main-section inbox_page">
   <div class="row">
-    <div class="small-12 columns">
-      <ul class="list list-activity">
+    <div class="small-12 columns item-content">
+      <ul class="list list-activity list-offer-items">
         {{#each offer in arrangedContent}}
           <li>
             {{#link-to 'review_offer' offer}}
-              <span class="avatar">
-                <span class="no-avatar">{{offer.createdBy.nameInitial}}</span>
-              </span>
-
-              <span class="info">
-                <h3>
-                  {{t "full_name" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
-                </h3>
-                <p>{{t "inbox.new_items"}}: {{offer.itemCount}}</p>
-                {{#if offer.hasUnreadMessages}}
-                  <p>{{t "inbox.unread_messages" unreadMessagesCount=offer.unreadMessagesCount}}</p>
-                {{/if}}
-                <p>{{offer.createdBy.address.district.name}}</p>
-
-                {{#if controller.newOffers}}
-                  {{view 'time-ago' timeValue=offer.submittedAt}}
-                {{else}}
-                  {{view 'time-ago' timeValue=offer.reviewedAt}}
-                {{/if}}
-              </span>
-
-              <span class="list-image">
+              <span class="item-image">
                 <img {{bind-attr src=offer.displayImageUrl}} class="thumb small" />
               </span>
 
+              <div class="row offer">
+                <div class="small-11 columns">
+                  <span class="info">
+                    <h3>
+                      {{t "full_name" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
+                    </h3>
+
+                    <div class='time_indicator'>
+                      submitted <i class="fa fa-clock-o"></i>
+                      {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
+                    </div>
+
+                    <div>
+                      {{offer.approvedItems.length}} Accepted,
+                      {{offer.rejectedItems.length}} rejected,
+                      {{offer.submittedItems.length}} pending
+                    </div>
+                  </span>
+                </div>
+                <div class="small-1 columns">
+                  {{#if offer.unreadOfferMessages.length}}
+                    <span class='unread_length'>{{offer.unreadOfferMessagesCount}}</span>
+                  {{/if}}
+                </div>
+              </div>
             {{/link-to}}
           </li>
         {{/each}}

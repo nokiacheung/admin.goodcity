@@ -1,0 +1,28 @@
+// app-menu-list styles
+ul.off-canvas-list li a {
+  padding-left: 2rem !important;
+}
+
+.submitted_page {
+  &.tab-bar {
+    margin-bottom: 0.5rem;
+  }
+}
+
+// offers list styles
+
+.inbox_page {
+  span.info {
+    .time_indicator div {
+      display: inline;
+    }
+    div {
+      font-size: 0.7rem;
+    }
+  }
+
+  .row.offer {
+    margin-top: 0.7rem;
+    margin-right: 0.3rem;
+  }
+}

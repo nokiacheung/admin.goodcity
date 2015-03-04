@@ -134,7 +134,6 @@ I18nTranslationsEn =
         "all_offers": "All Offers"
         "notifications": "Notifications"
         "new_offers": "New"
-        "title" : "New Offers"
         "new_items" : "New Items"
         "scheduled_offers": "Scheduled"
         "in_review" : "In Progress"
