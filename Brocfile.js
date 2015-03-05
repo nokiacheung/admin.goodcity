@@ -8,14 +8,6 @@ var app = new EmberApp({
   vendorFiles: { 'handlebars.js': null }
 });
 
-app.import('bower_components/cloudinary/js/jquery.ui.widget.js');
-app.import('bower_components/cloudinary/js/jquery.iframe-transport.js');
-app.import('bower_components/cloudinary/js/jquery.fileupload.js');
-app.import('bower_components/cloudinary/js/load-image.min.js');
-app.import('bower_components/cloudinary/js/canvas-to-blob.min.js');
-app.import('bower_components/cloudinary/js/jquery.fileupload-process.js');
-app.import('bower_components/cloudinary/js/jquery.fileupload-image.js');
-app.import('bower_components/cloudinary/js/jquery.fileupload-validate.js');
 app.import('bower_components/cloudinary/js/jquery.cloudinary.js');
 app.import('bower_components/moment/moment.js');
 app.import('bower_components/airbrake-js/airbrake.js');
