@@ -1,4 +1,4 @@
-# GoodCity Admin App [![Circle CI](https://circleci.com/gh/crossroads/goodcity.admin.svg?style=svg)](https://circleci.com/gh/crossroads/goodcity.admin)
+# GoodCity Admin App [![Circle CI](https://circleci.com/gh/crossroads/admin.goodcity.svg?style=svg)](https://circleci.com/gh/crossroads/admin.goodcity)
 
 The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
 
