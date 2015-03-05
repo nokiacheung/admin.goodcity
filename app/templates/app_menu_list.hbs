@@ -3,14 +3,14 @@
     <li><label>{{t "inbox.quick_links"}}</label></li>
     <li>{{#link-to ''}}{{t "inbox.notifications"}}{{/link-to}}</li>
     {{#if session.currentUser.isReviewer}}
-      <li>{{#link-to 'inbox.my_list'}}{{t "inbox.my_list"}} ({{myOffersCount}}){{/link-to}}</li>
+      <li>{{#link-to 'offers.my_list'}}{{t "inbox.my_list"}} ({{myOffersCount}}){{/link-to}}</li>
     {{/if}}
-    <li>{{#link-to 'inbox'}}{{t "inbox.new_offers"}} ({{newOffersCount}}){{/link-to}}</li>
+    <li>{{#link-to 'offers.submitted'}}{{t "inbox.new_offers"}} ({{newOffersCount}}){{/link-to}}</li>
     <li><a href="#" {{action 'logMeOut'}}>{{t "application.logout"}}</a></li>
 
     <li><label>{{t "inbox.all_offers"}}</label></li>
-    <li>{{#link-to 'inbox.under_review'}}{{t "inbox.in_review"}} ({{inProgressCount}}){{/link-to}}</li>
-    <li>{{#link-to 'inbox.scheduled'}}{{t "inbox.scheduled_offers"}} ({{scheduledCount}}){{/link-to}}</li>
+    <li>{{#link-to 'offers.under_review'}}{{t "inbox.in_review"}} ({{inProgressCount}}){{/link-to}}</li>
+    <li>{{#link-to 'offers.scheduled'}}{{t "inbox.scheduled_offers"}} ({{scheduledCount}}){{/link-to}}</li>
     <li>{{#link-to ''}}{{t "inbox.finished"}}{{/link-to}}</li>
   </ul>
 </aside>

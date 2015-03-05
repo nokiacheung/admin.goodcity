@@ -18,10 +18,10 @@ module('Closed Offers List', {
 });
 
 test("redirect to closed offers list page", function() {
-  visit("/inbox/closed");
+  visit("/offers/closed");
 
   andThen(function(){
-    equal(currentURL(), "/inbox/closed");
+    equal(currentURL(), "/offers/closed");
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
   });
@@ -41,7 +41,7 @@ test("closed offer page back link: redirect to closed-offers-list page", functio
 
   andThen(function(){
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
-    equal($(".left-small a").attr('href'), "/inbox/closed");
+    equal($(".left-small a").attr('href'), "/offers/closed");
   });
 });
 

@@ -12,9 +12,9 @@ export default AuthorizeRoute.extend({
   renderTemplate: function() {
     this.render(); // default template
     this.render('appMenuList', {
-      into: 'inbox',
+      into: 'offers',
       outlet: 'appMenuList',
-      controller: 'inbox'
+      controller: 'offers'
     });
   }
 });

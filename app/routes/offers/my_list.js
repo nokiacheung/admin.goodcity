@@ -4,7 +4,7 @@ export default AuthorizeRoute.extend({
   staffRestricted: true,
 
   renderTemplate: function() {
-    this.render('inbox.index', {controller: 'inbox.my_list'});
+    this.render('offers.submitted', {controller: 'offers.my_list'});
   },
 
   model: function() {

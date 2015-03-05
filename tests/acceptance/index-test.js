@@ -26,20 +26,20 @@ test("Display tour and register links", function() {
   });
 });
 
-test("redirect to inbox page if logged-in as Reviewer", function() {
+test("redirect to offers page if logged-in as Reviewer", function() {
   App = startApp({}, 1);
   visit("/");
 
   andThen(function(){
-    equal(currentURL(), "/inbox/my_list");
+    equal(currentURL(), "/offers/my_list");
   });
 });
 
-test("redirect to inbox page if logged-in as Supervisor", function() {
+test("redirect to offers page if logged-in as Supervisor", function() {
   App = startApp({}, 2);
   visit("/");
 
   andThen(function(){
-    equal(currentURL(), "/inbox");
+    equal(currentURL(), "/offers/submitted");
   });
 });

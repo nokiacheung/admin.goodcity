@@ -4,12 +4,12 @@ export default AuthorizeRoute.extend({
   staffRestricted: true,
 
   renderTemplate: function() {
-    this.render('inbox.index', {controller: 'inbox.reviewed'});
+    this.render('offers.submitted', {controller: 'offers.closed'});
   },
 
   model: function() {
     return this.store.filter('offer', function(offer) {
-        return offer.get('isReviewed');
+        return offer.get('isClosed');
     });
   }
 });

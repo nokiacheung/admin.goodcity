@@ -4,7 +4,7 @@ import startApp from '../helpers/start-app';
 var App, testHelper,
   TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
-module('Inbox', {
+module('offers', {
   setup: function() {
     App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
@@ -15,21 +15,21 @@ module('Inbox', {
   }
 });
 
-test("redirect to inbox page", function() {
-  visit("/inbox");
+test("redirect to offers page", function() {
+  visit("/offers");
 
   andThen(function(){
-    equal(currentURL(), "/inbox");
+    equal(currentURL(), "/offers/submitted");
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
   });
 });
 
-test("display submiited offer", function() {
-  visit("/inbox");
+test("display submitted offer", function() {
+  visit("/offers");
 
   andThen(function(){
-    equal(currentURL(), "/inbox");
+    equal(currentURL(), "/offers/submitted");
     click("ul.list li:first a");
     andThen(function() {
       equal(currentURL(), "/offers/3/review_offer/items");
@@ -39,9 +39,9 @@ test("display submiited offer", function() {
 });
 
 test("offers under review: redirect to in review offer page", function() {
-  visit("/inbox/under_review");
+  visit("/offers/under_review");
   andThen(function(){
-    equal(currentURL(), "/inbox/under_review");
+    equal(currentURL(), "/offers/under_review");
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
   });

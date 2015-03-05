@@ -57,14 +57,14 @@ test("User is able to enter sms code and confirm and redirected to offers", func
   click("#submit_pin");
 
   andThen(function(){
-    equal(currentURL(), "/inbox");
+    equal(currentURL(), "/offers/submitted");
   });
 });
 
 test("Logout clears authToken", function() {
   expect(1);
 
-  visit("/inbox");
+  visit("/offers");
   click("a:contains('Logout')");
   andThen(function() {
     equal(typeof window.localStorage.authToken, "undefined");
