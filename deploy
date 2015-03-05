@@ -2,8 +2,8 @@
 
 site_folder=/var/www/html/admin.goodcity.hk
 
-echo "Building $site [production]"
-EMBER_CLI_CORDOVA=0 ember build --environment=production
+echo "Building $site [$environment]"
+EMBER_CLI_CORDOVA=0 ember build --environment=$environment
 
 echo "Uploading new files to $site"
 release_folder=$site_folder/releases/$(date +%s)
