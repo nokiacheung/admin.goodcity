@@ -31,7 +31,7 @@ test("redirect to offers page if logged-in as Reviewer", function() {
   visit("/");
 
   andThen(function(){
-    equal(currentURL(), "/offers/my_list");
+    equal(currentURL(), "/offers/my_list/reviewing");
   });
 });
 

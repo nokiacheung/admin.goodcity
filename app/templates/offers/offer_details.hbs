@@ -1,0 +1,33 @@
+<li class='inbox_page'>
+  {{#link-to 'review_offer' offer}}
+    <span class="item-image">
+      <img {{bind-attr src=offer.displayImageUrl}} class="thumb small" />
+    </span>
+
+    <div class="row offer">
+      <div class="small-11 columns">
+        <span class="info">
+          <h3>
+            {{t "full_name" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
+          </h3>
+
+          <div class='time_indicator'>
+            submitted <i class="fa fa-clock-o"></i>
+            {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
+          </div>
+
+          <div>
+            {{offer.approvedItems.length}} Accepted,
+            {{offer.rejectedItems.length}} rejected,
+            {{offer.submittedItems.length}} pending
+          </div>
+        </span>
+      </div>
+      <div class="small-1 columns">
+        {{#if offer.unreadMessagesCount}}
+          <span class='unread_length'>{{offer.unreadMessagesCount}}</span>
+        {{/if}}
+      </div>
+    </div>
+  {{/link-to}}
+</li>

@@ -7,7 +7,7 @@ export default Ember.Route.extend({
       if (currentUser.get('isStaff')) {
         var myOffers = this.store.all('offer').filterBy('reviewedBy.id', currentUser.get('id'));
         if(myOffers.get('length') > 0) {
-          this.transitionTo('offers.my_list');
+          this.transitionTo('my_list');
         } else {
           this.transitionTo('offers');
         }

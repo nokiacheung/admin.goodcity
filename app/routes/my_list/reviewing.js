@@ -1,12 +1,6 @@
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-  staffRestricted: true,
-
-  renderTemplate: function() {
-    this.render('offers.submitted', {controller: 'offers.my_list'});
-  },
-
   model: function() {
     var currentUserId = this.get('session.currentUser.id');
     var currentUser = this.store.getById('user', currentUserId);

@@ -34,11 +34,17 @@ Router.map(function() {
   this.resource('offers', function(){
     this.route('submitted');
     this.route('under_review');
-    this.route('my_list');
     this.route('reviewed');
     this.route('scheduled');
     this.route('closed');
     this.route('received');
+
+    this.resource('my_list', function(){
+      this.route('reviewing');
+      this.route('reviewed');
+      this.route('scheduled');
+      this.route('finished');
+    });
   });
 });
 

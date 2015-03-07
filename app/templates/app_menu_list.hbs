@@ -3,7 +3,7 @@
     <li><label>{{t "inbox.quick_links"}}</label></li>
     <li>{{#link-to ''}}{{t "inbox.notifications"}}{{/link-to}}</li>
     {{#if session.currentUser.isReviewer}}
-      <li>{{#link-to 'offers.my_list'}}{{t "inbox.my_list"}} ({{myOffersCount}}){{/link-to}}</li>
+      <li>{{#link-to 'my_list'}}{{t "inbox.my_list"}} ({{myOffersCount}}){{/link-to}}</li>
     {{/if}}
     <li>{{#link-to 'offers.submitted'}}{{t "inbox.new_offers"}} ({{newOffersCount}}){{/link-to}}</li>
     <li><a href="#" {{action 'logMeOut'}}>{{t "application.logout"}}</a></li>
