@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'goodcity',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    defaultLocationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -27,6 +27,11 @@ module.exports = function(environment) {
 
       PRELOAD_TYPES: ["territory"],
       PRELOAD_AUTHORIZED_TYPES: ["offer","item_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport"]
+    },
+
+    cordova: {
+      rebuildOnChange: false,
+      emulate: false
     }
   };
 
@@ -40,7 +45,6 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
-    ENV.APP.SERVER_PATH  = ENV.APP.API_HOST_URL + '/' + ENV.APP.NAMESPACE;
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
   }
 
@@ -57,19 +61,30 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:4201';
-    ENV.APP.SERVER_PATH  = ENV.APP.API_HOST_URL + '/' + ENV.APP.NAMESPACE;
   }
 
   if (environment === 'production') {
     // RESTAdapter Settings
-    ENV.APP.API_HOST_URL = 'http://api.goodcity.hk';
-    ENV.APP.SERVER_PATH  = ENV.APP.API_HOST_URL + '/' + ENV.APP.NAMESPACE;
-    ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://socket.goodcity.hk/goodcity';
+    ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
+    ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
     //Airbrake Js keys
     ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
     ENV.APP.AIRBRAKE_PROJECT_ID = 0;
     ENV.APP.AIRBRAKE_PROJECT_KEY = "010f0d73f56efb6150cb2744e814e46b";
   }
+
+  if (environment === 'staging') {
+    ENV.environment = 'production';
+    // RESTAdapter Settings
+    ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
+    ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
+    //Airbrake Js keys
+    ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
+    ENV.APP.AIRBRAKE_PROJECT_ID = 0;
+    ENV.APP.AIRBRAKE_PROJECT_KEY = "010f0d73f56efb6150cb2744e814e46b";
+  }
+
+  ENV.APP.SERVER_PATH  = ENV.APP.API_HOST_URL + '/' + ENV.APP.NAMESPACE;
 
   return ENV;
 };
