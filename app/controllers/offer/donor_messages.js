@@ -1,6 +1,6 @@
-import sendMessage from './../send_message';
+import sendMsg from './../send_message';
 
-export default sendMessage.extend({
+export default sendMsg.extend({
   needs: ['offer'],
 
   staffMessagesPage: true,

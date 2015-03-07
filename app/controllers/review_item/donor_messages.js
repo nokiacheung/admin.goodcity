@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import sendMessage from './../send_message';
+import sendMsg from './../send_message';
 
-export default sendMessage.extend({
+export default sendMsg.extend({
 
   actions: {
     sendMessage: function() {

@@ -10,13 +10,12 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-        I18N_TRANSLATE_HELPER_SPAN: false //switch to future version default to suppress warning
-      },
-      I18N_COMPILE_WITHOUT_HANDLEBARS: true //switch to future version default to suppress warning
+      }
     },
 
     APP: {
-      // Cloudinary Keys
+      // Here you can pass flags/options to your application instance
+      // when it is created
       CLOUD_NAME: 'ddoadcjjl',
       CLOUD_API_KEY: 926849638736153,
       CLOUD_URL: 'https://api.cloudinary.com/v1_1/ddoadcjjl/auto/upload',
@@ -37,11 +36,11 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
 
-    ENV.APP.LOG_RESOLVER = true;
-    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    ENV.APP.LOG_VIEW_LOOKUPS = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
