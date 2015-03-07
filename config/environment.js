@@ -73,6 +73,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'staging') {
+    ENV.staging = true;
     ENV.environment = 'production';
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
