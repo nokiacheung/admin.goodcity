@@ -44,6 +44,7 @@
     "ember-cli-ic-ajax": "^0.1.1",
     "ember-goodcity": "git://github.com/crossroads/ember-goodcity.git",
     "body-parser": "^1.10.1",
+    "glob": "^5.0.0",
     "cors": "^2.5.2",
     "connect-restreamer": "^1.0.1"
   },
