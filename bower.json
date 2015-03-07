@@ -1,7 +1,6 @@
 {
   "name": "goodcity",
   "dependencies": {
-    "handlebars": "2.0.0",
     "jquery": "~2.1.1",
     "ember": "1.10.0",
     "ember-data": "1.0.0-beta.15",

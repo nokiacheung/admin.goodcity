@@ -5,7 +5,12 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var app = new EmberApp({
   vendorFiles: { 'handlebars.js': null },
   fingerprint: {
-    enabled: !process.env.EMBER_CLI_CORDOVA && ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
+    enabled: (process.env.EMBER_CLI_CORDOVA == '0') && ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
+  },
+  gzip: {
+    keepUncompressed: true,
+    extensions: ['js', 'css', 'map', 'ttf', 'ott', 'eot', 'svg'],
+    enabled: ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
   }
 });
 
