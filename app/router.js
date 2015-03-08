@@ -32,17 +32,29 @@ Router.map(function() {
 
   this.resource('offers', function(){
     this.route('submitted');
-    this.route('under_review');
-    this.route('reviewed');
-    this.route('scheduled');
-    this.route('closed');
-    this.route('received');
 
     this.resource('my_list', function(){
       this.route('reviewing');
       this.route('reviewed');
       this.route('scheduled');
       this.route('finished');
+    });
+
+    this.resource('in_progress', function(){
+      this.route('reviewing');
+      this.route('reviewed');
+    });
+
+    this.resource('finished', function(){
+      this.route('received');
+      this.route('canceled');
+      this.route('expired');
+    });
+
+    this.resource('scheduled', function(){
+      this.route('collection');
+      this.route('gogovan');
+      this.route('other_delivery');
     });
   });
 });

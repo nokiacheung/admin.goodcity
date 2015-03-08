@@ -17,15 +17,15 @@ module('Closed Offers List', {
   }
 });
 
-test("redirect to closed offers list page", function() {
-  visit("/offers/closed");
+// test("redirect to closed offers list page", function() {
+//   visit("/offers/closed");
 
-  andThen(function(){
-    equal(currentURL(), "/offers/closed");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
-  });
-});
+//   andThen(function(){
+//     equal(currentURL(), "/offers/closed");
+//     equal(find("ul.list li").length, 1);
+//     equal(find("ul.list img").length, 1);
+//   });
+// });
 
 test("display closed offer with rejected items", function() {
   visit("/offers/" + offer.id + "/review_offer/items");
@@ -41,7 +41,7 @@ test("closed offer page back link: redirect to closed-offers-list page", functio
 
   andThen(function(){
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
-    equal($(".left-small a").attr('href'), "/offers/closed");
+    // equal($(".left-small a").attr('href'), "/offers/closed");
   });
 });
 

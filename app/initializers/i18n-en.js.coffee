@@ -139,12 +139,7 @@ I18nTranslationsEn =
         "in_review" : "In Progress"
         "my_list" : "My List"
         "finished": "Finished"
-        "my_offers" : "My List"
-
-        "unread_messages" : "Unread Messages: {{unreadMessagesCount}}"
-        "reviewed_offers": "Reviewed Offers"
-        "closed_offers": "Closed Offers"
-        "received_offers": "Received Offers"
+        "closed_offers": "Finished"
 
       "messages":
         "unread" : "Unread ({{unreadCount}})"

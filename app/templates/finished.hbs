@@ -1,0 +1,30 @@
+{{partial 'offers/nav_bar'}}
+
+<section class="main-section review_offer">
+  <div class="row">
+    <div class="small-12 columns tab_row">
+      <dl class="tabs" data-tab>
+
+        {{#link-to 'finished.received' tagName="dd" classNames="small-4 columns text-center"}}
+          {{#link-to 'finished.received'}}
+            <div>Received()</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'finished.canceled' tagName="dd" classNames="small-4 columns text-center"}}
+          {{#link-to 'finished.canceled'}}
+            <div>Canceled()</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'finished.expired' tagName="dd" classNames="small-4 columns text-center"}}
+          {{#link-to 'finished.expired'}}
+            <div>Expired()</div>
+          {{/link-to}}
+        {{/link-to}}
+      </dl>
+    </div>
+  </div>
+
+  {{outlet}}
+</section>

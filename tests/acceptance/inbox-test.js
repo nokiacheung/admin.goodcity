@@ -39,9 +39,9 @@ test("display submitted offer", function() {
 });
 
 test("offers under review: redirect to in review offer page", function() {
-  visit("/offers/under_review");
+  visit("/offers/in_progress");
   andThen(function(){
-    equal(currentURL(), "/offers/under_review");
+    equal(currentURL(), "/offers/in_progress/reviewing");
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
   });
