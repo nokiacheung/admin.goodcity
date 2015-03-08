@@ -15,7 +15,7 @@
     "deploy-live": "site=admin.goodcity.hk ports=22,62423  environment=production ./deploy"
   },
   "repository": {
-    "url": "https://github.com/crossroads/goodcity.admin.git",
+    "url": "https://github.com/crossroads/goodcity.admin.git#GCW-175-reviewer-can-browse-various-list",
     "private": true
   },
   "engines": {
@@ -42,7 +42,7 @@
     "ember-cli-html5-validation": "git://github.com/swatijadhav/ember-cli-html5-validation.git",
     "ember-cli-htmlbars": "^0.7.4",
     "ember-cli-ic-ajax": "^0.1.1",
-    "ember-goodcity": "git://github.com/crossroads/ember-goodcity.git",
+    "ember-goodcity": "git://github.com/crossroads/ember-goodcity.git#GCW-175-reviewer-can-browse-various-list",
     "body-parser": "^1.10.1",
     "glob": "^5.0.0",
     "cors": "^2.5.2",
