@@ -1,0 +1,40 @@
+.thread {
+  margin: 1rem;
+  span {
+    display: table-cell;
+  }
+  img {
+    margin-right: 0.5rem;
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  i.fa-bullhorn {
+    margin-right: 0.5rem;
+    background-color: $alert-color;
+    color: white;
+    font-size: 2rem;
+  }
+
+  .thread_image {
+    vertical-align: top;
+  }
+
+  .thread_info{
+    width: 38rem;
+    @media #{$small-only} {
+      width: 21rem;
+    }
+    .thread_icon {
+      text-align: right;
+    }
+  }
+  .sender{
+    font-size: 0.65rem;
+  }
+  .thread_last_message{
+    padding-top: 0.3rem;
+    color: $white;
+  }
+}
+

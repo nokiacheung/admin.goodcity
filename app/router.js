@@ -31,6 +31,7 @@ Router.map(function() {
 
   this.resource('item_types');
   this.route('packages');
+  this.route('my_notifications');
 
   this.resource('inbox', function(){
     this.route('index', {path: '/'});

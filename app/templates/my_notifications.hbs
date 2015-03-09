@@ -1,0 +1,74 @@
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    {{partial 'appMenuList'}}
+    {{partial "unreadNotificationsCount"}}
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+
+      <section class="middle tab-bar-section">
+        <h1 class="title">Notifications</h1>
+      </section>
+    </nav>
+
+    <section class="main-section">
+      <div class="row">
+        <div class="small-12 columns">
+          <ul class="list list-activity">
+          {{#each entity in sortedEntities}}
+            <li>
+              <div class="thread">
+                <span class="thread_image">
+                  {{#if entity.isOffer}}
+                    <i class="fa fa-bullhorn thumb"></i>
+                  {{else}}
+                    <img {{bind-attr src=entity.displayImageUrl}} class="thumb" />
+                  {{/if}}
+                </span>
+                <span class="thread_info">
+                  <div class="row">
+                    <div class="small-10 columns">
+                      <div class='ellipsis one-line-ellipsis message-text'>
+                        {{#if entity.isOffer}}
+                          {{entity.createdBy.fullName}}
+                        {{else}}
+                          {{entity.donorDescription}}
+                        {{/if}}
+                      </div>
+                    </div>
+                    <div class="small-2 columns thread_icon right">
+                      <i class="fa fa-users"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="small-12 columns sender">
+                      {{#if entity.private}}
+                        {{entity.lastPrivateMessage.sender.fullName}}
+                      {{else}}
+                        {{entity.lastPublicMessage.sender.fullName}}
+                      {{/if}}
+                      <i class="fa fa-clock-o"></i>
+                      {{message-time entity.lastMessage.createdAt}}
+                    </div>
+                  </div>
+                  <div class="row thread_last_message">
+                    <div class="small-12 columns">
+                      {{#if entity.private}}
+                        {{entity.lastPrivateMessage.body}}
+                      {{else}}
+                        {{entity.lastPublicMessage.body}}
+                      {{/if}}
+                    </div>
+                  </div>
+                </span>
+              </div>
+            </li>
+          {{/each}}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
