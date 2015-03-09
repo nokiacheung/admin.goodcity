@@ -12,7 +12,7 @@ export default Ember.Route.extend({
           this.transitionTo('offers');
         }
       } else {
-        this.transitionTo('/offers');
+        this.transitionTo('offers');
       }
     }
   }

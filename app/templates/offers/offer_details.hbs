@@ -76,9 +76,15 @@
           </div>
 
           <div>
-            {{offer.approvedItems.length}} Accepted,
-            {{offer.rejectedItems.length}} rejected,
-            {{offer.submittedItems.length}} pending
+            {{#if offer.isReceived}}
+              {{offer.approvedItems.length}} Received,
+              0 Missing,
+              {{offer.rejectedItems.length}} rejected
+            {{else}}
+              {{offer.approvedItems.length}} Accepted,
+              {{offer.rejectedItems.length}} rejected,
+              {{offer.submittedItems.length}} pending
+            {{/if}}
           </div>
         </span>
       </div>
