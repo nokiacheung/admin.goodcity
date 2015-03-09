@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
-var SessionRoute = Ember.Route.extend({
+export default Ember.Route.extend({
   beforeModel: function() {
-    if (this.controllerFor('application').get('isLoggedIn')) {
+    if (this.session.get('isLoggedIn')) {
       var currentUser = this.get('session.currentUser');
       if (currentUser.get('isStaff')) {
         var myOffers = this.store.all('offer').filterBy('reviewedBy.id', currentUser.get('id'));
@@ -17,5 +17,3 @@ var SessionRoute = Ember.Route.extend({
     }
   }
 });
-
-export default SessionRoute;

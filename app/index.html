@@ -22,10 +22,14 @@
     <link rel="apple-touch-icon" sizes="72x72" href="assets/images/goodcity-icon-72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="assets/images/goodcity-icon-114.png" />
 
+    {{content-for 'head-footer'}}
+
   </head>
   <body>
     {{content-for 'body'}}
     <script src="assets/vendor.js"></script>
     <script src="assets/goodcity.js"></script>
+
+    {{content-for 'body-footer'}}
   </body>
 </html>

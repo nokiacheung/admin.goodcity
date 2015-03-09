@@ -5,7 +5,7 @@ import testSkip from '../../helpers/test-skip';
 moduleForModel('item', 'Item Model', {
   needs: ['model:item', 'model:image', 'model:package', 'model:message', 'model:offer',
     'model:donor_condition', 'model:rejection_reason', 'model:item_type', 'model:user',
-    'model:delivery']
+    'model:delivery', 'model:gogovan_transport', 'model:crossroads_transport']
 });
 
 test('Item is a valid ember-data Model', function () {
