@@ -12,8 +12,67 @@
           </h3>
 
           <div class='time_indicator'>
-            submitted <i class="fa fa-clock-o"></i>
-            {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
+            {{!-- Deleted Offer --}}
+            {{#if offer.isDeleted}}
+              Deleted by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
+              <i class="fa fa-clock-o"></i>
+              {{view 'time-ago' timeValue=offer.receivedAt smallPrefix=true}}
+
+            {{!-- Submitted Offer --}}
+            {{else if offer.isSubmitted}}
+              Submitted <i class="fa fa-clock-o"></i>
+              {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
+
+            {{!-- Offer Under Review --}}
+            {{else if offer.isUnderReview}}
+              {{t "review_offer.review_started_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}}
+              <i class="fa fa-clock-o"></i>
+              {{view 'time-ago' timeValue=offer.reviewedAt smallPrefix=true}}
+
+            {{!-- Offer Completed with Review --}}
+            {{else if offer.isReviewed}}
+              {{t "review_offer.reviewed"}}
+              <i class="fa fa-clock-o"></i>
+              {{view 'time-ago' timeValue=offer.reviewCompletedAt smallPrefix=true}}.
+              {{t "review_offer.plan_transport"}}
+
+            {{!-- Closed Offer --}}
+            {{else if offer.isClosed}}
+              Closed by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
+              <i class="fa fa-clock-o"></i>
+              {{view 'time-ago' timeValue=offer.reviewCompletedAt smallPrefix=true}}
+
+            {{!-- Received Offer --}}
+            {{else if offer.isReceived}}
+              Received by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
+              <i class="fa fa-clock-o"></i>
+              {{view 'time-ago' timeValue=offer.receivedAt smallPrefix=true}}
+
+            {{!-- Scheduled Offer --}}
+            {{else if offer.isScheduled}}
+
+              {{#if offer.delivery.isAlternate}}
+                {{t 'offer.offer_details.is_collection'}}
+              {{else if offer.delivery.isDropOff}}
+                {{t 'offer.offer_details.is_drop_off'}}
+              {{else if offer.delivery.isGogovan}}
+                {{t 'offer.offer_details.is_gogovan'}}
+              {{/if}}
+
+              <i class="fa fa-truck"></i>
+              <b>
+                {{#if offer.delivery.isGogovan}}
+                  {{offer.delivery.schedule.slotName}},
+                {{/if}}
+
+                {{schedule-time-status offer.delivery.schedule.scheduledAt}}
+
+                {{#if offer.delivery.noGogovan}}
+                  , {{offer.delivery.schedule.dayTime}}
+                {{/if}}
+              </b>
+
+            {{/if}}
           </div>
 
           <div>
@@ -23,6 +82,7 @@
           </div>
         </span>
       </div>
+
       <div class="small-1 columns">
         {{#if offer.unreadMessagesCount}}
           <span class='unread_length'>{{offer.unreadMessagesCount}}</span>

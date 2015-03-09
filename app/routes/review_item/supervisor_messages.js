@@ -1,7 +1,6 @@
 import ReadMessagesRoute from './../read_messages';
 
 export default ReadMessagesRoute.extend({
-  staffRestricted: true,
 
   renderTemplate: function() {
     this.render('message_template', {controller: 'review_item.supervisor_messages'});
