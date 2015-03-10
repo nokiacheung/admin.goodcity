@@ -1,6 +1,7 @@
 <div class="row">
   <div class="small-12 columns item-content">
     <ul class="list list-activity list-offer-items">
+      {{view 'schedule-select-view' schedules=arrangedContent}}
       {{#each offer in arrangedContent}}
         {{partial 'offers/offer_details'}}
       {{/each}}
