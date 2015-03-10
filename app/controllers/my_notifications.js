@@ -1,32 +1,44 @@
 import Ember from 'ember';
 import inbox from './inbox';
+import messagesUtil from "../utils/messages";
 
 export default inbox.extend({
-  sortProperties: ["myNotificationsSort:desc"],
-  sortedEntities: Ember.computed.sort("getEntities", "sortProperties"),
+  sortProperties: ["createdAt:desc"],
+  sortedModel: Ember.computed.sort("model", "sortProperties"),
 
-  getOffersOrItems: function(messages, type) {
-    var entities = [];
-    var entity;
-    messages.forEach(function(message){
-      entity = message.get("item") || message.get("offer");
-      entity.set(type, "true");
-      entities.push(entity);
+  myNotifications: function() {
+    var keys = {};
+    var res = [];
+    this.get("sortedModel").forEach(function(message) {
+      var isPrivate = message.get("isPrivate");
+      var key = isPrivate + message.get("offer.id") + (message.get("item.id") || "");
+      if (!keys[key]) {
+        var notification = Ember.Object.create({
+          id: message.get("id"),
+          text: message.get("body"),
+          item: message.get("item"),
+          offer: message.get("offer"),
+          sender: message.get("sender"),
+          createdAt: message.get("createdAt"),
+          isPrivate: isPrivate,
+          unreadCount: message.get("state") === "unread" ? 1: 0,
+        });
+
+        keys[key] = notification;
+        res.push(notification);
+      } else if (message.get("state") === "unread") {
+        var unreadCount = keys[key].get("unreadCount");
+        keys[key].set("unreadCount", unreadCount + 1);
+      }
     });
-    return entities.toArray().uniq();
-  },
+    return res;
+  }.property("model.@each.state"),
 
-  getEntities: function() {
-    var entities = [];
-    var privateMessages = this.filterBy("isPrivate", true);
-    var publicMessages = this.filterBy("isPrivate", false);
-
-    if(privateMessages){
-      entities.pushObjects(this.getOffersOrItems(privateMessages, "private"));
+  actions: {
+    view: function(messageId){
+      var message = this.store.getById('message', messageId);
+      var route = messagesUtil.getRoute(this.container, message);
+      this.transitionToRoute.apply(this, route);
     }
-    if(publicMessages){
-      entities.pushObjects(this.getOffersOrItems(publicMessages, "public"));
-    }
-    return entities;
-  }.property("model.@each"),
+  }
 });

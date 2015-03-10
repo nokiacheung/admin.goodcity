@@ -16,53 +16,54 @@
       <div class="row">
         <div class="small-12 columns">
           <ul class="list list-activity">
-          {{#each entity in sortedEntities}}
+          {{#each notification in myNotifications}}
             <li>
-              <div class="thread">
-                <span class="thread_image">
-                  {{#if entity.isOffer}}
-                    <i class="fa fa-bullhorn thumb"></i>
-                  {{else}}
-                    <img {{bind-attr src=entity.displayImageUrl}} class="thumb" />
-                  {{/if}}
-                </span>
-                <span class="thread_info">
-                  <div class="row">
-                    <div class="small-10 columns">
-                      <div class='ellipsis one-line-ellipsis message-text'>
-                        {{#if entity.isOffer}}
-                          {{entity.createdBy.fullName}}
-                        {{else}}
-                          {{entity.donorDescription}}
+              <a {{action "view" notification.id}}>
+                <div class="thread">
+                  <span class="thread_image">
+                    {{#if notification.item}}
+                      <img {{bind-attr src=notification.item.displayImageUrl}} class="thumb" />
+                    {{else}}
+                      <i class="fa fa-bullhorn thumb"></i>
+                    {{/if}}
+                  </span>
+                  <span class="thread_info">
+                    <div class="row">
+                      <div class="small-10 columns">
+                        <div class='ellipsis one-line-ellipsis message-text'>
+                          {{#if notification.item}}
+                            {{notification.item.donorDescription}}
+                          {{else}}
+                            {{notification.offer.createdBy.fullName}}'s Offer
+                          {{/if}}
+                        </div>
+                      </div>
+                      <div class="small-2 columns thread_icon right">
+                        {{#if notification.unreadCount}}
+                          <span class="unread">
+                            <div class="unread_length">{{notification.unreadCount}}</div>
+                          </span>
+                        {{/if}}
+                        {{#if notification.isPrivate}}
+                          <i class="fa fa-users"></i>
                         {{/if}}
                       </div>
                     </div>
-                    <div class="small-2 columns thread_icon right">
-                      <i class="fa fa-users"></i>
+                    <div class="row">
+                      <div class="small-12 columns sender">
+                        {{notification.sender.fullName}}
+                        <i class="fa fa-clock-o"></i>
+                        {{message-time notification.createdAt}}
+                      </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="small-12 columns sender">
-                      {{#if entity.private}}
-                        {{entity.lastPrivateMessage.sender.fullName}}
-                      {{else}}
-                        {{entity.lastPublicMessage.sender.fullName}}
-                      {{/if}}
-                      <i class="fa fa-clock-o"></i>
-                      {{message-time entity.lastMessage.createdAt}}
+                    <div class="row thread_last_message">
+                      <div class="small-12 columns">
+                        {{notification.text}}
+                      </div>
                     </div>
-                  </div>
-                  <div class="row thread_last_message">
-                    <div class="small-12 columns">
-                      {{#if entity.private}}
-                        {{entity.lastPrivateMessage.body}}
-                      {{else}}
-                        {{entity.lastPublicMessage.body}}
-                      {{/if}}
-                    </div>
-                  </div>
-                </span>
-              </div>
+                  </span>
+                </div>
+              </a>
             </li>
           {{/each}}
           </ul>
