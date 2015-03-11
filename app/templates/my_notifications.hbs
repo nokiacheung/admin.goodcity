@@ -18,52 +18,7 @@
           <ul class="list list-activity">
           {{#each notification in myNotifications}}
             <li>
-              <a {{action "view" notification.id}}>
-                <div class="thread">
-                  <span class="thread_image">
-                    {{#if notification.item}}
-                      <img {{bind-attr src=notification.item.displayImageUrl}} class="thumb" />
-                    {{else}}
-                      <i class="fa fa-bullhorn thumb"></i>
-                    {{/if}}
-                  </span>
-                  <span class="thread_info">
-                    <div class="row">
-                      <div class="small-9 large-10 columns">
-                        <div class='ellipsis one-line-ellipsis message-text'>
-                          {{#if notification.item}}
-                            {{notification.item.donorDescription}}
-                          {{else}}
-                            {{notification.offer.createdBy.fullName}}'s Offer
-                          {{/if}}
-                        </div>
-                      </div>
-                      <div class="small-3 large-2 columns thread_icon right">
-                        {{#if notification.unreadCount}}
-                          <span class="unread">
-                            <div class="unread_length">{{notification.unreadCount}}</div>
-                          </span>
-                        {{/if}}
-                        {{#if notification.isPrivate}}
-                          <i class="fa fa-users"></i>
-                        {{/if}}
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="small-12 columns sender">
-                        {{notification.sender.fullName}}
-                        <i class="fa fa-clock-o"></i>
-                        {{message-time notification.createdAt}}
-                      </div>
-                    </div>
-                    <div class="row thread_last_message">
-                      <div class="small-12 columns">
-                        {{notification.text}}
-                      </div>
-                    </div>
-                  </span>
-                </div>
-              </a>
+              {{partial "notificationThread"}}
             </li>
           {{/each}}
           </ul>
