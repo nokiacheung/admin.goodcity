@@ -5,7 +5,7 @@ import syncDataStub from '../helpers/empty-sync-data-stub';
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 var App, testHelper, offer1, offer2, reviewer, reviewer1, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
-  offer8, item8, offer9, item9, offer10;
+  offer8, item8, offer9, item9, offer10, schedule;
 
 module('Reviewer: Display Offer Status', {
   setup: function() {
@@ -20,13 +20,14 @@ module('Reviewer: Display Offer Status', {
 
     offer3 = FactoryGuy.make("offer_with_items", {state:"reviewed"});
 
-    delivery1 = FactoryGuy.make('delivery', {deliveryType: "Alternate"});
+    schedule = FactoryGuy.make('schedule', {scheduledAt: '12/01/2014'});
+    delivery1 = FactoryGuy.make('delivery', {deliveryType: "Alternate", schedule: schedule});
     offer4 = FactoryGuy.make("offer_with_items", {state:"scheduled", delivery: delivery1});
 
-    delivery2 = FactoryGuy.make('delivery', {deliveryType: "Gogovan"});
+    delivery2 = FactoryGuy.make('delivery', {deliveryType: "Gogovan", schedule: schedule});
     offer5 = FactoryGuy.make("offer_with_items", {state:"scheduled", delivery: delivery2});
 
-    delivery3 = FactoryGuy.make('delivery', {deliveryType: "Drop Off"});
+    delivery3 = FactoryGuy.make('delivery', {deliveryType: "Drop Off", schedule: schedule});
     offer6 = FactoryGuy.make("offer_with_items", {state:"scheduled", delivery: delivery3});
 
     offer7 = FactoryGuy.make("offer_with_items", { state:"closed", reviewedBy: reviewer });
