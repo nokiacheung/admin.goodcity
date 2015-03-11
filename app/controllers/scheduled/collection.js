@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   sortProperties: ["unreadMessagesCount:desc", "delivery.schedule.scheduledAt:desc"],
   arrangedContent: Ember.computed.sort("model", "sortProperties"),
+  scheduleldOffers: true,
 
   allScheduled: function(key, value){
     return (arguments.length > 1) ? value : this.get('model');
