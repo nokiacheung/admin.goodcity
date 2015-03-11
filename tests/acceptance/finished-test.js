@@ -8,13 +8,6 @@ module('Finished Offers', {
   setup: function() {
     App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
-    // reviewer = FactoryGuy.make('user', { id: 3 });
-    // offer1 = FactoryGuy.make("offer_with_items", { state:"under_review", reviewedBy: reviewer});
-    // reviewerName = reviewer.get('firstName') + " " + reviewer.get('lastName');
-
-    // offer2 = FactoryGuy.make("offer",{state:"reviewed", reviewedBy: reviewer});
-    // item1 = FactoryGuy.make("item", { state:"accepted", offer: offer2 });
-    // item2 = FactoryGuy.make("item", { state:"rejected", offer: offer2 });
   },
   teardown: function() {
     Em.run(function() { testHelper.teardown(); });

@@ -4,7 +4,7 @@ import startApp from '../helpers/start-app';
 var App, testHelper, offer, item,
   TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
-module('Closed Offers List', {
+module('Closed Offer', {
   setup: function() {
     App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
@@ -17,31 +17,12 @@ module('Closed Offers List', {
   }
 });
 
-// test("redirect to closed offers list page", function() {
-//   visit("/offers/closed");
-
-//   andThen(function(){
-//     equal(currentURL(), "/offers/closed");
-//     equal(find("ul.list li").length, 1);
-//     equal(find("ul.list img").length, 1);
-//   });
-// });
-
 test("display closed offer with rejected items", function() {
   visit("/offers/" + offer.id + "/review_offer/items");
 
   andThen(function(){
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
     equal(find(".reject_badge").length, 1);
-  });
-});
-
-test("closed offer page back link: redirect to closed-offers-list page", function() {
-  visit("/offers/" + offer.id + "/review_offer/items");
-
-  andThen(function(){
-    equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
-    // equal($(".left-small a").attr('href'), "/offers/closed");
   });
 });
 
