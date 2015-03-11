@@ -45,8 +45,14 @@ module.exports = function(app) {
     ]
   };
 
+  var finishedOffers = {
+      "offers": [ {"id": "5", "state": "closed" }],
+      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }],
+      "items": [{ "id": "1", "offer_id": "5", state: "rejected"}]
+    };
+
   offersRouter.get("/", function(req, res) {
-    res.send(offers_json);
+    res.send(req.query.category ? finishedOffers : offers_json)
   });
 
   offersRouter.get("/:id", function(req, res) {
