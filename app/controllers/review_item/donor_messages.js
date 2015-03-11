@@ -1,19 +1,7 @@
-import Ember from 'ember';
-import sendMsg from './../send_message';
+import Ember from "ember";
+import MessagesBaseController from "ember-goodcity/controllers/messages_base";
 
-export default sendMsg.extend({
-
-  actions: {
-    sendMessage: function() {
-      this._super(false, true);
-    },
-
-    showMessage: function(message) {
-      var scrollTo = function() {
-        window.setTimeout(function() { Ember.$('body').scrollTop(Ember.$("#"+message.get('id')).offset().top); }, 0);
-      };
-      this.transitionToRoute('review_offer.messages').then(scrollTo);
-    }
-  }
-
+export default MessagesBaseController.extend({
+  needs: ["review_item", "offer"],
+  item: Ember.computed.alias("controllers.review_item.model")
 });
