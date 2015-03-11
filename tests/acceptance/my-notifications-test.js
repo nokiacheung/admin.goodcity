@@ -68,41 +68,5 @@ test("display threads with icons and unread message count" , function() {
     var offer_private_thread = $(".thread")[3];
     equal($(offer_thread).find(".fa-bullhorn").length > 0, true);
     equal($(offer_private_thread).find(".fa-users").length > 0, true);
-
   });
 });
-
-// test("item-messages from Supervisor", function() {
-//   visit('/offers/' + offer.id + "/review_item/" + item.id + "/supervisor_messages");
-//   andThen(function() {
-//     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item.id + "/supervisor_messages");
-//     equal($('.message_details').length, 1);
-
-//     var offer_message_thread_text = $('.message_details:last').parent().text();
-//     equal(offer_message_thread_text.indexOf(message3.get('body')) >= 0, true);
-//   });
-// });
-
-// test("item-messages from donor should add unread bubble in donor message tab", function() {
-//   visit('/offers/' + offer.id + "/review_item/" + item.id + "/supervisor_messages");
-//   andThen(function() {
-//     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item.id + "/supervisor_messages");
-
-//     var message3 = FactoryGuy.make("message", { offer: offer, item: item, body: "Second Message from Donor"});
-
-//     // if message received from donor, add unread bubble mark
-//     equal($("a[href='/offers/"+ offer.id +"/review_item/"+ item.id +"/donor_messages'] i.unread").length, 1);
-//   });
-// });
-
-// test("offer-messages from staff should add unread bubble in supervisor message tab", function() {
-//   visit('/offers/' + offer.id + "/review_item/" + item.id + "/donor_messages");
-//   andThen(function() {
-//     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item.id + "/donor_messages");
-
-//     var message5 = FactoryGuy.make("message", { offer: offer, item: item, body: "Second Message from Supervisor", isPrivate: true});
-
-//     // if message received from donor, add unread bubble mark
-//     equal($("a[href='/offers/"+ offer.id +"/review_item/"+ item.id +"/supervisor_messages'] i.unread").length, 1);
-//   });
-// });

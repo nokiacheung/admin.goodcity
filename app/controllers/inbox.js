@@ -24,16 +24,18 @@ export default Ember.ArrayController.extend({
   }.property('model.@each'),
 
   unreadNotificationsCount: function() {
-    return this.get('allMessage').filterBy("state", "unread").get('length');
-  }.property('allMessage.@each.state'),
+    return this.get('allMessages').filterBy("state", "unread").get('length');
+  }.property('allMessages.@each.state'),
 
-  allMessage: function() {
-    return this.store.all('message');
+  allMessages: function() {
+    return this.store.filter('message', function(message) {
+      return message.get('state') !== 'never-subscribed';
+    });
   }.property(''),
 
   hasUnreadNotifications: function() {
     return this.get('unreadNotificationsCount') > 0;
-  }.property('allMessage.@each.state'),
+  }.property('allMessages.@each.state'),
 
   actions: {
     logMeOut: function(){
