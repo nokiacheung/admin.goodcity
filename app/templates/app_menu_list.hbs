@@ -1,17 +1,22 @@
 <aside class="left-off-canvas-menu">
   <ul class="off-canvas-list">
-    <li><label>App menu</label></li>
-
-    <li>{{#link-to 'inbox'}}{{t "inbox.title"}}{{/link-to}}</li>
+    <li><label>{{t "inbox.quick_links"}}</label></li>
+    <li>{{#link-to 'my_notifications'}}{{t "inbox.notifications"}}
+      {{#if hasUnreadNotifications}}
+        <span class="menu_notification">
+          <div class="unread_length">{{unreadNotificationsCount}}</div>
+        </span>
+      {{/if}}
+    {{/link-to}}</li>
     {{#if session.currentUser.isReviewer}}
-      <li>{{#link-to 'inbox.my_list'}}{{t "inbox.my_list"}}{{/link-to}}</li>
+      <li>{{#link-to 'inbox.my_list'}}{{t "inbox.my_list"}} ({{myOffersCount}}){{/link-to}}</li>
     {{/if}}
-    <li>{{#link-to 'inbox.under_review'}}{{t "inbox.in_review"}}{{/link-to}}</li>
-    <li>{{#link-to 'inbox.reviewed'}}{{t "inbox.reviewed_offers"}}{{/link-to}}</li>
-    <li>{{#link-to 'inbox.scheduled'}}{{t "inbox.scheduled_offers"}}{{/link-to}}</li>
-    <li>{{#link-to 'inbox.closed'}}{{t "inbox.closed_offers"}}{{/link-to}}</li>
-    <li>{{#link-to 'inbox.received'}}{{t "inbox.received_offers"}}{{/link-to}}</li>
-
+    <li>{{#link-to 'inbox'}}{{t "inbox.new_offers"}} ({{newOffersCount}}){{/link-to}}</li>
     <li><a href="#" {{action 'logMeOut'}}>{{t "application.logout"}}</a></li>
+
+    <li><label>{{t "inbox.all_offers"}}</label></li>
+    <li>{{#link-to 'inbox.under_review'}}{{t "inbox.in_review"}} ({{inProgressCount}}){{/link-to}}</li>
+    <li>{{#link-to 'inbox.scheduled'}}{{t "inbox.scheduled_offers"}} ({{scheduledCount}}){{/link-to}}</li>
+    <li>{{#link-to ''}}{{t "inbox.finished"}}{{/link-to}}</li>
   </ul>
 </aside>
