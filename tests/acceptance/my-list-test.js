@@ -88,8 +88,8 @@ test("redirect to finished offers page", function() {
 
   andThen(function(){
     equal(currentURL(), "/offers/my_list/finished");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
+    equal(find("ul.list li").length, 2);
+    equal(find("ul.list img").length, 2);
 
     // reviewed status
     equal($('.time_indicator').text().indexOf('Closed') > 0, true);
