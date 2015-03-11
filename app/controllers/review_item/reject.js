@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  needs: ["review_item", "offer", "sendMessage"],
+  needs: ["review_item", "offer"],
 
   itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
   itemId: Ember.computed.alias('controllers.review_item.id'),
