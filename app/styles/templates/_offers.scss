@@ -51,3 +51,9 @@ ul.off-canvas-list li a {
     color: $white;
   }
 }
+
+.menu_notification, .unread_message_count, .unread{
+  .unread_length{
+    font-size: 0.7rem;
+  }
+}
