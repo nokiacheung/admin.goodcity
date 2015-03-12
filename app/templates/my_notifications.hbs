@@ -1,0 +1,30 @@
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    {{partial 'appMenuList'}}
+    {{partial "unreadNotificationsCount"}}
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+
+      <section class="middle tab-bar-section">
+        <h1 class="title">{{t "inbox.notifications"}}</h1>
+      </section>
+    </nav>
+
+    <section class="main-section">
+      <div class="row">
+        <div class="small-12 columns">
+          <ul class="list list-activity">
+          {{#each notification in myNotifications}}
+            <li>
+              {{partial "notificationThread"}}
+            </li>
+          {{/each}}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>

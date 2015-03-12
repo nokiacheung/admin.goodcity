@@ -141,6 +141,9 @@ I18nTranslationsZhTw =
         "text" : "{{text}}"
         "view": "View"
 
+      "my_notifications":
+        "heading" : "{{name}}'s Offer"
+
       "review_item":
         "accept" : "Accept"
         "accept_item" : "Accept Item"
