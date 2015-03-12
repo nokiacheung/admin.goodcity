@@ -12,14 +12,8 @@
           </h3>
 
           <div class='time_indicator'>
-            {{!-- Deleted Offer --}}
-            {{#if offer.isDeleted}}
-              Deleted by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
-              <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.receivedAt smallPrefix=true}}
-
             {{!-- Submitted Offer --}}
-            {{else if offer.isSubmitted}}
+            {{#if offer.isSubmitted}}
               Submitted <i class="fa fa-clock-o"></i>
               {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
 
