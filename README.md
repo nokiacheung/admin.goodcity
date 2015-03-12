@@ -53,12 +53,12 @@ If someone else has done the upgrade and you're just refreshing code ignore the 
 npm uninstall -g ember-cli
 npm cache clean
 bower cache clean
-npm install -g ember-cli
 rm -rf node_modules bower_components dist tmp
+npm install -g ember-cli
 npm install --save-dev ember-cli (SKIP if someone else has updated ember-cli already)
 npm link ember-goodcity
-ember install
 ember init (SKIP if someone else has updated ember-cli already)
+ember install
 ```
 
 ## Cordova

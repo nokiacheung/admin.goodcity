@@ -23,6 +23,20 @@ export default Ember.ArrayController.extend({
     return this.store.all('offer');
   }.property('model.@each'),
 
+  unreadNotificationsCount: function() {
+    return this.get('allMessages').filterBy("state", "unread").get('length');
+  }.property('allMessages.@each.state'),
+
+  allMessages: function() {
+    return this.store.filter('message', function(message) {
+      return message.get('state') !== 'never-subscribed';
+    });
+  }.property(''),
+
+  hasUnreadNotifications: function() {
+    return this.get('unreadNotificationsCount') > 0;
+  }.property('allMessages.@each.state'),
+
   actions: {
     logMeOut: function(){
       this.get('controllers.application').send('logMeOut');

@@ -149,6 +149,9 @@ I18nTranslationsEn =
         "text" : "{{text}}"
         "view": "View"
 
+      "my_notifications":
+        "heading" : "{{name}}'s Offer"
+
       "review_offer":
         "review_started_by" : "Started by {{firstName}} {{lastName}}"
         "no_items": "No items needed"

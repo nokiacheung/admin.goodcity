@@ -16,5 +16,11 @@ export default AuthorizeRoute.extend({
       outlet: 'appMenuList',
       controller: 'offers'
     });
+
+    this.render('unreadNotificationsCount', {
+      into: 'inbox',
+      outlet: 'unreadNotificationsCount',
+      controller: 'inbox'
+    });
   }
 });
