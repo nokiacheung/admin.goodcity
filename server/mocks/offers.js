@@ -45,8 +45,33 @@ module.exports = function(app) {
     ]
   };
 
+  var finishedOffers = {
+      "offers": [ {"id": "5", "state": "closed" }, {"id": "6", "state": "received", "created_by_id": "4" }],
+      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }, { "id": "4", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null }],
+      "items": [{ "id": "1", "offer_id": "5", state: "rejected"}, { "id": "2", "offer_id": "6", state: "accepted"}]
+    };
+
+  var closedOffers = {
+      "offers": [ {"id": "5", "state": "closed", "reviewed_by_id": "2" }],
+      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }],
+      "items": [{ "id": "1", "offer_id": "5", state: "rejected"}]
+    };
+
+  var receivedOffers = {
+      "offers": [ {"id": "5", "state": "received", "created_by_id": "3" }],
+      "user": [{ "id": "3", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null }],
+      "items": [{ "id": "1", "offer_id": "5", state: "accepted"}]
+    };
+
   offersRouter.get("/", function(req, res) {
-    res.send(offers_json);
+    var offers = offers_json;
+    if(req.query.category)
+      offers = finishedOffers;
+    else if(req.query.state === 'closed')
+      offers = closedOffers;
+    else if(req.query.state === 'received')
+      offers = receivedOffers;
+    res.send(offers);
   });
 
   offersRouter.get("/:id", function(req, res) {

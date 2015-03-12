@@ -1,5 +1,8 @@
 FactoryGuy.define('schedule',{
   sequences: {
+    id: function(num) {
+      return num + 100;
+    },
     name: function(num) {
       return 'Daniel' + num;
     },
@@ -8,11 +11,12 @@ FactoryGuy.define('schedule',{
     }
   },
   default: {
+    id:           FactoryGuy.generate('id'),
     resource:     FactoryGuy.generate('name'),
     slot:         FactoryGuy.generate('slot'),
     slotName:     'Afternoon, 2pm-4pm',
     zone:         'zone',
-    scheduledAt:  '12/01/2014'
+    scheduledAt:  (new Date(new Date().setDate(new Date().getDate()-1)))
   }
 });
 export default {};

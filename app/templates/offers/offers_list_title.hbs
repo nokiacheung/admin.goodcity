@@ -1,0 +1,11 @@
+{{#if controller.newOffers}}
+  {{t "inbox.new_offers"}}
+{{else if controller.myOffers}}
+  {{t "inbox.my_list"}}
+{{else if controller.inProgress}}
+  {{t "inbox.in_review"}}
+{{else if controller.scheduleldOffers}}
+  {{t "inbox.scheduled_offers"}}
+{{else if controller.finishedOffers}}
+  {{t "inbox.closed_offers"}}
+{{/if}}

@@ -15,9 +15,9 @@ module('Authorization', {
 test("On restricted page doesn't redirect if staff", function() {
   App = startApp({}, 1);
 
-  visit('/inbox');
+  visit('/offers');
 
   andThen(function() {
-    equal(currentURL(), '/inbox');
+    equal(currentURL(), '/offers/submitted');
   });
 });

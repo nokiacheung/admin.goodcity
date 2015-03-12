@@ -134,18 +134,12 @@ I18nTranslationsEn =
         "all_offers": "All Offers"
         "notifications": "Notifications"
         "new_offers": "New"
-        "title" : "New Offers"
         "new_items" : "New Items"
         "scheduled_offers": "Scheduled"
         "in_review" : "In Progress"
         "my_list" : "My List"
         "finished": "Finished"
-
-        "unread_messages" : "Unread Messages: {{unreadMessagesCount}}"
-        "my_offers" : "My Offers"
-        "reviewed_offers": "Reviewed Offers"
-        "closed_offers": "Closed Offers"
-        "received_offers": "Received Offers"
+        "closed_offers": "Finished"
 
       "messages":
         "unread" : "Unread ({{unreadCount}})"

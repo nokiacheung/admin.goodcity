@@ -26,17 +26,17 @@ module('Reviewer: Notifications', {
 });
 
 test("display unread notification count on menu icon" , function() {
-  visit('/inbox');
+  visit('/offers');
   andThen(function() {
-    equal(currentURL(), "/inbox");
+    equal(currentURL(), "/offers/submitted");
     equal($(".unread_length.menu-icon").text(), 3);
   });
 });
 
 test("display unread notification count in left navigation" , function() {
-  visit('/inbox');
+  visit('/offers');
   andThen(function() {
-    equal(currentURL(), "/inbox");
+    equal(currentURL(), "/offers/submitted");
     equal($(".menu_notification .unread_length").text(), 3);
   });
 });

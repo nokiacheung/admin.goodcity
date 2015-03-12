@@ -6,26 +6,24 @@ var Router = GoodcityRouter.extend({
 });
 
 Router.map(function() {
-  this.resource('offers', function () {
 
-    this.resource('offer', { path: '/:offer_id'}, function() {
-      this.route('messages');
+  this.resource('offer', { path: '/offers/:offer_id'}, function() {
+    this.route('messages');
+    this.route('donor_messages');
+    this.route('supervisor_messages');
+
+    this.resource('review_offer', function(){
+      this.route('items');
+      this.route('logistics');
+      this.route('donor_details');
+    });
+
+    this.resource('review_item', {path: '/review_item/:item_id'},function() {
+      this.route('index', { path: '/'});
+      this.route('reject');
+      this.route('accept');
       this.route('donor_messages');
       this.route('supervisor_messages');
-
-      this.resource('review_offer', function(){
-        this.route('items');
-        this.route('logistics');
-        this.route('donor_details');
-      });
-
-      this.resource('review_item', {path: '/review_item/:item_id'},function() {
-        this.route('index', { path: '/'});
-        this.route('reject');
-        this.route('accept');
-        this.route('donor_messages');
-        this.route('supervisor_messages');
-      });
     });
   });
 
@@ -33,14 +31,32 @@ Router.map(function() {
   this.route('packages');
   this.route('my_notifications');
 
-  this.resource('inbox', function(){
-    this.route('index', {path: '/'});
-    this.route('under_review');
-    this.route('my_list');
-    this.route('reviewed');
-    this.route('scheduled');
-    this.route('closed');
-    this.route('received');
+  this.resource('offers', function(){
+    this.route('submitted');
+
+    this.resource('my_list', function(){
+      this.route('reviewing');
+      this.route('reviewed');
+      this.route('scheduled');
+      this.route('finished');
+    });
+
+    this.resource('in_progress', function(){
+      this.route('reviewing');
+      this.route('reviewed');
+    });
+
+    this.resource('finished', function(){
+      this.route('received');
+      this.route('canceled');
+      this.route('expired');
+    });
+
+    this.resource('scheduled', function(){
+      this.route('collection');
+      this.route('gogovan');
+      this.route('other_delivery');
+    });
   });
 });
 

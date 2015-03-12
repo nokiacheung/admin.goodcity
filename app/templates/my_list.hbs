@@ -1,0 +1,36 @@
+{{partial 'offers/nav_bar'}}
+
+<section class="main-section review_offer">
+  <div class="row">
+    <div class="small-12 columns tab_row">
+      <dl class="tabs" data-tab>
+
+        {{#link-to 'my_list.reviewing' tagName="dd" classNames="small-3 columns text-center"}}
+          {{#link-to 'my_list.reviewing'}}
+            <div>Reviewing({{inProgressCount}})</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'my_list.reviewed' tagName="dd" classNames="small-3 columns text-center"}}
+          {{#link-to 'my_list.reviewed'}}
+            <div>Reviewed({{reviewedCount}})</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'my_list.scheduled' tagName="dd" classNames="small-3 columns text-center"}}
+          {{#link-to 'my_list.scheduled'}}
+            <div>Scheduled({{scheduledCount}})</div>
+          {{/link-to}}
+        {{/link-to}}
+
+        {{#link-to 'my_list.finished' tagName="dd" classNames="small-3 columns text-center"}}
+          {{#link-to 'my_list.finished'}}
+            <div>Finished</div>
+          {{/link-to}}
+        {{/link-to}}
+      </dl>
+    </div>
+  </div>
+
+  {{outlet}}
+</section>
