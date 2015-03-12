@@ -10,14 +10,15 @@ ul.off-canvas-list li a {
 }
 
 // offers list styles
-
 .inbox_page {
   span.info {
-    .time_indicator div {
-      display: inline;
+    .time_indicator {
+      color: $white;
+      div {
+        display: inline; }
     }
     div {
-      font-size: 0.7rem;
+      font-size: 0.63rem;
     }
   }
 
