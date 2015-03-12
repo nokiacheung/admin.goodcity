@@ -18,9 +18,9 @@ export default AuthorizeRoute.extend({
     });
 
     this.render('unreadNotificationsCount', {
-      into: 'inbox',
+      into: 'offers',
       outlet: 'unreadNotificationsCount',
-      controller: 'inbox'
+      controller: 'offers'
     });
   }
 });

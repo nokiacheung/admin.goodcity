@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import inbox from './inbox';
+import offers from './offers';
 import messagesUtil from "../utils/messages";
 
-export default inbox.extend({
+export default offers.extend({
   sortProperties: ["createdAt:desc"],
   sortedModel: Ember.computed.sort("model", "sortProperties"),
 
