@@ -12,6 +12,11 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
+    contentSecurityPolicy: {
+      "img-src": "'self' https://res.cloudinary.com",
+      "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
+      "font-src": "'self' data: https://maxcdn.bootstrapcdn.com"
+    },
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -45,6 +50,8 @@ module.exports = function(environment) {
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
+
+    ENV.contentSecurityPolicy["connect-src"] = 'http://localhost:3000 http://localhost:1337 ws://localhost:1337';
   }
 
   if (environment === 'test') {
@@ -70,6 +77,8 @@ module.exports = function(environment) {
     ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
     ENV.APP.AIRBRAKE_PROJECT_ID = 0;
     ENV.APP.AIRBRAKE_PROJECT_KEY = "010f0d73f56efb6150cb2744e814e46b";
+
+    ENV.contentSecurityPolicy["connect-src"] = 'https://api.goodcity.hk https://socket.goodcity.hk:81 ws://socket.goodcity.hk:81';
   }
 
   if (environment === 'staging') {
@@ -82,6 +91,8 @@ module.exports = function(environment) {
     ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
     ENV.APP.AIRBRAKE_PROJECT_ID = 0;
     ENV.APP.AIRBRAKE_PROJECT_KEY = "010f0d73f56efb6150cb2744e814e46b";
+
+    ENV.contentSecurityPolicy["connect-src"] = 'https://api-staging.goodcity.hk https://socket-staging.goodcity.hk:81 ws://socket-staging.goodcity.hk:81';
   }
 
   ENV.APP.SERVER_PATH  = ENV.APP.API_HOST_URL + '/' + ENV.APP.NAMESPACE;
