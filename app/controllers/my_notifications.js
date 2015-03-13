@@ -13,16 +13,9 @@ export default offers.extend({
       var isPrivate = message.get("isPrivate");
       var key = isPrivate + message.get("offer.id") + (message.get("item.id") || "");
       if (!keys[key]) {
-        var notification = Ember.Object.create({
-          id: message.get("id"),
-          text: message.get("body"),
-          item: message.get("item"),
-          offer: message.get("offer"),
-          sender: message.get("sender"),
-          createdAt: message.get("createdAt"),
-          isPrivate: isPrivate,
-          unreadCount: message.get("state") === "unread" ? 1: 0,
-        });
+        var props = ["id", "body", "item", "offer", "sender", "createdAt", "isPrivate"];
+        var notification = Ember.Object.create(message.getProperties(props));
+        notification.set("unreadCount", message.get("state") === "unread" ? 1 : 0);
 
         keys[key] = notification;
         res.push(notification);
