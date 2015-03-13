@@ -29,7 +29,6 @@ I18nTranslationsEn =
       "index.start" : "Start Now"
       "full_name" : "{{firstName}} {{lastName}}"
       "select_district" : "Select a district"
-      "offline_error": "Attempting to connect to app.goodcity.hk..."
 
       "application":
         "home" : "Home"
