@@ -1,5 +1,5 @@
 import config from './config/environment';
-import GoodcityRouter from 'ember-goodcity/router/router';
+import GoodcityRouter from 'shared.goodcity/router/router';
 
 var Router = GoodcityRouter.extend({
   location: config.locationType

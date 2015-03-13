@@ -1,3 +1,3 @@
-import MessagesBaseController from "ember-goodcity/controllers/messages_base";
+import MessagesBaseController from "shared.goodcity/controllers/messages_base";
 
 export default MessagesBaseController;

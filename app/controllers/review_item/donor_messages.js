@@ -1,5 +1,5 @@
 import Ember from "ember";
-import MessagesBaseController from "ember-goodcity/controllers/messages_base";
+import MessagesBaseController from "shared.goodcity/controllers/messages_base";
 
 export default MessagesBaseController.extend({
   needs: ["review_item", "offer"],

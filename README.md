@@ -8,13 +8,13 @@ Install and configure nodejs https://github.com/creationix/nvm#install-script
 
 ```shell
 npm install -g ember-cli bower phantomjs
-git clone https://github.com/crossroads/ember-goodcity.git
-cd ember-goodcity
+git clone https://github.com/crossroads/shared.goodcity.git
+cd shared.goodcity
 npm link
 cd ..
-git clone https://github.com/crossroads/goodcity.admin.git
-cd goodcity.admin
-npm link ember-goodcity
+git clone https://github.com/crossroads/admin.goodcity.git
+cd admin.goodcity
+npm link shared.goodcity
 ember install
 ```
 
@@ -56,7 +56,7 @@ bower cache clean
 rm -rf node_modules bower_components dist tmp
 npm install -g ember-cli
 npm install --save-dev ember-cli (SKIP if someone else has updated ember-cli already)
-npm link ember-goodcity
+npm link shared.goodcity
 ember init (SKIP if someone else has updated ember-cli already)
 ember install
 ```
