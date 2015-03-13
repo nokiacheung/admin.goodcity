@@ -1,4 +1,5 @@
 `import Ember from "ember"`
+`import SharedTranslationsZhTw from "shared.goodcity/initializers/i18n-zh-tw"`
 
 I18nTranslationsZhTw =
   name: 'i18n-zh-tw'
@@ -6,7 +7,7 @@ I18nTranslationsZhTw =
 
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
-    Ember.I18n.translation_store['zh-tw'] =
+    Ember.I18n.translation_store['zh-tw'] = Ember.$.extend SharedTranslationsZhTw,
       "crossroads" : "Crossroads"
       'language': 'zh-tw'
       'loading': '加載中...'

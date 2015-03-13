@@ -1,4 +1,5 @@
 `import Ember from "ember"`
+`import SharedTranslationsEn from "shared.goodcity/initializers/i18n-en"`
 
 I18nTranslationsEn =
   name: "i18n-en"
@@ -6,7 +7,7 @@ I18nTranslationsEn =
 
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
-    Ember.I18n.translation_store.en =
+    Ember.I18n.translation_store.en = Ember.$.extend SharedTranslationsEn,
       "crossroads" : "Crossroads"
       "language": "en"
       "loading": "Loading..."
