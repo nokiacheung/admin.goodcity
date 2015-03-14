@@ -80,7 +80,8 @@ module.exports = function(environment) {
 
     ENV.contentSecurityPolicy["connect-src"] = 'https://api.goodcity.hk https://socket.goodcity.hk:81 ws://socket.goodcity.hk:81';
 
-    if (process.env.staging === true) {
+    if (process.env.staging === 'true') {
+      ENV.staging = true;
       ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
       ENV.contentSecurityPolicy["connect-src"] = 'https://api-staging.goodcity.hk https://socket-staging.goodcity.hk:81 ws://socket-staging.goodcity.hk:81';
