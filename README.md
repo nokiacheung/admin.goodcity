@@ -134,3 +134,5 @@ http://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html
   ```
 
 * To keep whitespace settings consistent in source code we're using .editorconfig which can be installed in your favourite editor via http://editorconfig.org/#download
+
+* Shared brocfile imports can be found in shared.goodcity/index.js
