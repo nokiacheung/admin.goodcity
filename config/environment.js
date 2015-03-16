@@ -21,6 +21,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      TYPE: 'reviewer',
       CLOUD_NAME: 'ddoadcjjl',
       CLOUD_API_KEY: 926849638736153,
       CLOUD_URL: 'https://api.cloudinary.com/v1_1/ddoadcjjl/auto/upload',
