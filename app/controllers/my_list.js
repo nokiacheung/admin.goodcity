@@ -19,7 +19,7 @@ export default Ember.ArrayController.extend({
 
   currentUser: function() {
     var currentUserId = this.session.get("currentUser.id");
-    return this.store.getById('user', currentUserId);
+    return this.store.getById('userProfile', currentUserId);
   }.property('session.currentUser'),
 
 });
