@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   needs: ['application'],
 
-  newOffersCount: Ember.computed.alias('model.length'),
+  newOffersCount: function() {
+    return this.get('allOffers').filterBy('isSubmitted', true).length;
+  }.property('allOffers.@each.isSubmitted'),
+
 
   inProgressCount: function() {
     return this.get('allOffers').filterBy('isUnderReview', true).length;
