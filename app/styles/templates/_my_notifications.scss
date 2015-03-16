@@ -2,8 +2,16 @@
   margin-bottom: 0;
 }
 
+.list.list-notifications li{
+  border-bottom: 1px solid $light-gray-1;
+}
+
+.thread.unread {
+  background-color: $light-blue-2;
+}
+
 .thread {
-  margin: 1rem;
+  padding: 1rem;
   span {
     display: table-cell;
   }
