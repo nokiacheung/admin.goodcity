@@ -5,6 +5,9 @@ site_folder=/var/www/html/admin.goodcity.hk
 echo "Building $site [$environment]"
 EMBER_CLI_CORDOVA=0 ember build --environment=$environment
 
+echo "Setting variable APP_SHA"
+APP_SHA=$(git rev-parse --short HEAD)
+
 echo "Uploading new files to $site"
 release_folder=$site_folder/releases/$(date +%s)
 
