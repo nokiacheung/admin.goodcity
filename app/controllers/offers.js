@@ -17,13 +17,15 @@ export default Ember.ArrayController.extend({
 
   myOffersCount: function() {
     var currentUserId = this.session.get("currentUser.id");
-    var currentUser = this.store.getById('user', currentUserId);
-    return currentUser.get('reviewedOffers').length;
+    return this.get("allOffers")
+      .filterBy("isReviewing", true)
+      .filterBy("reviewedBy.id", currentUserId)
+      .length;
   }.property('allOffers.@each.isReviewing'),
 
   allOffers: function() {
     return this.store.all('offer');
-  }.property('model.@each'),
+  }.property(),
 
   unreadNotificationsCount: function() {
     return this.get('allMessages').filterBy("state", "unread").get('length');
@@ -33,11 +35,11 @@ export default Ember.ArrayController.extend({
     return this.store.filter('message', function(message) {
       return message.get('state') !== 'never-subscribed';
     });
-  }.property(''),
+  }.property(),
 
   hasUnreadNotifications: function() {
     return this.get('unreadNotificationsCount') > 0;
-  }.property('allMessages.@each.state'),
+  }.property('unreadNotificationsCount'),
 
   actions: {
     logMeOut: function(){
