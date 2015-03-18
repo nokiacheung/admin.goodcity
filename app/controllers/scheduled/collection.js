@@ -11,35 +11,36 @@ export default Ember.ArrayController.extend({
 
   overdue: function(){
     return this.get('allScheduled').filter(function(offer){
-      return offer.get('delivery.schedule.scheduledAt') < moment().toDate();
+      var date = offer.get('delivery.schedule.scheduledAt');
+      return moment(date).isBefore(moment(), 'day');
     });
   },
 
   nextWeek: function(){
-    var firstDay = moment().day(7).startOf('day').toDate();
-    var lastDay  = moment().day(13).endOf('day').toDate();
+    var nextWeekEnd = moment().day(6).endOf('day');
+    var afterNextWeekStart  = moment().day(14).startOf('day');
 
     return this.get('allScheduled').filter(function(offer){
-      var date = offer.get('delivery.schedule.scheduledAt').setHours(0,0,0,0);
-      return (firstDay < date) && (date < lastDay);
+      var date = offer.get('delivery.schedule.scheduledAt');
+      return moment(date).isBetween(nextWeekEnd, afterNextWeekStart, 'day');
     });
   },
 
   afterNextWeek: function(){
-    var firstDay = moment().day(14).startOf('day').toDate();
+    var weekend = moment().day(13).endOf('day');
+
     return this.get('allScheduled').filter(function(offer){
-      var date = offer.get('delivery.schedule.scheduledAt').setHours(0,0,0,0);
-      return firstDay < date;
+      var date = offer.get('delivery.schedule.scheduledAt');
+      return moment(date).isAfter(weekend, 'day');
     });
   },
 
   daySchedule: function(dayValue){
     var day = dayValue ? moment().day(dayValue) : moment();
-    var today = day.startOf('day').toDate().toISOString();
 
     return this.get('allScheduled').filter(function(offer){
       var date = offer.get('delivery.schedule.scheduledAt');
-      return today === (date.toISOString());
+      return moment(date).isSame(day, 'day');
     });
   },
 
@@ -56,9 +57,5 @@ export default Ember.ArrayController.extend({
       }
       this.set('model', offers);
     }
-  },
-
-  didInsertElement: function() {
-    this.set('allScheduled', this.get('model'));
   }
 });

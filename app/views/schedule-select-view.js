@@ -12,7 +12,7 @@ export default Ember.View.extend({
     var week = moment.weekdays();
 
     var options = [
-      { name: 'Overdue (' + this.overdueCount() + ')', id: 'overdue' },
+      { name: 'Overdue (' + _this.overdueCount() + ')', id: 'overdue' },
       { name: 'Today (' + _this.scheduleCount() + ')', id: 'today' }];
 
     for (var i = currentDay + 1; i < week.length; i++) {
