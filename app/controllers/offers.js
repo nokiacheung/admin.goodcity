@@ -7,7 +7,6 @@ export default Ember.ArrayController.extend({
     return this.get('allOffers').filterBy('isSubmitted', true).length;
   }.property('allOffers.@each.isSubmitted'),
 
-
   inProgressCount: function() {
     return this.get('allOffers').filterBy('isUnderReview', true).length;
   }.property('allOffers.@each.isUnderReview'),
@@ -18,7 +17,7 @@ export default Ember.ArrayController.extend({
 
   myOffersCount: function() {
     var currentUserId = this.session.get("currentUser.id");
-    var currentUser = this.store.getById('userProfile', currentUserId);
+    var currentUser = this.store.getById('user', currentUserId);
     return currentUser.get('reviewedOffers').length;
   }.property('allOffers.@each.isReviewing'),
 

@@ -15,11 +15,13 @@ export default Ember.ArrayController.extend({
     return this.get('reviewerOffers').filterBy('isReviewed', true).length;
   }.property('reviewerOffers.@each.isReviewed'),
 
-  reviewerOffers: Ember.computed.alias('currentUser.reviewedOffers'),
+  reviewerOffers: function() {
+    return this.get('currentUser.reviewedOffers');
+  }.property('session.currentUser.reviewedOffers.@each'),
 
   currentUser: function() {
     var currentUserId = this.session.get("currentUser.id");
-    return this.store.getById('userProfile', currentUserId);
+    return this.store.getById('user', currentUserId);
   }.property('session.currentUser'),
 
 });

@@ -40,7 +40,7 @@ test("redirect to reviewing offers page", function() {
     equal(find("ul.list img").length, 1);
 
     // under-review status
-    equal($('.time_indicator').text().indexOf('Started by ' + reviewerName) > 0, true);
+    equal($('.time_indicator').text().indexOf('Started by ') > 0, true);
     var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
 
     // items accept-reject status
