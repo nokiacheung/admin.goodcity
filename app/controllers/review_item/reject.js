@@ -71,11 +71,9 @@ export default Ember.ObjectController.extend({
       var item = this.store.push('item', rejectProperties);
 
       // Save changes to Item
-      var route = this;
-      item.save().then(function() {
-        loadingView.destroy();
-        route.transitionToRoute('review_offer.items');
-      });
+      item.save()
+        .then(() => this.transitionToRoute('review_offer.items'))
+        .finally(() => loadingView.destroy());
     },
   }
 

@@ -33,16 +33,17 @@ export default transportDetails.extend({
         gogovan_transport_id: gogovanOptionId,
         crossroads_transport_id: crossroadsOptionId,
         state_event: 'finish_review',
-        id: this.get('id') };
+        id: this.get('id')
+      };
 
-      var route = this;
       var url   = "/offers/" + this.get('id') + "/complete_review";
 
-      new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties}).then(function(data) {
-        route.store.pushPayload(data);
-        loadingView.destroy();
-        route.transitionToRoute('review_offer.items');
-      });
+      new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
+        .then(data => {
+          this.store.pushPayload(data);
+          this.transitionToRoute('review_offer.items');
+        })
+        .finally(() => loadingView.destroy());
     },
 
     closeOffer: function(){
@@ -51,16 +52,17 @@ export default transportDetails.extend({
 
       // var offerProperties = {
       //   state_event: 'close',
-      //   id: this.get('id') };
+      //   id: this.get('id')
+      // };
 
-      // var route = this;
       // var url   = "/offers/" + this.get('id') + "/close_offer";
 
-      // new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties}).then(function(data) {
-      //   route.store.pushPayload(data);
-      //   loadingView.destroy();
-      //   route.transitionToRoute('review_offer.items');
-      // });
+      // new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
+      //   .then(data => {
+      //     this.store.pushPayload(data);
+      //     this.transitionToRoute('review_offer.items');
+      //   })
+      //   .finally(() => loadingView.destroy())
     }
   }
 });
