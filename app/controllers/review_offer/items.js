@@ -1,8 +1,6 @@
 import Ember from 'ember';
-import '../../computed/local-storage';
 
-var offerDetails = Ember.ObjectController.extend({
-
+export default Ember.ObjectController.extend({
   sortProperties: ["latestUpdatedTime:desc"],
   sortedItems: Ember.computed.sort("offerAndItems", "sortProperties"),
 
@@ -21,7 +19,3 @@ var offerDetails = Ember.ObjectController.extend({
     },
   }
 });
-
-export default offerDetails;
-
-

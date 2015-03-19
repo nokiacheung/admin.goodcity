@@ -174,6 +174,7 @@ I18nTranslationsEn =
         "accepted_items": "Accepted Items"
         "gogovan_requirement": "Gogovan Reqirement"
         "crossroads_requirement": "Crossroads Requirement"
+        "complete_review": "Complete Review"
 
       "review_item":
         "accept" : "Accept"
