@@ -8,66 +8,6 @@ I18nTranslationsEn =
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
     Ember.I18n.translation_store.en = Ember.$.extend SharedTranslationsEn,
-      "crossroads" : "Crossroads"
-      "language": "en"
-      "loading": "Loading..."
-      "goodcity.hk" : "GoodCity.HK"
-      "skip_intro" : "Skip intro"
-      "next" : "Next"
-      "back" : "Back"
-      "error.message" : "Sorry, an error occurred!"
-      "images" : "Images"
-      "delete" : "Delete"
-      "edit" : "Edit"
-      "remove" : "Remove"
-      "yes" : "Yes"
-      "no" : "No"
-      "ok" : "OK"
-      "index.title" : "Crossroads Foundation Presents"
-      "index.donate_goods" : "Donate your quality goods to people in need"
-      "index.how" : "Learn How"
-      "index.start" : "Start Now"
-      "full_name" : "{{firstName}} {{lastName}}"
-      "select_district" : "Select a district"
-
-      "application":
-        "home" : "Home"
-        "all_offers" : "All Offers"
-        "login" : "Log in"
-        "logout" : "Logout"
-        "register" : "Register"
-        "tour" : "Tour"
-
-      "authenticate":
-        "input_code" : "Input Code"
-
-      "contact":
-        "title" : "Contact Details"
-        "confirm_location" : "Who should we call to confirm location & address detail?"
-        "name" : "Name"
-        "phone" : "Phone"
-        "address" : "Collection address (Hong Kong)"
-        "street" : "Street"
-        "building" : "Building"
-        "flat" : "Flat"
-        "done" : "Done"
-
-      "districts":
-        "all" : "All"
-
-      "tour":
-        "step1.title" : "1. Photograph & describe"
-        "quality_items" : "quality items."
-        "we_receive" : "What we receive."
-        "step2.title" : "2. Submit for live review"
-        "chat_questions" : "We'll chat if we have questions"
-        "step3.title" : "3. Arrange transport"
-        "accepted_items" : "for accepted items."
-        "quick_easy" : "Quick & easy"
-        "step4.title" : "4. People are helped"
-        "make_goodcity" : "How you're making a Good City."
-        "faq" : "Frequently Asked Questions"
-
       "offer":
         "disable": "Disable"
         "details" : "Offer details"
@@ -107,28 +47,6 @@ I18nTranslationsEn =
           "info_text1": "If we have questions when reviewing this item we will chat with you here."
           "info_text2": "If you want to add a comment to this item for our reviewers, type it below."
 
-      "_resend":
-        "no_sms" : "Haven't received SMS code?"
-        "please_wait" : "Please wait 5 minutes..."
-        "resend" : "Resend"
-
-      "_verification_pin":
-        "input_code" : "Input 4-digit SMS code we just sent you:"
-        "auth_error" : "Sorry! Please enter the correct pin."
-
-      "login":
-        "hk_only" : "Mobile phone # (Hong Kong only)"
-        "login" : "Login"
-        "smscode": "Get 4-digit SMS code"
-
-      "register":
-        "hk_only" : "Mobile phone # (Hong Kong only)"
-        "given_name" : "Given name"
-        "family_name" : "Family name"
-        "districts" : "Districts"
-        "register" : "Register"
-        "login" : "Login"
-
       "inbox":
         "quick_links": "Quick Links"
         "all_offers": "All Offers"
@@ -140,14 +58,6 @@ I18nTranslationsEn =
         "my_list" : "My List"
         "finished": "Finished"
         "closed_offers": "Finished"
-
-      "messages":
-        "unread" : "Unread ({{unreadCount}})"
-        "owner" : "You"
-
-      "notifications":
-        "text" : "{{text}}"
-        "view": "View"
 
       "my_notifications":
         "heading" : "{{name}}'s Offer"
