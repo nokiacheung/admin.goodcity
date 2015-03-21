@@ -30,8 +30,6 @@ test("item status badge on item-image", function() {
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
 
-    console.log("My Offer" + offer.id);
-
     // display 'Accepted' status for accepted-item
     equal($(".item-image .accept_badge").length, 1);
 
