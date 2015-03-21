@@ -46,7 +46,7 @@ test("validate at least one option selected", function() {
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/reject");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item1.id + "/reject");
-    click(find('a.rejectOffer'));
+    click('.rejectOffer');
     andThen(function(){
       equal($.trim($(".error-box").text()), "Please choose a reason.");
     });
