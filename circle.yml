@@ -6,7 +6,7 @@ machine:
 
 dependencies:
   pre:
-    - node circle-branch.js admin.goodcity
+    - node circle-branch.js
   post:
     - "./node_modules/ember-cli/node_modules/bower/bin/bower install"
   cache_directories:

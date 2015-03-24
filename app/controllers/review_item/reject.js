@@ -51,11 +51,13 @@ export default Ember.ObjectController.extend({
 
       if(selectedReason === "-1" && Ember.$.trim(rejectProperties.rejectReason).length === 0) {
         this.set("isBlank", true);
-        return false; }
+        return false;
+      }
 
       if(selectedReason !== "-1") {
         rejectProperties.rejectReason = null;
-        this.set('rejectReason', null); }
+        this.set('rejectReason', null);
+      }
 
       var loadingView = this.container.lookup('view:loading').append();
       rejectProperties.rejectionReason = this.store.getById('rejection_reason', selectedReason);
@@ -73,6 +75,7 @@ export default Ember.ObjectController.extend({
       // Save changes to Item
       item.save()
         .then(() => this.transitionToRoute('review_offer.items'))
+        .catch(error => { item.rollback(); throw error; })
         .finally(() => loadingView.destroy());
     },
   }

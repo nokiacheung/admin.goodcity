@@ -6,6 +6,7 @@ var app = new EmberApp({
   vendorFiles: { 'handlebars.js': null },
   sourcemaps: ['js', 'css'],
   fingerprint: {
+    extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'eot', 'woff', 'woff2', 'ttf', 'ott', 'svg'],
     enabled: (process.env.EMBER_CLI_CORDOVA === '0') && ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
   },
   gzip: {
