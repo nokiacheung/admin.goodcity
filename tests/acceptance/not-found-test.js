@@ -39,7 +39,7 @@ test("Display not-found page for invalid url", function() {
   var not_found_message = "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!";
   visit("/invalid_url");
   andThen(function(){
-    equal(currentURL(), "/not-found");
+    equal(currentURL(), "/invalid_url");
     equal($(".xy-center").text().indexOf(not_found_message) > 0, true);
   });
 });
