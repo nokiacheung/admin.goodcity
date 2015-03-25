@@ -22,12 +22,6 @@ I18nTranslationsEn =
           "not_needed": "Not needed"
           "closed_offer_message": "Offer closed. No items needed, Sorry."
 
-        "transport_details" :
-          "accepted_items": "Accepted items to be transported"
-          "time": "Booking Time"
-          "modify": "Modify"
-          "cancel_booking": "Cancel Booking"
-
       "items":
         "add_item":
           "description_placeholder" : "What is it? How many items? What's the size?"
