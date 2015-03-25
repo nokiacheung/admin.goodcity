@@ -25,11 +25,6 @@ I18nTranslationsEn =
         "transport_details" :
           "accepted_items": "Accepted items to be transported"
           "time": "Booking Time"
-          "name": "Contact Name"
-          "phone": "Contact Phone"
-          "address": "Address"
-          "district": "District"
-          "charity_sale": "Charity sale ok?"
           "modify": "Modify"
           "cancel_booking": "Cancel Booking"
 
