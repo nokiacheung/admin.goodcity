@@ -1,5 +1,4 @@
 var execSync = require("child_process").execSync;
-var repoName = process.argv[2];
 
 function exec(cmd) {
   return execSync(cmd, {encoding:"utf8"});
@@ -12,7 +11,7 @@ if (!currentBranch) {
   return;
 }
 
-var branches = exec("curl https://api.github.com/repos/crossroads/" + repoName + "/branches");
+var branches = exec("curl https://api.github.com/repos/crossroads/shared.goodcity/branches");
 var matched = JSON.parse(branches)
   .map(function(b) { return b.name; })
   .filter(function(name) { return name.indexOf(currentBranch) !== -1; })[0];

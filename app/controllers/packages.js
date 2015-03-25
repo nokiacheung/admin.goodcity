@@ -65,27 +65,33 @@ var packages = Ember.ArrayController.extend(PackageComponentMixin, {
       var packagePromises = [], packageNew;
       var item = this.store.getById('item', this.get('itemId'));
       item.set('itemType', this.store.getById('item_type', this.get('itemTypeId')));
-      packagePromises.pushObject(item.save());
 
-      packageDetails.forEach(function(packDetail){
-        packDetail.item = _this.store.getById('item', packDetail.itemId);
-        packDetail.packageType = _this.store.getById('item_type', packDetail.packagetypeid);
+      item.save().then(() => {
 
-        if(packDetail.id) {
-          packageNew = _this.store.push('package', packDetail);
-        } else {
-          packageNew = _this.store.createRecord("package", packDetail);
-        }
-        packagePromises.pushObject(packageNew.save());
-      });
+        packageDetails.forEach(function(packDetail){
+          packDetail.item = _this.store.getById('item', packDetail.itemId);
+          packDetail.packageType = _this.store.getById('item_type', packDetail.packagetypeid);
 
-      Ember.RSVP.all(packagePromises).then(function() {
-        var acceptItem = {id: _this.get("itemId") , state_event: "accept",
-          itemType: _this.store.getById('item_type', _this.get("itemTypeId"))};
-        var item = _this.store.push('item', acceptItem);
-        item.save().then(function() {
-          _this.transitionToRoute('review_offer.items');
+          if(packDetail.id) {
+            packageNew = _this.store.push('package', packDetail);
+          } else {
+            packageNew = _this.store.createRecord("package", packDetail);
+          }
+          packagePromises.pushObject(packageNew.save());
         });
+
+        Ember.RSVP.all(packagePromises).then(function() {
+          var acceptItem = {id: _this.get("itemId") , state_event: "accept",
+            itemType: _this.store.getById('item_type', _this.get("itemTypeId"))};
+          var item = _this.store.push('item', acceptItem);
+          item.save().then(function() {
+            _this.transitionToRoute('review_offer.items');
+          });
+        });
+
+      }).catch(error => {
+        item.rollback();
+        throw error;
       });
     },
 

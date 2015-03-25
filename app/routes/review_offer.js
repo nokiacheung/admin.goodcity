@@ -4,6 +4,7 @@ export default AuthorizeRoute.extend({
 
   model: function() {
     var offerId = this.modelFor('offer').get('id');
-    return this.store.getById('offer', offerId);
+    var offer = this.store.getById('offer', offerId);
+    return (offer ? offer : this.resourceNotFound("offer"));
   }
 });
