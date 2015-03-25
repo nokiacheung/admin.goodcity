@@ -2,12 +2,15 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
 var App, testHelper, offer, item, reviewer, offer2, item2, offer3, item3,
+  delivery1, ggv_order1, offer5, item5, delivery2, ggv_order2,
+  offer6, item6,
   TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
 module('Review Offer Logistics', {
   setup: function() {
     App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
+    lookup('session:current').set('isAdmin', true);
 
     reviewer = FactoryGuy.make("user");
     offer = FactoryGuy.make("offer", { state: "under_review", reviewedBy:  reviewer });
@@ -17,6 +20,16 @@ module('Review Offer Logistics', {
 
     offer3 = FactoryGuy.make("offer", { state: "under_review" });
     item3 = FactoryGuy.make("item", { state:"rejected", offer: offer3 });
+
+    ggv_order1 = FactoryGuy.make("gogovan_order");
+    delivery1 = FactoryGuy.make("delivery", { deliveryType: "Gogovan", gogovanOrder: ggv_order1 });
+    offer5 = FactoryGuy.make("offer", {state:"scheduled", delivery: delivery1});
+    item5  = FactoryGuy.make("item", {state:"accepted", offer: offer5});
+
+    ggv_order2 = FactoryGuy.make("gogovan_active_order");
+    delivery2 = FactoryGuy.make("delivery", { deliveryType: "Gogovan", gogovanOrder: ggv_order2 });
+    offer6 = FactoryGuy.make("offer", {state:"scheduled", delivery: delivery2});
+    item6  = FactoryGuy.make("item", {state:"accepted", offer: offer6});
   },
   teardown: function() {
     Em.run(function() { testHelper.teardown(); });
@@ -58,17 +71,6 @@ test("complete review of offer", function() {
   });
 });
 
-test("for scheduled offer", function() {
-  visit('/offers/' + offer2.id + "/review_offer/logistics");
-  andThen(function() {
-    equal(currentURL(), "/offers/" + offer2.id + "/review_offer/logistics");
-
-    equal($.trim($(".delivery-details .row:eq(0)").text()), "Accepted items to be transported");
-    equal($(".items_list img").length, 1);
-    equal($('.transport-buttons a').length, 2);
-  });
-});
-
 test("for rejected offer-items", function() {
   visit('/offers/' + offer3.id + "/review_offer/logistics");
   andThen(function() {
@@ -80,5 +82,78 @@ test("for rejected offer-items", function() {
 
     // page has button to close offer
     equal($(".noTransportItems a:eq(0)").text(), 'Close Offer');
+  });
+});
+
+test("for scheduled offer", function() {
+  visit('/offers/' + offer2.id + "/review_offer/logistics");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer2.id + "/review_offer/logistics");
+
+    equal($.trim($(".delivery-details .row:eq(1)").text()), "Accepted items to be transported");
+    equal($(".items_list img").length, 1);
+    equal($('.transport-buttons a').length, 2);
+  });
+});
+
+test("cancel booking of scheduled offer with pending GGV order state", function() {
+  visit('/offers/' + offer5.id + "/review_offer/logistics");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer5.id + "/review_offer/logistics");
+
+    click(find("a:contains('Cancel Booking')"));
+    andThen(function(){
+      equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
+    });
+  });
+});
+
+test("cancel booking of scheduled offer with active GGV order state", function() {
+  visit('/offers/' + offer6.id + "/review_offer/logistics");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer6.id + "/review_offer/logistics");
+
+    click(find("a:contains('Cancel Booking')"));
+    andThen(function(){
+      equal(currentURL(), "/offers/" + offer6.id + "/delivery/" + delivery2.id + "/cancel_booking");
+    });
+  });
+});
+
+test("for scheduled offer with pending GGV order state", function() {
+  visit('/offers/' + offer5.id + "/review_offer/logistics");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer5.id + "/review_offer/logistics");
+
+    equal(($.trim($(".delivery-details .row:eq(0)").text()).indexOf('Awaiting Driver Confirmation') >= 0), true);
+    equal(($.trim($(".delivery-details .row:eq(0)").text()).indexOf('Driver & vehicle details will appear here once a driver accepts your booking.') > 0), true);
+
+    equal($.trim($('.delivery-details .row:eq(1)').text()), "Accepted items to be transported");
+    equal($(".items_list img").length, 1);
+    equal($('.transport-buttons a').length, 2);
+  });
+});
+
+test("for scheduled offer with active GGV order state", function() {
+  visit('/offers/' + offer6.id + "/review_offer/logistics");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer6.id + "/review_offer/logistics");
+
+    equal(($.trim($(".transport-content .row:eq(0)").text()).indexOf('Booking Confirmed') >= 0), true);
+
+    // driver name
+    equal((($.trim($(".delivery-details .gogovan_status .row:eq(0)").text())).indexOf(ggv_order2.get('driverName')) > 0), true);
+
+    // driver mobile
+    equal((($.trim($(".delivery-details .gogovan_status").text())).indexOf(ggv_order2.get('driverMobile')) > 0), true);
+
+    // driver License
+    equal((($.trim($(".delivery-details .gogovan_status .row:eq(2)").text())).indexOf(ggv_order2.get('driverLicense')) > 0), true);
+
+    equal((($.trim($(".delivery-details .gogovan_status .row:eq(3)").text())).indexOf(ggv_order2.get('price')) > 0), true);
+
+    equal($.trim($('.delivery-details .row:eq(5)').text()), "Accepted items to be transported");
+    equal($(".items_list img").length, 1);
+    equal($('.transport-buttons a').length, 2);
   });
 });
