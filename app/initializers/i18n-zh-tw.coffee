@@ -85,6 +85,7 @@ I18nTranslationsZhTw =
         "start_review": "Start Review"
         "goods_received_by" : "Goods received by {{lastName}} {{firstName}}"
         "offer_closed_by": "Offer closed by {{lastName}} {{firstName}}"
+        "receive": "Receive"
 
       "logistics":
         "no_items": "No items to transport."

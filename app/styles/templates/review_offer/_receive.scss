@@ -1,0 +1,29 @@
+.receive-list {
+  li {
+    border-top: $light-blue solid 1px;
+    border-bottom: $light-blue solid 1px;
+    margin: 10px 0px;
+    > div > div {
+      overflow: hidden;
+      padding-left: 10px;
+      color: white;
+    }
+  }
+  img {
+    width: auto;
+    float: left;
+  }
+  .package-name {
+    padding: 3px 0px;
+    padding-left: 10px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  .sep {
+    clear: both;
+    + div {
+      margin-top: 10px;
+    }
+  }
+}

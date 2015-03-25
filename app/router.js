@@ -16,6 +16,7 @@ Router.map(function() {
       this.route('items');
       this.route('logistics');
       this.route('donor_details');
+      this.route('receive');
     });
 
     this.resource('review_item', {path: '/review_item/:item_id'},function() {

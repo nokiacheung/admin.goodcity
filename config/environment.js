@@ -40,6 +40,9 @@ module.exports = function(environment) {
     cordova: {
       rebuildOnChange: false,
       emulate: false
+    },
+    coffeeOptions: {
+      blueprints: false
     }
   };
 

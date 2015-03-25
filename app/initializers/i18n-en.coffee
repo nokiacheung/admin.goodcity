@@ -63,6 +63,7 @@ I18nTranslationsEn =
         "start_review": "Start Review"
         "goods_received_by" : "Goods received by {{firstName}} {{lastName}}"
         "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
+        "receive": "Receive"
 
       "logistics":
         "no_items": "No items to transport."
