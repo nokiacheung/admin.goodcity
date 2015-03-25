@@ -25,6 +25,10 @@ Router.map(function() {
       this.route('donor_messages');
       this.route('supervisor_messages');
     });
+
+    this.resource('delivery', { path: '/delivery/:delivery_id'}, function(){
+      this.route('cancel_booking');
+    });
   });
 
   this.resource('item_types');

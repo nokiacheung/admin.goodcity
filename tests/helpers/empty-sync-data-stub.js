@@ -3,6 +3,7 @@ import '../fixtures/territory';
 import '../fixtures/contact';
 import '../fixtures/schedule';
 import '../fixtures/delivery';
+import '../fixtures/gogovan_order';
 import '../fixtures/offer';
 import '../fixtures/item_type';
 import '../fixtures/package';
