@@ -13,19 +13,6 @@ module('Home Page', {
   }
 });
 
-test("Display tour and register links", function() {
-  App = startApp();
-  lookup('session:current').set('authToken', null);
-
-  visit("/");
-
-  andThen(function(){
-    equal(currentURL(), "/");
-    equal($("a[href='/tour']").length, 1);
-    equal($("a[href='/register']").length, 1);
-  });
-});
-
 test("redirect to offers page if logged-in as Reviewer", function() {
   App = startApp({}, 1);
   visit("/");
