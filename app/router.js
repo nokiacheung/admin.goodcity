@@ -6,7 +6,6 @@ var Router = GoodcityRouter.extend({
 });
 
 Router.map(function() {
-
   this.resource('offer', { path: '/offers/:offer_id'}, function() {
     this.route('messages');
     this.route('donor_messages');
