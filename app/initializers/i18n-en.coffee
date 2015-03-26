@@ -101,6 +101,10 @@ I18nTranslationsEn =
         "size_message" : "Very few of our clients are able to accommodate large items in their homes."
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
 
+      "receive":
+        "missing": "Missing"
+        "receive": "Receive"
+
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en
 

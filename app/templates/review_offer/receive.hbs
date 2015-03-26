@@ -9,11 +9,13 @@
       <div>
         <img {{bind-attr src="item.displayImageUrl"}} />
         <div>
-
           <div class="package-name">
             {{package.quantity}}x
             {{package.packageName}}
           </div>
+
+          {{receive-menu packageId=package.id}}
+
           {{#if (js-x "this == 0" idx)}}
             {{js-x "p0.get('notes') ? p0.get('notes') : p1.get('donorDescription')" package item}}<br/>
           {{else}}

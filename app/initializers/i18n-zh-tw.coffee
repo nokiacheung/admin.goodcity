@@ -98,4 +98,8 @@ I18nTranslationsZhTw =
         "crossroads_requirement": "Crossroads Requirement"
         "complete_review": "Complete Review"
 
+      "receive":
+        "missing": "Missing"
+        "receive": "Receive"
+
 `export default I18nTranslationsZhTw`
