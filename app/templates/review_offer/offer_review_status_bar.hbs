@@ -40,7 +40,11 @@
         {{/if}}
 
         {{#if offer.delivery.isGogovan}}
-          {{t 'offer.offer_details.is_gogovan'}}
+          {{#if offer.delivery.gogovanOrder.isActive}}
+            {{t 'offer.offer_details.is_gogovan_confirm'}}
+          {{else}}
+            {{t 'offer.offer_details.is_gogovan_order'}}
+          {{/if}}
         {{/if}}
 
         <i class="fa fa-truck"></i>

@@ -5,7 +5,8 @@ import syncDataStub from '../helpers/empty-sync-data-stub';
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 var App, testHelper, offer1, offer2, reviewer, reviewer1, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
-  offer8, item8, offer9, item9, offer10, schedule;
+  offer8, item8, offer9, item9, offer10, schedule, ggv_order11, delivery11,
+  offer11;
 
 module('Reviewer: Display Offer Status', {
   setup: function() {
@@ -39,6 +40,10 @@ module('Reviewer: Display Offer Status', {
     item9 = FactoryGuy.make("item", { state: "accepted", offer: offer9 });
 
     offer10 = FactoryGuy.make("offer_with_items", { state:"received" });
+
+    ggv_order11 = FactoryGuy.make("gogovan_active_order");
+    delivery11 = FactoryGuy.make("delivery", { deliveryType: "Gogovan", gogovanOrder: ggv_order11 });
+    offer11 = FactoryGuy.make("offer_with_items", {state:"scheduled", delivery: delivery11});
   },
 
   teardown: function() {
@@ -90,12 +95,22 @@ test("Display offer status for scheduled offer: Collection", function() {
   });
 });
 
-test("Display offer status for scheduled offer: Gogovan", function() {
+test("Display offer status for scheduled offer: Gogovan pending", function() {
   visit('/offers/' + offer5.id + "/review_offer/items");
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van Booked Afternoon, 2pm-4pm, Mon 1st");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm, Mon 1st");
+  });
+});
+
+test("Display offer status for scheduled offer: Gogovan active", function() {
+  visit('/offers/' + offer11.id + "/review_offer/items");
+
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer11.id + "/review_offer/items");
+    var status = $.trim(find('.status-message').text().replace(/\s{2,}/g, ' '));
+    equal(status.indexOf("Van confirmed Afternoon, 2pm-4pm") >= 0, true);
   });
 });
 

@@ -74,8 +74,8 @@ test("redirect to scheduled offers page", function() {
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
 
-    // reviewed status
-    equal($('.time_indicator').text().indexOf('Van Booked') > 0, true);
+    // scheduled status
+    equal($('.time_indicator').text().indexOf('Van ordered') >= 0, true);
 
     // items accept-reject status
      var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');

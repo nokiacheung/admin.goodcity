@@ -48,7 +48,7 @@ test("redirect to reviewed offers page", function() {
     equal(currentURL(), "/offers/scheduled/gogovan");
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
-    equal($('.time_indicator').text().indexOf('Van Booked') > 0, true);
+    equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
   });
 });
 
@@ -65,7 +65,7 @@ test("apply filter at gogovan scheduled offers", function() {
       equal(find('.dynamic_filter select :selected').text(), "After next week (1)");
       equal(find("ul.list li").length, 1);
       equal(find("ul.list img").length, 1);
-      equal($('.time_indicator').text().indexOf('Van Booked') > 0, true);
+      equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
     });
   });
 });
