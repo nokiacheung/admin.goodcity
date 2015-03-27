@@ -58,7 +58,7 @@ module.exports = function(environment) {
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
 
-    ENV.contentSecurityPolicy["connect-src"] = 'http://localhost:3000 http://localhost:1337 ws://localhost:1337';
+    ENV.contentSecurityPolicy["connect-src"] = 'http://localhost:4201 http://localhost:3000 http://localhost:1337 ws://localhost:1337';
   }
 
   if (environment === 'test') {
@@ -85,13 +85,13 @@ module.exports = function(environment) {
     ENV.APP.AIRBRAKE_PROJECT_ID = 0;
     ENV.APP.AIRBRAKE_PROJECT_KEY = "010f0d73f56efb6150cb2744e814e46b";
 
-    ENV.contentSecurityPolicy["connect-src"] = 'https://api.goodcity.hk https://socket.goodcity.hk:81 ws://socket.goodcity.hk:81';
+    ENV.contentSecurityPolicy["connect-src"] = 'https://admin.goodcity.hk https://api.goodcity.hk https://socket.goodcity.hk:81 ws://socket.goodcity.hk:81';
 
     if (process.env.staging === 'true') {
       ENV.staging = true;
       ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
-      ENV.contentSecurityPolicy["connect-src"] = 'https://api-staging.goodcity.hk https://socket-staging.goodcity.hk:81 ws://socket-staging.goodcity.hk:81';
+      ENV.contentSecurityPolicy["connect-src"] = 'https://admin-staing.goodcity.hk https://api-staging.goodcity.hk https://socket-staging.goodcity.hk:81 ws://socket-staging.goodcity.hk:81';
     }
   }
 
