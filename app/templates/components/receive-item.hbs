@@ -1,3 +1,7 @@
+{{#if hasMultiplePackages}}
+  <div class="text-center">{{item.itemType.name}}</div>
+{{/if}}
+
 {{#each packages as |package idx|}}
   <div>
     <img src="{{item.displayImageUrl}}" />

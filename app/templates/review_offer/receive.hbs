@@ -27,12 +27,6 @@
 
 <ul class="list receive-list">
 {{#each item in items}}
-  <li>
-    {{#if (js-x "this.filterBy('state', p1).length > 1" item.packages state)}}
-      <div class="text-center">{{item.itemType.name}}</div>
-    {{/if}}
-
-    {{receive-item state=state itemId=item.id refresh="refresh"}}
-  </li>
+  {{receive-item state=state itemId=item.id}}
 {{/each}}
 </ul>
