@@ -1,32 +1,38 @@
+<br/>
+<section id="receive-list-menu" class="main-section review_offer">
+  <div class="row">
+    <div class="small-12 columns tab_row">
+      <dl class="tabs" data-tab>
+  {{#link-to 'review_offer.receive' (query-params state="expecting") tagName="dd" classNames="small-4 columns text-center"}}
+    {{#link-to 'review_offer.receive' (query-params state="expecting")}}
+      <div>{{t "review_offer.expecting"}}</div>
+    {{/link-to}}
+  {{/link-to}}
+
+  {{#link-to 'review_offer.receive' (query-params state="received") tagName="dd" classNames="small-4 columns text-center"}}
+    {{#link-to 'review_offer.receive' (query-params state="received")}}
+      <div>{{t "review_offer.received"}}</div>
+    {{/link-to}}
+  {{/link-to}}
+
+  {{#link-to 'review_offer.receive' (query-params state="missing") tagName="dd" classNames="small-4 columns text-center"}}
+    {{#link-to 'review_offer.receive' (query-params state="missing")}}
+      <div>{{t "review_offer.missing"}}</div>
+    {{/link-to}}
+  {{/link-to}}
+      </dl>
+    </div>
+  </div>
+</section>
+
 <ul class="list receive-list">
-{{#each item in model.items}}
+{{#each item in items}}
   <li>
-    {{#if (js-x "this.get('packages.length') > 1" item)}}
+    {{#if (js-x "this.filterBy('state', p1).length > 1" item.packages state)}}
       <div class="text-center">{{item.itemType.name}}</div>
     {{/if}}
 
-    {{#each item.packages as |package idx|}}
-      <div>
-        <img {{bind-attr src="item.displayImageUrl"}} />
-        <div>
-          <div class="package-name">
-            {{package.quantity}}x
-            {{package.packageName}}
-          </div>
-
-          {{receive-menu packageId=package.id}}
-
-          {{#if (js-x "this == 0" idx)}}
-            {{js-x "p0.get('notes') ? p0.get('notes') : p1.get('donorDescription')" package item}}<br/>
-          {{else}}
-            {{item.notes}}<br/>
-          {{/if}}
-          <br/>
-          {{package.dimensions}}
-        </div>
-      </div>
-      <div class="sep"></div>
-    {{/each}}
+    {{receive-item state=state itemId=item.id refresh="refresh"}}
   </li>
 {{/each}}
 </ul>

@@ -64,6 +64,9 @@ I18nTranslationsEn =
         "goods_received_by" : "Goods received by {{firstName}} {{lastName}}"
         "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
         "receive": "Receive"
+        "missing": "Missing"
+        "received": "Received"
+        "expecting": "Expecting"
 
       "logistics":
         "no_items": "No items to transport."

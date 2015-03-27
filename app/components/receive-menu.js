@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   hidden: true,
-  templateName: "review_offer/receive_menu",
   packageId: null,
   store: Ember.inject.service(),
 
@@ -12,7 +11,7 @@ export default Ember.Component.extend({
 
   updatePackage: function(action) {
     var pkg = this.get("package");
-    action(pkg).save()
+    return action(pkg).save()
       .catch(error => { pkg.rollback(); throw error; });
   },
 
@@ -21,7 +20,7 @@ export default Ember.Component.extend({
       this.set("hidden", hidden);
     },
     delete: function() {
-      this.updatePackage(p => p.deleteRecord());
+      this.updatePackage(p => { p.deleteRecord(); return p; }).then(p => p.unloadRecord());
     },
     missing: function() {
       this.updatePackage(p => p.set("state_event", "mark_missing"));
