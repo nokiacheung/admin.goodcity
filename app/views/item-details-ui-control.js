@@ -20,6 +20,13 @@ export default Ember.View.extend({
   packagetypeid: null,
   packagetype: null,
 
+  store: Ember.inject.service(),
+  package: function() {
+    return this.get("store").getById("package", this.get("pkgid"));
+  }.property("pkgid"),
+
+  imageUrl: Ember.computed.alias("package.displayImageUrl"),
+
   didInsertElement: function () {
     if (Ember.isEmpty(this.get("quantity"))) {
       this.set("quantity", 1);

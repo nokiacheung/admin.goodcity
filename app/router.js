@@ -27,6 +27,10 @@ Router.map(function() {
       this.route('supervisor_messages');
     });
 
+    this.resource('package', {path:'/package/:package_id'}, function() {
+      this.route('edit_images');
+    });
+
     this.resource('delivery', { path: '/delivery/:delivery_id'}, function(){
       this.route('cancel_booking');
     });
