@@ -1,0 +1,77 @@
+.receive-list {
+  > li {
+    border-top: $light-blue solid 1px;
+    border-bottom: $light-blue solid 1px;
+    margin: 10px 0px;
+    position: relative;
+    > div > div {
+      overflow: hidden;
+      padding-left: 10px;
+      padding-right: 35px;
+      color: white;
+    }
+  }
+  img {
+    width: auto;
+    float: left;
+  }
+  .package-name {
+    padding: 3px 0 3px 10px;
+    margin: 0 -35px 10px -10px;
+    background-color: #23416A;
+  }
+  .sep {
+    clear: both;
+    + div {
+      margin-top: 10px;
+    }
+  }
+  .receive-options {
+    background-color: #4C6485;
+    display: table-row;
+    width: 100%;
+    left: 0;
+    > div {
+      display: table-cell;
+      width: 25%;
+      text-align: center;
+      padding: 20px 0;
+      cursor: pointer;
+    }
+    .fa {
+      display: block;
+      font-size: 30px;
+    }
+    .fa-check-circle-o {
+      color: #D0515A;
+    }
+  }
+  .receive-options, .options-link-open {
+    position: absolute;
+    margin-top: -4px;
+  }
+  .options-link-open, div.options-link-close {
+    background-color: #4C6485;
+    padding: 0 12px;
+    color: $light-blue;
+    cursor: pointer;
+    font-size: 30px;
+  }
+  .options-link-close {
+    display: table-cell;
+    vertical-align: middle;
+    border-left: 2px solid $dark-blue;
+  }
+  .options-link-open {
+    right: 0;
+    height: 89px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+#receive-list-menu {
+  .tabs dd.active a:after, .tabs dd.active a:before {
+    display: none;
+  }
+}

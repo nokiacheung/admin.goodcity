@@ -16,7 +16,16 @@ var app = new EmberApp({
   }
 });
 
+app.import('bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
+app.import('bower_components/blueimp-file-upload/js/jquery.iframe-transport.js');
+app.import('bower_components/blueimp-file-upload/js/jquery.fileupload.js');
+app.import('bower_components/cloudinary/js/load-image.min.js');
+app.import('bower_components/cloudinary/js/canvas-to-blob.min.js');
+app.import('bower_components/blueimp-file-upload/js/jquery.fileupload-process.js');
+app.import('bower_components/blueimp-file-upload/js/jquery.fileupload-image.js');
+app.import('bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js');
 app.import('bower_components/cloudinary/js/jquery.cloudinary.js');
+
 app.import('bower_components/moment/moment.js');
 app.import('bower_components/airbrake-js/airbrake.js');
 app.import('bower_components/pickadate/lib/picker.js');

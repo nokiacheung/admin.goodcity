@@ -2,7 +2,9 @@
   <div class="small-12 columns detail_container">
     <div class="row top">
       <div class="small-3 columns">
-        <img {{bind-attr src=view.itemval.itemDefaultImageId}} class="thumb small">
+        {{#link-to "package.edit_images" view.pkgid}}
+          <img src="{{view.imageUrl}}" class="thumb small">
+        {{/link-to}}
       </div>
       <div class="small-7 columns head">
         <span class="ui">

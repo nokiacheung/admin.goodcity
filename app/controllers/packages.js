@@ -8,7 +8,6 @@ var packages = Ember.ArrayController.extend(PackageComponentMixin, {
   itemId: Ember.computed.alias('controllers.review_item/accept.itemId'),
   itemTypeId: Ember.computed.alias('controllers.review_item/accept.itemTypeId'),
   itemTypeName: Ember.computed.alias('controllers.review_item/accept.itemTypeName'),
-  itemDefaultImageId: Ember.computed.alias('controllers.review_item/accept.defaultImageId'),
 
   subItemTypes: function(){
     return this.get('controllers.review_item/accept.subItemTypes');

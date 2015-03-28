@@ -64,6 +64,10 @@ I18nTranslationsEn =
         "start_review": "Start Review"
         "goods_received_by" : "Goods received by {{firstName}} {{lastName}}"
         "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
+        "receive": "Receive"
+        "missing": "Missing"
+        "received": "Received"
+        "expecting": "Expecting"
 
       "logistics":
         "no_items": "No items to transport."
@@ -100,6 +104,10 @@ I18nTranslationsEn =
         "quality_message" : "Some categories of items are very difficult for us to distribute unless they are in excellent condition."
         "size_message" : "Very few of our clients are able to accommodate large items in their homes."
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
+
+      "receive":
+        "missing": "Missing"
+        "receive": "Receive"
 
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en

@@ -86,6 +86,10 @@ I18nTranslationsZhTw =
         "start_review": "Start Review"
         "goods_received_by" : "Goods received by {{lastName}} {{firstName}}"
         "offer_closed_by": "Offer closed by {{lastName}} {{firstName}}"
+        "receive": "Receive"
+        "missing": "Missing"
+        "received": "Received"
+        "expecting": "Expecting"
 
       "logistics":
         "no_items": "No items to transport."
@@ -97,5 +101,9 @@ I18nTranslationsZhTw =
         "gogovan_requirement": "Gogovan Reqirement"
         "crossroads_requirement": "Crossroads Requirement"
         "complete_review": "Complete Review"
+
+      "receive":
+        "missing": "Missing"
+        "receive": "Receive"
 
 `export default I18nTranslationsZhTw`

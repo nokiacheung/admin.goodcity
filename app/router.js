@@ -15,6 +15,7 @@ Router.map(function() {
       this.route('items');
       this.route('logistics');
       this.route('donor_details');
+      this.route('receive');
     });
 
     this.resource('review_item', {path: '/review_item/:item_id'},function() {
@@ -23,6 +24,10 @@ Router.map(function() {
       this.route('accept');
       this.route('donor_messages');
       this.route('supervisor_messages');
+    });
+
+    this.resource('package', {path:'/package/:package_id'}, function() {
+      this.route('edit_images');
     });
 
     this.resource('delivery', { path: '/delivery/:delivery_id'}, function(){

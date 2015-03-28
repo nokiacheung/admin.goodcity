@@ -8,12 +8,6 @@ export default Ember.ObjectController.extend({
   itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
   itemTypeName: Ember.computed.alias('controllers.review_item.itemTypeName'),
 
-  defaultImageId: function(){
-    var itemId = this.get('itemId');
-    var item = this.store.getById('item', itemId);
-    return item.get('displayImageUrl');
-  }.property('controllers.review_item.id', 'itemId'),
-
   subItemTypes: function(){
     var parentId = parseInt(this.get('itemTypeId'));
     var dataInItemType, _this = this;
