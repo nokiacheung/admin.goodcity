@@ -21,17 +21,26 @@ export default Ember.View.extend({
   packagetype: null,
 
   store: Ember.inject.service(),
+
   package: function() {
     return this.get("store").getById("package", this.get("pkgid"));
   }.property("pkgid"),
 
-  imageUrl: Ember.computed.alias("package.displayImageUrl"),
+  item: function() {
+    // using itemval.itemId instead of itemid since it's available when adding a new package
+    return this.get("store").getById("item", this.get("itemval.itemId"));
+  }.property("itemval.itemId"),
+
+  imageUrl: function() {
+    return this.get("package.displayImageUrl") || this.get("item.displayImageUrl");
+  }.property("package.displayImageUrl", "item.displayImageUrl"),
 
   didInsertElement: function () {
     if (Ember.isEmpty(this.get("quantity"))) {
       this.set("quantity", 1);
     }
   },
+
   actions: {
     hideComment: function(){
       return this.toggleProperty('isHide');
