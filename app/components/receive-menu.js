@@ -11,22 +11,33 @@ export default Ember.Component.extend({
 
   updatePackage: function(action) {
     var pkg = this.get("package");
-    return action(pkg).save()
+    action(pkg);
+    pkg.save()
       .catch(error => { pkg.rollback(); throw error; });
   },
+
+  currentUrl: function() {
+    return this.container.lookup("router:main").get("url");
+  }.property("packageId"),
+
+  isReceived: Ember.computed.equal("package.state", "received"),
+  isMissing: Ember.computed.equal("package.state", "missing"),
 
   actions: {
     toggle: function(hidden) {
       this.set("hidden", hidden);
     },
-    delete: function() {
-      this.updatePackage(p => { p.deleteRecord(); return p; }).then(p => p.unloadRecord());
-    },
     missing: function() {
-      this.updatePackage(p => p.set("state_event", "mark_missing"));
+      this.updatePackage(p => {
+        p.set("state", "missing");
+        p.set("state_event", "mark_missing");
+      });
     },
     receive: function() {
-      this.updatePackage(p => p.set("state_event", "mark_received"));
+      this.updatePackage(p => {
+        p.set("state", "received");
+        p.set("state_event", "mark_received");
+      });
     }
   }
 });

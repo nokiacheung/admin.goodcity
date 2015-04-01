@@ -13,7 +13,7 @@ module.exports = function(environment) {
       }
     },
     contentSecurityPolicy: {
-      "img-src": "'self' https://res.cloudinary.com",
+      "img-src": "'self' data: https://res.cloudinary.com",
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
       "font-src": "'self' data: https://maxcdn.bootstrapcdn.com"
     },

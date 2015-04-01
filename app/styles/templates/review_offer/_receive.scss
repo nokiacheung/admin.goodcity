@@ -30,10 +30,11 @@
     background-color: #4C6485;
     display: table-row;
     width: 100%;
-    left: 0;
+    max-width: 400px;
+    right: 0;
     > div {
       display: table-cell;
-      width: 25%;
+      width: 33%;
       text-align: center;
       padding: 20px 0;
       cursor: pointer;
@@ -44,6 +45,9 @@
     }
     .fa-check-circle-o {
       color: #D0515A;
+    }
+    .disabled, .disabled .fa-check-circle-o {
+      color: $org-grey;
     }
   }
   .receive-options, .options-link-open {

@@ -90,6 +90,15 @@ I18nTranslationsZhTw =
         "missing": "Missing"
         "received": "Received"
         "expecting": "Expecting"
+        "all_items_processed": "All items marked received or missing."
+
+      "mark_received":
+        "delivered_by": "Delivered by:"
+        "select": "- select -"
+        "gogovan": "Gogovan"
+        "crossroads_truck": "Crossroads truck"
+        "dropped_off": "Dropped off"
+        "close_offer": "Close Offer"
 
       "logistics":
         "no_items": "No items to transport."

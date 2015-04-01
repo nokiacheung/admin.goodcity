@@ -3,19 +3,15 @@
 </div>
 
 <div class="receive-options {{if hidden 'hidden' ''}}">
-  <div {{action "delete"}}>
-    <i class="fa fa-trash-o"></i>
-    {{t "delete"}}
-  </div>
-  {{#link-to "review_item.accept" package.item tagName="div"}}
+  {{#link-to "review_item.accept" package.item (query-params returnurl=currentUrl) tagName="div"}}
     <i class="fa fa-pencil-square-o"></i>
     {{t "edit"}}
   {{/link-to}}
-  <div {{action "missing"}}>
+  <div {{action "missing"}} {{bind-attr class="isMissing:disabled"}}>
     <i class="fa fa-exclamation-triangle"></i>
     {{t "receive.missing"}}
   </div>
-  <div {{action "receive"}}>
+  <div {{action "receive"}} {{bind-attr class="isReceived:disabled"}}>
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
   </div>
