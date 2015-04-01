@@ -74,6 +74,11 @@ module.exports = function(app) {
     res.send(offers);
   });
 
+  offersRouter.get("/invalid", function(req, res) {
+    res.statusCode = 404
+    res.send({});
+  });
+
   offersRouter.get("/:id", function(req, res) {
     res.send(offers_json);
   });
