@@ -1,10 +1,8 @@
 import AuthorizeRoute from './authorize';
 
 export default AuthorizeRoute.extend({
-
   model: function() {
     var offerId = this.modelFor('offer').get('id');
-    var offer = this.store.getById('offer', offerId);
-    return offer || this.store.find('offer', offerId);
+    return this.store.find('offer', offerId);
   }
 });
