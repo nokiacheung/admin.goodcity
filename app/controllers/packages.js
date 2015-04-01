@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import PackageComponentMixin from '../mixins/package-component';
 
-var packages = Ember.ArrayController.extend(PackageComponentMixin, {
+export default Ember.ArrayController.extend(PackageComponentMixin, {
   needs: ["review_item/accept"],
 
   isItemTypeChanged: Ember.computed.alias('controllers.review_item/accept.isItemTypeChanged'),
   itemId: Ember.computed.alias('controllers.review_item/accept.itemId'),
   itemTypeId: Ember.computed.alias('controllers.review_item/accept.itemTypeId'),
   itemTypeName: Ember.computed.alias('controllers.review_item/accept.itemTypeName'),
+  returnurl: Ember.computed.alias('controllers.review_item/accept.returnurl'),
 
   subItemTypes: function(){
     return this.get('controllers.review_item/accept.subItemTypes');
@@ -27,10 +28,17 @@ var packages = Ember.ArrayController.extend(PackageComponentMixin, {
     }
   }.property('noPackages', 'noSubItemType', 'itemId'),
 
-  allPackages: function(){
-    var item = this.store.getById('item', this.get('itemId'));
-    return item.get('packages');
-  }.property('packages.[]', 'itemId'),
+  allPackages: Ember.computed.alias("item.packages"),
+
+  item: function() {
+    return this.store.getById("item", this.get("itemId"));
+  }.property("itemId"),
+
+  acceptBtnLabel: function() {
+    return this.get("item.state") === "accepted" ?
+      Ember.I18n.t("save") :
+      Ember.I18n.t("review_item.accept_item");
+  }.property("item.state"),
 
   actions: {
     removePackageType: function(packageobj) {
@@ -84,7 +92,11 @@ var packages = Ember.ArrayController.extend(PackageComponentMixin, {
             itemType: _this.store.getById('item_type', _this.get("itemTypeId"))};
           var item = _this.store.push('item', acceptItem);
           item.save().then(function() {
-            _this.transitionToRoute('review_offer.items');
+            if (_this.get("returnurl")) {
+              _this.transitionToRoute(_this.get("returnurl"));
+            } else {
+              _this.transitionToRoute('review_offer.items');
+            }
           });
         });
 
@@ -118,4 +130,3 @@ var packages = Ember.ArrayController.extend(PackageComponentMixin, {
     }
   }
 });
-export default packages;

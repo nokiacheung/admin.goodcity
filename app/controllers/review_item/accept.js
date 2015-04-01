@@ -7,6 +7,8 @@ export default Ember.ObjectController.extend({
   itemId: Ember.computed.alias('model'),
   itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
   itemTypeName: Ember.computed.alias('controllers.review_item.itemTypeName'),
+  queryParams: ["returnurl"],
+  returnurl: null,
 
   subItemTypes: function(){
     var parentId = parseInt(this.get('itemTypeId'));
