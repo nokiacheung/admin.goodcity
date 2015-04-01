@@ -62,12 +62,22 @@ I18nTranslationsEn =
         "plan_transport": "User to plan transport."
         "reviewed": "Reviewed"
         "start_review": "Start Review"
-        "goods_received_by" : "Goods received by {{firstName}} {{lastName}}"
+        "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
         "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
         "receive": "Receive"
         "missing": "Missing"
         "received": "Received"
         "expecting": "Expecting"
+        "all_items_processed": "All items marked received or missing."
+
+      "mark_received":
+        "delivered_by": "Delivered by:"
+        "select": "- select -"
+        "gogovan": "Gogovan"
+        "crossroads_truck": "Crossroads truck"
+        "dropped_off": "Dropped off"
+        "close_offer": "Close Offer"
+        "unknown": "Unknown"
 
       "logistics":
         "no_items": "No items to transport."

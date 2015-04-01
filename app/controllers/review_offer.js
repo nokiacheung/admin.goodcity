@@ -5,6 +5,12 @@ export default Ember.ObjectController.extend({
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
 
+  offerReadyForClosure: function() {
+    return this.get("model.state") !== "received" &&
+      this.get("model.packages.length") > 0 &&
+      this.get("model.packages").filterBy("state", "expecting").get("length") === 0;
+  }.property("model.state", "model.packages.@each.state"),
+
   actions: {
     startReview: function() {
       if(this.get("isStartReviewClicked")) { return; }
