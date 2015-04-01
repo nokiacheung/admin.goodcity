@@ -9,7 +9,7 @@ export default Ember.ObjectController.extend({
     return this.get("model.state") !== "received" &&
       this.get("model.packages.length") > 0 &&
       this.get("model.packages").filterBy("state", "expecting").get("length") === 0;
-  }.property("model.packages.@each.state"),
+  }.property("model.state", "model.packages.@each.state"),
 
   actions: {
     startReview: function() {

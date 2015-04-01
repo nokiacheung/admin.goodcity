@@ -84,7 +84,7 @@ I18nTranslationsZhTw =
         "plan_transport": "User to plan transport."
         "reviewed": "Reviewed"
         "start_review": "Start Review"
-        "goods_received_by" : "Goods received by {{lastName}} {{firstName}}"
+        "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
         "offer_closed_by": "Offer closed by {{lastName}} {{firstName}}"
         "receive": "Receive"
         "missing": "Missing"
