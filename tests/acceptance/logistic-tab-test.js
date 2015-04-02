@@ -10,7 +10,7 @@ module('Review Offer Logistics', {
   setup: function() {
     App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
-    lookup('session:current').set('isAdmin', true);
+    lookup('service:session').set('isAdmin', true);
 
     reviewer = FactoryGuy.make("user");
     offer = FactoryGuy.make("offer", { state: "under_review", reviewedBy:  reviewer });

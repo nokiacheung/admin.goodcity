@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import offers from './offers';
-import messagesUtil from "../utils/messages";
 
 export default offers.extend({
   sortProperties: ["createdAt:desc"],
   sortedModel: Ember.computed.sort("model", "sortProperties"),
+  messagesUtil: Ember.inject.service("messages"),
 
   myNotifications: function() {
     var keys = {};
@@ -31,7 +31,7 @@ export default offers.extend({
   actions: {
     view: function(messageId){
       var message = this.store.getById('message', messageId);
-      var route = messagesUtil.getRoute(this.container, message);
+      var route = this.get("messagesUtil").getRoute(message);
       this.transitionToRoute.apply(this, route);
     }
   }
