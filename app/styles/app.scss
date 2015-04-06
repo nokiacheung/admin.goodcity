@@ -1,10 +1,14 @@
 @import "shared_app";
+@import "date_time_picker";
+@import "porterage_charges";
 
 /* template specific */
 @import "templates/offers";
 @import "templates/offers/index";
 @import "templates/offer/index";
 @import "templates/offer/cancel";
+@import "templates/offer/plan_delivery";
+@import "templates/offer/collection_charges";
 @import "templates/item/index";
 @import "templates/my_notifications";
 @import "templates/review_offer";
@@ -12,3 +16,7 @@
 @import "templates/review_offer/receive";
 @import "templates/review_item/reject";
 @import "templates/review_item";
+@import "templates/delivery/contact_details";
+@import "templates/delivery/drop_off";
+@import "templates/delivery/book_van";
+@import "templates/delivery/confirm_van";

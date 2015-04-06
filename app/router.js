@@ -11,6 +11,10 @@ Router.map(function() {
     this.route('donor_messages');
     this.route('supervisor_messages');
 
+    this.route('plan_delivery');
+    this.route('collection_charges');
+    this.route('gogovan_charges');
+
     this.resource('review_offer', function(){
       this.route('items');
       this.route('logistics');
@@ -32,6 +36,17 @@ Router.map(function() {
     });
 
     this.resource('delivery', { path: '/delivery/:delivery_id'}, function(){
+      this.route('book_timeslot');
+      this.route('available_time_slots');
+      this.route('contact_details');
+      this.route('thank_offer');
+
+      this.route('book_van');
+      this.route('confirm_van');
+      this.route('porterage_charges');
+
+      this.route('drop_off_schedule');
+
       this.route('cancel_booking');
     });
   });
