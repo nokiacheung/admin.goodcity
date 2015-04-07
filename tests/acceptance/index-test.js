@@ -33,7 +33,7 @@ test("redirect to offers page if logged-in as Supervisor", function() {
 
 test("redirect to login page if try to visit home page", function() {
   App = startApp();
-  lookup('session:current').set('authToken', null);
+  lookup('service:session').set('authToken', null);
 
   visit("/");
 
