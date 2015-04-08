@@ -20,25 +20,25 @@ test("Display error popup for invalid offer", function() {
   visit("/offers/invalid/review_offer/items");
 
   andThen(function(){
-    equal(Ember.$("#errorMessage").text() === Ember.I18n.t("404_error"), true);
+    equal(Ember.$("#errorMessage").text(), Ember.I18n.t("404_error"));
     Ember.$('#errorModal').foundation('reveal', 'close');
   });
 });
 
 test("Display error popup for invalid item", function() {
   visit("/offers/" + offer.id + "/review_item/invalid/accept");
+  $.mockjax({url:"/api/v1/items/*",status:404});
+
   andThen(function(){
-    equal(Ember.$("#errorMessage").text() === Ember.I18n.t("404_error"), true);
+    equal(Ember.$("#errorMessage").text(), Ember.I18n.t("404_error"));
     Ember.$('#errorModal').foundation('reveal', 'close');
   });
 });
 
 test("Display not-found page for invalid url", function() {
-  var not_found_message = "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!";
   visit("/invalid_url");
   andThen(function(){
     equal(currentURL(), "/invalid_url");
-    equal(Ember.$(".xy-center").text().indexOf(not_found_message) > 0, true);
+    notEqual(Ember.$(".xy-center").text().indexOf(Ember.I18n.t("not_found")), -1, "not found message found");
   });
 });
-
