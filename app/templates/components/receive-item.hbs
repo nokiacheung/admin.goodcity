@@ -1,16 +1,15 @@
 {{#if hasMultiplePackages}}
-  <div class="text-center">{{item.itemType.name}}</div>
+  <div class="text-center receive-group-header">{{item.itemType.name}}</div>
 {{/if}}
 
 {{#each packages as |package idx|}}
   <div>
+    <div class="package-name">
+      {{package.quantity}}x
+      {{package.packageName}}
+    </div>
     <img src="{{package.displayImageUrl}}" />
     <div>
-      <div class="package-name">
-        {{package.quantity}}x
-        {{package.packageName}}
-      </div>
-
       {{receive-menu packageId=package.id}}
 
       {{#if (js-x "this == 0" idx)}}

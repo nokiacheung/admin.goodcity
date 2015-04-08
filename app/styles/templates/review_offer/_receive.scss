@@ -15,15 +15,21 @@
     width: auto;
     float: left;
   }
+  .receive-group-header {
+    margin-top: -1px;
+    border-top: $dark-blue solid 1px;
+    border-bottom: $light-blue solid 1px;
+    color: #3B567A;
+    font-size: 1.3em;
+  }
   .package-name {
     padding: 3px 0 3px 10px;
-    margin: 0 -35px 10px -10px;
     background-color: #23416A;
   }
   .sep {
     clear: both;
     + div {
-      margin-top: 10px;
+      margin-top: 1px;
     }
   }
   .receive-options {
@@ -52,10 +58,8 @@
   }
   .receive-options, .options-link-open {
     position: absolute;
-    margin-top: -4px;
   }
   .options-link-open, div.options-link-close {
-    background-color: #4C6485;
     padding: 0 12px;
     color: $light-blue;
     cursor: pointer;
