@@ -8,12 +8,12 @@
 
       <div class="small-10 columns">
 
-        <div class="row">
+        <div class="row donor">
           <div class="small-5 columns">
             {{donor.fullName}}
           </div>
-          <div class="small-7 columns">
-            {{donor.mobile}}
+          <div class="small-7 columns mobile">
+            <a href="tel:{{donor.mobile}}"><i class="fa fa-phone"></i> {{donorMobile}}</a>
           </div>
         </div>
 

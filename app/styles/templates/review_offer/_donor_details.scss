@@ -1,4 +1,15 @@
 .donor_details {
   padding-left: 0;
   padding-right: 0;
+
+  .donor {
+    font-weight: bolder;
+    color: $white;
+
+    .mobile {
+      a {
+        border-bottom: $white 1px solid;
+      }
+    }
+  }
 }
