@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   }.property('model.length'),
 
   donorMobile: function(){
-    var mobile = this.get("donor.mobile").split("+852")[1]
+    var mobile = this.get("donor.mobile").split("+852")[1];
     return mobile.substr(0, 4) + " " + mobile.substr(4);
   }.property('donor'),
 });
