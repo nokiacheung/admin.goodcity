@@ -1,18 +1,19 @@
-<div class="tabs-content">
+<div class="tabs-content donor_details">
   <section class="main-section">
+
     <div class="row">
       <div class="small-2 columns">
-        <span class="no-avatar">{{model.nameInitial}}</span>
+        <span class="no-avatar">{{donor.nameInitial}}</span>
       </div>
 
       <div class="small-10 columns">
 
         <div class="row">
           <div class="small-5 columns">
-            {{fullName}}
+            {{donor.fullName}}
           </div>
           <div class="small-7 columns">
-            {{mobile}}
+            {{donor.mobile}}
           </div>
         </div>
 
@@ -21,6 +22,7 @@
             District:
           </div>
           <div class="small-7 columns">
+            {{donor.address.district.name}}
           </div>
         </div>
 
@@ -29,7 +31,7 @@
             Registered:
           </div>
           <div class="small-7 columns">
-            {{display-timeago createdAt}}
+            {{display-timeago donor.createdAt}}
           </div>
         </div>
 
@@ -47,7 +49,7 @@
             Total offers:
           </div>
           <div class="small-7 columns">
-            {{donations.length}}
+            {{offersCount}}
           </div>
         </div>
 
@@ -64,8 +66,18 @@
       </div>
     </div>
 
+    <hr>
     <div class="row">
+      <div class="small-12 columns item-content">
+        Other Offers on Goodcity
 
+        <ul class="list list-activity list-offer-items">
+          {{#each offer in model}}
+            {{partial 'offers/offer_details'}}
+          {{/each}}
+        </ul>
+      </div>
     </div>
+
   </section>
 </div>
