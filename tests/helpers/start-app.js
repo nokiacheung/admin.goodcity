@@ -37,7 +37,8 @@ export default function startApp(attrs, permissionId) {
   window.navigator = {onLine:true};
   window.alert = function(message) { console.log("Alert: " + message); };
   window.confirm = function(message) { console.log("Confirm: " + message); return true; };
-  Ember.$("head").append("<style>.loading-indicator {display:none;}</style>");
+  Ember.$("head").append("<style>.loading-indicator, .reveal-modal-bg, .reveal-modal {display:none !important;}</style>");
+  lookup("service:logger").error = message => QUnit.assert.equal(message, "");
 
   //needed by application controller init
   lookup("controller:subscriptions")._actions.wire = function() {};

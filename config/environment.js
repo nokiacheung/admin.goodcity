@@ -83,7 +83,7 @@ module.exports = function(environment) {
     //Airbrake Js keys
     ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
     ENV.APP.AIRBRAKE_PROJECT_ID = 0;
-    ENV.APP.AIRBRAKE_PROJECT_KEY = "010f0d73f56efb6150cb2744e814e46b";
+    ENV.APP.AIRBRAKE_PROJECT_KEY = "6d0f1e945f5fdba56d9fe043684f2b7a";
 
     ENV.contentSecurityPolicy["connect-src"] = 'https://admin.goodcity.hk https://api.goodcity.hk https://socket.goodcity.hk:81 ws://socket.goodcity.hk:81';
 
