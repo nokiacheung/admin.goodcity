@@ -70,6 +70,14 @@ I18nTranslationsEn =
         "expecting": "Expecting"
         "all_items_processed": "All items marked received or missing."
 
+        "donor":
+          "district": "District"
+          "registered": "Registered"
+          "last_seen": "Last seen"
+          "total_offers": "Total offers"
+          "crm": "CRM"
+          "other_offers": "Other Offers on Goodcity"
+
       "mark_received":
         "delivered_by": "Delivered by:"
         "select": "- select -"
