@@ -1,0 +1,83 @@
+<div class="tabs-content donor_details">
+  <section class="main-section">
+
+    <div class="row">
+      <div class="small-2 columns">
+        <span class="no-avatar">{{donor.nameInitial}}</span>
+      </div>
+
+      <div class="small-10 columns">
+
+        <div class="row donor">
+          <div class="small-5 columns">
+            {{donor.fullName}}
+          </div>
+          <div class="small-7 columns mobile">
+            <a href="tel:{{donor.mobile}}"><i class="fa fa-phone"></i> {{donorMobile}}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-5 columns">
+            {{t "review_offer.donor.district"}}:
+          </div>
+          <div class="small-7 columns">
+            {{donor.address.district.name}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-5 columns">
+            {{t "review_offer.donor.registered"}}:
+          </div>
+          <div class="small-7 columns">
+            {{display-timeago donor.createdAt}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-5 columns">
+            {{t "review_offer.donor.last_seen"}}:
+          </div>
+          <div class="small-7 columns">
+            3h ago
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-5 columns">
+            {{t "review_offer.donor.total_offers"}}:
+          </div>
+          <div class="small-7 columns">
+            {{offersCount}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-5 columns">
+            {{t "review_offer.donor.crm"}}:
+          </div>
+          <div class="small-7 columns">
+            12 opportunities
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="small-12 columns item-content">
+        {{t "review_offer.donor.other_offers"}}
+
+        <ul class="list list-activity list-offer-items">
+          {{#each offer in model}}
+            {{partial 'offers/offer_details'}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+  </section>
+</div>
