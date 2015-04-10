@@ -5,8 +5,8 @@ module.exports = function(app) {
 
   var offers_json = {
     "offers": [
-      { "id": "1", "state": "draft", "item_ids": ["1", "2"], "delivery_id": null },
-      { "id": "2", "state": "draft", "delivery_id": null },
+      { "id": "1", "state": "draft", "item_ids": ["1", "2"], "delivery_id": null, "created_by_id": "1" },
+      { "id": "2", "state": "draft", "delivery_id": null, "created_by_id": "1" },
       { "id": "3", "language": "en", "state": "submitted",
         "created_by_id": "1", "item_ids": ["4"], "delivery_id": null },
       { "id": "4", "language": "en", "state": "under_review",
@@ -36,7 +36,7 @@ module.exports = function(app) {
       { "id": "1", "body": "I have made an offer.", "state": null, "sender_id": "1", "is_private": false, "offer_id": "4", "item_id": null }
     ],
     "user": [
-      { "id": "1", "first_name": "Kendrick", "last_name": "Kiehn", "permission_id": null },
+      { "id": "1", "first_name": "Kendrick", "last_name": "Kiehn", "permission_id": null, "mobile": "+85251111111" },
       { "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }
     ],
     "permissions":[
