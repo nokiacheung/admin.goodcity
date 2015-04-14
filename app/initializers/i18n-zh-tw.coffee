@@ -21,6 +21,10 @@ I18nTranslationsZhTw =
           "accepted": "Accepted"
           "not_needed": "Not needed"
           "closed_offer_message": "Offer closed. No items needed, Sorry."
+          "received": "Received"
+          "rejected": "rejected"
+          "pending": "pending"
+          "missing": "missing"
 
       "items":
         "add_item":
@@ -122,5 +126,10 @@ I18nTranslationsZhTw =
       "receive":
         "missing": "Missing"
         "receive": "Receive"
+
+      "finished":
+        "received": "Received"
+        "canceled": "Canceled"
+        "expired": "Expired"
 
 `export default I18nTranslationsZhTw`

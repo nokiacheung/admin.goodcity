@@ -22,6 +22,10 @@ I18nTranslationsEn =
           "accepted": "Accepted"
           "not_needed": "Not needed"
           "closed_offer_message": "Offer closed. No items needed, Sorry."
+          "received": "Received"
+          "rejected": "rejected"
+          "pending": "pending"
+          "missing": "missing"
 
       "items":
         "add_item":
@@ -126,6 +130,11 @@ I18nTranslationsEn =
       "receive":
         "missing": "Missing"
         "receive": "Receive"
+
+      "finished":
+        "received": "Received"
+        "canceled": "Canceled"
+        "expired": "Expired"
 
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en
