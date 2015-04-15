@@ -132,4 +132,9 @@ I18nTranslationsZhTw =
         "canceled": "Canceled"
         "expired": "Expired"
 
+      "scheduled":
+        "other_delivery": "Other Delivery"
+        "collection" : "Collection"
+        "gogovan" : "GoGoVan"
+
 `export default I18nTranslationsZhTw`

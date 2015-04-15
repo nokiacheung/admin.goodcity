@@ -136,6 +136,11 @@ I18nTranslationsEn =
         "canceled": "Canceled"
         "expired": "Expired"
 
+      "scheduled":
+        "other_delivery": "Other Delivery"
+        "collection" : "Collection"
+        "gogovan" : "GoGoVan"
+
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en
 
