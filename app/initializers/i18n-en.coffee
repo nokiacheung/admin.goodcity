@@ -7,7 +7,7 @@ I18nTranslationsEn =
 
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
-    Ember.I18n.translation_store.en = Ember.$.extend SharedTranslationsEn,
+    Ember.I18n.translation_store.en = Ember.$.extend true, SharedTranslationsEn,
       "offer":
         "disable": "Disable"
         "details" : "Offer details"

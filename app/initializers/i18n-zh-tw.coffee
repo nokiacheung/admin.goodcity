@@ -7,7 +7,7 @@ I18nTranslationsZhTw =
 
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
-    Ember.I18n.translation_store['zh-tw'] = Ember.$.extend SharedTranslationsZhTw,
+    Ember.I18n.translation_store['zh-tw'] = Ember.$.extend true, SharedTranslationsZhTw,
       "offer":
         "details" : "优惠详情"
 
