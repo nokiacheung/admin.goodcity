@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../utils/ajax-promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
 
@@ -26,8 +26,9 @@ export default Ember.ObjectController.extend({
 
     closeOffer: function(){
       var loadingView = this.container.lookup('view:loading').append();
-      var offerProperties = {id: this.get('id'), state_event: 'close'};
-      var url = "/offers/" + this.get('id') + "/close_offer";
+      var offerId = this.get('model.id');
+      var offerProperties = {id: offerId, state_event: 'close'};
+      var url = "/offers/" + offerId + "/close_offer";
 
       new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
         .then(data => {

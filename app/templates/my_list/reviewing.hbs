@@ -4,7 +4,7 @@
       {{#if scheduleldOffers}}
         {{view 'schedule-select-view' schedules=arrangedContent}}
       {{/if}}
-      {{#each offer in arrangedContent}}
+      {{#each arrangedContent as |offer|}}
         {{partial 'offers/offer_details'}}
       {{/each}}
     </ul>

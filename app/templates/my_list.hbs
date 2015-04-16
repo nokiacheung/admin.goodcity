@@ -7,25 +7,25 @@
 
         {{#link-to 'my_list.reviewing' tagName="dd" classNames="small-3 columns text-center"}}
           {{#link-to 'my_list.reviewing'}}
-            <div>Reviewing({{inProgressCount}})</div>
+            <div>{{t "reviewing"}}({{inProgressCount}})</div>
           {{/link-to}}
         {{/link-to}}
 
         {{#link-to 'my_list.reviewed' tagName="dd" classNames="small-3 columns text-center"}}
           {{#link-to 'my_list.reviewed'}}
-            <div>Reviewed({{reviewedCount}})</div>
+            <div>{{t "reviewed"}}({{reviewedCount}})</div>
           {{/link-to}}
         {{/link-to}}
 
         {{#link-to 'my_list.scheduled' tagName="dd" classNames="small-3 columns text-center"}}
           {{#link-to 'my_list.scheduled'}}
-            <div>Scheduled({{scheduledCount}})</div>
+            <div>{{t "scheduled"}}({{scheduledCount}})</div>
           {{/link-to}}
         {{/link-to}}
 
         {{#link-to 'my_list.finished' tagName="dd" classNames="small-3 columns text-center"}}
           {{#link-to 'my_list.finished'}}
-            <div>Finished</div>
+            <div>{{t "finished"}}</div>
           {{/link-to}}
         {{/link-to}}
       </dl>

@@ -8,8 +8,22 @@ I18nTranslationsZhTw =
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
     Ember.I18n.translation_store['zh-tw'] = Ember.$.extend SharedTranslationsZhTw,
+      "reviewing": "Reviewing"
+      "expired" : "Expired"
+      "reviewed": "Reviewed"
+      "scheduled": "Scheduled"
+      "finished": "Finished"
+      "collection": "Collection"
+      "gogovan": "Gogovan"
+      "other_deivery": "Other Deivery"
+      "messages_title" : "Messages"
+
       "offer":
+        "disable": "Disable"
         "details" : "优惠详情"
+        "donor_messages" : "Donor Messages"
+        "supervisor_messages" : "Supervisors Messages"
+        "empty_msg" : "Sorry! This offer is empty."
 
         "offer_details" :
           "heading" : "Offer Details"
@@ -50,6 +64,7 @@ I18nTranslationsZhTw =
         "heading" : "{{name}}'s Offer"
 
       "review_item":
+        "title" : "Review Item"
         "accept" : "Accept"
         "accept_item" : "Accept Item"
         "reject" : "Reject"
@@ -75,6 +90,7 @@ I18nTranslationsZhTw =
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
 
       "review_offer":
+        "title" : "Review Offer"
         "review_started_by" : "Started by {{lastName}} {{firstName}}"
         "no_items": "No items needed"
         "close_offer": "Close Offer"
@@ -118,6 +134,8 @@ I18nTranslationsZhTw =
         "gogovan_requirement": "Gogovan Reqirement"
         "crossroads_requirement": "Crossroads Requirement"
         "complete_review": "Complete Review"
+        "ggv_hire": "Gogovan Hire Requirement"
+        "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
 
       "receive":
         "missing": "Missing"

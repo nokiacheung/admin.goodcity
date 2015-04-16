@@ -7,11 +7,11 @@
     <i class="fa fa-pencil-square-o"></i>
     {{t "edit"}}
   {{/link-to}}
-  <div {{action "missing"}} {{bind-attr class="isMissing:disabled"}}>
+  <div {{action "missing"}} class="{{if isMissing 'disabled'}}">
     <i class="fa fa-exclamation-triangle"></i>
     {{t "receive.missing"}}
   </div>
-  <div {{action "receive"}} {{bind-attr class="isReceived:disabled"}}>
+  <div {{action "receive"}} class="{{if isReceived 'disabled'}}">
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
   </div>

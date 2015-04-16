@@ -4,7 +4,7 @@
   {{#if offer.isRemoved}}
     <a>
     <span class="item-image">
-      <img {{bind-attr src=offer.displayImageUrl}} class="thumb small" />
+      <img src={{offer.displayImageUrl}} class="thumb small" />
     </span>
 
     <div class="row offer">
@@ -38,7 +38,7 @@
 
     {{#link-to 'review_offer' offer}}
       <span class="item-image">
-        <img {{bind-attr src=offer.displayImageUrl}} class="thumb small" />
+        <img src={{offer.displayImageUrl}} class="thumb small" />
       </span>
 
       <div class="row offer">

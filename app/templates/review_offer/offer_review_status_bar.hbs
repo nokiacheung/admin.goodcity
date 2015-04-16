@@ -13,7 +13,7 @@
       </div>
     </div>
   {{else if offer.isSubmitted}}
-    <a {{action 'startReview'}} {{bind-attr class="isStartReviewClicked:waiting:start_review_link"}}>
+    <a {{action 'startReview'}} class="{{if isStartReviewClicked 'waiting' 'start_review_link'}}">
       <div class="offer-status is-submitted">
         <div class='status-message'>
           {{t "review_offer.start_review"}}
@@ -32,34 +32,36 @@
   {{else if offer.isScheduled}}
     <div class="offer-status is-scheduled">
       <div class='status-message'>
-        {{#if offer.delivery.isAlternate}}
-          {{t 'offer.offer_details.is_collection'}}
-        {{/if}}
-
-        {{#if offer.delivery.isDropOff}}
-          {{t 'offer.offer_details.is_drop_off'}}
-        {{/if}}
-
-        {{#if offer.delivery.isGogovan}}
-          {{#if offer.delivery.gogovanOrder.isActive}}
-            {{t 'offer.offer_details.is_gogovan_confirm'}}
-          {{else}}
-            {{t 'offer.offer_details.is_gogovan_order'}}
-          {{/if}}
-        {{/if}}
-
-        <i class="fa fa-truck"></i>
-        <b>
-          {{#if offer.delivery.isGogovan}}
-            {{offer.delivery.schedule.slotName}},
+        {{#with offer.delivery as |delivery|}}
+          {{#if delivery.isAlternate}}
+            {{t 'offer.offer_details.is_collection'}}
           {{/if}}
 
-          {{schedule-time-status offer.delivery.schedule.scheduledAt}}
-
-          {{#if offer.delivery.noGogovan}}
-            , {{offer.delivery.schedule.dayTime}}
+          {{#if delivery.isDropOff}}
+            {{t 'offer.offer_details.is_drop_off'}}
           {{/if}}
-        </b>
+
+          {{#if delivery.isGogovan}}
+            {{#if delivery.gogovanOrder.isActive}}
+              {{t 'offer.offer_details.is_gogovan_confirm'}}
+            {{else}}
+              {{t 'offer.offer_details.is_gogovan_order'}}
+            {{/if}}
+          {{/if}}
+
+          <i class="fa fa-truck"></i>
+          <b>
+            {{#if delivery.isGogovan}}
+              {{delivery.schedule.slotName}},
+            {{/if}}
+
+            {{schedule-time-status delivery.schedule.scheduledAt}}
+
+            {{#if delivery.noGogovan}}
+              , {{delivery.schedule.dayTime}}
+            {{/if}}
+          </b>
+        {{/with}}
       </div>
     </div>
   {{else if offer.isClosed}}
@@ -90,8 +92,6 @@
   {{/if}}
 {{else}}
 <div class="offer-status is-closed">
-  <div class='status-message review_message'>
-    Sorry! This offer is empty.
-  </div>
+  <div class='status-message review_message'>{{t "offer.empty_msg"}}</div>
 </div>
 {{/if}}
