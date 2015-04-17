@@ -6,16 +6,9 @@ I18nTranslationsZhTw =
   initialize: ->
 
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
-
-    Ember.I18n.translation_store['zh-tw'] = Ember.$.extend SharedTranslationsZhTw,
+    Ember.I18n.translation_store['zh-tw'] = Ember.$.extend true, SharedTranslationsZhTw,
       "reviewing": "Reviewing"
-      "expired" : "Expired"
       "reviewed": "Reviewed"
-      "scheduled": "Scheduled"
-      "finished": "Finished"
-      "collection": "Collection"
-      "gogovan": "Gogovan"
-      "other_deivery": "Other Deivery"
       "messages_title" : "Messages"
 
       "offer":
@@ -35,6 +28,10 @@ I18nTranslationsZhTw =
           "accepted": "Accepted"
           "not_needed": "Not needed"
           "closed_offer_message": "Offer closed. No items needed, Sorry."
+          "received": "Received"
+          "rejected": "rejected"
+          "pending": "pending"
+          "missing": "missing"
 
       "items":
         "add_item":
@@ -140,5 +137,17 @@ I18nTranslationsZhTw =
       "receive":
         "missing": "Missing"
         "receive": "Receive"
+
+      "finished":
+        "title": "Finished"
+        "received": "Received"
+        "canceled": "Canceled"
+        "expired": "Expired"
+
+      "scheduled":
+        "title": "Scheduled"
+        "other_delivery": "Other Delivery"
+        "collection" : "Collection"
+        "gogovan" : "GoGoVan"
 
 `export default I18nTranslationsZhTw`

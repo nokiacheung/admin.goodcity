@@ -12,6 +12,7 @@ export default Ember.View.extend({
     var week = moment.weekdays();
 
     var options = [
+      { name: 'All offers (' + _this.allCount() + ')', id: 'all' },
       { name: 'Overdue (' + _this.overdueCount() + ')', id: 'overdue' },
       { name: 'Today (' + _this.scheduleCount() + ')', id: 'today' }];
 
@@ -41,6 +42,10 @@ export default Ember.View.extend({
 
   afterNextWeekCount: function(){
     return this.get('controller').afterNextWeek().length;
+  },
+
+  allCount: function() {
+    return this.get('controller.allScheduled.length');
   },
 
   selectedObserver: function(){
