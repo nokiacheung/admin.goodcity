@@ -49,6 +49,7 @@ export default Ember.ArrayController.extend({
     filterOffers: function(filterValue) {
       var offers;
       switch(filterValue) {
+        case 'all': offers = this.get('allScheduled'); break;
         case 'overdue': offers = this.overdue(); break;
         case 'next': offers = this.nextWeek(); break;
         case 'after_next': offers = this.afterNextWeek(); break;
