@@ -9,7 +9,8 @@ I18nTranslationsZhTw =
 
     Ember.I18n.translation_store['zh-tw'] = Ember.$.extend true, SharedTranslationsZhTw,
       "offer":
-        "details" : "优惠详情"
+        "disable": "Disable"
+        "details" : "Offer details"
 
         "offer_details" :
           "heading" : "Offer Details"
@@ -31,12 +32,14 @@ I18nTranslationsZhTw =
           "description_placeholder" : "What is it? How many items? What's the size?"
 
       "item":
-        "item_details" : "項詳情:"
-        "donor_description": "說明: {{donorDescription}}"
         "submitted_status": "This item is awaiting review."
         "in_review_status": "This item is being reviewed."
         "accepted_status": "This item has been accepted."
         "rejected_status": "This item has been rejected."
+
+        "messages":
+          "info_text1": "If we have questions when reviewing this item we will chat with you here."
+          "info_text2": "If you want to add a comment to this item for our reviewers, type it below."
 
       "inbox":
         "quick_links": "Quick Links"
@@ -52,6 +55,52 @@ I18nTranslationsZhTw =
 
       "my_notifications":
         "heading" : "{{name}}'s Offer"
+
+      "review_offer":
+        "review_started_by" : "Started by {{firstName}} {{lastName}}"
+        "no_items": "No items needed"
+        "close_offer": "Close Offer"
+        "items_reviewed": "All items reviewed"
+        "set_logistics": "Set logistics"
+        "to_complete": "to complete"
+        "plan_transport": "User to plan transport."
+        "reviewed": "Reviewed"
+        "start_review": "Start Review"
+        "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
+        "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
+        "receive": "Receive"
+        "missing": "Missing"
+        "received": "Received"
+        "expecting": "Expecting"
+        "all_items_processed": "All items marked received or missing."
+
+        "donor":
+          "district": "District"
+          "registered": "Registered"
+          "last_seen": "Last seen"
+          "total_offers": "Total offers"
+          "crm": "CRM"
+          "other_offers": "Other Offers on Goodcity"
+
+      "mark_received":
+        "delivered_by": "Delivered by:"
+        "select": "- select -"
+        "gogovan": "Gogovan"
+        "crossroads_truck": "Crossroads truck"
+        "dropped_off": "Dropped off"
+        "close_offer": "Close Offer"
+        "unknown": "Unknown"
+
+      "logistics":
+        "no_items": "No items to transport."
+        "offer_closed": "This offer is closed now."
+        "close_offer": "Close Offer"
+        "message_donor": "Message Donor"
+        "finish_review_request": "Please finish reviewing items first!"
+        "accepted_items": "Accepted Items"
+        "gogovan_requirement": "Gogovan Reqirement"
+        "crossroads_requirement": "Crossroads Requirement"
+        "complete_review": "Complete Review"
 
       "review_item":
         "accept" : "Accept"
@@ -77,51 +126,6 @@ I18nTranslationsZhTw =
         "quality_message" : "Some categories of items are very difficult for us to distribute unless they are in excellent condition."
         "size_message" : "Very few of our clients are able to accommodate large items in their homes."
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
-
-      "review_offer":
-        "review_started_by" : "Started by {{lastName}} {{firstName}}"
-        "no_items": "No items needed"
-        "close_offer": "Close Offer"
-        "items_reviewed": "All items reviewed"
-        "set_logistics": "Set logistics"
-        "to_complete": "to complete"
-        "plan_transport": "User to plan transport."
-        "reviewed": "Reviewed"
-        "start_review": "Start Review"
-        "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
-        "offer_closed_by": "Offer closed by {{lastName}} {{firstName}}"
-        "receive": "Receive"
-        "missing": "Missing"
-        "received": "Received"
-        "expecting": "Expecting"
-        "all_items_processed": "All items marked received or missing."
-
-        "donor":
-          "district": "District"
-          "registered": "Registered"
-          "last_seen": "Last seen"
-          "total_offers": "Total offers"
-          "crm": "CRM"
-          "other_offers": "Other Offers on Goodcity"
-
-      "mark_received":
-        "delivered_by": "Delivered by:"
-        "select": "- select -"
-        "gogovan": "Gogovan"
-        "crossroads_truck": "Crossroads truck"
-        "dropped_off": "Dropped off"
-        "close_offer": "Close Offer"
-
-      "logistics":
-        "no_items": "No items to transport."
-        "offer_closed": "This offer is closed now."
-        "close_offer": "Close Offer"
-        "message_donor": "Message Donor"
-        "finish_review_request": "Please finish reviewing items first!"
-        "accepted_items": "Accepted Items"
-        "gogovan_requirement": "Gogovan Reqirement"
-        "crossroads_requirement": "Crossroads Requirement"
-        "complete_review": "Complete Review"
 
       "receive":
         "missing": "Missing"
