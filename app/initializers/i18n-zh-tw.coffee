@@ -38,12 +38,14 @@ I18nTranslationsZhTw =
           "description_placeholder" : "What is it? How many items? What's the size?"
 
       "item":
-        "item_details" : "項詳情:"
-        "donor_description": "說明: {{donorDescription}}"
         "submitted_status": "This item is awaiting review."
         "in_review_status": "This item is being reviewed."
         "accepted_status": "This item has been accepted."
         "rejected_status": "This item has been rejected."
+
+        "messages":
+          "info_text1": "If we have questions when reviewing this item we will chat with you here."
+          "info_text2": "If you want to add a comment to this item for our reviewers, type it below."
 
       "inbox":
         "quick_links": "Quick Links"
@@ -88,7 +90,7 @@ I18nTranslationsZhTw =
 
       "review_offer":
         "title" : "Review Offer"
-        "review_started_by" : "Started by {{lastName}} {{firstName}}"
+        "review_started_by" : "Started by {{firstName}} {{lastName}}"
         "no_items": "No items needed"
         "close_offer": "Close Offer"
         "items_reviewed": "All items reviewed"
@@ -98,7 +100,7 @@ I18nTranslationsZhTw =
         "reviewed": "Reviewed"
         "start_review": "Start Review"
         "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
-        "offer_closed_by": "Offer closed by {{lastName}} {{firstName}}"
+        "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
         "receive": "Receive"
         "missing": "Missing"
         "received": "Received"
@@ -120,6 +122,7 @@ I18nTranslationsZhTw =
         "crossroads_truck": "Crossroads truck"
         "dropped_off": "Dropped off"
         "close_offer": "Close Offer"
+        "unknown": "Unknown"
 
       "logistics":
         "no_items": "No items to transport."
@@ -133,6 +136,31 @@ I18nTranslationsZhTw =
         "complete_review": "Complete Review"
         "ggv_hire": "Gogovan Hire Requirement"
         "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
+
+      "review_item":
+        "accept" : "Accept"
+        "accept_item" : "Accept Item"
+        "reject" : "Reject"
+        "reject_item" : "reject Item"
+        "not_now" : "Not Now"
+        "donor_message" : "Donor"
+        "supervisor_message" : "Supervisors"
+        "view_lable_guide": "View labeling guide"
+        "condition": "Condition"
+        "add_component": "Add component"
+
+      "reject":
+        "select_type": "Please choose Item Type first!"
+        "option_error": "Please choose a reason."
+        "reject_item": "Reject Item"
+        "quality" : "Quality"
+        "size": "Size"
+        "supply": "Supply/Demand"
+        "message_placeholder" : "Message to donor about the rejection of this item"
+        "reject_message" : "Unfortunately we cannot receive this item. "
+        "quality_message" : "Some categories of items are very difficult for us to distribute unless they are in excellent condition."
+        "size_message" : "Very few of our clients are able to accommodate large items in their homes."
+        "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
 
       "receive":
         "missing": "Missing"
