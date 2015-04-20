@@ -62,32 +62,6 @@ I18nTranslationsZhTw =
       "my_notifications":
         "heading" : "{{name}}'s Offer"
 
-      "review_item":
-        "title" : "Review Item"
-        "accept" : "Accept"
-        "accept_item" : "Accept Item"
-        "reject" : "Reject"
-        "reject_item" : "reject Item"
-        "not_now" : "Not Now"
-        "donor_message" : "Donor"
-        "supervisor_message" : "Supervisors"
-        "view_lable_guide": "View labeling guide"
-        "condition": "Condition"
-        "add_component": "Add component"
-
-      "reject":
-        "select_type": "Please choose Item Type first!"
-        "option_error": "Please choose a reason."
-        "reject_item": "Reject Item"
-        "quality" : "Quality"
-        "size": "Size"
-        "supply": "Supply/Demand"
-        "message_placeholder" : "Message to donor about the rejection of this item"
-        "reject_message" : "Unfortunately we cannot receive this item. "
-        "quality_message" : "Some categories of items are very difficult for us to distribute unless they are in excellent condition."
-        "size_message" : "Very few of our clients are able to accommodate large items in their homes."
-        "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
-
       "review_offer":
         "title" : "Review Offer"
         "review_started_by" : "Started by {{firstName}} {{lastName}}"
@@ -138,6 +112,7 @@ I18nTranslationsZhTw =
         "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
 
       "review_item":
+        "title" : "Review Item"
         "accept" : "Accept"
         "accept_item" : "Accept Item"
         "reject" : "Reject"
