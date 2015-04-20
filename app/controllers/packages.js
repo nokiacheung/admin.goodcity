@@ -113,15 +113,19 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
       var packageDetails = this.get('packageDetails');
 
       if(ths.get("isItemTypeChanged") && packages.length > 0) {
-        ths.store.find('package', {item: ths.get("itemId")}).then(function(pkgs) {
+
+        ths.store.filter('package', function(pkg){
+          return pkg.get('item.id') === ths.get('itemId');
+        }).then(function(pkgs) {
           pkgs.forEach(function(pkg) {
             pkg.deleteRecord();
             packagePromises.pushObject(pkg);
           });
-        return Ember.RSVP.all(pkgs.invoke('save'));
+          return Ember.RSVP.all(pkgs.invoke('save'));
         }).then(function() {
           ths.send("addNewPackage", packageDetails);
         });
+
       }
       else{
         ths.send("addNewPackage", packageDetails);
