@@ -14,7 +14,7 @@ module('Scheduled Offers', {
     offer1 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery1 });
 
     schedule4 = FactoryGuy.make('schedule', {
-      scheduledAt: (new Date(new Date().setDate(new Date().getDate()+15)))});
+      scheduledAt: (new Date(new Date().setDate(new Date().getDate()+30)))});
     delivery4 = FactoryGuy.make('delivery', {deliveryType: "Gogovan", schedule: schedule4 });
     offer4 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery4 });
 
@@ -30,7 +30,7 @@ module('Scheduled Offers', {
   }
 });
 
-test("redirect to reviewing offers page", function() {
+test("viewing collection schedule", function() {
   visit("/offers/scheduled");
 
   andThen(function(){
@@ -38,28 +38,31 @@ test("redirect to reviewing offers page", function() {
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
     equal($('.time_indicator').text().indexOf('Collection') > 0, true);
+    equal(find('.dynamic_filter select option').first().text(), "All offers (1)");
   });
 });
 
-test("redirect to reviewed offers page", function() {
+test("viewing gogovan delivery schedule", function() {
   visit("/offers/scheduled/gogovan");
 
   andThen(function(){
     equal(currentURL(), "/offers/scheduled/gogovan");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
+    equal(find("ul.list li").length, 2);
+    equal(find("ul.list img").length, 2);
     equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
   });
 });
 
-test("apply filter at gogovan scheduled offers", function() {
+test("filtering gogovan delivery schedule", function() {
   visit("/offers/scheduled/gogovan");
 
   andThen(function(){
     equal(currentURL(), "/offers/scheduled/gogovan");
 
-    var option = find('.dynamic_filter select option:contains("After next week (1)")').val();
-    $('.dynamic_filter select').val(option);
+    Ember.run(function() {
+      var option = find('.dynamic_filter select option:contains("After next week (1)")').val();
+      $('.dynamic_filter select').val(option).change();
+    });
 
     andThen(function(){
       equal(find('.dynamic_filter select :selected').text(), "After next week (1)");
@@ -70,7 +73,7 @@ test("apply filter at gogovan scheduled offers", function() {
   });
 });
 
-test("redirect to scheduled offers page", function() {
+test("viewing other delivery schedule", function() {
   visit("/offers/scheduled/other_delivery");
 
   andThen(function(){
