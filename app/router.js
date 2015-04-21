@@ -72,7 +72,7 @@ Router.map(function() {
 
     this.resource('finished', function(){
       this.route('received');
-      this.route('canceled');
+      this.route('cancelled');
       this.route('expired');
     });
 

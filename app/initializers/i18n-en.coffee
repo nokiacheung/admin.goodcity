@@ -145,7 +145,7 @@ I18nTranslationsEn =
       "finished":
         "title": "Finished"
         "received": "Received"
-        "canceled": "Canceled"
+        "cancelled": "Cancelled"
         "expired": "Expired"
 
       "scheduled":
