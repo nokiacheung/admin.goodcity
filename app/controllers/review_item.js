@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ['review_item/accept'],
 
-  defaultPackage: Ember.computed.alias('itemType'),
+  defaultPackage: Ember.computed.alias('model.itemType'),
   item: Ember.computed.alias('model'),
 
   itemTypeName: function(key, value) {
@@ -15,7 +15,7 @@ export default Ember.ObjectController.extend({
   }.property('defaultPackage' ),
 
   itemId: function(){
-    return this.get("id");
+    return this.get("model.id");
   }.property('model'),
 
   actions: {

@@ -1,5 +1,5 @@
 <span class="item-image">
-  <img {{bind-attr src="item.displayImageUrl"}} class="thumb" />
+  <img src={{item.displayImageUrl}} class="thumb" />
   {{#if item.isAccepted}}<div class='accept_badge'>{{t 'offer.offer_details.accepted'}}</div>{{/if}}
   {{#if item.isRejected}}<div class='reject_badge'>{{t 'offer.offer_details.not_needed'}}</div>{{/if}}
 </span>

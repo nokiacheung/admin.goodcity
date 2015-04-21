@@ -10,10 +10,10 @@
             </div>
           {{/if}}
           <ul>
-            {{#each item in rejectionOptions}}
+            {{#each rejectionOptions as |item|}}
               <li>
                 {{view 'radio-button' name="selectReason" selection=controller.selectedId value=item.id id=item.id}}
-                <label {{bind-attr for=item.id}}>
+                <label  for={{item.id}}>
                   {{item.name}}
                 </label>
               </li>

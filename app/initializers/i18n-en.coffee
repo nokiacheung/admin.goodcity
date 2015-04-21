@@ -8,9 +8,16 @@ I18nTranslationsEn =
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
 
     Ember.I18n.translation_store.en = Ember.$.extend true, SharedTranslationsEn,
+      "reviewing": "Reviewing"
+      "reviewed": "Reviewed"
+      "messages_title" : "Messages"
+
       "offer":
         "disable": "Disable"
         "details" : "Offer details"
+        "donor_messages" : "Donor Messages"
+        "supervisor_messages" : "Supervisors Messages"
+        "empty_msg" : "Sorry! This offer is empty."
 
         "offer_details" :
           "heading" : "Offer Details"
@@ -57,6 +64,7 @@ I18nTranslationsEn =
         "heading" : "{{name}}'s Offer"
 
       "review_offer":
+        "title" : "Review Offer"
         "review_started_by" : "Started by {{firstName}} {{lastName}}"
         "no_items": "No items needed"
         "close_offer": "Close Offer"
@@ -101,8 +109,11 @@ I18nTranslationsEn =
         "gogovan_requirement": "Gogovan Reqirement"
         "crossroads_requirement": "Crossroads Requirement"
         "complete_review": "Complete Review"
+        "ggv_hire": "Gogovan Hire Requirement"
+        "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
 
       "review_item":
+        "title" : "Review Item"
         "accept" : "Accept"
         "accept_item" : "Accept Item"
         "reject" : "Reject"
@@ -132,11 +143,13 @@ I18nTranslationsEn =
         "receive": "Receive"
 
       "finished":
+        "title": "Finished"
         "received": "Received"
         "cancelled": "Cancelled"
         "expired": "Expired"
 
       "scheduled":
+        "title": "Scheduled"
         "other_delivery": "Other Delivery"
         "collection" : "Collection"
         "gogovan" : "GoGoVan"

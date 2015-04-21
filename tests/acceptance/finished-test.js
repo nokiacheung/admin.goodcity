@@ -32,15 +32,15 @@ test("redirect to reviewing offers page", function() {
   });
 });
 
-test("redirect to canceled offers page", function() {
-  visit("/offers/finished/canceled");
+test("redirect to cancelled offers page", function() {
+  visit("/offers/finished/cancelled");
 
   andThen(function(){
-    equal(currentURL(), "/offers/finished/canceled");
+    equal(currentURL(), "/offers/finished/cancelled");
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
 
-    // canceled status
+    // cancelled status
     equal($('.time_indicator').text().indexOf('Closed') > 0, true);
 
     // items accept-reject status

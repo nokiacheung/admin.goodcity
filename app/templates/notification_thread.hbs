@@ -1,8 +1,8 @@
 <a {{action "view" notification.id}}>
-  <div {{bind-attr class=":thread notification.unreadCount:unread"}}>
+  <div class="thread {{if notification.unreadCount 'unread'}}">
     <span class="thread_image">
       {{#if notification.item}}
-        <img {{bind-attr src=notification.item.displayImageUrl}} class="thumb" />
+        <img src={{notification.item.displayImageUrl}} class="thumb" />
       {{else}}
         <i class="fa fa-bullhorn thumb"></i>
       {{/if}}
@@ -15,7 +15,6 @@
               {{notification.item.donorDescription}}
             {{else}}
               {{t "my_notifications.heading" name=notification.offer.createdBy.fullName}}
-
             {{/if}}
           </div>
         </div>

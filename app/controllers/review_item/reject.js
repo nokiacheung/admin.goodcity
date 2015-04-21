@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ["review_item", "offer"],
 
   itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
-  itemId: Ember.computed.alias('controllers.review_item.id'),
+  itemId: Ember.computed.alias('controllers.review_item.model.id'),
+  rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
 
   isBlank: function(key, value){
     return (arguments.length >1) ? value : false;
@@ -20,7 +21,7 @@ export default Ember.ObjectController.extend({
       this.set('noReasonSelected', false);
       return value;
     } else {
-      var reasonId = this.get('rejectionReason.id');
+      var reasonId = this.get('rejectionReasonId');
       if(reasonId) { return reasonId; }
       else {
         if(this.get("rejectReason") && this.get("rejectReason").length > 0) {
@@ -28,7 +29,7 @@ export default Ember.ObjectController.extend({
         }
       }
     }
-  }.property('rejectionReason.id'),
+  }.property('rejectionReasonId'),
 
   rejectionOptions: function() {
     return this.store.all('rejection_reason').sortBy('id');
@@ -62,11 +63,9 @@ export default Ember.ObjectController.extend({
       var loadingView = this.container.lookup('view:loading').append();
       rejectProperties.rejectionReason = this.store.getById('rejection_reason', selectedReason);
       rejectProperties.state_event = 'reject';
+      rejectProperties.id = this.get('itemId');
 
-      var item_id = this.get('controllers.review_item.id');
-      rejectProperties.id = item_id;
-
-      var offer_id = this.get('controllers.offer').get('id');
+      var offer_id = this.get('controllers.offer').get('model.id');
       rejectProperties.offer = this.store.getById('offer', offer_id);
       rejectProperties.itemType = this.store.getById('item_type', this.get('itemTypeId'));
 

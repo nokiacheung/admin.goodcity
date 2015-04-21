@@ -7,8 +7,8 @@ export default transportDetails.extend({
   needs: ['review_offer'],
 
   selectedCrossroadsOption: null,
-  accepted: Ember.computed.filterBy('items', 'state', 'accepted'),
-  pendingItem: Ember.computed.filterBy('items', 'state', 'submitted'),
+  accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
+  pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
 
   selectedGogovanOption: function(){
     return this.get('gogovanOptions.firstObject.id');
@@ -28,15 +28,16 @@ export default transportDetails.extend({
       var gogovanOptionId = this.get('selectedGogovanOption');
       var crossroadsOptionId = this.get('selectedCrossroadsOption.id');
       var loadingView = this.container.lookup('view:loading').append();
+      var offerId = this.get('model.id');
 
       var offerProperties = {
         gogovan_transport_id: gogovanOptionId,
         crossroads_transport_id: crossroadsOptionId,
         state_event: 'finish_review',
-        id: this.get('id')
+        id: offerId
       };
 
-      var url   = "/offers/" + this.get('id') + "/complete_review";
+      var url   = "/offers/" + offerId + "/complete_review";
 
       new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
         .then(data => {
@@ -48,21 +49,6 @@ export default transportDetails.extend({
 
     closeOffer: function(){
       this.get('controllers.review_offer').send('closeOffer');
-      // var loadingView = this.container.lookup('view:loading').append();
-
-      // var offerProperties = {
-      //   state_event: 'close',
-      //   id: this.get('id')
-      // };
-
-      // var url   = "/offers/" + this.get('id') + "/close_offer";
-
-      // new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
-      //   .then(data => {
-      //     this.store.pushPayload(data);
-      //     this.transitionToRoute('review_offer.items');
-      //   })
-      //   .finally(() => loadingView.destroy())
     }
   }
 });

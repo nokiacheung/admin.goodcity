@@ -4,31 +4,29 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Review Item</h1>
+    <h1 class="title">{{t "review_item.title"}}</h1>
   </section>
 </nav>
 <section class="main-section review_item">
-
   <div class="row" >
     <div class="small-12 columns">
       <div class= 'row'>
         {{partial 'item/status_message'}}
       </div>
-
       <div class="row top-bottom-margin">
         <div class="small-2 columns" id="lightGallery">
-          <div {{bind-attr data-src=displayImage.imageUrl}} >
-            <img {{bind-attr src=displayImageUrl}} class="thumb" style="width:100px;" />
+          <div data-src={{model.displayImage.imageUrl}} >
+            <img src={{model.displayImageUrl}} class="thumb" style="width:100px;" />
           </div>
-          {{#each image in nonFavouriteImages}}
-            <div class="hidden" {{bind-attr data-src=image.imageUrl}} >
-              <img {{bind-attr src=image.imageUrl}} />
+          {{#each model.nonFavouriteImages as |image|}}
+            <div class="hidden" data-src={{image.imageUrl}} >
+              <img src={{image.imageUrl}} />
             </div >
           {{/each}}
         </div>
         <div class="small-10 columns">
-          <h3 class="ellipsis two-line-ellipsis">{{donorDescription}}</h3>
-          Condition: {{donorCondition.name}}
+          <h3 class="ellipsis two-line-ellipsis">{{model.donorDescription}}</h3>
+          {{t "review_item.condition"}}: {{model.donorCondition.name}}
         </div>
       </div>
 
@@ -57,7 +55,7 @@
           {{#link-to 'review_item.donor_messages' tagName="dd" classNames="small-3 columns text-center"}}
             {{#link-to 'review_item.donor_messages'}}
               <i class="fa fa-comment-o fa-2x"></i>
-              {{#if hasUnreadDonorMessages}}
+              {{#if model.hasUnreadDonorMessages}}
                 <i class="fa fa-circle fa-1x unread"></i>
               {{/if}}
               <div>{{t "review_item.donor_message"}}</div>
@@ -67,7 +65,7 @@
           {{#link-to 'review_item.supervisor_messages' tagName="dd" classNames="small-3 columns text-center"}}
             {{#link-to 'review_item.supervisor_messages'}}
               <i class="fa fa-comment-o fa-2x"></i>
-              {{#if hasUnreadPrivateMessages}}
+              {{#if model.hasUnreadPrivateMessages}}
                 <i class="fa fa-circle fa-1x unread"></i>
               {{/if}}
               <div>{{t "review_item.supervisor_message"}}</div>
@@ -76,8 +74,8 @@
 
         </dl>
         <div class="tabs-content">
-            <br/>
-            {{outlet}}
+          <br/>
+          {{outlet}}
         </div>
       </div>
     </div>

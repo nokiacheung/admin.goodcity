@@ -4,10 +4,9 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Messages</h1>
+    <h1 class="title">{{t "messages_title"}}</h1>
   </section>
 </nav>
-
 <section class="main-section offer_details">
   <div class="row">
     <div class="small-12 columns">
@@ -19,7 +18,7 @@
             {{#if offer.hasUnreadDonorMessages}}
               <i class="fa fa-circle fa-1x unread"></i>
             {{/if}}
-            <span class='tab_title'>Donor Messages</span>
+            <span class='tab_title'>{{t "offer.donor_messages"}}</span>
           {{/link-to}}
         {{/link-to}}
 
@@ -29,7 +28,7 @@
             {{#if offer.hasUnreadPrivateMessages}}
               <i class="fa fa-circle fa-1x unread"></i>
             {{/if}}
-            <span class='tab_title'>Supervisor Messages</span>
+            <span class='tab_title'>{{t "offer.supervisor_messages"}}</span>
           {{/link-to}}
         {{/link-to}}
       </dl>

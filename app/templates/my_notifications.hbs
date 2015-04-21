@@ -16,10 +16,8 @@
       <div class="row">
         <div class="small-12 columns">
           <ul class="list list-notifications">
-          {{#each notification in myNotifications}}
-            <li>
-              {{partial "notificationThread"}}
-            </li>
+          {{#each myNotifications as |notification|}}
+            <li>{{partial "notificationThread"}}</li>
           {{/each}}
           </ul>
         </div>

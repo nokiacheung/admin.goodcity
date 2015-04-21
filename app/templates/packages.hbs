@@ -3,9 +3,9 @@
     {{#validatable-form class="form-horizontal" action="acceptOffer" target="view" on="submit"}}
       {{view "package-container-view"
         elementId="package_container_view" noPackages=noPackages noSubItemType=noSubItemType subItemTypes=subItemTypes packagetype=subItemTypes itemid=itemId
-        }}
+      }}
 
-        {{view "add-component-of-item" controller=controller packages=allPackages subItemTypes=subItemTypes noSubItemType=noSubItemType itemid=itemId}}
+      {{view "add-component-of-item" controller=controller packages=allPackages subItemTypes=subItemTypes noSubItemType=noSubItemType itemid=itemId}}
     {{/validatable-form}}
   {{else}}
     <p>

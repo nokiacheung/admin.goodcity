@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
 
   needs: ["review_item", "offer", "packages"],
 
@@ -30,7 +30,7 @@ export default Ember.ObjectController.extend({
       acceptSubItemTypes.pushObject(subItemTypeProperties);
     });
     return acceptSubItemTypes;
-  }.property("controllers.review_item.itemTypeName", "itemTypeId"),
+  }.property("itemTypeName", "itemTypeId"),
 
   isItemTypeChanged: function(key, value){
     return (arguments.length > 1) ? value :  false;

@@ -1,7 +1,7 @@
 <div class="tabs-content item-content">
   <ul class="list list-offer-items">
 
-    {{#each item in sortedItems}}
+    {{#each sortedItems as |item|}}
       {{#if item.isOffer}}
         <li>
           {{#link-to 'offer.donor_messages' model}}

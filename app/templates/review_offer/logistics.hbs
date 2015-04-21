@@ -2,15 +2,15 @@
   <section class="main-section">
     <div class="row ui">
 
-      {{#if isScheduled}}
+      {{#if model.isScheduled}}
         {{partial 'offer/delivery_details'}}
       {{else}}
-        {{#if allItemsRejected}}
+        {{#if model.allItemsRejected}}
           <div class='noTransportItems'>
             <i class="fa fa-info-circle fa-5x"></i>
             <div class='info-text'>{{t "logistics.no_items"}}</div>
 
-            {{#if isClosed}}
+            {{#if model.isClosed}}
               <div class='info-text'>{{t "logistics.offer_closed"}}</div>
             {{else}}
               <div class="row transport-buttons">
@@ -31,35 +31,28 @@
                 {{t "logistics.finish_review_request"}}
               </p>
             </p>
-
           {{else}}
-
             <div class="small-12 columns">
               <h3>{{t "logistics.accepted_items"}} ({{accepted.length}})</h3>
-              {{#each item in accepted}}
+              {{#each accepted as |item|}}
                 {{#link-to ''}}
-                  <img {{bind-attr src=item.displayImageUrl}} class="thumbnail" />
+                  <img src={{item.displayImageUrl}} class="thumbnail" />
                 {{/link-to}}
               {{/each}}
             </div>
 
-            {{#if isReviewed}}
-
+            {{#if model.isReviewed}}
               <div class="small-12 columns">
                 <div class = 'transport_details'>
-                  {{t "logistics.gogovan_requirement"}}: {{gogovanTransport.name}}
+                  {{t "logistics.gogovan_requirement"}}: {{model.gogovanTransport.name}}
                 </div>
                 <div class = 'transport_details'>
-                  {{t "logistics.crossroads_requirement"}}: {{crossroadsTransport.name}}
+                  {{t "logistics.crossroads_requirement"}}: {{model.crossroadsTransport.name}}
                 </div>
               </div>
-
             {{else}}
-
               {{partial 'review_offer/logistics_details_form'}}
-
             {{/if}}
-
           {{/if}}
         {{/if}}
       {{/if}}
