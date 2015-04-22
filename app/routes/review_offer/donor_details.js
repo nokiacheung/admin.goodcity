@@ -6,7 +6,7 @@ export default AuthorizeRoute.extend({
     var currentOffer = this.store.getById('offer', offerId);
     var donor = currentOffer.get('createdBy');
 
-    return this.store.find('offer', { donated_by_id: donor.get('id'), include_deleted: true });
+    return this.store.find('offer', { created_by_id: donor.get('id'), include_deleted: true });
   },
 
   setupController: function(controller, model){
