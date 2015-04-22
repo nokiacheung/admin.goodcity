@@ -1,11 +1,15 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
-var attr = DS.attr;
+var attr = DS.attr,
+  hasMany = DS.hasMany;
 
 export default DS.Model.extend({
-  name: attr('string'),
-  code: attr('string'),
-  parentId: attr('number'),
+  name:           attr('string'),
+  code:           attr('string'),
+  parentId:       attr('number'),
   isItemTypeNode: attr('boolean', {defaultValue: false}),
-  text: ""
+  text:           "",
+  packages:       hasMany('package', { inverse: 'packageType' }),
+  packagesCount:  Ember.computed.alias("packages.length"),
 });

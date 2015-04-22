@@ -54,6 +54,7 @@ Router.map(function() {
   this.resource('item_types');
   this.route('packages');
   this.route('my_notifications');
+  this.route('search');
 
   this.resource('offers', function(){
     this.route('submitted');

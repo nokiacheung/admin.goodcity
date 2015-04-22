@@ -11,6 +11,8 @@ I18nTranslationsEn =
       "reviewing": "Reviewing"
       "reviewed": "Reviewed"
       "messages_title" : "Messages"
+      "search":
+        "no_results": "Sorry, No results found."
 
       "offer":
         "disable": "Disable"

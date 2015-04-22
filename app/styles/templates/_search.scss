@@ -1,0 +1,11 @@
+.search-box {
+  position: relative;
+  padding: 0;
+
+  i {
+    position: absolute;
+    right: 0.5rem;
+    top: 1rem;
+    color: $black;
+  }
+}
