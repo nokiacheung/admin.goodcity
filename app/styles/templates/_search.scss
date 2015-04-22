@@ -2,10 +2,37 @@
   position: relative;
   padding: 0;
 
+  input {
+    padding-left: 0.5rem;
+  }
+
   i {
     position: absolute;
-    right: 0.5rem;
-    top: 1rem;
+    right: 0.6rem;
+    top: 0.5rem;
     color: $black;
+    font-size: 1.2rem;
+
+    @media #{$small-only} {
+      top: 0.4rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+.no_result {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-top: 2rem;
+  @media #{$small-only} {
+    font-size: 0.9rem;
+  }
+}
+
+.search {
+  .list.list-activity {
+    margin-left: -0.7rem;
+    margin-right: -0.7rem;
   }
 }

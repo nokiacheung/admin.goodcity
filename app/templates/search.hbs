@@ -1,11 +1,16 @@
 <div class="row">
-  <div class="small-12 columns search-box">
+  <div class="small-12 columns search-box ui">
     {{input type="text" value=searchText name="searchText" id="searchText"}}
-    <i class="fa fa-search"></i>
+
+    {{#if hasSearchText}}
+      <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+    {{else}}
+      <i class="fa fa-search"></i>
+    {{/if}}
   </div>
 </div>
 
-<section class="main-section review_offer">
+<section class="main-section review_offer search">
   <div class="row">
     <div class="small-12 columns item-content">
       {{#if filteredResults}}
@@ -14,8 +19,8 @@
             {{partial 'offers/offer_details'}}
           {{/each}}
         </ul>
-      {{else if hasSearchText}}
-        {{t "search.no_results"}}
+      {{else if hasFilter}}
+        <div class='no_result'>{{t "search.no_results"}}</div>
       {{/if}}
     </div>
   </div>

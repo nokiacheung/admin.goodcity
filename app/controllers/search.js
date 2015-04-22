@@ -3,7 +3,8 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   filter: '',
   searchText: '',
-  hasSearchText: Ember.computed.alias('filter.length'),
+  hasSearchText: Ember.computed.alias('searchText.length'),
+  hasFilter: Ember.computed.alias('filter.length'),
 
   onSearchTextChange: function() {
     // wait 1 second before applying the filter
@@ -51,5 +52,12 @@ export default Ember.Controller.extend({
     }
 
     return offers.uniq();
-  }.property('filter')
+  }.property('filter'),
+
+  actions: {
+    clearSearch: function() {
+      this.set('filter', '');
+      this.set('searchText', '');
+    }
+  }
 });
