@@ -11,6 +11,9 @@ export APP_SHA
 
 echo "Building $site [$environment]"
 EMBER_CLI_CORDOVA=0 ember build --environment=$environment
+if [ $? -ne 0 ]; then
+  exit 1
+fi
 
 echo "Uploading new files to $site"
 release_folder=$site_folder/releases/$(date +%s)
