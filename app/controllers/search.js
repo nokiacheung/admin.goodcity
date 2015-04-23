@@ -3,8 +3,14 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   filter: '',
   searchText: '',
-  hasSearchText: Ember.computed.alias('searchText.length'),
-  hasFilter: Ember.computed.alias('filter.length'),
+
+  hasSearchText: function() {
+    return Ember.$.trim(this.get('searchText')).length;
+  }.property('searchText'),
+
+  hasFilter: function() {
+    return Ember.$.trim(this.get('filter')).length;
+  }.property('filter'),
 
   onSearchTextChange: function() {
     // wait 1 second before applying the filter

@@ -5,7 +5,7 @@ FactoryGuy.define('delivery', {
     deliveryType: FactoryGuy.generate(function(num) {
       return conditions[num];
     }),
-    contact: FactoryGuy.belongsTo("contact"),
+    contact:  FactoryGuy.belongsTo("contact"),
     schedule: FactoryGuy.belongsTo("schedule"),
   }
 });

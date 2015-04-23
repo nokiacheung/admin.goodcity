@@ -12,6 +12,7 @@
     top: 0.5rem;
     color: $black;
     font-size: 1.2rem;
+    cursor: pointer;
 
     @media #{$small-only} {
       top: 0.4rem;

@@ -24,7 +24,8 @@ module.exports = function(app) {
       "id": 1,
       "first_name": "Tom",
       "last_name": "Jones",
-      "permission_id": null
+      "permission_id": null,
+      "mobile": "12345678"
     }
   };
 
