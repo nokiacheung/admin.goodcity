@@ -103,6 +103,10 @@ test("cancel booking of scheduled offer with pending GGV order state", function(
 
     click(find("a:contains('Cancel Booking')"));
     andThen(function(){
+      Ember.$("#confirmModal .ok").click();
+    });
+
+    andThen(function(){
       equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
     });
   });
