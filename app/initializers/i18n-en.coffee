@@ -88,7 +88,7 @@ I18nTranslationsEn =
           "last_seen": "Last seen"
           "total_offers": "Total offers"
           "crm": "CRM"
-          "other_offers": "All offers on Goodcity"
+          "other_offers": "All offers on GoodCity"
 
       "mark_received":
         "delivered_by": "Delivered by:"
