@@ -14,12 +14,11 @@ module('Search Offers', {
     offer = FactoryGuy.make("offer_with_items", { state: "scheduled", createdBy: user });
 
     ggvOrder = FactoryGuy.make("gogovan_active_order");
-    delivery = FactoryGuy.make("delivery", { gogovanOrder: ggvOrder, offer: offer });
-    contact = delivery.get("contact");
-    address = FactoryGuy.make("address", { 'addressable': contact });
+    contact  =  FactoryGuy.make("contact");
+    delivery = FactoryGuy.make("delivery", { gogovanOrder: ggvOrder, offer: offer, contact: contact });
+    address  = FactoryGuy.make("address", { 'addressable': contact });
   },
   teardown: function() {
-    // Ember.run.cancelTimers()
     Em.run(function() { testHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
@@ -53,32 +52,6 @@ test("search offers by donor mobile", function() {
 
 test("search offers by vehicle number", function() {
   visit("/search");
-test("search offers by vehicle number", function() {
-  visit("/search");
-
-  andThen(function(){
-    equal(currentURL(), "/search");
-    fillIn('#searchText', ggvOrder.get("driverLicense"));
-
-    andThen(function(){
-      equal(find('ul li').length, 1);
-      equal(find('ul li img').length, 1);
-    });
-  });
-});
-  andThen(function(){
-    equal(currentURL(), "/search");
-    fillIn('#searchText', ggvOrder.get("driverLicense"));
-
-    andThen(function(){
-      equal(find('ul li').length, 1);
-      equal(find('ul li img').length, 1);
-    });
-  });
-});
-
-test("search offers by vehicle number", function() {
-  visit("/search");
 
   andThen(function(){
     equal(currentURL(), "/search");
@@ -92,11 +65,14 @@ test("search offers by vehicle number", function() {
 });
 
 test("search offers by delivery address", function() {
+
   visit("/search");
 
   andThen(function(){
     equal(currentURL(), "/search");
-    fillIn('#searchText', address.get("flat"));
+    Ember.run(function() {
+      fillIn('#searchText', address.get("flat"));
+    });
 
     andThen(function(){
       equal(find('ul li').length, 1);

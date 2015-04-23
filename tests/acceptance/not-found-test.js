@@ -8,6 +8,7 @@ module('Display not found error', {
   setup: function() {
     App = startApp();
     testHelper = TestHelper.setup(App);
+    Ember.run.later = (context, func) => true;
     offer = FactoryGuy.make("offer");
   },
   teardown: function() {
