@@ -37,7 +37,7 @@ module.exports = function(app) {
     ],
     "user": [
       { "id": "1", "first_name": "Kendrick", "last_name": "Kiehn", "permission_id": null, "mobile": "+85251111111" },
-      { "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }
+      { "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2", "mobile": "12345678" }
     ],
     "permissions":[
       { "id": "2", "name": "Supervisor" },
@@ -47,19 +47,19 @@ module.exports = function(app) {
 
   var finishedOffers = {
       "offers": [ {"id": "5", "state": "closed" }, {"id": "6", "state": "received", "created_by_id": "4" }],
-      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }, { "id": "4", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null }],
+      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2", "mobile": "12345678" }, { "id": "4", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null, "mobile": "12345678" }],
       "items": [{ "id": "1", "offer_id": "5", state: "rejected"}, { "id": "2", "offer_id": "6", state: "accepted"}]
     };
 
   var closedOffers = {
       "offers": [ {"id": "5", "state": "closed", "reviewed_by_id": "2" }],
-      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2" }],
+      "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2", "mobile": "12345678" }],
       "items": [{ "id": "1", "offer_id": "5", state: "rejected"}]
     };
 
   var receivedOffers = {
       "offers": [ {"id": "5", "state": "received", "created_by_id": "3" }],
-      "user": [{ "id": "3", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null }],
+      "user": [{ "id": "3", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null, "mobile": "12345678" }],
       "items": [{ "id": "1", "offer_id": "5", state: "accepted"}]
     };
 
