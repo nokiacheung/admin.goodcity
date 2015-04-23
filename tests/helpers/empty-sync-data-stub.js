@@ -1,5 +1,6 @@
 import config from '../../config/environment';
 import '../fixtures/territory';
+import '../fixtures/address';
 import '../fixtures/contact';
 import '../fixtures/schedule';
 import '../fixtures/delivery';
