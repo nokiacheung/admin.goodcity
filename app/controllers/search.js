@@ -13,8 +13,8 @@ export default Ember.Controller.extend({
   }.property('filter'),
 
   onSearchTextChange: function() {
-    // wait 1 second before applying the filter
-    Ember.run.debounce(this, this.applyFilter, 1000);
+    // wait before applying the filter
+    Ember.run.debounce(this, this.applyFilter, 500);
   }.observes('searchText'),
 
   applyFilter: function() {
