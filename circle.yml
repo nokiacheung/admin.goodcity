@@ -9,8 +9,8 @@ dependencies:
     - node circle-branch.js
   post:
     - "./node_modules/ember-cli/node_modules/bower/bin/bower install"
-  cache_directories:
-    - "bower_components"    # relative to the build directory
+  #cache_directories:
+  #  - "bower_components"    # relative to the build directory
 
 test:
   pre:
