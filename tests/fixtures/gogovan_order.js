@@ -1,3 +1,5 @@
+import mobile from './mobile';
+
 FactoryGuy.define('gogovan_order', {
   sequences: {
     id: function(num) {
@@ -5,9 +7,6 @@ FactoryGuy.define('gogovan_order', {
     },
     collectionName: function(num) {
       return 'Daniel' + num + ' Stepp' + num;
-    },
-    collectionMobile: function(){
-      return Math.floor(Math.random()*8999922+67110000);
     },
     driverName: function(num) {
       return 'Driver' + num + ' Ggv' + num;
@@ -17,7 +16,7 @@ FactoryGuy.define('gogovan_order', {
   default: {
     id:            FactoryGuy.generate('id'),
     name:          FactoryGuy.generate('collectionName'),
-    mobile:        FactoryGuy.generate('collectionMobile'),
+    mobile:        FactoryGuy.generate(mobile.hongKong),
     status:        'pending',
 
     delivery:      FactoryGuy.belongsTo("delivery"),
@@ -28,7 +27,7 @@ FactoryGuy.define('gogovan_order', {
   gogovan_active_order: {
     price:         120.0,
     driverName:    FactoryGuy.generate('driverName'),
-    driverMobile:  FactoryGuy.generate('collectionMobile'),
+    driverMobile:  FactoryGuy.generate(mobile.hongKong),
     driverLicense: 'VH1002',
     status:        'active'
   }

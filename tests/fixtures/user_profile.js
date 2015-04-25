@@ -1,3 +1,5 @@
+import mobile from './mobile';
+
 FactoryGuy.define('user_profile', {
   sequences: {
     collectionFirstName: function(num) {
@@ -5,13 +7,6 @@ FactoryGuy.define('user_profile', {
     },
     collectionLastName: function(num) {
       return 'Stepp' + num;
-    },
-    collectionMobile: function(){
-      return Math.floor(Math.random()*8999922+671100001);
-    },
-    collectionHKMobile: function(){
-      var phone_number = Math.floor(Math.random()*8999922+67110000);
-      return phone_number;
     }
   },
   default: {
@@ -19,11 +14,11 @@ FactoryGuy.define('user_profile', {
     lastName: FactoryGuy.generate('collectionLastName'),
   },
   with_non_hk_mobile: {
-    mobile: FactoryGuy.generate('collectionMobile'),
+    mobile: FactoryGuy.generate(mobile.nonHongKong),
     district_id: 1
   },
   with_hk_mobile: {
-    mobile: FactoryGuy.generate('collectionHKMobile'),
+    mobile: FactoryGuy.generate(mobile.hongKong),
     district_id: 2
   }
 });

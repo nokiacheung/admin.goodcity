@@ -1,4 +1,5 @@
 import itemsFactory from './image';
+import mobile from './mobile';
 
 FactoryGuy.define('user', {
   sequences: {
@@ -10,17 +11,13 @@ FactoryGuy.define('user', {
     },
     collectionLastName: function(num) {
       return 'Stepp' + num;
-    },
-    collectionHKMobile: function(){
-      var phone_number = Math.floor(Math.random()*8999922+67110000);
-      return phone_number.toString();
     }
   },
   default: {
     id:        FactoryGuy.generate('id'),
     firstName: FactoryGuy.generate('collectionFirstName'),
     lastName:  FactoryGuy.generate('collectionLastName'),
-    mobile: FactoryGuy.generate('collectionHKMobile'),
+    mobile: FactoryGuy.generate(mobile.hongKong),
   },
   user_with_image: {
     image: FactoryGuy.belongsTo('image')
