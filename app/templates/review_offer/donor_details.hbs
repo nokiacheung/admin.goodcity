@@ -13,7 +13,7 @@
             {{donor.fullName}}
           </div>
           <div class="small-7 columns mobile">
-            <a href="tel:{{donor.mobile}}"><i class="fa fa-phone"></i> {{donorMobile}}</a>
+            {{view "phone" number=donor.mobile}}
           </div>
         </div>
 
