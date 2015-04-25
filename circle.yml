@@ -19,3 +19,9 @@ test:
     - sleep 5
   override:
     - ./node_modules/ember-cli/bin/ember test
+
+deployment:
+  staging:
+    branch: master
+    commands:
+      - npm run deploy-staging
