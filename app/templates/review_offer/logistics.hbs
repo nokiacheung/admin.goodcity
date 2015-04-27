@@ -1,9 +1,8 @@
 <div class="tabs-content transport-content">
   <section class="main-section">
     <div class="row ui">
-
-      {{#if model.isScheduled}}
-        {{partial 'offer/delivery_details'}}
+      {{#if model.showDeliveryDetails}}
+        {{partial "review_offer/delivery_details"}}
       {{else}}
         {{#if model.allItemsRejected}}
           <div class='noTransportItems'>

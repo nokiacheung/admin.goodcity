@@ -3,7 +3,7 @@ import startApp from '../helpers/start-app';
 
 var App, testHelper, offer, item, reviewer, offer2, item2, offer3, item3,
   delivery1, ggv_order1, offer5, item5, delivery2, ggv_order2,
-  offer6, item6,
+  offer6, item6, offer7,
   TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
 module('Review Offer Logistics', {
@@ -30,6 +30,8 @@ module('Review Offer Logistics', {
     delivery2 = FactoryGuy.make("delivery", { deliveryType: "Gogovan", gogovanOrder: ggv_order2 });
     offer6 = FactoryGuy.make("offer", {state:"scheduled", delivery: delivery2});
     item6  = FactoryGuy.make("item", {state:"accepted", offer: offer6});
+
+    offer7 = FactoryGuy.make("offer_with_items", {state:"received", deliveredBy: "Gogovan"});
   },
   teardown: function() {
     Em.run(function() { testHelper.teardown(); });
@@ -159,5 +161,15 @@ test("for scheduled offer with active GGV order state", function() {
     equal($.trim($('.delivery-details .row:eq(5)').text()), "Accepted items to be transported");
     equal($(".items_list img").length, 1);
     equal($('.transport-buttons a').length, 2);
+  });
+});
+
+test("for received offer", function() {
+  visit('/offers/' + offer7.id + "/review_offer/logistics");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer7.id + "/review_offer/logistics");
+    var text = $(".transport-content div:first").text().trim();
+    equal(text.indexOf("Goods received on") >= 0, true);
+    equal(text.indexOf("via Gogovan") >= 0, true);
   });
 });
