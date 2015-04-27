@@ -9,7 +9,7 @@
   {{else if offer.isReceived}}
     <div class="offer-status is-received">
       <div class='status-message review_message'>
-        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{view 'time-ago' timeValue=offer.receivedAt}}
+        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{display-timeago offer.receivedAt}}
       </div>
     </div>
   {{else if offer.isSubmitted}}

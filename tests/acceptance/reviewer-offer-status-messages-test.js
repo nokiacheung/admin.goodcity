@@ -156,6 +156,6 @@ test("Display offer status for received offer-items", function() {
   andThen(function() {
     equal(currentURL(), "/offers/" + offer10.id + "/review_offer/items");
     var donor_name = offer10.get("createdBy.firstName") + " " + offer10.get("createdBy.lastName");
-    // equal($.trim(find('.status-message').text()), "Goods received by " + donor_name + " less than a minute ago");
+    equal($('.status-message').text().trim().indexOf("Goods donated by " + donor_name + " received") >= 0, true);
   });
 });

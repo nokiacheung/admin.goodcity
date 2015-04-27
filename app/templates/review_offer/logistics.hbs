@@ -2,7 +2,10 @@
   <section class="main-section">
     <div class="row ui">
 
-      {{#if model.isScheduled}}
+      {{#if model.isReceived}}
+        {{t "logistics.goods_received"}} {{display-date model.receivedAt}} via {{model.deliveredBy}}.
+        {{partial 'offer/delivery_details'}}
+      {{else if model.isScheduled}}
         {{partial 'offer/delivery_details'}}
       {{else}}
         {{#if model.allItemsRejected}}
