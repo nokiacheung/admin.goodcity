@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
-var App, testHelper, offer, user, ggvOrder, delivery, address, contact,
+var App, testHelper, offer, user, ggvOrder, delivery, address, contact, item,
   TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
 module('Search Offers', {
@@ -12,6 +12,7 @@ module('Search Offers', {
 
     user  = FactoryGuy.make("user", { firstName: "John", mobile: "99999999" });
     offer = FactoryGuy.make("offer_with_items", { state: "scheduled", createdBy: user });
+    item = FactoryGuy.make("item", { offer: offer, state: "accepted" });
 
     ggvOrder = FactoryGuy.make("gogovan_active_order");
     contact  =  FactoryGuy.make("contact");
@@ -30,6 +31,19 @@ test("search offers by donor name", function() {
   andThen(function(){
     equal(currentURL(), "/search");
     fillIn('#searchText', user.get("firstName"));
+
+    andThen(function(){
+      equal(find('ul li').length, 1);
+    });
+  });
+});
+
+test("search offers by item description", function() {
+  visit("/search");
+
+  andThen(function(){
+    equal(currentURL(), "/search");
+    fillIn('#searchText', item.get("donorDescription"));
 
     andThen(function(){
       equal(find('ul li').length, 1);

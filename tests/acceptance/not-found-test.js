@@ -18,6 +18,7 @@ module('Display not found error', {
 });
 
 test("Display error popup for invalid offer", function() {
+  $('.reveal-modal').remove();
   visit("/offers/invalid/review_offer/items");
 
   andThen(function(){
@@ -27,6 +28,7 @@ test("Display error popup for invalid offer", function() {
 });
 
 test("Display error popup for invalid item", function() {
+  $('.reveal-modal').remove();
   visit("/offers/" + offer.id + "/review_item/invalid/accept");
   $.mockjax({url:"/api/v1/items/*",status:404});
 
@@ -37,6 +39,7 @@ test("Display error popup for invalid item", function() {
 });
 
 test("Display not-found page for invalid url", function() {
+  $('.reveal-modal').remove();
   visit("/invalid_url");
   andThen(function(){
     equal(currentURL(), "/invalid_url");
