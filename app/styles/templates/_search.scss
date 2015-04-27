@@ -1,22 +1,45 @@
 .search-box {
   position: relative;
   padding: 0;
+  background-color: $light-grey;
 
   input {
     padding-left: 0.5rem;
+    width: 85%;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+
+    @media #{$small-only} {
+      width: 75%;
+    }
   }
 
   i {
     position: absolute;
-    right: 0.6rem;
-    top: 0.5rem;
+    right: 15%;
+    top: 0.9rem;
     color: $black;
     font-size: 1.2rem;
     cursor: pointer;
 
     @media #{$small-only} {
-      top: 0.4rem;
       font-size: 1rem;
+      right: 25%;
+    }
+  }
+
+  a {
+    color: $medium-blue !important;
+    text-decoration: underline;
+    position: absolute;
+    top: 0.6rem;
+    right: 3%;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    @media #{$small-only} {
+      font-size: 0.8rem;
+      top: 0.8rem;
     }
   }
 }
@@ -41,9 +64,11 @@
 .search_link {
   i {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    display: inline;
+    margin-right: 0.2rem;
     @media #{$small-only} {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
   }
 }

@@ -4,9 +4,8 @@
 
     {{#if hasSearchText}}
       <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
-    {{else}}
-      <i class="fa fa-search"></i>
     {{/if}}
+    <a href="#" {{action "cancelSearch"}}>Cancel</a>
   </div>
 </div>
 
