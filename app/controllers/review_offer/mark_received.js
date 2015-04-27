@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
   actions: {
     closeOffer: function() {
       var offer = this.get("model");
-      offer.set("deliveredBy", this.get("deliveredBy"));
+      offer.set("deliveredBy", this.get("deliveredBy.value"));
       offer.set("state_event", "receive");
       offer.save()
         .then(() => this.transitionToRoute("review_offer.items"))
