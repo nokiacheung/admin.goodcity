@@ -67,7 +67,7 @@
   {{else if offer.isClosed}}
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
-        {{t "review_offer.offer_closed_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}
+        {{t "review_offer.offer_closed_by" firstName=offer.closedBy.firstName lastName=offer.closedBy.lastName}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}
       </div>
     </div>
   {{else if offer.allItemsRejected}}

@@ -69,7 +69,7 @@
 
               {{!-- Closed Offer --}}
               {{else if offer.isClosed}}
-                Closed by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
+                Closed by {{offer.closedBy.firstName}} {{offer.closedBy.lastName}}
                 <i class="fa fa-clock-o"></i>
                 {{view 'time-ago' timeValue=offer.reviewCompletedAt smallPrefix=true}}
 
