@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  disabled: false,
 
   placeholderText: function(){
     return Ember.I18n.t("reject.message_placeholder");

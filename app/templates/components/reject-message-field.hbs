@@ -1,3 +1,5 @@
-{{textarea type="text" value=rejectMessage name="rejectMessage" id='rejectMessage' placeholder=placeholderText rows=3}}
+{{textarea type="text" value=rejectMessage name="rejectMessage" id='rejectMessage' placeholder=placeholderText rows=3 disabled=disabled}}
 
+{{#unless disabled}}
 <i {{action "clearRejectMessage"}} class="fa fa-times-circle remove-text"></i>
+{{/unless}}
