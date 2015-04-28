@@ -1,9 +1,11 @@
 {{#if model.isReceived}}
   {{#if model.delivery}}
-    {{t "logistics.goods_received"}} {{display-date model.receivedAt}} via {{model.deliveredBy}}.
+    <div class="received-msg">
+      {{t "logistics.goods_received"}} {{display-date model.receivedAt}} via {{model.deliveredBy}}.
+    </div>
   {{else}}
     <p><span class="icon-no-items"></span></p>
-    <p class="no-items">
+    <p class="no-items received-msg">
       {{t "logistics.goods_received"}} {{display-date model.receivedAt}} via {{model.deliveredBy}}.
     </p>
   {{/if}}
