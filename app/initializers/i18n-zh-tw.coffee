@@ -137,6 +137,13 @@ I18nTranslationsZhTw =
         "quality_message" : "Some categories of items are very difficult for us to distribute unless they are in excellent condition."
         "size_message" : "Very few of our clients are able to accommodate large items in their homes."
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
+        "cancel_gogovan_confirm": "Rejecting the last item will cancel the gogovan booking, do you wish to proceed?"
+
+      "cancel_gogovan":
+        "title": "Cancel GoGoVan Booking"
+        "once_confirmed": "Once GoGoVan confirms the booking is cancelled you will be able to proceed rejecting or cancelling the offer."
+        "call_driver": "Please cancel the GoGoVan booking by calling GoGoVan on"
+        "notify_donor": "Message the donor to let them know their GoGoVan booking is being cancelled"
 
       "receive":
         "missing": "Missing"

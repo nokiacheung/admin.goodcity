@@ -70,6 +70,19 @@ export default Ember.Controller.extend({
     clearSearch: function() {
       this.set('filter', '');
       this.set('searchText', '');
+      Ember.$("#searchText").focus();
+    },
+
+    cancelSearch: function(){
+      this.send("clearSearch");
+      var route = localStorage["lastVisitedRoute"] || "my_list";
+      this.transitionToRoute(route);
     }
-  }
+  },
+
+  focusSearchInput: function() {
+    Ember.run.later(function(){
+      Ember.$("#searchText").focus();
+    });
+  }.on('init')
 });

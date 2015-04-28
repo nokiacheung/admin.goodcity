@@ -14,6 +14,7 @@ Router.map(function() {
     this.route('plan_delivery');
     this.route('collection_charges');
     this.route('gogovan_charges');
+    this.route('cancel_gogovan');
 
     this.resource('review_offer', function(){
       this.route('items');

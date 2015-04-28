@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  attributeBindings: ['selectedItemId', 'selectedItemName'],
+  attributeBindings: ['selectedItemId', 'selectedItemName', 'disabled'],
   selectedItype: {id: null},
   store: Ember.inject.service(),
+  disabled: false,
+  enabled: Ember.computed.not('disabled'),
 
   selectedItypeObserver: function(){
     return this.set('selectedItemName', this.get('findSelectedItem.name'));
