@@ -1,0 +1,40 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'review_offer.items' model classNames='back'}}{{t 'back'}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t 'cancel_gogovan.title'}}</h1>
+  </section>
+</nav>
+
+
+<section class="main-section cancel_offer">
+  <div class="row info">
+    <div class="small-12 columns">
+
+      <div><i class="fa fa-exclamation-triangle"></i>  {{t 'delivery.cancel.no_ggv_cancel'}}</div>
+
+      <div>{{t 'delivery.cancel.cancel_ggv'}}</div>
+
+      <ul class='call_ggv'>
+        {{#if driverContact}}
+          <li>{{t 'delivery.cancel.call_driver'}} {{view 'phone' number=driverContact}} or</li>
+        {{/if}}
+        <li>{{t 'delivery.cancel.call_ggv'}} {{view 'phone' number=gogovanContact}}</li>
+      </ul>
+
+      <div>{{t 'cancel_gogovan.notify_donor'}}</div>
+
+      <div>{{t 'cancel_gogovan.once_confirmed'}}</div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      {{#link-to 'review_offer.items' model classNames="button expand"}}
+        {{t 'delivery.cancel.back'}}
+      {{/link-to}}
+    </div>
+  </div>
+</section>

@@ -35,12 +35,14 @@ export default Ember.Controller.extend({
     return this.store.all('rejection_reason').sortBy('id');
   }.property(),
 
+  confirm: Ember.inject.service(),
+
   actions: {
     setRejectOption: function(){
       this.set("selectedId", "-1");
     },
 
-    rejectOffer: function(){
+    rejectItem: function(){
       var selectedReason = this.get('selectedId');
       if(selectedReason === undefined) {
         this.set('noReasonSelected', true);
@@ -60,23 +62,50 @@ export default Ember.Controller.extend({
         this.set('rejectReason', null);
       }
 
-      var loadingView = this.container.lookup('view:loading').append();
-      rejectProperties.rejectionReason = this.store.getById('rejection_reason', selectedReason);
-      rejectProperties.state_event = 'reject';
-      rejectProperties.id = this.get('itemId');
+      var offer = this.get("controllers.offer.model");
 
-      var offer_id = this.get('controllers.offer').get('model.id');
-      rejectProperties.offer = this.store.getById('offer', offer_id);
-      rejectProperties.itemType = this.store.getById('item_type', this.get('itemTypeId'));
+      var saveItem = () => {
+        var loadingView = this.container.lookup('view:loading').append();
+        rejectProperties.rejectionReason = this.store.getById('rejection_reason', selectedReason);
+        rejectProperties.state_event = 'reject';
+        rejectProperties.id = this.get('itemId');
 
-      var item = this.store.push('item', rejectProperties);
+        rejectProperties.offer = offer;
+        rejectProperties.itemType = this.store.getById('item_type', this.get('itemTypeId'));
 
-      // Save changes to Item
-      item.save()
-        .then(() => this.transitionToRoute('review_offer.items'))
-        .catch(error => { item.rollback(); throw error; })
-        .finally(() => loadingView.destroy());
-    },
+        var item = this.store.push('item', rejectProperties);
+
+        // Save changes to Item
+        item.save()
+          .then(() => this.transitionToRoute('review_offer.items'))
+          .catch(error => {
+            item.rollback();
+
+            if (error.errors instanceof Array &&
+              error.errors.filter(e => !!e["requires_gogovan_cancellation"]).length > 0) {
+              return this.transitionToRoute('offer.cancel_gogovan', offer);
+            }
+
+            throw error;
+          })
+          .finally(() => loadingView.destroy());
+      };
+
+      // if rejecting last accepted item but gogovan is booked display gogovan cancellation page
+      var gogovanOrder = offer.get("delivery.gogovanOrder");
+      var itemIsLastAccepted = offer.get("approvedItems").every(i => i.id === this.get('itemId'));
+
+      if (itemIsLastAccepted && gogovanOrder) {
+        this.get("confirm").show(Ember.I18n.t("reject.cancel_gogovan_confirm"), () => {
+          if (gogovanOrder.get("isActive")) {
+            this.transitionToRoute('offer.cancel_gogovan', offer);
+          } else {
+            saveItem();
+          }
+        });
+      } else {
+        saveItem();
+      }
+    }
   }
-
 });
