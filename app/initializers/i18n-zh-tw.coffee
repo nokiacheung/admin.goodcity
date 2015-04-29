@@ -113,6 +113,7 @@ I18nTranslationsZhTw =
         "ggv_hire": "Gogovan Hire Requirement"
         "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
         "goods_received" : "Goods received on"
+        "arrange_transport": "Arrange Transport"
 
       "review_item":
         "title" : "Review Item"

@@ -48,6 +48,9 @@
                 <div class = 'transport_details'>
                   {{t "logistics.crossroads_requirement"}}: {{model.crossroadsTransport.name}}
                 </div>
+                <div class="small-8 small-offset-2 columns transport_details">
+                  {{#link-to 'offer.plan_delivery' model class="button expand"}}{{t 'logistics.arrange_transport'}}{{/link-to}}
+                </div>
               </div>
             {{else}}
               {{partial 'review_offer/logistics_details_form'}}
