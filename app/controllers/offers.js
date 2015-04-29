@@ -7,9 +7,9 @@ export default Ember.ArrayController.extend({
     return this.get('allOffers').filterBy('isSubmitted', true).length;
   }.property('allOffers.@each.isSubmitted'),
 
-  inProgressCount: function() {
-    return this.get('allOffers').filterBy('isUnderReview', true).length;
-  }.property('allOffers.@each.isUnderReview'),
+  inProgressOffersCount: function() {
+    return this.get('allOffers').filterBy('isReviewing', true).length;
+  }.property('allOffers.@each.isReviewing'),
 
   scheduledCount: function() {
     return this.get('allOffers').filterBy('isScheduled', true).length;
