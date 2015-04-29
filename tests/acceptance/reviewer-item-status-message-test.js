@@ -3,7 +3,8 @@ import startApp from '../helpers/start-app';
 import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, store, offer1, offer2, item2, item1, item3, item4;
+var App, testHelper, store, offer1, offer2, item2, item1, item3, item4,
+  offer3, item5;
 
 module('Reviewer: Display Item Status', {
   setup: function() {
@@ -19,6 +20,9 @@ module('Reviewer: Display Item Status', {
     item2 = FactoryGuy.make("item", {offer: offer2, state:"submitted"});
     item3 = FactoryGuy.make("item", {offer: offer2, state:"accepted"});
     item4 = FactoryGuy.make("item", {offer: offer2, state:"rejected"});
+
+    offer3 = FactoryGuy.make("offer", {state:"cancelled"});
+    item5 = FactoryGuy.make("item", {offer: offer3, state:"accepted"});
   },
 
   teardown: function() {
@@ -60,5 +64,17 @@ test("Display offer status for reviewed offer", function() {
   andThen(function() {
     equal(currentURL(), '/offers/' + offer2.id + "/review_item/"+ item4.id +"/reject");
     equal($.trim(find('.status-message').text()), "This item has been rejected.");
+  });
+});
+
+test("Display offer status for reviewed offer", function() {
+  visit('/offers/' + offer3.id + "/review_item/"+ item5.id +"/accept");
+
+  andThen(function() {
+    equal(currentURL(), '/offers/' + offer3.id + "/review_item/"+ item5.id +"/accept");
+
+    var donor_name = offer3.get("createdBy.firstName") + " " + offer3.get("createdBy.lastName");
+
+    equal($('.status-message').text().trim().indexOf("The offer this item belongs to has been cancelled by " + donor_name + " on") >= 0, true);
   });
 });

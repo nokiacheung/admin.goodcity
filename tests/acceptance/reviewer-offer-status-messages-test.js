@@ -6,7 +6,7 @@ var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 var App, testHelper, offer1, offer2, reviewer, reviewer1, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
   offer8, item8, offer9, item9, offer10, schedule, ggv_order11, delivery11,
-  offer11;
+  offer11, offer12;
 
 module('Reviewer: Display Offer Status', {
   setup: function() {
@@ -44,6 +44,7 @@ module('Reviewer: Display Offer Status', {
     ggv_order11 = FactoryGuy.make("gogovan_active_order");
     delivery11 = FactoryGuy.make("delivery", { deliveryType: "Gogovan", gogovanOrder: ggv_order11 });
     offer11 = FactoryGuy.make("offer_with_items", {state:"scheduled", delivery: delivery11});
+    offer12 = FactoryGuy.make("offer_with_items", {state:"cancelled"});
   },
 
   teardown: function() {
@@ -157,5 +158,15 @@ test("Display offer status for received offer-items", function() {
     equal(currentURL(), "/offers/" + offer10.id + "/review_offer/items");
     var donor_name = offer10.get("createdBy.firstName") + " " + offer10.get("createdBy.lastName");
     equal($('.status-message').text().trim().indexOf("Goods donated by " + donor_name + " received") >= 0, true);
+  });
+});
+
+test("Display offer status for cancelled offer", function() {
+  visit('/offers/' + offer12.id + "/review_offer/items");
+
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer12.id + "/review_offer/items");
+    var donor_name = offer12.get("createdBy.firstName") + " " + offer12.get("createdBy.lastName");
+    equal($('.status-message').text().trim().indexOf("Cancelled by " + donor_name) >= 0, true);
   });
 });

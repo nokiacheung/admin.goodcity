@@ -64,6 +64,14 @@
         {{/with}}
       </div>
     </div>
+  {{!-- Cancelled Offer --}}
+  {{else if offer.isCancelled}}
+    <div class="offer-status is-closed">
+      <div class='status-message review_message'>
+        {{t "review_offer.offer_cancelled_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
+        {{cancel-offer-date-time offer.cancelledAt}}
+      </div>
+    </div>
   {{else if offer.isClosed}}
     <div class="offer-status is-closed">
       <div class='status-message review_message'>

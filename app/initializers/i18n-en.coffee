@@ -45,6 +45,7 @@ I18nTranslationsEn =
         "in_review_status": "This item is being reviewed."
         "accepted_status": "This item has been accepted."
         "rejected_status": "This item has been rejected."
+        "cancelled_status": "The offer this item belongs to has been cancelled by {{firstName}} {{lastName}} on"
 
         "messages":
           "info_text1": "If we have questions when reviewing this item we will chat with you here."
@@ -78,6 +79,7 @@ I18nTranslationsEn =
         "start_review": "Start Review"
         "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
         "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
+        "offer_cancelled_by": "Cancelled by {{firstName}} {{lastName}}"
         "receive": "Receive"
         "missing": "Missing"
         "received": "Received"
