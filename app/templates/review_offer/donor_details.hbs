@@ -50,6 +50,9 @@
           </div>
           <div class="small-7 columns">
             {{offersCount}}
+            {{#if receivedOffers}}
+              ({{receivedOffers}} {{t "finished.received"}})
+            {{/if}}
           </div>
         </div>
 

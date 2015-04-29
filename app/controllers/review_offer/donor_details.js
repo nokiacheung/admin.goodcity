@@ -5,5 +5,9 @@ export default Ember.Controller.extend({
 
   offersCount: function() {
     return this.get("model.length") + 1;
-  }.property('model.length')
+  }.property('model.length'),
+
+  receivedOffers: function(){
+    return this.get('model').filterBy("isReceived", true).length;
+  }.property('model')
 });
