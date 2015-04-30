@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
+import config from './../../config/environment';
 import transportDetails from './../offer/transport_details';
 
 export default transportDetails.extend({
-
   needs: ['review_offer'],
 
   selectedCrossroadsOption: null,
@@ -21,6 +21,14 @@ export default transportDetails.extend({
   crossroadsOptions: function() {
     return this.store.all('crossroads_transport').sortBy('name');
   }.property(),
+
+  ggvDriverUrl: function() {
+    var language = this.get("session.language");
+    var uuid = this.get("model.delivery.gogovanOrder.ggvUuid");
+    var url = config.DONOR_APP_HOST_URL+"/ggv_orders/"+uuid;
+    if(language) { url = url+ "?ln="+language; }
+    return url;
+  }.property("model"),
 
   actions: {
 

@@ -56,6 +56,7 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
+    ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
 
     ENV.contentSecurityPolicy["connect-src"] = 'http://localhost:4201 http://localhost:3000 http://localhost:1337 ws://localhost:1337';
@@ -74,11 +75,13 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:4201';
+    ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
   }
 
   if (environment === 'production') {
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
+    ENV.DONOR_APP_HOST_URL = 'https://app.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
     //Airbrake Js keys
     ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
@@ -90,6 +93,7 @@ module.exports = function(environment) {
     if (process.env.staging === 'true') {
       ENV.staging = true;
       ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
+      ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
       ENV.contentSecurityPolicy["connect-src"] = 'https://admin-staing.goodcity.hk https://api-staging.goodcity.hk https://socket-staging.goodcity.hk:81 ws://socket-staging.goodcity.hk:81';
     }
