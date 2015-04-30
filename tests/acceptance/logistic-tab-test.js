@@ -26,7 +26,7 @@ module('Review Offer Logistics', {
     offer5 = FactoryGuy.make("offer", {state:"scheduled", delivery: delivery1});
     item5  = FactoryGuy.make("item", {state:"accepted", offer: offer5});
 
-    ggv_order2 = FactoryGuy.make("gogovan_active_order");
+    ggv_order2 = FactoryGuy.make("gogovan_active_order", {ggvUuid: "123456", bookingId: "654321"});
     delivery2 = FactoryGuy.make("delivery", { deliveryType: "Gogovan", gogovanOrder: ggv_order2 });
     offer6 = FactoryGuy.make("offer", {state:"scheduled", delivery: delivery2});
     item6  = FactoryGuy.make("item", {state:"accepted", offer: offer6});
@@ -161,6 +161,11 @@ test("for scheduled offer with active GGV order state", function() {
     equal($.trim($('.delivery-details .row:eq(5)').text()), "Accepted items to be transported");
     equal($(".items_list img").length, 1);
     equal($('.transport-buttons a').length, 2);
+
+    equal($(".booking-id div:first").text().trim(), Ember.I18n.t("delivery_details.id"));
+    equal($(".booking-id div:last").text().trim().indexOf("654321") >= 0, true);
+    equal($(".booking-id div:last a").text().trim().indexOf(Ember.I18n.t("delivery_details.driver_screen")) >=0, true);
+    equal($(".delivery-details .row:eq(7) div a").attr("href").indexOf("/ggv_orders/12345") >=0, true);
   });
 });
 
