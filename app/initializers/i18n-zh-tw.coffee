@@ -10,6 +10,9 @@ I18nTranslationsZhTw =
       "reviewing": "Reviewing"
       "reviewed": "Reviewed"
       "messages_title" : "Messages"
+      "search":
+        "no_results": "Sorry, No results found."
+        "server_search": "Find more on server"
 
       "offer":
         "disable": "Disable"

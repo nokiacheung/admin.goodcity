@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   filter: '',
   searchText: '',
+  fetchMoreResult: true,
 
   hasSearchText: function() {
     return Ember.$.trim(this.get('searchText')).length;
@@ -19,6 +20,7 @@ export default Ember.Controller.extend({
 
   applyFilter: function() {
     this.set('filter', this.get('searchText'));
+    this.set('fetchMoreResult', true);
   },
 
   filteredResults: function() {
@@ -64,12 +66,13 @@ export default Ember.Controller.extend({
     }
 
     return offers.uniq();
-  }.property('filter'),
+  }.property('filter', 'fetchMoreResult'),
 
   actions: {
     clearSearch: function() {
       this.set('filter', '');
       this.set('searchText', '');
+      this.set('fetchMoreResult', true);
       Ember.$("#searchText").focus();
     },
 
@@ -77,6 +80,15 @@ export default Ember.Controller.extend({
       this.send("clearSearch");
       var route = localStorage["lastVisitedRoute"] || "my_list";
       this.transitionToRoute(route);
+    },
+
+    searchOnServer: function(){
+      var controller = this;
+      var loadingView = controller.container.lookup('view:loading').append();
+      return this.store.find('offer', { category: "finished" }).finally(function(){
+        controller.set('fetchMoreResult', false);
+        loadingView.destroy();
+      });
     }
   },
 

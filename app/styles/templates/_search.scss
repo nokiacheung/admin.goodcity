@@ -72,3 +72,16 @@
     }
   }
 }
+
+.find_more_link {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  a {
+    text-decoration: underline;
+    @media #{$small-only} {
+      font-size: 0.8rem;
+    }
+  }
+}

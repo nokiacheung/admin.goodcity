@@ -18,6 +18,11 @@
             {{partial 'offers/offer_details'}}
           {{/each}}
         </ul>
+        {{#if fetchMoreResult}}
+          <div class='find_more_link'>
+            <a href="#" {{action "searchOnServer"}}>{{t "search.server_search"}}</a>
+          </div>
+        {{/if}}
       {{else if hasFilter}}
         <div class='no_result'>{{t "search.no_results"}}</div>
       {{/if}}
