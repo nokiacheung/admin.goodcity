@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
   itemId: Ember.computed.alias('controllers.review_item.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
+  rejectReasonPlaceholder: Ember.I18n.t("reject.custom_reason"),
 
   isBlank: function(key, value){
     return (arguments.length >1) ? value : false;

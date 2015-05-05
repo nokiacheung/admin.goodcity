@@ -14,7 +14,7 @@
             optionLabelPath="content.name"
             selection="view.packagetype"
             value=view.packagetypeid
-            prompt='Package Type'
+            prompt=view.promptText
             required='true'
           }}
         </span>
@@ -29,7 +29,7 @@
           type="text"
           name="comment"
           value=view.comment
-          placeholder="Comments"
+          placeholder=view.commentPlaceholder
           maxlength="50"
         }}
       </div>
@@ -43,7 +43,7 @@
           type="number"
           name="qty"
           value=view.quantity
-          placeholder="Qty"
+          placeholder=view.qtyPlaceholder
           maxlength="8"
           required="required"
         }}
@@ -53,7 +53,7 @@
           type="number"
           name="length"
           value=view.length
-          placeholder="L"
+          placeholder=view.lengthPlaceholder
           maxlength="8"
         }}
       </div>
@@ -62,7 +62,7 @@
           type="number"
           name="width"
           value=view.width
-          placeholder="W"
+          placeholder=view.widthPlaceholder
           maxlength="5"
         }}
       </div>
@@ -71,7 +71,7 @@
           type="number"
           name="height"
           value=view.height
-          placeholder="H"
+          placeholder=view.heightPlaceholder
           maxlength="5"
         }}
       </div>
