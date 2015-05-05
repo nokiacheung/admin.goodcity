@@ -9,6 +9,7 @@ export default transportDetails.extend({
   selectedCrossroadsOption: null,
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
+  crossroadsOptionsPrompt: Ember.I18n.t("select"),
 
   selectedGogovanOption: function(){
     return this.get('gogovanOptions.firstObject.id');

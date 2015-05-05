@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   filter: '',
   searchText: '',
   fetchMoreResult: true,
+  searchPlaceholder: Ember.I18n.t("search.placeholder"),
 
   hasSearchText: function() {
     return Ember.$.trim(this.get('searchText')).length;

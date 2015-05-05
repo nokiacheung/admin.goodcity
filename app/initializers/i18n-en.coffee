@@ -11,9 +11,11 @@ I18nTranslationsEn =
       "reviewing": "Reviewing"
       "reviewed": "Reviewed"
       "messages_title" : "Messages"
+      "select": "Select"
       "search":
         "no_results": "Sorry, No results found."
         "server_search": "Find more on server"
+        "placeholder": "Search"
 
       "offer":
         "disable": "Disable"
@@ -131,6 +133,7 @@ I18nTranslationsEn =
         "view_lable_guide": "View labeling guide"
         "condition": "Condition"
         "add_component": "Add component"
+        "add_item_label": "Add item label"
 
       "reject":
         "select_type": "Please choose Item Type first!"
@@ -145,6 +148,7 @@ I18nTranslationsEn =
         "size_message" : "Very few of our clients are able to accommodate large items in their homes."
         "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
         "cancel_gogovan_confirm": "Rejecting the last item will cancel the gogovan booking, do you wish to proceed?"
+        "custom_reason": "Custom Reason"
 
       "cancel_gogovan":
         "title": "Cancel GoGoVan Booking"
@@ -167,6 +171,14 @@ I18nTranslationsEn =
         "other_delivery": "Other Delivery"
         "collection" : "Collection"
         "gogovan" : "GoGoVan"
+
+      "placeholder":
+        "qty": "Qty"
+        "height": "H"
+        "width": "W"
+        "length": "L"
+        "package_type": "Package Type"
+        "comments": "Comments"
 
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en

@@ -20,6 +20,13 @@ export default Ember.View.extend({
   packagetypeid: null,
   packagetype: null,
 
+  promptText: Ember.I18n.t("placeholder.package_type"),
+  commentPlaceholder: Ember.I18n.t("placeholder.comments"),
+  qtyPlaceholder: Ember.I18n.t("placeholder.qty"),
+  lengthPlaceholder: Ember.I18n.t("placeholder.length"),
+  widthPlaceholder: Ember.I18n.t("placeholder.width"),
+  heightPlaceholder: Ember.I18n.t("placeholder.height"),
+
   store: Ember.inject.service(),
 
   package: function() {
