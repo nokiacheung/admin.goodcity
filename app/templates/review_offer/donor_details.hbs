@@ -40,7 +40,11 @@
             {{t "review_offer.donor.last_seen"}}:
           </div>
           <div class="small-7 columns">
-            <small>(not implemented)</small>
+            {{#if donor.onlineStatus}}
+              {{donor.onlineStatus}}
+            {{else}}
+              {{view 'time-ago' timeValue=donor.lastDisconnected smallPrefix=false}}
+            {{/if}}
           </div>
         </div>
 
