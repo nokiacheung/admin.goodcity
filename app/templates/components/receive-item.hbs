@@ -15,7 +15,7 @@
       {{#if (js-x "this == 0" idx)}}
         {{js-x "p0.get('notes') ? p0.get('notes') : p1.get('donorDescription')" package item}}<br/>
       {{else}}
-        {{item.notes}}<br/>
+        {{package.notes}}<br/>
       {{/if}}
       <br/>
       {{package.dimensions}}
