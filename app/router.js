@@ -16,6 +16,10 @@ Router.map(function() {
     this.route('gogovan_charges');
     this.route('cancel_gogovan');
 
+    this.resource('item', {path: '/items/:item_id'}, function() {
+      this.route('edit_images');
+    });
+
     this.resource('review_offer', function(){
       this.route('items');
       this.route('logistics');
