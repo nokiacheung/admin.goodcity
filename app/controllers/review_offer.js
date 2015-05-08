@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import AjaxPromise from './../utils/ajax-promise';
+import OfferBaseController from "shared.goodcity/controllers/offer_base";
 
-export default Ember.Controller.extend({
+export default OfferBaseController.extend({
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
 
