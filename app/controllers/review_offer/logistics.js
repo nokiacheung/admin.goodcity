@@ -6,10 +6,16 @@ import transportDetails from './../offer/transport_details';
 export default transportDetails.extend({
   needs: ['review_offer'],
 
-  selectedCrossroadsOption: null,
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
   crossroadsOptionsPrompt: Ember.I18n.t("select"),
+
+  selectedCrossroadsOption: function(){
+    var options = this.get('crossroadsOptions').filter(function(option){
+      return option.get('name') === Ember.I18n.t("offer.disable");
+    });
+    return options.get('firstObject');
+  }.property('crossroadsOptions'),
 
   selectedGogovanOption: function(){
     return this.get('gogovanOptions.firstObject.id');
