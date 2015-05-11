@@ -178,7 +178,7 @@ I18nTranslationsEn =
         "width": "W"
         "length": "L"
         "package_type": "Package Type"
-        "comments": "Comments"
+        "comments": "Description"
 
     # this is how we set default language
     Ember.I18n.translations = Ember.I18n.translation_store.en
