@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
     var dataInItemType, _this = this;
     var acceptSubItemTypes = [];
     var store = this.get('store');
-     dataInItemType = store.all('item_type').filterBy('parentId', parentId);
+    dataInItemType = store.all('item_type').filterBy('parentId', parentId);
     if(Ember.isEmpty(dataInItemType)) {
       dataInItemType = store.all('item_type').filterBy('id', this.get('itemTypeId'));
     }

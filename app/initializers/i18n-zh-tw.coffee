@@ -177,6 +177,6 @@ I18nTranslationsZhTw =
         "width": "W"
         "length": "L"
         "package_type": "Package Type"
-        "comments": "Comments"
+        "comments": "Description"
 
 `export default I18nTranslationsZhTw`
