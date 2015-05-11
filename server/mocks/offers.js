@@ -65,12 +65,14 @@ module.exports = function(app) {
 
   offersRouter.get("/", function(req, res) {
     var offers = offers_json;
-    if(req.query.category)
-      offers = finishedOffers;
-    else if(req.query.state === 'closed')
-      offers = closedOffers;
-    else if(req.query.state === 'received')
-      offers = receivedOffers;
+    if(req.query.states) {
+      if(req.query.states.indexOf("inactive") >= 0)
+        offers = finishedOffers;
+      else if(req.query.states.indexOf("cancelled") >= 0)
+        offers = closedOffers;
+      else if(req.query.states.indexOf("received") >= 0)
+        offers = receivedOffers;
+    }
     res.send(offers);
   });
 

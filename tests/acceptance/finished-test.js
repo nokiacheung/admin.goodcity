@@ -15,7 +15,7 @@ module('Finished Offers', {
   }
 });
 
-test("redirect to reviewing offers page", function() {
+test("redirect to finished offers page", function() {
   visit("/offers/finished");
 
   andThen(function(){
