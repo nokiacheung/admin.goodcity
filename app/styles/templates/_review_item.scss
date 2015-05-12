@@ -31,3 +31,14 @@
     }
   }
 }
+
+.icon-center {
+  .fa-plus-circle {
+    @media #{$small-only} {
+      font-size: 1.35rem;
+      padding: 0;
+      margin-right: -0.6rem;
+      display: inline;
+    }
+  }
+}
