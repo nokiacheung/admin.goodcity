@@ -170,6 +170,11 @@ I18nTranslationsZhTw =
         "other_delivery": "Other Delivery"
         "collection" : "Collection"
         "gogovan" : "GoGoVan"
+        "all_offers": "All offers"
+        "overdue": "Overdue"
+        "today": "Today"
+        "next_week": "Next week"
+        "after_next_week": "After next week"
 
       "placeholder":
         "qty": "Qty"

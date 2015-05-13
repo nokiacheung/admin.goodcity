@@ -27,6 +27,7 @@ app.import('bower_components/blueimp-file-upload/js/jquery.fileupload-validate.j
 app.import('bower_components/cloudinary/js/jquery.cloudinary.js');
 
 app.import('bower_components/moment/moment.js');
+app.import('bower_components/moment/locale/zh-tw.js');
 app.import('bower_components/airbrake-js/airbrake.js');
 app.import('bower_components/pickadate/lib/picker.js');
 app.import('bower_components/pickadate/lib/picker.date.js');
