@@ -38,7 +38,7 @@
   }
 
   .icon-center {
-    .fa-plus-circle {
+    .fa-plus-circle, .fa-minus-circle {
       @media #{$small-only} {
         font-size: 1.35rem;
         padding: 0;
