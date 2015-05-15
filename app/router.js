@@ -1,7 +1,8 @@
 import config from './config/environment';
 import GoodcityRouter from 'shared.goodcity/router/router';
+import googlePageview from './mixins/google-pageview';
 
-var Router = GoodcityRouter.extend({
+var Router = GoodcityRouter.extend(googlePageview, {
   location: config.locationType
 });
 

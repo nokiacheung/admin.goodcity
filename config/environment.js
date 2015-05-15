@@ -89,6 +89,10 @@ module.exports = function(environment) {
     ENV.APP.AIRBRAKE_PROJECT_KEY = "6d0f1e945f5fdba56d9fe043684f2b7a";
 
     ENV.contentSecurityPolicy["connect-src"] = 'https://admin.goodcity.hk https://api.goodcity.hk https://socket.goodcity.hk:81 ws://socket.goodcity.hk:81';
+    //google analytics
+    ENV.googleAnalytics = {
+      webPropertyId: 'UA-62978462-2'
+    };
 
     if (process.env.staging === 'true') {
       ENV.staging = true;
@@ -96,6 +100,9 @@ module.exports = function(environment) {
       ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
       ENV.contentSecurityPolicy["connect-src"] = 'https://admin-staing.goodcity.hk https://api-staging.goodcity.hk https://socket-staging.goodcity.hk:81 ws://socket-staging.goodcity.hk:81';
+      ENV.googleAnalytics = {
+        webPropertyId: 'UA-62978462-3'
+      };
     }
   }
 
