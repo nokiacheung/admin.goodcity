@@ -10,23 +10,37 @@ export default Ember.Controller.extend({
   queryParams: ["returnurl"],
   returnurl: null,
 
-  subItemTypes: function(){
+  allSubPackagesList: function(){
     var parentId = parseInt(this.get('itemTypeId'));
     var dataInItemType, _this = this;
     var acceptSubItemTypes = [];
-    var store = this.get('store');
-    dataInItemType = store.all('item_type').filterBy('parentId', parentId);
-    if(Ember.isEmpty(dataInItemType)) {
-      dataInItemType = store.all('item_type').filterBy('id', this.get('itemTypeId'));
-    }
+    var parent = this.get('store').getById('package_type', parentId);
+    dataInItemType = parent.get('allChildPackagesList');
     dataInItemType.forEach(function(subtype) {
       var subItemTypeProperties = {};
-      subItemTypeProperties.id= parseInt(subtype.get("id"));
+      subItemTypeProperties.id = parseInt(subtype.get("id"));
       subItemTypeProperties.itemId = _this.get('controllers.review_item.id');
       subItemTypeProperties.itemTypeId = parseInt(subtype.get("id"));
       subItemTypeProperties.name = subtype.get("name");
       subItemTypeProperties.isItemTypeNode = subtype.get("isItemTypeNode");
-      subItemTypeProperties.parentId = subtype.get("parentId");
+      acceptSubItemTypes.pushObject(subItemTypeProperties);
+    });
+    return acceptSubItemTypes;
+  }.property("itemTypeName", "itemTypeId"),
+
+  subItemTypes: function(){
+    var parentId = parseInt(this.get('itemTypeId'));
+    var dataInItemType, _this = this;
+    var acceptSubItemTypes = [];
+    var parent = this.get('store').getById('package_type', parentId);
+    dataInItemType = parent.get('defaultChildPackagesList');
+    dataInItemType.forEach(function(subtype) {
+      var subItemTypeProperties = {};
+      subItemTypeProperties.id = parseInt(subtype.get("id"));
+      subItemTypeProperties.itemId = _this.get('controllers.review_item.id');
+      subItemTypeProperties.itemTypeId = parseInt(subtype.get("id"));
+      subItemTypeProperties.name = subtype.get("name");
+      subItemTypeProperties.isItemTypeNode = subtype.get("isItemTypeNode");
       acceptSubItemTypes.pushObject(subItemTypeProperties);
     });
     return acceptSubItemTypes;

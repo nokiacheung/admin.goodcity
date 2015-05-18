@@ -18,10 +18,10 @@ export default Ember.Component.extend({
   },
 
   itemTypes: function() {
-    return this.get("store").all('item_type').filterBy('parentId', null);
+    return this.get("store").all('package_type').sortBy('name');
   }.property(),
 
   findSelectedItem: function(){
-    return this.get("store").getById('item_type', this.get('selectedItemId'));
+    return this.get("store").getById('package_type', this.get('selectedItemId'));
   }.property('selectedItemId')
 });

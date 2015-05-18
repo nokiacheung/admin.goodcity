@@ -14,19 +14,13 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
     return this.get('controllers.review_item/accept.subItemTypes');
   }.property('controllers.review_item/accept.subItemTypes', 'itemId'),
 
-  noSubItemType: function() {
-    return this.get('subItemTypes.length') === 0;
-  }.property('subItemTypes.[]', 'itemId'),
-
-  noPackages: function(){
-    return this.get('allPackages.length') === 0;
-  }.property('packages.[]', 'itemId'),
+  allSubPackagesList: function(){
+    return this.get('controllers.review_item/accept.allSubPackagesList');
+  }.property('controllers.review_item/accept.allSubPackagesList', 'itemId'),
 
   packagetypeid: function(){
-    if(this.get("noPackages")) {
-      return this.get("itemTypeId");
-    }
-  }.property('noPackages', 'noSubItemType', 'itemId'),
+    return this.get("itemTypeId");
+  }.property('itemId'),
 
   allPackages: Ember.computed.alias("item.packages"),
 
@@ -71,13 +65,13 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
       var _this = this;
       var packagePromises = [], packageNew;
       var item = this.store.getById('item', this.get('itemId'));
-      item.set('itemType', this.store.getById('item_type', this.get('itemTypeId')));
+      item.set('packageType', this.store.getById('package_type', this.get('itemTypeId')));
 
       item.save().then(() => {
 
         packageDetails.forEach(function(packDetail){
           packDetail.item = _this.store.getById('item', packDetail.itemId);
-          packDetail.packageType = _this.store.getById('item_type', packDetail.packagetypeid);
+          packDetail.packageType = _this.store.getById('package_type', packDetail.packagetypeid);
 
           if(packDetail.id) {
             packageNew = _this.store.push('package', packDetail);
@@ -89,7 +83,7 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
 
         Ember.RSVP.all(packagePromises).then(function() {
           var acceptItem = {id: _this.get("itemId") , state_event: "accept",
-            itemType: _this.store.getById('item_type', _this.get("itemTypeId"))};
+            itemType: _this.store.getById('package_type', _this.get("itemTypeId"))};
           var item = _this.store.push('item', acceptItem);
           item.save().then(function() {
             if (_this.get("returnurl")) {

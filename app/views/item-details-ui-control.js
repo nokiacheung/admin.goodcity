@@ -5,7 +5,7 @@ export default Ember.View.extend({
   tagName: 'div',
   attributeBindings: ["value", "itemid", "itemtypeid", "itemtypename", "name",
     "itemval", "width", "height", "length", "quantity", "comment",
-    "subItemtypes", "packagetypeid", "packagetype", "pkgid"],
+    "subItemtypes", "packagetypeid", "packagetype", "pkgid", "allSubPackagesList"],
 
   value: null,
   itemtypename: null,

@@ -69,9 +69,7 @@ export default Ember.Mixin.create({
     },
 
     renderViews: function() {
-      if (!this.get("noSubItemType")) {
-        this.get('subItemTypes').forEach(this._createSubItemTypeView, this);
-      }
+      this.get('subItemTypes').forEach(this._createSubItemTypeView, this);
     },
 
     createUpdateChildView: function(packageViewDetails) {
@@ -85,7 +83,7 @@ export default Ember.Mixin.create({
     if(packages.get('length') > 0) {
       packages.forEach(this._createPackageView, this);
     }
-    else if (!this.get("noSubItemType")) {
+    else {
       this.get('subItemTypes').forEach(this._createSubItemTypeView, this);
     }
   }.on('didInsertElement')
