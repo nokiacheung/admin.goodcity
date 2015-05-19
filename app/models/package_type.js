@@ -27,7 +27,7 @@ export default DS.Model.extend({
   }.property("otherChildPackagesList", "defaultChildPackagesList"),
 
   _getPackages: function(model, packageNames){
-    var array = packageNames.split(',');
+    var array = (packageNames || "").split(',');
     var packages = [];
     array.forEach(function(type) {
       model.store.filter("packageType", function (pkg) {

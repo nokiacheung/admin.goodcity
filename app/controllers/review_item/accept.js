@@ -14,17 +14,19 @@ export default Ember.Controller.extend({
     var parentId = parseInt(this.get('itemTypeId'));
     var dataInItemType, _this = this;
     var acceptSubItemTypes = [];
-    var parent = this.get('store').getById('package_type', parentId);
-    dataInItemType = parent.get('allChildPackagesList');
-    dataInItemType.forEach(function(subtype) {
-      var subItemTypeProperties = {};
-      subItemTypeProperties.id = parseInt(subtype.get("id"));
-      subItemTypeProperties.itemId = _this.get('controllers.review_item.id');
-      subItemTypeProperties.itemTypeId = parseInt(subtype.get("id"));
-      subItemTypeProperties.name = subtype.get("name");
-      subItemTypeProperties.isItemTypeNode = subtype.get("isItemTypeNode");
-      acceptSubItemTypes.pushObject(subItemTypeProperties);
-    });
+    if(parentId){
+      var parent = this.get('store').getById('package_type', parentId);
+      dataInItemType = parent.get('allChildPackagesList');
+      dataInItemType.forEach(function(subtype) {
+        var subItemTypeProperties = {};
+        subItemTypeProperties.id = parseInt(subtype.get("id"));
+        subItemTypeProperties.itemId = _this.get('controllers.review_item.id');
+        subItemTypeProperties.itemTypeId = parseInt(subtype.get("id"));
+        subItemTypeProperties.name = subtype.get("name");
+        subItemTypeProperties.isItemTypeNode = subtype.get("isItemTypeNode");
+        acceptSubItemTypes.pushObject(subItemTypeProperties);
+      });
+    }
     return acceptSubItemTypes;
   }.property("itemTypeName", "itemTypeId"),
 
@@ -32,17 +34,19 @@ export default Ember.Controller.extend({
     var parentId = parseInt(this.get('itemTypeId'));
     var dataInItemType, _this = this;
     var acceptSubItemTypes = [];
-    var parent = this.get('store').getById('package_type', parentId);
-    dataInItemType = parent.get('defaultChildPackagesList');
-    dataInItemType.forEach(function(subtype) {
-      var subItemTypeProperties = {};
-      subItemTypeProperties.id = parseInt(subtype.get("id"));
-      subItemTypeProperties.itemId = _this.get('controllers.review_item.id');
-      subItemTypeProperties.itemTypeId = parseInt(subtype.get("id"));
-      subItemTypeProperties.name = subtype.get("name");
-      subItemTypeProperties.isItemTypeNode = subtype.get("isItemTypeNode");
-      acceptSubItemTypes.pushObject(subItemTypeProperties);
-    });
+    if(parentId){
+      var parent = this.get('store').getById('package_type', parentId);
+      dataInItemType = parent.get('defaultChildPackagesList');
+      dataInItemType.forEach(function(subtype) {
+        var subItemTypeProperties = {};
+        subItemTypeProperties.id = parseInt(subtype.get("id"));
+        subItemTypeProperties.itemId = _this.get('controllers.review_item.id');
+        subItemTypeProperties.itemTypeId = parseInt(subtype.get("id"));
+        subItemTypeProperties.name = subtype.get("name");
+        subItemTypeProperties.isItemTypeNode = subtype.get("isItemTypeNode");
+        acceptSubItemTypes.pushObject(subItemTypeProperties);
+      });
+    }
     return acceptSubItemTypes;
   }.property("itemTypeName", "itemTypeId"),
 
