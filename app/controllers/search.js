@@ -49,9 +49,9 @@ export default Ember.Controller.extend({
         }
       });
 
-      store.all('itemType').rejectBy('packagesCount', 0).forEach(function(itemType) {
-        if(itemType.get('name').toLowerCase().indexOf(filter) !== -1) {
-          itemType.get('packages').forEach(function(pkg) {
+      store.all('packageType').rejectBy('packagesCount', 0).forEach(function(packageType) {
+        if(packageType.get('name').toLowerCase().indexOf(filter) !== -1) {
+          packageType.get('packages').forEach(function(pkg) {
             var offer = store.getById('offer', pkg.get('offerId'));
             if(offer) { offers.push(offer); }
           });

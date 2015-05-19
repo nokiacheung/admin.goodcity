@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['review_item/accept'],
 
-  defaultPackage: Ember.computed.alias('model.itemType'),
+  defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
 
   itemTypeName: function(key, value) {

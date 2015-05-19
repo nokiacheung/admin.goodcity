@@ -1,4 +1,4 @@
-FactoryGuy.define('item_type', {
+FactoryGuy.define('package_type', {
   sequences: {
     id: function(num) {
       return num + 100;
@@ -13,8 +13,9 @@ FactoryGuy.define('item_type', {
   default: {
     id:   FactoryGuy.generate('id'),
     name: FactoryGuy.generate("name"),
-    code: FactoryGuy.generate("code"),
-    parentId: null
+    code: "ABC",
+    defaultChildPackages: "ABC",
+    otherChildPackages: "ABC",
   }
 });
 

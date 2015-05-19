@@ -1,5 +1,5 @@
 import itemsFactory from './item';
-import itemTypesFactory from './item_type';
+import packageTypesFactory from './package_type';
 
 FactoryGuy.define('package', {
   sequences: {
@@ -14,7 +14,7 @@ FactoryGuy.define('package', {
     width:    10,
     height:   10,
     item:     FactoryGuy.belongsTo('item'),
-    packageType:  FactoryGuy.belongsTo('item_type'),
+    packageType:  FactoryGuy.belongsTo('package_type'),
     notes:    "example",
   }
 });

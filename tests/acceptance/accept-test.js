@@ -13,8 +13,8 @@ module('Reviewer: Accept Item Tab', {
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item1 = FactoryGuy.make("item_with_type", { offer: offer});
     item2 = FactoryGuy.make("item", { offer: offer});
-    package1 = FactoryGuy.make("package", { item: item1, packageType: item1.get('itemType')});
-    package2 = FactoryGuy.make("package", { item: item1, packageType: item1.get('itemType')});
+    package1 = FactoryGuy.make("package", { item: item1, packageType: item1.get('packageType')});
+    package2 = FactoryGuy.make("package", { item: item1, packageType: item1.get('packageType')});
   },
 
   teardown: function() {
@@ -36,7 +36,7 @@ test("visit rejected item with item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
-    equal($('.select2-chosen').text(), item1.get('itemType.name'));
+    equal($('.select2-chosen').text(), item1.get('packageType.name'));
 
     // two package components
     equal($(".detail_container").length, 2);

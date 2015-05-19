@@ -72,7 +72,7 @@ export default Ember.Controller.extend({
         rejectProperties.id = this.get('itemId');
 
         rejectProperties.offer = offer;
-        rejectProperties.itemType = this.store.getById('item_type', this.get('itemTypeId'));
+        rejectProperties.itemType = this.store.getById('package_type', this.get('itemTypeId'));
 
         var item = this.store.push('item', rejectProperties);
 
