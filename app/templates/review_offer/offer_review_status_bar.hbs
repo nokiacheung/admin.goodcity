@@ -44,6 +44,8 @@
           {{#if delivery.isGogovan}}
             {{#if delivery.gogovanOrder.isActive}}
               {{t 'offer.offer_details.is_gogovan_confirm'}}
+            {{else if delivery.gogovanOrder.isCompleted}}
+              {{t 'offer.offer_details.driver_completed'}}
             {{else}}
               {{t 'offer.offer_details.is_gogovan_order'}}
             {{/if}}
