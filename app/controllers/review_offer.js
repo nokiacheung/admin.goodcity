@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../utils/ajax-promise';
-import OfferBaseController from "shared.goodcity/controllers/offer_base";
 
-export default OfferBaseController.extend({
+export default Ember.Controller.extend({
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
 
@@ -13,6 +12,11 @@ export default OfferBaseController.extend({
   }.property("model.state", "model.packages.@each.state"),
 
   actions: {
+    addItem: function() {
+      var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
+      this.transitionToRoute('item.edit_images', draftItemId);
+    },
+
     startReview: function() {
       if(this.get("isStartReviewClicked")) { return; }
       var offer = this.store.getById('offer', this.get('offer.id'));
