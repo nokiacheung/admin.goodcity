@@ -30,6 +30,7 @@ I18nTranslationsEn =
           "is_drop_off": "Drop-off"
           "is_gogovan_order": "Van ordered"
           "is_gogovan_confirm": "Van confirmed"
+          "driver_completed": "Driver completed"
           "offer_messages": "General Messages"
           "accepted": "Accepted"
           "not_needed": "Not needed"
