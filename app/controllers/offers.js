@@ -18,7 +18,7 @@ export default Ember.ArrayController.extend({
   myOffersCount: function() {
     var currentUserId = this.session.get("currentUser.id");
     return this.get("allOffers")
-      .filterBy("isReviewing", true)
+      .filterBy("adminCurrentOffer", true)
       .filterBy("reviewedBy.id", currentUserId)
       .length;
   }.property('allOffers.@each.isReviewing'),
