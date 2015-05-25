@@ -51,7 +51,6 @@
 
             {{!-- Scheduled Offer --}}
             {{else if offer.isScheduled}}
-
               {{#if offer.delivery.isAlternate}}
                 {{t 'offer.offer_details.is_collection'}}
               {{else if offer.delivery.isDropOff}}
@@ -59,18 +58,24 @@
               {{else if offer.delivery.isGogovan}}
                 {{#if offer.delivery.gogovanOrder.isActive}}
                   {{t 'offer.offer_details.is_gogovan_confirm'}}
-                 {{else}}
+                {{else if offer.delivery.gogovanOrder.isCompleted}}
+                  {{t 'offer.offer_details.driver_completed'}}
+                {{else}}
                   {{t 'offer.offer_details.is_gogovan_order'}}
                 {{/if}}
               {{/if}}
 
               <i class="fa fa-truck"></i>
               <b>
-                {{#if offer.delivery.isGogovan}}
-                  {{offer.delivery.schedule.slotName}},
-                {{/if}}
+                {{#if offer.delivery.completedWithGogovan}}
+                  {{completed-time-status offer.delivery.gogovanOrder.completedAt}}
+                {{else}}
+                  {{#if offer.delivery.isGogovan}}
+                    {{offer.delivery.schedule.slotName}},
+                  {{/if}}
 
-                {{schedule-time-status offer.delivery.schedule.scheduledAt}}
+                  {{schedule-time-status offer.delivery.schedule.scheduledAt}}
+                {{/if}}
 
                 {{#if offer.delivery.noGogovan}}
                   , {{offer.delivery.schedule.dayTime}}
