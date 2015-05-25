@@ -31,9 +31,11 @@ export default transportDetails.extend({
 
   ggvDriverUrl: function() {
     var language = this.get("session.language");
+    var isAdmin = this.get("session.isAdminApp");
     var uuid = this.get("model.delivery.gogovanOrder.ggvUuid");
     var url = config.DONOR_APP_HOST_URL+"/ggv_orders/"+uuid;
     if(language) { url = url+ "?ln="+language; }
+    if(isAdmin) { url = url+ "?gcadmin="+isAdmin; }
     return url;
   }.property("model"),
 
