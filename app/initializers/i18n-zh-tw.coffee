@@ -17,7 +17,7 @@ I18nTranslationsZhTw =
         "placeholder": "搜索"
 
       "offer":
-        "disable": 終止"
+        "disable": "終止"
         "details" : "優惠詳情"
         "donor_messages" : "捐贈者信息"
         "supervisor_messages" : "監察員信息"
@@ -41,7 +41,7 @@ I18nTranslationsZhTw =
 
       "items":
         "add_item":
-          "description_placeholder" : "這是甚麼？有多少樣物件？大小如何？""
+          "description_placeholder" : "這是甚麼？有多少樣物件？大小如何？"
 
       "item":
         "submitted_status": "這項物品正在等候審查。"
