@@ -7,9 +7,24 @@
     <div class='small-1 columns'>&nbsp;</div>
   </div>
   <br>
-  <div class="row">
-    <div class="small-11 small-offset-1  columns">
-    {{#view "online-button" id="acceptItem" classNames="button expand"}}{{acceptBtnLabel}}{{/view}}
-    </div>
+  <div class="row accept_buttons">
+    {{#if isItemAccepted}}
+      <div class="small-11 small-offset-1  columns">
+        {{#view "online-button" id="acceptItem" classNames="button expand accept_item" name="accept" value="accept"}}
+          {{t "save"}}
+        {{/view}}
+      </div>
+    {{else}}
+      <div class="small-6 columns">
+        {{#view "online-button" id="saveItem" classNames="button expand save_item" }}
+          {{t "review_item.save_item"}}
+        {{/view}}
+      </div>
+      <div class="small-6 columns">
+        {{#view "online-button" id="acceptItem" classNames="button expand accept_item"}}
+          {{t "review_item.accept_item"}}
+        {{/view}}
+      </div>
+    {{/if}}
   </div>
 </div>

@@ -124,7 +124,8 @@ I18nTranslationsZhTw =
       "review_item":
         "title" : "審查物資"
         "accept" : "接受"
-        "accept_item" : "接受物品"
+        "save_item": "Save Only"
+        "accept_item" : "Save + Accept"
         "reject" : "不接受"
         "reject_item" : "拒絕物品"
         "not_now" : "暫不決定"
