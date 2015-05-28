@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   itemTypeName: Ember.computed.alias('controllers.review_item.itemTypeName'),
   queryParams: ["returnurl"],
   returnurl: null,
+  displayEditLink: false,
 
   selectedPackage: function(){
     var parentId = parseInt(this.get('itemTypeId'));
@@ -71,6 +72,14 @@ export default Ember.Controller.extend({
       this.set("itemTypeName", itemtypename);
       this.set("isItemTypeChanged", true);
       this.get('controllers.packages').send('renderComponents');
+    },
+
+    setDisplayEditLink: function(value) {
+      this.set('displayEditLink', value);
+    },
+
+    setEditing: function(){
+      this.get('controllers.review_item').send('setEditing', false);
     }
   }
 });
