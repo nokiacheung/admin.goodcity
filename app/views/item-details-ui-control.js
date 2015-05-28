@@ -16,7 +16,7 @@ export default Ember.View.extend({
   quantity: null,
   isHide: false,
   subItemtypes: null,
-  // pkgid: null,
+  pkgid: null,
   packagetypeid: null,
   packagetype: null,
 

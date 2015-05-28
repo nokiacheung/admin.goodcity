@@ -10,13 +10,18 @@ export default Ember.Controller.extend({
   queryParams: ["returnurl"],
   returnurl: null,
 
+  selectedPackage: function(){
+    var parentId = parseInt(this.get('itemTypeId'));
+    return this.get('store').getById('package_type', parentId);
+  }.property("itemtypeid", "itemTypeName"),
+
   allSubPackagesList: function(){
     var parentId = parseInt(this.get('itemTypeId'));
     var dataInItemType, _this = this;
     var acceptSubItemTypes = [];
     if(parentId){
-      var parent = this.get('store').getById('package_type', parentId);
-      dataInItemType = parent.get('allChildPackagesList');
+      var parent = this.get('selectedPackage');
+      dataInItemType = parent.allChildPackagesList();
       dataInItemType.forEach(function(subtype) {
         var subItemTypeProperties = {};
         subItemTypeProperties.id = parseInt(subtype.get("id"));
@@ -28,15 +33,15 @@ export default Ember.Controller.extend({
       });
     }
     return acceptSubItemTypes;
-  }.property("itemTypeName", "itemTypeId"),
+  }.property("selectedPackage"),
 
   subItemTypes: function(){
     var parentId = parseInt(this.get('itemTypeId'));
     var dataInItemType, _this = this;
     var acceptSubItemTypes = [];
     if(parentId){
-      var parent = this.get('store').getById('package_type', parentId);
-      dataInItemType = parent.get('defaultChildPackagesList');
+      var parent = this.get('selectedPackage');
+      dataInItemType = parent.defaultChildPackagesList();
       dataInItemType.forEach(function(subtype) {
         var subItemTypeProperties = {};
         subItemTypeProperties.id = parseInt(subtype.get("id"));
@@ -48,7 +53,7 @@ export default Ember.Controller.extend({
       });
     }
     return acceptSubItemTypes;
-  }.property("itemTypeName", "itemTypeId"),
+  }.property("selectedPackage"),
 
   isItemTypeChanged: function(key, value){
     return (arguments.length > 1) ? value :  false;
