@@ -14,15 +14,10 @@
         {{partial 'item/status_message'}}
       </div>
       <div class="row top-bottom-margin">
-        <div class="small-2 columns" id="lightGallery">
-          <div data-src={{model.displayImage.imageUrl}} >
+        <div class="small-2 columns">
+          {{#link-to "item.edit_images" model}}
             <img src={{model.displayImageUrl}} class="thumb" style="width:100px;" />
-          </div>
-          {{#each model.nonFavouriteImages as |image|}}
-            <div class="hidden" data-src={{image.imageUrl}} >
-              <img src={{image.imageUrl}} />
-            </div >
-          {{/each}}
+          {{/link-to}}
         </div>
         <div class="small-10 columns">
           <h3 class="ellipsis two-line-ellipsis">{{model.donorDescription}}</h3>
