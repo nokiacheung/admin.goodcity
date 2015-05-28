@@ -178,10 +178,10 @@ I18nTranslationsZhTw =
         "after_next_week": "下星期後"
 
       "placeholder":
-        "qty": "Qty"
-        "height": "H"
-        "width": "W"
-        "length": "L"
+        "qty": "數量"
+        "height": "高度"
+        "width": "闊度"
+        "length": "長度"
         "package_type": "包裝類型"
         "comments": "描述"
 
