@@ -16,15 +16,15 @@ export default DS.Model.extend({
 
   defaultChildPackagesList: function() {
     return this._getPackages(this, this.get("defaultChildPackages"));
-  }.property("defaultChildPackages"),
+  },
 
   otherChildPackagesList: function() {
     return this._getPackages(this, this.get("otherChildPackages"));
-  }.property("otherChildPackages"),
+  },
 
   allChildPackagesList: function() {
-    return this.get("defaultChildPackagesList").concat(this.get("otherChildPackagesList"));
-  }.property("otherChildPackagesList", "defaultChildPackagesList"),
+    return this.defaultChildPackagesList().concat(this.otherChildPackagesList());
+  },
 
   _getPackages: function(model, packageNames){
     var array = (packageNames || "").split(',');
