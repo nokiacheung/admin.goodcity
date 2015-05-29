@@ -1,11 +1,13 @@
 <div class="row ">
   {{#if itemTypeId}}
-    {{#validatable-form class="form-horizontal" action="acceptOffer" target="view" on="submit"}}
+    {{#validatable-form class="form-horizontal" action="acceptOffer" on="submit" target="view"}}
       {{view "package-container-view"
         elementId="package_container_view" subItemTypes=subItemTypes packagetype=subItemTypes itemid=itemId
       }}
 
       {{view "add-component-of-item" controller=controller packages=allPackages subItemTypes=subItemTypes itemid=itemId}}
+
+      {{input type="hidden" id="isAccepting" value=isAccepting}}
     {{/validatable-form}}
   {{else}}
     <p>

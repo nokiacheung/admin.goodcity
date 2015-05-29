@@ -125,7 +125,8 @@ I18nTranslationsEn =
       "review_item":
         "title" : "Review Item"
         "accept" : "Accept"
-        "accept_item" : "Accept Item"
+        "save_item": "Save Only"
+        "accept_item" : "Save + Accept"
         "reject" : "Reject"
         "reject_item" : "reject Item"
         "not_now" : "Not Now"

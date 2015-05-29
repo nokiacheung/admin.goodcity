@@ -9,6 +9,8 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
   itemTypeId: Ember.computed.alias('controllers.review_item/accept.itemTypeId'),
   itemTypeName: Ember.computed.alias('controllers.review_item/accept.itemTypeName'),
   returnurl: Ember.computed.alias('controllers.review_item/accept.returnurl'),
+  isItemAccepted: Ember.computed.equal("item.state", "accepted"),
+  isAccepting: true,
 
   subItemTypes: function(){
     return this.get('controllers.review_item/accept.subItemTypes');
@@ -27,12 +29,6 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
   item: function() {
     return this.store.getById("item", this.get("itemId"));
   }.property("itemId"),
-
-  acceptBtnLabel: function() {
-    return this.get("item.state") === "accepted" ?
-      Ember.I18n.t("save") :
-      Ember.I18n.t("review_item.accept_item");
-  }.property("item.state"),
 
   actions: {
     removePackageType: function(packageobj) {
@@ -67,6 +63,10 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
       var item = this.store.getById('item', this.get('itemId'));
       item.set('packageType', this.store.getById('package_type', this.get('itemTypeId')));
 
+      var clickedButton = Ember.$("input#isAccepting").val();
+      var state_value = clickedButton === "true" ? "accept" :
+        (item.get("isDrafted") ? 'submit' : null);
+
       item.save().then(() => {
 
         packageDetails.forEach(function(packDetail){
@@ -82,7 +82,7 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
         });
 
         Ember.RSVP.all(packagePromises).then(function() {
-          var acceptItem = {id: _this.get("itemId") , state_event: "accept",
+          var acceptItem = {id: _this.get("itemId") , state_event: state_value,
             itemType: _this.store.getById('package_type', _this.get("itemTypeId"))};
           var item = _this.store.push('item', acceptItem);
           item.save().then(function() {
@@ -125,6 +125,6 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
         ths.send("addNewPackage", packageDetails);
       }
       return;
-    }
+    },
   }
 });
