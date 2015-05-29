@@ -18,7 +18,7 @@ module('Reviewer: Accept Item Tab', {
 
     item2 = FactoryGuy.make("item", { offer: offer});
 
-    item3 = FactoryGuy.make("item_with_type", { offer: offer });
+    item3 = FactoryGuy.make("item_with_type", { offer: offer, donorDescription: null, donorCondition: null });
     package3 = FactoryGuy.make("package", { item: item3, packageType: item3.get('packageType')});
 
     item4 = FactoryGuy.make("item_with_type", { offer: offer, state: "rejected" });
@@ -76,6 +76,18 @@ test("visit accepted item with item_type", function() {
 
     // Display buttons
     equal($(".accept_buttons button").length, 1);
+
+    // Item Details
+    equal($(".edit-item-link").length, 1);
+    equal($('.item-details textarea').length, 0);
+    equal($('.item-details .radio-buttons li').length, 0);
+
+    // Display Item Details Form
+    click($(".edit-item-link"));
+    andThen(function(){
+      equal($('.item-details textarea').val(), item1.get('donorDescription'));
+      equal($('.item-details .radio-buttons li').length, 4);
+    });
   });
 });
 
@@ -90,6 +102,10 @@ test("visit submitted item with item_type", function() {
 
     // Display buttons
     equal($(".accept_buttons button").length, 2);
+
+    // Item Details Form
+    equal($('.item-details textarea').val(), "");
+    equal($('.item-details .radio-buttons li').length, 4);
   });
 });
 
@@ -104,5 +120,16 @@ test("visit rejected item with item_type", function() {
 
     // Display buttons
     equal($(".accept_buttons button").length, 2);
+  });
+});
+
+test("visit rejected item page", function() {
+  visit("/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
+    equal($('.select2-chosen').text(), item4.get('packageType.name'));
+
+    // hide item-edit link
+    equal($(".edit-item-link").length, 0);
   });
 });

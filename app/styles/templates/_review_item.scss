@@ -30,6 +30,15 @@
       vertical-align: 0.35rem;
     }
   }
+
+  .edit-item-link{
+    float: right;
+    color: $white;
+    cursor: pointer;
+    @media #{$small-only} {
+      font-size: 1rem;
+    }
+  }
 }
 
 .accept_widget {

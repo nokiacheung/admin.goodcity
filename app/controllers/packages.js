@@ -2,7 +2,7 @@ import Ember from 'ember';
 import PackageComponentMixin from '../mixins/package-component';
 
 export default Ember.ArrayController.extend(PackageComponentMixin, {
-  needs: ["review_item/accept"],
+  needs: ["review_item/accept", "review_item"],
 
   isItemTypeChanged: Ember.computed.alias('controllers.review_item/accept.isItemTypeChanged'),
   itemId: Ember.computed.alias('controllers.review_item/accept.itemId'),
@@ -62,6 +62,7 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
       var packagePromises = [], packageNew;
       var item = this.store.getById('item', this.get('itemId'));
       item.set('packageType', this.store.getById('package_type', this.get('itemTypeId')));
+      item.set('state_event', null);
 
       var clickedButton = Ember.$("input#isAccepting").val();
       var state_value = clickedButton === "true" ? "accept" :
@@ -84,6 +85,14 @@ export default Ember.ArrayController.extend(PackageComponentMixin, {
         Ember.RSVP.all(packagePromises).then(function() {
           var acceptItem = {id: _this.get("itemId") , state_event: state_value,
             itemType: _this.store.getById('package_type', _this.get("itemTypeId"))};
+
+          var data = _this.get("controllers.review_item.formData");
+          var itemData = {
+            donorDescription: data.donorDescription,
+            donorCondition: _this.get("store").getById('donorCondition', data.donorConditionId)
+          };
+          Ember.$.extend(acceptItem, itemData);
+
           var item = _this.store.push('item', acceptItem);
           item.save().then(function() {
             if (_this.get("returnurl")) {
