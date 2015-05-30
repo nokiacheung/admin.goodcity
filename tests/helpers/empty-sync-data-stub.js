@@ -6,7 +6,7 @@ import '../fixtures/schedule';
 import '../fixtures/delivery';
 import '../fixtures/gogovan_order';
 import '../fixtures/offer';
-import '../fixtures/item_type';
+import '../fixtures/package_type';
 import '../fixtures/package';
 import '../fixtures/donor_condition';
 import '../fixtures/rejection_reason';

@@ -30,6 +30,7 @@ I18nTranslationsEn =
           "is_drop_off": "Drop-off"
           "is_gogovan_order": "Van ordered"
           "is_gogovan_confirm": "Van confirmed"
+          "driver_completed": "Driver completed"
           "offer_messages": "General Messages"
           "accepted": "Accepted"
           "not_needed": "Not needed"
@@ -124,7 +125,8 @@ I18nTranslationsEn =
       "review_item":
         "title" : "Review Item"
         "accept" : "Accept"
-        "accept_item" : "Accept Item"
+        "save_item": "Save Only"
+        "accept_item" : "Save + Accept"
         "reject" : "Reject"
         "reject_item" : "reject Item"
         "not_now" : "Not Now"

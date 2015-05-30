@@ -3,7 +3,8 @@ import startApp from '../helpers/start-app';
 import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, item1, item2, package1, package2;
+var App, testHelper, offer, item1, item2, package1, package2, item3, package3,
+  item4, package4;
 
 module('Reviewer: Accept Item Tab', {
   setup: function() {
@@ -11,10 +12,17 @@ module('Reviewer: Accept Item Tab', {
     testHelper = TestHelper.setup(App);
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
-    item1 = FactoryGuy.make("item_with_type", { offer: offer});
+    item1 = FactoryGuy.make("item_with_type", { offer: offer, state: "accepted"});
+    package1 = FactoryGuy.make("package", { item: item1, packageType: item1.get('packageType')});
+    package2 = FactoryGuy.make("package", { item: item1, packageType: item1.get('packageType')});
+
     item2 = FactoryGuy.make("item", { offer: offer});
-    package1 = FactoryGuy.make("package", { item: item1, packageType: item1.get('itemType')});
-    package2 = FactoryGuy.make("package", { item: item1, packageType: item1.get('itemType')});
+
+    item3 = FactoryGuy.make("item_with_type", { offer: offer, donorDescription: null, donorCondition: null });
+    package3 = FactoryGuy.make("package", { item: item3, packageType: item3.get('packageType')});
+
+    item4 = FactoryGuy.make("item_with_type", { offer: offer, state: "rejected" });
+    package4 = FactoryGuy.make("package", { item: item4, packageType: item4.get('packageType')});
   },
 
   teardown: function() {
@@ -32,11 +40,11 @@ test("visit accept item tab without item_type", function() {
   });
 });
 
-test("visit rejected item with item_type", function() {
+test("visit accepted item with item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
-    equal($('.select2-chosen').text(), item1.get('itemType.name'));
+    equal($('.select2-chosen').text(), item1.get('packageType.name'));
 
     // two package components
     equal($(".detail_container").length, 2);
@@ -66,6 +74,62 @@ test("visit rejected item with item_type", function() {
     equal(parseInt($(".detail_container:eq(0) input[name='height']").val()), package1.get('height'));
     equal(parseInt($(".detail_container:eq(1) input[name='height']").val()), package2.get('height'));
 
+    // Display buttons
+    equal($(".accept_buttons button").length, 1);
+
+    // Item Details
+    equal($(".edit-item-link").length, 1);
+    equal($('.item-details textarea').length, 0);
+    equal($('.item-details .radio-buttons li').length, 0);
+
+    // Display Item Details Form
+    click($(".edit-item-link"));
+    andThen(function(){
+      equal($('.item-details textarea').val(), item1.get('donorDescription'));
+      equal($('.item-details .radio-buttons li').length, 4);
+    });
   });
 });
 
+test("visit submitted item with item_type", function() {
+  visit("/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
+    equal($('.select2-chosen').text(), item3.get('packageType.name'));
+
+    // one package components
+    equal($(".detail_container").length, 1);
+
+    // Display buttons
+    equal($(".accept_buttons button").length, 2);
+
+    // Item Details Form
+    equal($('.item-details textarea').val(), "");
+    equal($('.item-details .radio-buttons li').length, 4);
+  });
+});
+
+test("visit rejected item with item_type", function() {
+  visit("/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
+    equal($('.select2-chosen').text(), item4.get('packageType.name'));
+
+    // one package components
+    equal($(".detail_container").length, 1);
+
+    // Display buttons
+    equal($(".accept_buttons button").length, 2);
+  });
+});
+
+test("visit rejected item page", function() {
+  visit("/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
+  andThen(function() {
+    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
+    equal($('.select2-chosen').text(), item4.get('packageType.name'));
+
+    // hide item-edit link
+    equal($(".edit-item-link").length, 0);
+  });
+});
