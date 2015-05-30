@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   offerReadyForClosure: function() {
     return this.get("model.state") !== "received" &&
       this.get("model.packages.length") > 0 &&
-      this.get("model.packages").filterBy("state", "expecting").get("length") === 0;
+      this.get("model.packages").filter(p => !p.get("item.isRejected") && p.get("state") == "expecting").get("length") === 0;
   }.property("model.state", "model.packages.@each.state"),
 
   actions: {
