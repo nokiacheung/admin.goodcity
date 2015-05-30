@@ -18,6 +18,8 @@ export default Ember.Controller.extend({
   }.property("allPackages.@each.state"),
 
   allPackages: function(){
-    return this.get("model.itemPackages");
-  }.property("model", "model.state"),
+    var res = [];
+    this.get("items").forEach(i => res = res.concat(i.get("packages").toArray()));
+    return res;
+  }.property("items.@each.packages"),
 });
