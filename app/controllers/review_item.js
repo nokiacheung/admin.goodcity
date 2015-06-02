@@ -46,6 +46,39 @@ export default Ember.Controller.extend({
 
     setEditing: function(value){
       this.set("isEditing", value);
-    }
+    },
+
+    copyItem: function(){
+      var loadingView = this.container.lookup('view:loading').append();
+      var _this = this;
+      var item = _this.get("model");
+      var images = item.get("images");
+      var promises = [];
+
+      var newItem = _this.get("store").createRecord("item", {
+        offer: item.get('offer'),
+        donorCondition: item.get('donorCondition'),
+        state: "draft",
+        packageType: item.get("packageType"),
+        donorDescription: item.get('donorDescription')
+      });
+
+      newItem.save()
+        .then(() => {
+          images.forEach(function(image){
+            var newImage = _this.get("store").createRecord('image', {
+              cloudinaryId: image.get('cloudinaryId'),
+              item: newItem,
+              favourite: image.get('favourite')
+            });
+            promises.push(newImage.save());
+          });
+
+          Ember.RSVP.all(promises).then(function(){
+            loadingView.destroy();
+            _this.transitionToRoute('item.edit_images', newItem);
+          });
+        });
+    },
   }
 });
