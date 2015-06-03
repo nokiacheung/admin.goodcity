@@ -47,7 +47,8 @@
     "ember-export-application-global": "^1.0.2",
     "ember-select-2": "git://github.com/iStefo/ember-select-2.git",
     "express": "^4.12.2",
-    "glob": "^5.0.1"
+    "glob": "^5.0.1",
+    "liquid-fire": "0.19.4"
   },
   "dependencies": {
     "shared.goodcity": "git://github.com/crossroads/shared.goodcity.git",

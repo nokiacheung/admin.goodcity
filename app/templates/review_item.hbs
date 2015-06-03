@@ -20,7 +20,7 @@
         {{partial 'item/status_message'}}
       </div>
 
-      {{#if isEditing}}
+      {{#liquid-if isEditing class="item-edit-form"}}
         {{partial 'item/item_edit_form'}}
       {{else}}
         <div class="row top-bottom-margin">
@@ -37,7 +37,7 @@
             {{/if}}
           </div>
         </div>
-      {{/if}}
+      {{/liquid-if}}
 
       <div class="row top-bottom-margin">
         <div class="small-12 columns link">

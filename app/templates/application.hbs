@@ -1,0 +1,9 @@
+{{outlet "notifications"}}
+{{outlet}}
+
+{{#with controllers.subscriptions.status as status}}
+  <div id="status" class="{{if status.online 'online'}} {{if status.hidden 'hidden'}}">
+    <i class="fa fa-dot-circle-o"></i>
+    <span>{{status.text}}</span>
+  </div>
+{{/with}}
