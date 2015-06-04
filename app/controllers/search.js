@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
         }
       });
 
-      store.all('item').rejectBy('isDraft', true).forEach(function(item) {
+      store.all('item').rejectBy('isDraft', true).rejectBy('donorDescription', null).forEach(function(item) {
         if(item.get('donorDescription').toLowerCase().indexOf(filter) !== -1){
           offers.push(item.get('offer'));
         }
