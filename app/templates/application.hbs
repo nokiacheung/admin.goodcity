@@ -1,5 +1,5 @@
 {{outlet "notifications"}}
-{{outlet}}
+{{liquid-outlet}}
 
 {{#with controllers.subscriptions.status as status}}
   <div id="status" class="{{if status.online 'online'}} {{if status.hidden 'hidden'}}">

@@ -1,5 +1,5 @@
 {{#if offer.isSubmitted}}
-  {{#link-to 'offers' classNames="back"}}{{t "back"}}{{/link-to}}
+  {{#link-to 'offers.submitted' classNames="back"}}{{t "back"}}{{/link-to}}
 {{else if offer.isReviewed}}
   {{#link-to 'in_progress' classNames="back"}}{{t "back"}}{{/link-to}}
 {{else if offer.isScheduled}}
