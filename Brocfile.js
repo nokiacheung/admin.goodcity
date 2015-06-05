@@ -1,18 +1,19 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var webRelease = process.env.EMBER_CLI_CORDOVA === '0' && ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1;
 
 var app = new EmberApp({
   vendorFiles: { 'handlebars.js': null },
   sourcemaps: ['js', 'css'],
   fingerprint: {
     extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map'],
-    enabled: (process.env.EMBER_CLI_CORDOVA === '0') && ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
+    enabled: webRelease
   },
   gzip: {
     keepUncompressed: true,
     extensions: ['js', 'css', 'map', 'ttf', 'ott', 'eot', 'svg'],
-    enabled: ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
+    enabled: webRelease
   }
 });
 

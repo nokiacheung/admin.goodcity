@@ -6,4 +6,12 @@
   <icon src="www/assets/images/goodcity-icon-128.png" />
   <content src="index.html" />
   <access origin="*" />
+  <platform name="android">
+    <preference name="LoadUrlTimeoutValue" value="120000" />
+  </platform>
+  <engine name="ios" spec="^3.8.0" />
+  <engine name="android" spec="^4.0.0" />
+  <engine name="windows" spec="^3.8.1" />
+  <plugin name="com.phonegap.plugins.PushPlugin" spec="https://github.com/Telerik-Verified-Plugins/PushNotification.git" />
+  <plugin name="cordova-plugin-whitelist" spec="^1.0.0" />
 </widget>
