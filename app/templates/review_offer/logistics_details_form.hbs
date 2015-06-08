@@ -1,18 +1,18 @@
 {{#validatable-form class="form-horizontal" action="completeReview" on="submit"}}
 
-  <div class="small-12 columns gogovan-req">
+  <div class="small-12 columns gogovan-req ui">
     <div class='description'>{{t "logistics.ggv_hire"}}</div>
 
-    <div class='radio-buttons'>
+    <ul class='radio-buttons'>
       {{#each gogovanOptions as |option|}}
-        <span class="radio">
+        <li class="radio">
           {{view 'radio-button' name="selectionTest" selection=selectedGogovanOption value=option.id id=option.id}}
           <label class="radio-wrap small-only-text-center" for={{option.id}}>
             {{option.name}}
           </label>
-        </span>
+        </li>
       {{/each}}
-    </div>
+    </ul>
   </div>
 
   <div class="small-12 columns gogovan-req">
