@@ -22,7 +22,10 @@ export default transportDetails.extend({
   }.property('gogovanOptions'),
 
   gogovanOptions: function() {
-    return this.store.all('gogovan_transport').sortBy('id');
+    var allOptions = this.store.all('gogovan_transport');
+    var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
+    var disabledOption = allOptions.filterBy('isDisabled', true);
+    return options.concat(disabledOption);
   }.property(),
 
   crossroadsOptions: function() {
