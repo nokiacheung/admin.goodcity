@@ -124,6 +124,7 @@ I18nTranslationsZhTw =
         "portion_for_crossroads_truck": "這項捐獻需要佔用十字路會貨車多少空間運輸？"
         "goods_received" : "物資接收日期"
         "arrange_transport": "安排運輸"
+        "9t_truck": "9噸卡車"
 
       "review_item":
         "title" : "審查物資"

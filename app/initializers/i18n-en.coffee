@@ -126,6 +126,7 @@ I18nTranslationsEn =
         "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
         "goods_received" : "Goods received on"
         "arrange_transport": "Arrange Transport"
+        "9t_truck": "9 Tonne Truck"
 
       "review_item":
         "title" : "Review Item"
