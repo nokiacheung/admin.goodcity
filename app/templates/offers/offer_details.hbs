@@ -15,7 +15,7 @@
           <div class='time_indicator'>
             {{!-- Submitted Offer --}}
             {{#if offer.isSubmitted}}
-              Submitted <i class="fa fa-clock-o"></i>
+              {{t "submitted"}} <i class="fa fa-clock-o"></i>
               {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
 
             {{!-- Offer Under Review --}}

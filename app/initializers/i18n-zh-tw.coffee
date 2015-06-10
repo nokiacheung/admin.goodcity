@@ -9,6 +9,7 @@ I18nTranslationsZhTw =
     Ember.I18n.translation_store['zh-tw'] = Ember.$.extend true, SharedTranslationsZhTw,
       "reviewing": "正在審查"
       "reviewed": "已審查完畢"
+      "submitted": "Submitted"
       "messages_title" : "信息"
       "select": "選擇"
       "search":
@@ -17,6 +18,9 @@ I18nTranslationsZhTw =
         "placeholder": "搜索"
 
       "offer":
+        "title": "Offer"
+        "donor": "Donor"
+        "logistics": "Logistics"
         "disable": "終止"
         "details" : "優惠詳情"
         "donor_messages" : "捐贈者信息"
@@ -120,6 +124,7 @@ I18nTranslationsZhTw =
         "portion_for_crossroads_truck": "這項捐獻需要佔用十字路會貨車多少空間運輸？"
         "goods_received" : "物資接收日期"
         "arrange_transport": "安排運輸"
+        "9t_truck": "9噸卡車"
 
       "review_item":
         "title" : "審查物資"

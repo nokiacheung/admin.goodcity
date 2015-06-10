@@ -28,29 +28,30 @@ export default Ember.Controller.extend({
     var filter = Ember.$.trim(this.get('filter').toLowerCase());
     var offers = [];
     var store = this.store;
+    var matchFilter = value => (value || "").toLowerCase().indexOf(filter) !== -1;
 
-    if(filter.length > 0) {
+    if (filter.length > 0) {
       store.all('user').forEach(function(donor) {
-        if((donor.get('fullName').toLowerCase().indexOf(filter) !== -1) || (donor.get('mobile').toLowerCase().indexOf(filter) !== -1)){
+        if (matchFilter(donor.get('fullName')) || matchFilter(donor.get('mobile'))) {
           var donations = donor.get('donations').rejectBy("state", "draft");
           offers = offers.concat(donations.toArray());
         }
       });
 
-      store.all('item').rejectBy('isDraft', true).forEach(function(item) {
-        if(item.get('donorDescription').toLowerCase().indexOf(filter) !== -1){
+      store.all('item').rejectBy('isDraft', true).rejectBy('donorDescription', null).forEach(function(item) {
+        if (matchFilter(item.get('donorDescription'))) {
           offers.push(item.get('offer'));
         }
       });
 
       store.all('gogovanOrder').rejectBy('driverLicense', null).forEach(function(order) {
-        if(order.get('driverLicense').toLowerCase().indexOf(filter) !== -1){
+        if (matchFilter(order.get('driverLicense'))) {
           offers.push(order.get('delivery.offer'));
         }
       });
 
       store.all('packageType').rejectBy('packagesCount', 0).forEach(function(packageType) {
-        if(packageType.get('name').toLowerCase().indexOf(filter) !== -1) {
+        if (matchFilter(packageType.get('name'))) {
           packageType.get('packages').forEach(function(pkg) {
             var offer = store.getById('offer', pkg.get('offerId'));
             if(offer) { offers.push(offer); }
@@ -59,7 +60,7 @@ export default Ember.Controller.extend({
       });
 
       store.all('address').forEach(function(address) {
-        if(address.get('regionDetails').toLowerCase().indexOf(filter) !== -1) {
+        if (matchFilter(address.get('regionDetails'))) {
           var offer = address.get('addressable.delivery.offer');
           if(offer) { offers.push(offer); }
         }

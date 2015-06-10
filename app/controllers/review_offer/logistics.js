@@ -18,11 +18,17 @@ export default transportDetails.extend({
   }.property('crossroadsOptions'),
 
   selectedGogovanOption: function(){
-    return this.get('gogovanOptions.firstObject.id');
+    var options = this.get('gogovanOptions').filter(function(option){
+      return option.get('name') === Ember.I18n.t("logistics.9t_truck");
+    });
+    return options.get('firstObject.id');
   }.property('gogovanOptions'),
 
   gogovanOptions: function() {
-    return this.store.all('gogovan_transport').sortBy('id');
+    var allOptions = this.store.all('gogovan_transport');
+    var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
+    var disabledOption = allOptions.filterBy('isDisabled', true);
+    return options.concat(disabledOption);
   }.property(),
 
   crossroadsOptions: function() {

@@ -23,7 +23,7 @@ module('Reviewer: Display Donor Details Tab', {
   }
 });
 
-test("item status badge on item-image", function() {
+test("verify donor details", function() {
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {
     equal(currentURL(), "/offers/1/review_offer/donor_details");
@@ -31,8 +31,8 @@ test("item status badge on item-image", function() {
     equal($(".donor_details .no-avatar").text(), "K");
     equal($(".donor_details .donor").text().indexOf('Kendrick Kiehn') >= 0, true);
     equal($.trim($(".donor_details .donor").text()).indexOf('5111 1111') >= 0, true);
-    equal($(".donor_details li").length, 4);
+    equal($(".donor_details li").length, 3);
     equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('Total offers') >= 0, true);
-    equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('5') >= 0, true);
+    equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('4') >= 0, true);
   });
 });

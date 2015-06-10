@@ -10,6 +10,7 @@ I18nTranslationsEn =
     Ember.I18n.translation_store.en = Ember.$.extend true, SharedTranslationsEn,
       "reviewing": "Reviewing"
       "reviewed": "Reviewed"
+      "submitted": "Submitted"
       "messages_title" : "Messages"
       "select": "Select"
       "search":
@@ -18,11 +19,15 @@ I18nTranslationsEn =
         "placeholder": "Search"
 
       "offer":
+        "title": "Offer"
+        "donor": "Donor"
+        "logistics": "Logistics"
         "disable": "Disable"
         "details" : "Offer details"
         "donor_messages" : "Donor Messages"
         "supervisor_messages" : "Supervisors Messages"
         "empty_msg" : "Sorry! This offer is empty."
+
 
         "offer_details" :
           "heading" : "Offer Details"
@@ -121,6 +126,7 @@ I18nTranslationsEn =
         "portion_for_crossroads_truck": "What portion of the Crossroads truck will this offer take up?"
         "goods_received" : "Goods received on"
         "arrange_transport": "Arrange Transport"
+        "9t_truck": "9 Tonne Truck"
 
       "review_item":
         "title" : "Review Item"
