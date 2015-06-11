@@ -41,7 +41,7 @@ module.exports = function(environment) {
       enabled: process.env.EMBER_CLI_CORDOVA !== '0',
       rebuildOnChange: false,
       emulate: false,
-      GcmSenderId: '161361907015'
+      GcmSenderId: '907786683525'
     },
     coffeeOptions: {
       blueprints: false
@@ -125,7 +125,7 @@ module.exports = function(environment) {
       ].join(' ');
       ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     } else {
-      ENV.cordova.GcmSenderId = '919797298115';
+      ENV.cordova.GcmSenderId = '876198075877';
     }
   }
 
