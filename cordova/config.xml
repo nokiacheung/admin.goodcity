@@ -5,10 +5,13 @@
   <author href="https://www.crossroads.org.hk">Crossroads</author>
   <icon src="www/assets/images/goodcity-icon-128.png" />
   <content src="index.html" />
-  <access origin="*" />
   <platform name="android">
     <preference name="LoadUrlTimeoutValue" value="120000" />
   </platform>
+  <platform name="windows">
+    <hook type="after_platform_add" src="hooks/windows/include.bat" />
+  </platform>
+  <access origin="*" />
   <engine name="ios" spec="^3.8.0" />
   <engine name="android" spec="^4.0.0" />
   <engine name="windows" spec="^3.8.1" />
