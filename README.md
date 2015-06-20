@@ -106,7 +106,8 @@ To start app in emulator
 To deploy to connected device
 
 `ember cordova run windows --device --phone` (WP8.1)<br/>
-`ember cordova run android`
+`ember cordova run android --device`<br/>
+`ember cordova run ios --device`
 
 ---
 
@@ -122,7 +123,11 @@ If developer options is missing:
 For Android you can use Chrome for remote debugging of the app on your phone:
 https://developer.chrome.com/devtools/docs/remote-debugging
 
-For iOS you can use Safari and under develop menu to remotely debug app on iPhone. For Windows Phone you can use Visual Studio to deploy app and debug by opening "platforms/windows/CordovaApp.Phone.jsproj"
+For iOS you can use Safari and under develop menu to remotely debug app on iPhone.
+
+For Windows Phone you can use Visual Studio to deploy app and debug by opening `platforms/windows/CordovaApp.Phone.jsproj`.
+
+Note if you are using an IDE (e.g. XCode/VisualStudio/AndroidStudio) then after running `ember build` to make code changes, you'll need to run `cordova build <platform>` before deploying so that `cordova/www` is copied to `cordova/platforms/<platform>/www`.
 
 ### Build
 Release Build
