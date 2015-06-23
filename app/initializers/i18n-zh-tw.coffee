@@ -9,7 +9,7 @@ I18nTranslationsZhTw =
     Ember.I18n.translation_store['zh-tw'] = Ember.$.extend true, SharedTranslationsZhTw,
       "reviewing": "正在審查"
       "reviewed": "已審查完畢"
-      "submitted": "Submitted"
+      "submitted": "已提交"
       "messages_title" : "信息"
       "select": "選擇"
       "search":
@@ -18,11 +18,11 @@ I18nTranslationsZhTw =
         "placeholder": "搜索"
 
       "offer":
-        "title": "Offer"
-        "donor": "Donor"
-        "logistics": "Logistics"
-        "disable": "終止"
-        "details" : "優惠詳情"
+        "title": "捐獻細節"
+        "donor": "捐贈者"
+        "logistics": "運送詳情"
+        "disable": "不適用"
+        "details" : "捐獻詳情"
         "donor_messages" : "捐贈者信息"
         "supervisor_messages" : "監察員信息"
         "empty_msg" : "對不起！這項捐獻並不存在。"
@@ -33,7 +33,7 @@ I18nTranslationsZhTw =
           "is_drop_off": "送抵"
           "is_gogovan_order": "預約貨車"
           "is_gogovan_confirm": "確認貨車"
-          "driver_completed": "Driver completed"
+          "driver_completed": "司機已確認預約"
           "offer_messages": "一般信息"
           "accepted": "已接受"
           "not_needed": "不需要"
@@ -45,18 +45,18 @@ I18nTranslationsZhTw =
 
       "items":
         "add_item":
-          "description_placeholder" : "這是甚麼？有多少樣物件？大小如何？"
+          "description_placeholder" : "這是甚麼？有多少件物資？物資大小？"
 
       "item":
         "submitted_status": "這項物品正在等候審查。"
         "in_review_status": "正在審查這項物品。"
         "accepted_status": "已接受這項物品。"
         "rejected_status": "不接受這項物品。"
-        "cancelled_status": "這項捐贈已被 {{firstName}} {{lastName}} 取消。"
+        "cancelled_status": "這項捐贈已被 {{lastName}} {{firstName}} 取消。"
 
         "messages":
           "info_text1": "假如審查過程中我們遇到任何問題，我們會在下面的對話框向您查詢。"
-          "info_text2": "假如您希望添加任何有關捐贈物品的資料，請於下面的對話框輸入。"
+          "info_text2": "假如您想添加任何有關捐贈物品的資料，請於下面的對話框輸入。"
 
       "inbox":
         "quick_links": "快捷鍵"
@@ -75,12 +75,12 @@ I18nTranslationsZhTw =
 
       "review_offer":
         "title" : "審查捐獻項目"
-        "review_started_by" : "由 {{firstName}} {{lastName}} 發起"
+        "review_started_by" : "由 {{lastName}} {{firstName}} 發起"
         "no_items": "不需要任何物資"
         "close_offer": "此項捐獻不再開放"
         "items_reviewed": "已審查所有物資"
         "set_logistics": "設定運輸資料"
-        "to_complete": "前進完成"
+        "to_complete": "以完成"
         "plan_transport": "用戶可安排交通"
         "reviewed": "審查完畢"
         "start_review": "開始審查"
@@ -90,14 +90,14 @@ I18nTranslationsZhTw =
         "receive": "收到"
         "missing": "遺失"
         "received": "已經收到"
-        "expecting": "正在等候"
-        "all_items_processed": "所有項目皆列為已接收或遺失"
+        "expecting": "等候中"
+        "all_items_processed": "所有項目皆被接收或列作遺失"
 
         "donor":
           "district": "地區"
           "registered": "已註冊"
           "last_seen": "最後上線"
-          "total_offers": "總捐獻"
+          "total_offers": "捐獻總數"
           "crm": "CRM"
           "other_offers": "所有好人好市捐獻"
 
@@ -117,11 +117,11 @@ I18nTranslationsZhTw =
         "message_donor": "向捐贈者發送信息"
         "finish_review_request": "請先完成審查！"
         "accepted_items": "已接受物品"
-        "gogovan_requirement": "要求GoGoVan"
+        "gogovan_requirement": "要求GoGoVan運送"
         "crossroads_requirement": "要求十字路會運送"
         "complete_review": "完成審查"
         "ggv_hire": "要求租用GoGoVan"
-        "portion_for_crossroads_truck": "這項捐獻需要佔用十字路會貨車多少空間運輸？"
+        "portion_for_crossroads_truck": "這項捐獻需要佔用十字路會貨車多少空間？"
         "goods_received" : "物資接收日期"
         "arrange_transport": "安排運輸"
         "9t_truck": "9噸卡車"
@@ -129,16 +129,16 @@ I18nTranslationsZhTw =
       "review_item":
         "title" : "審查物資"
         "accept" : "接受"
-        "save_item": "Save Only"
-        "accept_item" : "Save + Accept"
+        "save_item": "儲存"
+        "accept_item" : "儲存及接受"
         "reject" : "不接受"
         "reject_item" : "拒絕物品"
         "not_now" : "暫不決定"
-        "donor_message" : "捐贈者"
-        "supervisor_message" : "監察員"
+        "donor_message" : "捐贈者信息"
+        "supervisor_message" : "監察員信息"
         "view_lable_guide": "檢閱決定準則"
         "condition": "狀況"
-        "add_component": "增加部份"
+        "add_component": "增加配件"
         "add_item_label": "增加物品標籤"
 
       "reject":
@@ -151,14 +151,14 @@ I18nTranslationsZhTw =
         "message_placeholder" : "發送信息予捐贈者，告知物品不被接受"
         "reject_message" : "很抱歉，我們不能接受這項物品。"
         "quality_message" : "對於部份物資類型，除非物資質量極佳，否則我們無法接收。"
-        "size_message" : "物資過大，要找到可以安置物資的客戶將很困難。"
+        "size_message" : "物資過大，要找到可以安置物資的客戶會很困難。"
         "supply_message" : "很抱歉，由於我們已經有很多同類型的物資，我們無法接受您的捐獻。"
         "cancel_gogovan_confirm": "拒絕接受最後一項物資將會取消GoGoVan的預約，您是否確認？"
-        "custom_reason": "特定理由"
+        "custom_reason": "特別原因"
 
       "cancel_gogovan":
         "title": "取消預約GoGoVan"
-        "once_confirmed": "GoGoVan確認預約取消後，您即能夠前往拒絕或取消此項捐獻。"
+        "once_confirmed": "GoGoVan確認預約取消後，您便能夠前往拒絕或取消此項捐獻。"
         "call_driver": "請致電GoGoVan以取消預約"
         "notify_donor": "聯絡捐贈者，告知預約已被取消"
 

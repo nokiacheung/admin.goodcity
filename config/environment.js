@@ -15,7 +15,8 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       "img-src": "'self' data: https://res.cloudinary.com",
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
-      "font-src": "'self' data: https://maxcdn.bootstrapcdn.com"
+      "font-src": "'self' data: https://maxcdn.bootstrapcdn.com",
+      "media-src": "'self' data: https://api.twilio.com http://api.twilio.com"
     },
 
     APP: {
@@ -67,7 +68,8 @@ module.exports = function(environment) {
       'http://localhost:1337',
       'ws://localhost:1337',
       'wss://localhost:1337',
-      'https://api.cloudinary.com'
+      'https://api.cloudinary.com',
+      'https://api.twilio.com'
     ].join(' ');
   }
 
@@ -104,7 +106,8 @@ module.exports = function(environment) {
       'ws://socket.goodcity.hk:81',
       'wss://socket.goodcity.hk:81',
       'https://api.cloudinary.com',
-      'https://errbit.crossroads.org.hk'
+      'https://errbit.crossroads.org.hk',
+      'https://api.twilio.com'
     ].join(' ');
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
@@ -121,7 +124,8 @@ module.exports = function(environment) {
         'ws://socket-staging.goodcity.hk:81',
         'wss://socket-staging.goodcity.hk:81',
         'https://api.cloudinary.com',
-        'https://errbit.crossroads.org.hk'
+        'https://errbit.crossroads.org.hk',
+        'https://api.twilio.com'
       ].join(' ');
       ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     } else {
