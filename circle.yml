@@ -22,7 +22,7 @@ test:
 
 deployment:
   staging:
-    branch: GCW-178-cordova-notifications
+    branch: master
     commands:
-      # - npm run deploy-staging  # comment out while testing on branch
+      - npm run deploy-staging
       - bash ./cordova/deploy/deploy-android-testfairy.sh
