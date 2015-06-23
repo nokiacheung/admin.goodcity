@@ -64,40 +64,70 @@ ember install
 ## Cordova
 
 ### Setup
-* `npm install -g cordova`
-* `ember cordova:prepare`
-* `ln -s ../dist cordova/www` (linux/mac)
-* `mklink /d cordova\www ..\dist` (windows)
+* `npm install -g cordova` (note 5.1.1 has problems installing plugins from git url on windows use 5.0.0 instead)
+* `ember cordova:prepare` (mainly needed to create symlink between dist <=> cordova/www)
+* `cd cordova`
+* `cordova prepare android` (or ios/windows)
 
 Android
-* Install SDK tools - https://developer.android.com/sdk/installing/index.html
-* start SDK manager `android`
-  - install API v19
-  - install system image (performs better if matches host CPU, can be higher API version)
-  - install sdk build tools
+* Install stand alone SDK tools - https://developer.android.com/sdk/installing/index.html
+* set environment variables<br/>
+  `export ANDROID_HOME=/<installation location>/android-sdk`<br/>
+  `export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools`
+* start SDK manager from terminal `android`
+  - install "Android 5.1.1 (API 22)/SDK Platform"
+  - install "Tools/Android SDK Build-tools" (latest version)
+  - install "Tools/Android SDK Platform-tools" (latest version)
 * `sudo apt-get install ant`
-* start android avd manager `android avd` to create an android VM
-* `ember cordova platform add android`
+
+Android Emulator setup (not needed if using a real phone)
+* start SDK manager from terminal `android`
+  - install "Android 5.1.1 (API 22)/Google APIs Intel x86 Atom System Image"
+* open from menu "Tools > Manage AVDs > Create"
+* fill out create new AVD and click ok
 
 Windows Phone
-* Install VS 2013 - http://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx
-  - select "Windows Phone 8.0 SDK" for wp8
-* `ember cordova platform add wp8` (for wp8)
-* `ember cordova platform add windows` (for wp8.1/windows8.1)
+* Install Visual Studio - https://www.visualstudio.com/en-us/features/cordova-vs.aspx
+* During install under optional features tick "Apache Cordova" (or look to install Visual Studio Tools for Apache Cordova)
+* Register your phone by using the "Windows Phone Developer Registration Tool"
 
 IOS
 * Install Xcode - https://developer.apple.com/xcode/downloads/
+* Ask to be signed up as a developer of the Crossroads Apple Developer Team
+* In XCode download the certs via "Settings > Accounts > View Details > Refresh"
+* Register your phone under https://developer.apple.com/account/ios/device/deviceList.action
 * `npm install -g ios-deploy`
-* `ember cordova platform add ios`
 
 ### Run
 To start app in emulator
 
-`ember cordova run`
+`ember cordova emulate android`
 
-To start app in browser (use [ripple-emulator](https://chrome.google.com/webstore/detail/ripple-emulator-beta/geelfhphabnejjhdalkjhgipohgpdnoc?hl=en) to emulate hardware)
+To deploy to connected device
 
-`npm run cordova`
+`ember cordova run windows --device --phone` (WP8.1)<br/>
+`ember cordova run android --device`<br/>
+`ember cordova run ios --device`
+
+---
+
+To deploy to Android you need to have USB debugging enabled, to do so:
+
+* enable `settings > developer options > android debugging`
+
+If developer options is missing:
+
+* go to `settings > about phone`
+* tap `build number` seven times
+
+For Android you can use Chrome for remote debugging of the app on your phone:
+https://developer.chrome.com/devtools/docs/remote-debugging
+
+For iOS you can use Safari and under develop menu to remotely debug app on iPhone.
+
+For Windows Phone you can use Visual Studio to deploy app and debug by opening `platforms/windows/CordovaApp.Phone.jsproj`.
+
+Note if you are using an IDE (e.g. XCode/VisualStudio/AndroidStudio) then after running `ember build` to make code changes, you'll need to run `cordova build <platform>` before deploying so that `cordova/www` is copied to `cordova/platforms/<platform>/www`.
 
 ### Build
 Release Build
@@ -106,8 +136,8 @@ Release Build
 
 Debug Build
 ```sh
-ember build --environment=production
 cd cordova
+ember build --environment=production
 cordova build android --debug
 ```
 

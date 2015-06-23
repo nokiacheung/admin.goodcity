@@ -19,3 +19,4 @@ cordova/www
 cordova/platforms
 .hgignore
 .DS_Store
+cordova/plugins/*
