@@ -25,3 +25,4 @@ deployment:
     branch: master
     commands:
       - npm run deploy-staging
+      - bash ./cordova/deploy/deploy-android-testfairy.sh

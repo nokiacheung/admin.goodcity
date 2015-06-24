@@ -53,13 +53,13 @@
 
           <i class="fa fa-truck"></i>
           <b>
-            {{#if delivery.isGogovan}}
+            {{#if delivery.completedWithGogovan}}
+              {{completed-time-status offer.delivery.gogovanOrder.completedAt}}
+            {{else if delivery.isGogovan}}
               {{delivery.schedule.slotName}},
-            {{/if}}
-
-            {{schedule-time-status delivery.schedule.scheduledAt}}
-
-            {{#if delivery.noGogovan}}
+              {{schedule-time-status delivery.schedule.scheduledAt}}
+            {{else}}
+              {{schedule-time-status delivery.schedule.scheduledAt}}
               , {{delivery.schedule.dayTime}}
             {{/if}}
           </b>

@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "EMBER_CLI_CORDOVA=0 LRPortOverride=35730 ember serve --port 4201",
-    "cordova": "LRPortOverride=35730 ember serve --port 4201",
     "build": "EMBER_CLI_CORDOVA=0 ember build",
     "test": "EMBER_CLI_CORDOVA=0 ember test --server --port 7358",
     "deploy-staging": "site=admin-staging.goodcity.hk ports=22 environment=production staging=true ./deploy",
