@@ -65,6 +65,10 @@
   .thread_last_message{
     padding-top: 0.3rem;
     color: $white;
+
+    audio {
+      width: 100%;
+    }
   }
 }
 
