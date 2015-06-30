@@ -16,6 +16,7 @@ import '../fixtures/timeslot';
 import '../fixtures/gogovan_transport';
 import '../fixtures/crossroads_transport';
 import '../fixtures/message';
+import '../fixtures/version';
 
 export default function(testHelper) {
   config.APP.PRELOAD_TYPES.concat(config.APP.PRELOAD_AUTHORIZED_TYPES).forEach(function(type) {
