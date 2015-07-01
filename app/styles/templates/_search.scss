@@ -85,3 +85,15 @@
     }
   }
 }
+
+// TWILIO OUTBOUND CALL STYLES
+.hangup-call {
+  display: none;
+  color: red;
+  cursor: pointer;
+}
+
+.phone_link {
+  text-decoration: underline;
+  cursor: pointer;
+}
