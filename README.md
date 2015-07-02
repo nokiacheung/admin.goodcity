@@ -105,7 +105,7 @@ To start app in emulator
 
 To deploy to connected device
 
-`ember cordova run windows --device --phone` (WP8.1)<br/>
+`ember cordova run windows -- --phone --device` (WP8.1)<br/>
 `ember cordova run android --device`<br/>
 `ember cordova run ios --device`
 
