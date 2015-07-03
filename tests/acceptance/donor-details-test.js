@@ -24,6 +24,17 @@ module('Reviewer: Display Donor Details Tab', {
 });
 
 test("verify donor details", function() {
+
+  $.mockjax({url:"/api/v1/twilio/twilio_generate_call_toke*",responseText:{}});
+  window.Twilio = {
+    Device: {
+      setup: function() {},
+      error: function() {},
+      disconnectAll: function() {},
+      disconnect: function() {}
+    }
+  };
+
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {
     equal(currentURL(), "/offers/1/review_offer/donor_details");

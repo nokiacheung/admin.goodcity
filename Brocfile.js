@@ -62,7 +62,9 @@ app.import('bower_components/lightgallery/light-gallery/img/loading.gif', {
   destDir: '/img'
 });
 
-app.import('vendor/twilio/twilio.js');
+if (app.env === 'development' || app.env === 'production') {
+  app.import('vendor/twilio/twilio.js');
+}
 
 app.import({
   development: 'bower_components/ember-data/ember-data.js',
