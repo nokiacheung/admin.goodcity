@@ -16,7 +16,8 @@ module.exports = function(environment) {
       "img-src": "'self' data: https://res.cloudinary.com",
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
       "font-src": "'self' data: https://maxcdn.bootstrapcdn.com",
-      "media-src": "'self' data: https://api.twilio.com http://api.twilio.com"
+      "media-src": "'self' data: https://api.twilio.com http://api.twilio.com http://static.twilio.com https://static.twilio.com",
+      "object-src": "'self'"
     },
 
     APP: {
@@ -69,7 +70,10 @@ module.exports = function(environment) {
       'ws://localhost:1337',
       'wss://localhost:1337',
       'https://api.cloudinary.com',
-      'https://api.twilio.com'
+      'https://api.twilio.com',
+      'http://static.twilio.com',
+      'https://static.twilio.com',
+      'wss://chunderw.twilio.com/signal'
     ].join(' ');
   }
 
@@ -107,7 +111,10 @@ module.exports = function(environment) {
       'wss://socket.goodcity.hk:81',
       'https://api.cloudinary.com',
       'https://errbit.crossroads.org.hk',
-      'https://api.twilio.com'
+      'https://api.twilio.com',
+      'http://static.twilio.com',
+      'https://static.twilio.com',
+      'wss://chunderw.twilio.com/signal'
     ].join(' ');
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
@@ -125,7 +132,10 @@ module.exports = function(environment) {
         'wss://socket-staging.goodcity.hk:81',
         'https://api.cloudinary.com',
         'https://errbit.crossroads.org.hk',
-        'https://api.twilio.com'
+        'https://api.twilio.com',
+        'http://static.twilio.com',
+        'https://static.twilio.com',
+        'wss://chunderw.twilio.com/signal'
       ].join(' ');
       ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     } else {

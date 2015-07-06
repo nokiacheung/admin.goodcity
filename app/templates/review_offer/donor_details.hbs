@@ -13,7 +13,7 @@
             {{donor.fullName}}
           </div>
           <div class="small-7 columns mobile">
-            {{view "phone" number=donor.mobile}}
+            {{twilio-make-call mobile=donor.mobile offerId=currentOffer.id}}
           </div>
         </div>
 

@@ -52,7 +52,8 @@
     "FactoryGuyTestMixin",
     "logoutUser",
     "lookup",
-    "skipTest"
+    "skipTest",
+    "Twilio"
   ],
   "node": false,
   "browser": false,
