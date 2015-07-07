@@ -70,6 +70,8 @@ export default Ember.Controller.extend({
     return offers.uniq();
   }.property('filter', 'fetchMoreResult'),
 
+  lastVisitedRoute: Ember.computed.localStorage(),
+
   actions: {
     clearSearch: function() {
       this.set('filter', '');
@@ -80,7 +82,7 @@ export default Ember.Controller.extend({
 
     cancelSearch: function(){
       this.send("clearSearch");
-      var route = localStorage["lastVisitedRoute"] || "my_list";
+      var route = this.get("lastVisitedRoute") || "my_list";
       this.transitionToRoute(route);
     },
 
