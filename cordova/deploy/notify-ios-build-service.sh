@@ -34,3 +34,4 @@ if [ -z "${PROJECT}" ]; then
 fi
 
 curl -H "Content-Type: application/json" -H "Authorization: OAuth ${GOODCITY_IRON_MQ_OAUTH_KEY}" -d '{"messages":[{"body":"build '${PROJECT}'"}]}' "https://mq-aws-us-east-1.iron.io/1/projects/${GOODCITY_IRON_MQ_PROJECT_KEY}/queues/${GOODCITY_IRON_MQ_QUEUE_NAME}/messages"
+echo
