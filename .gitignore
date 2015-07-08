@@ -20,3 +20,4 @@ cordova/platforms
 .hgignore
 .DS_Store
 cordova/plugins/*
+.ios_build.lock
