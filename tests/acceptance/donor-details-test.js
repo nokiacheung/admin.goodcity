@@ -25,7 +25,7 @@ module('Reviewer: Display Donor Details Tab', {
 
 test("verify donor details", function() {
 
-  $.mockjax({url:"/api/v1/twilio/twilio_generate_call_toke*",responseText:{}});
+  $.mockjax({url:"/api/v1/twilio_outbound/generate_call_toke*",responseText:{}});
   window.Twilio = {
     Device: {
       setup: function() {},

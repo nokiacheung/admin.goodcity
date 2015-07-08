@@ -58,7 +58,7 @@ export default Ember.Component.extend({
 
     var loadingView = this.container.lookup('view:loading').append();
 
-    new AjaxPromise("/twilio/twilio_generate_call_token", "GET", null)
+    new AjaxPromise("/twilio_outbound/generate_call_token", "GET", null)
       .then(data => {
         Ember.$("#twilio_token").data("token", data["token"]);
         _this.initTwilioDeviceBindings();
