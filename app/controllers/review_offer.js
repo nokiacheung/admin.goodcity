@@ -6,7 +6,8 @@ export default Ember.Controller.extend({
   isStartReviewClicked: false,
 
   offerReadyForClosure: function() {
-    return this.get("model.state") !== "received" &&
+    return !this.get("model.allItemsRejected") &&
+      this.get("model.state") !== "received" &&
       this.get("model.packages.length") > 0 &&
       this.get("model.packages").filter(p => !p.get("item.isRejected") && p.get("state") === "expecting").get("length") === 0;
   }.property("model.state", "model.packages.@each.state"),
