@@ -1,4 +1,4 @@
-import itemsFactory from './image';
+import './image';
 import mobile from './mobile';
 
 FactoryGuy.define('user', {

@@ -2,13 +2,13 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, offer_error, item_error, item, display_item_url;
+var App, testHelper, offer;
 
 module('Display not found error', {
   setup: function() {
     App = startApp();
     testHelper = TestHelper.setup(App);
-    Ember.run.later = (context, func) => true;
+    Ember.run.later = () => true;
     offer = FactoryGuy.make("offer");
   },
   teardown: function() {

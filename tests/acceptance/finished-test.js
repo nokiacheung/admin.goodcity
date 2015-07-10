@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
-var App, testHelper, offer1, reviewer, reviewerName, offer2, item1, item2,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App, testHelper, TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
 module('Finished Offers', {
   setup: function() {

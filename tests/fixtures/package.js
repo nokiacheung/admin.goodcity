@@ -1,5 +1,5 @@
-import itemsFactory from './item';
-import packageTypesFactory from './package_type';
+import './item';
+import './package_type';
 
 FactoryGuy.define('package', {
   sequences: {

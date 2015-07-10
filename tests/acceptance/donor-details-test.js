@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 var App, testHelper, user, offer1, offer2, offer3, offer4;

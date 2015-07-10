@@ -1,18 +1,13 @@
-import Ember from 'ember';
 import { test, moduleForComponent } from 'ember-qunit';
-import startApp from '../../helpers/start-app';
 
-var App, component;
+var component;
 
 moduleForComponent('select-2', 'ItemTypeComponent using select2', {
   setup: function() {
-    // App = startApp();
     //creation of component instance
     component = this.subject();
   },
   teardown: function() {
-    // Ember.run(App, App.destroy);
-    // Ember.run(component, component.destroy);
   }
 });
 

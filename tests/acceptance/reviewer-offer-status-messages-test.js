@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer1, offer2, reviewer, reviewer1, reviewerName,
+var App, testHelper, offer1, offer2, reviewer, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
   offer8, item8, offer9, item9, offer10, schedule, ggv_order11, delivery11,
   offer11, offer12;
@@ -82,7 +81,7 @@ test("Display offer status for reviewed offer", function() {
   andThen(function() {
     equal(currentURL(), "/offers/" + offer3.id + "/review_offer/items");
 
-    var message = $.trim(find('.status-message').text().replace(/\n/g, ''));
+    // var message = $.trim(find('.status-message').text().replace(/\n/g, ''));
     // equal(message, "Reviewed less than a minute ago. User to plan transport." );
   });
 });

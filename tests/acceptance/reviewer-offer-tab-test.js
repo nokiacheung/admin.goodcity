@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, reviewer, item1, item2, item3,
+var App, testHelper, offer, item1, item2, item3,
   message1, message2, donor, msg_time;
 
 module('Reviewer: Display Offer Tab', {

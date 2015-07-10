@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 var App, testHelper, offer, item, message1, message2, message3;
@@ -50,7 +49,7 @@ test("item-messages from donor should add unread bubble in donor message tab", f
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item.id + "/supervisor_messages");
 
-    var message4 = FactoryGuy.make("message", { offer: offer, item: item, body: "Second Message from Donor"});
+    FactoryGuy.make("message", { offer: offer, item: item, body: "Second Message from Donor"});
 
     // if message received from donor, add unread bubble mark
     equal($("a[href='/offers/"+ offer.id +"/review_item/"+ item.id +"/donor_messages'] i.unread").length, 1);
@@ -62,7 +61,7 @@ test("offer-messages from staff should add unread bubble in supervisor message t
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item.id + "/donor_messages");
 
-    var message5 = FactoryGuy.make("message", { offer: offer, item: item, body: "Second Message from Supervisor", isPrivate: true});
+    FactoryGuy.make("message", { offer: offer, item: item, body: "Second Message from Supervisor", isPrivate: true});
 
     // if message received from donor, add unread bubble mark
     equal($("a[href='/offers/"+ offer.id +"/review_item/"+ item.id +"/supervisor_messages'] i.unread").length, 1);

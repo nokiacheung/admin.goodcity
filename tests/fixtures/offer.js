@@ -1,4 +1,4 @@
-import itemsFactory from './item';
+import './item';
 
 FactoryGuy.define('offer', {
   sequences: {

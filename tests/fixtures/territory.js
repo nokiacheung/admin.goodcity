@@ -1,4 +1,4 @@
-import districtFactory from '../fixtures/district';
+import '../fixtures/district';
 var territory_list = ["", "New Territories","Hong Kong Island","Kowloon"];
 
 FactoryGuy.define('territory',{
