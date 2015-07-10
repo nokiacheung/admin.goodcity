@@ -7,6 +7,7 @@ I18nTranslationsZhTw =
 
     Ember.I18n.translation_store = Ember.I18n.translation_store || {}
     Ember.I18n.translation_store['zh-tw'] = Ember.$.extend true, SharedTranslationsZhTw,
+      "socket_offline_error": "正在嘗試連接至 admin.goodcity.hk..."
       "reviewing": "正在審查"
       "reviewed": "已審查完畢"
       "submitted": "已提交"
