@@ -49,3 +49,6 @@ Documentation has moved to https://github.com/crossroads/shared.goodcity/blob/ma
 
 ## Cordova
 Documentation has moved to https://github.com/crossroads/shared.goodcity/blob/master/docs/cordova.md
+
+## Development Notes
+Documentation has moved to https://github.com/crossroads/shared.goodcity/blob/master/docs/development-notes.md
