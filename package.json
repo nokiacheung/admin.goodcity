@@ -53,7 +53,7 @@
     "glob": "^5.0.13"
   },
   "dependencies": {
-    "shared.goodcity": "git://github.com/crossroads/shared.goodcity.git",
+    "shared-goodcity": "git://github.com/crossroads/shared.goodcity.git",
     "slick-carousel": "^1.5.5"
   }
 }

@@ -14,7 +14,7 @@ npm link
 cd ..
 git clone https://github.com/crossroads/admin.goodcity.git
 cd admin.goodcity
-npm link shared.goodcity
+npm link shared-goodcity
 ember install
 ```
 

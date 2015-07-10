@@ -1,5 +1,5 @@
 `import Ember from "ember"`
-`import SharedTranslationsZhTw from "shared.goodcity/initializers/i18n-zh-tw"`
+`import SharedTranslationsZhTw from "shared-goodcity/initializers/i18n-zh-tw"`
 
 I18nTranslationsZhTw =
   name: 'i18n-zh-tw'
