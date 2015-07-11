@@ -1,11 +1,9 @@
-<div id="twilio_token" data-token=""></div>
-
-<span id="phoneNumber" data-mobile={{mobileWithPrefix}} class="tel_link {{if hidden 'hidden'}}" {{action "makeCall" on='click'}}>
+<span id="phoneNumber" class="tel_link {{if hidden 'hidden'}}" {{action "makeCall" on='click'}}>
   <span class="phone_link"><i class="fa fa-phone"></i> {{displayNumber}}</span>
 </span>
 
 {{!-- HANG-UP BUTTON --}}
-<span id="hangup" class="fa-stack fa hangup-call" {{action "hangupCall" on='click'}}>
+<span id="hangup" class="fa-stack fa hangup-call {{if activeCall 'display-hangup' 'hide-hangup'}}" {{action "hangupCall" on='click'}}>
   <i class="fa fa-circle fa-stack-2x"></i>
   <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
 </span>

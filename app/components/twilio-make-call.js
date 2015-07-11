@@ -3,14 +3,13 @@ import AjaxPromise from '../utils/ajax-promise';
 
 export default Ember.Component.extend({
 
-  mobile: "",
-  hidden: Ember.computed.empty("mobile"),
+  mobile:      null,
+  offerId:     null,
+  twilioToken: null,
+  activeCall:  false,
 
-  mobileWithPrefix: function() {
-    var mobile = this.get("mobile");
-    var prefix = mobile.indexOf("+852") === -1 ? "" : "";
-    return this.get('session.currentUser.id') + "#" + this.get("offerId") + "#" + prefix + mobile.replace(/ /g, "");
-  }.property("mobile"),
+  hidden:        Ember.computed.empty("mobile"),
+  currentUserId: Ember.computed.alias("session.currentUser.id"),
 
   displayNumber: function() {
     var num = this.get("mobile").replace(/\+852/, "");
@@ -18,54 +17,47 @@ export default Ember.Component.extend({
   }.property("mobile"),
 
   initTwilioDeviceBindings: function() {
-    var twilio_device, twilio_token;
-    twilio_token = Ember.$('#twilio_token').data('token');
-    twilio_device = Twilio.Device;
+    var _this         = this;
+    var twilio_token  = _this.get("twilioToken");
+    var twilio_device = Twilio.Device;
     twilio_device.setup(twilio_token, {
       debug: true
     });
 
     twilio_device.error(function() {
       Twilio.Device.disconnectAll();
-      return Ember.$("#hangup").hide();
+      _this.set("activeCall", false);
     });
 
     twilio_device.disconnect(function() {
-      return Ember.$("#hangup").hide();
+      _this.set("activeCall", false);
     });
   },
 
   actions: {
 
     makeCall: function(){
-      var params = { "phone_number": Ember.$('#phoneNumber').data('mobile') };
-      this.send("displayHangupIcon");
+      var params = { "phone_number": this.get('offerId') + "#" + this.get("currentUserId") };
+      this.set("activeCall", true);
       return Twilio.Device.connect(params);
     },
 
     hangupCall: function(){
       return Twilio.Device.disconnectAll();
     },
-
-    displayHangupIcon: function(){
-      Ember.$("#hangup").fadeIn().css('display', 'inline-block');
-    }
   },
 
   didInsertElement: function() {
     this._super();
     var _this = this;
-
     var loadingView = this.container.lookup('view:loading').append();
 
-    new AjaxPromise("/twilio_outbound/generate_call_token", "GET", null)
+    new AjaxPromise("/twilio_outbound/generate_call_token", "GET", this.get('session.authToken'))
       .then(data => {
-        Ember.$("#twilio_token").data("token", data["token"]);
+        _this.set("twilioToken", data["token"]);
         _this.initTwilioDeviceBindings();
       })
-      .catch(error => {
-        throw error;
-      })
+      .catch(error => { throw error; })
       .finally(() => loadingView.destroy());
   }
 });
