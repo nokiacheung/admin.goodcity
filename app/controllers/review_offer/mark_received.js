@@ -8,12 +8,16 @@ export default Ember.Controller.extend({
     return arguments.length > 1 ? value : this.get("model.deliveryType");
   },
 
-  deliveredOptions: [
-    { value: "Unknown", label: this.get("i18n").t("mark_received.unknown") },
-    { value: "Gogovan", label: this.get("i18n").t("mark_received.gogovan") },
-    { value: "Alternate", label: this.get("i18n").t("mark_received.crossroads_truck") },
-    { value: "Drop Off", label: this.get("i18n").t("mark_received.dropped_off") }
-  ],
+  deliveredOptions: null,
+
+  initController: function() {
+    this.set("deliveredOptions", [
+      { value: "Unknown", label: this.get("i18n").t("mark_received.unknown") },
+      { value: "Gogovan", label: this.get("i18n").t("mark_received.gogovan") },
+      { value: "Alternate", label: this.get("i18n").t("mark_received.crossroads_truck") },
+      { value: "Drop Off", label: this.get("i18n").t("mark_received.dropped_off") }
+    ]);
+  }.on("init"),
 
   promptText: t("mark_received.select"),
 

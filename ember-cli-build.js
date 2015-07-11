@@ -1,5 +1,6 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var webRelease = process.env.EMBER_CLI_CORDOVA === '0' && ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1;
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -27,7 +28,7 @@ module.exports = function(defaults) {
 
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/moment/locale/zh-tw.js');
-  app.import('bower_components/airbrake-js/airbrake.js');
+  app.import('bower_components/airbrake-js/dist/client.js');
   app.import('bower_components/pickadate/lib/picker.js');
   app.import('bower_components/pickadate/lib/picker.date.js');
   app.import('bower_components/pickadate/lib/picker.time.js');
@@ -50,10 +51,6 @@ module.exports = function(defaults) {
   app.import('bower_components/jquery-timeago/jquery.timeago.js');
   app.import('bower_components/socket.io-client/socket.io.js');
 
-  app.import('bower_components/handlebars/handlebars.runtime.js');
-  app.import('bower_components/ember-i18n/lib/i18n.js');
-  app.import('bower_components/ember-i18n/lib/i18n-plurals.js');
-
   app.import('bower_components/lightgallery/light-gallery/css/lightGallery.css');
   app.import('bower_components/lightgallery/light-gallery/js/lightGallery.js');
   app.import('bower_components/lightgallery/light-gallery/img/loading.gif', {
@@ -71,23 +68,24 @@ module.exports = function(defaults) {
           'ember-data': ['default']
         }
   });
-  app.import({
-    development: 'bower_components/ember-data-factory-guy/dist/ember-data-factory-guy.js',
-    test: 'bower_components/ember-data-factory-guy/dist/ember-data-factory-guy.js'
-    }, {  destDir: 'assets/',
-        exports: {
-          'FactoryGuy': ['default']
-    }
-  });
 
-  app.import({
-    development: 'bower_components/ember-data-factory-guy/dist/factory_guy_has_many.js',
-    test: 'bower_components/ember-data-factory-guy/dist/factory_guy_has_many.js',
-    }, {  destDir: 'assets/',
-        exports: {
-          'FactoryGuyHasMany': ['default']
-    }
-  });
+  // app.import({
+  //   development: 'bower_components/ember-data-factory-guy/dist/ember-data-factory-guy.js',
+  //   test: 'bower_components/ember-data-factory-guy/dist/ember-data-factory-guy.js'
+  //   }, {  destDir: 'assets/',
+  //       exports: {
+  //         'FactoryGuy': ['default']
+  //   }
+  // });
+
+  // app.import({
+  //   development: 'bower_components/ember-data-factory-guy/dist/factory_guy_has_many.js',
+  //   test: 'bower_components/ember-data-factory-guy/dist/factory_guy_has_many.js',
+  //   }, {  destDir: 'assets/',
+  //       exports: {
+  //         'FactoryGuyHasMany': ['default']
+  //   }
+  // });
 
   app.import({test:'bower_components/jquery-mockjax/jquery.mockjax.js'});
 
