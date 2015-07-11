@@ -1,11 +1,10 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Component.extend({
   disabled: false,
-
-  placeholderText: function(){
-    return Ember.I18n.t("reject.message_placeholder");
-  }.property(),
+  placeholderText: t("reject.message_placeholder"),
+  i18n: Ember.inject.service(),
 
   rejectMessage: function(key, value){
     if(arguments.length > 1) {
@@ -17,19 +16,19 @@ export default Ember.Component.extend({
       var message = "";
 
       switch(reason) {
-        case Ember.I18n.t("reject.quality"):
-          message = Ember.I18n.t("reject.reject_message") + Ember.I18n.t("reject.quality_message");
+        case this.get("i18n").t("reject.quality"):
+          message = this.get("i18n").t("reject.reject_message") + this.get("i18n").t("reject.quality_message");
           break;
-        case Ember.I18n.t("reject.size") :
-          message = Ember.I18n.t("reject.reject_message") + Ember.I18n.t("reject.size_message");
+        case this.get("i18n").t("reject.size") :
+          message = this.get("i18n").t("reject.reject_message") + this.get("i18n").t("reject.size_message");
           break;
-        case Ember.I18n.t("reject.supply") :
-          message = Ember.I18n.t("reject.supply_message");
+        case this.get("i18n").t("reject.supply") :
+          message = this.get("i18n").t("reject.supply_message");
           break;
       }
 
       if(this.get('selectedId') === "-1") {
-        message = Ember.I18n.t("reject.reject_message");
+        message = this.get("i18n").t("reject.reject_message");
       }
       return message;
     }

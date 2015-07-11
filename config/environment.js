@@ -51,6 +51,9 @@ module.exports = function(environment) {
     },
     coffeeOptions: {
       blueprints: false
+    },
+    i18n: {
+      defaultLocale: 'en'
     }
   };
 

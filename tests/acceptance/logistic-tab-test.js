@@ -3,7 +3,7 @@ import startApp from '../helpers/start-app';
 
 var App, testHelper, offer, item, reviewer, offer2, item2, offer3, item3,
   delivery1, ggv_order1, offer5, item5, delivery2, ggv_order2,
-  offer6, item6, offer7,
+  offer6, item6, offer7, t,
   TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
 
 module('Review Offer Logistics', {
@@ -11,6 +11,7 @@ module('Review Offer Logistics', {
     App = startApp({}, 2);
     testHelper = TestHelper.setup(App);
     lookup('service:session').set('isAdmin', true);
+    t = lookup('service:i18n').t;
 
     reviewer = FactoryGuy.make("user");
     offer = FactoryGuy.make("offer", { state: "under_review", reviewedBy:  reviewer });
@@ -162,9 +163,9 @@ test("for scheduled offer with active GGV order state", function() {
     equal($(".items_list img").length, 1);
     equal($('.transport-buttons a').length, 2);
 
-    equal($(".booking-id div:first").text().trim(), Ember.I18n.t("delivery_details.id"));
+    equal($(".booking-id div:first").text().trim(), t("delivery_details.id"));
     equal($(".booking-id div:last").text().trim().indexOf("654321") >= 0, true);
-    equal($(".booking-id div:last a").text().trim().indexOf(Ember.I18n.t("delivery_details.driver_screen")) >=0, true);
+    equal($(".booking-id div:last a").text().trim().indexOf(t("delivery_details.driver_screen")) >=0, true);
     equal($(".delivery-details .row:eq(7) div a").attr("href").indexOf("/ggv_orders/12345") >=0, true);
   });
 });

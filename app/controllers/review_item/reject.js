@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
   needs: ["review_item", "offer"],
@@ -6,7 +7,8 @@ export default Ember.Controller.extend({
   itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
   itemId: Ember.computed.alias('controllers.review_item.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
-  rejectReasonPlaceholder: Ember.I18n.t("reject.custom_reason"),
+  rejectReasonPlaceholder: t("reject.custom_reason"),
+  i18n: Ember.inject.service(),
 
   isBlank: function(key, value){
     return (arguments.length >1) ? value : false;
@@ -97,7 +99,7 @@ export default Ember.Controller.extend({
       var itemIsLastAccepted = offer.get("approvedItems").every(i => i.id === this.get('itemId'));
 
       if (itemIsLastAccepted && gogovanOrder) {
-        this.get("confirm").show(Ember.I18n.t("reject.cancel_gogovan_confirm"), () => {
+        this.get("confirm").show(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
           if (gogovanOrder.get("isActive")) {
             this.transitionToRoute('offer.cancel_gogovan', offer);
           } else {

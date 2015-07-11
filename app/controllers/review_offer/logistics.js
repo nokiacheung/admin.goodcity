@@ -2,24 +2,26 @@ import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 import config from './../../config/environment';
 import transportDetails from './../offer/transport_details';
+import { translationMacro as t } from "ember-i18n";
 
 export default transportDetails.extend({
   needs: ['review_offer'],
 
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
-  crossroadsOptionsPrompt: Ember.I18n.t("select"),
+  crossroadsOptionsPrompt: t("select"),
+  i18n: Ember.inject.service(),
 
   selectedCrossroadsOption: function(){
     var options = this.get('crossroadsOptions').filter(function(option){
-      return option.get('name') === Ember.I18n.t("offer.disable");
+      return option.get('name') === this.get("i18n").t("offer.disable");
     });
     return options.get('firstObject');
   }.property('crossroadsOptions'),
 
   selectedGogovanOption: function(){
     var options = this.get('gogovanOptions').filter(function(option){
-      return option.get('name') === Ember.I18n.t("logistics.9t_truck");
+      return option.get('name') === this.get("i18n").t("logistics.9t_truck");
     });
     return options.get('firstObject.id');
   }.property('gogovanOptions'),

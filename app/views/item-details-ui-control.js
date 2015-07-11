@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.View.extend({
   templateName: 'item-details-ui-control',
@@ -20,12 +21,12 @@ export default Ember.View.extend({
   packagetypeid: null,
   packagetype: null,
 
-  promptText: Ember.I18n.t("placeholder.package_type"),
-  commentPlaceholder: Ember.I18n.t("placeholder.comments"),
-  qtyPlaceholder: Ember.I18n.t("placeholder.qty"),
-  lengthPlaceholder: Ember.I18n.t("placeholder.length"),
-  widthPlaceholder: Ember.I18n.t("placeholder.width"),
-  heightPlaceholder: Ember.I18n.t("placeholder.height"),
+  promptText: t("placeholder.package_type"),
+  commentPlaceholder: t("placeholder.comments"),
+  qtyPlaceholder: t("placeholder.qty"),
+  lengthPlaceholder: t("placeholder.length"),
+  widthPlaceholder: t("placeholder.width"),
+  heightPlaceholder: t("placeholder.height"),
 
   store: Ember.inject.service(),
 

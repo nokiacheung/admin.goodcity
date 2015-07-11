@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Component.extend({
   attributeBindings: ['selectedItemId', 'selectedItemName', 'disabled'],
@@ -6,7 +7,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   disabled: false,
   enabled: Ember.computed.not('disabled'),
-  placeholderText: Ember.I18n.t("review_item.add_item_label"),
+  placeholderText: t("review_item.add_item_label"),
 
   selectedItypeObserver: function(){
     return this.set('selectedItemName', this.get('findSelectedItem.name'));
