@@ -11,6 +11,7 @@
 # Script config
 PROJECT_NAME=admin.goodcity
 APP_NAME="GoodCity Admin (Staging)" # must match <name> in config.xml
+STAGING=true # true|false - for admin-staging|admin.goodcity production builds
 
 # Then insert this script into the crontab
 # * * * * * source /Users/developer/.bash_profile; /Users/developer/Workspace/admin.goodcity/cordova/deploy/deploy-ios-testfairy.sh  >> /tmp/goodcity_admin_ios_build.log 2>&1
@@ -156,7 +157,7 @@ if [ $? -ne 0 ]; then
 fi
 
 log "Building cordova project"
-${EMBER} cordova:build --environment=production --platform=ios >/dev/null
+staging=${STAGING} ${EMBER} cordova:build --environment=production --platform=ios >/dev/null
 if [ $? -ne 0 ]; then
 	log "Error during 'ember cordova:build --environment=production --platform=ios'. Terminating."
 	delete_lock_and_exit
