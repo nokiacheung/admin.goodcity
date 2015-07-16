@@ -1,4 +1,4 @@
-
+import FactoryGuy from 'ember-data-factory-guy';
 var district_list =  ["Yuen Long","Kwu Tung","Tai Wai","Taipo","Tai Tong","Tai Tam"];
 
 FactoryGuy.define('district', {

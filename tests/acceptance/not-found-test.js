@@ -1,19 +1,21 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, t;
+var App, offer, t;
 
 module('Display not found error', {
   setup: function() {
     App = startApp();
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
     Ember.run.later = () => true;
     offer = FactoryGuy.make("offer");
-    t = lookup('service:i18n').t;
+    var i18n = App.__container__.lookup('service:i18n');
+    t = i18n.t.bind(i18n);
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

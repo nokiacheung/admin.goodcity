@@ -1,14 +1,15 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, message1, message2, message3,
+var App, offer, message1, message2, message3,
   message4, message5, user1, user2, offer1;
 
 module('Reviewer: Display Offer Messages', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
     user1 = FactoryGuy.make("user");
     user2 = FactoryGuy.make("user_with_image");
     offer = FactoryGuy.make("offer", { state:"under_review"});
@@ -21,7 +22,7 @@ module('Reviewer: Display Offer Messages', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

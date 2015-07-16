@@ -1,4 +1,5 @@
 import { test, moduleForModel } from 'ember-qunit';
+import FactoryGuy from 'ember-data-factory-guy';
 import testSkip from '../../helpers/test-skip';
 
 moduleForModel('offer', 'Offer Model', {

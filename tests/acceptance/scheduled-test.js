@@ -1,14 +1,15 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, testHelper, offer1, delivery1, offer2, delivery2, offer3,
-  delivery3, schedule4, offer4, delivery4,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App, offer1, delivery1, offer2, delivery2, offer3,
+  delivery3, schedule4, offer4, delivery4;
 
 module('Scheduled Offers', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     delivery1 = FactoryGuy.make('delivery', {deliveryType: "Gogovan"});
     offer1 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery1 });
@@ -25,7 +26,7 @@ module('Scheduled Offers', {
     offer3 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery3 });
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

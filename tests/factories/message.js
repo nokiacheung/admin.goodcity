@@ -1,3 +1,5 @@
+import FactoryGuy from 'ember-data-factory-guy';
+
 FactoryGuy.define('message', {
   sequences: {
     id: function(num) {

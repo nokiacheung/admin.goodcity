@@ -29,6 +29,7 @@ export default Ember.View.extend({
   heightPlaceholder: t("placeholder.height"),
 
   store: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   package: function() {
     return this.get("store").getById("package", this.get("pkgid"));

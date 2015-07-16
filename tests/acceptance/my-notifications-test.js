@@ -1,14 +1,15 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 // import syncDataStub from '../helpers/empty-sync-data-stub';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, item, message1, message2, message3, message4, message5;
+var App, offer, item, message1, message2, message3, message4, message5;
 
 module('Reviewer: Notifications', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item = FactoryGuy.make("item", { state:"submitted", offer: offer});
@@ -20,7 +21,7 @@ module('Reviewer: Notifications', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

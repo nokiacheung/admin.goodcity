@@ -1,14 +1,15 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, item1, item2, package1, package2, item3, package3,
+var App, offer, item1, item2, package1, package2, item3, package3,
   item4, package4;
 
 module('Reviewer: Accept Item Tab', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item1 = FactoryGuy.make("item_with_type", { offer: offer, state: "accepted"});
@@ -25,7 +26,7 @@ module('Reviewer: Accept Item Tab', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

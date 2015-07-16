@@ -1,4 +1,5 @@
-import '../fixtures/user';
+import FactoryGuy from 'ember-data-factory-guy';
+import '../factories/user';
 
 export default function() {
   Ember.Test.registerAsyncHelper('loginUser', function (app, url) {

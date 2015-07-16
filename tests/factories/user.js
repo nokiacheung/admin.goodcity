@@ -1,3 +1,4 @@
+import FactoryGuy from 'ember-data-factory-guy';
 import './image';
 import mobile from './mobile';
 

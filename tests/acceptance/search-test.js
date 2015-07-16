@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, testHelper, offer, user, ggvOrder, delivery, address, contact, item,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App, offer, user, ggvOrder, delivery, address, contact, item;
 
 module('Search Offers', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
     Ember.run.debounce = (context, func) => func.call(context);
 
     user  = FactoryGuy.make("user", { firstName: "John", mobile: "99999999" });
@@ -20,7 +21,7 @@ module('Search Offers', {
     address  = FactoryGuy.make("address", { 'addressable': contact });
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

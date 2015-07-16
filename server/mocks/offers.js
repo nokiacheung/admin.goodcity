@@ -30,7 +30,7 @@ module.exports = function(app) {
       { "id": 3, "name": "Heavily Used" }
     ],
     "addresses": [
-      { "id": 1, "street": null, "flat": null, "building": null, "district_id": null, "addressable_type": "User" }
+      { "id": 1, "street": null, "flat": null, "building": null, "district_id": null, "addressable_type": "User", "addressable_id": 1 }
     ],
     "messages": [
       { "id": "1", "body": "I have made an offer.", "state": null, "sender_id": "1", "is_private": false, "offer_id": "4", "item_id": null }

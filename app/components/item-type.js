@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   disabled: false,
   enabled: Ember.computed.not('disabled'),
   placeholderText: t("review_item.add_item_label"),
+  i18n: Ember.inject.service(),
 
   selectedItypeObserver: function(){
     return this.set('selectedItemName', this.get('findSelectedItem.name'));

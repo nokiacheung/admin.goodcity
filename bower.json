@@ -24,14 +24,11 @@
     "socket.io-client": "~1.3.2",
     "hammerjs": "~2.0.4",
     "lightgallery": "~1.1.4",
-    "font-awesome": "~4.3.0"
-  },
-  "devDependencies": {
-    "jquery-mockjax": "~2.0.1",
-    "ember-data-factory-guy": "~1.13.1",
+    "font-awesome": "~4.3.0",
     "ember-qunit": "0.4.1",
     "ember-qunit-notifications": "0.0.7",
-    "qunit": "~1.18.0"
+    "qunit": "~1.18.0",
+    "jquery-mockjax": "2.0.1"
   },
   "resolutions": {
     "ember-data": "1.13.5",

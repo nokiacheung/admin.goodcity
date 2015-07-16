@@ -1,3 +1,4 @@
+import FactoryGuy from 'ember-data-factory-guy';
 import mobile from './mobile';
 
 FactoryGuy.define('user_profile', {

@@ -61,33 +61,5 @@ module.exports = function(defaults) {
     app.import('vendor/twilio/twilio.js');
   }
 
-  app.import({
-    development: 'bower_components/ember-data/ember-data.js',
-    production:  'bower_components/ember-data/ember-data.prod.js'
-    }, { exports: {
-          'ember-data': ['default']
-        }
-  });
-
-  // app.import({
-  //   development: 'bower_components/ember-data-factory-guy/dist/ember-data-factory-guy.js',
-  //   test: 'bower_components/ember-data-factory-guy/dist/ember-data-factory-guy.js'
-  //   }, {  destDir: 'assets/',
-  //       exports: {
-  //         'FactoryGuy': ['default']
-  //   }
-  // });
-
-  // app.import({
-  //   development: 'bower_components/ember-data-factory-guy/dist/factory_guy_has_many.js',
-  //   test: 'bower_components/ember-data-factory-guy/dist/factory_guy_has_many.js',
-  //   }, {  destDir: 'assets/',
-  //       exports: {
-  //         'FactoryGuyHasMany': ['default']
-  //   }
-  // });
-
-  app.import({test:'bower_components/jquery-mockjax/jquery.mockjax.js'});
-
   return app.toTree();
 };

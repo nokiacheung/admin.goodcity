@@ -1,17 +1,19 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, testHelper, offer, item, reviewer, offer2, item2, offer3, item3,
+var App, offer, item, reviewer, offer2, item2, offer3, item3,
   delivery1, ggv_order1, offer5, item5, delivery2, ggv_order2,
-  offer6, item6, offer7, t,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+  offer6, item6, offer7, t;
 
 module('Review Offer Logistics', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
     lookup('service:session').set('isAdmin', true);
-    t = lookup('service:i18n').t;
+    var i18n = App.__container__.lookup('service:i18n');
+    t = i18n.t.bind(i18n);
 
     reviewer = FactoryGuy.make("user");
     offer = FactoryGuy.make("offer", { state: "under_review", reviewedBy:  reviewer });
@@ -35,7 +37,7 @@ module('Review Offer Logistics', {
     offer7 = FactoryGuy.make("offer_with_items", {state:"received", deliveredBy: "Gogovan"});
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

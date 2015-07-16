@@ -1,3 +1,4 @@
+import FactoryGuy from 'ember-data-factory-guy';
 var reason_list = ["Quality", "Size","Supply/Demand"];
 
 FactoryGuy.define('rejection_reason',{

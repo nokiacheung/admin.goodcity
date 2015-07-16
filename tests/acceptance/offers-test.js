@@ -1,16 +1,13 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
-var App, testHelper,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App;
 
 module('Submitted Offers', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

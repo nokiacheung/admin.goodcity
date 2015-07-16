@@ -1,3 +1,4 @@
+import FactoryGuy from 'ember-data-factory-guy';
 import './offer';
 import './package_type';
 

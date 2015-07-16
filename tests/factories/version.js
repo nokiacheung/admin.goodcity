@@ -1,3 +1,4 @@
+import FactoryGuy from 'ember-data-factory-guy';
 var event_list = ["create","update"];
 
 FactoryGuy.define('version',{

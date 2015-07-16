@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, user, offer1, offer2, offer3, offer4;
+var App, user, offer1, offer2, offer3, offer4;
 
 module('Reviewer: Display Donor Details Tab', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     user   = FactoryGuy.make("user");
     offer1 = FactoryGuy.make("offer_with_items", { state:"under_review", createdBy: user});
@@ -17,7 +18,7 @@ module('Reviewer: Display Donor Details Tab', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
