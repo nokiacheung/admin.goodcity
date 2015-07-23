@@ -36,7 +36,11 @@ module.exports = function(environment) {
       PRELOAD_TYPES: ["territory"],
       PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "version"],
       SHA: process.env.APP_SHA || "00000000",
-      VERSION: "1.0.0"
+      VERSION: "1.0.0",
+
+      AIRBRAKE_HOST: "https://errbit.crossroads.org.hk",
+      AIRBRAKE_PROJECT_ID: 0,
+      AIRBRAKE_PROJECT_KEY: "6d0f1e945f5fdba56d9fe043684f2b7a"
     },
 
     cordova: {
@@ -98,10 +102,6 @@ module.exports = function(environment) {
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
     ENV.DONOR_APP_HOST_URL = 'https://app.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
-    //Airbrake Js keys
-    ENV.APP.AIRBRAKE_HOST = "https://errbit.crossroads.org.hk";
-    ENV.APP.AIRBRAKE_PROJECT_ID = 0;
-    ENV.APP.AIRBRAKE_PROJECT_KEY = "6d0f1e945f5fdba56d9fe043684f2b7a";
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'https://admin.goodcity.hk',
@@ -118,29 +118,31 @@ module.exports = function(environment) {
     ].join(' ');
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
+    ENV.cordova.GcmSenderId = '876198075877';
+  }
 
-    if (process.env.staging === 'true') {
-      ENV.staging = true;
-      ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
-      ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
-      ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
-      ENV.contentSecurityPolicy["connect-src"] = [
-        'https://admin-staging.goodcity.hk',
-        'https://api-staging.goodcity.hk',
-        'https://socket-staging.goodcity.hk:81',
-        'ws://socket-staging.goodcity.hk:81',
-        'wss://socket-staging.goodcity.hk:81',
-        'https://api.cloudinary.com',
-        'https://errbit.crossroads.org.hk',
-        'https://api.twilio.com',
-        'http://static.twilio.com',
-        'https://static.twilio.com',
-        'wss://chunderw.twilio.com/signal'
-      ].join(' ');
-      ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
-    } else {
-      ENV.cordova.GcmSenderId = '876198075877';
-    }
+  if (process.env.staging === 'true') {
+    ENV.staging = true;
+    ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
+    ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
+    ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
+    ENV.contentSecurityPolicy["connect-src"] = [
+      'https://admin-staging.goodcity.hk',
+      'https://api-staging.goodcity.hk',
+      'https://socket-staging.goodcity.hk:81',
+      'ws://socket-staging.goodcity.hk:81',
+      'wss://socket-staging.goodcity.hk:81',
+      'https://api.cloudinary.com',
+      'https://errbit.crossroads.org.hk',
+      'https://api.twilio.com',
+      'http://static.twilio.com',
+      'https://static.twilio.com',
+      'wss://chunderw.twilio.com/signal'
+    ].join(' ');
+    ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
+    ENV.cordova.GcmSenderId = '907786683525';
+  } else {
+    ENV.staging = false;
   }
 
   ENV.APP.SERVER_PATH  = ENV.APP.API_HOST_URL + '/' + ENV.APP.NAMESPACE;

@@ -4,6 +4,7 @@
     "window",
     "-Promise",
     "moment",
+    "airbrakeJs",
     "Twilio"
   ],
   "browser": true,
