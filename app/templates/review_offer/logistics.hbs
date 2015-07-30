@@ -33,11 +33,7 @@
           {{else}}
             <div class="small-12 columns">
               <h3>{{t "logistics.accepted_items"}} ({{accepted.length}})</h3>
-              {{#each accepted as |item|}}
-                {{#link-to ''}}
-                  <img src={{item.displayImageUrl}} class="thumbnail" />
-                {{/link-to}}
-              {{/each}}
+              {{image-full-preview items=accepted}}
             </div>
 
             {{#if model.isReviewed}}
