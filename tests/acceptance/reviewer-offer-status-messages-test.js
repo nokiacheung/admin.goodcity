@@ -92,7 +92,7 @@ test("Display offer status for scheduled offer: Collection", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer4.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st , Afternoon");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st Afternoon");
   });
 });
 
@@ -120,7 +120,7 @@ test("Display offer status for scheduled offer: Drop Off", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer6.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st , Afternoon");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st Afternoon");
   });
 });
 
