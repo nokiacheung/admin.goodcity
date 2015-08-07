@@ -67,6 +67,8 @@ module.exports = function(environment) {
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
     ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
 
+    ENV.APP.GOODCITY_NUMBER = "+85258087803"
+
     ENV.contentSecurityPolicy["connect-src"] = [
       'http://localhost:4201',
       'http://localhost:3000',
@@ -102,6 +104,8 @@ module.exports = function(environment) {
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
     ENV.DONOR_APP_HOST_URL = 'https://app.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
+
+    ENV.APP.GOODCITY_NUMBER = "+85258088700"
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'https://admin.goodcity.hk',

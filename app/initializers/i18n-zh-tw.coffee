@@ -100,6 +100,8 @@ I18nTranslationsZhTw =
           "total_offers": "捐獻總數"
           "crm": "CRM"
           "other_offers": "所有好人好市捐獻"
+          "internet_call": "Internet Call"
+          "end_call": "End Call"
 
       "mark_received":
         "delivered_by": "運送人員："
