@@ -11,11 +11,6 @@ export default Ember.Component.extend({
   hidden:        Ember.computed.empty("mobile"),
   currentUserId: Ember.computed.alias("session.currentUser.id"),
 
-  displayNumber: function() {
-    var num = this.get("mobile").replace(/\+852/, "");
-    return num.length > 4 ? num.substr(0, 4) + " " + num.substr(4) : num;
-  }.property("mobile"),
-
   initTwilioDeviceBindings: function() {
     var _this         = this;
     var twilio_token  = _this.get("twilioToken");

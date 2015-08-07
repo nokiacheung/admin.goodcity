@@ -102,6 +102,8 @@ I18nTranslationsEn =
           "total_offers": "Total offers"
           "crm": "CRM"
           "other_offers": "All offers on GoodCity"
+          "internet_call": "Internet Call"
+          "end_call": "End Call"
 
       "mark_received":
         "delivered_by": "Delivered by:"
