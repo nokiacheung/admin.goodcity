@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    {{#unless isCordovaApp}}
+    {{#unless isMobileAndTabletBrowser}}
       {{twilio-make-call mobile=donor.mobile offerId=currentOffer.id}}
     {{/unless}}
 

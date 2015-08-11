@@ -1,12 +1,11 @@
 import Ember from "ember";
 import config from '../../config/environment';
+import VerifyMobileBrowserMixin from '../../mixins/verify-mobile-browser';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(VerifyMobileBrowserMixin, {
   donor:        null,
   currentOffer: null,
-  isCordovaApp: config.cordova.enabled,
   offersCount:  Ember.computed.alias('model.length'),
-
   goodcityNumber: config.APP.GOODCITY_NUMBER,
 
   displayNumber: function() {
@@ -20,5 +19,5 @@ export default Ember.Controller.extend({
 
   receivedOffers: function(){
     return this.get('model').filterBy("isReceived", true).length;
-  }.property('model')
+  }.property('model'),
 });
