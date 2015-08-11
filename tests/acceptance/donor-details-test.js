@@ -35,6 +35,8 @@ test("verify donor details", function() {
     }
   };
 
+  lookup("controller:review_offer/donor_details").set("isMobileAndTabletBrowser", true);
+
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {
     equal(currentURL(), "/offers/1/review_offer/donor_details");
