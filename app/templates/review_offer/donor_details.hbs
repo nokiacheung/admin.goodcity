@@ -34,7 +34,7 @@
             {{t "review_offer.donor.registered"}}:
           </div>
           <div class="small-7 columns">
-            {{display-timeago donor.createdAt}}
+            {{view 'time-ago' timeValue=donor.createdAt smallPrefix=false}}
           </div>
         </div>
 
