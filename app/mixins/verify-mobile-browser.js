@@ -4,6 +4,11 @@ import config from './../config/environment';
 export default Ember.Mixin.create({
   isCordovaApp: config.cordova.enabled,
 
+  touchDevice: function() {
+    try{ document.createEvent("TouchEvent"); return true; }
+    catch(e){ return false; }
+  }.property(),
+
   // Reference: http://stackoverflow.com/a/11381730
   isMobileAndTabletBrowser: function() {
     var check = false;
@@ -12,6 +17,6 @@ export default Ember.Mixin.create({
           check = true;
       }
     })(navigator.userAgent||navigator.vendor||window.opera);
-    return check || this.get("isCordovaApp");
+    return check || this.get("isCordovaApp") || this.get("touchDevice");
   }.property()
 });
