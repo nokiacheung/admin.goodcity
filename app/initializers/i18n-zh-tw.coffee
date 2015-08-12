@@ -94,6 +94,7 @@ I18nTranslationsZhTw =
         "all_items_processed": "所有項目皆被接收或列作遺失"
 
         "donor":
+          "offer_id": "Offer ID"
           "district": "地區"
           "registered": "已註冊"
           "last_seen": "最後上線"

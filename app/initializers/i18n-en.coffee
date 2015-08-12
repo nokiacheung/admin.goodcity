@@ -96,6 +96,7 @@ I18nTranslationsEn =
         "all_items_processed": "All items marked received or missing."
 
         "donor":
+          "offer_id": "Offer ID"
           "district": "District"
           "registered": "Registered"
           "last_seen": "Last seen"
