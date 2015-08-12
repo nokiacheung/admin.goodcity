@@ -1,17 +1,21 @@
-<div class="row internet-call-button {{if hidden 'hidden'}}">
-  <div class="small-8 small-offset-2 columns">
-    {{#if activeCall}}
-      <button class="button expand secondary" {{action "hangupCall" on='click'}}>
-        <span id="hangup" class="fa-stack fa hangup-call no-avatar">
-          <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-        </span>
-        {{t "review_offer.donor.end_call"}}
-      </button>
-    {{else}}
-      {{#view "online-button" action="makeCall" classNames="button expand secondary"}}
-        <i class="fa fa-headphones"></i>
-        {{t "review_offer.donor.internet_call"}}
-      {{/view}}
-    {{/if}}
+{{#if hasTwilioSupport}}
+
+  <div class="row internet-call-button {{if hidden 'hidden'}}">
+    <div class="small-8 small-offset-2 columns">
+      {{#if activeCall}}
+        <button class="button expand secondary" {{action "hangupCall" on='click'}}>
+          <span id="hangup" class="fa-stack fa hangup-call no-avatar">
+            <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+          </span>
+          {{t "review_offer.donor.end_call"}}
+        </button>
+      {{else}}
+        {{#view "online-button" action="makeCall" classNames="button expand secondary"}}
+          <i class="fa fa-headphones"></i>
+          {{t "review_offer.donor.internet_call"}}
+        {{/view}}
+      {{/if}}
+    </div>
   </div>
-</div>
+
+{{/if}}

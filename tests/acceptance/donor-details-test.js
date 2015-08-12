@@ -35,7 +35,7 @@ test("verify donor details", function() {
     }
   };
 
-  lookup("controller:review_offer/donor_details").set("isMobileAndTabletBrowser", true);
+  window.webkitRTCPeerConnection = true;
 
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {

@@ -1,8 +1,7 @@
 import Ember from "ember";
 import config from '../../config/environment';
-import VerifyMobileBrowserMixin from '../../mixins/verify-mobile-browser';
 
-export default Ember.Controller.extend(VerifyMobileBrowserMixin, {
+export default Ember.Controller.extend({
   donor:        null,
   currentOffer: null,
   offersCount:  Ember.computed.alias('model.length'),
