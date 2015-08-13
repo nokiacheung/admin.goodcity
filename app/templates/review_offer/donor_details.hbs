@@ -84,9 +84,7 @@
       </div>
     </div>
 
-    {{#unless isMobileAndTabletBrowser}}
-      {{twilio-make-call mobile=donor.mobile offerId=currentOffer.id}}
-    {{/unless}}
+    {{twilio-make-call mobile=donor.mobile offerId=currentOffer.id}}
 
     <hr>
     <div class="row">
