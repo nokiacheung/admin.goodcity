@@ -41,7 +41,14 @@
 
       <div class="row top-bottom-margin">
         <div class="small-12 columns link">
-          {{item-type getItemId="getItemId" selectedItemId=itemTypeId selectedItemName=itemTypeName disabled=model.offer.isFinished }}
+          {{select-2
+            content=itemTypes
+            optionValuePath="id"
+            optionLabelPath="name"
+            value=itemTypeId
+            placeholder=(t "review_item.add_item_label")
+            enabled=(js-x "this == false" model.offer.isFinished)
+          }}
         </div>
       </div>
 

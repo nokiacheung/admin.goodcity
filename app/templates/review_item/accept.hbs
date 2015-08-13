@@ -1,3 +1,106 @@
 <section class="main-section accept_widget">
-{{outlet "packages"}}
+  <div class="row ">
+    {{#if itemTypeId}}
+      {{#validatable-form class="form-horizontal" action="save" on="submit"}}
+
+        {{#each packages key="@index" as |pkg index|}}
+          <div class="details row">
+            <div class="small-2 icon-center columns">
+              {{#if (js-x "this > 0" index)}}
+              <i class='fa fa-minus-circle fa-2x icon' {{action "removePackage" index on="click" }}></i>
+              {{/if}}
+            </div>
+            <div class="small-10 columns">
+              <div class="small-12 columns detail_container">
+                <div class="row top">
+                  <div class="small-3 columns">
+                    {{!-- We will enable once feature is implemented fully. --}}
+                    {{!-- {{#link-to "package.edit_images" pkg.packageTypeId}} --}}
+                      <img src="{{pkg.displayImageUrl}}" class="thumb small">
+                    {{!-- {{/link-to}} --}}
+                  </div>
+                  <div class="small-7 columns head">
+                    <span class="ui">
+                      {{view "select"
+                        content=subPackageTypes
+                        optionValuePath="content.id"
+                        optionLabelPath="content.name"
+                        value=pkg.packageTypeId
+                        prompt=(t 'placeholder.package_type')
+                        required='true'
+                      }}
+                    </span>
+                  </div>
+                  <div class="small-2 columns icon" {{action "toggleComment" index on="click"}}>
+                    <i class="fa fa-lg {{if pkg.hideComment 'fa-plus' 'is-hide'}}"></i>
+                  </div>
+                </div>
+                <div class="{{if pkg.hideComment 'is-hide'}} row bottom ui">
+                  <div class="small-10 columns head">
+                    {{input type="text" value=pkg.notes placeholder=(t "placeholder.comments") maxlength="50" required="required" }}
+                  </div>
+                  <div class="small-2 columns icon" {{action "toggleComment" index on="click"}}>
+                    <i class="fa fa-minus fa-lg"></i>
+                  </div>
+                </div>
+                <div class="row bottom">
+                  <div class="small-6 columns ui inner">
+                    {{input type="number" value=pkg.quantity placeholder=(t "placeholder.qty") maxlength="8" required="required" }}
+                  </div>
+                  <div class="small-2 columns ui inner">
+                    {{input type="number" value=pkg.length placeholder=(t "placeholder.length") maxlength="8" }}
+                  </div>
+                  <div class="small-2 columns ui inner">
+                    {{input type="number" value=pkg.width placeholder=(t "placeholder.width") maxlength="5" }}
+                  </div>
+                  <div class="small-2 columns ui inner">
+                    {{input type="number" value=pkg.height placeholder=(t "placeholder.height") maxlength="5" }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        {{/each}}
+
+        <div class="small-12 columns">
+          <div class='row'>
+            <div class='small-2 columns icon-center'>
+              <i class='fa fa-plus-circle fa-2x icon' {{action "addPackage" on="click"}}></i>
+            </div>
+            <div class='small-9 columns link-blue add_package_link' {{action "addPackage" on="click"}}>{{t "review_item.add_component"}}</div>
+            <div class='small-1 columns'>&nbsp;</div>
+          </div>
+          <br>
+          <div class="row accept_buttons">
+            {{#if isItemAccepted}}
+              <div class="small-11 small-offset-1  columns">
+                {{#view "online-button" id="acceptItem" classNames="button expand accept_item"}}
+                  {{t "save"}}
+                {{/view}}
+              </div>
+            {{else}}
+              <div class="small-6 columns">
+                {{#view "online-button" id="saveItem" classNames="button expand save_item"}}
+                  {{t "review_item.save_item"}}
+                {{/view}}
+              </div>
+              <div class="small-6 columns">
+                {{#view "online-button" id="acceptItem" classNames="button expand accept_item"}}
+                  {{t "review_item.accept_item"}}
+                {{/view}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+
+      {{/validatable-form}}
+
+    {{else}}
+      <p>
+        <i class="icon-empty-items fa fa-info-circle fa-5x"></i>
+        <p class="no-items">{{t 'reject.select_type'}}</p>
+      </p>
+    {{/if}}
+  </div>
 </section>
