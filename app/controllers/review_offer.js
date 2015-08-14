@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import AjaxPromise from './../utils/ajax-promise';
+import recordsUtil from './../utils/records';
 
 export default Ember.Controller.extend({
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
+  confirm: Ember.inject.service(),
 
   offerReadyForClosure: function() {
     return !this.get("model.allItemsRejected") &&
@@ -42,6 +44,21 @@ export default Ember.Controller.extend({
           this.transitionToRoute('review_offer.items');
         })
         .finally(() => loadingView.destroy());
-    }
+    },
+
+    cancelOffer: function(){
+      var offer = this.get("model");
+      this.get("confirm").show(Ember.I18n.t("delete_confirm"), () => {
+        var loadingView = this.container.lookup('view:loading').append();
+        offer.deleteRecord();
+        offer.save()
+          .then(() => {
+            recordsUtil.unloadRecordTree(offer);
+            this.transitionToRoute('my_list');
+          })
+          .catch(error => { offer.rollback(); throw error; })
+          .finally(() => loadingView.destroy());
+        });
+    },
   }
 });
