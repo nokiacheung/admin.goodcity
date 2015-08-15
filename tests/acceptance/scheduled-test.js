@@ -60,10 +60,8 @@ test("filtering gogovan delivery schedule", function() {
   andThen(function(){
     equal(currentURL(), "/offers/scheduled/gogovan");
 
-    Ember.run(function() {
-      var option = find('.dynamic_filter select option:contains("After next week (1)")').val();
-      $('.dynamic_filter select').val(option).change();
-    });
+    var option = find('.dynamic_filter select option:contains("After next week (1)")').val();
+    $('.dynamic_filter select').val(option).change();
 
     andThen(function(){
       equal(find('.dynamic_filter select :selected').text(), "After next week (1)");

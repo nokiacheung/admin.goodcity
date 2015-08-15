@@ -12,8 +12,8 @@ module('Reviewer: Display Item Messages', {
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item = FactoryGuy.make("item", { state:"submitted", offer: offer});
-    message1 = FactoryGuy.make("message", { offer: offer, item: item});
-    message2 = FactoryGuy.make("message", { offer: offer, item: item, body: "Message from Donor"});
+    message1 = FactoryGuy.make("message", { offer: offer, item: item, createdAt: new Date("2015/1/1")});
+    message2 = FactoryGuy.make("message", { offer: offer, item: item, body: "Message from Donor", createdAt: new Date("2015/1/2")});
     message3 = FactoryGuy.make("message", { offer: offer, item: item, body: "Message from Supervisor", isPrivate: true});
   },
 

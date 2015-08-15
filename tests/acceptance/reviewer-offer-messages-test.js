@@ -14,10 +14,10 @@ module('Reviewer: Display Offer Messages', {
     user2 = FactoryGuy.make("user_with_image");
     offer = FactoryGuy.make("offer", { state:"under_review"});
     offer1 = FactoryGuy.make("offer", { createdBy: user1, state:"under_review"});
-    message4 = FactoryGuy.make("message", {offer: offer1, sender: user2, item: null, body: "Message from donor1"});
-    message5 = FactoryGuy.make("message", {offer: offer1, sender: user1, item: null, body: "Message from donor2"});
-    message1 = FactoryGuy.make("message", {offer: offer, item: null});
-    message2 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Donor"});
+    message4 = FactoryGuy.make("message", {offer: offer1, sender: user2, item: null, body: "Message from donor1", createdAt: new Date("2015/1/1")});
+    message5 = FactoryGuy.make("message", {offer: offer1, sender: user1, item: null, body: "Message from donor2", createdAt: new Date("2015/1/2")});
+    message1 = FactoryGuy.make("message", {offer: offer, item: null, createdAt: new Date("2015/1/3")});
+    message2 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Donor", createdAt: new Date("2015/1/4")});
     message3 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Supervisor", isPrivate: true});
   },
 

@@ -13,15 +13,15 @@ export default transportDetails.extend({
   i18n: Ember.inject.service(),
 
   selectedCrossroadsOption: function(){
-    var options = this.get('crossroadsOptions').filter(function(option){
-      return option.get('name') === this.get("i18n").t("offer.disable");
+    var options = this.get('crossroadsOptions').filter(option => {
+      return option.get('name') === this.get("i18n").t("offer.disable").string;
     });
     return options.get('firstObject');
   }.property('crossroadsOptions'),
 
   selectedGogovanOption: function(){
-    var options = this.get('gogovanOptions').filter(function(option){
-      return option.get('name') === this.get("i18n").t("logistics.9t_truck");
+    var options = this.get('gogovanOptions').filter(option => {
+      return option.get('name') === this.get("i18n").t("logistics.9t_truck").string;
     });
     return options.get('firstObject.id');
   }.property('gogovanOptions'),

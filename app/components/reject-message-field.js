@@ -16,13 +16,13 @@ export default Ember.Component.extend({
       var message = "";
 
       switch(reason) {
-        case this.get("i18n").t("reject.quality"):
+        case this.get("i18n").t("reject.quality").string:
           message = this.get("i18n").t("reject.reject_message") + this.get("i18n").t("reject.quality_message");
           break;
-        case this.get("i18n").t("reject.size") :
+        case this.get("i18n").t("reject.size").string :
           message = this.get("i18n").t("reject.reject_message") + this.get("i18n").t("reject.size_message");
           break;
-        case this.get("i18n").t("reject.supply") :
+        case this.get("i18n").t("reject.supply").string :
           message = this.get("i18n").t("reject.supply_message");
           break;
       }
