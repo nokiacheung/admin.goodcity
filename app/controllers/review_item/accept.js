@@ -118,6 +118,10 @@ export default Ember.Controller.extend({
             loadingView.destroy();
           });
         });
+    },
+
+    setupAcceptClick(btnId, accept) {
+      $("#" + btnId).click(() => this.set("isAccepting", accept));
     }
   }
 });

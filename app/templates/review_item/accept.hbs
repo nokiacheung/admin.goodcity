@@ -81,12 +81,12 @@
               </div>
             {{else}}
               <div class="small-6 columns">
-                {{#view "online-button" id="saveItem" classNames="button expand save_item"}}
+                {{#view "online-button" id="saveItem" classNames="button expand save_item" didInsertElement=(action "setupAcceptClick" "saveItem" false)}}
                   {{t "review_item.save_item"}}
                 {{/view}}
               </div>
               <div class="small-6 columns">
-                {{#view "online-button" id="acceptItem" classNames="button expand accept_item"}}
+                {{#view "online-button" id="acceptItem" classNames="button expand accept_item" didInsertElement=(action "setupAcceptClick" "acceptItem" true)}}
                   {{t "review_item.accept_item"}}
                 {{/view}}
               </div>
