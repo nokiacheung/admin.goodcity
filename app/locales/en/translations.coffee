@@ -91,15 +91,15 @@ I18nTranslationsEn =
       "all_items_processed": "All items marked received or missing."
 
       "donor":
-          "offer_id": "Offer ID"
+        "offer_id": "Offer ID"
         "district": "District"
         "registered": "Registered"
         "last_seen": "Last seen"
         "total_offers": "Total offers"
         "crm": "CRM"
         "other_offers": "All offers on GoodCity"
-          "internet_call": "Internet Call"
-          "end_call": "End Call"
+        "internet_call": "Internet Call"
+        "end_call": "End Call"
 
     "mark_received":
       "delivered_by": "Delivered by:"

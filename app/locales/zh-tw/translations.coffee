@@ -90,15 +90,15 @@ I18nTranslationsZhTw =
       "all_items_processed": "所有項目皆被接收或列作遺失"
 
       "donor":
-          "offer_id": "Offer ID"
+        "offer_id": "Offer ID"
         "district": "地區"
         "registered": "已註冊"
         "last_seen": "最後上線"
         "total_offers": "捐獻總數"
         "crm": "CRM"
         "other_offers": "所有好人好市捐獻"
-          "internet_call": "Internet Call"
-          "end_call": "End Call"
+        "internet_call": "Internet Call"
+        "end_call": "End Call"
 
     "mark_received":
       "delivered_by": "運送人員："
