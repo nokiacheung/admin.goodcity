@@ -11,10 +11,12 @@ export default Ember.Component.extend({
   hidden:        Ember.computed.empty("mobile"),
   currentUserId: Ember.computed.alias("session.currentUser.id"),
 
-  displayNumber: function() {
-    var num = this.get("mobile").replace(/\+852/, "");
-    return num.length > 4 ? num.substr(0, 4) + " " + num.substr(4) : num;
-  }.property("mobile"),
+  hasTwilioSupport: function(){
+    var hasWebRtcSupport = !!window.webkitRTCPeerConnection; // twilio js doesn't use mozRTCPeerConnection
+    var hasFlashSupport = !!(navigator.plugins["Shockwave Flash"] || window.ActiveXObject && new window.ActiveXObject("ShockwaveFlash.ShockwaveFlash"));
+
+    return hasWebRtcSupport || hasFlashSupport;
+  }.property(),
 
   initTwilioDeviceBindings: function() {
     var _this         = this;
@@ -48,16 +50,17 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function() {
-    this._super();
-    var _this = this;
-    var loadingView = this.container.lookup('view:loading').append();
+    if(this.get("hasTwilioSupport")) {
+      this._super();
+      var _this = this;
+      var loadingView = this.container.lookup('view:loading').append();
 
-    new AjaxPromise("/twilio_outbound/generate_call_token", "GET", this.get('session.authToken'))
-      .then(data => {
-        _this.set("twilioToken", data["token"]);
-        _this.initTwilioDeviceBindings();
-      })
-      .catch(error => { throw error; })
-      .finally(() => loadingView.destroy());
+      new AjaxPromise("/twilio_outbound/generate_call_token", "GET", this.get('session.authToken'))
+        .then(data => {
+          _this.set("twilioToken", data["token"]);
+          _this.initTwilioDeviceBindings();
+        })
+        .finally(() => loadingView.destroy());
+    }
   }
 });

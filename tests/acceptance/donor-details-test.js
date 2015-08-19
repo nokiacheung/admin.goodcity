@@ -35,6 +35,8 @@ test("verify donor details", function() {
     }
   };
 
+  window.webkitRTCPeerConnection = true;
+
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {
     equal(currentURL(), "/offers/1/review_offer/donor_details");
@@ -43,7 +45,7 @@ test("verify donor details", function() {
     equal($(".donor_details .donor").text().indexOf('Kendrick Kiehn') >= 0, true);
     equal($.trim($(".donor_details .donor").text()).indexOf('5111 1111') >= 0, true);
     equal($(".donor_details li").length, 3);
-    equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('Total offers') >= 0, true);
-    equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('4') >= 0, true);
+    equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('Total offers') >= 0, true);
+    equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('4') >= 0, true);
   });
 });

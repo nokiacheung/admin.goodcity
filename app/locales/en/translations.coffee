@@ -18,7 +18,6 @@ I18nTranslationsEn =
       "title": "Offer"
       "donor": "Donor"
       "logistics": "Logistics"
-      "disable": "Disable"
       "details" : "Offer details"
       "donor_messages" : "Donor Messages"
       "supervisor_messages" : "Supervisors Messages"
@@ -92,12 +91,15 @@ I18nTranslationsEn =
       "all_items_processed": "All items marked received or missing."
 
       "donor":
+          "offer_id": "Offer ID"
         "district": "District"
         "registered": "Registered"
         "last_seen": "Last seen"
         "total_offers": "Total offers"
         "crm": "CRM"
         "other_offers": "All offers on GoodCity"
+          "internet_call": "Internet Call"
+          "end_call": "End Call"
 
     "mark_received":
       "delivered_by": "Delivered by:"

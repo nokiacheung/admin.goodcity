@@ -13,7 +13,19 @@
             {{donor.fullName}}
           </div>
           <div class="small-7 columns mobile">
-            {{twilio-make-call mobile=donor.mobile offerId=currentOffer.id}}
+            <span id="phoneNumber" class="tel_link phone_link {{if hidden 'hidden'}}">
+              <i class="fa fa-phone"></i>
+              <a href="tel:{{goodcityNumber}}">{{displayNumber}}</a>
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-5 columns">
+            {{t "review_offer.donor.offer_id"}}:
+          </div>
+          <div class="small-7 columns">
+            {{currentOffer.id}}
           </div>
         </div>
 
@@ -31,7 +43,7 @@
             {{t "review_offer.donor.registered"}}:
           </div>
           <div class="small-7 columns">
-            {{display-timeago donor.createdAt}}
+            {{view 'time-ago' timeValue=donor.createdAt smallPrefix=false}}
           </div>
         </div>
 
@@ -69,9 +81,10 @@
           </div>
         </div>
 
-
       </div>
     </div>
+
+    {{twilio-make-call mobile=donor.mobile offerId=currentOffer.id}}
 
     <hr>
     <div class="row">

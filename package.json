@@ -10,7 +10,7 @@
     "start": "EMBER_CLI_CORDOVA=0 ember serve --port 4201 --live-reload-port 35730",
     "build": "EMBER_CLI_CORDOVA=0 ember build",
     "test": "EMBER_CLI_CORDOVA=0 ember test --server --test-port 7358",
-    "deploy-staging": "site=admin-staging.goodcity.hk ports=22 environment=production staging=true ./deploy",
+    "deploy-staging": "site=admin-staging.goodcity.hk ports=59207 environment=production staging=true ./deploy",
     "deploy-live": "site=admin.goodcity.hk ports=22,62423  environment=production ./deploy"
   },
   "repository": {
