@@ -30,6 +30,7 @@ export default function startApp(attrs, permissionId) {
 
   Ember.run(function() {
     App = Application.create(attributes);
+    App.__container__.lookup('service:i18n').set("locale", "en");
     App.setupForTesting();
     App.injectTestHelpers();
   });

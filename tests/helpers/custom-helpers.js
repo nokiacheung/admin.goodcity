@@ -1,5 +1,7 @@
-import userFactory from '../fixtures/user';
-var customHelpers = function() {
+import FactoryGuy from 'ember-data-factory-guy';
+import '../factories/user';
+
+export default function() {
   Ember.Test.registerAsyncHelper('loginUser', function (app, url) {
     var hk_user;
     hk_user = FactoryGuy.build('with_hk_mobile');
@@ -28,6 +30,4 @@ var customHelpers = function() {
   Ember.Test.registerHelper('lookup', function(app, name) {
     return app.__container__.lookup(name);
   });
-}();
-
-export default customHelpers;
+}()

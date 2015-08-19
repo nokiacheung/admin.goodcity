@@ -17,7 +17,8 @@ module.exports = function(environment) {
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
       "font-src": "'self' data: https://maxcdn.bootstrapcdn.com",
       "media-src": "'self' data: https://api.twilio.com http://api.twilio.com http://static.twilio.com https://static.twilio.com",
-      "object-src": "'self'"
+      "object-src": "'self'",
+      "script-src": "'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com"
     },
 
     APP: {
@@ -51,6 +52,9 @@ module.exports = function(environment) {
     },
     coffeeOptions: {
       blueprints: false
+    },
+    i18n: {
+      defaultLocale: 'en'
     }
   };
 

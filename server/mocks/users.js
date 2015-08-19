@@ -9,7 +9,8 @@ module.exports = function(app) {
       "flat": null,
       "building": null,
       "district_id": null,
-      "addressable_type": "User"
+      "addressable_type": "User",
+      "addressable_id": 1
     }],
     "districts": [],
     "permissions": [{

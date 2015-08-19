@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['review_item/accept'],
+  application: Ember.inject.controller(),
+  store: Ember.inject.service(),
 
   formData: function() {
     return {
@@ -12,7 +13,10 @@ export default Ember.Controller.extend({
 
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
-  displayEditLink: Ember.computed.alias('controllers.review_item/accept.displayEditLink'),
+
+  displayEditLink: function() {
+    return this.get("application.currentRouteName").indexOf("accept") >= 0;
+  }.property("application.currentRouteName"),
 
   isEditing: function(key, value){
     if(arguments.length > 1) {
@@ -24,26 +28,15 @@ export default Ember.Controller.extend({
     }
   }.property('item', 'item.donorDescription', 'item.donorCondition'),
 
-  itemTypeName: function(key, value) {
-    return (arguments.length > 1) ? value : this.get('defaultPackage.name');
-  }.property('defaultPackage'),
-
   itemTypeId: function(key, value) {
     return (arguments.length > 1) ? value : this.get('defaultPackage.id');
   }.property('defaultPackage' ),
 
-  itemId: function(){
-    return this.get("model.id");
-  }.property('model'),
+  itemTypes: function() {
+    return this.get("store").all('package_type').sortBy('name');
+  }.property(),
 
   actions: {
-    getItemId: function(id, name) {
-      this.set('itemTypeId', id);
-      this.set('itemTypeName', name);
-      this.get('controllers.review_item/accept').send('setItemTypeDetails', id, name);
-      return;
-    },
-
     setEditing: function(value){
       this.set("isEditing", value);
     },

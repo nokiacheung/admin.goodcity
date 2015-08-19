@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, testHelper, offer1, item1, package1, package2, package3,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App, offer1, item1, package1, package2, package3;
 
 module('Received Offers', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
     item1 = FactoryGuy.make("item", {state: "accepted"});
     offer1 = FactoryGuy.make("offer", { state: "received", items: [item1] });
     package1 = FactoryGuy.make("package", { offerId: parseInt(offer1.id), state: "received", item: item1});
@@ -16,7 +17,7 @@ module('Received Offers', {
 
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
