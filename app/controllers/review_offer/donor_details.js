@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   displayNumber: function() {
     var num = this.get("donor.mobile").replace(/\+852/, "");
     return num.length > 4 ? num.substr(0, 4) + " " + num.substr(4) : num;
-  }.property("mobile"),
+  }.property("donor.mobile"),
 
   donorOffers: function(){
     return this.get("model").rejectBy("id", this.get('currentOffer.id'));
