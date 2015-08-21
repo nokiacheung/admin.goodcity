@@ -9,6 +9,9 @@ if [ $? -ne 0 ]; then
 fi
 export APP_SHA
 
+APP_SHARED_SHA=$(git ls-remote --heads https://github.com/crossroads/shared.goodcity.git master | cut -c1-7)
+export APP_SHARED_SHA
+
 echo "Building $site [$environment]"
 EMBER_CLI_CORDOVA=0 ember build --environment=$environment
 if [ $? -ne 0 ]; then
