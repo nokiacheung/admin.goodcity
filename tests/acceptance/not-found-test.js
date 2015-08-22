@@ -1,21 +1,19 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
-import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 var App, offer, t;
 
 module('Display not found error', {
   setup: function() {
     App = startApp();
-    TestHelper.setup();
     Ember.run.later = () => true;
     offer = FactoryGuy.make("offer");
     var i18n = App.__container__.lookup('service:i18n');
     t = i18n.t.bind(i18n);
+    App.__container__.lookup("service:logger").error = () => {};
   },
   teardown: function() {
-    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
