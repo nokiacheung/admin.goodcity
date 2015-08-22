@@ -2,7 +2,7 @@
 
 UPLOADER_VERSION=1.09
 # Put your TestFairy API_KEY here. Find it in your TestFairy account settings.
-#TESTFAIRY_API_KEY=<this should be added to your ~/.bash_profile		
+#TESTFAIRY_API_KEY=<this should be added to your ~/.bash_profile
 
 # Tester Groups that will be notified when the app is ready. Setup groups in your TestFairy account testers page.
 # This parameter is optional, leave empty if not required
@@ -12,12 +12,12 @@ TESTER_GROUPS=
 NOTIFY="on"
 
 # If AUTO_UPDATE is "on" all users will be prompt to update to this build next time they run the app
-AUTO_UPDATE="off"
+AUTO_UPDATE="on"
 
-# The maximum recording duration for every test. 
+# The maximum recording duration for every test.
 MAX_DURATION="10m"
 
-# Is video recording enabled for this build. valid values:  "on", "off", "wifi" 
+# Is video recording enabled for this build. valid values:  "on", "off", "wifi"
 VIDEO="wifi"
 
 # Comment text will be included in the email sent to testers
@@ -32,7 +32,7 @@ usage() {
 	echo "Usage: testfairy-upload-ios.sh IPA_FILENAME"
 	echo
 }
-	
+
 verify_tools() {
 
 	# Windows users: this script requires curl. If not installed please get from http://cygwin.com/
