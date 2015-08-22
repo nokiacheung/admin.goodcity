@@ -32,7 +32,7 @@ cd ..
 npm i -g cordova
 rm -rf platforms plugins
 ln -s ../dist www
-cordova prepare
+cordova prepare android
 cordova build android
 chmod +x ./deploy/testfairy-upload.sh
 ./deploy/testfairy-upload.sh platforms/android/build/outputs/apk/android-debug.apk
