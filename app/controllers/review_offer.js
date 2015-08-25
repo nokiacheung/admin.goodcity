@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
   confirm: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   offerReadyForClosure: function() {
     return !this.get("model.allItemsRejected") &&
@@ -48,7 +49,7 @@ export default Ember.Controller.extend({
 
     cancelOffer: function(){
       var offer = this.get("model");
-      this.get("confirm").show(Ember.I18n.t("delete_confirm"), () => {
+      this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
         var loadingView = this.container.lookup('view:loading').append();
         offer.deleteRecord();
         offer.save()
