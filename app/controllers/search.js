@@ -8,6 +8,26 @@ export default Ember.Controller.extend({
   searchPlaceholder: t("search.placeholder"),
   i18n: Ember.inject.service(),
 
+  allUsers: function() {
+    return this.store.all("user");
+  }.property(),
+
+  allItems: function() {
+    return this.store.all("item");
+  }.property(),
+
+  allGogovanOrders: function() {
+    return this.store.all("gogovan_order");
+  }.property(),
+
+  allPackageTypes: function() {
+    return this.store.all("package_type");
+  }.property(),
+
+  allAddresses: function() {
+    return this.store.all("address");
+  }.property(),
+
   hasSearchText: function() {
     return Ember.$.trim(this.get('searchText')).length;
   }.property('searchText'),
@@ -33,26 +53,26 @@ export default Ember.Controller.extend({
     var matchFilter = value => (value || "").toLowerCase().indexOf(filter) !== -1;
 
     if (filter.length > 0) {
-      store.all('user').forEach(function(donor) {
+      this.get('allUsers').forEach(function(donor) {
         if (matchFilter(donor.get('fullName')) || matchFilter(donor.get('mobile'))) {
           var donations = donor.get('donations').rejectBy("state", "draft");
           offers = offers.concat(donations.toArray());
         }
       });
 
-      store.all('item').rejectBy('isDraft', true).rejectBy('donorDescription', null).forEach(function(item) {
+      this.get('allItems').rejectBy('isDraft', true).rejectBy('donorDescription', null).forEach(function(item) {
         if (matchFilter(item.get('donorDescription'))) {
           offers.push(item.get('offer'));
         }
       });
 
-      store.all('gogovanOrder').rejectBy('driverLicense', null).forEach(function(order) {
+      this.get('allGogovanOrders').rejectBy('driverLicense', null).forEach(function(order) {
         if (matchFilter(order.get('driverLicense'))) {
           offers.push(order.get('delivery.offer'));
         }
       });
 
-      store.all('packageType').rejectBy('packagesCount', 0).forEach(function(packageType) {
+      this.get('allPackageTypes').rejectBy('packagesCount', 0).forEach(function(packageType) {
         if (matchFilter(packageType.get('name'))) {
           packageType.get('packages').forEach(function(pkg) {
             var offer = store.getById('offer', pkg.get('offerId'));
@@ -61,7 +81,7 @@ export default Ember.Controller.extend({
         }
       });
 
-      store.all('address').forEach(function(address) {
+      this.get('allAddresses').forEach(function(address) {
         if (matchFilter(address.get('regionDetails'))) {
           var offer = address.get('addressable.delivery.offer');
           if(offer) { offers.push(offer); }
@@ -70,7 +90,7 @@ export default Ember.Controller.extend({
     }
 
     return offers.uniq();
-  }.property('filter', 'fetchMoreResult'),
+  }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
 
   lastVisitedRoute: Ember.computed.localStorage(),
 
