@@ -25,6 +25,6 @@
   <engine name="android" spec="^4.0.0" />
   <engine name="windows" spec="^3.8.1" />
   <plugin name="com.phonegap.plugins.PushPlugin" spec="https://github.com/Telerik-Verified-Plugins/PushNotification.git" />
-  <plugin name="cordova-plugin-whitelist" spec="1.1.0" />
+  <plugin name="cordova-plugin-whitelist" spec="1.0.0" />
   <plugin name="cordova-plugin-network-information" spec="^1.0.0" />
 </widget>
