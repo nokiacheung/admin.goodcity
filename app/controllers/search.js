@@ -92,7 +92,7 @@ export default Ember.Controller.extend({
     return offers.uniq();
   }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
 
-  lastVisitedRoute: Ember.computed.localStorage(),
+  lastVisitedRoute: null,
 
   actions: {
     clearSearch: function() {

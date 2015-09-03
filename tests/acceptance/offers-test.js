@@ -38,9 +38,6 @@ test("display submitted offer", function() {
     andThen(function() {
       equal(currentURL(), "/offers/3/review_offer/items");
       equal(find("a:contains('Start Review')").length, 1);
-
-      // back-link points to submitted-offers page
-      equal($('a:contains("Back")').attr('href'), "/offers");
     });
   });
 });
