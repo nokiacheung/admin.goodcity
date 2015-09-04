@@ -7,8 +7,14 @@ export default AuthorizeRoute.extend({
   beforeModel: function() {
     var previousRoutes = this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
-    if(previousRoute && previousRoute.name !== "search") {
-      this.set("lastVisitedRoute", previousRoute.name);
+
+    if(previousRoute){
+      var isSearchRoute = previousRoute.name === "search";
+      var isTrackable   = previousRoute.handler.controller.hasOffersList;
+
+      if(!isSearchRoute && isTrackable) {
+        this.set("lastVisitedRoute", previousRoute.name);
+      }
     }
   },
 
