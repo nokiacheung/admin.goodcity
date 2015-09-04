@@ -1,14 +1,3 @@
-import AuthorizeRoute from './authorize';
-import Ember from 'ember';
+import BackNavigatorRoute from './back_navigator';
 
-export default AuthorizeRoute.extend({
-  lastVisitedRoute: Ember.computed.localStorage(),
-
-  beforeModel: function() {
-    var previousRoutes = this.router.router.currentHandlerInfos;
-    var previousRoute = previousRoutes && previousRoutes.pop();
-    if(previousRoute) {
-      this.set("lastVisitedRoute", previousRoute.name);
-    }
-  }
-});
+export default BackNavigatorRoute.extend();

@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
   isStartReviewClicked: false,
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  lastVisitedRoute: null,
 
   offerReadyForClosure: function() {
     return !this.get("model.allItemsRejected") &&
@@ -16,6 +17,11 @@ export default Ember.Controller.extend({
   }.property("model.state", "model.packages.@each.state"),
 
   actions: {
+    redirectBack: function(){
+      var route = this.get("lastVisitedRoute") || "my_list";
+      this.transitionToRoute(route);
+    },
+
     addItem: function() {
       var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
       this.transitionToRoute('item.edit_images', draftItemId);
