@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import OfferListController from './../offer_list';
 
-export default Ember.ArrayController.extend({
+export default OfferListController.extend({
   sortProperties: ['submittedAt'],
   sortAscending: false,
   newOffers: true
