@@ -18,6 +18,15 @@
     <splash src="res/ios/Default-568h@2x~iphone.png" width="640" height="1136"/>
     <splash src="res/ios/Default-667h.png" width="750" height="1334"/>
     <splash src="res/ios/Default-736h.png" width="1242" height="2208"/>
+
+    <!-- StatusBar Settings -->
+    <feature name="StatusBar">
+      <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+
   </platform>
   <access origin="*" />
   <allow-intent href="https://maps.google.com/*" />
@@ -29,4 +38,6 @@
   <plugin name="cordova-plugin-network-information" spec="^1.0.0" />
   <plugin name="cordova-plugin-actionsheet" spec="https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git" />
   <plugin name="cordova-plugin-camera" spec="1.2.0" />
+  <plugin name="cordova-plugin-statusbar" spec="1.0.1" />
+
 </widget>
