@@ -11,7 +11,7 @@ export default AuthorizeRoute.extend({
     var donor = currentOffer.get('createdBy');
     this.set("currentDonor", donor);
     this.set("currentOffer", currentOffer);
-    return this.store.find('offer', { created_by_id: donor.get('id'), states: ['nondraft'] });
+    return this.store.query('offer', { created_by_id: donor.get('id'), states: ['nondraft'] });
   },
 
   setupController: function(controller, model){

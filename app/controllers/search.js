@@ -111,7 +111,7 @@ export default Ember.Controller.extend({
     searchOnServer: function(){
       var controller = this;
       var loadingView = controller.container.lookup('view:loading').append();
-      return this.store.find('offer', { states: ["inactive"] }).finally(function(){
+      return this.store.query('offer', { states: ["inactive"] }).finally(function(){
         controller.set('fetchMoreResult', false);
         loadingView.destroy();
       });
