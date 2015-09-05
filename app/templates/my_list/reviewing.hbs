@@ -2,7 +2,7 @@
   <div class="small-12 columns item-content">
     <ul class="list list-activity list-offer-items">
       {{#if scheduledOffers}}
-        {{view 'schedule-select-view' schedules=allScheduled}}
+        {{view 'schedule-select-view' schedules=allScheduled selectedValue=filterValue}}
       {{/if}}
       {{#each (js-x "p0 || p1" filteredOffers model) as |offer|}}
         {{partial 'offers/offer_details'}}

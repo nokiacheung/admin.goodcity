@@ -5,6 +5,8 @@ import OfferListController from './../offer_list';
 export default OfferListController.extend(scheduledOffersMixin, {
   sortProperties: ["unreadMessagesCount:desc", "delivery.schedule.scheduledAt:desc"],
 
+  filterValue: null,
+
   filteredOffers: function(key, value){
     return arguments.length > 1 ? value : this.get('arrangedContent');
   }.property(),
