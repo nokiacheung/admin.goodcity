@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
   }.property('rejectionReasonId'),
 
   rejectionOptions: function() {
-    return this.store.all('rejection_reason').sortBy('id');
+    return this.store.peekAll('rejection_reason').sortBy('id');
   }.property(),
 
   confirm: Ember.inject.service(),

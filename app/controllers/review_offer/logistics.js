@@ -27,14 +27,14 @@ export default transportDetails.extend({
   }.property('gogovanOptions'),
 
   gogovanOptions: function() {
-    var allOptions = this.store.all('gogovan_transport');
+    var allOptions = this.store.peekAll('gogovan_transport');
     var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
     var disabledOption = allOptions.filterBy('isDisabled', true);
     return options.concat(disabledOption);
   }.property(),
 
   crossroadsOptions: function() {
-    return this.store.all('crossroads_transport').sortBy('name');
+    return this.store.peekAll('crossroads_transport').sortBy('name');
   }.property(),
 
   ggvDriverUrl: function() {

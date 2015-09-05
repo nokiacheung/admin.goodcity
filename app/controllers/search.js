@@ -9,23 +9,23 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   allUsers: function() {
-    return this.store.all("user");
+    return this.store.peekAll("user");
   }.property(),
 
   allItems: function() {
-    return this.store.all("item");
+    return this.store.peekAll("item");
   }.property(),
 
   allGogovanOrders: function() {
-    return this.store.all("gogovan_order");
+    return this.store.peekAll("gogovan_order");
   }.property(),
 
   allPackageTypes: function() {
-    return this.store.all("package_type");
+    return this.store.peekAll("package_type");
   }.property(),
 
   allAddresses: function() {
-    return this.store.all("address");
+    return this.store.peekAll("address");
   }.property(),
 
   hasSearchText: function() {

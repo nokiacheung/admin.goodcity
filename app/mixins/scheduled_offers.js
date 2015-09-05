@@ -4,11 +4,11 @@ export default Ember.Mixin.create({
   scheduledOffers: true,
 
   allDeliveries: function() {
-    return this.store.all("delivery");
+    return this.store.peekAll("delivery");
   }.property(),
 
   allOffers: function() {
-    return this.store.all("offer");
+    return this.store.peekAll("offer");
   }.property(),
 
   allValidDeliveries: function(){

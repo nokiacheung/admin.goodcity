@@ -24,7 +24,7 @@ export default Ember.ArrayController.extend({
   }.property('allOffers.@each.isReviewing'),
 
   allOffers: function() {
-    return this.store.all('offer');
+    return this.store.peekAll('offer');
   }.property(),
 
   unreadNotificationsCount: function() {
