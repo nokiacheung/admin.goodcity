@@ -5,8 +5,8 @@ import transportDetails from './../offer/transport_details';
 import { translationMacro as t } from "ember-i18n";
 
 export default transportDetails.extend({
-  needs: ['review_offer'],
 
+  review_offer: Ember.inject.controller(),
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
   crossroadsOptionsPrompt: t("select"),
@@ -75,7 +75,7 @@ export default transportDetails.extend({
     },
 
     closeOffer: function(){
-      this.get('controllers.review_offer').send('closeOffer');
+      this.get('review_offer').send('closeOffer');
     }
   }
 });

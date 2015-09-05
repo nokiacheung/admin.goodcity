@@ -2,10 +2,12 @@ import Ember from 'ember';
 import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
-  needs: ["review_item", "offer"],
 
-  itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
-  itemId: Ember.computed.alias('controllers.review_item.model.id'),
+  review_item: Ember.inject.controller(),
+  offer: Ember.inject.controller(),
+
+  itemTypeId: Ember.computed.alias('review_item.itemTypeId'),
+  itemId: Ember.computed.alias('review_item.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
   rejectReasonPlaceholder: t("reject.custom_reason"),
   i18n: Ember.inject.service(),
@@ -65,7 +67,7 @@ export default Ember.Controller.extend({
         this.set('rejectReason', null);
       }
 
-      var offer = this.get("controllers.offer.model");
+      var offer = this.get("offer.model");
 
       var saveItem = () => {
         var loadingView = this.container.lookup('view:loading').append();
