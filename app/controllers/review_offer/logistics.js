@@ -5,8 +5,8 @@ import transportDetails from './../offer/transport_details';
 import { translationMacro as t } from "ember-i18n";
 
 export default transportDetails.extend({
-  needs: ['review_offer'],
 
+  review_offer: Ember.inject.controller(),
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
   crossroadsOptionsPrompt: t("select"),
@@ -27,14 +27,14 @@ export default transportDetails.extend({
   }.property('gogovanOptions'),
 
   gogovanOptions: function() {
-    var allOptions = this.store.all('gogovan_transport');
+    var allOptions = this.store.peekAll('gogovan_transport');
     var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
     var disabledOption = allOptions.filterBy('isDisabled', true);
     return options.concat(disabledOption);
   }.property(),
 
   crossroadsOptions: function() {
-    return this.store.all('crossroads_transport').sortBy('name');
+    return this.store.peekAll('crossroads_transport').sortBy('name');
   }.property(),
 
   ggvDriverUrl: function() {
@@ -75,7 +75,7 @@ export default transportDetails.extend({
     },
 
     closeOffer: function(){
-      this.get('controllers.review_offer').send('closeOffer');
+      this.get('review_offer').send('closeOffer');
     }
   }
 });

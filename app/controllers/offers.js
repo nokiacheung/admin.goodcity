@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  needs: ['application'],
+  application: Ember.inject.controller(),
 
   newOffersCount: function() {
     return this.get('allOffers').filterBy('isSubmitted', true).length;
@@ -24,7 +24,7 @@ export default Ember.ArrayController.extend({
   }.property('allOffers.@each.isReviewing'),
 
   allOffers: function() {
-    return this.store.all('offer');
+    return this.store.peekAll('offer');
   }.property(),
 
   unreadNotificationsCount: function() {
@@ -43,7 +43,7 @@ export default Ember.ArrayController.extend({
 
   actions: {
     logMeOut: function(){
-      this.get('controllers.application').send('logMeOut');
+      this.get('application').send('logMeOut');
     }
   }
 });

@@ -4,7 +4,7 @@ export default Ember.ArrayController.extend({
   inProgress: true,
 
   allOffers: function() {
-    return this.store.all("offer");
+    return this.store.peekAll("offer");
   }.property(),
 
   reviewedCount: function() {
