@@ -33,6 +33,12 @@ export default offers.extend({
       var message = this.store.getById('message', messageId);
       var route = this.get("messagesUtil").getRoute(message);
       this.transitionToRoute.apply(this, route);
-    }
+    },
+
+    markThreadRead: function(notification){
+      var allMessages = notification.get('item.messages') || notification.get('offer.messages');
+      var messages = allMessages.filterBy('state', 'unread').filterBy('isPrivate', notification.get('isPrivate'));
+      messages.forEach(m => this.get("messagesUtil").markRead(m));
+    },
   }
 });

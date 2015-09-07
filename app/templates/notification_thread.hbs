@@ -27,6 +27,9 @@
           {{#if notification.isPrivate}}
             <i class="fa fa-users"></i>
           {{/if}}
+          {{#if notification.unreadCount}}
+            <i class="fa fa-check mark_read" {{action 'markThreadRead' notification on='click' bubbles=false}}></i>
+          {{/if}}
         </div>
       </div>
       <div class="row">
