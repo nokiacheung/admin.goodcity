@@ -1,13 +1,6 @@
 <aside class="left-off-canvas-menu">
   <ul class="off-canvas-list">
     <li><label>{{t "inbox.quick_links"}}</label></li>
-    <li>{{#link-to 'my_notifications'}}{{t "inbox.notifications"}}
-      {{#if hasUnreadNotifications}}
-        <span class="menu_notification">
-          <div class="unread_length">{{unreadNotificationsCount}}</div>
-        </span>
-      {{/if}}
-    {{/link-to}}</li>
     {{#if session.currentUser.isReviewer}}
       <li>{{#link-to 'my_list'}}{{t "inbox.my_list"}} ({{myOffersCount}}){{/link-to}}</li>
     {{/if}}
