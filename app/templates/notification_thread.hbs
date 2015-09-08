@@ -27,8 +27,10 @@
           {{#if notification.isPrivate}}
             <i class="fa fa-users"></i>
           {{/if}}
-          {{#if notification.unreadCount}}
-            <i class="fa fa-check mark_read" {{action 'markThreadRead' notification on='click' bubbles=false}}></i>
+          {{#if notification.isSingleMessage}}
+            <i class="fa fa-check mark_read" {{action 'markThreadRead' notification.id on='click' bubbles=false}}></i>
+          {{else if notification.isThread}}
+            <i class="fa fa-arrow-right mark_read"></i>
           {{/if}}
         </div>
       </div>

@@ -17,12 +17,15 @@ export default offers.extend({
         var notification = Ember.Object.create(message.getProperties(props));
         notification.set("unreadCount", message.get("state") === "unread" ? 1 : 0);
         notification.set("text", message.get("body"));
+        notification.set("isSingleMessage", message.get("state") === "unread");
 
         keys[key] = notification;
         res.push(notification);
       } else if (message.get("state") === "unread") {
         var unreadCount = keys[key].get("unreadCount");
         keys[key].set("unreadCount", unreadCount + 1);
+        keys[key].set("isSingleMessage", false);
+        keys[key].set("isThread", true);
       }
     });
     return res;
@@ -30,15 +33,14 @@ export default offers.extend({
 
   actions: {
     view: function(messageId){
-      var message = this.store.getById('message', messageId);
+      var message = this.store.peekRecord('message', messageId);
       var route = this.get("messagesUtil").getRoute(message);
       this.transitionToRoute.apply(this, route);
     },
 
-    markThreadRead: function(notification){
-      var allMessages = notification.get('item.messages') || notification.get('offer.messages');
-      var messages = allMessages.filterBy('state', 'unread').filterBy('isPrivate', notification.get('isPrivate'));
-      messages.forEach(m => this.get("messagesUtil").markRead(m));
+    markThreadRead: function(messageId){
+      var message = this.store.peekRecord('message', messageId);
+      this.get("messagesUtil").markRead(message);
     },
   }
 });
