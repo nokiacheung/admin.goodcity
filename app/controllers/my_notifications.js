@@ -5,6 +5,7 @@ export default offers.extend({
   sortProperties: ["createdAt:desc"],
   sortedModel: Ember.computed.sort("model", "sortProperties"),
   messagesUtil: Ember.inject.service("messages"),
+  lastVisitedRoute: null,
 
   showUnread: function(key, value){
     return arguments.length > 1 ? value : false;

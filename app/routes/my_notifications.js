@@ -1,6 +1,6 @@
-import AuthorizeRoute from './authorize';
+import BackNavigatorRoute from './back_navigator';
 
-export default AuthorizeRoute.extend({
+export default BackNavigatorRoute.extend({
   model: function() {
     return this.store.filter('message', function(message) {
       return message.get('state') !== 'never-subscribed';
