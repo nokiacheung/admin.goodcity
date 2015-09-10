@@ -55,3 +55,36 @@ test("display threads with icons and unread message count" , function() {
     equal($(offer_private_thread).find(".fa-users").length > 0, true);
   });
 });
+
+test("display unread notification count on notification-bell icon" , function() {
+  visit('/offers');
+  andThen(function() {
+    equal(currentURL(), "/offers/submitted");
+    equal($("span.unread .unread_length").text(), 3);
+  });
+});
+
+test("redirect to notifications page on click of notification-bell icon" , function() {
+  visit('/offers');
+  andThen(function() {
+    equal(currentURL(), "/offers/submitted");
+    equal($("span.unread .unread_length").text(), 3);
+
+    click("a.all_unread_messages_count");
+    andThen(function() {
+      equal(currentURL(), "/my_notifications");
+    });
+  });
+});
+
+test("filter unread notifications" , function() {
+  visit("/my_notifications");
+  andThen(function() {
+    equal(currentURL(), "/my_notifications");
+
+    click(".my-notifications a:eq(0)");
+    andThen(function() {
+      equal($(".thread").length, 2);
+    });
+  });
+});
