@@ -21,7 +21,7 @@ export default transportDetails.extend({
 
   selectedGogovanOption: function(){
     var options = this.get('gogovanOptions').filter(option => {
-      return option.get('name') === this.get("i18n").t("logistics.9t_truck").string;
+      return option.get('name') === this.get("i18n").t("logistics.van").string;
     });
     return options.get('firstObject.id');
   }.property('gogovanOptions'),
