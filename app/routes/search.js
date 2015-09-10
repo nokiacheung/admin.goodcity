@@ -1,3 +1,3 @@
-import BackNavigatorRoute from './back_navigator';
+import AuthorizeRoute from './authorize';
 
-export default BackNavigatorRoute.extend();
+export default AuthorizeRoute.extend();

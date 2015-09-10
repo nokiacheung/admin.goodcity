@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { translationMacro as t } from "ember-i18n";
+import backNavigator from './../mixins/back_navigator';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(backNavigator, {
   filter: '',
   searchText: '',
   fetchMoreResult: true,
@@ -92,8 +93,6 @@ export default Ember.Controller.extend({
     return offers.uniq();
   }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
 
-  lastVisitedRoute: null,
-
   actions: {
     clearSearch: function() {
       this.set('filter', '');
@@ -104,8 +103,7 @@ export default Ember.Controller.extend({
 
     cancelSearch: function(){
       this.send("clearSearch");
-      var route = this.get("lastVisitedRoute") || "my_list";
-      this.transitionToRoute(route);
+      this.send("togglePath", "search");
     },
 
     searchOnServer: function(){
