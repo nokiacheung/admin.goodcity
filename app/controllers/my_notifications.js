@@ -6,7 +6,19 @@ export default offers.extend({
   sortedModel: Ember.computed.sort("model", "sortProperties"),
   messagesUtil: Ember.inject.service("messages"),
 
-  myNotifications: function() {
+  showUnread: function(key, value){
+    return arguments.length > 1 ? value : false;
+  }.property(),
+
+  myNotifications: function(){
+    return this.get('showUnread') ? this.get('unreadNotifications') : this.get('allNotifications');
+  }.property('showUnread', 'allNotifications'),
+
+  unreadNotifications: function(){
+    return this.get('allNotifications').rejectBy('unreadCount', 0);
+  }.property('allNotifications.[]'),
+
+  allNotifications: function() {
     var keys = {};
     var res = [];
     this.get("sortedModel").forEach(function(message) {
@@ -42,5 +54,14 @@ export default offers.extend({
       var message = this.store.peekRecord('message', messageId);
       this.get("messagesUtil").markRead(message);
     },
+
+    toggleShowUnread: function(){
+      this.set('showUnread', !this.get('showUnread'));
+    },
+
+    markAllRead: function(){
+      var allUnreadMessages = this.get('model').filterBy('state', 'unread');
+      allUnreadMessages.forEach(m => this.get("messagesUtil").markRead(m));
+    }
   }
 });

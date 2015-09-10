@@ -69,6 +69,9 @@ I18nTranslationsEn =
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
+      "all_notifications" : "All notifications"
+      "show_unread" : "Show unread only"
+      "mark_all_read" : "Mark all read"
 
     "review_offer":
       "title" : "Review Offer"

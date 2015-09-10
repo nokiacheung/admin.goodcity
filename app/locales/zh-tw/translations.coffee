@@ -68,6 +68,9 @@ I18nTranslationsZhTw =
 
     "my_notifications":
       "heading" : "{{name}}的捐獻"
+      "all_notifications" : "All notifications"
+      "show_unread" : "Show unread only"
+      "mark_all_read" : "Mark all read"
 
     "review_offer":
       "title" : "審查捐獻項目"
