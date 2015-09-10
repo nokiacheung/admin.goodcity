@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import scheduledOffersMixin from './../../mixins/scheduled_offers';
-import OfferListController from './../offer_list';
 
-export default OfferListController.extend(scheduledOffersMixin, {
+export default Ember.ArrayController.extend(scheduledOffersMixin, {
   sortProperties: ["unreadMessagesCount:desc", "delivery.schedule.scheduledAt:desc"],
 
   filterValue: null,

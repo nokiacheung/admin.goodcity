@@ -9,6 +9,36 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   lastVisitedRoute: null,
 
+  isMyOffer: function(key, value){
+    if(arguments.length > 1) {
+      return value;
+    } else {
+      var currentUserId = this.session.get("currentUser.id");
+      return this.get("offer.reviewedBy.id") === currentUserId;
+    }
+  }.property('offer'),
+
+  backLinkPath: function(){
+    var offer = this.get("offer");
+    var isMyOffer = this.get("isMyOffer");
+
+    if(offer.get("isSubmitted")) { return "offers"; }
+    else if(offer.get("isReviewed")) {
+      return isMyOffer ? "my_list.reviewed" : "in_progress.reviewed"; }
+    else if(offer.get("isUnderReview")) {
+      return isMyOffer ? "my_list.reviewing" : "in_progress.reviewing"; }
+    else if(offer.get("isClosed") || offer.get("isCancelled")) {
+      return isMyOffer ? "my_list.finished" : "finished.cancelled"; }
+    else if(offer.get("isReceived")) {
+      return isMyOffer ? "my_list.finished" : "finished.received"; }
+    else if(offer.get("isScheduled")) {
+      if(isMyOffer) { return "my_list.scheduled"; }
+      else if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }
+      else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
+      else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
+    }
+  }.property('offer', 'isMyOffer'),
+
   offerReadyForClosure: function() {
     return !this.get("model.allItemsRejected") &&
       this.get("model.state") !== "received" &&
