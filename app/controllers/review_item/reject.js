@@ -12,6 +12,10 @@ export default Ember.Controller.extend({
   rejectReasonPlaceholder: t("reject.custom_reason"),
   i18n: Ember.inject.service(),
 
+  rejectReason: function(key, value){
+    return (arguments.length >1) ? value : this.get('review_item.model.rejectReason');
+  }.property('itemId'),
+
   isBlank: function(key, value){
     return (arguments.length >1) ? value : false;
   }.property(),
