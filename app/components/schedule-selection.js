@@ -1,10 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: "schedule_select_view",
-
+export default Ember.Component.extend({
   attributeBindings: ['schedules', 'selectedValue'],
-  selectedValue: null,
   i18n: Ember.inject.service(),
 
   weekDays: function() {
@@ -30,26 +27,32 @@ export default Ember.View.extend({
   }.property('schedules'),
 
   overdueCount: function(){
-    return this.get('controller').overdue().length;
+    return this.get('_controller').overdue().length;
   },
 
   scheduleCount: function(dayValue){
-    return this.get('controller').daySchedule(dayValue).length;
+    return this.get('_controller').daySchedule(dayValue).length;
   },
 
   nextWeekCount: function(){
-    return this.get('controller').nextWeek().length;
+    return this.get('_controller').nextWeek().length;
   },
 
   afterNextWeekCount: function(){
-    return this.get('controller').afterNextWeek().length;
+    return this.get('_controller').afterNextWeek().length;
   },
 
   allCount: function() {
-    return this.get('controller.allScheduled.length');
+    return this.get('_controller.allScheduled.length');
   },
 
-  selectedObserver: function(){
-    this.get('controller').send('filterOffers', this.get('selectedValue.id'));
-  }.observes('selectedValue'),
+  actions: {
+    change() {
+      const changeAction  = this.get('on-change');
+      const selectedIndex = this.$('select').prop('selectedIndex');
+      const selectedValue = this.get('weekDays')[selectedIndex];
+      this.set('selectedValue', selectedValue);
+      changeAction(selectedValue);
+    }
+  }
 });
