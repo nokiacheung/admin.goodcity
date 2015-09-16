@@ -59,10 +59,12 @@ export default Ember.Controller.extend({
     },
 
     addPackage(packageTypeId) {
+      var note_text = this.get("item.donorDescription") || this.get("reviewItem.formData.donorDescription") || "";
+
       this.get("packages").pushObject({
-        hideComment: true,
+        hideComment: false,
         displayImageUrl: this.get("item.displayImageUrl"),
-        notes: substring(this.get("item.donorDescription"), 50),
+        notes: substring(note_text, 50),
         quantity: 1,
         packageTypeId,
         offerId: this.get("item.offer.id"),
