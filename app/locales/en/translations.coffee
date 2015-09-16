@@ -72,6 +72,7 @@ I18nTranslationsEn =
       "all_notifications" : "All notifications"
       "show_unread" : "Show unread only"
       "mark_all_read" : "Mark all read"
+      "no_unread": "No unread messages!"
 
     "review_offer":
       "title" : "Review Offer"

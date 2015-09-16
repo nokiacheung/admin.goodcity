@@ -83,3 +83,34 @@
   font-size: 1rem;
   vertical-align: bottom;
 }
+
+.no_unread_message {
+  position: fixed;
+  top: 30%;
+  left: 0px;
+  width: 97% !important;
+  text-align: center;
+
+  .child_icon {
+    display: inline-block;
+    vertical-align: super;
+    i {
+      font-size: 4rem;
+    }
+  }
+
+  .info-message {
+    display: inline-block;
+    word-wrap: normal;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 0.5rem;
+    width: 22%;
+    font-size: 1.6rem;
+
+    @media #{$small-only} {
+      width: 35%;
+      font-size: 1.2rem;
+    }
+  }
+}
