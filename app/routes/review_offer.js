@@ -11,7 +11,7 @@ export default AuthorizeRoute.extend({
 
     if(previousRoute){
       var parentRoute = previousRoutes[1];
-      var hasParentRoute = parentRoute.name === "offers";
+      var hasParentRoute = parentRoute && parentRoute.name === "offers";
       var isSearchRoute = previousRoute.name === "search";
       var isFromMyListPage = previousRoute.name.indexOf("my_list") > -1;
 
