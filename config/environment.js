@@ -89,6 +89,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.cordova.enabled = false;
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'auto';
