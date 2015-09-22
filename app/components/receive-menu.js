@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   package: function() {
-    return this.get("store").getById("package", this.get("packageId"));
+    return this.get("store").peekRecord("package", this.get("packageId"));
   }.property("packageId"),
 
   updatePackage: function(action) {

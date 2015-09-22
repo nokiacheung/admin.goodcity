@@ -7,7 +7,7 @@ export default AuthorizeRoute.extend({
 
   model: function() {
     var offerId = this.modelFor('reviewOffer').get('id');
-    var currentOffer = this.store.getById('offer', offerId);
+    var currentOffer = this.store.peekRecord('offer', offerId);
     var donor = currentOffer.get('createdBy');
     this.set("currentDonor", donor);
     this.set("currentOffer", currentOffer);

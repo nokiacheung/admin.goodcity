@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   hasMultiplePackages: Ember.computed.gte("packages.length", 2),
 
   item: function() {
-    return this.get("store").getById("item", this.get("itemId"));
+    return this.get("store").peekRecord("item", this.get("itemId"));
   }.property("itemId"),
 
   packages: function() {

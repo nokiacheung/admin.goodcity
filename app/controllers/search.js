@@ -76,7 +76,7 @@ export default Ember.Controller.extend(backNavigator, {
       this.get('allPackageTypes').rejectBy('packagesCount', 0).forEach(function(packageType) {
         if (matchFilter(packageType.get('name'))) {
           packageType.get('packages').forEach(function(pkg) {
-            var offer = store.getById('offer', pkg.get('offerId'));
+            var offer = store.peekRecord('offer', pkg.get('offerId'));
             if(offer) { offers.push(offer); }
           });
         }

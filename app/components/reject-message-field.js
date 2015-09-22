@@ -11,7 +11,7 @@ export default Ember.Component.extend({
       return value;
     } else {
       var store = this.get('targetObject.store');
-      var reasonRecord = store.getById('rejection_reason', this.get('selectedId'));
+      var reasonRecord = store.peekRecord('rejection_reason', this.get('selectedId'));
       var reason = reasonRecord && reasonRecord.get('name');
       var message = "";
 
@@ -42,7 +42,7 @@ export default Ember.Component.extend({
 
   didInsertElement: function(){
     var store = this.get('targetObject.store');
-    var item = store.getById('item', this.get('itemId'));
+    var item = store.peekRecord('item', this.get('itemId'));
     this.set('rejectMessage', item.get('rejectionComments'));
   }
 });

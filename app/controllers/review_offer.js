@@ -59,7 +59,7 @@ export default Ember.Controller.extend({
 
     startReview: function() {
       if(this.get("isStartReviewClicked")) { return; }
-      var offer = this.store.getById('offer', this.get('offer.id'));
+      var offer = this.store.peekRecord('offer', this.get('offer.id'));
       this.set("isStartReviewClicked", true);
       var adapter = this.container.lookup('adapter:application');
       var url = adapter.buildURL('offer', offer.get('id')) + '/review';
