@@ -12,24 +12,36 @@ export default Ember.Controller.extend({
   rejectReasonPlaceholder: t("reject.custom_reason"),
   i18n: Ember.inject.service(),
 
-  rejectReason: function(key, value){
-    return (arguments.length >1) ? value : this.get('review_item.model.rejectReason');
-  }.property('itemId'),
-
-  isBlank: function(key, value){
-    return (arguments.length >1) ? value : false;
-  }.property(),
-
-  noReasonSelected: function(key, value){
-    return (arguments.length >1) ? value : false;
-  }.property(),
-
-  selectedId: function(key, value){
-    this.set("isBlank", false);
-    if(arguments.length > 1) {
-      this.set('noReasonSelected', false);
+  rejectReason: Ember.computed('itemId', {
+    get: function() {
+      return this.get('review_item.model.rejectReason');
+    },
+    set: function(key, value) {
       return value;
-    } else {
+    }
+  }),
+
+  isBlank: Ember.computed({
+    get: function() {
+      return false;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  noReasonSelected: Ember.computed({
+    get: function() {
+      return false;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  selectedId: Ember.computed("rejectionReasonId", {
+    get: function() {
+      this.set("isBlank", false);
       var reasonId = this.get('rejectionReasonId');
       if(reasonId) { return reasonId; }
       else {
@@ -37,8 +49,13 @@ export default Ember.Controller.extend({
           return "-1";
         }
       }
+    },
+    set: function(key, value) {
+      this.set("isBlank", false);
+      this.set('noReasonSelected', false);
+      return value;
     }
-  }.property('rejectionReasonId'),
+  }),
 
   rejectionOptions: function() {
     return this.store.peekAll('rejection_reason').sortBy('id');

@@ -4,9 +4,14 @@ import { translationMacro as t } from "ember-i18n";
 export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
-  deliveredBy: function(name, value) {
-    return arguments.length > 1 ? value : this.get("model.deliveryType");
-  },
+  deliveredBy: Ember.computed({
+    get: function() {
+      return this.get("model.deliveryType");
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   deliveredOptions: null,
 

@@ -9,14 +9,15 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   lastVisitedRoute: null,
 
-  isMyOffer: function(key, value){
-    if(arguments.length > 1) {
-      return value;
-    } else {
+  isMyOffer: Ember.computed('offer', {
+    get: function() {
       var currentUserId = this.session.get("currentUser.id");
       return this.get("offer.reviewedBy.id") === currentUserId;
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('offer'),
+  }),
 
   backLinkPath: function(){
     var offer = this.get("offer");

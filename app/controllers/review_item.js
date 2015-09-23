@@ -18,19 +18,25 @@ export default Ember.Controller.extend({
     return this.get("application.currentRouteName").indexOf("accept") >= 0;
   }.property("application.currentRouteName"),
 
-  isEditing: function(key, value){
-    if(arguments.length > 1) {
-      return value;
-    } else {
+  isEditing: Ember.computed('item', 'item.donorDescription', 'item.donorCondition', {
+    get: function() {
       var item = this.get('item');
       var description = Ember.$.trim(item.get('donorDescription'));
       return !(item.get('donorCondition') && description.length > 0);
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('item', 'item.donorDescription', 'item.donorCondition'),
+  }),
 
-  itemTypeId: function(key, value) {
-    return (arguments.length > 1) ? value : this.get('defaultPackage.id');
-  }.property('defaultPackage' ),
+  itemTypeId: Ember.computed('defaultPackage', {
+    get: function() {
+      return this.get('defaultPackage.id');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   itemTypes: function() {
     return this.get("store").all('package_type').sortBy('name');

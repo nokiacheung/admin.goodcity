@@ -4,9 +4,14 @@ import scheduledOffersMixin from './../../mixins/scheduled_offers';
 export default Ember.Controller.extend(scheduledOffersMixin, {
   sortProperties: ["unreadMessagesCount:desc", "delivery.schedule.scheduledAt:desc"],
 
-  filterValue: function(key, value){
-    return arguments.length > 1 ? value : null;
-  }.property(),
+  filterValue: Ember.computed({
+    get: function() {
+      return null;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   filteredOffers: function(){
     var filter = this.get('filterValue.id');
@@ -15,9 +20,14 @@ export default Ember.Controller.extend(scheduledOffersMixin, {
 
   arrangedContent: Ember.computed.sort("allScheduled", "sortProperties"),
 
-  allScheduled: function(key, value){
-    return (arguments.length > 1) ? value : this.get('collection');
-  }.property('collection'),
+  allScheduled: Ember.computed('collection', {
+    get: function() {
+      return this.get('collection');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   overdue: function(){
     return this.get('allScheduled').filter(function(offer){

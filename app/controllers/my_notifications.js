@@ -6,9 +6,14 @@ export default offers.extend({
   sortedModel: Ember.computed.sort("model", "sortProperties"),
   messagesUtil: Ember.inject.service("messages"),
 
-  showUnread: function(key, value){
-    return arguments.length > 1 ? value : false;
-  }.property(),
+  showUnread: Ember.computed({
+    get: function() {
+      return false;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   myNotifications: function(){
     return this.get('showUnread') ? this.get('unreadNotifications') : this.get('allNotifications');
