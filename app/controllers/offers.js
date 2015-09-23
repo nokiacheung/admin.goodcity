@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   application: Ember.inject.controller(),
 
   newOffersCount: function() {
