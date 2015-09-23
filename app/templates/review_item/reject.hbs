@@ -12,7 +12,7 @@
           <ul>
             {{#each rejectionOptions as |item|}}
               <li>
-                {{view 'radio-button' name="selectReason" selection=controller.selectedId value=item.id id=item.specialId disabled=model.offer.isFinished}}
+                {{radio-button name="selectReason" selection=controller.selectedId value=item.id id=item.specialId disabled=model.offer.isFinished}}
                 <label  for={{item.specialId}}>
                   {{item.name}}
                 </label>
