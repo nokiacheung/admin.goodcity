@@ -94,15 +94,16 @@ export default Ember.Controller.extend(backNavigator, {
   }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
 
   actions: {
-    clearSearch: function() {
+    clearSearch: function(isCancelled) {
       this.set('filter', '');
       this.set('searchText', '');
       this.set('fetchMoreResult', true);
-      Ember.$("#searchText").focus();
+      if(!isCancelled) { Ember.$("#searchText").focus(); }
     },
 
     cancelSearch: function(){
-      this.send("clearSearch");
+      Ember.$("#searchText").blur();
+      this.send("clearSearch", true);
       this.send("togglePath", "search");
     },
 
@@ -116,9 +117,4 @@ export default Ember.Controller.extend(backNavigator, {
     }
   },
 
-  focusSearchInput: function() {
-    Ember.run.later(function(){
-      Ember.$("#searchText").focus();
-    });
-  }.on('init')
 });
