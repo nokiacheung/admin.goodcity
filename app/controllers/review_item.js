@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
   }),
 
   itemTypes: function() {
-    return this.get("store").all('package_type').sortBy('name');
+    return this.get("store").peekAll('package_type').sortBy('name');
   }.property(),
 
   actions: {
