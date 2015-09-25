@@ -112,7 +112,7 @@ export default Ember.Controller.extend({
           item.set("donorConditionId", this.get("reviewItem.formData.donorConditionId"));
           if (this.get("isAccepting")) {
             item.set("state_event", "accept");
-          } else if (item.get("isDraft")) {
+          } else if (item.get("isDrafted")) {
             item.set("state_event", "submit");
           }
           item.save().finally(() => {
