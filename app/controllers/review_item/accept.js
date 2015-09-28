@@ -48,9 +48,9 @@ export default Ember.Controller.extend({
     }
   }),
 
-  onInit: function() {
+  onInit: Ember.on('init', function() {
     this.onItemTypeChange();
-  }.on("init"),
+  }),
 
   actions: {
     toggleComment(index) {

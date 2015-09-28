@@ -15,14 +15,14 @@ export default Ember.Controller.extend({
 
   deliveredOptions: null,
 
-  initController: function() {
+  initController: Ember.on('init', function() {
     this.set("deliveredOptions", [
       { value: "Unknown", label: this.get("i18n").t("mark_received.unknown") },
       { value: "Gogovan", label: this.get("i18n").t("mark_received.gogovan") },
       { value: "Alternate", label: this.get("i18n").t("mark_received.crossroads_truck") },
       { value: "Drop Off", label: this.get("i18n").t("mark_received.dropped_off") }
     ]);
-  }.on("init"),
+  }),
 
   promptText: t("mark_received.select"),
 
