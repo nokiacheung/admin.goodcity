@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
     return itemType.get("allChildPackagesList").apply(itemType);
   }),
 
-  onItemTypeChange: function() {
+  onItemTypeChange: Ember.observer('itemTypeId', function () {
     if (this.get("itemSaving")) {
       return;
     }
@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
       itemType.get("defaultChildPackagesList").apply(itemType)
         .forEach(t => this.send("addPackage", t.get("id")));
     }
-  }.observes("itemTypeId"),
+  }),
 
   onInit: function() {
     this.onItemTypeChange();

@@ -37,10 +37,10 @@ export default Ember.Controller.extend(backNavigator, {
     return Ember.$.trim(this.get('filter')).length;
   }),
 
-  onSearchTextChange: function() {
+  onSearchTextChange: Ember.observer('searchText', function () {
     // wait before applying the filter
     Ember.run.debounce(this, this.applyFilter, 500);
-  }.observes('searchText'),
+  }),
 
   applyFilter: function() {
     this.set('filter', this.get('searchText'));
