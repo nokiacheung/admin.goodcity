@@ -2,7 +2,9 @@ import Ember from 'ember';
 import scheduledOffersMixin from './../../mixins/scheduled_offers';
 
 export default Ember.Controller.extend(scheduledOffersMixin, {
+
   sortProperties: ["unreadMessagesCount:desc", "delivery.schedule.scheduledAt:desc"],
+  arrangedContent: Ember.computed.sort("allScheduled", "sortProperties"),
 
   filterValue: Ember.computed({
     get: function() {
@@ -13,12 +15,10 @@ export default Ember.Controller.extend(scheduledOffersMixin, {
     }
   }),
 
-  filteredOffers: function(){
+  filteredOffers: Ember.computed('filterValue', function(){
     var filter = this.get('filterValue.id');
     return this.filterOffers(filter || 'all');
-  }.property('filterValue'),
-
-  arrangedContent: Ember.computed.sort("allScheduled", "sortProperties"),
+  }),
 
   allScheduled: Ember.computed('collection', {
     get: function() {

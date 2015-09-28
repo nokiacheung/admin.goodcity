@@ -9,11 +9,11 @@ export default Ember.Component.extend({
   hidden: Ember.computed.empty("packages"),
   hasMultiplePackages: Ember.computed.gte("packages.length", 2),
 
-  item: function() {
+  item: Ember.computed("itemId", function(){
     return this.get("store").peekRecord("item", this.get("itemId"));
-  }.property("itemId"),
+  }),
 
-  packages: function() {
+  packages: Ember.computed("pState", "item", "item.packages.@each.state", function(){
     return this.get("item.packages").filterBy("state", this.get("pState"));
-  }.property("pState", "item", "item.packages.@each.state")
+  })
 });

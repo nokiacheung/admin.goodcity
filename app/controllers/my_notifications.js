@@ -15,15 +15,15 @@ export default offers.extend({
     }
   }),
 
-  myNotifications: function(){
+  myNotifications: Ember.computed('showUnread', 'allNotifications', function(){
     return this.get('showUnread') ? this.get('unreadNotifications') : this.get('allNotifications');
-  }.property('showUnread', 'allNotifications'),
+  }),
 
-  unreadNotifications: function(){
+  unreadNotifications: Ember.computed('allNotifications.[]', function(){
     return this.get('allNotifications').rejectBy('unreadCount', 0);
-  }.property('allNotifications.[]'),
+  }),
 
-  allNotifications: function() {
+  allNotifications: Ember.computed("model.@each.state", function(){
     var keys = {};
     var res = [];
     this.get("sortedModel").forEach(function(message) {
@@ -46,7 +46,7 @@ export default offers.extend({
       }
     });
     return res;
-  }.property("model.@each.state"),
+  }),
 
   actions: {
     view: function(messageId){

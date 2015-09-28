@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   attributeBindings: ['schedules', 'selectedValue'],
   i18n: Ember.inject.service(),
 
-  weekDays: function() {
+  weekDays: Ember.computed('schedules', function(){
     var _this = this;
     var currentDay = moment().day();
     var week = moment.weekdays();
@@ -24,7 +24,7 @@ export default Ember.Component.extend({
       id: 'next'});
     options.push({ name: this.get("i18n").t('scheduled.after_next_week') + ' (' + _this.afterNextWeekCount() + ')', id: 'after_next'});
     return options;
-  }.property('schedules'),
+  }),
 
   overdueCount: function(){
     return this.get('_controller').overdue().length;

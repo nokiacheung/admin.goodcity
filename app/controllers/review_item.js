@@ -4,19 +4,19 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
 
-  formData: function() {
+  formData: Ember.computed("model", function(){
     return {
       donorConditionId: this.get("model.donorConditionId"),
       donorDescription: this.get("model.donorDescription")
     };
-  }.property("model"),
+  }),
 
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
 
-  displayEditLink: function() {
+  displayEditLink: Ember.computed("application.currentRouteName", function(){
     return this.get("application.currentRouteName").indexOf("accept") >= 0;
-  }.property("application.currentRouteName"),
+  }),
 
   isEditing: Ember.computed('item', 'item.donorDescription', 'item.donorCondition', {
     get: function() {
@@ -38,9 +38,9 @@ export default Ember.Controller.extend({
     }
   }),
 
-  itemTypes: function() {
+  itemTypes: Ember.computed(function(){
     return this.get("store").peekAll('package_type').sortBy('name');
-  }.property(),
+  }),
 
   actions: {
     setEditing: function(value){

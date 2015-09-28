@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
     }
   }),
 
-  backLinkPath: function(){
+  backLinkPath: Ember.computed('offer.state', 'isMyOffer', function(){
     var offer = this.get("offer");
     var isMyOffer = this.get("isMyOffer");
 
@@ -38,14 +38,14 @@ export default Ember.Controller.extend({
       else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
       else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
     }
-  }.property('offer.state', 'isMyOffer'),
+  }),
 
-  offerReadyForClosure: function() {
+  offerReadyForClosure: Ember.computed("model.state", "model.packages.@each.state", function(){
     return !this.get("model.allItemsRejected") &&
       this.get("model.state") !== "received" &&
       this.get("model.packages.length") > 0 &&
       this.get("model.packages").filter(p => !p.get("item.isRejected") && p.get("state") === "expecting").get("length") === 0;
-  }.property("model.state", "model.packages.@each.state"),
+  }),
 
   actions: {
     redirectBack: function(){

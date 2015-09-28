@@ -5,9 +5,16 @@ export default Ember.Component.extend({
   packageId: null,
   store: Ember.inject.service(),
 
-  package: function() {
+  isReceived: Ember.computed.equal("package.state", "received"),
+  isMissing: Ember.computed.equal("package.state", "missing"),
+
+  package: Ember.computed('packageId', function(){
     return this.get("store").peekRecord("package", this.get("packageId"));
-  }.property("packageId"),
+  }),
+
+  currentUrl: Ember.computed('packageId', function(){
+    return this.container.lookup("router:main").get("url");
+  }),
 
   updatePackage: function(action) {
     var pkg = this.get("package");
@@ -15,13 +22,6 @@ export default Ember.Component.extend({
     pkg.save()
       .catch(error => { pkg.rollback(); throw error; });
   },
-
-  currentUrl: function() {
-    return this.container.lookup("router:main").get("url");
-  }.property("packageId"),
-
-  isReceived: Ember.computed.equal("package.state", "received"),
-  isMissing: Ember.computed.equal("package.state", "missing"),
 
   actions: {
     toggle: function(hidden) {

@@ -9,33 +9,33 @@ export default Ember.Controller.extend(backNavigator, {
   searchPlaceholder: t("search.placeholder"),
   i18n: Ember.inject.service(),
 
-  allUsers: function() {
+  allUsers: Ember.computed(function(){
     return this.store.peekAll("user");
-  }.property(),
+  }),
 
-  allItems: function() {
+  allItems: Ember.computed(function(){
     return this.store.peekAll("item");
-  }.property(),
+  }),
 
-  allGogovanOrders: function() {
+  allGogovanOrders: Ember.computed(function(){
     return this.store.peekAll("gogovan_order");
-  }.property(),
+  }),
 
-  allPackageTypes: function() {
+  allPackageTypes: Ember.computed(function(){
     return this.store.peekAll("package_type");
-  }.property(),
+  }),
 
-  allAddresses: function() {
+  allAddresses: Ember.computed(function(){
     return this.store.peekAll("address");
-  }.property(),
+  }),
 
-  hasSearchText: function() {
+  hasSearchText: Ember.computed('searchText', function(){
     return Ember.$.trim(this.get('searchText')).length;
-  }.property('searchText'),
+  }),
 
-  hasFilter: function() {
+  hasFilter: Ember.computed('filter', function(){
     return Ember.$.trim(this.get('filter')).length;
-  }.property('filter'),
+  }),
 
   onSearchTextChange: function() {
     // wait before applying the filter
@@ -47,7 +47,7 @@ export default Ember.Controller.extend(backNavigator, {
     this.set('fetchMoreResult', true);
   },
 
-  filteredResults: function() {
+  filteredResults: Ember.computed('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails', function(){
     var filter = Ember.$.trim(this.get('filter').toLowerCase());
     var offers = [];
     var store = this.store;
@@ -91,7 +91,7 @@ export default Ember.Controller.extend(backNavigator, {
     }
 
     return offers.uniq();
-  }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
+  }),
 
   actions: {
     clearSearch: function(isCancelled) {
