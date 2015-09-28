@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
       else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
       else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
     }
-  }.property('offer', 'isMyOffer'),
+  }.property('offer.state', 'isMyOffer'),
 
   offerReadyForClosure: function() {
     return !this.get("model.allItemsRejected") &&
