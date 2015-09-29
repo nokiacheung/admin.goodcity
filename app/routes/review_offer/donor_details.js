@@ -5,7 +5,7 @@ export default AuthorizeRoute.extend({
   currentDonor: null,
   currentOffer: null,
 
-  model: function() {
+  model() {
     var offerId = this.modelFor('reviewOffer').get('id');
     var currentOffer = this.store.peekRecord('offer', offerId);
     var donor = currentOffer.get('createdBy');
@@ -14,7 +14,7 @@ export default AuthorizeRoute.extend({
     return this.store.query('offer', { created_by_id: donor.get('id'), states: ['nondraft'] });
   },
 
-  setupController: function(controller, model){
+  setupController(controller, model) {
     controller.set("model", model);
     controller.set("donor", this.get("currentDonor"));
     controller.set("currentOffer", this.get("currentOffer"));

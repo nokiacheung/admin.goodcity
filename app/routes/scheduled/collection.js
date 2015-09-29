@@ -1,7 +1,7 @@
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-  renderTemplate: function() {
+  renderTemplate() {
     this.render('my_list.reviewing', {controller: 'scheduled.collection'});
   },
 

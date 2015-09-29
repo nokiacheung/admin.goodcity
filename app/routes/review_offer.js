@@ -5,7 +5,7 @@ import './../computed/local-storage';
 export default AuthorizeRoute.extend({
   fromMyListPage: Ember.computed.localStorage(),
 
-  beforeModel: function() {
+  beforeModel() {
     var previousRoutes = this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
 
@@ -21,12 +21,12 @@ export default AuthorizeRoute.extend({
     }
   },
 
-  model: function() {
+  model() {
     var offerId = this.modelFor('offer').get('id');
     return this.store.findRecord('offer', offerId);
   },
 
-  setupController:function(controller, model) {
+  setupController(controller, model) {
     this._super(controller, model);
     if(this.get('fromMyListPage') !== null) {
       controller.set('isMyOffer', this.get('fromMyListPage'));
