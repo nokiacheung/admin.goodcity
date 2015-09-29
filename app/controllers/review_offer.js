@@ -48,17 +48,17 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    redirectBack: function(){
+    redirectBack() {
       var route = this.get("lastVisitedRoute") || "my_list";
       this.transitionToRoute(route);
     },
 
-    addItem: function() {
+    addItem() {
       var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
       this.transitionToRoute('item.edit_images', draftItemId);
     },
 
-    startReview: function() {
+    startReview() {
       if(this.get("isStartReviewClicked")) { return; }
       var offer = this.store.peekRecord('offer', this.get('offer.id'));
       this.set("isStartReviewClicked", true);
@@ -70,7 +70,7 @@ export default Ember.Controller.extend({
         .finally(() => this.set("isStartReviewClicked", false));
     },
 
-    closeOffer: function(){
+    closeOffer() {
       var loadingView = this.container.lookup('view:loading').append();
       var offerId = this.get('model.id');
       var offerProperties = {id: offerId, state_event: 'close'};
@@ -84,7 +84,7 @@ export default Ember.Controller.extend({
         .finally(() => loadingView.destroy());
     },
 
-    cancelOffer: function(){
+    cancelOffer() {
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
         var loadingView = this.container.lookup('view:loading').append();

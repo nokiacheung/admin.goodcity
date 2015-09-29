@@ -64,11 +64,11 @@ export default Ember.Controller.extend({
   confirm: Ember.inject.service(),
 
   actions: {
-    setRejectOption: function(){
+    setRejectOption() {
       this.set("selectedId", "-1");
     },
 
-    rejectItem: function(){
+    rejectItem() {
       var selectedReason = this.get('selectedId');
       if(selectedReason === undefined) {
         this.set('noReasonSelected', true);

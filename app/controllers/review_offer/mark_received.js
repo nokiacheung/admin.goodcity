@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
   promptText: t("mark_received.select"),
 
   actions: {
-    closeOffer: function() {
+    closeOffer() {
       var offer = this.get("model");
       offer.set("deliveredBy", this.get("deliveredBy.value"));
       offer.set("state_event", "receive");

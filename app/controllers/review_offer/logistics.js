@@ -51,7 +51,7 @@ export default transportDetails.extend({
 
   actions: {
 
-    completeReview: function() {
+    completeReview() {
       var gogovanOptionId = this.get('selectedGogovanOption');
       var crossroadsOptionId = this.get('selectedCrossroadsOption.id');
       var loadingView = this.container.lookup('view:loading').append();
@@ -74,7 +74,7 @@ export default transportDetails.extend({
         .finally(() => loadingView.destroy());
     },
 
-    closeOffer: function(){
+    closeOffer() {
       this.get('review_offer').send('closeOffer');
     }
   }

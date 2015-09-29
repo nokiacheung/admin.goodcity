@@ -43,11 +43,11 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    setEditing: function(value){
+    setEditing(value) {
       this.set("isEditing", value);
     },
 
-    copyItem: function(){
+    copyItem() {
       var loadingView = this.container.lookup('view:loading').append();
       var _this = this;
       var item = _this.get("model");

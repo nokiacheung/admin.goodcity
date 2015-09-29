@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    handleBrokenImage: function() {
+    handleBrokenImage() {
       this.get("model.reviewedBy").set("hasImage", null);
     },
   }

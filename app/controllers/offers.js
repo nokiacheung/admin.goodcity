@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    logMeOut: function(){
+    logMeOut() {
       this.get('application').send('logMeOut');
     }
   }

@@ -8,7 +8,7 @@ export default Ember.Mixin.create({
   }),
 
   actions: {
-    togglePath: function(path){
+    togglePath(path) {
       this.get('history').pushObject(this.get('currentPath'));
 
       if(this.get('target.currentPath') === path) {

@@ -49,22 +49,22 @@ export default offers.extend({
   }),
 
   actions: {
-    view: function(messageId){
+    view(messageId) {
       var message = this.store.peekRecord('message', messageId);
       var route = this.get("messagesUtil").getRoute(message);
       this.transitionToRoute.apply(this, route);
     },
 
-    markThreadRead: function(messageId){
+    markThreadRead(messageId) {
       var message = this.store.peekRecord('message', messageId);
       this.get("messagesUtil").markRead(message);
     },
 
-    toggleShowUnread: function(){
+    toggleShowUnread() {
       this.set('showUnread', !this.get('showUnread'));
     },
 
-    markAllRead: function(){
+    markAllRead() {
       var allUnreadMessages = this.get('model').filterBy('state', 'unread');
       allUnreadMessages.forEach(m => this.get("messagesUtil").markRead(m));
     }

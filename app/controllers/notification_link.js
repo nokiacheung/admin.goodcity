@@ -10,7 +10,7 @@ export default Ember.Controller.extend(backNavigator, {
   }),
 
   actions: {
-    displayNotification: function(){
+    displayNotification() {
       this.send("togglePath", "my_notifications");
     }
   }

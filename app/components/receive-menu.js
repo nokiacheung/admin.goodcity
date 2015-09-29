@@ -24,16 +24,16 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    toggle: function(hidden) {
+    toggle(hidden) {
       this.set("hidden", hidden);
     },
-    missing: function() {
+    missing() {
       this.updatePackage(p => {
         p.set("state", "missing");
         p.set("state_event", "mark_missing");
       });
     },
-    receive: function() {
+    receive() {
       this.updatePackage(p => {
         p.set("state", "received");
         p.set("state_event", "mark_received");

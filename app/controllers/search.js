@@ -94,20 +94,20 @@ export default Ember.Controller.extend(backNavigator, {
   }),
 
   actions: {
-    clearSearch: function(isCancelled) {
+    clearSearch(isCancelled) {
       this.set('filter', '');
       this.set('searchText', '');
       this.set('fetchMoreResult', true);
       if(!isCancelled) { Ember.$("#searchText").focus(); }
     },
 
-    cancelSearch: function(){
+    cancelSearch() {
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
       this.send("togglePath", "search");
     },
 
-    searchOnServer: function(){
+    searchOnServer() {
       var controller = this;
       var loadingView = controller.container.lookup('view:loading').append();
       return this.store.query('offer', { states: ["inactive"] }).finally(function(){

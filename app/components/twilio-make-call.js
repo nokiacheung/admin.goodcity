@@ -38,13 +38,13 @@ export default Ember.Component.extend({
 
   actions: {
 
-    makeCall: function(){
+    makeCall() {
       var params = { "phone_number": this.get('offerId') + "#" + this.get("currentUserId") };
       this.set("activeCall", true);
       return Twilio.Device.connect(params);
     },
 
-    hangupCall: function(){
+    hangupCall() {
       return Twilio.Device.disconnectAll();
     },
   },
