@@ -1,0 +1,20 @@
+.hangup-call {
+  background: red;
+  cursor: pointer;
+  display: inherit;
+  margin-top: -0.1rem;
+
+  @media #{$small-only} {
+    margin-top: -0.3rem;
+  }
+}
+
+.internet-call-button{
+  margin-top: 1rem !important;
+
+  button {
+    @media #{$medium-up} {
+      min-height: 3.1rem;
+    }
+  }
+}

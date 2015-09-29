@@ -1,6 +1,6 @@
 <nav class="tab-bar offer_details_title non-draft">
   <section class="left-small">
-  {{partial 'review_offer/back_navigation_link'}}
+    {{#link-to backLinkPath classNames="back"}}{{t "back"}}{{/link-to}}
   </section>
 
   <section class="middle tab-bar-section">
@@ -10,6 +10,9 @@
   <section class="right-small">
     <a id="camera_icon" {{action "addItem"}} title="Camera" class="fontawe-icons" >
       <i class="fa fa-camera"></i>
+    </a>
+    <a title={{t "delete"}} {{action "cancelOffer"}} class="fontawe-icons">
+      <i class="fa fa-trash"></i>
     </a>
   </section>
 </nav>

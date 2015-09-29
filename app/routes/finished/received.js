@@ -6,6 +6,6 @@ export default AuthorizeRoute.extend({
   },
 
   model: function() {
-    return this.store.find('offer', { states: ["received"] });
+    return this.store.query('offer', { states: ["received"] });
   }
 });

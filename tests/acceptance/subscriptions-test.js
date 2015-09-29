@@ -1,17 +1,19 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import syncDataStub from '../helpers/empty-sync-data-stub';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper;
+var App;
 
 module('Subscriptions', {
   setup: function() {
     App = startApp();
-    testHelper = TestHelper.setup(App);
-    syncDataStub(testHelper);
+    TestHelper.setup();
+    syncDataStub(TestHelper);
   },
   teardown: function() {
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

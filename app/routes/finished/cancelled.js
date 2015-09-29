@@ -6,6 +6,6 @@ export default AuthorizeRoute.extend({
   },
 
   model: function() {
-    return this.store.find('offer', { states: ["cancelled", "closed"] });
+    return this.store.query('offer', { states: ["cancelled", "closed"] });
   }
 });

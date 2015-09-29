@@ -1,28 +1,28 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, reviewer, message1, message2, message3,
+var App, offer, message1, message2, message3,
   message4, message5, user1, user2, offer1;
 
 module('Reviewer: Display Offer Messages', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
     user1 = FactoryGuy.make("user");
     user2 = FactoryGuy.make("user_with_image");
     offer = FactoryGuy.make("offer", { state:"under_review"});
     offer1 = FactoryGuy.make("offer", { createdBy: user1, state:"under_review"});
-    message4 = FactoryGuy.make("message", {offer: offer1, sender: user2, item: null, body: "Message from donor1"});
-    message5 = FactoryGuy.make("message", {offer: offer1, sender: user1, item: null, body: "Message from donor2"});
-    message1 = FactoryGuy.make("message", {offer: offer, item: null});
-    message2 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Donor"});
+    message4 = FactoryGuy.make("message", {offer: offer1, sender: user2, item: null, body: "Message from donor1", createdAt: new Date("2015/1/1")});
+    message5 = FactoryGuy.make("message", {offer: offer1, sender: user1, item: null, body: "Message from donor2", createdAt: new Date("2015/1/2")});
+    message1 = FactoryGuy.make("message", {offer: offer, item: null, createdAt: new Date("2015/1/3")});
+    message2 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Donor", createdAt: new Date("2015/1/4")});
     message3 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Supervisor", isPrivate: true});
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
@@ -54,7 +54,7 @@ test("offer-messages from donor should add unread bubble in donor message tab", 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/supervisor_messages");
 
-    var message4 = FactoryGuy.make("message", {offer: offer, item: null, body: "Second Message from Donor"});
+    FactoryGuy.make("message", {offer: offer, item: null, body: "Second Message from Donor"});
 
     // if message received from donor, add unread bubble mark
     equal($("a[href='/offers/"+ offer.id +"/donor_messages'] i.unread").length, 1);
@@ -66,7 +66,7 @@ test("offer-messages from staff should add unread bubble in supervisor message t
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/donor_messages");
 
-    var message5 = FactoryGuy.make("message", {offer: offer, item: null, body: "Second Message from Supervisor", isPrivate: true});
+    FactoryGuy.make("message", {offer: offer, item: null, body: "Second Message from Supervisor", isPrivate: true});
 
     // if message received from donor, add unread bubble mark
     equal($("a[href='/offers/"+ offer.id +"/supervisor_messages'] i.unread").length, 1);

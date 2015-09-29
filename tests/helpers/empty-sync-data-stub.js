@@ -1,21 +1,23 @@
+import FactoryGuy from 'ember-data-factory-guy';
 import config from '../../config/environment';
-import '../fixtures/territory';
-import '../fixtures/address';
-import '../fixtures/contact';
-import '../fixtures/schedule';
-import '../fixtures/delivery';
-import '../fixtures/gogovan_order';
-import '../fixtures/offer';
-import '../fixtures/package_type';
-import '../fixtures/package';
-import '../fixtures/donor_condition';
-import '../fixtures/rejection_reason';
-import '../fixtures/permission';
-import '../fixtures/user_profile';
-import '../fixtures/timeslot';
-import '../fixtures/gogovan_transport';
-import '../fixtures/crossroads_transport';
-import '../fixtures/message';
+import '../factories/territory';
+import '../factories/address';
+import '../factories/contact';
+import '../factories/schedule';
+import '../factories/delivery';
+import '../factories/gogovan_order';
+import '../factories/offer';
+import '../factories/package_type';
+import '../factories/package';
+import '../factories/donor_condition';
+import '../factories/rejection_reason';
+import '../factories/permission';
+import '../factories/user_profile';
+import '../factories/timeslot';
+import '../factories/gogovan_transport';
+import '../factories/crossroads_transport';
+import '../factories/message';
+import '../factories/version';
 
 export default function(testHelper) {
   config.APP.PRELOAD_TYPES.concat(config.APP.PRELOAD_AUTHORIZED_TYPES).forEach(function(type) {

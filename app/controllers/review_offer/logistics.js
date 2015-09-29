@@ -2,37 +2,39 @@ import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 import config from './../../config/environment';
 import transportDetails from './../offer/transport_details';
+import { translationMacro as t } from "ember-i18n";
 
 export default transportDetails.extend({
-  needs: ['review_offer'],
 
+  review_offer: Ember.inject.controller(),
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
-  crossroadsOptionsPrompt: Ember.I18n.t("select"),
+  crossroadsOptionsPrompt: t("select"),
+  i18n: Ember.inject.service(),
 
   selectedCrossroadsOption: function(){
-    var options = this.get('crossroadsOptions').filter(function(option){
-      return option.get('name') === Ember.I18n.t("offer.disable");
+    var options = this.get('crossroadsOptions').filter(option => {
+      return option.get('name') === this.get("i18n").t("offer.disable").string;
     });
     return options.get('firstObject');
   }.property('crossroadsOptions'),
 
   selectedGogovanOption: function(){
-    var options = this.get('gogovanOptions').filter(function(option){
-      return option.get('name') === Ember.I18n.t("logistics.9t_truck");
+    var options = this.get('gogovanOptions').filter(option => {
+      return option.get('name') === this.get("i18n").t("logistics.van").string;
     });
     return options.get('firstObject.id');
   }.property('gogovanOptions'),
 
   gogovanOptions: function() {
-    var allOptions = this.store.all('gogovan_transport');
+    var allOptions = this.store.peekAll('gogovan_transport');
     var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
     var disabledOption = allOptions.filterBy('isDisabled', true);
     return options.concat(disabledOption);
   }.property(),
 
   crossroadsOptions: function() {
-    return this.store.all('crossroads_transport').sortBy('name');
+    return this.store.peekAll('crossroads_transport').sortBy('name');
   }.property(),
 
   ggvDriverUrl: function() {
@@ -73,7 +75,7 @@ export default transportDetails.extend({
     },
 
     closeOffer: function(){
-      this.get('controllers.review_offer').send('closeOffer');
+      this.get('review_offer').send('closeOffer');
     }
   }
 });

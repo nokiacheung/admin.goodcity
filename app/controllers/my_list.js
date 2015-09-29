@@ -16,7 +16,7 @@ export default Ember.ArrayController.extend({
   }.property('reviewerOffers.@each.isReviewed'),
 
   allOffers: function() {
-    return this.store.all("offer");
+    return this.store.peekAll("offer");
   }.property(),
 
   reviewerOffers: function() {

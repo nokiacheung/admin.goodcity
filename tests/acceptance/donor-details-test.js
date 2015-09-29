@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, user, offer1, offer2, offer3, offer4;
+var App, user, offer1, offer2, offer3, offer4;
 
 module('Reviewer: Display Donor Details Tab', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     user   = FactoryGuy.make("user");
     offer1 = FactoryGuy.make("offer_with_items", { state:"under_review", createdBy: user});
@@ -18,12 +18,25 @@ module('Reviewer: Display Donor Details Tab', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
 
 test("verify donor details", function() {
+
+  $.mockjax({url:"/api/v1/twilio_outbound/generate_call_toke*",responseText:{}});
+  window.Twilio = {
+    Device: {
+      setup: function() {},
+      error: function() {},
+      disconnectAll: function() {},
+      disconnect: function() {}
+    }
+  };
+
+  window.webkitRTCPeerConnection = true;
+
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {
     equal(currentURL(), "/offers/1/review_offer/donor_details");
@@ -32,7 +45,7 @@ test("verify donor details", function() {
     equal($(".donor_details .donor").text().indexOf('Kendrick Kiehn') >= 0, true);
     equal($.trim($(".donor_details .donor").text()).indexOf('5111 1111') >= 0, true);
     equal($(".donor_details li").length, 3);
-    equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('Total offers') >= 0, true);
-    equal($.trim($(".donor_details .row .row:eq(4)").text()).indexOf('4') >= 0, true);
+    equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('Total offers') >= 0, true);
+    equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('4') >= 0, true);
   });
 });

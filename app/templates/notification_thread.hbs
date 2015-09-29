@@ -27,6 +27,11 @@
           {{#if notification.isPrivate}}
             <i class="fa fa-users"></i>
           {{/if}}
+          {{#if notification.isSingleMessage}}
+            <i class="fa fa-check mark_read" {{action 'markThreadRead' notification.id on='click' bubbles=false}}></i>
+          {{else if notification.isThread}}
+            <i class="fa fa-arrow-right mark_read"></i>
+          {{/if}}
         </div>
       </div>
       <div class="row">
@@ -38,7 +43,7 @@
       </div>
       <div class="row thread_last_message">
         <div class="small-12 columns">
-          {{notification.text}}
+          {{{apply-line-break notification.text}}}
         </div>
       </div>
     </span>

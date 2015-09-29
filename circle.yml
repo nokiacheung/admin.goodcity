@@ -26,3 +26,4 @@ deployment:
     commands:
       - npm run deploy-staging
       - bash ./cordova/deploy/deploy-android-testfairy.sh
+      - bash ./cordova/deploy/notify-ios-build-service.sh admin.goodcity

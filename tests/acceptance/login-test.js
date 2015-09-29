@@ -1,16 +1,15 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import testSkip from '../helpers/test-skip';
-import '../fixtures/user_profile';
+import '../factories/user_profile';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, testHelper, hk_user, non_hk_user;
-
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App, hk_user, non_hk_user;
 
 module('Acceptance: Login', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     hk_user = FactoryGuy.build('with_hk_mobile');
     non_hk_user = FactoryGuy.build('with_non_hk_mobile');
@@ -21,9 +20,7 @@ module('Acceptance: Login', {
     };
   },
   teardown: function() {
-    Ember.run(function () {
-      testHelper.teardown();
-    });
+    Ember.run(function () { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

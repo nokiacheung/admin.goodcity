@@ -1,5 +1,5 @@
-import DS from "ember-data";
 import { test, moduleForModel } from 'ember-qunit';
+import FactoryGuy from 'ember-data-factory-guy';
 import testSkip from '../../helpers/test-skip';
 
 moduleForModel('offer', 'Offer Model', {
@@ -35,7 +35,7 @@ testSkip('Count of items within an offer', function () {
     var offer = FactoryGuy.make('offer', { items: [item1.id, item2.id] });
 
     return store.find('offer', offer.id).then(function(offer1){
-      offer1.get('items').then(function(items){
+      offer1.get('items').then(function(){
         console.log(offer1.get('itemCount'));
         equal(offer1.get('itemCount'), 2);
       });

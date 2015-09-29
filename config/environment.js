@@ -16,7 +16,9 @@ module.exports = function(environment) {
       "img-src": "'self' data: https://res.cloudinary.com",
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
       "font-src": "'self' data: https://maxcdn.bootstrapcdn.com",
-      "media-src": "'self' data: https://api.twilio.com http://api.twilio.com"
+      "media-src": "'self' data: https://api.twilio.com http://api.twilio.com http://static.twilio.com https://static.twilio.com",
+      "object-src": "'self'",
+      "script-src": "'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com"
     },
 
     APP: {
@@ -33,8 +35,9 @@ module.exports = function(environment) {
       NAMESPACE: 'api/v1',
 
       PRELOAD_TYPES: ["territory"],
-      PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport"],
+      PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "version"],
       SHA: process.env.APP_SHA || "00000000",
+      SHARED_SHA:  process.env.APP_SHARED_SHA || "00000000",
       VERSION: "1.0.0",
 
       AIRBRAKE_HOST: "https://errbit.crossroads.org.hk",
@@ -50,6 +53,9 @@ module.exports = function(environment) {
     },
     coffeeOptions: {
       blueprints: false
+    },
+    i18n: {
+      defaultLocale: 'en'
     }
   };
 
@@ -66,6 +72,8 @@ module.exports = function(environment) {
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
     ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
 
+    ENV.APP.GOODCITY_NUMBER = "+85258087803"
+
     ENV.contentSecurityPolicy["connect-src"] = [
       'http://localhost:4201',
       'http://localhost:3000',
@@ -73,11 +81,15 @@ module.exports = function(environment) {
       'ws://localhost:1337',
       'wss://localhost:1337',
       'https://api.cloudinary.com',
-      'https://api.twilio.com'
+      'https://api.twilio.com',
+      'http://static.twilio.com',
+      'https://static.twilio.com',
+      'wss://chunderw.twilio.com/signal'
     ].join(' ');
   }
 
   if (environment === 'test') {
+    ENV.cordova.enabled = false;
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'auto';
@@ -99,6 +111,8 @@ module.exports = function(environment) {
     ENV.DONOR_APP_HOST_URL = 'https://app.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
 
+    ENV.APP.GOODCITY_NUMBER = "+85258088700"
+
     ENV.contentSecurityPolicy["connect-src"] = [
       'https://admin.goodcity.hk',
       'https://api.goodcity.hk',
@@ -107,7 +121,10 @@ module.exports = function(environment) {
       'wss://socket.goodcity.hk:81',
       'https://api.cloudinary.com',
       'https://errbit.crossroads.org.hk',
-      'https://api.twilio.com'
+      'https://api.twilio.com',
+      'http://static.twilio.com',
+      'https://static.twilio.com',
+      'wss://chunderw.twilio.com/signal'
     ].join(' ');
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
@@ -119,6 +136,7 @@ module.exports = function(environment) {
     ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
     ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
+    ENV.APP.GOODCITY_NUMBER = "+85258084822"
     ENV.contentSecurityPolicy["connect-src"] = [
       'https://admin-staging.goodcity.hk',
       'https://api-staging.goodcity.hk',
@@ -127,7 +145,10 @@ module.exports = function(environment) {
       'wss://socket-staging.goodcity.hk:81',
       'https://api.cloudinary.com',
       'https://errbit.crossroads.org.hk',
-      'https://api.twilio.com'
+      'https://api.twilio.com',
+      'http://static.twilio.com',
+      'https://static.twilio.com',
+      'wss://chunderw.twilio.com/signal'
     ].join(' ');
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     ENV.cordova.GcmSenderId = '907786683525';

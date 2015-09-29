@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, testHelper, offer, offer1, reviewer1,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App, offer, offer1, reviewer1;
 
 module('App Menu', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     reviewer1 = FactoryGuy.make("user", {isReviwer: true});
     window.localStorage.currentUserId = reviewer1.id;
@@ -15,7 +16,7 @@ module('App Menu', {
     offer1 = FactoryGuy.make("offer_with_items", { state: "is_reviewed", reviewed_by: reviewer1 });
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });

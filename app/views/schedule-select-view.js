@@ -5,6 +5,7 @@ export default Ember.View.extend({
 
   attributeBindings: ['schedules', 'selectedValue'],
   selectedValue: null,
+  i18n: Ember.inject.service(),
 
   weekDays: function() {
     var _this = this;
@@ -12,9 +13,9 @@ export default Ember.View.extend({
     var week = moment.weekdays();
 
     var options = [
-      { name: Ember.I18n.t('scheduled.all_offers') + ' (' + _this.allCount() + ')', id: 'all' },
-      { name: Ember.I18n.t('scheduled.overdue') + ' (' + _this.overdueCount() + ')', id: 'overdue' },
-      { name: Ember.I18n.t('scheduled.today') + ' (' + _this.scheduleCount() + ')', id: 'today' }];
+      { name: this.get("i18n").t('scheduled.all_offers') + ' (' + _this.allCount() + ')', id: 'all' },
+      { name: this.get("i18n").t('scheduled.overdue') + ' (' + _this.overdueCount() + ')', id: 'overdue' },
+      { name: this.get("i18n").t('scheduled.today') + ' (' + _this.scheduleCount() + ')', id: 'today' }];
 
     for (var i = currentDay + 1; i < week.length; i++) {
       options.push(
@@ -22,9 +23,9 @@ export default Ember.View.extend({
       );
     }
 
-    options.push({ name: Ember.I18n.t('scheduled.next_week') + ' (' + _this.nextWeekCount() + ')',
+    options.push({ name: this.get("i18n").t('scheduled.next_week') + ' (' + _this.nextWeekCount() + ')',
       id: 'next'});
-    options.push({ name: Ember.I18n.t('scheduled.after_next_week') + ' (' + _this.afterNextWeekCount() + ')', id: 'after_next'});
+    options.push({ name: this.get("i18n").t('scheduled.after_next_week') + ' (' + _this.afterNextWeekCount() + ')', id: 'after_next'});
     return options;
   }.property('schedules'),
 

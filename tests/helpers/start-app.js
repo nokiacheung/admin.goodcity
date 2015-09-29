@@ -30,11 +30,12 @@ export default function startApp(attrs, permissionId) {
 
   Ember.run(function() {
     App = Application.create(attributes);
+    App.__container__.lookup('service:i18n').set("locale", "en");
     App.setupForTesting();
     App.injectTestHelpers();
   });
 
-  window.navigator = {onLine:true};
+  window.navigator = {onLine:true,plugins:[]};
   window.alert = function(message) { console.log("Alert: " + message); };
   window.confirm = function(message) { console.log("Confirm: " + message); return true; };
   Ember.$("head").append("<style>.loading-indicator, .reveal-modal-bg, .reveal-modal {display:none !important;}</style>");

@@ -1,14 +1,15 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 // import syncDataStub from '../helpers/empty-sync-data-stub';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer, item, message1, message2, message3, message4, message5;
+var App, offer, item, message1, message2, message3, message4, message5;
 
 module('Reviewer: Notifications', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item = FactoryGuy.make("item", { state:"submitted", offer: offer});
@@ -20,25 +21,9 @@ module('Reviewer: Notifications', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
-});
-
-test("display unread notification count on menu icon" , function() {
-  visit('/offers');
-  andThen(function() {
-    equal(currentURL(), "/offers/submitted");
-    equal($(".unread_length.menu-icon").text(), 3);
-  });
-});
-
-test("display unread notification count in left navigation" , function() {
-  visit('/offers');
-  andThen(function() {
-    equal(currentURL(), "/offers/submitted");
-    equal($(".menu_notification .unread_length").text(), 3);
-  });
 });
 
 test("display threads with icons and unread message count" , function() {
@@ -68,5 +53,38 @@ test("display threads with icons and unread message count" , function() {
     var offer_private_thread = $(".thread")[3];
     equal($(offer_thread).find(".fa-bullhorn").length > 0, true);
     equal($(offer_private_thread).find(".fa-users").length > 0, true);
+  });
+});
+
+test("display unread notification count on notification-bell icon" , function() {
+  visit('/offers');
+  andThen(function() {
+    equal(currentURL(), "/offers/submitted");
+    equal($("span.unread .unread_length").text(), 3);
+  });
+});
+
+test("redirect to notifications page on click of notification-bell icon" , function() {
+  visit('/offers');
+  andThen(function() {
+    equal(currentURL(), "/offers/submitted");
+    equal($("span.unread .unread_length").text(), 3);
+
+    click("a.all_unread_messages_count");
+    andThen(function() {
+      equal(currentURL(), "/my_notifications");
+    });
+  });
+});
+
+test("filter unread notifications" , function() {
+  visit("/my_notifications");
+  andThen(function() {
+    equal(currentURL(), "/my_notifications");
+
+    click(".my-notifications a:eq(0)");
+    andThen(function() {
+      equal($(".thread").length, 2);
+    });
   });
 });

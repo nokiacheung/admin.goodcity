@@ -1,18 +1,25 @@
 import Ember from "ember";
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
+  i18n: Ember.inject.service(),
+
   deliveredBy: function(name, value) {
     return arguments.length > 1 ? value : this.get("model.deliveryType");
   },
 
-  deliveredOptions: [
-    { value: "Unknown", label: Ember.I18n.t("mark_received.unknown") },
-    { value: "Gogovan", label: Ember.I18n.t("mark_received.gogovan") },
-    { value: "Alternate", label: Ember.I18n.t("mark_received.crossroads_truck") },
-    { value: "Drop Off", label: Ember.I18n.t("mark_received.dropped_off") }
-  ],
+  deliveredOptions: null,
 
-  promptText: Ember.I18n.t("mark_received.select"),
+  initController: function() {
+    this.set("deliveredOptions", [
+      { value: "Unknown", label: this.get("i18n").t("mark_received.unknown") },
+      { value: "Gogovan", label: this.get("i18n").t("mark_received.gogovan") },
+      { value: "Alternate", label: this.get("i18n").t("mark_received.crossroads_truck") },
+      { value: "Drop Off", label: this.get("i18n").t("mark_received.dropped_off") }
+    ]);
+  }.on("init"),
+
+  promptText: t("mark_received.select"),
 
   actions: {
     closeOffer: function() {

@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper, offer1, offer2, reviewer, reviewer1, reviewerName,
+var App, offer1, offer2, reviewer, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
   offer8, item8, offer9, item9, offer10, schedule, ggv_order11, delivery11,
   offer11, offer12;
@@ -11,7 +11,7 @@ var App, testHelper, offer1, offer2, reviewer, reviewer1, reviewerName,
 module('Reviewer: Display Offer Status', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
+    TestHelper.setup();
 
     reviewer = FactoryGuy.make("user");
     offer1 = FactoryGuy.make("offer_with_items", {state:"submitted"});
@@ -48,7 +48,7 @@ module('Reviewer: Display Offer Status', {
   },
 
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
@@ -82,7 +82,7 @@ test("Display offer status for reviewed offer", function() {
   andThen(function() {
     equal(currentURL(), "/offers/" + offer3.id + "/review_offer/items");
 
-    var message = $.trim(find('.status-message').text().replace(/\n/g, ''));
+    // var message = $.trim(find('.status-message').text().replace(/\n/g, ''));
     // equal(message, "Reviewed less than a minute ago. User to plan transport." );
   });
 });
@@ -92,7 +92,7 @@ test("Display offer status for scheduled offer: Collection", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer4.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st , Afternoon");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st Afternoon");
   });
 });
 
@@ -120,7 +120,7 @@ test("Display offer status for scheduled offer: Drop Off", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer6.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st , Afternoon");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st Afternoon");
   });
 });
 

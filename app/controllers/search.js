@@ -1,10 +1,33 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
+import backNavigator from './../mixins/back_navigator';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(backNavigator, {
   filter: '',
   searchText: '',
   fetchMoreResult: true,
-  searchPlaceholder: Ember.I18n.t("search.placeholder"),
+  searchPlaceholder: t("search.placeholder"),
+  i18n: Ember.inject.service(),
+
+  allUsers: function() {
+    return this.store.peekAll("user");
+  }.property(),
+
+  allItems: function() {
+    return this.store.peekAll("item");
+  }.property(),
+
+  allGogovanOrders: function() {
+    return this.store.peekAll("gogovan_order");
+  }.property(),
+
+  allPackageTypes: function() {
+    return this.store.peekAll("package_type");
+  }.property(),
+
+  allAddresses: function() {
+    return this.store.peekAll("address");
+  }.property(),
 
   hasSearchText: function() {
     return Ember.$.trim(this.get('searchText')).length;
@@ -31,26 +54,26 @@ export default Ember.Controller.extend({
     var matchFilter = value => (value || "").toLowerCase().indexOf(filter) !== -1;
 
     if (filter.length > 0) {
-      store.all('user').forEach(function(donor) {
+      this.get('allUsers').forEach(function(donor) {
         if (matchFilter(donor.get('fullName')) || matchFilter(donor.get('mobile'))) {
           var donations = donor.get('donations').rejectBy("state", "draft");
           offers = offers.concat(donations.toArray());
         }
       });
 
-      store.all('item').rejectBy('isDraft', true).rejectBy('donorDescription', null).forEach(function(item) {
+      this.get('allItems').rejectBy('isDraft', true).rejectBy('donorDescription', null).forEach(function(item) {
         if (matchFilter(item.get('donorDescription'))) {
           offers.push(item.get('offer'));
         }
       });
 
-      store.all('gogovanOrder').rejectBy('driverLicense', null).forEach(function(order) {
+      this.get('allGogovanOrders').rejectBy('driverLicense', null).forEach(function(order) {
         if (matchFilter(order.get('driverLicense'))) {
           offers.push(order.get('delivery.offer'));
         }
       });
 
-      store.all('packageType').rejectBy('packagesCount', 0).forEach(function(packageType) {
+      this.get('allPackageTypes').rejectBy('packagesCount', 0).forEach(function(packageType) {
         if (matchFilter(packageType.get('name'))) {
           packageType.get('packages').forEach(function(pkg) {
             var offer = store.getById('offer', pkg.get('offerId'));
@@ -59,7 +82,7 @@ export default Ember.Controller.extend({
         }
       });
 
-      store.all('address').forEach(function(address) {
+      this.get('allAddresses').forEach(function(address) {
         if (matchFilter(address.get('regionDetails'))) {
           var offer = address.get('addressable.delivery.offer');
           if(offer) { offers.push(offer); }
@@ -68,35 +91,30 @@ export default Ember.Controller.extend({
     }
 
     return offers.uniq();
-  }.property('filter', 'fetchMoreResult'),
+  }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
 
   actions: {
-    clearSearch: function() {
+    clearSearch: function(isCancelled) {
       this.set('filter', '');
       this.set('searchText', '');
       this.set('fetchMoreResult', true);
-      Ember.$("#searchText").focus();
+      if(!isCancelled) { Ember.$("#searchText").focus(); }
     },
 
     cancelSearch: function(){
-      this.send("clearSearch");
-      var route = localStorage["lastVisitedRoute"] || "my_list";
-      this.transitionToRoute(route);
+      Ember.$("#searchText").blur();
+      this.send("clearSearch", true);
+      this.send("togglePath", "search");
     },
 
     searchOnServer: function(){
       var controller = this;
       var loadingView = controller.container.lookup('view:loading').append();
-      return this.store.find('offer', { states: ["inactive"] }).finally(function(){
+      return this.store.query('offer', { states: ["inactive"] }).finally(function(){
         controller.set('fetchMoreResult', false);
         loadingView.destroy();
       });
     }
   },
 
-  focusSearchInput: function() {
-    Ember.run.later(function(){
-      Ember.$("#searchText").focus();
-    });
-  }.on('init')
 });

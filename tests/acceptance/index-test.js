@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
 
-var TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
-var App, testHelper;
+var App;
 
 module('Home Page', {
   setup: function() {

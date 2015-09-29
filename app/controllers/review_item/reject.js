@@ -1,12 +1,20 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
-  needs: ["review_item", "offer"],
 
-  itemTypeId: Ember.computed.alias('controllers.review_item.itemTypeId'),
-  itemId: Ember.computed.alias('controllers.review_item.model.id'),
+  review_item: Ember.inject.controller(),
+  offer: Ember.inject.controller(),
+
+  itemTypeId: Ember.computed.alias('review_item.itemTypeId'),
+  itemId: Ember.computed.alias('review_item.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
-  rejectReasonPlaceholder: Ember.I18n.t("reject.custom_reason"),
+  rejectReasonPlaceholder: t("reject.custom_reason"),
+  i18n: Ember.inject.service(),
+
+  rejectReason: function(key, value){
+    return (arguments.length >1) ? value : this.get('review_item.model.rejectReason');
+  }.property('itemId'),
 
   isBlank: function(key, value){
     return (arguments.length >1) ? value : false;
@@ -33,7 +41,7 @@ export default Ember.Controller.extend({
   }.property('rejectionReasonId'),
 
   rejectionOptions: function() {
-    return this.store.all('rejection_reason').sortBy('id');
+    return this.store.peekAll('rejection_reason').sortBy('id');
   }.property(),
 
   confirm: Ember.inject.service(),
@@ -63,7 +71,7 @@ export default Ember.Controller.extend({
         this.set('rejectReason', null);
       }
 
-      var offer = this.get("controllers.offer.model");
+      var offer = this.get("offer.model");
 
       var saveItem = () => {
         var loadingView = this.container.lookup('view:loading').append();
@@ -97,7 +105,7 @@ export default Ember.Controller.extend({
       var itemIsLastAccepted = offer.get("approvedItems").every(i => i.id === this.get('itemId'));
 
       if (itemIsLastAccepted && gogovanOrder) {
-        this.get("confirm").show(Ember.I18n.t("reject.cancel_gogovan_confirm"), () => {
+        this.get("confirm").show(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
           if (gogovanOrder.get("isActive")) {
             this.transitionToRoute('offer.cancel_gogovan', offer);
           } else {

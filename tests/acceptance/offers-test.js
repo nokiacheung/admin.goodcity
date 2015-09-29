@@ -1,16 +1,13 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
-var App, testHelper,
-  TestHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin);
+var App;
 
 module('Submitted Offers', {
   setup: function() {
     App = startApp({}, 2);
-    testHelper = TestHelper.setup(App);
   },
   teardown: function() {
-    Em.run(function() { testHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
@@ -41,9 +38,6 @@ test("display submitted offer", function() {
     andThen(function() {
       equal(currentURL(), "/offers/3/review_offer/items");
       equal(find("a:contains('Start Review')").length, 1);
-
-      // back-link points to submitted-offers page
-      equal($('a:contains("Back")').attr('href'), "/offers");
     });
   });
 });
