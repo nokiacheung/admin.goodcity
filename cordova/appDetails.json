@@ -1,0 +1,10 @@
+{
+	"staging": {
+		"name": "S. Admin GoodCity",
+		"url": "hk.goodcity.adminstaging"
+	},
+	"production": {
+		"name": "Admin GoodCity",
+		"url": "hk.goodcity.admin"
+	}
+}
