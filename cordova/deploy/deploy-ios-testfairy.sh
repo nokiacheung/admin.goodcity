@@ -23,7 +23,7 @@ STAGING=true # true|false - for admin-staging|admin.goodcity production builds
 
 # To aid debugging in cron environment
 # * * * * * env > ~/cronenv
-# env - `cat ~/cronenv` /bin/sh /Users/developer/Workspace/admin.goodcity/cordova/deploy/deploy-ios-testfairy.sh 
+# env - `cat ~/cronenv` /bin/sh /Users/developer/Workspace/admin.goodcity/cordova/deploy/deploy-ios-testfairy.sh
 # /Users/developer/Workspace/admin.goodcity/cordova/deploy/deploy-ios-testfairy.sh
 
 GIT=`which git`
@@ -43,8 +43,8 @@ APP_PATH="${PROJECT_HOME}/cordova/platforms/ios/build/device/${APP_NAME}"
 
 # This function uses python to parse the json data returned from IronMQ curl call
 # Usage: getJsonVal "['text']"
-function getJsonVal () { 
-    python -c "import json,sys;sys.stdout.write(json.dumps(json.load(sys.stdin)$1))"; 
+function getJsonVal () {
+    python -c "import json,sys;sys.stdout.write(json.dumps(json.load(sys.stdin)$1))";
 }
 
 # Date stamps log output
@@ -187,7 +187,7 @@ fi
 if [ -e "${APP_PATH}.ipa" ]
 then
     log "Uploading IPA to TestFairy"
-    ${PROJECT_HOME}/cordova/deploy/testfairy-uploader-ios.sh "${APP_PATH}.ipa"
+    ${PROJECT_HOME}/cordova/deploy/testfairy-upload-ios.sh "${APP_PATH}.ipa"
 else
     log "IPA file does not exist. Please check the build process. Terminating."
 fi
