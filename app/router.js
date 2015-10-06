@@ -64,6 +64,7 @@ Router.map(function() {
 
   this.resource('offers', function(){
     this.route('submitted');
+    this.route('receiving');
 
     this.resource('my_list', function(){
       this.route('reviewing');

@@ -66,6 +66,7 @@ I18nTranslationsEn =
       "my_list" : "My List"
       "finished": "Finished"
       "closed_offers": "Finished"
+      "receiving": "Receiving"
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
