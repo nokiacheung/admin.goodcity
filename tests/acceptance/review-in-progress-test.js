@@ -2,6 +2,7 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import testSkip from '../helpers/test-skip';
 
 var App, offer1, reviewer, reviewerName, offer2, item1, item2;
 
@@ -23,7 +24,7 @@ module('In Review Offers', {
   }
 });
 
-test("redirect to reviewing offers page", function() {
+testSkip("redirect to reviewing offers page", function() {
   visit("/offers/in_progress");
 
   andThen(function(){
@@ -41,7 +42,7 @@ test("redirect to reviewing offers page", function() {
   });
 });
 
-test("redirect to reviewed offers page", function() {
+testSkip("redirect to reviewed offers page", function() {
   visit("/offers/in_progress/reviewed");
 
   andThen(function(){
