@@ -1,9 +1,15 @@
+import Ember from 'ember';
 import scheduleController from './collection';
 
 export default scheduleController.extend({
 
-  allScheduled: function(key, value){
-    return (arguments.length > 1) ? value : this.get('ggv');
-  }.property('ggv'),
+  allScheduled: Ember.computed('ggv', {
+    get: function() {
+      return this.get('ggv');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
 });

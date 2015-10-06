@@ -6,7 +6,7 @@
     <ul class='radio-buttons'>
       {{#each gogovanOptions as |option|}}
         <li class="radio">
-          {{view 'radio-button' name="selectionTest" selection=selectedGogovanOption value=option.id id=option.id}}
+          {{radio-button name="selectionTest" selection=selectedGogovanOption value=option.id id=option.id}}
           <label class="radio-wrap small-only-text-center" for={{option.id}}>
             {{option.name}}
           </label>

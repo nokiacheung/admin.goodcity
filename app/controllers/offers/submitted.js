@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
-  sortProperties: ['submittedAt'],
+export default Ember.Controller.extend({
+  sortProperties: ["unreadMessagesCount:desc", 'submittedAt:desc'],
+  arrangedContent: Ember.computed.sort("model", "sortProperties"),
   sortAscending: false,
   newOffers: true
 });

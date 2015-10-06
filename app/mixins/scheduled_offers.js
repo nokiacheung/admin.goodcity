@@ -3,36 +3,36 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   scheduledOffers: true,
 
-  allDeliveries: function() {
+  allDeliveries: Ember.computed(function(){
     return this.store.peekAll("delivery");
-  }.property(),
+  }),
 
-  allOffers: function() {
+  allOffers: Ember.computed(function(){
     return this.store.peekAll("offer");
-  }.property(),
+  }),
 
-  allValidDeliveries: function(){
+  allValidDeliveries: Ember.computed('allDeliveries.[]', function(){
     return this.get("allDeliveries").filter(d => !d.get("offer.isFinished"));
-  }.property('allDeliveries.[]'),
+  }),
 
-  allValidOffers: function() {
+  allValidOffers: Ember.computed('allOffers.[]', function(){
     return this.get("allOffers").filter(d => !d.get("isFinished"));
-  }.property('allOffers.[]'),
+  }),
 
-  allScheduledOffers: function() {
+  allScheduledOffers: Ember.computed('allValidOffers.@each.isFinished', 'allValidDeliveries.[]', function(){
     this.get("allValidDeliveries"); // extra call
     return this.get("allValidOffers").filter(d => d.get("isScheduled"));
-  }.property('allValidOffers.@each.isFinished', 'allValidDeliveries.[]'),
+  }),
 
-  dropOff: function() {
+  dropOff: Ember.computed('allScheduledOffers.@each.delivery.deliveryType', function(){
     return this.get('allScheduledOffers').filterBy('delivery.isDropOff');
-  }.property('allScheduledOffers.@each.delivery.deliveryType'),
+  }),
 
-  collection: function() {
+  collection: Ember.computed('allScheduledOffers.@each.delivery.deliveryType', function(){
     return this.get('allScheduledOffers').filterBy('delivery.isAlternate');
-  }.property('allScheduledOffers.@each.delivery.deliveryType'),
+  }),
 
-  ggv: function() {
+  ggv: Ember.computed('allScheduledOffers.@each.delivery.deliveryType', function(){
     return this.get('allScheduledOffers').filterBy('delivery.isGogovan');
-  }.property('allScheduledOffers.@each.delivery.deliveryType'),
+  }),
 });

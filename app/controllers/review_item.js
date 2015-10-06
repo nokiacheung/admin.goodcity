@@ -4,44 +4,50 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
 
-  formData: function() {
+  formData: Ember.computed("model", function(){
     return {
       donorConditionId: this.get("model.donorConditionId"),
       donorDescription: this.get("model.donorDescription")
     };
-  }.property("model"),
+  }),
 
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
 
-  displayEditLink: function() {
+  displayEditLink: Ember.computed("application.currentRouteName", function(){
     return this.get("application.currentRouteName").indexOf("accept") >= 0;
-  }.property("application.currentRouteName"),
+  }),
 
-  isEditing: function(key, value){
-    if(arguments.length > 1) {
-      return value;
-    } else {
+  isEditing: Ember.computed('item', 'item.donorDescription', 'item.donorCondition', {
+    get: function() {
       var item = this.get('item');
       var description = Ember.$.trim(item.get('donorDescription'));
       return !(item.get('donorCondition') && description.length > 0);
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('item', 'item.donorDescription', 'item.donorCondition'),
+  }),
 
-  itemTypeId: function(key, value) {
-    return (arguments.length > 1) ? value : this.get('defaultPackage.id');
-  }.property('defaultPackage' ),
+  itemTypeId: Ember.computed('defaultPackage', {
+    get: function() {
+      return this.get('defaultPackage.id');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
-  itemTypes: function() {
-    return this.get("store").all('package_type').sortBy('name');
-  }.property(),
+  itemTypes: Ember.computed(function(){
+    return this.get("store").peekAll('package_type').sortBy('name');
+  }),
 
   actions: {
-    setEditing: function(value){
+    setEditing(value) {
       this.set("isEditing", value);
     },
 
-    copyItem: function(){
+    copyItem() {
       var loadingView = this.container.lookup('view:loading').append();
       var _this = this;
       var item = _this.get("model");

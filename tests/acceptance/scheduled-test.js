@@ -40,7 +40,7 @@ test("viewing collection schedule", function() {
     equal(find("ul.list li").length, 1);
     equal(find("ul.list img").length, 1);
     equal($('.time_indicator').text().indexOf('Collection') > 0, true);
-    equal(find('.dynamic_filter select option').first().text(), "All offers (1)");
+    equal($.trim(find('.dynamic_filter select option').first().text()), "All offers (1)");
   });
 });
 

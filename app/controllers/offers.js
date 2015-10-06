@@ -1,34 +1,34 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   application: Ember.inject.controller(),
 
-  newOffersCount: function() {
+  newOffersCount: Ember.computed('allOffers.@each.isSubmitted', function(){
     return this.get('allOffers').filterBy('isSubmitted', true).length;
-  }.property('allOffers.@each.isSubmitted'),
+  }),
 
-  inProgressOffersCount: function() {
+  inProgressOffersCount: Ember.computed('allOffers.@each.isReviewing', function(){
     return this.get('allOffers').filterBy('isReviewing', true).length;
-  }.property('allOffers.@each.isReviewing'),
+  }),
 
-  scheduledCount: function() {
+  scheduledCount: Ember.computed('allOffers.@each.isScheduled', function(){
     return this.get('allOffers').filterBy('isScheduled', true).length;
-  }.property('allOffers.@each.isScheduled'),
+  }),
 
-  myOffersCount: function() {
+  myOffersCount: Ember.computed('allOffers.@each.isReviewing', function(){
     var currentUserId = this.session.get("currentUser.id");
     return this.get("allOffers")
       .filterBy("adminCurrentOffer", true)
       .filterBy("reviewedBy.id", currentUserId)
       .length;
-  }.property('allOffers.@each.isReviewing'),
+  }),
 
-  allOffers: function() {
+  allOffers: Ember.computed(function(){
     return this.store.peekAll('offer');
-  }.property(),
+  }),
 
   actions: {
-    logMeOut: function(){
+    logMeOut() {
       this.get('application').send('logMeOut');
     }
   }

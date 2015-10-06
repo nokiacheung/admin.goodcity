@@ -5,21 +5,21 @@ export default Ember.Controller.extend({
   state: "expecting",
   items: Ember.computed.filterBy("model.items", "state", "accepted"),
 
-  expectingCount: function(){
+  expectingCount: Ember.computed("allPackages.@each.state", function(){
     return this.get('allPackages').filterBy("state", "expecting").length;
-  }.property("allPackages.@each.state"),
+  }),
 
-  receivedCount: function(){
+  receivedCount: Ember.computed("allPackages.@each.state", function(){
     return this.get('allPackages').filterBy("state", "received").length;
-  }.property("allPackages.@each.state"),
+  }),
 
-  missingCount: function(){
+  missingCount: Ember.computed("allPackages.@each.state", function(){
     return this.get('allPackages').filterBy("state", "missing").length;
-  }.property("allPackages.@each.state"),
+  }),
 
-  allPackages: function(){
+  allPackages: Ember.computed("items.@each.packages", function(){
     var res = [];
     this.get("items").forEach(i => res = res.concat(i.get("packages").toArray()));
     return res;
-  }.property("items.@each.packages"),
+  }),
 });

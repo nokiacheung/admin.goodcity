@@ -1,9 +1,15 @@
+import Ember from 'ember';
 import scheduleController from './collection';
 
 export default scheduleController.extend({
 
-  allScheduled: function(key, value){
-    return (arguments.length > 1) ? value : this.get('dropOff');
-  }.property('dropOff'),
+  allScheduled: Ember.computed('dropOff', {
+    get: function() {
+      return this.get('dropOff');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
 });

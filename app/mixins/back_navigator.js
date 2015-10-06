@@ -3,12 +3,12 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   history: [],
 
-  hasHistory: function(){
+  hasHistory: Ember.computed('history.length', function(){
     return this.get('history.length') > 1;
-  }.property('history.length'),
+  }),
 
   actions: {
-    togglePath: function(path){
+    togglePath(path) {
       this.get('history').pushObject(this.get('currentPath'));
 
       if(this.get('target.currentPath') === path) {

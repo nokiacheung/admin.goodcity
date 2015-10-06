@@ -9,7 +9,7 @@
   {{else if offer.isReceived}}
     <div class="offer-status is-received">
       <div class='status-message review_message'>
-        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{view 'time-ago' timeValue=offer.receivedAt}}
+        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{time-ago timeValue=offer.receivedAt}}
       </div>
     </div>
   {{else if offer.isSubmitted}}
@@ -26,7 +26,7 @@
   {{else if offer.isReviewed}}
     <div class="offer-status is-reviewed">
       <div class='status-message review_message'>
-        {{t "review_offer.reviewed"}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}. {{t "review_offer.plan_transport"}}
+        {{t "review_offer.reviewed"}} {{time-ago timeValue=offer.reviewCompletedAt}}. {{t "review_offer.plan_transport"}}
       </div>
     </div>
   {{else if offer.isScheduled}}
@@ -77,7 +77,7 @@
   {{else if offer.isClosed}}
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
-        {{t "review_offer.offer_closed_by" firstName=offer.closedBy.firstName lastName=offer.closedBy.lastName}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}
+        {{t "review_offer.offer_closed_by" firstName=offer.closedBy.firstName lastName=offer.closedBy.lastName}} {{time-ago timeValue=offer.reviewCompletedAt}}
       </div>
     </div>
   {{else if offer.allItemsRejected}}
@@ -96,7 +96,7 @@
     <div class="offer-status is-under-review">
       <div class='status-message review_message'>
         {{t "review_offer.review_started_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}}
-        {{view 'time-ago' timeValue=offer.reviewedAt}}
+        {{time-ago timeValue=offer.reviewedAt}}
       </div>
     </div>
   {{/if}}

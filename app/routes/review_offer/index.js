@@ -2,7 +2,7 @@ import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
 
-  model: function() {
+  model() {
     return this.transitionTo('review_offer.items');
   }
 

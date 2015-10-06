@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import testSkip from '../helpers/test-skip';
 
 var App;
 
@@ -12,7 +13,7 @@ module('Submitted Offers', {
   }
 });
 
-test("redirect to offers page", function() {
+testSkip("redirect to offers page", function() {
   visit("/offers");
 
   andThen(function(){
@@ -29,7 +30,7 @@ test("redirect to offers page", function() {
   });
 });
 
-test("display submitted offer", function() {
+testSkip("display submitted offer", function() {
   visit("/offers");
 
   andThen(function(){

@@ -2,6 +2,7 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import testSkip from '../helpers/test-skip';
 
 var App, offer, item, reviewer, offer2, item2, offer3, item3,
   delivery1, ggv_order1, offer5, item5, delivery2, ggv_order2,
@@ -42,7 +43,7 @@ module('Review Offer Logistics', {
   }
 });
 
-test("for pending review of items", function() {
+testSkip("for pending review of items", function() {
   visit("/offers/"+ offer.id +"/review_offer/logistics");
 
   andThen(function(){
@@ -101,7 +102,7 @@ test("for scheduled offer", function() {
   });
 });
 
-test("cancel booking of scheduled offer with pending GGV order state", function() {
+testSkip("cancel booking of scheduled offer with pending GGV order state", function() {
   visit('/offers/' + offer5.id + "/review_offer/logistics");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer5.id + "/review_offer/logistics");
@@ -172,7 +173,7 @@ test("for scheduled offer with active GGV order state", function() {
   });
 });
 
-test("for received offer", function() {
+testSkip("for received offer", function() {
   visit('/offers/' + offer7.id + "/review_offer/logistics");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer7.id + "/review_offer/logistics");

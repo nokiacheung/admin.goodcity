@@ -5,9 +5,16 @@ export default Ember.Component.extend({
   packageId: null,
   store: Ember.inject.service(),
 
-  package: function() {
-    return this.get("store").getById("package", this.get("packageId"));
-  }.property("packageId"),
+  isReceived: Ember.computed.equal("package.state", "received"),
+  isMissing: Ember.computed.equal("package.state", "missing"),
+
+  package: Ember.computed('packageId', function(){
+    return this.get("store").peekRecord("package", this.get("packageId"));
+  }),
+
+  currentUrl: Ember.computed('packageId', function(){
+    return this.container.lookup("router:main").get("url");
+  }),
 
   updatePackage: function(action) {
     var pkg = this.get("package");
@@ -16,24 +23,17 @@ export default Ember.Component.extend({
       .catch(error => { pkg.rollback(); throw error; });
   },
 
-  currentUrl: function() {
-    return this.container.lookup("router:main").get("url");
-  }.property("packageId"),
-
-  isReceived: Ember.computed.equal("package.state", "received"),
-  isMissing: Ember.computed.equal("package.state", "missing"),
-
   actions: {
-    toggle: function(hidden) {
+    toggle(hidden) {
       this.set("hidden", hidden);
     },
-    missing: function() {
+    missing() {
       this.updatePackage(p => {
         p.set("state", "missing");
         p.set("state_event", "mark_missing");
       });
     },
-    receive: function() {
+    receive() {
       this.updatePackage(p => {
         p.set("state", "received");
         p.set("state_event", "mark_received");

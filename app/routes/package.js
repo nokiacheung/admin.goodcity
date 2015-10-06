@@ -1,7 +1,7 @@
 import AuthorizeRoute from './authorize';
 
 export default AuthorizeRoute.extend({
-  model: function(params) {
-    return this.store.getById('package', params.package_id);
+  model(params) {
+    return this.store.peekRecord('package', params.package_id);
   }
 });

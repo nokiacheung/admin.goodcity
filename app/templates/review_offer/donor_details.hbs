@@ -43,7 +43,7 @@
             {{t "review_offer.donor.registered"}}:
           </div>
           <div class="small-7 columns">
-            {{view 'time-ago' timeValue=donor.createdAt smallPrefix=false}}
+            {{time-ago timeValue=donor.createdAt smallPrefix=false}}
           </div>
         </div>
 
@@ -55,7 +55,7 @@
             {{#if donor.onlineStatus}}
               {{donor.onlineStatus}}
             {{else}}
-              {{view 'time-ago' timeValue=donor.lastDisconnected smallPrefix=false}}
+              {{time-ago timeValue=donor.lastDisconnected smallPrefix=false}}
             {{/if}}
           </div>
         </div>
