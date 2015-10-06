@@ -169,6 +169,11 @@ I18nTranslationsEn =
     "receive":
       "missing": "Missing"
       "receive": "Receive"
+      "receiving":
+        "header": "Begin Receiving Offer"
+        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone.<br/>Donors cannot modify their offer once you start receiving the items."
+        "not_now": "Not Now"
+        "begin_receiving": "Begin Receiving"
 
     "finished":
       "title": "Finished"

@@ -168,6 +168,12 @@ I18nTranslationsZhTw =
     "receive":
       "missing": "遺失"
       "receive": "接收"
+      "receiving":
+        "header": "Begin Receiving Offer"
+        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone.<br/>Donors cannot modify their offer once you start receiving the items."
+        "not_now": "Not Now"
+        "begin_receiving": "Begin Receiving"
+
 
     "finished":
       "title": "已完成"
