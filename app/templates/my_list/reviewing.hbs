@@ -5,7 +5,7 @@
         {{schedule-selection schedules=allScheduled on-change=(action (mut filterValue)) }}
       {{/if}}
 
-      {{#each (js-x "p0 || p1" filteredOffers arrangedContent) as |offer|}}
+      {{#each (js-x "p0 || p1" filteredOffers (js-x "p0 || p1" arrangedContent model)) as |offer|}}
         {{partial 'offers/offer_details'}}
       {{/each}}
     </ul>
