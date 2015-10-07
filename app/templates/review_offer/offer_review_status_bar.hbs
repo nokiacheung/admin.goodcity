@@ -3,9 +3,17 @@
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
         {{t "review_offer.all_items_processed"}}
-        {{#link-to "review_offer.mark_received"}}{{t "review_offer.close_offer"}}{{/link-to}}
+        <a {{action "closeReceivedOffer"}}>{{t "review_offer.close_offer"}}</a>
       </div>
     </div>
+
+  {{else if offer.isReceiving}}
+    <div class="offer-status is-received">
+      <div class='status-message review_message'>
+        {{t "review_offer.goods_start_receiving_by" firstName=offer.receivedBy.firstName lastName=offer.receivedBy.lastName}} {{time-ago timeValue=offer.startReceivingAt}}
+      </div>
+    </div>
+
   {{else if offer.isReceived}}
     <div class="offer-status is-received">
       <div class='status-message review_message'>

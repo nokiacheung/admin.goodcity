@@ -24,6 +24,7 @@ export default Ember.Controller.extend({
     var isMyOffer = this.get("isMyOffer");
 
     if(offer.get("isSubmitted")) { return "offers"; }
+    else if(offer.get("isReceiving")) { return "offers.receiving"; }
     else if(offer.get("isReviewed")) {
       return isMyOffer ? "my_list.reviewed" : "in_progress.reviewed"; }
     else if(offer.get("isUnderReview")) {
@@ -82,6 +83,13 @@ export default Ember.Controller.extend({
           this.transitionToRoute('review_offer.items');
         })
         .finally(() => loadingView.destroy());
+    },
+
+    closeReceivedOffer() {
+      var offer = this.get("model");
+      offer.set("state_event", "receive");
+      offer.save()
+        .catch(error => { offer.rollback(); throw error; });
     },
 
     cancelOffer() {

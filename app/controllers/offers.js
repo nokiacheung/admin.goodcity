@@ -7,6 +7,10 @@ export default Ember.Controller.extend({
     return this.get('allOffers').filterBy('isSubmitted', true).length;
   }),
 
+  receivingOffersCount: Ember.computed('allOffers.@each.isReceiving', function(){
+    return this.get('allOffers').filterBy('isReceiving', true).length;
+  }),
+
   inProgressOffersCount: Ember.computed('allOffers.@each.isReviewing', function(){
     return this.get('allOffers').filterBy('isReviewing', true).length;
   }),
