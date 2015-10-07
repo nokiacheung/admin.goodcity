@@ -24,6 +24,7 @@ export default Ember.Controller.extend({
     var isMyOffer = this.get("isMyOffer");
 
     if(offer.get("isSubmitted")) { return "offers"; }
+    else if(offer.get("isReceiving")) { return "offers.receiving"; }
     else if(offer.get("isReviewed")) {
       return isMyOffer ? "my_list.reviewed" : "in_progress.reviewed"; }
     else if(offer.get("isUnderReview")) {

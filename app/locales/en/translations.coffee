@@ -87,6 +87,7 @@ I18nTranslationsEn =
       "reviewed": "Reviewed"
       "start_review": "Start Review"
       "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
+      "goods_start_receiving_by": "{{firstName}} {{lastName}} began receiving items"
       "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
       "offer_cancelled_by": "Cancelled by {{firstName}} {{lastName}}"
       "receive": "Receive"
@@ -172,7 +173,7 @@ I18nTranslationsEn =
       "receive": "Receive"
       "receiving":
         "header": "Begin Receiving Offer"
-        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone.<br/>Donors cannot modify their offer once you start receiving the items."
+        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
         "not_now": "Not Now"
         "begin_receiving": "Begin Receiving"
 

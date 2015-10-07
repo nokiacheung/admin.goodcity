@@ -85,6 +85,7 @@ I18nTranslationsZhTw =
       "reviewed": "審查完畢"
       "start_review": "開始審查"
       "goods_received_by" : "已經收到由 {{firstName}} {{lastName}} 捐贈的物資"
+      "goods_start_receiving_by": "{{firstName}} {{lastName}} began receiving items"
       "offer_closed_by": "捐贈項目由 {{firstName}} {{lastName}} 關閉"
       "offer_cancelled_by": "捐贈項目由 {{firstName}} {{lastName}} 取消"
       "receive": "收到"
@@ -170,7 +171,7 @@ I18nTranslationsZhTw =
       "receive": "接收"
       "receiving":
         "header": "Begin Receiving Offer"
-        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone.<br/>Donors cannot modify their offer once you start receiving the items."
+        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
         "not_now": "Not Now"
         "begin_receiving": "Begin Receiving"
 
