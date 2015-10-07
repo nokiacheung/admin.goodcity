@@ -38,12 +38,12 @@ CONFIG_XML_PATH = "#{CORDOVA_PATH}/config.xml"
 EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
 
 # Default task
-task default: %w("app:build")
+task default: %w(app:build)
 
 # Main namespace
 namespace :app do
   desc "Builds the app"
-  task build: %w(clean ember:install ember:build cordova:install cordova:prepare cordova:build)
+  task build: %w(ember:install ember:build cordova:install cordova:prepare cordova:build)
   desc "Uploads the app to TestFairy"
   task deploy: %w(testfairy:upload)
   desc "Equivalent to rake app:build app:deploy"
@@ -73,8 +73,7 @@ namespace :ember do
   end
   desc "Ember build with Cordova enabled"
   task :build do
-    staging = (environment == "staging").to_s
-    sh %{ EMBER_CLI_CORDOVA=1 APP_SHA=#{app_sha} STAGING=#{staging} #{EMBER} build --environment=production }
+    sh %{ EMBER_CLI_CORDOVA=1 APP_SHA=#{app_sha} STAGING=#{is_staging} #{EMBER} build --environment=production }
   end
 end
 
@@ -91,7 +90,7 @@ namespace :cordova do
   desc "Cordova build {platform}"
   task :build do
     Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
-    sh %{ #{EMBER} cordova:build --platform #{platform} --environment=production }
+    sh %{ STAGING=#{is_staging} #{EMBER} cordova:build --platform #{platform} --environment=production }
     if platform == "ios"
       sh %{ cordova build ios --device }
       sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
@@ -218,4 +217,8 @@ end
 
 def testfairy_upload_script
   "#{CORDOVA_PATH}/deploy/testfairy-#{platform}-upload.sh"
+end
+
+def is_staging
+  (environment == "staging").to_s
 end
