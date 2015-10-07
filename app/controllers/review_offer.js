@@ -85,6 +85,13 @@ export default Ember.Controller.extend({
         .finally(() => loadingView.destroy());
     },
 
+    closeReceivedOffer() {
+      var offer = this.get("model");
+      offer.set("state_event", "receive");
+      offer.save()
+        .catch(error => { offer.rollback(); throw error; });
+    },
+
     cancelOffer() {
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {

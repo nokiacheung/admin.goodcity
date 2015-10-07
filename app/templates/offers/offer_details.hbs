@@ -49,6 +49,12 @@
               <i class="fa fa-clock-o"></i>
               {{time-ago timeValue=offer.receivedAt smallPrefix=true}}
 
+            {{!-- Receiving Offer --}}
+            {{else if offer.isReceiving}}
+              {{t "offer.offer_details.start_receiving_by" firstName=offer.receivedBy.firstName lastName=offer.receivedBy.lastName}}
+              <i class="fa fa-clock-o"></i>
+              {{time-ago timeValue=offer.startReceivingAt smallPrefix=true}}
+
             {{!-- Scheduled Offer --}}
             {{else if offer.isScheduled}}
               {{#if offer.delivery.isAlternate}}
@@ -86,7 +92,7 @@
           </div>
 
           <div>
-            {{#if offer.isReceived}}
+            {{#if offer.hasReceived}}
               {{offer.approvedItems.length}} {{t "offer.offer_details.received"}},
               0 {{t "offer.offer_details.missing"}},
               {{offer.rejectedItems.length}} {{t "offer.offer_details.rejected"}}

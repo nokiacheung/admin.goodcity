@@ -39,6 +39,7 @@ I18nTranslationsEn =
         "rejected": "rejected"
         "pending": "pending"
         "missing": "missing"
+        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
 
     "items":
       "add_item":
@@ -109,11 +110,9 @@ I18nTranslationsEn =
 
     "mark_received":
       "delivered_by": "Delivered by:"
-      "select": "- select -"
       "gogovan": "Gogovan"
       "crossroads_truck": "Crossroads truck"
       "dropped_off": "Dropped off"
-      "close_offer": "Close Offer"
       "unknown": "Unknown"
 
     "logistics":

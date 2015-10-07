@@ -38,6 +38,7 @@ I18nTranslationsZhTw =
         "rejected": "已拒絕"
         "pending": "正在等候"
         "missing": "遺失"
+        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
 
     "items":
       "add_item":
@@ -107,11 +108,9 @@ I18nTranslationsZhTw =
 
     "mark_received":
       "delivered_by": "運送人員："
-      "select": "- 選擇 -"
       "gogovan": "Gogovan"
       "crossroads_truck": "十字路會貨車"
       "dropped_off": "親自運送"
-      "close_offer": "關閉捐獻項目"
       "unknown": "未知"
 
     "logistics":
