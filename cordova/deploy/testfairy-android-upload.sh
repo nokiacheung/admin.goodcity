@@ -35,7 +35,7 @@ ZIPALIGN=zipalign
 SERVER_ENDPOINT=http://app.testfairy.com
 
 usage() {
-  echo "Usage: testfairy-upload-android.sh APK_FILENAME"
+  echo "Usage: testfairy-android-upload.sh APK_FILENAME"
   echo
 }
 

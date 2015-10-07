@@ -29,7 +29,7 @@ CURL=curl
 SERVER_ENDPOINT=http://app.testfairy.com
 
 usage() {
-	echo "Usage: testfairy-upload-ios.sh IPA_FILENAME"
+	echo "Usage: testfairy-ios-upload.sh IPA_FILENAME"
 	echo
 }
 
