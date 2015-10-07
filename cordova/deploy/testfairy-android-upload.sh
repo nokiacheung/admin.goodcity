@@ -26,7 +26,7 @@ VIDEO="on"
 ICON_WATERMARK="on"
 
 # Comment text will be included in the email sent to testers
-COMMENT=""
+COMMENT="Uploaded on `date`"
 
 # locations of various tools
 CURL=curl
@@ -35,7 +35,7 @@ ZIPALIGN=zipalign
 SERVER_ENDPOINT=http://app.testfairy.com
 
 usage() {
-  echo "Usage: testfairy-upload.sh APK_FILENAME"
+  echo "Usage: testfairy-android-upload.sh APK_FILENAME"
   echo
 }
 
