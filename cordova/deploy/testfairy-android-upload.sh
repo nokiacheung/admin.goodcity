@@ -26,7 +26,7 @@ VIDEO="on"
 ICON_WATERMARK="on"
 
 # Comment text will be included in the email sent to testers
-COMMENT=""
+COMMENT="Uploaded on `date`"
 
 # locations of various tools
 CURL=curl
