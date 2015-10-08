@@ -36,6 +36,7 @@ PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
 CONFIG_XML_PATH = "#{CORDOVA_PATH}/config.xml"
 EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
+TESTFAIRY_PLATFORMS=%w(android ios)
 
 # Default task
 task default: %w(app:build)
@@ -95,6 +96,11 @@ namespace :cordova do
       sh %{ cordova build ios --device }
       sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
     end
+    # Copy build artifacts
+    if true or ENV["CI"]
+      sh %{ if [ -e "#{app_file}" ]; then cp #{app_file} $CIRCLE_ARTIFACTS/; fi }
+      sh %{ if [ -e "#{ipa_file}" ]; then cp #{ipa_file} $CIRCLE_ARTIFACTS/; fi }
+    end
   end
   task :bump_version do
     increment_app_version!
@@ -109,9 +115,15 @@ end
 
 namespace :testfairy do
   task :upload do
-    raise "#{app_file} does not exist!" unless File.exists?(app_file)
+    return unless TESTFAIRY_PLATFORMS.include?(platform)
+    app = (platform == "ios") ? ipa_file : app_file
+    raise "#{app} does not exist!" unless File.exists?(app)
     raise "TESTFAIRY_API_KEY not set." unless env?("TESTFAIRY_API_KEY")
-    sh %{ #{testfairy_upload_script} #{app_file} }
+    if ENV["CI"]
+      sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} #{app} }
+    else
+      sh %{ #{testfairy_upload_script} #{app} }
+    end
   end
 end
 
@@ -176,7 +188,7 @@ end
 def app_file
   case platform
   when /ios/
-    "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.ipa"
+    "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.app"
   when /android/
     "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-release-unsigned.apk"
   when /windows/
