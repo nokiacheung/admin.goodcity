@@ -35,4 +35,4 @@ ln -s ../dist www
 cordova prepare android
 cordova build android
 chmod +x ./deploy/testfairy-upload-android.sh
-./deploy/testfairy-upload-android.sh platforms/android/build/outputs/apk/android-debug.apk
+./deploy/testfairy-android-upload.sh platforms/android/build/outputs/apk/android-debug.apk
