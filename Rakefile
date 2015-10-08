@@ -89,7 +89,7 @@ namespace :cordova do
   end
   desc "Cordova build {platform}"
   task :build do
-    Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
+    #Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
     system({"STAGING" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
     if platform == "ios"
       sh %{ cordova build ios --device }
