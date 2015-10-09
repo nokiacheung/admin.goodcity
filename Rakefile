@@ -74,7 +74,7 @@ namespace :ember do
   end
   desc "Ember build with Cordova enabled"
   task :build do
-    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "STAGING" => is_staging}, "#{EMBER} build --environment=production")
+    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
   end
 end
 
@@ -91,13 +91,13 @@ namespace :cordova do
   desc "Cordova build {platform}"
   task :build do
     #Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
-    system({"STAGING" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
+    system({"staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
     if platform == "ios"
       sh %{ cordova build ios --device }
       sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
     end
     # Copy build artifacts
-    if true or ENV["CI"]
+    if ENV["CI"]
       sh %{ if [ -e "#{app_file}" ]; then cp #{app_file} $CIRCLE_ARTIFACTS/; fi }
       sh %{ if [ -e "#{ipa_file}" ]; then cp #{ipa_file} $CIRCLE_ARTIFACTS/; fi }
     end
