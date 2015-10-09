@@ -15,12 +15,12 @@ export default Ember.Controller.extend(scheduledOffersMixin, {
     }
   }),
 
-  filteredOffers: Ember.computed('filterValue', function(){
+  filteredOffers: Ember.computed('filterValue', 'allScheduled.[]', function(){
     var filter = this.get('filterValue.id');
     return this.filterOffers(filter || 'all');
   }),
 
-  allScheduled: Ember.computed('collection', {
+  allScheduled: Ember.computed('collection.[]', {
     get: function() {
       return this.get('collection');
     },

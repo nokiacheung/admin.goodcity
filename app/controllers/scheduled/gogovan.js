@@ -3,7 +3,7 @@ import scheduleController from './collection';
 
 export default scheduleController.extend({
 
-  allScheduled: Ember.computed('ggv', {
+  allScheduled: Ember.computed('ggv.[]', {
     get: function() {
       return this.get('ggv');
     },

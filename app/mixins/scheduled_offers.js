@@ -19,7 +19,7 @@ export default Ember.Mixin.create({
     return this.get("allOffers").filter(d => !d.get("isFinished"));
   }),
 
-  allScheduledOffers: Ember.computed('allValidOffers.@each.isFinished', 'allValidDeliveries.[]', function(){
+  allScheduledOffers: Ember.computed('allValidOffers.@each.isScheduled','allValidOffers.@each.isFinished', 'allValidDeliveries.[]', function(){
     this.get("allValidDeliveries"); // extra call
     return this.get("allValidOffers").filter(d => d.get("isScheduled"));
   }),
