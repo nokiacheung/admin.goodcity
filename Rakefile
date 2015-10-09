@@ -25,7 +25,6 @@
 #     > rake ios_build_server:notify (tells the iOS server to start a build)
 
 require 'json'
-require 'rexml/document'
 require "rake/clean"
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
@@ -34,7 +33,7 @@ CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
 CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
-CONFIG_XML_PATH = "#{CORDOVA_PATH}/config.xml"
+APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
 EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
 TESTFAIRY_PLATFORMS=%w(android ios)
 
@@ -85,12 +84,12 @@ namespace :cordova do
   end
   desc "Cordova prepare {platform}"
   task :prepare do
+    Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
   end
   desc "Cordova build {platform}"
-  task :build do
-    #Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
+  task build: :prepare do
     system({"staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
     if platform == "ios"
       sh %{ cordova build ios --device }
@@ -107,7 +106,7 @@ namespace :cordova do
     sh %{ git config --global user.email "none@none" }
     sh %{ git config --global user.name "CircleCi" }
     sh %{ git config --global push.default current }
-    sh %{ git add #{CONFIG_XML_PATH} }
+    sh %{ git add #{APP_DETAILS_PATH} }
     sh %{ git commit -m "Update build version [ci skip]" }
     sh %{ git push }
   end
@@ -201,30 +200,26 @@ def ipa_file
 end
 
 def app_name
-  app_details["name"]
+  app_details[environment]["name"]
 end
 
 def app_url
-  app_details["url"]
+  app_details[environment]["url"]
+end
+
+def app_version
+  app_details[environment]["version"]
 end
 
 def app_details
-  @app_details ||= JSON.parse(File.read("#{CORDOVA_PATH}/appDetails.json"))
-  @app_details[environment]
+  @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
+  @app_details
 end
 
 def increment_app_version!
-  version_array = config_xml.elements["widget"].attributes["version"].split(".")
-  new_version = (version_array[0..1] << version_array.last.to_i + 1).join(".")
-  config_xml.elements["widget"].attributes["version"] = new_version
-  File.open(CONFIG_XML_PATH, "w"){|f| f.puts config_xml}
-end
-
-def config_xml
-  # Run cordova hooks to set app name first
-  # invoke will ensure task is only called if it hasn't already run
-  Rake::Task["cordova:prepare"].invoke
-  REXML::Document.new(File.read(CONFIG_XML_PATH))
+  version_array = app_version.split(".")
+  app_details[environment]["version"] = (version_array[0..1] << version_array.last.to_i + 1).join(".")
+  File.open(APP_DETAILS_PATH, "w"){|f| f.puts JSON.pretty_generate(app_details)}
 end
 
 def testfairy_upload_script
