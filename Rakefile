@@ -129,10 +129,6 @@ namespace :testfairy do
   end
 end
 
-def env?(env)
-  (ENV[env] || "") != ""
-end
-
 namespace :ios_build_server do
   desc "Sends a message to the iOS build server to begin building an app"
   task :notify do
@@ -185,6 +181,10 @@ def platform
       raise "Unsupported build os: #{os}"
     end
   end
+end
+
+def env?(env)
+  (ENV[env] || "") != ""
 end
 
 def app_file
