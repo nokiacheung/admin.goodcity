@@ -4,30 +4,32 @@
 
 module.exports = function(context) {
     var fs = require('fs');
+    var xml2js = require('xml2js');
     var path = require('path');
     var rootdir = context["opts"]["projectRoot"];
     var environment = "staging";
     if (process.env.ENVIRONMENT) { environment = process.env.ENVIRONMENT }
 
-    function replace_string_in_file(filename, to_replace, replace_with) {
-        var data = fs.readFileSync(filename, 'utf8');
-        var result = data.replace(new RegExp(to_replace, "g"), replace_with);
-        fs.writeFileSync(filename, result, 'utf8');
-    }
-
     if (rootdir) {
         var app_details_path = path.join(rootdir, "appDetails.json");
         var app_details = JSON.parse(fs.readFileSync(app_details_path, 'utf8'));
-
-        config_xml_path = path.join(rootdir, "config.xml")
+        // app_details[environment].url
+        // app_details[environment].version
+        config_xml_path = path.join(rootdir, "config.xml");
         if (fs.existsSync(config_xml_path)) {
-            replace_string_in_file(config_xml_path, "@NAME@", app_details[environment].name);
-            replace_string_in_file(config_xml_path, "@URL@", app_details[environment].url);
-            replace_string_in_file(config_xml_path, "@VERSION@", app_details[environment].version);
+            // var data = fs.readFileSync(config_xml_path, 'utf8');
+            var parser = new xml2js.Parser();
+            fs.readFile(config_xml_path, function(err, data) {
+                parser.parseString(data, function (err, result) {
+                    result.widget.name = app_details[environment].name;
+                    // fs.writeFileSync(config_xml_path, result, 'utf8');
+                    console.log(result)
+                });
+            });
         } else {
             console.log("Missing file:" + config_xml_path);
         }
     } else {
-        console.log("Missing file:" + config_xml_path);
+        console.log("Can't find config files... aborting");
     }
 }

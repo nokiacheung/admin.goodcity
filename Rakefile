@@ -86,6 +86,7 @@ namespace :cordova do
   task :prepare do
     Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
+    puts "Preparing app\nAPP NAME: #{app_name}\nENV: #{environment}\nPLATFORM: #{platform}\nVERSION: #{app_version}"
     system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
   end
   desc "Cordova build {platform}"
@@ -212,8 +213,7 @@ def app_version
 end
 
 def app_details
-  @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
-  @app_details
+  JSON.parse(File.read(APP_DETAILS_PATH))
 end
 
 def increment_app_version!
