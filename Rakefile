@@ -104,12 +104,14 @@ namespace :cordova do
   end
   task :bump_version do
     increment_app_version!
-    sh %{ git config --global user.email "none@none" }
-    sh %{ git config --global user.name "CircleCi" }
-    sh %{ git config --global push.default current }
-    sh %{ git add #{APP_DETAILS_PATH} }
-    sh %{ git commit -m "Update build version [ci skip]" }
-    sh %{ git push }
+    if ENV["CI"]
+      sh %{ git config --global user.email "none@none" }
+      sh %{ git config --global user.name "CircleCi" }
+      sh %{ git config --global push.default current }
+      sh %{ git add #{APP_DETAILS_PATH} }
+      sh %{ git commit -m "Update build version [ci skip]" }
+      sh %{ git push }
+    end
   end
 end
 
@@ -213,7 +215,7 @@ def app_version
 end
 
 def app_details
-  JSON.parse(File.read(APP_DETAILS_PATH))
+  @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
 end
 
 def increment_app_version!
