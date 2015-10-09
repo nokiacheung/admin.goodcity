@@ -91,7 +91,7 @@ export default Ember.Controller.extend({
       var offer = this.get("offer.model");
 
       var saveItem = () => {
-        var loadingView = this.container.lookup('view:loading').append();
+        var loadingView = this.container.lookup('component:loading').append();
         rejectProperties.rejectionReason = this.store.peekRecord('rejection_reason', selectedReason);
         rejectProperties.state_event = 'reject';
         rejectProperties.id = this.get('itemId');
