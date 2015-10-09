@@ -23,5 +23,5 @@ deployment:
     branch: master
     commands:
       - npm run deploy-staging
-      - bash ./cordova/deploy/testfairy-android-deploy.sh
-      - bash ./cordova/deploy/notify-ios-build-service.sh admin.goodcity
+      - rake staging android app:release
+      - rake staging ios_build_server:notify

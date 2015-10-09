@@ -25,7 +25,6 @@
 #     > rake ios_build_server:notify (tells the iOS server to start a build)
 
 require 'json'
-require 'rexml/document'
 require "rake/clean"
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
@@ -34,8 +33,9 @@ CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
 CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
-CONFIG_XML_PATH = "#{CORDOVA_PATH}/config.xml"
+APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
 EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
+TESTFAIRY_PLATFORMS=%w(android ios)
 
 # Default task
 task default: %w(app:build)
@@ -43,7 +43,7 @@ task default: %w(app:build)
 # Main namespace
 namespace :app do
   desc "Builds the app"
-  task build: %w(ember:install ember:build cordova:install cordova:prepare cordova:build)
+  task build: %w(ember:install cordova:install ember:build cordova:prepare cordova:build)
   desc "Uploads the app to TestFairy"
   task deploy: %w(testfairy:upload)
   desc "Equivalent to rake app:build app:deploy"
@@ -73,7 +73,7 @@ namespace :ember do
   end
   desc "Ember build with Cordova enabled"
   task :build do
-    sh %{ EMBER_CLI_CORDOVA=1 APP_SHA=#{app_sha} STAGING=#{is_staging} #{EMBER} build --environment=production }
+    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
   end
 end
 
@@ -84,39 +84,49 @@ namespace :cordova do
   end
   desc "Cordova prepare {platform}"
   task :prepare do
+    Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
-    sh %{ cd #{CORDOVA_PATH}; cordova prepare #{platform} }
+    puts "Preparing app\nAPP NAME: #{app_name}\nENV: #{environment}\nPLATFORM: #{platform}\nVERSION: #{app_version}"
+    system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
   end
   desc "Cordova build {platform}"
-  task :build do
-    Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
-    sh %{ STAGING=#{is_staging} #{EMBER} cordova:build --platform #{platform} --environment=production }
+  task build: :prepare do
+    system({"staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
     if platform == "ios"
       sh %{ cordova build ios --device }
       sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
     end
+    # Copy build artifacts
+    if ENV["CI"]
+      sh %{ if [ -e "#{app_file}" ]; then cp #{app_file} $CIRCLE_ARTIFACTS/; fi }
+      sh %{ if [ -e "#{ipa_file}" ]; then cp #{ipa_file} $CIRCLE_ARTIFACTS/; fi }
+    end
   end
   task :bump_version do
     increment_app_version!
-    sh %{ git config --global user.email "none@none" }
-    sh %{ git config --global user.name "CircleCi" }
-    sh %{ git config --global push.default current }
-    sh %{ git add #{CONFIG_XML_PATH} }
-    sh %{ git commit -m "Update build version [ci skip]" }
-    sh %{ git push }
+    if ENV["CI"]
+      sh %{ git config --global user.email "none@none" }
+      sh %{ git config --global user.name "CircleCi" }
+      sh %{ git config --global push.default current }
+      sh %{ git add #{APP_DETAILS_PATH} }
+      sh %{ git commit -m "Update build version [ci skip]" }
+      sh %{ git push }
+    end
   end
 end
 
 namespace :testfairy do
   task :upload do
-    raise "#{app_file} does not exist!" unless File.exists?(app_file)
+    return unless TESTFAIRY_PLATFORMS.include?(platform)
+    app = (platform == "ios") ? ipa_file : app_file
+    raise "#{app} does not exist!" unless File.exists?(app)
     raise "TESTFAIRY_API_KEY not set." unless env?("TESTFAIRY_API_KEY")
-    sh %{ #{testfairy_upload_script} #{app_file} }
+    if ENV["CI"]
+      sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} #{app} }
+    else
+      sh %{ #{testfairy_upload_script} #{app} }
+    end
   end
-end
-
-def env?(env)
-  (ENV[env] || "") != ""
 end
 
 namespace :ios_build_server do
@@ -173,10 +183,14 @@ def platform
   end
 end
 
+def env?(env)
+  (ENV[env] || "") != ""
+end
+
 def app_file
   case platform
   when /ios/
-    "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.ipa"
+    "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.app"
   when /android/
     "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-release-unsigned.apk"
   when /windows/
@@ -189,30 +203,25 @@ def ipa_file
 end
 
 def app_name
-  app_details["name"]
+  app_details[environment]["name"]
 end
 
 def app_url
-  app_details["url"]
+  app_details[environment]["url"]
+end
+
+def app_version
+  app_details[environment]["version"]
 end
 
 def app_details
-  @app_details ||= JSON.parse(File.read("#{CORDOVA_PATH}/appDetails.json"))
-  @app_details[environment]
+  @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
 end
 
 def increment_app_version!
-  version_array = config_xml.elements["widget"].attributes["version"].split(".")
-  new_version = (version_array[0..1] << version_array.last.to_i + 1).join(".")
-  config_xml.elements["widget"].attributes["version"] = new_version
-  File.open(CONFIG_XML_PATH, "w"){|f| f.puts config_xml}
-end
-
-def config_xml
-  # Run cordova hooks to set app name first
-  # invoke will ensure task is only called if it hasn't already run
-  Rake::Task["cordova:prepare"].invoke
-  REXML::Document.new(File.read(CONFIG_XML_PATH))
+  version_array = app_version.split(".")
+  app_details[environment]["version"] = (version_array[0..1] << version_array.last.to_i + 1).join(".")
+  File.open(APP_DETAILS_PATH, "w"){|f| f.puts JSON.pretty_generate(app_details)}
 end
 
 def testfairy_upload_script
