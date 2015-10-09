@@ -86,7 +86,7 @@ namespace :cordova do
   desc "Cordova prepare {platform}"
   task :prepare do
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
-    sh %{ cd #{CORDOVA_PATH}; cordova prepare #{platform} }
+    system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
   end
   desc "Cordova build {platform}"
   task :build do
