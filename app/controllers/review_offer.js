@@ -101,7 +101,7 @@ export default Ember.Controller.extend({
         offer.save()
           .then(() => {
             recordsUtil.unloadRecordTree(offer);
-            this.transitionToRoute('my_list');
+            this.transitionToRoute(this.get("backLinkPath"));
           })
           .catch(error => { offer.rollback(); throw error; })
           .finally(() => loadingView.destroy());

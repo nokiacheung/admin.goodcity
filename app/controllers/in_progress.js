@@ -7,11 +7,11 @@ export default Ember.Controller.extend({
     return this.store.peekAll("offer");
   }),
 
-  reviewedCount: Ember.computed('allOffers.[]', function(){
+  reviewedCount: Ember.computed('allOffers.@each.isReviewed', function(){
     return this.get('allOffers').filterBy('isReviewed', true).length;
   }),
 
-  underReviewCount: Ember.computed('allOffers.[]', function(){
+  underReviewCount: Ember.computed('allOffers.@each.isUnderReview', function(){
     return this.get('allOffers').filterBy('isUnderReview', true).length;
   }),
 
