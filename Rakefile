@@ -84,7 +84,6 @@ namespace :cordova do
   end
   desc "Cordova prepare {platform}"
   task :prepare do
-    Rake::Task["cordova:bump_version"].invoke if ENV["CI"]
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     puts "Preparing app\nAPP NAME: #{app_name}\nENV: #{environment}\nPLATFORM: #{platform}\nVERSION: #{app_version}"
     system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")

@@ -23,10 +23,12 @@ deployment:
     branch: master
     commands:
       - bundle exec cap staging deploy
-      - rake staging android app:release
-      - rake staging ios_build_server:notify
+      - bundle exec rake staging cordova:bump_version
+      - bundle exec rake staging android app:release
+      - bundle exec rake staging ios_build_server:notify
   production:
     branch: live
     commands:
-      - rake production android app:release
-      - rake production ios_build_server:notify
+      - bundle exec rake production cordova:bump_version
+      - bundle exec rake production android app:release
+      - bundle exec rake production ios_build_server:notify
