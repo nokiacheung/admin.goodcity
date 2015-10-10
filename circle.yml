@@ -19,15 +19,10 @@ test:
     - ./node_modules/ember-cli/bin/ember test
 
 deployment:
-  capistrano:
-    branch: capistrano
-    commands:
-      - bundle exec cap staging deploy
-
   staging:
     branch: master
     commands:
-      - npm run deploy-staging
+      - bundle exec cap staging deploy
       - rake staging android app:release
       - rake staging ios_build_server:notify
   production:
