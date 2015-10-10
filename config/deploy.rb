@@ -3,14 +3,15 @@ lock '3.4.0'
 set :application, 'admin.goodcity'
 set :deploy_to, '/var/www/html/admin.goodcity.hk'
 set :shared_repo, 'https://github.com/crossroads/shared.goodcity.git'
+set :log_level, :info
 
 namespace :deploy do
   desc "Locally build the ember site"
   task :build do
     run_locally do
       env = {"EMBER_CLI_CORDOVA" => "0"}
-      env["APP_SHA"] = `git rev-parse --short #{fetch(:branch)}`
-      env["APP_SHARED_SHA"] = `git ls-remote --heads #{fetch(:shared_repo)} #{fetch(:branch)} | cut -c1-7`
+      env["APP_SHA"] = `git rev-parse --short #{fetch(:branch)}`.strip
+      env["APP_SHARED_SHA"] = `git ls-remote --heads #{fetch(:shared_repo)} #{fetch(:branch)}`.strip[0..6]
       env["staging"] = "true" if fetch(:stage) == :staging
       system(env, "ember build --environment=production")
     end

@@ -19,6 +19,11 @@ test:
     - ./node_modules/ember-cli/bin/ember test
 
 deployment:
+  capistrano:
+    branch: capistrano
+    commands:
+      - bundle exec cap staging deploy
+
   staging:
     branch: master
     commands:
