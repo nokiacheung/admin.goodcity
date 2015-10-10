@@ -109,9 +109,10 @@ namespace :cordova do
       sh %{ git config --global push.default current }
       sh %{ git add #{APP_DETAILS_PATH} }
       sh %{ git commit -m "Update build version [ci skip]" }
-      sh %{ git status }
+      sh %{ git stash }
       sh %{ git pull --rebase }
       sh %{ git push }
+      sh %{ git stash pop }
     end
   end
 end
