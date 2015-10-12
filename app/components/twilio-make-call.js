@@ -53,7 +53,7 @@ export default Ember.Component.extend({
     if(this.get("hasTwilioSupport")) {
       this._super();
       var _this = this;
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
 
       new AjaxPromise("/twilio_outbound/generate_call_token", "GET", this.get('session.authToken'))
         .then(data => {

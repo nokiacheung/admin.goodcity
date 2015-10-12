@@ -77,7 +77,7 @@ export default Ember.Controller.extend({
     },
 
     save() {
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
 
       // save packages
       var promises = [];

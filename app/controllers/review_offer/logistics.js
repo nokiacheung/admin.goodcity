@@ -54,7 +54,7 @@ export default transportDetails.extend({
     completeReview() {
       var gogovanOptionId = this.get('selectedGogovanOption');
       var crossroadsOptionId = this.get('selectedCrossroadsOption.id');
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       var offerId = this.get('model.id');
 
       var offerProperties = {

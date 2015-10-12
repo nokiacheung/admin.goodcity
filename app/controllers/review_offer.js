@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
     },
 
     closeOffer() {
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       var offerId = this.get('model.id');
       var offerProperties = {id: offerId, state_event: 'close'};
       var url = "/offers/" + offerId + "/close_offer";
@@ -96,7 +96,7 @@ export default Ember.Controller.extend({
     cancelOffer() {
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
-        var loadingView = this.container.lookup('view:loading').append();
+        var loadingView = this.container.lookup('component:loading').append();
         offer.deleteRecord();
         offer.save()
           .then(() => {

@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
     },
 
     copyItem() {
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       var _this = this;
       var item = _this.get("model");
       var images = item.get("images");
