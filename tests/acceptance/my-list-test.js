@@ -2,7 +2,6 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, offer1, reviewer, reviewerName, offer2, item1, item2,
   delivery, offer3, item3, item4, offer4, item5;
@@ -33,7 +32,7 @@ module('My Offers', {
   }
 });
 
-testSkip("redirect to reviewing offers page", function() {
+test("redirect to reviewing offers page", function() {
   visit("/offers/my_list");
 
   andThen(function(){
@@ -50,7 +49,7 @@ testSkip("redirect to reviewing offers page", function() {
   });
 });
 
-testSkip("redirect to reviewed offers page", function() {
+test("redirect to reviewed offers page", function() {
   visit("/offers/my_list/reviewed");
 
   andThen(function(){
@@ -85,7 +84,7 @@ test("redirect to scheduled offers page", function() {
   });
 });
 
-testSkip("redirect to finished offers page", function() {
+test("redirect to finished offers page", function() {
   visit("/offers/my_list/finished");
 
   andThen(function(){
@@ -98,6 +97,6 @@ testSkip("redirect to finished offers page", function() {
 
     // items accept-reject status
      var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
-    equal(itemStatus, " 0 Accepted, 1 rejected, 0 pending ");
+    equal(itemStatus, " 1 Received, 0 missing, 0 rejected ");
   });
 });

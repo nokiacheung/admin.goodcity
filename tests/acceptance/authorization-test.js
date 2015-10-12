@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import testSkip from '../helpers/test-skip';
 
 var App;
 
@@ -13,7 +12,7 @@ module('Authorization', {
   }
 });
 
-testSkip("On restricted page doesn't redirect if staff", function() {
+test("On restricted page doesn't redirect if staff", function() {
   visit('/offers');
 
   andThen(function() {

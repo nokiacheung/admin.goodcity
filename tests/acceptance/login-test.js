@@ -3,7 +3,6 @@ import startApp from '../helpers/start-app';
 import '../factories/user_profile';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, hk_user, non_hk_user;
 
@@ -26,7 +25,7 @@ module('Acceptance: Login', {
   }
 });
 
-testSkip("User able to enter mobile number and get the sms code", function() {
+test("User able to enter mobile number and get the sms code", function() {
   expect(1);
   logoutUser('/login');
   fillIn('#mobile', hk_user.mobile);
@@ -38,7 +37,7 @@ testSkip("User able to enter mobile number and get the sms code", function() {
   });
 });
 
-testSkip("User is able to enter sms code and confirm and redirected to offers", function() {
+test("User is able to enter sms code and confirm and redirected to offers", function() {
   expect(2);
 
   var authToken = window.localStorage.authToken;
@@ -59,7 +58,7 @@ testSkip("User is able to enter sms code and confirm and redirected to offers", 
   });
 });
 
-testSkip("Logout clears authToken", function() {
+test("Logout clears authToken", function() {
   expect(1);
 
   visit("/offers");

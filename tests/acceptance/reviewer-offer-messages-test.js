@@ -2,7 +2,6 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, offer, message1, message2, message3,
   message4, message5, user1, user2, offer1;
@@ -28,7 +27,7 @@ module('Reviewer: Display Offer Messages', {
   }
 });
 
-testSkip("offer-messages from donor", function() {
+test("offer-messages from donor", function() {
   visit('/offers/' + offer.id + "/donor_messages");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/donor_messages");
@@ -39,7 +38,7 @@ testSkip("offer-messages from donor", function() {
   });
 });
 
-testSkip("offer-messages from Supervisor", function() {
+test("offer-messages from Supervisor", function() {
   visit('/offers/' + offer.id + "/supervisor_messages");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/supervisor_messages");
@@ -50,7 +49,7 @@ testSkip("offer-messages from Supervisor", function() {
   });
 });
 
-testSkip("offer-messages from donor should add unread bubble in donor message tab", function() {
+test("offer-messages from donor should add unread bubble in donor message tab", function() {
   visit('/offers/' + offer.id + "/supervisor_messages");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/supervisor_messages");
@@ -62,7 +61,7 @@ testSkip("offer-messages from donor should add unread bubble in donor message ta
   });
 });
 
-testSkip("offer-messages from staff should add unread bubble in supervisor message tab", function() {
+test("offer-messages from staff should add unread bubble in supervisor message tab", function() {
   visit('/offers/' + offer.id + "/donor_messages");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/donor_messages");
@@ -74,7 +73,7 @@ testSkip("offer-messages from staff should add unread bubble in supervisor messa
   });
 });
 
-testSkip("offer-message with image", function() {
+test("offer-message with image", function() {
   visit('/offers/' + offer1.id + "/donor_messages");
   andThen(function() {
     var src = $(".received_message#"+message4.id+" img").attr("src");

@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import testSkip from '../helpers/test-skip';
 
 var App;
 
@@ -13,7 +12,7 @@ module('Finished Offers', {
   }
 });
 
-testSkip("redirect to finished offers page", function() {
+test("redirect to finished offers page", function() {
   visit("/offers/finished");
 
   andThen(function(){
@@ -30,7 +29,7 @@ testSkip("redirect to finished offers page", function() {
   });
 });
 
-testSkip("redirect to cancelled offers page", function() {
+test("redirect to cancelled offers page", function() {
   visit("/offers/finished/cancelled");
 
   andThen(function(){
