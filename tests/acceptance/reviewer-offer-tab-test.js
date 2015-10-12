@@ -2,7 +2,6 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, offer, item1, item2, item3,
   message1, message2, donor, msg_time;
@@ -27,7 +26,7 @@ module('Reviewer: Display Offer Tab', {
   }
 });
 
-testSkip("item status badge on item-image", function() {
+test("item status badge on item-image", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
@@ -40,7 +39,7 @@ testSkip("item status badge on item-image", function() {
   });
 });
 
-testSkip("offer-messages thread details", function() {
+test("offer-messages thread details", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     // display 'General Messages' thread
@@ -56,7 +55,7 @@ testSkip("offer-messages thread details", function() {
   });
 });
 
-testSkip("ordering of message threads", function() {
+test("ordering of message threads", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     // latest item message thread
@@ -69,7 +68,7 @@ testSkip("ordering of message threads", function() {
   });
 });
 
-testSkip("visit pending review item", function() {
+test("visit pending review item", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     click(".list li a:contains('"+ item3.get('donorDescription') +"')");
@@ -79,7 +78,7 @@ testSkip("visit pending review item", function() {
   });
 });
 
-testSkip("visit accepted item", function() {
+test("visit accepted item", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     click(".list li a:contains('"+ item1.get('donorDescription') +"')");
@@ -89,7 +88,7 @@ testSkip("visit accepted item", function() {
   });
 });
 
-testSkip("visit rejected item", function() {
+test("visit rejected item", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     click(".list li a:contains('"+ item2.get('donorDescription') +"')");
@@ -99,7 +98,7 @@ testSkip("visit rejected item", function() {
   });
 });
 
-testSkip("visit offer message threads", function() {
+test("visit offer message threads", function() {
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     //offer message thread

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, user, offer1, offer2, offer3, offer4;
 
@@ -24,7 +23,7 @@ module('Reviewer: Display Donor Details Tab', {
   }
 });
 
-testSkip("verify donor details", function() {
+test("verify donor details", function() {
 
   $.mockjax({url:"/api/v1/twilio_outbound/generate_call_toke*",responseText:{}});
   window.Twilio = {

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
+
 // import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var App, offer, item, message1, message2, message3, message4, message5;
@@ -57,7 +57,7 @@ test("display threads with icons and unread message count" , function() {
   });
 });
 
-testSkip("display unread notification count on notification-bell icon" , function() {
+test("display unread notification count on notification-bell icon" , function() {
   visit('/offers');
   andThen(function() {
     equal(currentURL(), "/offers/submitted");
@@ -65,7 +65,7 @@ testSkip("display unread notification count on notification-bell icon" , functio
   });
 });
 
-testSkip("redirect to notifications page on click of notification-bell icon" , function() {
+test("redirect to notifications page on click of notification-bell icon" , function() {
   visit('/offers');
   andThen(function() {
     equal(currentURL(), "/offers/submitted");

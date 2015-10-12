@@ -2,7 +2,6 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, offer1, item1, package1, package2, package3;
 
@@ -23,7 +22,7 @@ module('Received Offers', {
   }
 });
 
-testSkip("expecting, received and missing count", function() {
+test("expecting, received and missing count", function() {
   visit("/offers/"+offer1.id+"/review_offer/receive");
 
   andThen(function(){

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import testSkip from '../helpers/test-skip';
 
 var App, offer, item;
 
@@ -19,7 +18,7 @@ module('Closed Offer', {
   }
 });
 
-testSkip("display closed offer with rejected items", function() {
+test("display closed offer with rejected items", function() {
   visit("/offers/" + offer.id + "/review_offer/items");
 
   andThen(function(){
@@ -28,7 +27,7 @@ testSkip("display closed offer with rejected items", function() {
   });
 });
 
-testSkip("display logistics tab of closed offer", function() {
+test("display logistics tab of closed offer", function() {
   visit("/offers/" + offer.id + "/review_offer/logistics");
 
   andThen(function(){
