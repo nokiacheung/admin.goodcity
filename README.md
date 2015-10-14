@@ -34,13 +34,12 @@ ember install
 
 ## Deployment
 
-Staging site
+Deployment will be automatic from CircleCI. To deploy to the live site, simply push to the live branch.
 
-`npm run deploy-staging`
+If you wish to run the deployment manually, use the following commands. However, if deploying to the live site, be sure to switch both your local folder and shared.goodcity folders to the `live` branch first. This will ensure the correct code is built manually.
 
-Live site
-
-`npm run deploy-live`
+    cap staging deploy
+    cap production deploy
 
 Note you will need to have your SSH key installed on the destination servers before deployment will work.
 
@@ -48,6 +47,14 @@ Note you will need to have your SSH key installed on the destination servers bef
 Documentation has moved to https://github.com/crossroads/shared.goodcity/blob/master/docs/upgrading-ember.md
 
 ## Cordova
+CircleCI will automatically build apps for `master` and `live` branches. However, if you wish to do this manually you can use the following commands.
+
+* Switch your admin.goodcity and shared.goodcity folders to the correct branch (usually `master` or `live`)
+* Run `rake app:build` or `rake production android app:build` (see `Rakefile` for full command options)
+* Run `rake testfairy:upload` if you wish to push the app to Testfairy.
+
+Note: this is the same command as run on CircleCI. If you don't specify a platform, it will choose based on your current operating system. It will assume `staging` environment unless you specific otherwise.
+
 Documentation has moved to https://github.com/crossroads/shared.goodcity/blob/master/docs/cordova.md
 
 ## Development Notes
