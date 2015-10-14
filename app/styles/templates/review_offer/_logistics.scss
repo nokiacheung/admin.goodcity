@@ -32,3 +32,11 @@
   font-weight: bold;
   font-size: 1rem;
 }
+
+.gogovan-req {
+  .radio-buttons label {
+    @media #{$small-only} {
+      font-size: 0.7rem !important;
+    }
+  }
+}
