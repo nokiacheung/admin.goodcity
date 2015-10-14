@@ -2,7 +2,7 @@
   "staging": {
     "name": "S. Admin GoodCity",
     "url": "hk.goodcity.adminstaging",
-    "version": "0.3.22"
+    "version": "0.3.23"
   },
   "production": {
     "name": "Admin GoodCity",
