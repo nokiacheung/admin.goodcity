@@ -24,7 +24,8 @@
 #     > rake testfairy:upload
 #     > rake ios_build_server:notify (tells the iOS server to start a build)
 
-require 'json'
+require "json"
+require "fileutils"
 require "rake/clean"
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
@@ -36,6 +37,7 @@ ENVIRONMENTS = %w(staging production).freeze
 APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
 EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
 TESTFAIRY_PLATFORMS=%w(android ios)
+SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 
 # Default task
 task default: %w(app:build)
@@ -43,7 +45,7 @@ task default: %w(app:build)
 # Main namespace
 namespace :app do
   desc "Builds the app"
-  task build: %w(ember:install cordova:install ember:build cordova:prepare cordova:build)
+  task build: %w(ember:install cordova:install cordova:prepare cordova:build)
   desc "Uploads the app to TestFairy"
   task deploy: %w(testfairy:upload)
   desc "Equivalent to rake app:build app:deploy"
@@ -73,7 +75,7 @@ namespace :ember do
   end
   desc "Ember build with Cordova enabled"
   task :build do
-    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
+    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
   end
 end
 
@@ -84,13 +86,14 @@ namespace :cordova do
   end
   desc "Cordova prepare {platform}"
   task :prepare do
+    FileUtils.mkdir_p "#{ROOT_PATH}/dist"
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
-    puts "Preparing app\nAPP NAME: #{app_name}\nENV: #{environment}\nPLATFORM: #{platform}\nVERSION: #{app_version}"
+    puts "Preparing app\nAPP NAME: #{app_name}\nENV: #{environment}\nPLATFORM: #{platform}\nAPP VERSION: #{app_version}"
     system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
   end
   desc "Cordova build {platform}"
   task build: :prepare do
-    system({"staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
+    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
     if platform == "ios"
       sh %{ cordova build ios --device }
       sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
@@ -110,7 +113,6 @@ namespace :cordova do
       sh %{ git add #{APP_DETAILS_PATH} }
       sh %{ git commit -m "Update build version [ci skip]" }
       sh %{ git stash }
-      sh %{ git pull --rebase }
       sh %{ git push }
       sh %{ git stash pop }
     end
@@ -162,6 +164,15 @@ def app_sha
   `git rev-parse --short HEAD`.chomp
 end
 
+def app_shared_sha
+  @app_shared_sha ||= begin
+    branch = `git rev-parse --abbrev-ref HEAD`.strip
+    sha = `git ls-remote --heads #{SHARED_REPO} #{branch}`.strip
+    sha = `git ls-remote --heads #{SHARED_REPO} master`.strip if sha.empty?
+    sha[0..6]
+  end
+end
+
 def environment
   environment = ENV["ENV"]
   raise "Unsupported environment: #{environment}" if (environment || "").length > 0 and !ENVIRONMENTS.include?(environment)
@@ -194,7 +205,11 @@ def app_file
   when /ios/
     "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.app"
   when /android/
-    "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-release-unsigned.apk"
+    if environment == "staging"
+      "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-release-unsigned.apk"
+    else
+      "#{CORDOVA_PATH}/platforms/android/ant-build/MainActivity-release-unsigned.apk"
+    end
   when /windows/
     raise "TODO: Need to get Windows app path"
   end
