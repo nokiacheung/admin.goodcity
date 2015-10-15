@@ -132,13 +132,13 @@ namespace :testfairy do
     app = (platform == "ios") ? ipa_file : app_file
     raise "#{app} does not exist!" unless File.exists?(app)
     raise "TESTFAIRY_API_KEY not set." unless env?("TESTFAIRY_API_KEY")
-    puts "Uploading app..."
-    build_details.map{|key, value| puts "#{key.upcase}: #{value}"}
     if ENV["CI"]
       sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} "#{app}" }
     else
       sh %{ #{testfairy_upload_script} "#{app}" }
     end
+    puts "Uploaded app..."
+    build_details.map{|key, value| puts "#{key.upcase}: #{value}"}
   end
 end
 
