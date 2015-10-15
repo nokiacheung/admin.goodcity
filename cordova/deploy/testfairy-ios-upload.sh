@@ -21,7 +21,7 @@ MAX_DURATION="10m"
 VIDEO="wifi"
 
 # Comment text will be included in the email sent to testers
-COMMENT=""
+COMMENT="Uploaded on `date`"
 
 # locations of various tools
 CURL=curl
