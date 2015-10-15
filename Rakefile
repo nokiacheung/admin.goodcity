@@ -95,7 +95,7 @@ namespace :cordova do
   task build: :prepare do
     system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
     if platform == "ios"
-      sh %{ cordova build ios --device }
+      sh %{ cd #{CORDOVA_PATH}; cordova build ios --device }
       sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
     end
     # Copy build artifacts
