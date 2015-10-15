@@ -38,6 +38,8 @@ APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
 EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
 TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
+TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
+TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
 
 # Default task
 task default: %w(app:build)
@@ -90,6 +92,10 @@ namespace :cordova do
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     puts "Preparing app\nAPP NAME: #{app_name}\nENV: #{environment}\nPLATFORM: #{platform}\nAPP VERSION: #{app_version}"
     system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
+    if platform == "ios"
+      sh %{ cd #{CORDOVA_PATH}; cordova plugin add #{TESTFAIRY_PLUGIN_URL} } if environment == "staging"
+      sh %{ cd #{CORDOVA_PATH}; cordova plugin remove #{TESTFAIRY_PLUGIN_NAME}; true } if environment == "production"
+    end
   end
   desc "Cordova build {platform}"
   task build: :prepare do
