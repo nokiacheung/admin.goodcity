@@ -184,14 +184,14 @@ def platform
   raise "Unsupported platform: #{env_platform}" if (env_platform || "").length > 0 and !PLATFORMS.include?(env_platform)
   env_platform || begin
     case Gem::Platform.local.os
-    when /mswin|windows/i
+    when /mswin|windows|mingw32/i
       "windows"
     when /linux|arch/i
       "android"
     when /darwin/i
       "ios"
     else
-      raise "Unsupported build os: #{os}"
+      raise "Unsupported build os: #{env_platform}"
     end
   end
 end
