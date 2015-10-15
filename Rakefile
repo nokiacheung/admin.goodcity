@@ -126,9 +126,9 @@ namespace :testfairy do
     raise "#{app} does not exist!" unless File.exists?(app)
     raise "TESTFAIRY_API_KEY not set." unless env?("TESTFAIRY_API_KEY")
     if ENV["CI"]
-      sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} #{app} }
+      sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} "#{app}" }
     else
-      sh %{ #{testfairy_upload_script} #{app} }
+      sh %{ #{testfairy_upload_script} "#{app}" }
     end
   end
 end
