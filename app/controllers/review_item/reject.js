@@ -3,18 +3,18 @@ import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
 
-  review_item: Ember.inject.controller(),
+  reviewItem: Ember.inject.controller(),
   offer: Ember.inject.controller(),
 
-  itemTypeId: Ember.computed.alias('review_item.itemTypeId'),
-  itemId: Ember.computed.alias('review_item.model.id'),
+  itemTypeId: Ember.computed.alias('reviewItem.itemTypeId'),
+  itemId: Ember.computed.alias('reviewItem.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
   rejectReasonPlaceholder: t("reject.custom_reason"),
   i18n: Ember.inject.service(),
 
   rejectReason: Ember.computed('itemId', {
     get: function() {
-      return this.get('review_item.model.rejectReason');
+      return this.get('reviewItem.model.rejectReason');
     },
     set: function(key, value) {
       return value;
@@ -97,7 +97,7 @@ export default Ember.Controller.extend({
         rejectProperties.id = this.get('itemId');
 
         rejectProperties.offer = offer;
-        rejectProperties.itemType = this.store.peekRecord('package_type', this.get('itemTypeId'));
+        rejectProperties.packageType = this.store.peekRecord('packageType', this.get('itemTypeId'));
 
         var item = this.store.push('item', rejectProperties);
 
