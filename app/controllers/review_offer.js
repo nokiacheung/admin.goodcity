@@ -7,9 +7,8 @@ export default Ember.Controller.extend({
   isStartReviewClicked: false,
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
-  lastVisitedRoute: null,
 
-  isMyOffer: Ember.computed('offer', {
+  isMyOffer: Ember.computed('offer.reviewedBy', {
     get: function() {
       var currentUserId = this.session.get("currentUser.id");
       return this.get("offer.reviewedBy.id") === currentUserId;
@@ -50,11 +49,6 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    redirectBack() {
-      var route = this.get("lastVisitedRoute") || "my_list";
-      this.transitionToRoute(route);
-    },
-
     addItem() {
       var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
       this.transitionToRoute('item.edit_images', draftItemId);
