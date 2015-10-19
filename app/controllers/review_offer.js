@@ -37,6 +37,7 @@ export default Ember.Controller.extend({
       else if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }
       else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
       else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
+    else { return "offers"; }
     }
   }),
 
