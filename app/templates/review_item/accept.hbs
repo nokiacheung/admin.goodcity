@@ -45,16 +45,16 @@
                 </div>
                 <div class="row bottom">
                   <div class="small-6 columns ui inner">
-                    {{input type="number" name="qty" value=pkg.quantity placeholder=(t "placeholder.qty") maxlength="8" required="required" }}
+                    {{numeric-input id=(concat 'qty' index) name="qty" value=pkg.quantity placeholder=(t "placeholder.qty") maxlength="8" required='true' pattern="\d{1,8}"}}
                   </div>
                   <div class="small-2 columns ui inner">
-                    {{input type="number" name="length" value=pkg.length placeholder=(t "placeholder.length") maxlength="8" }}
+                    {{numeric-input name="length" id=(concat 'length' index) value=pkg.length placeholder=(t "placeholder.length") maxlength="8" pattern="\d{1,8}"}}
                   </div>
                   <div class="small-2 columns ui inner">
-                    {{input type="number" name="width" value=pkg.width placeholder=(t "placeholder.width") maxlength="5" }}
+                    {{numeric-input id=(concat 'width' index) name="width" value=pkg.width placeholder=(t "placeholder.width") maxlength="5" pattern="\d{1,5}"}}
                   </div>
                   <div class="small-2 columns ui inner">
-                    {{input type="number" name="height" value=pkg.height placeholder=(t "placeholder.height") maxlength="5" }}
+                    {{numeric-input id=(concat 'height' index) name="height" value=pkg.height placeholder=(t "placeholder.height") maxlength="5"  pattern="\d{1,5}" }}
                   </div>
                 </div>
               </div>
