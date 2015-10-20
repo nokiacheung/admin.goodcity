@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
   item: Ember.computed.alias("reviewItem.item"),
+  offer: Ember.computed.alias("item.offer"),
   itemTypeId: Ember.computed.alias("reviewItem.itemTypeId"),
   isItemAccepted: Ember.computed.equal("item.state", "accepted"),
   packages: [],
