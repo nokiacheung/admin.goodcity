@@ -3,7 +3,7 @@
 
 I18nTranslationsEn =
   Ember.$.extend true, SharedTranslationsEn,
-    "socket_offline_error": "Attempting to connect to admin.goodcity.hk..."
+    "socket_offline_error": "Attempting to reconnect..."
     "reviewing": "Reviewing"
     "reviewed": "Reviewed"
     "submitted": "Submitted"
