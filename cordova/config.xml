@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="hk.goodcity.adminstaging" version="0.3.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="hk.goodcity.adminstaging" version="0.3.40" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>S. Admin GoodCity</name>
   <description>The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.</description>
   <author href="https://www.crossroads.org.hk">Crossroads</author>
@@ -7,20 +7,22 @@
   <content src="index.html"/>
   <hook type="before_prepare" src="scripts/prepareConfigXml.js"/>
   <platform name="android">
+    <hook type="after_prepare" src="scripts/copyAndroidAssets.js"/>
     <preference name="LoadUrlTimeoutValue" value="120000"/>
     <preference name="SplashScreen" value="screen"/>
     <preference name="SplashScreenDelay" value="5000"/>
-    <icon src="res/android/gc_mdpi_48.png" width="48" height="48"/>
-    <icon src="res/android/gc_hdpi_72.png" width="72" height="72"/>
-    <icon src="res/android/gc_xhdpi_96.png" width="96" height="96"/>
-    <icon src="res/android/gc_xxhdpi_144.png" width="144" height="144"/>
-    <icon src="res/android/gc_xxxhdpi_192.png" width="192" height="192"/>
-    <splash src="res/android/splash_ldpi/screen.png" density="port-ldpi"/>
-    <splash src="res/android/splash_mdpi/screen.png" density="port-mdpi"/>
-    <splash src="res/android/splash_hdpi/screen.png" density="port-hdpi"/>
-    <splash src="res/android/splash_xhdpi/screen.png" density="port-xhdpi"/>
-    <splash src="res/android/splash_xxhdpi/screen.png" density="port-xxhdpi"/>
-    <splash src="res/android/splash_xxxhdpi/screen.png" density="port-xxxhdpi"/>
+    <icon src="res/android/drawable-ldpi/icon.png" density="ldpi"/>
+    <icon src="res/android/drawable-mdpi/icon.png" density="mdpi"/>
+    <icon src="res/android/drawable-hdpi/icon.png" density="hdpi"/>
+    <icon src="res/android/drawable-xhdpi/icon.png" density="xhdpi"/>
+    <icon src="res/android/drawable-xxhdpi/icon.png" density="xxhdpi"/>
+    <icon src="res/android/drawable-xxxhdpi/icon.png" density="xxxhdpi"/>
+    <splash src="res/android/drawable-ldpi/screen.png" density="port-ldpi"/>
+    <splash src="res/android/drawable-mdpi/screen.png" density="port-mdpi"/>
+    <splash src="res/android/drawable-hdpi/screen.png" density="port-hdpi"/>
+    <splash src="res/android/drawable-xhdpi/screen.png" density="port-xhdpi"/>
+    <splash src="res/android/drawable-xxhdpi/screen.png" density="port-xxhdpi"/>
+    <splash src="res/android/drawable-xxxhdpi/screen.png" density="port-xxxhdpi"/>
   </platform>
   <platform name="windows">
     <hook type="after_platform_add" src="hooks/windows/include.bat"/>
