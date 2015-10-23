@@ -21,11 +21,17 @@
 #     > rake cordova:install
 #     > rake cordova:prepare
 #     > rake cordova:build
-#     > rake testfairy:upload
+#
+# iOS Build Server
 #     > rake ios_build_server:notify (tells the iOS server to start a build)
+#     > rake ios_build_server:build (checks and starts a build)
+#
+#     Cronjob entry
+# * * * * * source /Users/developer/.bash_profile; rake -f /Users/developer/Workspace/admin.goodcity/Rakefile app:release  >> /tmp/goodcity_admin_ios_build.log 2>&1
 
 require "json"
 require "fileutils"
+require "iron_mq"
 require "rake/clean"
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
@@ -40,6 +46,8 @@ TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
 TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
+LOCK_FILE="#{CORDOVA_PATH}/.ios_build.lock"
+LOCK_FILE_MAX_AGE = 1000 # number of seconds before we remove lock file if failing build
 
 # Default task
 task default: %w(app:build)
@@ -67,8 +75,13 @@ PLATFORMS.each do |platform|
 end
 
 namespace :ember do
+  multitask install_parallel: %w(bower_install npm_install)
   desc "Ember install dependencies"
-  multitask install: %w(bower_install npm_install)
+  task :install do
+    Dir.chdir(ROOT_PATH) do
+      Rake::MultiTask["ember:install_parallel"].invoke
+    end
+  end
   task :bower_install do
     sh %{ bower install }
   end
@@ -77,7 +90,9 @@ namespace :ember do
   end
   desc "Ember build with Cordova enabled"
   task :build do
-    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
+    Dir.chdir(ROOT_PATH) do
+      system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
+    end
   end
 end
 
@@ -90,20 +105,28 @@ namespace :cordova do
   task :prepare do
     FileUtils.mkdir_p "#{ROOT_PATH}/dist"
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
-    puts "Preparing app..."
-    build_details.map{|key, value| puts "#{key.upcase}: #{value}"}
-    system({"ENVIRONMENT" => environment}, "cd #{CORDOVA_PATH}; cordova prepare #{platform}")
+    log("Preparing app...")
+    build_details.map{|key, value| log("#{key.upcase}: #{value}")}
+    Dir.chdir(CORDOVA_PATH) do
+      system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
+    end
     if platform == "ios"
-      sh %{ cd #{CORDOVA_PATH}; cordova plugin add #{TESTFAIRY_PLUGIN_URL} } if environment == "staging"
-      sh %{ cd #{CORDOVA_PATH}; cordova plugin remove #{TESTFAIRY_PLUGIN_NAME}; true } if environment == "production"
+      Dir.chdir(CORDOVA_PATH) do
+        sh %{ cordova plugin add #{TESTFAIRY_PLUGIN_URL} } if environment == "staging"
+        sh %{ cordova plugin remove #{TESTFAIRY_PLUGIN_NAME}; true } if environment == "production"
+      end
     end
   end
   desc "Cordova build {platform}"
   task build: :prepare do
-    system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
+    Dir.chdir(ROOT_PATH) do
+      system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} cordova:build --platform #{platform} --environment=production")
+    end
     if platform == "ios"
-      sh %{ cd #{CORDOVA_PATH}; cordova build ios --device }
-      sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
+      Dir.chdir(CORDOVA_PATH) do
+        sh %{ cordova build ios --device }
+        sh %{ xcrun -sdk iphoneos PackageApplication '#{app_file}' -o '#{ipa_file}' }
+      end
     end
     # Copy build artifacts
     if ENV["CI"]
@@ -114,14 +137,16 @@ namespace :cordova do
   task :bump_version do
     increment_app_version!
     if ENV["CI"]
-      sh %{ git config --global user.email "none@none" }
-      sh %{ git config --global user.name "CircleCi" }
-      sh %{ git config --global push.default current }
-      sh %{ git add #{APP_DETAILS_PATH} }
-      sh %{ git commit -m "Update build version [ci skip]" }
-      sh %{ git stash }
-      sh %{ git push; true } # try but don't care if this fails
-      sh %{ git stash pop }
+      Dir.chdir(ROOT_PATH) do
+        sh %{ git config --global user.email "none@none" }
+        sh %{ git config --global user.name "CircleCi" }
+        sh %{ git config --global push.default current }
+        sh %{ git add #{APP_DETAILS_PATH} }
+        sh %{ git commit -m "Update build version [ci skip]" }
+        sh %{ git stash }
+        sh %{ git push; true } # try but don't care if this fails
+        sh %{ git stash pop }
+      end
     end
   end
 end
@@ -137,45 +162,57 @@ namespace :testfairy do
     else
       sh %{ #{testfairy_upload_script} "#{app}" }
     end
-    puts "Uploaded app..."
-    build_details.map{|key, value| puts "#{key.upcase}: #{value}"}
+    log("Uploaded app...")
+    build_details.map{|key, value| log("#{key.upcase}: #{value}")}
   end
 end
 
 namespace :ios_build_server do
   desc "Sends a message to the iOS build server to begin building an app"
-  task :notify do
+  task notify: :check_env do
+    iron_queue.post("build")
+  end
+  desc "Checks to see if we should begin a build"
+  task build: :check_env do
+    log("Checking for build messages on #{iron_queue.name}...")
+    msg = iron_queue.get
+    if msg
+      if !lock_expired?
+        log("Build starting...")
+        Dir.chdir(ROOT_PATH) do
+          sh %{ git fetch origin; git reset --hard HEAD; git pull }
+        end
+        create_lock!
+        msg.delete
+        Rake::Task["app:release"].invoke
+        delete_lock!
+      else
+        log("Build currently in progress")
+      end
+    else
+      log("No build requested")
+    end
+  end
+  task :check_env do
     %w(GOODCITY_IRON_MQ_OAUTH_KEY GOODCITY_IRON_MQ_PROJECT_KEY
       GOODCITY_IRON_MQ_QUEUE_NAME TESTFAIRY_API_KEY).each do |env|
         raise "#{env} not set." unless env?(env)
     end
-    auth_header = "Authorization: OAuth #{ENV['GOODCITY_IRON_MQ_OAUTH_KEY']}"
-    content_type_header = "Content-Type: application/json"
-    build_message = {messages: [ { body: "build #{app_url}" } ]}.to_json
-    url = "https://mq-aws-us-east-1.iron.io/1/projects/#{ENV['GOODCITY_IRON_MQ_PROJECT_KEY']}/queues/#{ENV['GOODCITY_IRON_MQ_QUEUE_NAME']}/messages"
-    sh %{ curl -H '#{content_type_header}' -H '#{auth_header}' -d '#{build_message}' #{url} }
-    puts
-  end
-
-  desc "Checks to see if we should begin a build"
-  task :check do
-    # body: message: "build hk.goodcity.adminstaging"
-    # body: message: "build hk.goodcity.admin"
-    # body: message: "build hk.goodcity.appstaging"
-    # body: message: "build hk.goodcity.app"
-  end
-  task :build do
-
   end
 end
 
 def app_sha
-  `git rev-parse --short HEAD`.chomp
+  Dir.chdir(ROOT_PATH) do
+    `git rev-parse --short HEAD`.chomp
+  end
 end
 
 def app_shared_sha
   @app_shared_sha ||= begin
-    branch = `git rev-parse --abbrev-ref HEAD`.strip
+    branch = nil
+    Dir.chdir(ROOT_PATH) do
+      branch = `git rev-parse --abbrev-ref HEAD`.strip
+    end
     sha = `git ls-remote --heads #{SHARED_REPO} #{branch}`.strip
     sha = `git ls-remote --heads #{SHARED_REPO} master`.strip if sha.empty?
     sha[0..6]
@@ -260,4 +297,36 @@ end
 
 def build_details
   {app_name: app_name, env: environment, platform: platform, app_version: app_version}
+end
+
+def iron_mq
+  @ironmq ||= IronMQ::Client.new(token: iron_token, project_id: iron_project_id)
+end
+
+def iron_queue
+  iron_mq.queue(app_url)
+end
+
+def iron_token
+  ENV['GOODCITY_IRON_MQ_OAUTH_KEY']
+end
+
+def iron_project_id
+  ENV['GOODCITY_IRON_MQ_PROJECT_KEY']
+end
+
+def lock_expired?
+  File.exists?(LOCK_FILE) && (Time.now - File.mtime(LOCK_FILE)).to_i > LOCK_FILE_MAX_AGE
+end
+
+def create_lock!
+  FileUtils.touch(LOCK_FILE)
+end
+
+def delete_lock!
+  FileUtils.rm(LOCK_FILE) if File.exists?(LOCK_FILE)
+end
+
+def log(msg="")
+  puts(Time.now.to_s << " " << msg)
 end
