@@ -91,7 +91,8 @@
           {{/link-to}}
 
         </dl>
-        <div class="tabs-content">
+
+        <div class="tabs-content {{if model.offer.isFinished 'disable-canceloffer-review'}}">
           <br/>
           {{outlet}}
         </div>
