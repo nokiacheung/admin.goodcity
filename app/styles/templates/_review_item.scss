@@ -35,9 +35,16 @@
     float: right;
     color: $white;
     cursor: pointer;
+    padding: 0.25rem 0.6rem;
     @media #{$small-only} {
       font-size: 1rem;
     }
+  }
+  .disable-canceloffer-review{
+    pointer-events: none;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    cursor: not-allowed;
   }
 }
 
