@@ -93,8 +93,8 @@
 
           <div>
             {{#if offer.hasReceived}}
-              {{offer.approvedItems.length}} {{t "offer.offer_details.received"}},
-              0 {{t "offer.offer_details.missing"}},
+              {{offer.receivedCount}} {{t "offer.offer_details.received"}},
+              {{offer.missingCount}} {{t "offer.offer_details.missing"}},
               {{offer.rejectedItems.length}} {{t "offer.offer_details.rejected"}}
             {{else}}
               {{offer.approvedItems.length}} {{t "offer.offer_details.accepted"}},
