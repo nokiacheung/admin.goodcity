@@ -7,6 +7,6 @@
   "production": {
     "name": "Admin GoodCity",
     "url": "hk.goodcity.admin",
-    "version": "0.2.1"
+    "version": "0.2.2"
   }
 }
