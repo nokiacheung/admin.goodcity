@@ -168,7 +168,7 @@ test("for scheduled offer with active GGV order state", function() {
     equal($(".booking-id div:first").text().trim(), t("delivery_details.id"));
     equal($(".booking-id div:last").text().trim().indexOf("654321") >= 0, true);
     equal($(".booking-id div:last a").text().trim().indexOf(t("delivery_details.driver_screen")) >=0, true);
-    equal($(".delivery-details .row:eq(7) div a").attr("href").indexOf("/ggv_orders/12345") >=0, true);
+    equal($(".delivery-details .row:eq(7) div a").text().trim().indexOf("Driver Screen") >=0, true);
   });
 });
 

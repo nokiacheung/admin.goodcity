@@ -1,18 +1,18 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   inProgress: true,
 
-  allOffers: function() {
+  allOffers: Ember.computed(function(){
     return this.store.peekAll("offer");
-  }.property(),
+  }),
 
-  reviewedCount: function() {
+  reviewedCount: Ember.computed('allOffers.@each.isReviewed', function(){
     return this.get('allOffers').filterBy('isReviewed', true).length;
-  }.property('allOffers.[]'),
+  }),
 
-  underReviewCount: function() {
+  underReviewCount: Ember.computed('allOffers.@each.isUnderReview', function(){
     return this.get('allOffers').filterBy('isUnderReview', true).length;
-  }.property('allOffers.[]'),
+  }),
 
 });

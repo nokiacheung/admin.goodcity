@@ -6,22 +6,23 @@ export default Ember.Controller.extend({
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
   item: Ember.computed.alias("reviewItem.item"),
+  offer: Ember.computed.alias("item.offer"),
   itemTypeId: Ember.computed.alias("reviewItem.itemTypeId"),
   isItemAccepted: Ember.computed.equal("item.state", "accepted"),
   packages: [],
-
-  itemType: function() {
-    return this.get("store").peekRecord("packageType", this.get("itemTypeId"));
-  }.property("itemTypeId"),
-
-  subPackageTypes: function() {
-    var itemType = this.get("itemType");
-    return itemType.get("allChildPackagesList").apply(itemType);
-  }.property("itemType"),
-
   isAccepting: false,
   itemSaving: false,
-  onItemTypeChange: function() {
+
+  itemType: Ember.computed('itemTypeId', function(){
+    return this.get("store").peekRecord("packageType", this.get("itemTypeId"));
+  }),
+
+  subPackageTypes: Ember.computed('itemType', function(){
+    var itemType = this.get("itemType");
+    return itemType.get("allChildPackagesList").apply(itemType);
+  }),
+
+  onItemTypeChange: Ember.observer('itemTypeId', function () {
     if (this.get("itemSaving")) {
       return;
     }
@@ -46,11 +47,11 @@ export default Ember.Controller.extend({
       itemType.get("defaultChildPackagesList").apply(itemType)
         .forEach(t => this.send("addPackage", t.get("id")));
     }
-  }.observes("itemTypeId"),
+  }),
 
-  onInit: function() {
+  onInit: Ember.on('init', function() {
     this.onItemTypeChange();
-  }.on("init"),
+  }),
 
   actions: {
     toggleComment(index) {
@@ -77,7 +78,7 @@ export default Ember.Controller.extend({
     },
 
     save() {
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
 
       // save packages
       var promises = [];

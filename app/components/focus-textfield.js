@@ -5,7 +5,7 @@ export default Ember.TextField.extend({
   type:    "text",
   attributeBindings: [ "name", "id", "value", 'placeholder'],
 
-  becomeFocused: function() {
+  didInsertElement() {
     this.$().focus();
-  }.on('didInsertElement'),
+  }
 });

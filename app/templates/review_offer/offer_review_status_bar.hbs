@@ -3,13 +3,21 @@
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
         {{t "review_offer.all_items_processed"}}
-        {{#link-to "review_offer.mark_received"}}{{t "review_offer.close_offer"}}{{/link-to}}
+        <a {{action "closeReceivedOffer"}}>{{t "review_offer.close_offer"}}</a>
       </div>
     </div>
+
+  {{else if offer.isReceiving}}
+    <div class="offer-status is-received">
+      <div class='status-message review_message'>
+        {{t "review_offer.goods_start_receiving_by" firstName=offer.receivedBy.firstName lastName=offer.receivedBy.lastName}} {{time-ago timeValue=offer.startReceivingAt}}
+      </div>
+    </div>
+
   {{else if offer.isReceived}}
     <div class="offer-status is-received">
       <div class='status-message review_message'>
-        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{view 'time-ago' timeValue=offer.receivedAt}}
+        {{t "review_offer.goods_received_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}} {{time-ago timeValue=offer.receivedAt}}
       </div>
     </div>
   {{else if offer.isSubmitted}}
@@ -26,7 +34,7 @@
   {{else if offer.isReviewed}}
     <div class="offer-status is-reviewed">
       <div class='status-message review_message'>
-        {{t "review_offer.reviewed"}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}. {{t "review_offer.plan_transport"}}
+        {{t "review_offer.reviewed"}} {{time-ago timeValue=offer.reviewCompletedAt}}. {{t "review_offer.plan_transport"}}
       </div>
     </div>
   {{else if offer.isScheduled}}
@@ -77,7 +85,7 @@
   {{else if offer.isClosed}}
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
-        {{t "review_offer.offer_closed_by" firstName=offer.closedBy.firstName lastName=offer.closedBy.lastName}} {{view 'time-ago' timeValue=offer.reviewCompletedAt}}
+        {{t "review_offer.offer_closed_by" firstName=offer.closedBy.firstName lastName=offer.closedBy.lastName}} {{time-ago timeValue=offer.reviewCompletedAt}}
       </div>
     </div>
   {{else if offer.allItemsRejected}}
@@ -86,7 +94,7 @@
         {{t "review_offer.no_items"}} <i class="fa fa-frown-o"></i> <a {{action 'closeOffer'}}>{{t "review_offer.close_offer"}}</a>
       </div>
     </div>
-  {{else if offer.allItemsReviewed}}
+  {{else if offer.readyForSchedule}}
     <div class="offer-status is-submitted">
       <div class='status-message'>
         {{t "review_offer.items_reviewed"}} <i class="fa fa-smile-o"></i> {{#link-to 'review_offer.logistics' offer }}{{t "review_offer.set_logistics"}}{{/link-to}} {{t "review_offer.to_complete"}}
@@ -96,7 +104,7 @@
     <div class="offer-status is-under-review">
       <div class='status-message review_message'>
         {{t "review_offer.review_started_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}}
-        {{view 'time-ago' timeValue=offer.reviewedAt}}
+        {{time-ago timeValue=offer.reviewedAt}}
       </div>
     </div>
   {{/if}}

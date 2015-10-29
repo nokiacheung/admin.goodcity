@@ -5,6 +5,7 @@ var App;
 
 module('Home Page', {
   setup: function() {
+    App = startApp({}, 1);
   },
   teardown: function() {
     Ember.run(App, 'destroy');

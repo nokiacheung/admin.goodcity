@@ -6,19 +6,24 @@ export default offers.extend({
   sortedModel: Ember.computed.sort("model", "sortProperties"),
   messagesUtil: Ember.inject.service("messages"),
 
-  showUnread: function(key, value){
-    return arguments.length > 1 ? value : false;
-  }.property(),
+  showUnread: Ember.computed({
+    get: function() {
+      return false;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
-  myNotifications: function(){
+  myNotifications: Ember.computed('showUnread', 'allNotifications', function(){
     return this.get('showUnread') ? this.get('unreadNotifications') : this.get('allNotifications');
-  }.property('showUnread', 'allNotifications'),
+  }),
 
-  unreadNotifications: function(){
+  unreadNotifications: Ember.computed('allNotifications.[]', function(){
     return this.get('allNotifications').rejectBy('unreadCount', 0);
-  }.property('allNotifications.[]'),
+  }),
 
-  allNotifications: function() {
+  allNotifications: Ember.computed("model.@each.state", function(){
     var keys = {};
     var res = [];
     this.get("sortedModel").forEach(function(message) {
@@ -41,25 +46,25 @@ export default offers.extend({
       }
     });
     return res;
-  }.property("model.@each.state"),
+  }),
 
   actions: {
-    view: function(messageId){
+    view(messageId) {
       var message = this.store.peekRecord('message', messageId);
       var route = this.get("messagesUtil").getRoute(message);
       this.transitionToRoute.apply(this, route);
     },
 
-    markThreadRead: function(messageId){
+    markThreadRead(messageId) {
       var message = this.store.peekRecord('message', messageId);
       this.get("messagesUtil").markRead(message);
     },
 
-    toggleShowUnread: function(){
+    toggleShowUnread() {
       this.set('showUnread', !this.get('showUnread'));
     },
 
-    markAllRead: function(){
+    markAllRead() {
       var allUnreadMessages = this.get('model').filterBy('state', 'unread');
       allUnreadMessages.forEach(m => this.get("messagesUtil").markRead(m));
     }

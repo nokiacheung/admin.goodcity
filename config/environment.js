@@ -41,7 +41,7 @@ module.exports = function(environment) {
       VERSION: "1.0.0",
 
       AIRBRAKE_HOST: "https://errbit.crossroads.org.hk",
-      AIRBRAKE_PROJECT_ID: 0,
+      AIRBRAKE_PROJECT_ID: "55263f256572721acb000000",
       AIRBRAKE_PROJECT_KEY: "6d0f1e945f5fdba56d9fe043684f2b7a"
     },
 

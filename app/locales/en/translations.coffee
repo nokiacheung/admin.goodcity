@@ -3,7 +3,7 @@
 
 I18nTranslationsEn =
   Ember.$.extend true, SharedTranslationsEn,
-    "socket_offline_error": "Attempting to connect to admin.goodcity.hk..."
+    "socket_offline_error": "Attempting to reconnect..."
     "reviewing": "Reviewing"
     "reviewed": "Reviewed"
     "submitted": "Submitted"
@@ -39,6 +39,7 @@ I18nTranslationsEn =
         "rejected": "rejected"
         "pending": "pending"
         "missing": "missing"
+        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
 
     "items":
       "add_item":
@@ -66,6 +67,7 @@ I18nTranslationsEn =
       "my_list" : "My List"
       "finished": "Finished"
       "closed_offers": "Finished"
+      "receiving": "Receiving"
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
@@ -86,6 +88,7 @@ I18nTranslationsEn =
       "reviewed": "Reviewed"
       "start_review": "Start Review"
       "goods_received_by" : "Goods donated by {{firstName}} {{lastName}} received"
+      "goods_start_receiving_by": "{{firstName}} {{lastName}} began receiving items"
       "offer_closed_by": "Offer closed by {{firstName}} {{lastName}}"
       "offer_cancelled_by": "Cancelled by {{firstName}} {{lastName}}"
       "receive": "Receive"
@@ -107,11 +110,9 @@ I18nTranslationsEn =
 
     "mark_received":
       "delivered_by": "Delivered by:"
-      "select": "- select -"
       "gogovan": "Gogovan"
       "crossroads_truck": "Crossroads truck"
       "dropped_off": "Dropped off"
-      "close_offer": "Close Offer"
       "unknown": "Unknown"
 
     "logistics":
@@ -169,6 +170,11 @@ I18nTranslationsEn =
     "receive":
       "missing": "Missing"
       "receive": "Receive"
+      "receiving":
+        "header": "Begin Receiving Offer"
+        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
+        "not_now": "Not Now"
+        "begin_receiving": "Begin Receiving"
 
     "finished":
       "title": "Finished"

@@ -2,6 +2,7 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+
 // import syncDataStub from '../helpers/empty-sync-data-stub';
 
 var App, offer, item, message1, message2, message3, message4, message5;

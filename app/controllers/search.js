@@ -9,45 +9,45 @@ export default Ember.Controller.extend(backNavigator, {
   searchPlaceholder: t("search.placeholder"),
   i18n: Ember.inject.service(),
 
-  allUsers: function() {
+  allUsers: Ember.computed(function(){
     return this.store.peekAll("user");
-  }.property(),
+  }),
 
-  allItems: function() {
+  allItems: Ember.computed(function(){
     return this.store.peekAll("item");
-  }.property(),
+  }),
 
-  allGogovanOrders: function() {
+  allGogovanOrders: Ember.computed(function(){
     return this.store.peekAll("gogovan_order");
-  }.property(),
+  }),
 
-  allPackageTypes: function() {
+  allPackageTypes: Ember.computed(function(){
     return this.store.peekAll("package_type");
-  }.property(),
+  }),
 
-  allAddresses: function() {
+  allAddresses: Ember.computed(function(){
     return this.store.peekAll("address");
-  }.property(),
+  }),
 
-  hasSearchText: function() {
+  hasSearchText: Ember.computed('searchText', function(){
     return Ember.$.trim(this.get('searchText')).length;
-  }.property('searchText'),
+  }),
 
-  hasFilter: function() {
+  hasFilter: Ember.computed('filter', function(){
     return Ember.$.trim(this.get('filter')).length;
-  }.property('filter'),
+  }),
 
-  onSearchTextChange: function() {
+  onSearchTextChange: Ember.observer('searchText', function () {
     // wait before applying the filter
     Ember.run.debounce(this, this.applyFilter, 500);
-  }.observes('searchText'),
+  }),
 
   applyFilter: function() {
     this.set('filter', this.get('searchText'));
     this.set('fetchMoreResult', true);
   },
 
-  filteredResults: function() {
+  filteredResults: Ember.computed('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails', function(){
     var filter = Ember.$.trim(this.get('filter').toLowerCase());
     var offers = [];
     var store = this.store;
@@ -76,7 +76,7 @@ export default Ember.Controller.extend(backNavigator, {
       this.get('allPackageTypes').rejectBy('packagesCount', 0).forEach(function(packageType) {
         if (matchFilter(packageType.get('name'))) {
           packageType.get('packages').forEach(function(pkg) {
-            var offer = store.getById('offer', pkg.get('offerId'));
+            var offer = store.peekRecord('offer', pkg.get('offerId'));
             if(offer) { offers.push(offer); }
           });
         }
@@ -91,25 +91,25 @@ export default Ember.Controller.extend(backNavigator, {
     }
 
     return offers.uniq();
-  }.property('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails'),
+  }),
 
   actions: {
-    clearSearch: function(isCancelled) {
+    clearSearch(isCancelled) {
       this.set('filter', '');
       this.set('searchText', '');
       this.set('fetchMoreResult', true);
       if(!isCancelled) { Ember.$("#searchText").focus(); }
     },
 
-    cancelSearch: function(){
+    cancelSearch() {
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
       this.send("togglePath", "search");
     },
 
-    searchOnServer: function(){
+    searchOnServer() {
       var controller = this;
-      var loadingView = controller.container.lookup('view:loading').append();
+      var loadingView = controller.container.lookup('component:loading').append();
       return this.store.query('offer', { states: ["inactive"] }).finally(function(){
         controller.set('fetchMoreResult', false);
         loadingView.destroy();

@@ -45,16 +45,16 @@
                 </div>
                 <div class="row bottom">
                   <div class="small-6 columns ui inner">
-                    {{input type="number" name="qty" value=pkg.quantity placeholder=(t "placeholder.qty") maxlength="8" required="required" }}
+                    {{numeric-input id=(concat 'qty' index) name="qty" value=pkg.quantity placeholder=(t "placeholder.qty") maxlength="8" required='true' pattern="\d{1,8}"}}
                   </div>
                   <div class="small-2 columns ui inner">
-                    {{input type="number" name="length" value=pkg.length placeholder=(t "placeholder.length") maxlength="8" }}
+                    {{numeric-input name="length" id=(concat 'length' index) value=pkg.length placeholder=(t "placeholder.length") maxlength="8" pattern="\d{1,8}"}}
                   </div>
                   <div class="small-2 columns ui inner">
-                    {{input type="number" name="width" value=pkg.width placeholder=(t "placeholder.width") maxlength="5" }}
+                    {{numeric-input id=(concat 'width' index) name="width" value=pkg.width placeholder=(t "placeholder.width") maxlength="5" pattern="\d{1,5}"}}
                   </div>
                   <div class="small-2 columns ui inner">
-                    {{input type="number" name="height" value=pkg.height placeholder=(t "placeholder.height") maxlength="5" }}
+                    {{numeric-input id=(concat 'height' index) name="height" value=pkg.height placeholder=(t "placeholder.height") maxlength="5"  pattern="\d{1,5}" }}
                   </div>
                 </div>
               </div>
@@ -75,18 +75,18 @@
           <div class="row accept_buttons">
             {{#if isItemAccepted}}
               <div class="small-11 small-offset-1  columns">
-                {{#view "online-button" id="acceptItem" classNames="button expand accept_item"}}
+                {{#view "online-button" disabledOverride=offer.isFinished id="acceptItem" classNames="button expand accept_item"}}
                   {{t "save"}}
                 {{/view}}
               </div>
             {{else}}
               <div class="small-6 columns">
-                {{#view "online-button" id="saveItem" classNames="button expand save_item" didInsertElement=(action "setupAcceptClick" "saveItem" false)}}
+                {{#view "online-button" id="saveItem" classNames="button expand save_item" disabled=offer.isFinished didInsertElement=(action "setupAcceptClick" "saveItem" false)}}
                   {{t "review_item.save_item"}}
                 {{/view}}
               </div>
               <div class="small-6 columns">
-                {{#view "online-button" id="acceptItem" classNames="button expand accept_item" didInsertElement=(action "setupAcceptClick" "acceptItem" true)}}
+                {{#view "online-button" id="acceptItem" classNames="button expand accept_item" disabled=offer.isFinished didInsertElement=(action "setupAcceptClick" "acceptItem" true)}}
                   {{t "review_item.accept_item"}}
                 {{/view}}
               </div>

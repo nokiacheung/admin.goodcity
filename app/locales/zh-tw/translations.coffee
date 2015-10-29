@@ -3,7 +3,7 @@
 
 I18nTranslationsZhTw =
   Ember.$.extend true, SharedTranslationsZhTw,
-    "socket_offline_error": "正在嘗試連接至 admin.goodcity.hk..."
+    "socket_offline_error": "正在嘗試連線…"
     "reviewing": "正在審查"
     "reviewed": "已審查完畢"
     "submitted": "已提交"
@@ -38,6 +38,7 @@ I18nTranslationsZhTw =
         "rejected": "已拒絕"
         "pending": "正在等候"
         "missing": "遺失"
+        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
 
     "items":
       "add_item":
@@ -85,6 +86,7 @@ I18nTranslationsZhTw =
       "reviewed": "審查完畢"
       "start_review": "開始審查"
       "goods_received_by" : "已經收到由 {{firstName}} {{lastName}} 捐贈的物資"
+      "goods_start_receiving_by": "{{firstName}} {{lastName}} began receiving items"
       "offer_closed_by": "捐贈項目由 {{firstName}} {{lastName}} 關閉"
       "offer_cancelled_by": "捐贈項目由 {{firstName}} {{lastName}} 取消"
       "receive": "收到"
@@ -106,11 +108,9 @@ I18nTranslationsZhTw =
 
     "mark_received":
       "delivered_by": "運送人員："
-      "select": "- 選擇 -"
       "gogovan": "Gogovan"
       "crossroads_truck": "十字路會貨車"
       "dropped_off": "親自運送"
-      "close_offer": "關閉捐獻項目"
       "unknown": "未知"
 
     "logistics":
@@ -168,6 +168,12 @@ I18nTranslationsZhTw =
     "receive":
       "missing": "遺失"
       "receive": "接收"
+      "receiving":
+        "header": "Begin Receiving Offer"
+        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
+        "not_now": "Not Now"
+        "begin_receiving": "Begin Receiving"
+
 
     "finished":
       "title": "已完成"

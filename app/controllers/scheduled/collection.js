@@ -1,20 +1,33 @@
 import Ember from 'ember';
 import scheduledOffersMixin from './../../mixins/scheduled_offers';
 
-export default Ember.ArrayController.extend(scheduledOffersMixin, {
+export default Ember.Controller.extend(scheduledOffersMixin, {
+
   sortProperties: ["unreadMessagesCount:desc", "delivery.schedule.scheduledAt:desc"],
-
-  filterValue: null,
-
-  filteredOffers: function(key, value){
-    return arguments.length > 1 ? value : this.get('arrangedContent');
-  }.property(),
-
   arrangedContent: Ember.computed.sort("allScheduled", "sortProperties"),
 
-  allScheduled: function(key, value){
-    return (arguments.length > 1) ? value : this.get('collection');
-  }.property('collection'),
+  filterValue: Ember.computed({
+    get: function() {
+      return null;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  filteredOffers: Ember.computed('filterValue', 'allScheduled.[]', function(){
+    var filter = this.get('filterValue.id');
+    return this.filterOffers(filter || 'all');
+  }),
+
+  allScheduled: Ember.computed('collection.[]', {
+    get: function() {
+      return this.get('collection');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   overdue: function(){
     return this.get('allScheduled').filter(function(offer){
@@ -51,19 +64,16 @@ export default Ember.ArrayController.extend(scheduledOffersMixin, {
     });
   },
 
-  actions: {
-
-    filterOffers: function(filterValue) {
-      var offers;
-      switch(filterValue) {
-        case 'all': offers = this.get('allScheduled'); break;
-        case 'overdue': offers = this.overdue(); break;
-        case 'next': offers = this.nextWeek(); break;
-        case 'after_next': offers = this.afterNextWeek(); break;
-        case 'today': offers = this.daySchedule(); break;
-        default: offers = this.daySchedule(filterValue); break;
-      }
-      this.set('filteredOffers', offers);
+  filterOffers: function(filterValue) {
+    var offers;
+    switch(filterValue) {
+      case 'all': offers = this.get('allScheduled'); break;
+      case 'overdue': offers = this.overdue(); break;
+      case 'next': offers = this.nextWeek(); break;
+      case 'after_next': offers = this.afterNextWeek(); break;
+      case 'today': offers = this.daySchedule(); break;
+      default: offers = this.daySchedule(filterValue); break;
     }
-  }
+    return offers;
+  },
 });

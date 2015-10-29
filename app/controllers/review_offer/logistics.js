@@ -12,32 +12,32 @@ export default transportDetails.extend({
   crossroadsOptionsPrompt: t("select"),
   i18n: Ember.inject.service(),
 
-  selectedCrossroadsOption: function(){
+  selectedCrossroadsOption: Ember.computed('crossroadsOptions', function(){
     var options = this.get('crossroadsOptions').filter(option => {
       return option.get('name') === this.get("i18n").t("offer.disable").string;
     });
     return options.get('firstObject');
-  }.property('crossroadsOptions'),
+  }),
 
-  selectedGogovanOption: function(){
+  selectedGogovanOption: Ember.computed('gogovanOptions', function(){
     var options = this.get('gogovanOptions').filter(option => {
       return option.get('name') === this.get("i18n").t("logistics.van").string;
     });
     return options.get('firstObject.id');
-  }.property('gogovanOptions'),
+  }),
 
-  gogovanOptions: function() {
+  gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
     var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
     var disabledOption = allOptions.filterBy('isDisabled', true);
     return options.concat(disabledOption);
-  }.property(),
+  }),
 
-  crossroadsOptions: function() {
+  crossroadsOptions: Ember.computed(function(){
     return this.store.peekAll('crossroads_transport').sortBy('name');
-  }.property(),
+  }),
 
-  ggvDriverUrl: function() {
+  ggvDriverUrl: Ember.computed('model', function(){
     var language = this.get("session.language");
     var isAdmin = this.get("session.isAdminApp");
     var uuid = this.get("model.delivery.gogovanOrder.ggvUuid");
@@ -47,14 +47,14 @@ export default transportDetails.extend({
     if(isAdmin) { params.push("gcadmin="+isAdmin); }
     if(params.length) { url = url + "?" + params.join("&"); }
     return url;
-  }.property("model"),
+  }),
 
   actions: {
 
-    completeReview: function() {
+    completeReview() {
       var gogovanOptionId = this.get('selectedGogovanOption');
       var crossroadsOptionId = this.get('selectedCrossroadsOption.id');
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       var offerId = this.get('model.id');
 
       var offerProperties = {
@@ -74,7 +74,7 @@ export default transportDetails.extend({
         .finally(() => loadingView.destroy());
     },
 
-    closeOffer: function(){
+    closeOffer() {
       this.get('review_offer').send('closeOffer');
     }
   }

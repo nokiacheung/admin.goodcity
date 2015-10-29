@@ -7,22 +7,23 @@ export default Ember.Controller.extend({
   isStartReviewClicked: false,
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
-  lastVisitedRoute: null,
 
-  isMyOffer: function(key, value){
-    if(arguments.length > 1) {
-      return value;
-    } else {
+  isMyOffer: Ember.computed('offer.reviewedBy', {
+    get: function() {
       var currentUserId = this.session.get("currentUser.id");
       return this.get("offer.reviewedBy.id") === currentUserId;
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('offer'),
+  }),
 
-  backLinkPath: function(){
+  backLinkPath: Ember.computed('offer.state', 'isMyOffer', function(){
     var offer = this.get("offer");
     var isMyOffer = this.get("isMyOffer");
 
     if(offer.get("isSubmitted")) { return "offers"; }
+    else if(offer.get("isReceiving")) { return "offers.receiving"; }
     else if(offer.get("isReviewed")) {
       return isMyOffer ? "my_list.reviewed" : "in_progress.reviewed"; }
     else if(offer.get("isUnderReview")) {
@@ -36,30 +37,27 @@ export default Ember.Controller.extend({
       else if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }
       else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
       else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
+    else { return "offers"; }
     }
-  }.property('offer.state', 'isMyOffer'),
+  }),
 
-  offerReadyForClosure: function() {
+  offerReadyForClosure: Ember.computed("model.state", "model.packages.@each.state", function(){
     return !this.get("model.allItemsRejected") &&
+      this.get("model.allItemsReviewed") &&
       this.get("model.state") !== "received" &&
       this.get("model.packages.length") > 0 &&
       this.get("model.packages").filter(p => !p.get("item.isRejected") && p.get("state") === "expecting").get("length") === 0;
-  }.property("model.state", "model.packages.@each.state"),
+  }),
 
   actions: {
-    redirectBack: function(){
-      var route = this.get("lastVisitedRoute") || "my_list";
-      this.transitionToRoute(route);
-    },
-
-    addItem: function() {
+    addItem() {
       var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
       this.transitionToRoute('item.edit_images', draftItemId);
     },
 
-    startReview: function() {
+    startReview() {
       if(this.get("isStartReviewClicked")) { return; }
-      var offer = this.store.getById('offer', this.get('offer.id'));
+      var offer = this.store.peekRecord('offer', this.get('offer.id'));
       this.set("isStartReviewClicked", true);
       var adapter = this.container.lookup('adapter:application');
       var url = adapter.buildURL('offer', offer.get('id')) + '/review';
@@ -69,8 +67,8 @@ export default Ember.Controller.extend({
         .finally(() => this.set("isStartReviewClicked", false));
     },
 
-    closeOffer: function(){
-      var loadingView = this.container.lookup('view:loading').append();
+    closeOffer() {
+      var loadingView = this.container.lookup('component:loading').append();
       var offerId = this.get('model.id');
       var offerProperties = {id: offerId, state_event: 'close'};
       var url = "/offers/" + offerId + "/close_offer";
@@ -83,15 +81,22 @@ export default Ember.Controller.extend({
         .finally(() => loadingView.destroy());
     },
 
-    cancelOffer: function(){
+    closeReceivedOffer() {
+      var offer = this.get("model");
+      offer.set("state_event", "receive");
+      offer.save()
+        .catch(error => { offer.rollback(); throw error; });
+    },
+
+    cancelOffer() {
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
-        var loadingView = this.container.lookup('view:loading').append();
+        var loadingView = this.container.lookup('component:loading').append();
         offer.deleteRecord();
         offer.save()
           .then(() => {
             recordsUtil.unloadRecordTree(offer);
-            this.transitionToRoute('my_list');
+            this.transitionToRoute(this.get("backLinkPath"));
           })
           .catch(error => { offer.rollback(); throw error; })
           .finally(() => loadingView.destroy());

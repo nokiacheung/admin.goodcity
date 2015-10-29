@@ -16,38 +16,44 @@
             {{!-- Submitted Offer --}}
             {{#if offer.isSubmitted}}
               {{t "submitted"}} <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.submittedAt smallPrefix=true}}
+              {{time-ago timeValue=offer.submittedAt smallPrefix=true}}
 
             {{!-- Offer Under Review --}}
             {{else if offer.isUnderReview}}
               {{t "review_offer.review_started_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}}
               <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.reviewedAt smallPrefix=true}}
+              {{time-ago timeValue=offer.reviewedAt smallPrefix=true}}
 
             {{!-- Offer Completed with Review --}}
             {{else if offer.isReviewed}}
               {{t "review_offer.reviewed"}}
               <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.reviewCompletedAt smallPrefix=true}}.
+              {{time-ago timeValue=offer.reviewCompletedAt smallPrefix=true}}.
               {{t "review_offer.plan_transport"}}
 
             {{!-- Closed Offer --}}
             {{else if offer.isClosed}}
               Closed by {{offer.closedBy.firstName}} {{offer.closedBy.lastName}}
               <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.reviewCompletedAt smallPrefix=true}}
+              {{time-ago timeValue=offer.reviewCompletedAt smallPrefix=true}}
 
             {{!-- Cancelled Offer --}}
             {{else if offer.isCancelled}}
               Cancelled by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
               <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.cancelledAt smallPrefix=true}}
+              {{time-ago timeValue=offer.cancelledAt smallPrefix=true}}
 
             {{!-- Received Offer --}}
             {{else if offer.isReceived}}
               Received by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
               <i class="fa fa-clock-o"></i>
-              {{view 'time-ago' timeValue=offer.receivedAt smallPrefix=true}}
+              {{time-ago timeValue=offer.receivedAt smallPrefix=true}}
+
+            {{!-- Receiving Offer --}}
+            {{else if offer.isReceiving}}
+              {{t "offer.offer_details.start_receiving_by" firstName=offer.receivedBy.firstName lastName=offer.receivedBy.lastName}}
+              <i class="fa fa-clock-o"></i>
+              {{time-ago timeValue=offer.startReceivingAt smallPrefix=true}}
 
             {{!-- Scheduled Offer --}}
             {{else if offer.isScheduled}}
@@ -86,9 +92,9 @@
           </div>
 
           <div>
-            {{#if offer.isReceived}}
-              {{offer.approvedItems.length}} {{t "offer.offer_details.received"}},
-              0 {{t "offer.offer_details.missing"}},
+            {{#if offer.hasReceived}}
+              {{offer.receivedCount}} {{t "offer.offer_details.received"}},
+              {{offer.missingCount}} {{t "offer.offer_details.missing"}},
               {{offer.rejectedItems.length}} {{t "offer.offer_details.rejected"}}
             {{else}}
               {{offer.approvedItems.length}} {{t "offer.offer_details.accepted"}},

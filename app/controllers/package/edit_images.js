@@ -9,7 +9,7 @@ export default ItemBaseController.extend({
   packageId: Ember.computed.alias("model.id"),
 
   actions: {
-    next: function() {
+    next() {
       this.transitionToRoute("review_item.accept", this.get("model.item.id"));
     }
   }

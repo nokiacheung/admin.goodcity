@@ -37,7 +37,7 @@ test("redirect to reviewing offers page", function() {
     var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
 
     // items accept-reject status
-    equal(itemStatus, " 0 Accepted, 0 rejected, 2 pending ");
+    equal(itemStatus, " 1 Accepted, 0 rejected, 0 pending ");
   });
 });
 

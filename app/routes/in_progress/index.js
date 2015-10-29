@@ -1,7 +1,7 @@
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-  model: function() {
+  model() {
     return this.transitionTo('in_progress.reviewing');
   }
 });

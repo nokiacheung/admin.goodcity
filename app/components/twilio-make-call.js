@@ -11,12 +11,12 @@ export default Ember.Component.extend({
   hidden:        Ember.computed.empty("mobile"),
   currentUserId: Ember.computed.alias("session.currentUser.id"),
 
-  hasTwilioSupport: function(){
+  hasTwilioSupport: Ember.computed(function(){
     var hasWebRtcSupport = !!window.webkitRTCPeerConnection; // twilio js doesn't use mozRTCPeerConnection
     var hasFlashSupport = !!(navigator.plugins["Shockwave Flash"] || window.ActiveXObject && new window.ActiveXObject("ShockwaveFlash.ShockwaveFlash"));
 
     return hasWebRtcSupport || hasFlashSupport;
-  }.property(),
+  }),
 
   initTwilioDeviceBindings: function() {
     var _this         = this;
@@ -38,22 +38,22 @@ export default Ember.Component.extend({
 
   actions: {
 
-    makeCall: function(){
+    makeCall() {
       var params = { "phone_number": this.get('offerId') + "#" + this.get("currentUserId") };
       this.set("activeCall", true);
       return Twilio.Device.connect(params);
     },
 
-    hangupCall: function(){
+    hangupCall() {
       return Twilio.Device.disconnectAll();
     },
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     if(this.get("hasTwilioSupport")) {
       this._super();
       var _this = this;
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
 
       new AjaxPromise("/twilio_outbound/generate_call_token", "GET", this.get('session.authToken'))
         .then(data => {

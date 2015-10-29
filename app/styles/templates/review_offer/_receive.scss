@@ -83,3 +83,24 @@
     display: none;
   }
 }
+
+#confirmReceivingModal {
+  top: 20% !important;
+
+  @media #{$small-only} {
+    padding: 1rem;
+  }
+
+  div{
+    @media #{$small-only} {
+      font-size: 0.9rem;
+    }
+
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .receive_title {
+    font-weight: bold;
+  }
+}

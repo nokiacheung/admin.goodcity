@@ -1,11 +1,11 @@
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-  renderTemplate: function() {
+  renderTemplate() {
     this.render('my_list.reviewing', {controller: 'finished.cancelled'});
   },
 
-  model: function() {
+  model() {
     return this.store.query('offer', { states: ["cancelled", "closed"] });
   }
 });

@@ -5,7 +5,7 @@ var App;
 
 module('Authorization', {
   setup: function() {
-
+    App = startApp({}, 1);
   },
   teardown: function() {
     Ember.run(App, 'destroy');
@@ -13,8 +13,6 @@ module('Authorization', {
 });
 
 test("On restricted page doesn't redirect if staff", function() {
-  App = startApp({}, 1);
-
   visit('/offers');
 
   andThen(function() {

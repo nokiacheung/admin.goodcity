@@ -8,9 +8,11 @@
   </section>
 
   <section class="right-small">
-    <a {{action "copyItem"}} title="Copy Item" class="fontawe-icons" >
-      <i class="fa fa-files-o"></i>
-    </a>
+    {{#unless model.offer.isFinished}}
+      <a {{action "copyItem"}} title="Copy Item" class="fontawe-icons" >
+        <i class="fa fa-files-o"></i>
+      </a>
+    {{/unless}}
   </section>
 </nav>
 <section class="main-section review_item">
@@ -89,7 +91,8 @@
           {{/link-to}}
 
         </dl>
-        <div class="tabs-content">
+
+        <div class="tabs-content {{if model.offer.isFinished 'disable-canceloffer-review'}}">
           <br/>
           {{outlet}}
         </div>

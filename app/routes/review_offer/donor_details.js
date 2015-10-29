@@ -5,19 +5,27 @@ export default AuthorizeRoute.extend({
   currentDonor: null,
   currentOffer: null,
 
-  model: function() {
+  model() {
     var offerId = this.modelFor('reviewOffer').get('id');
-    var currentOffer = this.store.getById('offer', offerId);
-    var donor = currentOffer.get('createdBy');
-    this.set("currentDonor", donor);
-    this.set("currentOffer", currentOffer);
-    return this.store.query('offer', { created_by_id: donor.get('id'), states: ['nondraft'] });
+    var currentOffer = this.store.peekRecord('offer', offerId);
+    if(currentOffer) {
+      var donor = currentOffer.get('createdBy');
+      this.set("currentDonor", donor);
+      this.set("currentOffer", currentOffer);
+      return this.store.query('offer', { created_by_id: donor.get('id'), states: ['nondraft'] });
+    }
   },
 
-  setupController: function(controller, model){
+  setupController(controller, model) {
     controller.set("model", model);
     controller.set("donor", this.get("currentDonor"));
     controller.set("currentOffer", this.get("currentOffer"));
+  },
+
+  afterModel(model) {
+    if(!model) {
+      this.transitionTo('my_list.reviewing');
+    }
   }
 
 });
