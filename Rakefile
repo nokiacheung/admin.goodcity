@@ -251,11 +251,7 @@ def app_file
   when /ios/
     "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.app"
   when /android/
-    if environment == "staging"
-      "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-release-unsigned.apk"
-    else
-      "#{CORDOVA_PATH}/platforms/android/ant-build/MainActivity-release-unsigned.apk"
-    end
+    "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-release-unsigned.apk"
   when /windows/
     raise "TODO: Need to get Windows app path"
   end
