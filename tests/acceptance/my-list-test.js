@@ -4,7 +4,7 @@ import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 var App, offer1, reviewer, reviewerName, offer2, item1, item2,
-  delivery, offer3, item3, item4, offer4, item5;
+  delivery, offer3, item3, item4, offer4, item5, ggv_order;
 
 module('My Offers', {
   setup: function() {
@@ -18,7 +18,8 @@ module('My Offers', {
     item1 = FactoryGuy.make("item", { state:"accepted", offer: offer2 });
     item2 = FactoryGuy.make("item", { state:"rejected", offer: offer2 });
 
-    delivery = FactoryGuy.make('delivery', {deliveryType: "Gogovan"});
+    ggv_order = FactoryGuy.make("gogovan_order", {status: "pending"});
+    delivery = FactoryGuy.make('delivery', {deliveryType: "Gogovan", gogovanOrder: ggv_order});
     offer3 = FactoryGuy.make("offer", {state:"scheduled", delivery: delivery, reviewedBy: reviewer});
     item3 = FactoryGuy.make("item", { state:"accepted", offer: offer3 });
     item4 = FactoryGuy.make("item", { state:"rejected", offer: offer3 });
