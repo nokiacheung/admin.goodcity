@@ -85,7 +85,7 @@ namespace :ember do
   task :bower_install do
     sh %{ bower install }
   end
-  task :npm_install do
+  task npm_install: :select_branch do
     sh %{ npm install }
   end
   desc "Ember build with Cordova enabled"
@@ -93,6 +93,9 @@ namespace :ember do
     Dir.chdir(ROOT_PATH) do
       system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
     end
+  end
+  task :select_branch do
+    sh %{ node circle-branch.js }
   end
 end
 

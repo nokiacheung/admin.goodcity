@@ -4,7 +4,7 @@ import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 var App, offer1, delivery1, offer2, delivery2, offer3,
-  delivery3, schedule4, offer4, delivery4;
+  delivery3, schedule4, offer4, delivery4, ggv_order;
 
 module('Scheduled Offers', {
   setup: function() {
@@ -14,9 +14,10 @@ module('Scheduled Offers', {
     delivery1 = FactoryGuy.make('delivery', {deliveryType: "Gogovan"});
     offer1 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery1 });
 
+    ggv_order = FactoryGuy.make("gogovan_order", {status: "pending"});
     schedule4 = FactoryGuy.make('schedule', {
       scheduledAt: (new Date(new Date().setDate(new Date().getDate()+30)))});
-    delivery4 = FactoryGuy.make('delivery', {deliveryType: "Gogovan", schedule: schedule4 });
+    delivery4 = FactoryGuy.make('delivery', {deliveryType: "Gogovan", schedule: schedule4, gogovanOrder: ggv_order });
     offer4 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery4 });
 
     delivery2 = FactoryGuy.make('delivery', {deliveryType: "Alternate"});
