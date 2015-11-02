@@ -11,6 +11,7 @@ export default transportDetails.extend({
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
   crossroadsOptionsPrompt: t("select"),
   i18n: Ember.inject.service(),
+  selectedGogovanOption: "",
 
   selectedCrossroadsOption: Ember.computed('crossroadsOptions', function(){
     var options = this.get('crossroadsOptions').filter(option => {
@@ -19,7 +20,7 @@ export default transportDetails.extend({
     return options.get('firstObject');
   }),
 
-  selectedGogovanOption: Ember.computed('gogovanOptions', function(){
+  defaultGogovanOption: Ember.computed('gogovanOptions', function(){
     var options = this.get('gogovanOptions').filter(option => {
       return option.get('name') === this.get("i18n").t("logistics.van").string;
     });

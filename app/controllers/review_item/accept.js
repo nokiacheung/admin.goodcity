@@ -13,6 +13,18 @@ export default Ember.Controller.extend({
   isAccepting: false,
   itemSaving: false,
 
+  alert: Ember.inject.service(),
+  i18n: Ember.inject.service(),
+
+  isItemVanished: Ember.computed.or('item.isDeleted', 'item.isDeleting'),
+  disableAccept: Ember.computed.or('isItemVanished', 'offer.isFinished'),
+
+  showDeleteError: Ember.observer('isItemVanished', function(){
+    if(this.get("isItemVanished")) {
+      this.get("alert").show(this.get("i18n").t("404_error"), () => this.transitionTo("review_offer.items"), this.get("offer"));
+    }
+  }),
+
   itemType: Ember.computed('itemTypeId', function(){
     return this.get("store").peekRecord("packageType", this.get("itemTypeId"));
   }),

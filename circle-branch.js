@@ -38,10 +38,10 @@ function setBranch(branches) {
     .map(function(b) { return b.name; })
     .filter(function(name) { return name.indexOf(currentBranch) == 0; });
 
-  var branchToUse = matched[0] || currentBranch;
+  var branchToUse = matched[0] || defaultBranch;
   console.log(sharedGoodCityRepo + " using " + branchToUse);
 
-  var sharedGoodCityPackage = "git://github.com/" + sharedGoodCityRepo + ".git#" + currentBranch
+  var sharedGoodCityPackage = "git://github.com/" + sharedGoodCityRepo + ".git#" + branchToUse
   var packageJson = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
   packageJson['dependencies']['shared-goodcity'] = sharedGoodCityPackage;
   fs.writeFile(packageJsonFile, JSON.stringify(packageJson, null, 2), function(err) {
