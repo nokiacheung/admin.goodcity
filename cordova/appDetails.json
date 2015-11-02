@@ -2,11 +2,13 @@
   "staging": {
     "name": "S. Admin GoodCity",
     "url": "hk.goodcity.adminstaging",
-    "version": "0.3.67"
+    "version": "0.3.66",
+    "signing_detail": "iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)"
   },
   "production": {
     "name": "Admin GoodCity",
     "url": "hk.goodcity.admin",
-    "version": "0.2.0"
+    "version": "0.2.0",
+    "signing_detail": "iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)"
   }
 }
