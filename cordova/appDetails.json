@@ -8,7 +8,7 @@
   "production": {
     "name": "Admin GoodCity",
     "url": "hk.goodcity.admin",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "signing_detail": "iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)"
   }
 }
