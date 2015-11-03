@@ -4,11 +4,16 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
 
-  formData: Ember.computed("model", function(){
-    return {
-      donorConditionId: this.get("model.donorConditionId"),
-      donorDescription: this.get("model.donorDescription")
-    };
+  formData: Ember.computed("model", {
+    get: function() {
+      return {
+        donorConditionId: this.get("model.donorConditionId"),
+        donorDescription: this.get("model.donorDescription")
+      };
+    },
+    set: function(key, value) {
+      return value;
+    }
   }),
 
   defaultPackage: Ember.computed.alias('model.packageType'),
