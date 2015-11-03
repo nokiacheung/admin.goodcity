@@ -3,6 +3,7 @@ import substring from 'goodcity/utils/substring';
 
 export default Ember.Controller.extend({
 
+  applicationController: Ember.inject.controller('application'),
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
   item: Ember.computed.alias("reviewItem.item"),
@@ -19,9 +20,13 @@ export default Ember.Controller.extend({
   isItemVanished: Ember.computed.or('item.isDeleted', 'item.isDeleting'),
   disableAccept: Ember.computed.or('isItemVanished', 'offer.isFinished'),
 
-  showDeleteError: Ember.observer('isItemVanished', function(){
+  showDeleteError: Ember.observer('item', 'isItemVanished', function(){
+    var currentRoute = this.get('applicationController.currentRouteName');
+
     if(this.get("isItemVanished")) {
-      this.get("alert").show(this.get("i18n").t("404_error"), () => this.transitionTo("review_offer.items"), this.get("offer"));
+      if(currentRoute.indexOf("review_item") >= 0) {
+        this.get("alert").show(this.get("i18n").t("404_error"), () => this.transitionTo("review_offer.items"), this.get("offer"));
+      }
     }
   }),
 
