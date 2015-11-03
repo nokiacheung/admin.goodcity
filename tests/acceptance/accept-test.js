@@ -104,11 +104,8 @@ test("visit submitted item with item_type", function() {
     equal($(".accept_buttons button").length, 2);
 
     // Item Details Form
-    click($(".edit-item-link"));
-    andThen(function(){
-      equal($('.item-details textarea').val(), "");
-      equal($('.item-details .radio-buttons li').length, 4);
-    });
+    equal($('.item-details textarea').val(), "");
+    equal($('.item-details .radio-buttons li').length, 4);
   });
 });
 
