@@ -14,7 +14,6 @@ export default AuthorizeRoute.extend({
       donorDescription: model.get("donorDescription")
     };
     controller.set("formData", itemDetails);
-    controller.set("isEditing", false);
   }
 
 });
