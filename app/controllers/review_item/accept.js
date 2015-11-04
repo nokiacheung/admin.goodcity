@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
   }),
 
   itemType: Ember.computed('itemTypeId', function(){
-    return this.get("store").peekRecord("packageType", this.get("itemTypeId"));
+    return this.get("store").peekRecord("packageType", (this.get("itemTypeId.id") || this.get("itemTypeId")));
   }),
 
   subPackageTypes: Ember.computed('itemType', function(){
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
     if (itemType && itemType.get("id") === this.get("item.packageType.id")) {
       this.get("item.packages").forEach(p => {
         var obj = p.getProperties("id", "quantity", "length", "width", "height", "notes",
-          "packageTypeId", "displayImageUrl");
+          "packageTypeId", "displayImageUrl", "packageType");
         obj.hideComment = false;
         obj.quantity = obj.quantity || 1;
         packages.pushObject(obj);
@@ -77,6 +77,7 @@ export default Ember.Controller.extend({
     },
 
     addPackage(packageTypeId) {
+      var _this = this;
       var note_text = this.get("item.donorDescription") || this.get("reviewItem.formData.donorDescription") || "";
 
       this.get("packages").pushObject({
@@ -85,6 +86,7 @@ export default Ember.Controller.extend({
         notes: substring(note_text, 50),
         quantity: 1,
         packageTypeId,
+        packageType: _this.get("store").peekRecord("packageType", packageTypeId),
         offerId: this.get("item.offer.id"),
         item: this.get("item")
       });

@@ -43,14 +43,22 @@
 
       <div class="row top-bottom-margin">
         <div class="small-12 columns link">
-          {{select-2
-            content=itemTypes
-            optionValuePath="id"
-            optionLabelPath="name"
-            value=itemTypeId
-            placeholder=(t "review_item.add_item_label")
-            enabled=(js-x "this == false" model.offer.isFinished)
-          }}
+          {{#if isAndroidDevice}}
+            {{select-list
+              content=itemTypes
+              on-change=(action (mut itemTypeId))
+              selectedValue=itemType
+              prompt=(t "review_item.add_item_label")}}
+          {{else}}
+            {{select-2
+              content=itemTypes
+              optionValuePath="id"
+              optionLabelPath="name"
+              value=itemTypeId
+              placeholder=(t "review_item.add_item_label")
+              enabled=(js-x "this == false" model.offer.isFinished)
+            }}
+          {{/if}}
         </div>
       </div>
 

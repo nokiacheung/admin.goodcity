@@ -21,11 +21,10 @@
                   </div>
                   <div class="small-7 columns head">
                     <span class="ui">
-                      {{view "select"
+                      {{select-list
                         content=subPackageTypes
-                        optionValuePath="content.id"
-                        optionLabelPath="content.name"
-                        value=pkg.packageTypeId
+                        on-change=(action (mut pkg.packageTypeId))
+                        selectedValue=pkg.packageType
                         prompt=(t 'placeholder.package_type')
                         required='true'
                       }}
