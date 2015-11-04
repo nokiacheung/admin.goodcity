@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
 
@@ -7,6 +8,8 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
+  cordova: Ember.inject.service(),
+  isAndroidDevice: false,
 
   itemDescriptionPlaceholder: Ember.computed(function(){
     return this.get("i18n").t("items.add_item.description_placeholder").string;
@@ -48,8 +51,24 @@ export default Ember.Controller.extend({
     }
   }),
 
+  itemType: Ember.computed('defaultPackage', {
+    get: function() {
+      return this.get('defaultPackage');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
   itemTypes: Ember.computed(function(){
     return this.get("store").peekAll('package_type').sortBy('name');
+  }),
+
+  onInit: Ember.on('init', function() {
+    if (config.cordova.enabled) {
+      var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
+      this.set("isAndroidDevice", isAndroidDevice);
+    }
   }),
 
   actions: {
