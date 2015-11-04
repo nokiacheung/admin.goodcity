@@ -1,8 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
+  i18n: Ember.inject.service(),
+  defaultPackage: Ember.computed.alias('model.packageType'),
+  item: Ember.computed.alias('model'),
+
+  itemDescriptionPlaceholder: Ember.computed(function(){
+    return this.get("i18n").t("items.add_item.description_placeholder").string;
+  }),
 
   formData: Ember.computed("model.donorCondition", "model.donorDescription", {
     get: function() {
@@ -15,9 +23,6 @@ export default Ember.Controller.extend({
       return value;
     }
   }),
-
-  defaultPackage: Ember.computed.alias('model.packageType'),
-  item: Ember.computed.alias('model'),
 
   displayEditLink: Ember.computed("application.currentRouteName", function(){
     return this.get("application.currentRouteName").indexOf("accept") >= 0;
