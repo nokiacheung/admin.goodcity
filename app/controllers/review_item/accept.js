@@ -53,7 +53,7 @@ export default Ember.Controller.extend({
       this.get("item.packages").forEach(p => {
         var obj = p.getProperties("id", "quantity", "length", "width", "height", "notes",
           "packageTypeId", "displayImageUrl");
-        obj.hideComment = true;
+        obj.hideComment = false;
         obj.quantity = obj.quantity || 1;
         packages.pushObject(obj);
       });
