@@ -21,11 +21,10 @@
                   </div>
                   <div class="small-7 columns head">
                     <span class="ui">
-                      {{view "select"
+                      {{select-list
                         content=subPackageTypes
-                        optionValuePath="content.id"
-                        optionLabelPath="content.name"
-                        value=pkg.packageTypeId
+                        on-change=(action (mut pkg.packageTypeId))
+                        selectedValue=pkg.packageType
                         prompt=(t 'placeholder.package_type')
                         required='true'
                       }}
@@ -37,7 +36,7 @@
                 </div>
                 <div class="{{if pkg.hideComment 'is-hide'}} row bottom ui">
                   <div class="small-10 columns head">
-                    {{input type="text" name="comment" value=pkg.notes placeholder=(t "placeholder.comments") maxlength="50" required="required" }}
+                    {{input type="text" name="comment" value=pkg.notes placeholder=(t "placeholder.comments") maxlength="50" required="required" pattern=".*\S.*" }}
                   </div>
                   <div class="small-2 columns icon" {{action "toggleComment" index on="click"}}>
                     <i class="fa fa-minus fa-lg"></i>

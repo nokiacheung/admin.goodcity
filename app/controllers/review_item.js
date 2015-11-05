@@ -1,18 +1,31 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
+
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
-
-  formData: Ember.computed("model", function(){
-    return {
-      donorConditionId: this.get("model.donorConditionId"),
-      donorDescription: this.get("model.donorDescription")
-    };
-  }),
-
+  i18n: Ember.inject.service(),
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
+  cordova: Ember.inject.service(),
+  isAndroidDevice: false,
+
+  itemDescriptionPlaceholder: Ember.computed(function(){
+    return this.get("i18n").t("items.add_item.description_placeholder").string;
+  }),
+
+  formData: Ember.computed("model.donorCondition", "model.donorDescription", {
+    get: function() {
+      return {
+        donorConditionId: this.get("model.donorCondition.id"),
+        donorDescription: this.get("model.donorDescription")
+      };
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   displayEditLink: Ember.computed("application.currentRouteName", function(){
     return this.get("application.currentRouteName").indexOf("accept") >= 0;
@@ -38,8 +51,24 @@ export default Ember.Controller.extend({
     }
   }),
 
+  itemType: Ember.computed('defaultPackage', {
+    get: function() {
+      return this.get('defaultPackage');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
   itemTypes: Ember.computed(function(){
     return this.get("store").peekAll('package_type').sortBy('name');
+  }),
+
+  onInit: Ember.on('init', function() {
+    if (config.cordova.enabled) {
+      var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
+      this.set("isAndroidDevice", isAndroidDevice);
+    }
   }),
 
   actions: {
