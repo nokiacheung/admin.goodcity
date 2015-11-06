@@ -14,6 +14,13 @@ export default Ember.Controller.extend({
   isAccepting: false,
   itemSaving: false,
 
+  itemPackages: Ember.computed.alias("item.packages"),
+
+  onItemPackagesChange: Ember.observer('itemPackages.[]', "itemPackages.@each.quantity", "itemPackages.@each.length", "itemPackages.@each.width", "itemPackages.@each.height", "itemPackages.@each.notes", "itemPackages.@each.packageTypeId", "itemPackages.@each.displayImageUrl", "itemPackages.@each.packageType", function () {
+      this.onItemTypeChange();
+      return false;
+  }),
+
   alert: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
@@ -100,6 +107,11 @@ export default Ember.Controller.extend({
     },
 
     save() {
+      // save item and packages
+      // getting "Attempted to handle event *event* on *record* while in state root.deleted.saved" if try
+      // to save item same time as a package is being deleted
+      this.set("itemSaving", true);
+
       var loadingView = this.container.lookup('component:loading').append();
 
       // save packages
@@ -126,9 +138,6 @@ export default Ember.Controller.extend({
       Ember.RSVP.all(promises)
         .then(() => {
           // save item
-          // getting "Attempted to handle event *event* on *record* while in state root.deleted.saved" if try
-          // to save item same time as a package is being deleted
-          this.set("itemSaving", true);
           var item = this.get("item");
           item.set("packageType", this.get("itemType")); // this throws error in onItemTypeChange so using itemSaving as workaround
           item.set("donorDescription", this.get("reviewItem.formData.donorDescription"));
