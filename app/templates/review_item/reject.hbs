@@ -2,7 +2,7 @@
   <div class="row">
     {{#if itemTypeId}}
       <div class="small-12 columns">
-        <form class="ui">
+        <div class="ui">
           {{#if noReasonSelected}}
             <div class="error-box">
               <i class="fa fa-exclamation-triangle"></i>
@@ -43,7 +43,7 @@
 
           {{reject-message-field selectedId=selectedId itemId=itemId disabled=model.offer.isFinished}}
 
-        </form>
+        </div>
 
         <div class="row">
           <div class="small-8 small-offset-2 columns">
