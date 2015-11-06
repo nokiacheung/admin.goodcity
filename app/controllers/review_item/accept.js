@@ -134,6 +134,8 @@ export default Ember.Controller.extend({
             item.set("state_event", "accept");
           } else if (item.get("isDrafted")) {
             item.set("state_event", "submit");
+          } else  {
+            item.set("state_event", null);
           }
           item.save().finally(() => {
             this.set("itemSaving", false);
