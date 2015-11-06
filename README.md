@@ -34,7 +34,7 @@ ember install
 
 ## Deployment
 
-Deployment will be automatic from CircleCI. To deploy to the live site, simply push to the live branch.
+Deployment will be automatic from CircleCI. To deploy to the live site, simply push to the live branch and CircleCI will do the rest.
 
 If you wish to run the deployment manually, use the following commands. However, if deploying to the live site, be sure to switch both your local folder and shared.goodcity folders to the `live` branch first. This will ensure the correct code is built manually.
 
