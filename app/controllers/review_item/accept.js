@@ -40,6 +40,9 @@ export default Ember.Controller.extend({
   }),
 
   onItemTypeChange: Ember.observer('itemTypeId', function () {
+    // remove focus to hide soft-keyboard
+    Ember.$("input").blur();
+
     if (this.get("itemSaving")) {
       return;
     }
