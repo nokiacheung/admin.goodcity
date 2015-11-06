@@ -11,6 +11,7 @@ export default AuthorizeRoute.extend({
     this._super(controller, model);
     if(!model.get("isRejected")) {
       controller.set("selectedId", undefined);
+      controller.set("rejectReason", undefined);
     }
   }
 });
