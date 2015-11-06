@@ -41,7 +41,6 @@ CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
 APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
-EMBER = "#{ROOT_PATH}/node_modules/ember-cli/bin/ember"
 TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
@@ -93,7 +92,7 @@ namespace :ember do
     # Before starting Ember build clean up folders
     Rake::Task["clobber"].invoke
     Dir.chdir(ROOT_PATH) do
-      system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "#{EMBER} build --environment=production")
+      system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "ember build --environment=production")
     end
   end
   task :select_branch do
