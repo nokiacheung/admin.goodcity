@@ -21,3 +21,5 @@ cordova/platforms
 .DS_Store
 cordova/plugins/*
 .ios_build.lock
+cordova/*.keystore
+cordova/build.json

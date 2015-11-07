@@ -32,4 +32,5 @@ deployment:
       - bundle exec cap production deploy
       - bundle exec rake production cordova:bump_version
       - bundle exec rake production ios_build_server:notify
+      - "scp -P 59207 deployer@admin-staging.goodcity.hk:/home/deployer/goodcity.keystore cordova/goodcity.keystore"
       - bundle exec rake production android app:release
