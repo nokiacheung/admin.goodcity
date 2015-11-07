@@ -350,7 +350,7 @@ end
 # Expects CORDOVA_PATH/goodcity.keystore to exist
 # Requires ENV vars: GOODCITY_KEYSTORE_PASSWORD and GOODCITY_KEYSTORE_ALIAS
 def create_build_json_file
-  FileUtils.rm(LOCK_FILE) if File.exists?(LOCK_FILE)
+  FileUtils.rm(BUILD_JSON_FILE) if File.exists?(BUILD_JSON_FILE)
   return unless (environment == "production" and platform == "android")
   raise(BuildError, "Keystore file not found: #{KEYSTORE_FILE}") unless File.exists?("#{KEYSTORE_FILE}")
   %w(GOODCITY_KEYSTORE_PASSWORD GOODCITY_KEYSTORE_ALIAS).each do |key|
