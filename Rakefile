@@ -115,7 +115,7 @@ namespace :cordova do
   desc "Cordova prepare {platform}"
   task :prepare do
     # Before cordova prepare build ember app that will auto update the dist folder too
-    # Rake::Task["ember:build"].invoke
+    Rake::Task["ember:build"].invoke
     create_build_json_file
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
@@ -351,7 +351,7 @@ end
 # Requires ENV vars: GOODCITY_KEYSTORE_PASSWORD and GOODCITY_KEYSTORE_ALIAS
 def create_build_json_file
   FileUtils.rm(LOCK_FILE) if File.exists?(LOCK_FILE)
-  return if environment == "staging" and platform == "android"
+  return unless (environment == "production" and platform == "android")
   raise(BuildError, "Keystore file not found: #{KEYSTORE_FILE}") unless File.exists?("#{KEYSTORE_FILE}")
   %w(GOODCITY_KEYSTORE_PASSWORD GOODCITY_KEYSTORE_ALIAS).each do |key|
     raise(BuildError, "#{key} environment variable not set.") unless env?(key)
