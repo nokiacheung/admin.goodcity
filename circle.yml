@@ -19,13 +19,6 @@ test:
     - ./node_modules/ember-cli/bin/ember test
 
 deployment:
-  live-keystore:
-    branch: live-keystore
-    commands:
-      - bundle exec rake production cordova:bump_version
-      - "scp -P 59207 deployer@admin-staging.goodcity.hk:/home/deployer/goodcity.keystore cordova/goodcity.keystore"
-      - bundle exec rake production android app:release
-
   staging:
     branch: master
     commands:
