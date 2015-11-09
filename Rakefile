@@ -97,7 +97,7 @@ namespace :ember do
   desc "Ember build with Cordova enabled"
   task :build do
     # Before starting Ember build clean up folders
-    # Rake::Task["clobber"].invoke
+    Rake::Task["clobber"].invoke
     Dir.chdir(ROOT_PATH) do
       system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging}, "ember build --environment=production")
     end
