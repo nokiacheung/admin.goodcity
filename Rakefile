@@ -134,7 +134,7 @@ namespace :cordova do
   desc "Cordova build {platform}"
   task build: :prepare do
     Dir.chdir(CORDOVA_PATH) do
-      build = (environment == "production") ? "release" : "debug"
+      build = (environment == "staging" && platform == "android") ? "debug" : "release"
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
       if platform == "ios"
         sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
