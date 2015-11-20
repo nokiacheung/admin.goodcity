@@ -3,10 +3,13 @@ import AjaxPromise from './../utils/ajax-promise';
 import recordsUtil from './../utils/records';
 
 export default Ember.Controller.extend({
+
+  application: Ember.inject.controller(),
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  alert: Ember.inject.service(),
 
   isMyOffer: Ember.computed('offer.reviewedBy', {
     get: function() {
@@ -17,6 +20,30 @@ export default Ember.Controller.extend({
       return value;
     }
   }),
+
+  cancelByMe: Ember.computed('model', {
+    get() {
+      return false;
+    },
+    set(key, value) {
+      return value;
+    }
+  }),
+
+  isOfferVanished: Ember.computed.or('offer.isDeleted', 'offer.isDeleting'),
+
+  showDeleteError: Ember.observer('offer', 'isOfferVanished', function(){
+    var currentRoute = this.get('application.currentRouteName');
+
+    if(this.get("isOfferVanished") && !this.get("cancelByMe")) {
+      if(currentRoute.indexOf("review_offer") >= 0) {
+        this.get("alert").show(this.get("i18n").t("404_error"), () => {
+          this.transitionTo("my_list");
+        });
+      }
+    }
+  }),
+
 
   backLinkPath: Ember.computed('offer.state', 'isMyOffer', function(){
     var offer = this.get("offer");
@@ -91,6 +118,7 @@ export default Ember.Controller.extend({
     cancelOffer() {
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
+        this.set("cancelByMe", true);
         var loadingView = this.container.lookup('component:loading').append();
         offer.deleteRecord();
         offer.save()
@@ -99,7 +127,7 @@ export default Ember.Controller.extend({
             this.transitionToRoute(this.get("backLinkPath"));
           })
           .catch(error => { offer.rollback(); throw error; })
-          .finally(() => loadingView.destroy());
+          .finally(() => {loadingView.destroy(); this.set("cancelByMe", false);});
         });
     },
   }
