@@ -33,10 +33,10 @@ export default Ember.Controller.extend({
   isOfferVanished: Ember.computed.or('offer.isDeleted', 'offer.isDeleting'),
 
   showDeleteError: Ember.observer('offer', 'isOfferVanished', function(){
-    var currentRoute = this.get('application.currentRouteName');
+    var currentPath = window.location.href;
 
     if(this.get("isOfferVanished") && !this.get("cancelByMe")) {
-      if(currentRoute.indexOf("review_offer") >= 0) {
+      if(currentPath.indexOf("review_item") < 0 && currentPath.indexOf(`offers/${this.get("offer.id")}`) >= 0) {
         this.get("alert").show(this.get("i18n").t("404_error"), () => {
           this.transitionTo("my_list");
         });
