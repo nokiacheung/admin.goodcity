@@ -130,6 +130,7 @@ I18nTranslationsEn =
       "goods_received" : "Goods received on"
       "arrange_transport": "Arrange Transport"
       "van": "Van"
+      "receiving" : "This offer is currently being received."
 
     "review_item":
       "title" : "Review Item"
