@@ -3,6 +3,14 @@
     <div class="row ui">
       {{#if model.showDeliveryDetails}}
         {{partial "review_offer/delivery_details"}}
+      {{else if model.isCancelled}}
+        <div class='noTransportItems'>
+          <i class="fa fa-info-circle fa-5x"></i>
+          <div class='info-text'>
+            {{t "logistics.offer_cancelled_by" firstName=model.createdBy.firstName lastName=model.createdBy.lastName}}
+            {{cancel-offer-date-time model.cancelledAt}}
+          </div>
+        </div>
       {{else}}
         {{#if model.allItemsRejected}}
           <div class='noTransportItems'>

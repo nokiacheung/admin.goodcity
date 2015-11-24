@@ -131,6 +131,7 @@ I18nTranslationsEn =
       "arrange_transport": "Arrange Transport"
       "van": "Van"
       "receiving" : "This offer is currently being received."
+      "offer_cancelled_by": "Offer cancelled by {{firstName}} {{lastName}}"
 
     "review_item":
       "title" : "Review Item"
