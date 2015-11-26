@@ -24,7 +24,7 @@
     "socket.io-client": "~1.3.2",
     "hammerjs": "~2.0.4",
     "lightgallery": "~1.1.4",
-    "font-awesome": "~4.4.0",
+    "font-awesome": "~4.5.0",
     "ember-qunit": "0.4.9",
     "ember-qunit-notifications": "0.0.7",
     "qunit": "~1.18.0",
