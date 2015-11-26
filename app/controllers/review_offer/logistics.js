@@ -29,8 +29,8 @@ export default transportDetails.extend({
 
   gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
-    var options = allOptions.rejectBy('isDisabled', true).sortBy('id');
-    var disabledOption = allOptions.filterBy('isDisabled', true);
+    var options = allOptions.rejectBy('disabled', true).sortBy('id');
+    var disabledOption = allOptions.filterBy('disabled', true);
     return options.concat(disabledOption);
   }),
 
