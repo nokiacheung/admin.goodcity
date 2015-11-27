@@ -1,113 +1,111 @@
-{{#custom-navbar}}
-  <nav class="tab-bar item_details_title custom_nav">
-    <section class="left-small">
-      {{#link-to 'review_offer' classNames="back"}}{{t "back"}}{{/link-to}}
-    </section>
+<nav class="tab-bar item_details_title">
+  <section class="left-small">
+    {{#link-to 'review_offer' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
 
-    <section class="middle tab-bar-section">
-      <h1 class="title">{{t "review_item.title"}}</h1>
-    </section>
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "review_item.title"}}</h1>
+  </section>
 
-    <section class="right-small">
-      {{#unless model.offer.isFinished}}
-        <a {{action "copyItem"}} title="Copy Item" class="fontawe-icons" >
-          <i class="fa fa-files-o"></i>
-        </a>
-      {{/unless}}
-    </section>
-  </nav>
+  <section class="right-small">
+    {{#unless model.offer.isFinished}}
+      <a {{action "copyItem"}} title="Copy Item" class="fontawe-icons" >
+        <i class="fa fa-files-o"></i>
+      </a>
+    {{/unless}}
+  </section>
+</nav>
 
-  <section class="main-section review_item custom-section">
-    <div class="row" >
-      <div class="small-12 columns">
-        <div class= 'row'>
-          {{partial 'item/status_message'}}
-        </div>
+<section class="main-section review_item">
+  <div class="row" >
+    <div class="small-12 columns">
+      <div class= 'row'>
+        {{partial 'item/status_message'}}
+      </div>
 
-        {{#if isEditing}}
-          {{partial 'item/item_edit_form'}}
-        {{else}}
-          <div class="row top-bottom-margin">
-            <div class="small-2 columns">
-              {{#link-to "item.edit_images" model}}
-                <img src={{model.displayImageUrl}} class="thumb" style="width:100px;" />
-              {{/link-to}}
-            </div>
-            <div class="small-10 columns">
-              <h3 class="ellipsis two-line-ellipsis">{{model.donorDescription}}</h3>
-              {{t "review_item.condition"}}: {{model.donorCondition.name}}
-              {{#if displayEditLink}}
-                <i class="fa fa-pencil edit-item-link" {{action "setEditing" true}}></i>
-              {{/if}}
-            </div>
-          </div>
-        {{/if}}
-
+      {{#if isEditing}}
+        {{partial 'item/item_edit_form'}}
+      {{else}}
         <div class="row top-bottom-margin">
-          <div class="small-12 columns link">
-            {{#if isAndroidDevice}}
-              {{select-list
-                content=itemTypes
-                on-change=(action (mut itemTypeId))
-                selectedValue=itemType
-                prompt=(t "review_item.add_item_label")}}
-            {{else}}
-              {{select-2
-                content=itemTypes
-                optionValuePath="id"
-                optionLabelPath="name"
-                value=itemTypeId
-                placeholder=(t "review_item.add_item_label")
-                enabled=(js-x "this == false" model.offer.isFinished)
-              }}
+          <div class="small-2 columns">
+            {{#link-to "item.edit_images" model}}
+              <img src={{model.displayImageUrl}} class="thumb" style="width:100px;" />
+            {{/link-to}}
+          </div>
+          <div class="small-10 columns">
+            <h3 class="ellipsis two-line-ellipsis">{{model.donorDescription}}</h3>
+            {{t "review_item.condition"}}: {{model.donorCondition.name}}
+            {{#if displayEditLink}}
+              <i class="fa fa-pencil edit-item-link" {{action "setEditing" true}}></i>
             {{/if}}
           </div>
         </div>
+      {{/if}}
 
-        <div class="row row-grey">
-          <dl class="tabs" data-tab>
-            {{#link-to 'review_item.accept' tagName="dd" classNames="small-3 columns text-center"}}
-              {{#link-to 'review_item.accept'}}
-                <i class="fa fa-check-circle fa-2x"></i>
-                <div>{{t "review_item.accept"}}</div>
-              {{/link-to}}
+      <div class="row top-bottom-margin">
+        <div class="small-12 columns link">
+          {{#if isAndroidDevice}}
+            {{select-list
+              content=itemTypes
+              on-change=(action (mut itemTypeId))
+              selectedValue=itemType
+              prompt=(t "review_item.add_item_label")}}
+          {{else}}
+            {{select-2
+              content=itemTypes
+              optionValuePath="id"
+              optionLabelPath="name"
+              value=itemTypeId
+              placeholder=(t "review_item.add_item_label")
+              enabled=(js-x "this == false" model.offer.isFinished)
+            }}
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="row row-grey">
+        <dl class="tabs" data-tab>
+          {{#link-to 'review_item.accept' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.accept'}}
+              <i class="fa fa-check-circle fa-2x"></i>
+              <div>{{t "review_item.accept"}}</div>
             {{/link-to}}
+          {{/link-to}}
 
-            {{#link-to 'review_item.reject' tagName="dd" classNames="small-3 columns text-center"}}
-              {{#link-to 'review_item.reject'}}
-                <i class="fa fa-times-circle fa-2x"></i>
-                <div>{{t "review_item.reject"}}</div>
-              {{/link-to}}
+          {{#link-to 'review_item.reject' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.reject'}}
+              <i class="fa fa-times-circle fa-2x"></i>
+              <div>{{t "review_item.reject"}}</div>
             {{/link-to}}
+          {{/link-to}}
 
-            {{#link-to 'review_item.donor_messages' tagName="dd" classNames="small-3 columns text-center"}}
-              {{#link-to 'review_item.donor_messages'}}
-                <i class="fa fa-comment-o fa-2x"></i>
-                {{#if model.hasUnreadDonorMessages}}
-                  <i class="fa fa-circle fa-1x unread"></i>
-                {{/if}}
-                <div>{{t "review_item.donor_message"}}</div>
-              {{/link-to}}
+          {{#link-to 'review_item.donor_messages' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.donor_messages'}}
+              <i class="fa fa-comment-o fa-2x"></i>
+              {{#if model.hasUnreadDonorMessages}}
+                <i class="fa fa-circle fa-1x unread"></i>
+              {{/if}}
+              <div>{{t "review_item.donor_message"}}</div>
             {{/link-to}}
+          {{/link-to}}
 
-            {{#link-to 'review_item.supervisor_messages' tagName="dd" classNames="small-3 columns text-center"}}
-              {{#link-to 'review_item.supervisor_messages'}}
-                <i class="fa fa-comment-o fa-2x"></i>
-                {{#if model.hasUnreadPrivateMessages}}
-                  <i class="fa fa-circle fa-1x unread"></i>
-                {{/if}}
-                <div>{{t "review_item.supervisor_message"}}</div>
-              {{/link-to}}
+          {{#link-to 'review_item.supervisor_messages' tagName="dd" classNames="small-3 columns text-center"}}
+            {{#link-to 'review_item.supervisor_messages'}}
+              <i class="fa fa-comment-o fa-2x"></i>
+              {{#if model.hasUnreadPrivateMessages}}
+                <i class="fa fa-circle fa-1x unread"></i>
+              {{/if}}
+              <div>{{t "review_item.supervisor_message"}}</div>
             {{/link-to}}
+          {{/link-to}}
 
-          </dl>
+        </dl>
 
-          <div class="tabs-content {{if model.offer.isFinished 'disable-canceloffer-review'}}">
-            <br/>
-            {{outlet}}
-          </div>
+        <div class="tabs-content {{if model.offer.isFinished 'disable-canceloffer-review'}}">
+          <br/>
+          {{outlet}}
         </div>
       </div>
     </div>
-  </section>
-{{/custom-navbar}}
+  </div>
+</section>
