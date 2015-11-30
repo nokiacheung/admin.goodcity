@@ -10,8 +10,7 @@
     <li>{{#link-to 'scheduled'}}{{t "inbox.scheduled_offers"}} ({{scheduledCount}}){{/link-to}}</li>
     <li>{{#link-to 'offers.receiving'}}{{t "inbox.receiving"}} ({{receivingOffersCount}}){{/link-to}}</li>
     <li>{{#link-to 'finished'}}{{t "inbox.finished"}}{{/link-to}}</li>
-    {{#if appVersion}}
-      <li><a>v{{appVersion}}</a></li>
-    {{/if}}
   </ul>
+
+  {{partial "app_version"}}
 </aside>
