@@ -123,7 +123,6 @@ export default Ember.Controller.extend({
         offer.deleteRecord();
         offer.save()
           .then(() => {
-            recordsUtil.unloadRecordTree(offer);
             this.transitionToRoute(this.get("backLinkPath"));
           })
           .catch(error => { offer.rollback(); throw error; })
