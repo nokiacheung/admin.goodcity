@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import AjaxPromise from './../utils/ajax-promise';
-import recordsUtil from './../utils/records';
 
 export default Ember.Controller.extend({
 
