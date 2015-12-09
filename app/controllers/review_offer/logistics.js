@@ -70,7 +70,6 @@ export default transportDetails.extend({
       new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
         .then(data => {
           this.store.pushPayload(data);
-          this.transitionToRoute('review_offer.items');
         })
         .finally(() => loadingView.destroy());
     },
