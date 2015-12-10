@@ -1,0 +1,65 @@
+<div id="{{concat 'stockitAddItemModal' package.id}}" class="stockitAddItemModal small reveal-modal ui" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+  <section class="main-section receive_package_modal">
+
+    <div class="row single-row {{if hasErrors 'form-errors' 'no-error'}}">
+      <div class="small-1 columns">
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+      <div class="small-11 columns">
+        <div class={{if invalidInventoryNo 'show-error' 'no-error'}}>Inventory number is invalid.</div>
+        <div class={{if invalidQuantity 'show-error' 'no-error'}}>Quantity can not be blank.</div>
+      </div>
+    </div>
+
+
+    <div class="box-white">
+
+      <div class="row single-row">
+        <div class="small-12 columns">
+          <b>{{package.packageName}}</b>
+        </div>
+      </div>
+
+      <div class="row single-row">
+        <div class="small-12 columns">
+          {{package.notes}}
+        </div>
+      </div>
+
+      <div class="row inputs-row">
+        <div class="small-3 columns {{if invalidQuantity 'has-error'}}">
+          {{numeric-input id=(concat 'qty' package.id) name="qty" value=packageForm.quantity placeholder=(t "placeholder.qty") maxlength="8" pattern="\d{1,8}"}}
+          <i class="fa fa-exclamation-triangle"></i>
+        </div>
+        <div class="small-3 columns">
+          {{numeric-input name="length" id=(concat 'length' package.id) value=packageForm.length placeholder=(t "placeholder.length") maxlength="8" pattern="\d{1,8}"}}
+        </div>
+        <div class="small-3 columns">
+          {{numeric-input id=(concat 'width' package.id) name="width" value=packageForm.width placeholder=(t "placeholder.width") maxlength="5" pattern="\d{1,5}"}}
+        </div>
+        <div class="small-3 columns">
+          {{numeric-input id=(concat 'height' package.id) name="height" value=packageForm.height placeholder=(t "placeholder.height") maxlength="5"  pattern="\d{1,5}" }}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row inventory-number">
+      <div class="small-12 columns {{if invalidInventoryNo 'has-error'}}">
+        {{input type="text" name="inventoryNumber" id=(concat 'inventory_number' package.id)  value=packageForm.inventoryNumber  }}
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-6 columns">
+        <a class="button expand secondary closeLink action1" type="reset">Cancel</a>
+      </div>
+      <div class="small-6 columns">
+        <button class="button expand action2 confirmLink">Receive</button>
+      </div>
+    </div>
+  </section>
+
+</div>

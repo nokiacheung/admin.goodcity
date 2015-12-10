@@ -1,0 +1,98 @@
+.stockitAddItemModal {
+  &.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    top: 0 !important;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    max-width: 100%;
+    background-color: #002352;
+    padding: 0.5rem;
+  }
+
+  .main-section {
+    @media #{$large-only} {
+      padding: 0 15rem;
+    }
+  }
+
+  .box-white {
+    background-color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    input {
+      padding-left: .5rem;
+      padding-right: .5rem;
+    }
+
+    @media #{$small-only} {
+      font-size: 0.8rem;
+    }
+
+    .single-row {
+      border-bottom: lightgray 1px solid;
+      margin: 0 !important;
+      padding: 0.5rem 0.7rem;
+      max-width: 100%;
+
+      @media #{$small-only} {
+        padding: 0.3rem 0.5rem;
+      }
+    }
+  }
+
+  .inventory-number {
+    margin-bottom: 1rem;
+  }
+
+  .secondary {
+    background-color: inherit;
+  }
+
+  .inputs-row .columns {
+    padding: 0;
+  }
+
+  .has-error {
+    .fa.fa-exclamation-triangle {
+      position: relative;
+      float: right;
+      margin-top: -1.6rem;
+      color: $coral-red;
+      margin-right: 0.5rem;
+      display: inline-block !important;
+
+      @media #{$small-only} {
+        margin-top: -1.2rem;
+      }
+    }
+  }
+
+  .form-errors {
+    color: $coral-red;
+    display: block;
+
+    @media #{$small-only} {
+      font-size: 0.9rem;
+    }
+
+    .fa.fa-exclamation-triangle {
+      display: inline-block !important;
+    }
+  }
+
+  .no-error {
+    display: none;
+  }
+
+  .show-error {
+    display: block;
+  }
+
+  .fa.fa-exclamation-triangle {
+    display: none;
+  }
+}
