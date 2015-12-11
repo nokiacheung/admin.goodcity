@@ -5,11 +5,26 @@ export default Ember.Controller.extend({
 
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
+  alert: Ember.inject.service(),
   i18n: Ember.inject.service(),
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
   cordova: Ember.inject.service(),
   isAndroidDevice: false,
+
+  isItemVanished: Ember.computed.or('item.isDeleted', 'item.isDeleting'),
+
+  showDeleteError: Ember.observer('item', 'isItemVanished', function(){
+    var currentRoute = this.get('application.currentRouteName');
+
+    if(this.get("isItemVanished")) {
+      if(currentRoute.indexOf("review_item") >= 0) {
+        this.get("alert").show(this.get("i18n").t("404_error"), () => {
+          this.transitionTo("my_list");
+        });
+      }
+    }
+  }),
 
   itemDescriptionPlaceholder: Ember.computed(function(){
     return this.get("i18n").t("items.add_item.description_placeholder").string;

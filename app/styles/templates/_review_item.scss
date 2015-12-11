@@ -12,7 +12,7 @@
 
   i.unread {
     vertical-align: top;
-    color: $alert-color;
+    color: $alert-color !important;
     font-size: 0.7rem;
 
     @media #{$small-only} {
@@ -63,4 +63,9 @@
       }
     }
   }
+}
+
+.accept_item {
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
 }

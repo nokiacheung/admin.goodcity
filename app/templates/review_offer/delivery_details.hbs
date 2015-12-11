@@ -1,15 +1,18 @@
-{{#if model.isReceived}}
-  {{#if model.delivery}}
-    <div class="received-msg">
-      {{t "logistics.goods_received"}} {{display-date model.receivedAt}} via {{model.deliveredBy}}.
-    </div>
-  {{else}}
+{{#if model.hasReceived}}
+  {{#unless model.delivery}}
     <p><span class="icon-no-items"></span></p>
-    <p class="no-items received-msg">
+  {{/unless}}
+
+  <p class="received-msg no-items">
+    {{#if model.isReceiving}}
+      {{t "logistics.receiving"}}
+    {{else}}
       {{t "logistics.goods_received"}} {{display-date model.receivedAt}} via {{model.deliveredBy}}.
-    </p>
-  {{/if}}
+    {{/if}}
+  </p>
+
 {{/if}}
+
 {{#if model.delivery}}
   {{partial 'offer/delivery_details'}}
 {{/if}}

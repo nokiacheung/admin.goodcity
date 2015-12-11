@@ -128,6 +128,8 @@ I18nTranslationsZhTw =
       "goods_received" : "物資接收日期"
       "arrange_transport": "安排運輸"
       "van": "麵包車"
+      "receiving" : "This offer is currently being received."
+      "offer_cancelled_by": "Offer cancelled by {{lastName}} {{firstName}}"
 
     "review_item":
       "title" : "審查物資"

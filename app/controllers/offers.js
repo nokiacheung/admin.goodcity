@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
   application: Ember.inject.controller(),
+  appVersion: Ember.computed.alias('application.appVersion'),
 
   newOffersCount: Ember.computed('allOffers.@each.isSubmitted', function(){
     return this.get('allOffers').filterBy('isSubmitted', true).length;

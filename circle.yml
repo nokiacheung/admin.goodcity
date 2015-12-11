@@ -6,9 +6,10 @@ machine:
 
 dependencies:
   pre:
+    - npm install -g bower
     - node circle-branch.js
   post:
-    - "./node_modules/ember-cli/node_modules/bower/bin/bower install"
+    - bower install
 
 test:
   pre:

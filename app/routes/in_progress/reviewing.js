@@ -6,7 +6,7 @@ export default AuthorizeRoute.extend({
   },
 
   model() {
-    return this.store.filter('offer', function(offer) {
+    return this.get("store").filter('offer', function(offer) {
       return offer.get('isUnderReview');
     });
   }

@@ -71,7 +71,7 @@ test("complete review of offer", function() {
     click(find("button:contains('Complete Review')"));
 
     andThen(function(){
-      equal(currentURL(), "/offers/4/review_offer/items");
+      equal(currentURL(), "/offers/4/review_offer/logistics");
     });
   });
 });

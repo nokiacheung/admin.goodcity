@@ -1,5 +1,6 @@
 {{#scroll-to-bottom}}
-  <nav class="tab-bar">
+
+  <nav class="tab-bar sticky_title_bar">
     <section class="left-small">
       {{#link-to 'review_offer.items' offer classNames="back"}}{{t "back"}}{{/link-to}}
     </section>
@@ -8,7 +9,8 @@
       <h1 class="title">{{t "messages_title"}}</h1>
     </section>
   </nav>
-  <section class="main-section offer_details">
+
+  <section class="main-section offer_details offer_messages_section">
     <div class="row">
       <div class="small-12 columns">
 
@@ -36,7 +38,8 @@
 
       </div>
     </div>
+
+    {{partial 'message_template'}}
   </section>
 
-  {{partial 'message_template'}}
 {{/scroll-to-bottom}}

@@ -92,7 +92,7 @@ test("Display offer status for scheduled offer: Collection", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer4.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st Afternoon");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st Dec Afternoon");
   });
 });
 
@@ -101,7 +101,7 @@ test("Display offer status for scheduled offer: Gogovan pending", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm, Mon 1st");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm, Mon 1st Dec");
   });
 });
 
@@ -120,7 +120,7 @@ test("Display offer status for scheduled offer: Drop Off", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer6.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st Afternoon");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st Dec Afternoon");
   });
 });
 
