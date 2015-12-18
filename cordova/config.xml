@@ -80,4 +80,5 @@
   <plugin name="cordova-plugin-camera" spec="1.2.0"/>
   <plugin name="cordova-plugin-statusbar" spec="1.0.1"/>
   <plugin name="cordova-plugin-splashscreen" spec="2.1.0"/>
+  <plugin name="com-cordova-splunkmint" spec="https://github.com/swatijadhav/splunkmint-cordova-plugin.git"/>
 </widget>
