@@ -131,9 +131,6 @@ module.exports = function(environment) {
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
     ENV.cordova.GcmSenderId = '876198075877';
-
-    ENV.cordova.SplunkMintApiKeyAndroid = "50c189a1";
-    ENV.cordova.SplunkMintApiKeyIos = "3db1b67d";
   }
 
   if (process.env.staging === 'true') {
@@ -157,8 +154,6 @@ module.exports = function(environment) {
     ].join(' ');
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     ENV.cordova.GcmSenderId = '907786683525';
-    ENV.cordova.SplunkMintApiKeyAndroid = "9e4de231";
-    ENV.cordova.SplunkMintApiKeyIos = "09671e4a";
   } else {
     ENV.staging = false;
   }
