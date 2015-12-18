@@ -5,4 +5,8 @@ export default Ember.TextField.extend({
   type:    "text",
   attributeBindings: [ "name", "id", "value", 'disabled', 'placeholder'],
   disabled: false,
+
+  click() {
+    Ember.$(this.element).closest("li").find("input[type='radio']").prop('checked', true);
+  },
 });
