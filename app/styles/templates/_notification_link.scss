@@ -27,6 +27,11 @@
 
 .right-small {
   margin-right: 4%;
+
+  @media #{$medium-only} {
+    margin-right: 6.5%;
+  }
+
   @media #{$small-only} {
     margin-right: 10%;
   }
