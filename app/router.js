@@ -28,6 +28,8 @@ Router.map(function() {
       this.route('receive');
     });
 
+    this.resource('receive_package', {path: '/receive_package/:package_id'});
+
     this.resource('review_item', {path: '/review_item/:item_id'},function() {
       this.route('index', { path: '/'});
       this.route('reject');

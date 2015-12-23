@@ -49,39 +49,13 @@ export default Ember.Component.extend({
   }),
 
   updatePackage: function(action) {
+    var loadingView = this.container.lookup('component:loading').append();
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
-      .catch(error => { pkg.rollback(); throw error; });
+      .catch(error => { pkg.rollback(); throw error; })
+      .finally(() => loadingView.destroy());
   },
-
-  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo',{
-    get: function() {
-      return this.get("invalidQuantity") || this.get("invalidInventoryNo");
-    },
-    set: function(key, value) {
-      return value;
-    }
-  }),
-
-  invalidQuantity: Ember.computed({
-    get: function() {
-      return this.get("package.quantity").length === 0;
-    },
-    set: function(key, value) {
-      return value;
-    }
-  }),
-
-  invalidInventoryNo: Ember.computed({
-    get: function() {
-      var isValid = this.verifyInventoryNumber(this.get("package.inventoryNumber"));
-      return isValid;
-    },
-    set: function(key, value) {
-      return value;
-    }
-  }),
 
   actions: {
     toggle(hidden) {
@@ -90,7 +64,7 @@ export default Ember.Component.extend({
 
     missing() {
       if(this.get("isFirstReceivingPackage")) {
-        this.confirmReceiving("confirmReceivingModal", () => this.send("missingPackage"));
+        this.confirmReceiving(() => this.send("missingPackage"));
       } else {
         this.send("missingPackage");
       }
@@ -98,14 +72,14 @@ export default Ember.Component.extend({
 
     receive() {
       if(this.get("isFirstReceivingPackage")) {
-        this.confirmReceiving("confirmReceivingModal", () => this.send("addToStockit"));
+        this.confirmReceiving(() => this.send("addToStockit"));
       } else {
         if(!this.get("isReceived")) { this.send("addToStockit"); }
       }
     },
 
     addToStockit() {
-      this.confirmReceiving("stockitAddItemModal" + this.get("packageId"), () => this.send("receivePackage"));
+      this.get('router').transitionTo("receive_package", this.get("packageId"));
     },
 
     missingPackage() {
@@ -114,66 +88,19 @@ export default Ember.Component.extend({
         p.set("state_event", "mark_missing");
       });
     },
-
-    receivePackage() {
-      var pkg = this.get("package");
-      var pkgData = this.get("packageForm");
-      pkg.set("state", "received");
-      pkg.set("state_event", "mark_received");
-      pkg.set("quantity", pkgData.quantity);
-      pkg.set("length", pkgData.length);
-      pkg.set("width", pkgData.width);
-      pkg.set("height", pkgData.height);
-      pkg.set("inventoryNumber", pkgData.inventoryNumber);
-      pkg.save()
-        .catch(error => {
-          if(pkg.get("errors.firstObject.attribute") === "connection_error") {
-            this.get("alert").show(pkg.get("errors.firstObject.message"), () => {});
-          } else {
-            pkg.rollback();
-            throw error;
-          }
-        });
-    },
-
-    resetInputs() {
-      this.set("invalidQuantity", false);
-      this.set("invalidInventoryNo", false);
-      this.set("hasErrors", false);
-      this.notifyPropertyChange('package');
-    },
-
-    verifyInputs() {
-      Ember.$("input[name='qty']").trigger("focusout");
-      Ember.$("input[name='inventoryNumber']").trigger("focusout");
-    }
   },
 
   confirmReceiving: function(modalId, successCallback) {
     var _this = this;
-    Ember.$("#" + modalId).removeClass("open");
-    _this.send("resetInputs");
-
-    Ember.$("#" + modalId).foundation("reveal", "open");
+    Ember.$("#confirmReceivingModal").removeClass("open");
+    Ember.$("#confirmReceivingModal").foundation("reveal", "open");
     Ember.$(".loading-indicator").remove();
 
-    Ember.$("#" + modalId +" .closeLink").click(() => {
+    Ember.$("#confirmReceivingModal .closeLink").click(() => {
       _this.closeConfirmBox();
     });
 
-    _this.observeInputValidation();
-
-    Ember.$("#" + modalId +" .confirmLink").click((e) => {
-      var form = Ember.$(e.target).closest('.receive_package_modal');
-      _this.send("verifyInputs");
-
-      if(form.length > 0 && (_this.get("invalidQuantity") || _this.get("invalidInventoryNo"))) {
-        _this.set("hasErrors", true);
-        return false;
-      } else {
-        _this.set("hasErrors", false);
-      }
-
+    Ember.$("#confirmReceivingModal .confirmLink").click(() => {
       _this.closeConfirmBox();
       successCallback();
     });
@@ -184,26 +111,4 @@ export default Ember.Component.extend({
       Ember.$("#confirmReceivingModal").foundation("reveal", "close");
     });
   },
-
-  observeInputValidation: function(){
-    var _this = this;
-
-    Ember.$("input[name='qty']").bind("change focusout", function () {
-      var isValid = this.value.length > 0;
-      _this.set("invalidQuantity", !isValid);
-    });
-
-    Ember.$("input[name='inventoryNumber']").bind("change focusout", function () {
-      var isValid = _this.verifyInventoryNumber(this.value);
-      _this.set("invalidInventoryNo", !isValid);
-    });
-  },
-
-  verifyInventoryNumber: function(value) {
-    return /[#{A-Z}][0-9]{5}[a-zA-Z]{0,1}[0-9]*/.test(value);
-  },
-
-  didInsertElement() {
-    this.send("resetInputs");
-  }
 });
