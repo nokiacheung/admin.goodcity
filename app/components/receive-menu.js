@@ -53,8 +53,18 @@ export default Ember.Component.extend({
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
-      .catch(error => { pkg.rollback(); throw error; })
-      .finally(() => loadingView.destroy());
+      .then(() => loadingView.destroy())
+      .catch(error => {
+        loadingView.destroy();
+        if(pkg.get("errors.firstObject.attribute") === "connection_error") {
+          this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
+            pkg.rollback();
+          });
+        } else {
+          pkg.rollback();
+          throw error;
+        }
+      });
   },
 
   actions: {

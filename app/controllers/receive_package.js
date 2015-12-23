@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   package: Ember.computed.alias("model"),
+  alert: Ember.inject.service(),
 
   packageForm: Ember.computed("package", {
     get: function() {
@@ -63,11 +64,18 @@ export default Ember.Controller.extend({
     },
 
     receivePackage() {
-      this.set("hasErrors", false);
-      var loadingView = this.container.lookup('component:loading').append();
       var _this = this;
-      var pkg = this.get("package");
       var pkgData = this.get("packageForm");
+
+      this.set("invalidQuantity", (pkgData.quantity.length === 0));
+
+      var validInventory = this.verifyInventoryNumber(pkgData.inventoryNumber);
+      this.set("invalidInventoryNo", !validInventory);
+
+      if(this.get("hasErrors")) { return false; }
+
+      var loadingView = this.container.lookup('component:loading').append();
+      var pkg = this.get("package");
       pkg.set("state", "received");
       pkg.set("state_event", "mark_received");
       pkg.set("quantity", pkgData.quantity);
@@ -83,7 +91,9 @@ export default Ember.Controller.extend({
         .catch(() => {
           loadingView.destroy();
           if(pkg.get("errors.firstObject.attribute") === "connection_error") {
-            this.get("alert").show(pkg.get("errors.firstObject.message"), () => {});
+            this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
+              pkg.rollbackAttributes();
+            });
           } else {
             _this.set("hasErrors", true);
           }
@@ -95,26 +105,6 @@ export default Ember.Controller.extend({
       this.set("invalidInventoryNo", false);
       this.set("hasErrors", false);
     },
-
-    verifyInputs() {
-      Ember.$("input[name='qty']").trigger("focusout");
-      Ember.$("input[name='inventoryNumber']").trigger("focusout");
-    },
-
-  },
-
-  observeInputValidation: function(){
-    var _this = this;
-
-    Ember.$("input[name='qty']").bind("change focusout", function () {
-      var isValid = this.value.length > 0;
-      _this.set("invalidQuantity", !isValid);
-    });
-
-    Ember.$("input[name='inventoryNumber']").bind("change focusout", function () {
-      var isValid = _this.verifyInventoryNumber(this.value);
-      _this.set("invalidInventoryNo", !isValid);
-    });
   },
 
   verifyInventoryNumber: function(value) {
