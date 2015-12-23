@@ -6,28 +6,6 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   alert: Ember.inject.service(),
 
-  packageForm: Ember.computed("package", {
-    get: function() {
-      var pkg = this.get('package');
-      return {
-        quantity: pkg.get("quantity"),
-        length: pkg.get("length"),
-        width: pkg.get("width"),
-        height: pkg.get("height"),
-        inventoryNumber: pkg.get("inventoryNumber"),
-      };
-    },
-    set: function(key, value) {
-      return {
-        quantity: value.get("quantity"),
-        length: value.get("length"),
-        width: value.get("width"),
-        height: value.get("height"),
-        inventoryNumber: value.get("inventoryNumber"),
-      };
-    }
-  }),
-
   isReceived: Ember.computed.equal("package.state", "received"),
   isMissing: Ember.computed.equal("package.state", "missing"),
 
@@ -58,10 +36,10 @@ export default Ember.Component.extend({
         loadingView.destroy();
         if(pkg.get("errors.firstObject.attribute") === "connection_error") {
           this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
-            pkg.rollback();
+            pkg.rollbackAttributes();
           });
         } else {
-          pkg.rollback();
+          pkg.rollbackAttributes();
           throw error;
         }
       });
@@ -100,7 +78,7 @@ export default Ember.Component.extend({
     },
   },
 
-  confirmReceiving: function(modalId, successCallback) {
+  confirmReceiving: function(successCallback) {
     var _this = this;
     Ember.$("#confirmReceivingModal").removeClass("open");
     Ember.$("#confirmReceivingModal").foundation("reveal", "open");
