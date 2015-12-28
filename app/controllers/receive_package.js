@@ -78,12 +78,13 @@ export default Ember.Controller.extend({
       var _this = this;
       var pkgData = this.get("packageForm");
 
-      this.set("invalidQuantity", (pkgData.quantity.length === 0));
+      this.set("invalidQuantity", (pkgData.quantity.toString().length === 0));
       this.set("invalidDescription", (pkgData.notes.length === 0));
 
       var validInventory = this.verifyInventoryNumber(pkgData.inventoryNumber);
       this.set("invalidInventoryNo", !validInventory);
 
+      this.notifyPropertyChange("invalidQuantity"); // this will recalculate 'hasErrors' property, sometimes it does return true for valid form.
       if(this.get("hasErrors")) { return false; }
 
       var loadingView = this.container.lookup('component:loading').append();
