@@ -12,6 +12,8 @@
 
         <div class={{if invalidQuantity 'show-error' 'no-error'}}>{{t "receive_package.invalid_quantity"}}</div>
 
+        <div class={{if invalidDescription 'show-error' 'no-error'}}>{{t "receive_package.invalid_description"}}</div>
+
         {{#each package.errors as |error|}}
           <div class='show-error'>{{error.attribute}}: {{error.message}}</div>
         {{/each}}
@@ -27,9 +29,9 @@
         </div>
       </div>
 
-      <div class="row single-row">
-        <div class="small-12 columns">
-          {{package.notes}}
+      <div class="row inputs-row">
+        <div class="small-12 columns {{if invalidDescription 'has-error'}}">
+          {{auto-resize-textarea data-autoresize=true name="notes" value=packageForm.notes placeholder=(t "placeholder.comments") maxlength="255" required="required" pattern=".*\S.*" id=(concat 'notes' package.id)}}
         </div>
       </div>
 

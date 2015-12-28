@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
         width: pkg.get("width"),
         height: pkg.get("height"),
         inventoryNumber: pkg.get("inventoryNumber"),
+        notes: pkg.get("notes")
       };
     },
     set: function(key, value) {
@@ -23,13 +24,14 @@ export default Ember.Controller.extend({
         width: value.get("width"),
         height: value.get("height"),
         inventoryNumber: value.get("inventoryNumber"),
+        notes: value.get("notes")
       };
     }
   }),
 
-  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo',{
+  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo', 'invalidDescription', {
     get: function() {
-      return this.get("invalidQuantity") || this.get("invalidInventoryNo");
+      return this.get("invalidQuantity") || this.get("invalidInventoryNo") || this.get("invalidDescription");
     },
     set: function(key, value) {
       return value;
@@ -39,6 +41,15 @@ export default Ember.Controller.extend({
   invalidQuantity: Ember.computed({
     get: function() {
       return this.get("package.quantity").length === 0;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  invalidDescription: Ember.computed({
+    get: function() {
+      return this.get("package.notes").length === 0;
     },
     set: function(key, value) {
       return value;
@@ -68,6 +79,7 @@ export default Ember.Controller.extend({
       var pkgData = this.get("packageForm");
 
       this.set("invalidQuantity", (pkgData.quantity.length === 0));
+      this.set("invalidDescription", (pkgData.notes.length === 0));
 
       var validInventory = this.verifyInventoryNumber(pkgData.inventoryNumber);
       this.set("invalidInventoryNo", !validInventory);
@@ -82,6 +94,7 @@ export default Ember.Controller.extend({
       pkg.set("length", pkgData.length);
       pkg.set("width", pkgData.width);
       pkg.set("height", pkgData.height);
+      pkg.set("notes", pkgData.notes);
       pkg.set("inventoryNumber", pkgData.inventoryNumber);
       pkg.save()
         .then(() => {
@@ -103,6 +116,7 @@ export default Ember.Controller.extend({
     resetInputs() {
       this.set("invalidQuantity", false);
       this.set("invalidInventoryNo", false);
+      this.set("invalidDescription", false);
       this.set("hasErrors", false);
     },
   },

@@ -2,6 +2,12 @@
   color: black;
   padding-top: 1.5rem;
 
+  &.ui textarea {
+    margin: 0rem;
+    max-width: 100%;
+    padding: 0.5rem 0.8rem;
+  }
+
   .main-section {
     @media #{$large-only} {
       padding: 0 15rem;
@@ -42,8 +48,22 @@
     background-color: inherit;
   }
 
-  .inputs-row .columns {
-    padding: 0;
+  .inputs-row {
+    border-bottom: lightgray 1px solid;
+
+    .columns {
+      padding: 0;
+    }
+
+    textarea {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      resize: none;
+    }
+
+    .has-error textarea {
+      margin-bottom: 0;
+    }
   }
 
   .has-error {
