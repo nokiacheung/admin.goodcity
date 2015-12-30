@@ -46,10 +46,12 @@ CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
 APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
+APP_SECRET_KEYS_PATH = "#{CORDOVA_PATH}/.secret_keys"
 TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
 TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
+SPLUNKMINT_PLUGIN_URL = "https://github.com/swatijadhav/splunkmint-cordova-plugin.git"
 LOCK_FILE="#{CORDOVA_PATH}/.ios_build.lock"
 LOCK_FILE_MAX_AGE = 1000 # number of seconds before we remove lock file if failing build
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
@@ -123,6 +125,8 @@ namespace :cordova do
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
+
+      sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
     end
     if platform == "ios"
       Dir.chdir(CORDOVA_PATH) do
@@ -211,6 +215,14 @@ namespace :ios_build_server do
         raise(BuildError, "#{env} not set.") unless env?(env)
     end
   end
+end
+
+def splunk_mint_key
+  secret_keys[environment][platform]["splunk_mint_key"]
+end
+
+def secret_keys
+  @secret_keys ||= JSON.parse(File.read(APP_SECRET_KEYS_PATH))
 end
 
 def app_sha
