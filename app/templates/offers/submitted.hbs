@@ -4,7 +4,7 @@
   <div class="row">
     <div class="small-12 columns item-content">
       <ul class="list list-activity list-offer-items">
-        {{#each offer in arrangedContent}}
+        {{#each arrangedContent as |offer|}}
           {{partial 'offers/offer_details'}}
         {{/each}}
       </ul>
