@@ -19,9 +19,9 @@
 
       <ul class='call_ggv'>
         {{#if driverContact}}
-          <li>{{t 'delivery.cancel.call_driver'}} {{view 'phone' number=driverContact}} or</li>
+          <li>{{t 'delivery.cancel.call_driver'}} {{phone-number number=driverContact}} or</li>
         {{/if}}
-        <li>{{t 'delivery.cancel.call_ggv'}} {{view 'phone' number=gogovanContact}}</li>
+        <li>{{t 'delivery.cancel.call_ggv'}} {{phone-number number=gogovanContact}}</li>
       </ul>
 
       <div>{{t 'cancel_gogovan.notify_donor'}}</div>
