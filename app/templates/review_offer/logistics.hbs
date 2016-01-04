@@ -8,7 +8,7 @@
           <i class="fa fa-info-circle fa-5x"></i>
           <div class='info-text'>
             {{t "logistics.offer_cancelled_by" firstName=model.createdBy.firstName lastName=model.createdBy.lastName}}
-            {{cancel-offer-date-time model.cancelledAt}}
+            {{display-datetime model.cancelledAt format='h:mm a, ddd Do MMM'}}
           </div>
         </div>
       {{else}}
