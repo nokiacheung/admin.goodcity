@@ -62,12 +62,12 @@
           <i class="fa fa-truck"></i>
           <b>
             {{#if delivery.completedWithGogovan}}
-              {{completed-time-status offer.delivery.gogovanOrder.completedAt}}
+              {{display-datetime offer.delivery.gogovanOrder.completedAt format='h:mm A, ddd Do MMM'}}
             {{else if delivery.isGogovan}}
               {{delivery.schedule.slotName}},
-              {{schedule-time-status delivery.schedule.scheduledAt}}
+              {{display-datetime delivery.schedule.scheduledAt format='ddd Do MMM'}}
             {{else}}
-              {{schedule-time-status delivery.schedule.scheduledAt}}
+              {{display-datetime delivery.schedule.scheduledAt format='ddd Do MMM'}}
               {{delivery.schedule.dayTime}}
             {{/if}}
           </b>
@@ -79,7 +79,7 @@
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
         {{t "review_offer.offer_cancelled_by" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
-        {{cancel-offer-date-time offer.cancelledAt}}
+        {{display-datetime offer.cancelledAt format='h:mm a, ddd Do MMM'}}
       </div>
     </div>
   {{else if offer.isClosed}}
