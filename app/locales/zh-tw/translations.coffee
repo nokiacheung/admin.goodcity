@@ -202,4 +202,11 @@ I18nTranslationsZhTw =
       "package_type": "包裝類型"
       "comments": "描述"
 
+    "receive_package":
+      "invalid_inventory": "Inventory number is invalid."
+      "invalid_quantity": "Quantity can not be blank."
+      "invalid_description": "Description can not be blank."
+      "receive": "Receive"
+      "cancel": "Cancel"
+
 `export default I18nTranslationsZhTw`
