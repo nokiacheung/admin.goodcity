@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
 
   package: Ember.computed.alias("model"),
   alert: Ember.inject.service(),
+  watchErrors: true,
 
   packageForm: Ember.computed("package", {
     get: function() {
@@ -29,7 +30,7 @@ export default Ember.Controller.extend({
     }
   }),
 
-  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo', 'invalidDescription', {
+  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo', 'invalidDescription', 'watchErrors', {
     get: function() {
       return this.get("invalidQuantity") || this.get("invalidInventoryNo") || this.get("invalidDescription");
     },
@@ -84,7 +85,7 @@ export default Ember.Controller.extend({
       var validInventory = this.verifyInventoryNumber(pkgData.inventoryNumber);
       this.set("invalidInventoryNo", !validInventory);
 
-      this.notifyPropertyChange("invalidQuantity"); // this will recalculate 'hasErrors' property, sometimes it does return true for valid form.
+      this.notifyPropertyChange("watchErrors"); // this will recalculate 'hasErrors' property, sometimes it does return true for valid form.
       if(this.get("hasErrors")) { return false; }
 
       var loadingView = this.container.lookup('component:loading').append();
