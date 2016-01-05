@@ -91,6 +91,9 @@ Router.map(function() {
       this.route('other_delivery');
     });
   });
+
+  this.resource('users');
+  this.resource('user', { path: '/users/:user_id'});
 });
 
 export default Router;

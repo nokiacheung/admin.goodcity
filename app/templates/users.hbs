@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="small-12 columns search-box ui">
+    {{input
+      type="text"
+      name="searchText"
+      id="searchText"
+      placeholder="Search User"
+      value=searchText }}
+
+    {{#if hasSearchText}}
+      <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+    {{/if}}
+    <a href="#" {{action "cancelSearch"}}>Cancel</a>
+  </div>
+</div>
+
+<section class="main-section review_offer search users">
+  <div class="row">
+    <div class="small-12 columns item-content">
+      {{#if filteredResults}}
+        <ul class="list list-activity list-offer-items">
+          {{#each filteredResults as |user|}}
+            <li>
+              {{#link-to 'user' user.id}}
+                {{user.fullName}} {{user.roleInitials}}
+              {{/link-to}}
+            </li>
+          {{/each}}
+        </ul>
+      {{else if hasFilter}}
+        <div class='no_result'>{{t "search.no_results"}}</div>
+      {{/if}}
+
+      {{#if hasFilter}}
+        {{#if fetchMoreResult}}
+          <div class='find_more_link'>
+            <a href="#" {{action "searchOnServer"}}>
+              {{t "search.server_search"}}
+            </a>
+          </div>
+        {{/if}}
+      {{/if}}
+
+    </div>
+  </div>
+</section>

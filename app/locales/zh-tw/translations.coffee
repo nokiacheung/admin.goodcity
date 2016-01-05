@@ -66,6 +66,8 @@ I18nTranslationsZhTw =
       "my_list" : "我的列表"
       "finished": "已完成"
       "closed_offers": "已完成"
+      "receiving": "Receiving"
+      "users": "Users"
 
     "my_notifications":
       "heading" : "{{name}}的捐獻"
@@ -208,5 +210,8 @@ I18nTranslationsZhTw =
       "invalid_description": "Description can not be blank."
       "receive": "Receive"
       "cancel": "Cancel"
+
+    "user":
+      "permission": "Permission"
 
 `export default I18nTranslationsZhTw`
