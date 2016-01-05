@@ -31,7 +31,7 @@
 
       <div class="row inputs-row">
         <div class="small-12 columns {{if invalidDescription 'has-error'}}">
-          {{auto-resize-textarea data-autoresize=true name="notes" value=packageForm.notes placeholder=(t "placeholder.comments") maxlength="255" required="required" pattern=".*\S.*" id=(concat 'notes' package.id)}}
+          {{auto-resize-textarea data-autoresize=true name="notes" value=packageForm.notes placeholder=(t "placeholder.comments") maxlength="50" required="required" pattern=".*\S.*" id=(concat 'notes' package.id)}}
         </div>
       </div>
 
