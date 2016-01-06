@@ -1,12 +1,10 @@
 import Ember from 'ember';
-import config from '../config/environment';
 
 export default Ember.Controller.extend({
 
   package: Ember.computed.alias("model"),
   alert: Ember.inject.service(),
   watchErrors: true,
-  isAndroidDevice: false,
 
   location: Ember.computed("locationId", function(){
     return this.store.peekRecord("location", this.get("locationId"));
@@ -23,13 +21,6 @@ export default Ember.Controller.extend({
 
   locations: Ember.computed(function(){
     return this.store.peekAll("location");
-  }),
-
-  onInit: Ember.on('init', function() {
-    if (config.cordova.enabled) {
-      var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
-      this.set("isAndroidDevice", isAndroidDevice);
-    }
   }),
 
   packageForm: Ember.computed("package", {
