@@ -68,6 +68,7 @@ I18nTranslationsEn =
       "finished": "Finished"
       "closed_offers": "Finished"
       "receiving": "Receiving"
+      "users": "Users"
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
@@ -209,5 +210,8 @@ I18nTranslationsEn =
       "invalid_description": "Description can not be blank."
       "receive": "Receive"
       "cancel": "Cancel"
+
+    "user":
+      "permission": "Permission"
 
 `export default I18nTranslationsEn`
