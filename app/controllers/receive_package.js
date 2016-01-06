@@ -1,10 +1,36 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
 
   package: Ember.computed.alias("model"),
   alert: Ember.inject.service(),
   watchErrors: true,
+  isAndroidDevice: false,
+
+  location: Ember.computed("locationId", function(){
+    return this.store.peekRecord("location", this.get("locationId"));
+  }),
+
+  locationId: Ember.computed("package", {
+    get: function() {
+      return this.get("package.location.id");
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  locations: Ember.computed(function(){
+    return this.store.peekAll("location");
+  }),
+
+  onInit: Ember.on('init', function() {
+    if (config.cordova.enabled) {
+      var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
+      this.set("isAndroidDevice", isAndroidDevice);
+    }
+  }),
 
   packageForm: Ember.computed("package", {
     get: function() {
@@ -90,6 +116,13 @@ export default Ember.Controller.extend({
 
       var loadingView = this.container.lookup('component:loading').append();
       var pkg = this.get("package");
+
+      var locationId = this.get("locationId.id");
+      if(locationId) {
+        var location = this.get("store").peekRecord("location", locationId);
+        pkg.set("location", location);
+      }
+
       pkg.set("state", "received");
       pkg.set("state_event", "mark_received");
       pkg.set("quantity", pkgData.quantity);
