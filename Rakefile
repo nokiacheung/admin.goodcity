@@ -50,6 +50,7 @@ TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
 TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
+SPLUNKMINT_PLUGIN_URL = "https://github.com/swatijadhav/splunkmint-cordova-plugin.git"
 LOCK_FILE="#{CORDOVA_PATH}/.ios_build.lock"
 LOCK_FILE_MAX_AGE = 1000 # number of seconds before we remove lock file if failing build
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
@@ -123,6 +124,8 @@ namespace :cordova do
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
+
+      sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
     end
     if platform == "ios"
       Dir.chdir(CORDOVA_PATH) do
@@ -211,6 +214,15 @@ namespace :ios_build_server do
         raise(BuildError, "#{env} not set.") unless env?(env)
     end
   end
+end
+
+# SPLUNK_MINT_KEY_ADMIN_IOS_STAGING
+# SPLUNK_MINT_KEY_ADMIN_IOS_PRODUCTION
+# SPLUNK_MINT_KEY_ADMIN_ANDROID_STAGING
+# SPLUNK_MINT_KEY_ADMIN_ANDROID_PRODUCTION
+def splunk_mint_key
+  key = "SPLUNK_MINT_KEY_ADMIN_#{platform}_#{environment}".upcase
+  ENV[key]
 end
 
 def app_sha
