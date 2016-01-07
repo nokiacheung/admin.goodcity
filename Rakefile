@@ -46,7 +46,6 @@ CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
 APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
-APP_SECRET_KEYS_PATH = "#{CORDOVA_PATH}/.secret_keys"
 TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
@@ -217,12 +216,13 @@ namespace :ios_build_server do
   end
 end
 
+# SPLUNK_MINT_KEY_ADMIN_IOS_STAGING
+# SPLUNK_MINT_KEY_ADMIN_IOS_PRODUCTION
+# SPLUNK_MINT_KEY_ADMIN_ANDROID_STAGING
+# SPLUNK_MINT_KEY_ADMIN_ANDROID_PRODUCTION
 def splunk_mint_key
-  secret_keys[environment][platform]["splunk_mint_key"]
-end
-
-def secret_keys
-  @secret_keys ||= JSON.parse(File.read(APP_SECRET_KEYS_PATH))
+  key = "SPLUNK_MINT_KEY_ADMIN_#{platform}_#{environment}".upcase
+  ENV[key]
 end
 
 def app_sha

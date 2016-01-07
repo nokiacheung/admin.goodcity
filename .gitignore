@@ -23,4 +23,3 @@ cordova/plugins/*
 .ios_build.lock
 cordova/*.keystore
 cordova/build.json
-cordova/.secret_keys
