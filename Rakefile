@@ -38,6 +38,8 @@ require "json"
 require "fileutils"
 require "iron_mq"
 require "rake/clean"
+require "xcodeproj"
+
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
 CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
@@ -55,6 +57,8 @@ LOCK_FILE="#{CORDOVA_PATH}/.ios_build.lock"
 LOCK_FILE_MAX_AGE = 1000 # number of seconds before we remove lock file if failing build
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
 BUILD_JSON_FILE = "#{CORDOVA_PATH}/build.json"
+PROJECTFILE = Dir.glob("#{CORDOVA_PATH}/platforms/ios/*.xcodeproj")[0]
+TARGETNAME = File.basename(PROJECTFILE, ".xcodeproj")
 
 # Default task
 task default: %w(app:build)
@@ -136,6 +140,18 @@ namespace :cordova do
   end
   desc "Cordova build {platform}"
   task build: :prepare do
+    if platform == "ios"
+      project = Xcodeproj::Project.open(PROJECTFILE)
+      target = project.targets.select { |t| t.name == TARGETNAME }
+      project.build_configurations.each do |config|
+        config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
+        config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
+        config.build_settings['CODE_SIGN_IDENTITY'] = 'iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)'
+        config.build_settings['HEADER_SEARCH_PATHS'] = "\$(TARGET_BUILD_DIR)/usr/local/lib/include \$(OBJROOT)/UninstalledProducts/include \$(BUILT_PRODUCTS_DIR) \$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
+      end
+      project.save
+    end
+
     Dir.chdir(CORDOVA_PATH) do
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
