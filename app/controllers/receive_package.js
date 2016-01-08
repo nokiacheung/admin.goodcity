@@ -108,7 +108,7 @@ export default Ember.Controller.extend({
       var loadingView = this.container.lookup('component:loading').append();
       var pkg = this.get("package");
 
-      var locationId = this.get("locationId.id");
+      var locationId = this.get("locationId.id") || this.get("locationId");
       if(locationId) {
         var location = this.get("store").peekRecord("location", locationId);
         pkg.set("location", location);
