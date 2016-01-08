@@ -1,15 +1,13 @@
 import Ember from 'ember';
-import config from '../config/environment';
 
 export default Ember.Component.extend({
   attributeBindings: ["record", "recordId", "placeholder", "content", "enabled"],
   isAndroidDevice: false,
   enabled: true,
+  cordova: Ember.inject.service(),
 
   didInsertElement() {
-    if (config.cordova.enabled) {
-      var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
-      this.set("isAndroidDevice", isAndroidDevice);
-    }
+    var isAndroidDevice = this.get("cordova").isAndroid();
+    this.set("isAndroidDevice", isAndroidDevice);
   },
 });

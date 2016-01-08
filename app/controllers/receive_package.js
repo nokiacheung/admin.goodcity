@@ -2,9 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  package: Ember.computed.alias("model"),
   alert: Ember.inject.service(),
+  cordova: Ember.inject.service(),
+
+  package: Ember.computed.alias("model"),
   watchErrors: true,
+  isAndroidDevice: false,
+
+  identifyDevice: Ember.on('init', function() {
+    var isAndroidDevice = this.get("cordova").isAndroid();
+    this.set("isAndroidDevice", isAndroidDevice);
+  }),
 
   location: Ember.computed("locationId", function(){
     return this.store.peekRecord("location", this.get("locationId"));
