@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   isAndroidDevice: false,
   enabled: true,
 
-  didInserElement() {
+  didInsertElement() {
     if (config.cordova.enabled) {
       var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
       this.set("isAndroidDevice", isAndroidDevice);
