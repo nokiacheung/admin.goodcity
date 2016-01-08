@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from '../config/environment';
 
 export default Ember.Controller.extend({
 
@@ -10,7 +9,6 @@ export default Ember.Controller.extend({
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
   cordova: Ember.inject.service(),
-  isAndroidDevice: false,
 
   isItemVanished: Ember.computed.or('item.isDeleted', 'item.isDeleting'),
 
@@ -77,13 +75,6 @@ export default Ember.Controller.extend({
 
   itemTypes: Ember.computed(function(){
     return this.get("store").peekAll('package_type').sortBy('name');
-  }),
-
-  onInit: Ember.on('init', function() {
-    if (config.cordova.enabled) {
-      var isAndroidDevice = window.device && (["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0);
-      this.set("isAndroidDevice", isAndroidDevice);
-    }
   }),
 
   actions: {

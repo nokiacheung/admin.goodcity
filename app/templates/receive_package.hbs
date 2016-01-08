@@ -60,6 +60,13 @@
       </div>
     </div>
 
+    <div class="row inventory-number">
+      <div class="small-12 columns">
+        {{custom-select2 content=locations record=location recordId=locationId placeholder="Add Location"}}
+        <i class="fa fa-map-marker {{if isAndroidDevice 'small-marker'}}"></i>
+      </div>
+    </div>
+
     <div class="row">
       <div class="small-6 columns">
         <a class="button expand secondary closeLink action1" {{action 'moveBack'}}>{{t "receive_package.cancel"}}</a>

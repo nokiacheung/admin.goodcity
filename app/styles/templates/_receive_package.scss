@@ -66,14 +66,38 @@
     }
   }
 
+  .select2-arrow {
+    display: none !important;
+  }
+
+  .fa {
+    position: relative;
+    float: right;
+
+    &.fa-map-marker {
+      margin-top: -1.8rem;
+      z-index: 100;
+      font-size: 1.3rem;
+      color: gray;
+      margin-right: 0.8rem;
+
+      &.small-marker {
+        margin-right: 0.5rem;
+        margin-top: -1.65rem;
+
+        @media #{$small-only} {
+          margin-top: -1.5rem;
+        }
+      }
+    }
+  }
+
   .has-error {
     .fa.fa-exclamation-triangle {
-      position: relative;
-      float: right;
-      margin-top: -1.6rem;
       color: $coral-red;
-      margin-right: 0.5rem;
       display: inline-block !important;
+      margin-top: -1.6rem;
+      margin-right: 0.5rem;
 
       @media #{$small-only} {
         margin-top: -1.2rem;
