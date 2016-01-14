@@ -2,30 +2,27 @@
 
 <div class="options_menu_list {{if displayOfferOptions '' 'hidden'}}">
   {{#unless offer.isFinished}}
-    <div class="add_item_option">
-      <a id="camera_icon" {{action "addItem"}} title="Camera" class="fontawe-icons" >
+    <div class="add_item_option option_menu">
+      <a id="camera_icon" {{action "addItem"}} title="Camera" >
         <i class="fa fa-camera"></i>
         Add an item
       </a>
     </div>
   {{/unless}}
 
-  <div>
-    <a {{action "cancelOffer"}} class="fontawe-icons">
+  <div class="option_menu">
+    <a {{action "cancelOffer"}}>
       <i class="fa fa-trash"></i>
       Mark Inactive
     </a>
   </div>
 
-  <div>
-    <a {{action "cancelOffer"}} class="fontawe-icons">
-      <i class="fa fa-times"></i>
-      Cancel Offer
-    </a>
+  <div class="option_menu">
+    {{cancel-offer offer=offer toggleAction="toggleOfferOptions"}}
   </div>
 
-  <div>
-    <a {{action "cancelOffer"}} class="fontawe-icons">
+  <div class="option_menu">
+    <a {{action "cancelOffer"}}>
       <i class="fa fa-trash"></i>
       Delete Offer
     </a>

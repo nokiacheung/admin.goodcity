@@ -1,0 +1,25 @@
+<a {{action "confirmCancelOffer"}}>
+  <i class="fa fa-times"></i>
+  Cancel Offer
+</a>
+
+<div id="confirmOfferCancelModal" class="small reveal-modal ui" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+  <div class="receive_title">
+    Choose why the donor wishes to cancel this offer.
+  </div>
+
+  {{select-list
+    content=cancellationOptions
+    on-change=(action (mut selectedReason))
+    selectedValue=selectedReason}}
+
+  {{#if displayCustomReason}}
+    <div class="{{if invalidReason 'has-error'}}">
+      {{input type="text" name="cancelReason" value=offer.cancelReason }}
+    </div>
+  {{/if}}
+
+  <a class="right button closeLink action1">{{t "receive.receiving.not_now"}}</a>
+  <a class="right button confirmLink action2">Cancel Offer</a>
+</div>
