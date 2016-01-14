@@ -10,6 +10,15 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   alert: Ember.inject.service(),
 
+  displayOfferOptions: Ember.computed({
+    get: function() {
+      return false;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
   isMyOffer: Ember.computed('offer.reviewedBy', {
     get: function() {
       var currentUserId = this.session.get("currentUser.id");
@@ -76,6 +85,10 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
+    toggleOfferOptions() {
+      this.toggleProperty("displayOfferOptions");
+    },
+
     addItem() {
       var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
       this.transitionToRoute('item.edit_images', draftItemId);
@@ -115,6 +128,7 @@ export default Ember.Controller.extend({
     },
 
     cancelOffer() {
+      this.send("toggleOfferOptions");
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
         this.set("cancelByMe", true);

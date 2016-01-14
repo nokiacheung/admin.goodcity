@@ -28,6 +28,7 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
+    controller.set("displayOfferOptions", false);
     if(this.get('fromMyListPage') !== null) {
       controller.set('isMyOffer', this.get('fromMyListPage'));
     }
