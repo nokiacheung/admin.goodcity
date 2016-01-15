@@ -67,6 +67,8 @@ export default Ember.Controller.extend({
       return isMyOffer ? "my_list.finished" : "finished.cancelled"; }
     else if(offer.get("isReceived")) {
       return isMyOffer ? "my_list.finished" : "finished.received"; }
+    else if(offer.get("isInactive")) {
+      return isMyOffer ? "my_list.finished" : "finished.expired"; }
     else if(offer.get("isScheduled")) {
       if(isMyOffer) { return "my_list.scheduled"; }
       else if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }

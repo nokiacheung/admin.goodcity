@@ -55,12 +55,16 @@
   }
 
   .options_menu_list {
-    width: 10rem;
+    width: 11rem;
     margin-left: -5rem;
     background-color: #002136;
     margin-top: 2.5rem;
     position: absolute;
     z-index: 100;
+
+    @media #{$small-only} {
+      width: 10rem;
+    }
 
     // box-shadow style
     -webkit-box-shadow: -8px 8px 25px 1px rgba(0,0,0,0.75);

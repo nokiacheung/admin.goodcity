@@ -10,13 +10,17 @@
     </div>
   {{/unless}}
 
-  <div class="option_menu">
-    {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
-  </div>
+  {{#unless offer.isFinished}}
+    <div class="option_menu">
+      {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
+    </div>
+  {{/unless}}
 
-  <div class="option_menu">
-    {{cancel-offer offer=offer toggleAction="toggleOfferOptions"}}
-  </div>
+  {{#unless offer.isCancelled}}
+    <div class="option_menu">
+      {{cancel-offer offer=offer toggleAction="toggleOfferOptions"}}
+    </div>
+  {{/unless}}
 
   <div class="option_menu">
     <a {{action "cancelOffer"}}>
