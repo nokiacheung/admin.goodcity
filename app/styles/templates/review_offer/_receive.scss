@@ -84,7 +84,7 @@
   }
 }
 
-#confirmReceivingModal, #confirmOfferCancelModal {
+#confirmReceivingModal, #confirmOfferCancelModal, #confirmOfferInactiveModal {
   top: 20% !important;
 
   @media #{$small-only} {

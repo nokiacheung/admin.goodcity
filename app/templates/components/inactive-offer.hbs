@@ -1,0 +1,18 @@
+<a {{action "confirmMarkOfferInactive"}}>
+  <i class="fa fa-trash"></i>
+  Mark Inactive
+</a>
+
+<div id="confirmOfferInactiveModal" class="small reveal-modal ui" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+  <div class="receive_title">
+    Add message for donor:
+  </div>
+
+  <div class="{{if invalidMessage 'has-error'}}">
+    {{auto-resize-textarea data-autoresize=true name="inactiveMessage" id="inactiveMessage" value=inactiveMessage maxlength=140 }}
+  </div>
+
+  <a class="right button closeLink action1">{{t "receive.receiving.not_now"}}</a>
+  <a class="right button confirmLink action2">Mark Inactive</a>
+</div>

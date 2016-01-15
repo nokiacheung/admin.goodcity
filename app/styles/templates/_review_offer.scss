@@ -94,3 +94,12 @@
     margin-bottom: 1rem;
   }
 }
+
+#confirmOfferInactiveModal {
+  textarea {
+    margin: 0;
+    max-width: 100%;
+    padding: 0.5rem;
+    overflow: hidden;
+  }
+}

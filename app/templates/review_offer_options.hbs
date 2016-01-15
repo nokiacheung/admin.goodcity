@@ -11,10 +11,7 @@
   {{/unless}}
 
   <div class="option_menu">
-    <a {{action "cancelOffer"}}>
-      <i class="fa fa-trash"></i>
-      Mark Inactive
-    </a>
+    {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
   </div>
 
   <div class="option_menu">
