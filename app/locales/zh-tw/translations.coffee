@@ -112,6 +112,7 @@ I18nTranslationsZhTw =
       "options":
         "add_item": "Add an item"
         "delete_offer": "Delete Offer"
+        "submit_offer": "Re-submit Offer"
 
     "mark_received":
       "delivered_by": "運送人員："
