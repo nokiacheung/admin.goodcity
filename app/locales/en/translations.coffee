@@ -183,7 +183,7 @@ I18nTranslationsEn =
       "title": "Finished"
       "received": "Received"
       "cancelled": "Cancelled"
-      "expired": "Expired"
+      "inactive": "Inactive"
 
     "scheduled":
       "title": "Scheduled"

@@ -183,7 +183,7 @@ I18nTranslationsZhTw =
       "title": "已完成"
       "received": "已接收"
       "cancelled": "已取消"
-      "expired": "已過期"
+      "inactive": "Inactive"
 
     "scheduled":
       "title": "已安排時間"
