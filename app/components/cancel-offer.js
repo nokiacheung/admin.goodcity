@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   packageId: null,
   store: Ember.inject.service(),
   alert: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   selectedReason: null,
   invalidReason: false,
@@ -15,7 +16,7 @@ export default Ember.Component.extend({
 
   cancellationOptions: Ember.computed(function(){
     var reasons = this.get("store").peekAll('cancellation_reason').sortBy('id');
-    reasons.push({id: "-1", name: "Other"});
+    reasons.push({id: "-1", name: this.get("i18n").t("other") });
     return reasons;
   }),
 

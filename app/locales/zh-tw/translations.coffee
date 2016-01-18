@@ -96,6 +96,7 @@ I18nTranslationsZhTw =
       "received": "已經收到"
       "expecting": "等候中"
       "all_items_processed": "所有項目皆被接收或列作遺失"
+      "inactive_offer": "This offer is marked as inactive."
 
       "donor":
         "offer_id": "Offer ID"
@@ -107,6 +108,10 @@ I18nTranslationsZhTw =
         "other_offers": "所有好人好市捐獻"
         "internet_call": "Internet Call"
         "end_call": "End Call"
+
+      "options":
+        "add_item": "Add an item"
+        "delete_offer": "Delete Offer"
 
     "mark_received":
       "delivered_by": "運送人員："
@@ -213,5 +218,14 @@ I18nTranslationsZhTw =
 
     "user":
       "permission": "Permission"
+
+    "inactive_offer":
+      "message": "This offer seems to be inactive. Please feel free to modify, re-submit or cancel it."
+      "add_message": "Add message for donor"
+      "mark_inactive": "Mark Inactive"
+
+    "cancel_offer":
+      "donor_message": "Choose why the donor wishes to cancel this offer."
+      "cancel": "Cancel Offer"
 
 `export default I18nTranslationsZhTw`

@@ -1,12 +1,12 @@
 <a {{action "confirmMarkOfferInactive"}}>
   <i class="fa fa-archive"></i>
-  Mark Inactive
+  {{t "inactive_offer.mark_inactive"}}
 </a>
 
 <div id="confirmOfferInactiveModal" class="small reveal-modal ui" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
   <div class="receive_title">
-    Add message for donor:
+    {{t "inactive_offer.add_message"}}:
   </div>
 
   <div class="{{if invalidMessage 'has-error'}}">
@@ -14,5 +14,5 @@
   </div>
 
   <a class="right button closeLink action1">{{t "receive.receiving.not_now"}}</a>
-  <a class="right button confirmLink action2">Mark Inactive</a>
+  <a class="right button confirmLink action2">{{t "inactive_offer.mark_inactive"}}</a>
 </div>

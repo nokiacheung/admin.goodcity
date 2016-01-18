@@ -5,11 +5,12 @@ export default Ember.Component.extend({
   hidden: true,
   packageId: null,
   store: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   invalidMessage: false,
 
   inactiveMessage: Ember.computed(function(){
-    return "This offer seems to be inactive. Please feel free to modify, re-submit or cancel it.";
+    return this.get("i18n").t("inactive_offer.message");
   }),
 
   actions: {
