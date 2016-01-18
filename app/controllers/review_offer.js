@@ -144,5 +144,17 @@ export default Ember.Controller.extend({
           .finally(() => {loadingView.destroy(); this.set("cancelByMe", false);});
         });
     },
+
+    submitOffer() {
+      this.toggleProperty("displayOfferOptions");
+      var loadingView = this.container.lookup('component:loading').append();
+      var offer = this.store.push('offer', {
+        id: this.get('model.id'),
+        state_event: 'submit'
+      });
+
+      offer.save()
+        .finally(() => loadingView.destroy());
+    }
   }
 });

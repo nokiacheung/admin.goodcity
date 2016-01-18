@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     },
 
     markOfferInactive() {
-      var inactiveMessage = this.get("inactiveMessage");
+      var inactiveMessage = this.get("inactiveMessage.string") || this.get("inactiveMessage");
 
       if(Ember.$.trim(inactiveMessage).length === 0) {
         this.set("invalidMessage", true);

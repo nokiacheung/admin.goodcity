@@ -10,6 +10,15 @@
     </div>
   {{/unless}}
 
+  {{#if offer.isInactive}}
+    <div class="add_item_option option_menu">
+      <a {{action "submitOffer"}} >
+        <i class="fa fa-shopping-cart"></i>
+        {{t "review_offer.options.submit_offer"}}
+      </a>
+    </div>
+  {{/if}}
+
   {{#unless offer.isFinished}}
     <div class="option_menu">
       {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
