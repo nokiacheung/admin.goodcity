@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
-import config from './../../config/environment';
 import transportDetails from './../offer/transport_details';
 import { translationMacro as t } from "ember-i18n";
 
@@ -40,12 +39,10 @@ export default transportDetails.extend({
 
   ggvDriverUrl: Ember.computed('model', function(){
     var language = this.get("session.language");
-    var isAdmin = this.get("session.isAdminApp");
     var uuid = this.get("model.delivery.gogovanOrder.ggvUuid");
-    var url = config.DONOR_APP_HOST_URL+"/ggv_orders/"+uuid;
+    var url = "/ggv_orders/"+uuid;
     var params = [];
     if(language) { params.push("ln="+language); }
-    if(isAdmin) { params.push("gcadmin="+isAdmin); }
     if(params.length) { url = url + "?" + params.join("&"); }
     return url;
   }),
