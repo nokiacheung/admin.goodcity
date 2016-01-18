@@ -107,6 +107,14 @@
         {{time-ago timeValue=offer.reviewedAt}}
       </div>
     </div>
+
+  {{else if offer.isInactive}}
+    <div class="offer-status is-closed">
+      <div class='status-message review_message'>
+        {{t "review_offer.inactive_offer"}}
+      </div>
+    </div>
+
   {{/if}}
 {{else}}
 <div class="offer-status is-closed">

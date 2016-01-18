@@ -97,6 +97,7 @@ I18nTranslationsEn =
       "received": "Received"
       "expecting": "Expecting"
       "all_items_processed": "All items marked received or missing."
+      "inactive_offer": "This offer is marked as inactive."
 
       "donor":
         "offer_id": "Offer ID"
@@ -108,6 +109,10 @@ I18nTranslationsEn =
         "other_offers": "All offers on GoodCity"
         "internet_call": "Internet Call"
         "end_call": "End Call"
+
+      "options":
+        "add_item": "Add an item"
+        "delete_offer": "Delete Offer"
 
     "mark_received":
       "delivered_by": "Delivered by:"
@@ -183,7 +188,7 @@ I18nTranslationsEn =
       "title": "Finished"
       "received": "Received"
       "cancelled": "Cancelled"
-      "expired": "Expired"
+      "inactive": "Inactive"
 
     "scheduled":
       "title": "Scheduled"
@@ -213,5 +218,14 @@ I18nTranslationsEn =
 
     "user":
       "permission": "Permission"
+
+    "inactive_offer":
+      "message": "This offer seems to be inactive. Please feel free to modify, re-submit or cancel it."
+      "add_message": "Add message for donor"
+      "mark_inactive": "Mark Inactive"
+
+    "cancel_offer":
+      "donor_message": "Choose why the donor wishes to cancel this offer."
+      "cancel": "Cancel Offer"
 
 `export default I18nTranslationsEn`

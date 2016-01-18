@@ -66,7 +66,7 @@ module.exports = function(app) {
   offersRouter.get("/", function(req, res) {
     var offers = offers_json;
     if(req.query.states) {
-      if(req.query.states.indexOf("inactive") >= 0)
+      if(req.query.states.indexOf("not_active") >= 0)
         offers = finishedOffers;
       else if(req.query.states.indexOf("cancelled") >= 0)
         offers = closedOffers;

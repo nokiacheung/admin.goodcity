@@ -1,0 +1,32 @@
+<a {{action "toggleOfferOptions"}}><i class="fa fa-ellipsis-v options"></i></a>
+
+<div class="options_menu_list {{if displayOfferOptions '' 'hidden'}}">
+  {{#unless offer.isFinished}}
+    <div class="add_item_option option_menu">
+      <a id="camera_icon" {{action "addItem"}} title="Camera" >
+        <i class="fa fa-camera"></i>
+        {{t "review_offer.options.add_item"}}
+      </a>
+    </div>
+  {{/unless}}
+
+  {{#unless offer.isFinished}}
+    <div class="option_menu">
+      {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
+    </div>
+  {{/unless}}
+
+  {{#unless offer.isCancelled}}
+    <div class="option_menu">
+      {{cancel-offer offer=offer toggleAction="toggleOfferOptions"}}
+    </div>
+  {{/unless}}
+
+  <div class="option_menu">
+    <a {{action "cancelOffer"}}>
+      <i class="fa fa-trash"></i>
+      {{t "review_offer.options.delete_offer"}}
+    </a>
+  </div>
+
+</div>
