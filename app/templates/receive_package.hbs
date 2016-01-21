@@ -15,7 +15,13 @@
         <div class={{if invalidDescription 'show-error' 'no-error'}}>{{t "receive_package.invalid_description"}}</div>
 
         {{#each package.errors as |error|}}
-          <div class='show-error'>{{error.attribute}}: {{error.message}}</div>
+          <div class='show-error'>
+          {{#unless (is-equal error.attribute "inventoryNumber" )}}
+            {{error.attribute}}:
+          {{/unless}}
+
+          {{error.message}}
+          </div>
         {{/each}}
 
       </div>
