@@ -211,6 +211,7 @@ I18nTranslationsEn =
       "comments": "Description"
 
     "receive_package":
+      "inventory": "Inventory Number"
       "invalid_inventory": "Inventory number is invalid."
       "invalid_quantity": "Quantity can not be blank."
       "invalid_description": "Description can not be blank."
