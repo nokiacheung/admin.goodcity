@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 import transportDetails from './../offer/transport_details';
+import config from './../../config/environment';
 import { translationMacro as t } from "ember-i18n";
 
 export default transportDetails.extend({
@@ -40,7 +41,7 @@ export default transportDetails.extend({
   ggvDriverUrl: Ember.computed('model', function(){
     var language = this.get("session.language");
     var uuid = this.get("model.delivery.gogovanOrder.ggvUuid");
-    var url = "/ggv_orders/"+uuid;
+    var url = config.ADMIN_APP_HOST_URL+"/ggv_orders/"+uuid;
     var params = [];
     if(language) { params.push("ln="+language); }
     if(params.length) { url = url + "?" + params.join("&"); }

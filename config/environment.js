@@ -102,13 +102,13 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:4201';
-    ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
+    ENV.ADMIN_APP_HOST_URL = 'http://localhost:4201';
   }
 
   if (environment === 'production') {
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
-    ENV.DONOR_APP_HOST_URL = 'https://app.goodcity.hk';
+    ENV.ADMIN_APP_HOST_URL = 'https://admin.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
 
     ENV.APP.GOODCITY_NUMBER = "+85258088700"
@@ -134,7 +134,7 @@ module.exports = function(environment) {
   if (process.env.staging === 'true') {
     ENV.staging = true;
     ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
-    ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
+    ENV.ADMIN_APP_HOST_URL = 'https://admin-staging.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
     ENV.APP.GOODCITY_NUMBER = "+85258084822"
     ENV.contentSecurityPolicy["connect-src"] = [
