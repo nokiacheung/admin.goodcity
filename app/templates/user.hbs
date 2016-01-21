@@ -14,6 +14,13 @@
       <span class="form-label">{{t "user.permission"}}:</span>
 
       <ul class="radio-buttons">
+        <li class="radio">
+          {{radio-button name="permission" selection=selectedId value="-1" id="-1" }}
+          <label class="radio-wrap small-only-text-center" for="-1">
+            Donor
+          </label>
+        </li>
+
         {{#each permissions as |permission|}}
           <li class="radio">
             {{radio-button name="permission" selection=selectedId value=permission.id id=permission.id }}

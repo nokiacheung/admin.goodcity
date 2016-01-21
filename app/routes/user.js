@@ -8,7 +8,7 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
-    controller.set("selectedId", model.get("permission.id"));
+    controller.set("selectedId", model.get("permission.id") || "-1");
   }
 
 });
