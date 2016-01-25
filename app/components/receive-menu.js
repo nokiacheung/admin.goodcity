@@ -34,7 +34,9 @@ export default Ember.Component.extend({
       .then(() => loadingView.destroy())
       .catch(error => {
         loadingView.destroy();
-        if(["connection_error", "dispatched"].indexOf(pkg.get("errors.firstObject.attribute")) > 0) {
+        var errorMessage = pkg.get("errors.firstObject.message");
+        var matchFound = ["Connection error", "Dispatched"].some(v => errorMessage.indexOf(v) >= 0);
+        if(matchFound) {
           this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
             pkg.rollbackAttributes();
           });

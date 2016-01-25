@@ -137,10 +137,9 @@ export default Ember.Controller.extend({
         })
         .catch(() => {
           loadingView.destroy();
-          if(pkg.get("errors.firstObject.attribute") === "connection_error") {
-            this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
-              pkg.rollbackAttributes();
-            });
+          var errorMessage = pkg.get("errors.firstObject.message");
+          if(errorMessage.indexOf("Connection error") >= 0) {
+            this.get("alert").show(errorMessage, () => pkg.rollbackAttributes());
           } else {
             _this.set("hasErrors", true);
           }
