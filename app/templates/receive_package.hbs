@@ -53,12 +53,7 @@
 
     </div>
 
-    <div class="row inventory-number">
-      <div class="small-12 columns {{if invalidInventoryNo 'has-error'}}">
-        {{input type="text" name="inventoryNumber" id=(concat 'inventory_number' package.id)  value=packageForm.inventoryNumber  placeholder=(t "receive_package.inventory") }}
-        <i class="fa fa-exclamation-triangle"></i>
-      </div>
-    </div>
+    {{inventory-number-input inputId=(concat 'inventory_number' package.id) value=packageForm.inventoryNumber invalid=invalidInventoryNo name="inventoryNumber" }}
 
     <div class="row inventory-number">
       <div class="small-12 columns">
