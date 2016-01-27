@@ -6,7 +6,8 @@
     "moment",
     "airbrakeJs",
     "Twilio",
-    "$"
+    "$",
+    "cordova"
   ],
   "browser": true,
   "boss": true,

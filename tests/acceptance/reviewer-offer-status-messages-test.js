@@ -166,7 +166,7 @@ test("Display offer status for cancelled offer", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer12.id + "/review_offer/items");
-    var donor_name = offer12.get("createdBy.firstName") + " " + offer12.get("createdBy.lastName");
+    var donor_name = offer12.get("closedBy.firstName") + " " + offer12.get("closedBy.lastName");
     equal($('.status-message').text().trim().indexOf("Cancelled by " + donor_name) >= 0, true);
   });
 });
