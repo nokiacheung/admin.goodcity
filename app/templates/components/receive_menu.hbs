@@ -15,6 +15,10 @@
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
   </div>
+  <div {{action "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
+    <i class="fa fa-university"></i>
+    {{t "receive.inventory"}}
+  </div>
   <div class="options-link-close" {{action "toggle" true}}>
     <i class="fa fa-angle-right"></i>
   </div>

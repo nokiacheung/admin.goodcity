@@ -45,8 +45,6 @@ export default Ember.Component.extend({
           throw error;
         }
       });
-
-
   },
 
   actions: {
@@ -63,6 +61,21 @@ export default Ember.Component.extend({
     },
 
     receive() {
+      if(this.get("isFirstReceivingPackage")) {
+        this.confirmReceiving(() => this.send("receivePackage"));
+      } else {
+        this.send("receivePackage");
+      }
+    },
+
+    receivePackage() {
+      this.updatePackage(p => {
+        p.set("state", "received");
+        p.set("state_event", "mark_received");
+      });
+    },
+
+    receiveInInventory() {
       if(this.get("isFirstReceivingPackage")) {
         this.confirmReceiving(() => this.send("addToStockit"));
       } else {

@@ -178,6 +178,7 @@ I18nTranslationsZhTw =
     "receive":
       "missing": "遺失"
       "receive": "接收"
+      "inventory": "Inventory"
       "receiving":
         "header": "Begin Receiving Offer"
         "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
