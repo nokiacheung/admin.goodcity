@@ -110,7 +110,7 @@ export default Ember.Controller.extend(backNavigator, {
     searchOnServer() {
       var controller = this;
       var loadingView = controller.container.lookup('component:loading').append();
-      return this.store.query('offer', { states: ["not_active"] }).finally(function(){
+      return this.store.query('offer', { states: ["in_active"] }).finally(function(){
         controller.set('fetchMoreResult', false);
         loadingView.destroy();
       });
