@@ -66,6 +66,7 @@
     <preference name="StatusBarBackgroundColor" value="#000000"/>
     <preference name="StatusBarStyle" value="lightcontent"/>
   </platform>
+  <access origin="tel:*" launch-external="yes"/>
   <access origin="*"/>
   <allow-intent href="https://maps.google.com/*"/>
   <engine name="ios" spec="3.9.1"/>
