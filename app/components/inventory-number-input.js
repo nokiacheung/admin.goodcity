@@ -18,6 +18,9 @@ export default Ember.Component.extend({
         },
         function (error) {
           this.get("alert").show("Scanning failed: " + error);
+        },
+        {
+          "formats": "CODE_128"
         }
      );
     }
