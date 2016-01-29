@@ -1,37 +1,23 @@
-{{#if isCordovaApp}}
-  <div class="row inventory-number">
-    <div class="small-10 columns {{if invalid 'has-error'}}">
+<div class="row inventory-number">
+  <div class="{{if isCordovaApp 'small-8' 'small-10'}} columns {{if invalid 'has-error'}}">
 
-      {{input
-        type="text"
-        name=name
-        id=inputId
-        value=value
-        placeholder=(t "receive_package.inventory")
-      }}
+    {{input
+      type="text"
+      name=name
+      id=inputId
+      value=value
+      placeholder=(t "receive_package.inventory")
+    }}
 
-      <i class="fa fa-exclamation-triangle"></i>
-    </div>
-
-    <div class="small-2 columns barcode-icon" {{action "inputInventory"}}>
-      <i class= "fa fa-barcode"></i>
-    </div>
-
+    <i class="fa fa-exclamation-triangle"></i>
   </div>
-{{else}}
 
-  <div class="row inventory-number">
-    <div class="small-12 columns {{if invalid 'has-error'}}">
-
-      {{input
-        type="text"
-        name=name
-        id=inputId
-        value=value
-        placeholder=(t "receive_package.inventory")
-      }}
-
-      <i class="fa fa-exclamation-triangle"></i>
-    </div>
+  {{#if isCordovaApp}}
+  <div class="small-2 columns barcode-icon" {{action "inputInventory"}}>
+    <i class= "fa fa-barcode"></i>
   </div>
-{{/if}}
+  {{/if}}
+  <div class="small-2 columns print-icon" {{action "printBarcode"}}>
+    <i class= "fa fa-print"></i>
+  </div>
+</div>
