@@ -84,7 +84,9 @@ module.exports = function(environment) {
       'https://api.twilio.com',
       'http://static.twilio.com',
       'https://static.twilio.com',
-      'wss://chunderw.twilio.com/signal'
+      'wss://chunderw.twilio.com/signal',
+      'wss://chunderw-vpc-gll.twilio.com/signal',
+      'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
   }
 
@@ -124,7 +126,9 @@ module.exports = function(environment) {
       'https://api.twilio.com',
       'http://static.twilio.com',
       'https://static.twilio.com',
-      'wss://chunderw.twilio.com/signal'
+      'wss://chunderw.twilio.com/signal',
+      'wss://chunderw-vpc-gll.twilio.com/signal',
+      'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
@@ -148,7 +152,9 @@ module.exports = function(environment) {
       'https://api.twilio.com',
       'http://static.twilio.com',
       'https://static.twilio.com',
-      'wss://chunderw.twilio.com/signal'
+      'wss://chunderw.twilio.com/signal',
+      'wss://chunderw-vpc-gll.twilio.com/signal',
+      'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     ENV.cordova.GcmSenderId = '907786683525';
