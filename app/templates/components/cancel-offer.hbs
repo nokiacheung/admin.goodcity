@@ -12,7 +12,8 @@
   {{select-list
     content=cancellationOptions
     on-change=(action (mut selectedReason))
-    selectedValue=selectedReason}}
+    selectedValue=selectedReason
+    selectArrow=true}}
 
   {{#if displayCustomReason}}
     <div class="{{if invalidReason 'has-error'}}">
