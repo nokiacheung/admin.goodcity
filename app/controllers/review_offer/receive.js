@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
 
   deliveredBy: Ember.computed({
     get: function() {
-      return this.get("model.deliveryType");
+      return this.get("model.delivery.deliveryType");
     },
     set: function(key, value) {
       return value;
@@ -37,15 +37,6 @@ export default Ember.Controller.extend({
 
   deliveredOptions: null,
   promptText: t("mark_received.select"),
-
-  initController: Ember.on('init', function() {
-    this.set("deliveredOptions", [
-      { value: "Unknown", name: this.get("i18n").t("mark_received.unknown") },
-      { value: "Gogovan", name: this.get("i18n").t("mark_received.gogovan") },
-      { value: "Alternate", name: this.get("i18n").t("mark_received.crossroads_truck") },
-      { value: "Drop Off", name: this.get("i18n").t("mark_received.dropped_off") }
-    ]);
-  }),
 
   actions: {
     startReceivingOffer() {

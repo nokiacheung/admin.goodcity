@@ -16,12 +16,14 @@ export default Ember.Component.extend({
     },
 
     scanBarcode() {
-      cordova.plugins.barcodeScanner
-        .scan(res => {
-          if (!res.cancelled) {
-            this.set("value", res.text);
-          }
-        }, error => this.get("alert").show("Scanning failed: " + error));
+      var onSuccess = res => {
+        if (!res.cancelled) {
+          this.set("value", res.text);
+        }
+      };
+      var onError = error => this.get("alert").show("Scanning failed: " + error);
+      var options = {"formats": "CODE_128"};
+      cordova.plugins.barcodeScanner.scan(onSuccess, onError, options);
     },
 
     printBarcode() {
