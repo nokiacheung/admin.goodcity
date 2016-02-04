@@ -133,6 +133,7 @@ export default Ember.Controller.extend({
           item.save().finally(() => {
             this.set("itemSaving", false);
             loadingView.destroy();
+            this.transitionToRoute("review_offer.items");
           });
         });
     },
