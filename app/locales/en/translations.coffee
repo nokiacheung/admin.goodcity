@@ -212,12 +212,14 @@ I18nTranslationsEn =
       "comments": "Description"
 
     "receive_package":
-      "inventory": "Inventory Number"
+      "inventory": "Print will generate number"
       "invalid_inventory": "Inventory number is invalid."
       "invalid_quantity": "Quantity can not be blank."
       "invalid_description": "Description can not be blank."
       "receive": "Receive"
       "cancel": "Cancel"
+      "scan_barcode": "Scan barcode"
+      "enter_barcode": "Enter barcode"
 
     "user":
       "permission": "Permission"

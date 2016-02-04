@@ -1,5 +1,5 @@
 <div class="row inventory-number">
-  <div class="{{if isCordovaApp 'small-8' 'small-10'}} columns {{if invalid 'has-error'}}">
+  <div class="small-8 columns {{if invalid 'has-error'}}">
 
     {{input
       type="text"
@@ -7,17 +7,33 @@
       id=inputId
       value=value
       placeholder=(t "receive_package.inventory")
+      disabled=bardcodeReadonly
     }}
 
     <i class="fa fa-exclamation-triangle"></i>
   </div>
 
-  {{#if isCordovaApp}}
-  <div class="small-2 columns barcode-icon" {{action "inputInventory"}}>
-    <i class= "fa fa-barcode"></i>
-  </div>
-  {{/if}}
-  <div class="small-2 columns print-icon" {{action "printBarcode"}}>
+  <a class="small-2 columns" {{action "toggleMenu"}}>
+    <i class="fa fa-ellipsis-v options"></i>
+    <div class="options_menu_list {{if showMenu '' 'hidden'}}">
+      {{#if isCordovaApp}}
+      <div class="option_menu">
+        <a {{action "scanBarcode"}}>
+          <i class="fa fa-barcode"></i>
+          {{t "receive_package.scan_barcode"}}
+        </a>
+      </div>
+      {{/if}}
+      <div class="option_menu">
+        <a {{action "enterBarcode"}}>
+          <i class="fa fa-keyboard-o"></i>
+          {{t "receive_package.enter_barcode"}}
+        </a>
+      </div>
+    </div>
+  </a>
+
+  <div class="small-2 columns" {{action "printBarcode"}}>
     <i class= "fa fa-print"></i>
   </div>
 </div>
