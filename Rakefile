@@ -38,6 +38,8 @@ require "json"
 require "fileutils"
 require "iron_mq"
 require "rake/clean"
+require "xcodeproj"
+
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
 CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
@@ -124,8 +126,9 @@ namespace :cordova do
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
-
-      sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
+      unless platform == "ios"
+        sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
+      end
     end
     if platform == "ios"
       Dir.chdir(CORDOVA_PATH) do
@@ -136,11 +139,26 @@ namespace :cordova do
   end
   desc "Cordova build {platform}"
   task build: :prepare do
+    if platform == "ios"
+      xcodeproject_file = Dir.glob("#{CORDOVA_PATH}/platforms/ios/*.xcodeproj")[0]
+      xcodefile_name = File.basename(xcodeproject_file, ".xcodeproj")
+      project = Xcodeproj::Project.open(xcodeproject_file)
+      target = project.targets.select { |t| t.name == xcodefile_name }
+      project.build_configurations.each do |config|
+        config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
+        config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
+        config.build_settings['CODE_SIGN_IDENTITY'] = 'iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)'
+        # config.build_settings['HEADER_SEARCH_PATHS'] = "\$(TARGET_BUILD_DIR)/usr/local/lib/include \$(OBJROOT)/UninstalledProducts/include \$(BUILT_PRODUCTS_DIR) \$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
+      end
+      project.save
+    end
+
     Dir.chdir(CORDOVA_PATH) do
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
       if platform == "ios"
-        sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
+        # sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
+        sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}'}
       end
     end
     # Copy build artifacts

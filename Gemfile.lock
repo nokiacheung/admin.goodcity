@@ -50,3 +50,6 @@ DEPENDENCIES
   iron_mq
   rake
   xcodeproj
+
+BUNDLED WITH
+   1.10.6
