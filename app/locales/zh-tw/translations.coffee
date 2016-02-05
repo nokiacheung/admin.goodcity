@@ -66,6 +66,8 @@ I18nTranslationsZhTw =
       "my_list" : "我的列表"
       "finished": "已完成"
       "closed_offers": "已完成"
+      "receiving": "Receiving"
+      "users": "Users"
 
     "my_notifications":
       "heading" : "{{name}}的捐獻"
@@ -94,6 +96,7 @@ I18nTranslationsZhTw =
       "received": "已經收到"
       "expecting": "等候中"
       "all_items_processed": "所有項目皆被接收或列作遺失"
+      "inactive_offer": "This offer is marked as inactive."
 
       "donor":
         "offer_id": "Offer ID"
@@ -105,6 +108,11 @@ I18nTranslationsZhTw =
         "other_offers": "所有好人好市捐獻"
         "internet_call": "Internet Call"
         "end_call": "End Call"
+
+      "options":
+        "add_item": "Add an item"
+        "delete_offer": "Delete Offer"
+        "submit_offer": "Re-submit Offer"
 
     "mark_received":
       "delivered_by": "運送人員："
@@ -170,6 +178,7 @@ I18nTranslationsZhTw =
     "receive":
       "missing": "遺失"
       "receive": "接收"
+      "inventory": "Inventory"
       "receiving":
         "header": "Begin Receiving Offer"
         "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
@@ -181,7 +190,7 @@ I18nTranslationsZhTw =
       "title": "已完成"
       "received": "已接收"
       "cancelled": "已取消"
-      "expired": "已過期"
+      "inactive": "Inactive"
 
     "scheduled":
       "title": "已安排時間"
@@ -201,5 +210,25 @@ I18nTranslationsZhTw =
       "length": "長度"
       "package_type": "包裝類型"
       "comments": "描述"
+
+    "receive_package":
+      "inventory": "Inventory Number"
+      "invalid_inventory": "Inventory number is invalid."
+      "invalid_quantity": "Quantity can not be blank."
+      "invalid_description": "Description can not be blank."
+      "receive": "Receive"
+      "cancel": "Cancel"
+
+    "user":
+      "permission": "Permission"
+
+    "inactive_offer":
+      "message": "This offer seems to be inactive. Please feel free to modify, re-submit or cancel it."
+      "add_message": "Add message for donor"
+      "mark_inactive": "Mark Inactive"
+
+    "cancel_offer":
+      "donor_message": "Choose why the donor wishes to cancel this offer."
+      "cancel": "Cancel Offer"
 
 `export default I18nTranslationsZhTw`

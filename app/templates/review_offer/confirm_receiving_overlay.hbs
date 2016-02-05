@@ -8,7 +8,8 @@
   {{select-list
     content=deliveredOptions
     on-change=(action (mut deliveredBy))
-    selectedValue=deliveredBy}}
+    selectedValue=deliveredBy
+    selectArrow=true}}
 
   <a class="right button closeLink action1">{{t "receive.receiving.not_now"}}</a>
   <a {{action "startReceivingOffer"}} class="right button confirmLink action2">{{t "receive.receiving.begin_receiving"}}</a>

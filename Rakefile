@@ -38,6 +38,8 @@ require "json"
 require "fileutils"
 require "iron_mq"
 require "rake/clean"
+require "xcodeproj"
+
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
 CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
@@ -50,6 +52,7 @@ TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
 TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
+SPLUNKMINT_PLUGIN_URL = "https://github.com/swatijadhav/splunkmint-cordova-plugin.git"
 LOCK_FILE="#{CORDOVA_PATH}/.ios_build.lock"
 LOCK_FILE_MAX_AGE = 1000 # number of seconds before we remove lock file if failing build
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
@@ -123,6 +126,9 @@ namespace :cordova do
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
+      unless platform == "ios"
+        sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
+      end
     end
     if platform == "ios"
       Dir.chdir(CORDOVA_PATH) do
@@ -133,11 +139,26 @@ namespace :cordova do
   end
   desc "Cordova build {platform}"
   task build: :prepare do
+    if platform == "ios"
+      xcodeproject_file = Dir.glob("#{CORDOVA_PATH}/platforms/ios/*.xcodeproj")[0]
+      xcodefile_name = File.basename(xcodeproject_file, ".xcodeproj")
+      project = Xcodeproj::Project.open(xcodeproject_file)
+      target = project.targets.select { |t| t.name == xcodefile_name }
+      project.build_configurations.each do |config|
+        config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
+        config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
+        config.build_settings['CODE_SIGN_IDENTITY'] = 'iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)'
+        # config.build_settings['HEADER_SEARCH_PATHS'] = "\$(TARGET_BUILD_DIR)/usr/local/lib/include \$(OBJROOT)/UninstalledProducts/include \$(BUILT_PRODUCTS_DIR) \$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
+      end
+      project.save
+    end
+
     Dir.chdir(CORDOVA_PATH) do
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
       if platform == "ios"
-        sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
+        # sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
+        sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}'}
       end
     end
     # Copy build artifacts
@@ -157,7 +178,7 @@ namespace :cordova do
         sh %{ git commit -m "Update build version [ci skip]" }
         sh %{ git stash }
         sh %{ git push; true } # try but don't care if this fails
-        sh %{ git stash pop }
+        sh %{ git stash pop; true }
       end
     end
   end
@@ -211,6 +232,15 @@ namespace :ios_build_server do
         raise(BuildError, "#{env} not set.") unless env?(env)
     end
   end
+end
+
+# SPLUNK_MINT_KEY_ADMIN_IOS_STAGING
+# SPLUNK_MINT_KEY_ADMIN_IOS_PRODUCTION
+# SPLUNK_MINT_KEY_ADMIN_ANDROID_STAGING
+# SPLUNK_MINT_KEY_ADMIN_ANDROID_PRODUCTION
+def splunk_mint_key
+  key = "SPLUNK_MINT_KEY_ADMIN_#{platform}_#{environment}".upcase
+  ENV[key]
 end
 
 def app_sha

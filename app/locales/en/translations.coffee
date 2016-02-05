@@ -68,6 +68,7 @@ I18nTranslationsEn =
       "finished": "Finished"
       "closed_offers": "Finished"
       "receiving": "Receiving"
+      "users": "Users"
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
@@ -96,6 +97,7 @@ I18nTranslationsEn =
       "received": "Received"
       "expecting": "Expecting"
       "all_items_processed": "All items marked received or missing."
+      "inactive_offer": "This offer is marked as inactive."
 
       "donor":
         "offer_id": "Offer ID"
@@ -107,6 +109,11 @@ I18nTranslationsEn =
         "other_offers": "All offers on GoodCity"
         "internet_call": "Internet Call"
         "end_call": "End Call"
+
+      "options":
+        "add_item": "Add an item"
+        "delete_offer": "Delete Offer"
+        "submit_offer": "Re-submit Offer"
 
     "mark_received":
       "delivered_by": "Delivered by:"
@@ -172,6 +179,7 @@ I18nTranslationsEn =
     "receive":
       "missing": "Missing"
       "receive": "Receive"
+      "inventory": "Inventory"
       "receiving":
         "header": "Begin Receiving Offer"
         "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
@@ -182,7 +190,7 @@ I18nTranslationsEn =
       "title": "Finished"
       "received": "Received"
       "cancelled": "Cancelled"
-      "expired": "Expired"
+      "inactive": "Inactive"
 
     "scheduled":
       "title": "Scheduled"
@@ -202,5 +210,27 @@ I18nTranslationsEn =
       "length": "L"
       "package_type": "Package Type"
       "comments": "Description"
+
+    "receive_package":
+      "inventory": "Print will generate number"
+      "invalid_inventory": "Inventory number is invalid."
+      "invalid_quantity": "Quantity can not be blank."
+      "invalid_description": "Description can not be blank."
+      "receive": "Receive"
+      "cancel": "Cancel"
+      "scan_barcode": "Scan barcode"
+      "enter_barcode": "Enter barcode"
+
+    "user":
+      "permission": "Permission"
+
+    "inactive_offer":
+      "message": "This offer seems to be inactive. Please feel free to modify, re-submit or cancel it."
+      "add_message": "Add message for donor"
+      "mark_inactive": "Mark Inactive"
+
+    "cancel_offer":
+      "donor_message": "Choose why the donor wishes to cancel this offer."
+      "cancel": "Cancel Offer"
 
 `export default I18nTranslationsEn`

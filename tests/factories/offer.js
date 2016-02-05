@@ -19,6 +19,7 @@ FactoryGuy.define('offer', {
     notes: 'dummy text',
     createdBy: FactoryGuy.belongsTo("user"),
     reviewedBy: FactoryGuy.belongsTo("user"),
+    closedBy: FactoryGuy.belongsTo("user"),
     delivery: FactoryGuy.belongsTo("delivery"),
     createdAt: new Date(2015, 0, 20, 13,10),
     updatedAt: new Date(2015, 0, 20, 13,11)

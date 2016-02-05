@@ -49,11 +49,9 @@
       display: block;
       font-size: 30px;
     }
-    .fa-check-circle-o {
-      color: #D0515A;
-    }
-    .disabled, .disabled .fa-check-circle-o {
+    .disabled {
       color: $org-grey;
+      cursor: default;
     }
   }
   .receive-options, .options-link-open {
@@ -84,7 +82,7 @@
   }
 }
 
-#confirmReceivingModal {
+#confirmReceivingModal, #confirmOfferCancelModal, #confirmOfferInactiveModal {
   top: 20% !important;
 
   @media #{$small-only} {

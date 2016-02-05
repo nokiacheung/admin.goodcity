@@ -9,7 +9,7 @@ module('Closed Offer', {
   setup: function() {
     App = startApp({}, 2);
     TestHelper.setup();
-    offer = FactoryGuy.make("offer", { state: "closed" });
+    offer = FactoryGuy.make("offer", { state: "cancelled" });
     item = FactoryGuy.make("item", { state: "rejected", offer: offer });
   },
   teardown: function() {
@@ -34,6 +34,6 @@ test("display logistics tab of closed offer", function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/logistics");
 
     var logistics_text = $.trim($('.noTransportItems').text().replace(/\s+/g, " "));
-    equal(logistics_text, "No items to transport. This offer is closed now.");
+    equal(logistics_text, "Offer cancelled by Daniel1 Stepp1");
   });
 });

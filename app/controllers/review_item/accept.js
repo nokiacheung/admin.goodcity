@@ -60,10 +60,6 @@ export default Ember.Controller.extend({
     }
   }),
 
-  onInit: Ember.on('init', function() {
-    this.onItemTypeChange();
-  }),
-
   actions: {
     toggleComment(index) {
       var pkg = this.get("packages")[index];
@@ -107,11 +103,12 @@ export default Ember.Controller.extend({
         var pkg;
         if (existing[data.id]) {
           pkg = existing[data.id];
-          delete existing[data.id];
           pkg.setProperties(data);
+          delete existing[data.id];
         } else {
           pkg = this.store.createRecord("package", data);
         }
+        pkg.set("state_event", null);
         promises.push(pkg.save());
       });
 
@@ -136,6 +133,7 @@ export default Ember.Controller.extend({
           item.save().finally(() => {
             this.set("itemSaving", false);
             loadingView.destroy();
+            this.transitionToRoute("review_offer.items");
           });
         });
     },

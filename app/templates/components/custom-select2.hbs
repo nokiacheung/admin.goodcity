@@ -1,0 +1,16 @@
+{{#if isAndroidDevice}}
+  {{select-list
+    content=content
+    on-change=(action (mut recordId))
+    selectedValue=record
+    prompt=placeholder}}
+{{else}}
+  {{select-2
+    content=content
+    optionValuePath="id"
+    optionLabelPath="name"
+    value=recordId
+    placeholder=placeholder
+    enabled=enabled
+  }}
+{{/if}}

@@ -35,7 +35,7 @@ module.exports = function(environment) {
       NAMESPACE: 'api/v1',
 
       PRELOAD_TYPES: ["territory"],
-      PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "version"],
+      PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "version", "location", "cancellation_reason"],
       SHA: process.env.APP_SHA || "00000000",
       SHARED_SHA:  process.env.APP_SHARED_SHA || "00000000",
       VERSION: process.env.VERSION || "1.0.0",
@@ -84,7 +84,9 @@ module.exports = function(environment) {
       'https://api.twilio.com',
       'http://static.twilio.com',
       'https://static.twilio.com',
-      'wss://chunderw.twilio.com/signal'
+      'wss://chunderw.twilio.com/signal',
+      'wss://chunderw-vpc-gll.twilio.com/signal',
+      'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
   }
 
@@ -102,13 +104,13 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:4201';
-    ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
+    ENV.ADMIN_APP_HOST_URL = 'http://localhost:4201';
   }
 
   if (environment === 'production') {
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
-    ENV.DONOR_APP_HOST_URL = 'https://app.goodcity.hk';
+    ENV.ADMIN_APP_HOST_URL = 'https://admin.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
 
     ENV.APP.GOODCITY_NUMBER = "+85258088700"
@@ -124,7 +126,9 @@ module.exports = function(environment) {
       'https://api.twilio.com',
       'http://static.twilio.com',
       'https://static.twilio.com',
-      'wss://chunderw.twilio.com/signal'
+      'wss://chunderw.twilio.com/signal',
+      'wss://chunderw-vpc-gll.twilio.com/signal',
+      'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
     //google analytics
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-2' };
@@ -134,7 +138,7 @@ module.exports = function(environment) {
   if (process.env.staging === 'true') {
     ENV.staging = true;
     ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
-    ENV.DONOR_APP_HOST_URL = 'https://app-staging.goodcity.hk';
+    ENV.ADMIN_APP_HOST_URL = 'https://admin-staging.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
     ENV.APP.GOODCITY_NUMBER = "+85258084822"
     ENV.contentSecurityPolicy["connect-src"] = [
@@ -148,7 +152,9 @@ module.exports = function(environment) {
       'https://api.twilio.com',
       'http://static.twilio.com',
       'https://static.twilio.com',
-      'wss://chunderw.twilio.com/signal'
+      'wss://chunderw.twilio.com/signal',
+      'wss://chunderw-vpc-gll.twilio.com/signal',
+      'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     ENV.cordova.GcmSenderId = '907786683525';

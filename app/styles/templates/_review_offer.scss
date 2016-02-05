@@ -9,7 +9,7 @@
   }
 
   .review_message div {
-    display: inline;
+    display: inline-block;
   }
 
   .start_review_link {
@@ -43,4 +43,19 @@
     }
   }
 
+}
+
+#confirmOfferCancelModal {
+  input {
+    margin-bottom: 1rem;
+  }
+}
+
+#confirmOfferInactiveModal {
+  textarea {
+    margin: 0;
+    max-width: 100%;
+    padding: 0.5rem;
+    overflow: hidden;
+  }
 }

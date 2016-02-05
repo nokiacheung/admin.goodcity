@@ -7,6 +7,6 @@ export default AuthorizeRoute.extend({
 
   model() {
     var currentUserId = this.get("session.currentUser.id");
-    return this.store.query('offer', { states: ["inactive"], reviewed_by_id: currentUserId });
+    return this.store.query('offer', { states: ["not_active"], reviewed_by_id: currentUserId });
   }
 });

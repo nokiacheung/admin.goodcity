@@ -1,0 +1,145 @@
+.stockitAddItemModal {
+  color: black;
+  padding-top: 1.5rem;
+
+  &.ui textarea {
+    margin: 0rem;
+    max-width: 100%;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .main-section {
+    @media #{$large-only} {
+      padding: 0 15rem;
+    }
+  }
+
+  .box-white {
+    background-color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    input {
+      padding-left: .5rem;
+      padding-right: .5rem;
+    }
+
+    @media #{$small-only} {
+      font-size: 0.8rem;
+    }
+
+    .single-row {
+      border-bottom: lightgray 1px solid;
+      margin: 0 !important;
+      padding: 0.5rem 0.7rem;
+      max-width: 100%;
+
+      @media #{$small-only} {
+        padding: 0.3rem 0.5rem;
+      }
+    }
+  }
+
+  .inventory-number {
+    margin-bottom: 1rem;
+  }
+
+  .secondary {
+    background-color: inherit;
+  }
+
+  .inputs-row {
+    border-bottom: lightgray 1px solid;
+
+    .columns {
+      padding: 0;
+    }
+
+    textarea {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      resize: none;
+    }
+
+    .has-error textarea {
+      margin-bottom: 0;
+    }
+  }
+
+  .select2-arrow {
+    display: none !important;
+  }
+
+  .columns > .fa {
+    float: right;
+  }
+
+  .fa {
+    position: relative;
+
+    &.fa-map-marker {
+      margin-top: -1.8rem;
+      z-index: 100;
+      font-size: 1.3rem;
+      color: gray;
+      margin-right: 0.8rem;
+
+      &.small-marker {
+        margin-right: 0.5rem;
+        margin-top: -1.65rem;
+
+        @media #{$small-only} {
+          margin-top: -1.55rem;
+        }
+      }
+    }
+  }
+
+  .has-error {
+    .fa.fa-exclamation-triangle {
+      color: $coral-red;
+      display: inline-block !important;
+      margin-top: -1.6rem;
+      margin-right: 0.5rem;
+
+      @media #{$small-only} {
+        margin-top: -1.2rem;
+      }
+    }
+  }
+
+  .form-errors {
+    color: $coral-red;
+    display: block;
+
+    @media #{$small-only} {
+      font-size: 0.9rem;
+    }
+
+    .fa.fa-exclamation-triangle {
+      display: inline-block !important;
+    }
+  }
+
+  .no-error {
+    display: none;
+  }
+
+  .show-error {
+    display: block;
+  }
+
+  .fa.fa-exclamation-triangle {
+    display: none;
+  }
+
+  .inventory-number .columns > .fa {
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.2rem 1rem;
+  }
+}
+
+[data-ember-action] {
+  cursor: pointer;
+}

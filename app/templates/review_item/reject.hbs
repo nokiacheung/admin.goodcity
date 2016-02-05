@@ -12,7 +12,7 @@
           <ul>
             {{#each rejectionOptions as |item|}}
               <li>
-                {{radio-button name="selectReason" selection=controller.selectedId value=item.id id=item.specialId disabled=model.offer.isFinished}}
+                {{radio-button name="selectReason" selection=selectedId value=item.id id=item.specialId disabled=model.offer.isFinished}}
                 <label  for={{item.specialId}}>
                   {{item.name}}
                 </label>
@@ -22,15 +22,15 @@
             <li>
               {{radio-button
                 name="selectReason"
-                selection=controller.selectedId
+                selection=selectedId
                 value="-1"
                 id="-1"
                 labelText=rejectReason
                 disabled=model.offer.isFinished }}
 
-              <label class='reject_label' for="-1">
+              <label class='reject_label' for="rejectReason">
                 {{radio-text-input
-                  value=controller.rejectReason
+                  value=rejectReason
                   name="rejectReason"
                   id='rejectReason'
                   placeholder=rejectReasonPlaceholder
@@ -47,7 +47,7 @@
 
         <div class="row">
           <div class="small-8 small-offset-2 columns">
-            {{#view "online-button" action="rejectItem" classNames="button expand rejectOffer" disabledOverride=model.offer.isFinished}}{{t "reject.reject_item"}}{{/view}}
+            {{#online-button action="rejectItem" classNames="button expand rejectOffer" disabledOverride=model.offer.isFinished}}{{t "reject.reject_item"}}{{/online-button}}
           </div>
         </div>
       </div>

@@ -15,7 +15,8 @@ ul.off-canvas-list li a {
     .time_indicator {
       color: $white;
       div {
-        display: inline; }
+        display: inline-block;
+      }
     }
     div {
       font-size: 0.63rem;

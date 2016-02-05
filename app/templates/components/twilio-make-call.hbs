@@ -10,10 +10,10 @@
           {{t "review_offer.donor.end_call"}}
         </button>
       {{else}}
-        {{#view "online-button" action="makeCall" classNames="button expand secondary"}}
+        {{#online-button action="makeCall" classNames="button expand secondary"}}
           <i class="fa fa-headphones"></i>
           {{t "review_offer.donor.internet_call"}}
-        {{/view}}
+        {{/online-button}}
       {{/if}}
     </div>
   </div>

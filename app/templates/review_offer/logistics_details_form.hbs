@@ -18,19 +18,19 @@
   <div class="small-12 columns gogovan-req">
     <div class='description'>{{t "logistics.portion_for_crossroads_truck"}}</div>
 
-    {{view "select"
+    {{select-list
       content=crossroadsOptions
-      optionLabelPath='content.name'
-      optionValuePath='content.id'
-      selection=selectedCrossroadsOption
+      on-change=(action (mut selectedCrossroadsOption))
+      selectedValue=selectedCrossroadsOption
       prompt=crossroadsOptionsPrompt
       required='true'
-      disabled=true}}
+      disabled='true'
+      selectArrow=true}}
   </div>
 
   <div class="row">
     <div class="small-12 columns complete-review-button">
-      {{#view "online-button" classNames="button expand" disabledOverride=model.isFinished}}{{t "logistics.complete_review"}}{{/view}}
+      {{#online-button classNames="button expand" disabledOverride=model.isFinished}}{{t "logistics.complete_review"}}{{/online-button}}
     </div>
   </div>
 

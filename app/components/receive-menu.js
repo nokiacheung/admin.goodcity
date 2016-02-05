@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   hidden: true,
   packageId: null,
   store: Ember.inject.service(),
+  alert: Ember.inject.service(),
 
   isReceived: Ember.computed.equal("package.state", "received"),
   isMissing: Ember.computed.equal("package.state", "missing"),
@@ -22,14 +23,28 @@ export default Ember.Component.extend({
 
   isFirstReceivingPackage: Ember.computed('package', function(){
     var offerPackages = this.get("offer.packages");
-    return offerPackages.get("length") === offerPackages.filterBy("state", "expecting").length;
+    return offerPackages.get("length") === offerPackages.filterBy("state", "expecting").length && !this.get("offer.isReceiving");
   }),
 
   updatePackage: function(action) {
+    var loadingView = this.container.lookup('component:loading').append();
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
-      .catch(error => { pkg.rollback(); throw error; });
+      .then(() => loadingView.destroy())
+      .catch(error => {
+        loadingView.destroy();
+        var errorMessage = pkg.get("errors.firstObject.message");
+        var matchFound = ["Connection error", "Dispatched"].some(v => errorMessage.indexOf(v) >= 0);
+        if(matchFound) {
+          this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
+            pkg.rollbackAttributes();
+          });
+        } else {
+          pkg.rollbackAttributes();
+          throw error;
+        }
+      });
   },
 
   actions: {
@@ -53,17 +68,29 @@ export default Ember.Component.extend({
       }
     },
 
-    missingPackage() {
-      this.updatePackage(p => {
-        p.set("state", "missing");
-        p.set("state_event", "mark_missing");
-      });
-    },
-
     receivePackage() {
       this.updatePackage(p => {
         p.set("state", "received");
         p.set("state_event", "mark_received");
+      });
+    },
+
+    receiveInInventory() {
+      if(this.get("isFirstReceivingPackage")) {
+        this.confirmReceiving(() => this.send("addToStockit"));
+      } else {
+        if(!this.get("isReceived")) { this.send("addToStockit"); }
+      }
+    },
+
+    addToStockit() {
+      this.get('router').transitionTo("receive_package", this.get("packageId"));
+    },
+
+    missingPackage() {
+      this.updatePackage(p => {
+        p.set("state", "missing");
+        p.set("state_event", "mark_missing");
       });
     },
   },
@@ -71,7 +98,6 @@ export default Ember.Component.extend({
   confirmReceiving: function(successCallback) {
     var _this = this;
     Ember.$("#confirmReceivingModal").removeClass("open");
-
     Ember.$("#confirmReceivingModal").foundation("reveal", "open");
     Ember.$(".loading-indicator").remove();
 
@@ -89,5 +115,5 @@ export default Ember.Component.extend({
     Ember.run.next(function() {
       Ember.$("#confirmReceivingModal").foundation("reveal", "close");
     });
-  }
+  },
 });

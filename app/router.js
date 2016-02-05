@@ -28,6 +28,8 @@ Router.map(function() {
       this.route('receive');
     });
 
+    this.resource('receive_package', {path: '/receive_package/:package_id'});
+
     this.resource('review_item', {path: '/review_item/:item_id'},function() {
       this.route('index', { path: '/'});
       this.route('reject');
@@ -80,7 +82,7 @@ Router.map(function() {
     this.resource('finished', function(){
       this.route('received');
       this.route('cancelled');
-      this.route('expired');
+      this.route('inactive');
     });
 
     this.resource('scheduled', function(){
@@ -89,6 +91,9 @@ Router.map(function() {
       this.route('other_delivery');
     });
   });
+
+  this.resource('users');
+  this.resource('user', { path: '/users/:user_id'});
 });
 
 export default Router;

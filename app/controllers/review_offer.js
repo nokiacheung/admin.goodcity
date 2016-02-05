@@ -10,6 +10,15 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   alert: Ember.inject.service(),
 
+  displayOfferOptions: Ember.computed({
+    get: function() {
+      return false;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
   isMyOffer: Ember.computed('offer.reviewedBy', {
     get: function() {
       var currentUserId = this.session.get("currentUser.id");
@@ -58,6 +67,8 @@ export default Ember.Controller.extend({
       return isMyOffer ? "my_list.finished" : "finished.cancelled"; }
     else if(offer.get("isReceived")) {
       return isMyOffer ? "my_list.finished" : "finished.received"; }
+    else if(offer.get("isInactive")) {
+      return isMyOffer ? "my_list.finished" : "finished.inactive"; }
     else if(offer.get("isScheduled")) {
       if(isMyOffer) { return "my_list.scheduled"; }
       else if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }
@@ -76,6 +87,10 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
+    toggleOfferOptions() {
+      this.toggleProperty("displayOfferOptions");
+    },
+
     addItem() {
       var draftItemId = this.get("model.items").filterBy("state", "draft").get("firstObject.id") || "new";
       this.transitionToRoute('item.edit_images', draftItemId);
@@ -115,6 +130,7 @@ export default Ember.Controller.extend({
     },
 
     cancelOffer() {
+      this.send("toggleOfferOptions");
       var offer = this.get("model");
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
         this.set("cancelByMe", true);
@@ -128,5 +144,17 @@ export default Ember.Controller.extend({
           .finally(() => {loadingView.destroy(); this.set("cancelByMe", false);});
         });
     },
+
+    submitOffer() {
+      this.toggleProperty("displayOfferOptions");
+      var loadingView = this.container.lookup('component:loading').append();
+      var offer = this.store.push('offer', {
+        id: this.get('model.id'),
+        state_event: 'submit'
+      });
+
+      offer.save()
+        .finally(() => loadingView.destroy());
+    }
   }
 });

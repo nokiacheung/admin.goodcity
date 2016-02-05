@@ -9,7 +9,7 @@
 
   <section class="right-small">
     {{#unless model.offer.isFinished}}
-      <a {{action "copyItem"}} title="Copy Item" class="fontawe-icons" >
+      <a {{action "copyItem"}} title="Copy Item" class="fontawe-icons copy_icon" >
         <i class="fa fa-files-o"></i>
       </a>
     {{/unless}}
@@ -44,22 +44,7 @@
 
       <div class="row top-bottom-margin">
         <div class="small-12 columns link">
-          {{#if isAndroidDevice}}
-            {{select-list
-              content=itemTypes
-              on-change=(action (mut itemTypeId))
-              selectedValue=itemType
-              prompt=(t "review_item.add_item_label")}}
-          {{else}}
-            {{select-2
-              content=itemTypes
-              optionValuePath="id"
-              optionLabelPath="name"
-              value=itemTypeId
-              placeholder=(t "review_item.add_item_label")
-              enabled=(js-x "this == false" model.offer.isFinished)
-            }}
-          {{/if}}
+          {{custom-select2 content=itemTypes record=itemType recordId=itemTypeId placeholder=(t "review_item.add_item_label") enabled=(js-x "this == false" model.offer.isFinished)}}
         </div>
       </div>
 
