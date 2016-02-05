@@ -74,27 +74,6 @@
     float: right;
   }
 
-  .fa {
-    position: relative;
-
-    &.fa-map-marker {
-      margin-top: -1.8rem;
-      z-index: 100;
-      font-size: 1.3rem;
-      color: gray;
-      margin-right: 0.8rem;
-
-      &.small-marker {
-        margin-right: 0.5rem;
-        margin-top: -1.65rem;
-
-        @media #{$small-only} {
-          margin-top: -1.55rem;
-        }
-      }
-    }
-  }
-
   .has-error {
     .fa.fa-exclamation-triangle {
       color: $coral-red;
@@ -137,6 +116,25 @@
     color: white;
     font-size: 1.5rem;
     padding: 0.2rem 1rem;
+
+    &.fa-map-marker {
+      padding: 0;
+      position: relative;
+      margin-top: -1.8rem;
+      z-index: 99;
+      font-size: 1.3rem;
+      color: gray;
+      margin-right: 0.8rem;
+
+      &.small-marker {
+        margin-right: 0.5rem;
+        margin-top: -1.65rem;
+
+        @media #{$small-only} {
+          margin-top: -1.55rem;
+        }
+      }
+    }
   }
 }
 
