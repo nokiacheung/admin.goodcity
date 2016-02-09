@@ -145,6 +145,7 @@ namespace :cordova do
       project = Xcodeproj::Project.open(xcodeproject_file)
       target = project.targets.select { |t| t.name == xcodefile_name }
       project.build_configurations.each do |config|
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
         config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
         config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
         config.build_settings['CODE_SIGN_IDENTITY'] = 'iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)'
