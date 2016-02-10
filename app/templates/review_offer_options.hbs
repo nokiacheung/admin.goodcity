@@ -19,7 +19,7 @@
     </div>
   {{/if}}
 
-  {{#unless offer.isFinished}}
+  {{#unless (js-or offer.isFinished offer.isReceiving)}}
     <div class="option_menu">
       {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
     </div>
