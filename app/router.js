@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('messages');
     this.route('donor_messages');
     this.route('supervisor_messages');
+    this.route('merge');
 
     this.route('plan_delivery');
     this.route('collection_charges');

@@ -23,6 +23,12 @@ I18nTranslationsEn =
       "supervisor_messages" : "Supervisors Messages"
       "empty_msg" : "Sorry! This offer is empty."
 
+      "merge":
+        "title": "Select offer to merge with"
+        "message": "Merging offers cannot be undone. All data will be retained except general discussion messages on the offer you just selected."
+        "cancel": "Cancel"
+        "merge": "Merge"
+        "error": "These offers can not be merged."
 
       "offer_details" :
         "heading" : "Offer Details"
@@ -114,6 +120,7 @@ I18nTranslationsEn =
         "add_item": "Add an item"
         "delete_offer": "Delete Offer"
         "submit_offer": "Re-submit Offer"
+        "merge_offer": "Merge Offer"
 
     "mark_received":
       "delivered_by": "Delivered by:"
