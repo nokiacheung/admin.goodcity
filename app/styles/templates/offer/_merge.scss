@@ -17,3 +17,10 @@
   }
 }
 
+.merge_page {
+  .title{
+    @media #{$small-only} {
+      font-size: 0.7rem !important;
+    }
+  }
+}
