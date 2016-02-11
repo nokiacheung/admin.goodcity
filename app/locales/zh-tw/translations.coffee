@@ -23,6 +23,13 @@ I18nTranslationsZhTw =
       "supervisor_messages" : "監察員信息"
       "empty_msg" : "對不起！這項捐獻並不存在。"
 
+      "merge":
+        "title": "Select offer to merge with"
+        "message": "Merging offers cannot be undone. All data will be retained except general discussion messages on the offer you just selected."
+        "cancel": "Cancel"
+        "merge": "Merge"
+        "error": "These offers can not be merged."
+
       "offer_details" :
         "heading" : "捐贈詳情"
         "is_collection": "收集"
