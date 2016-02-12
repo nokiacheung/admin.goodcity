@@ -81,12 +81,6 @@ test("for rejected offer-items", function() {
   andThen(function() {
     equal(currentURL(), "/offers/" + offer3.id + "/review_offer/logistics");
     equal($(".info-text").text(), "No items to transport.");
-
-    // page has link to donor-messages page
-    equal($("a[href='/offers/"+ offer3.id +"/donor_messages']").length, 1);
-
-    // page has button to close offer
-    equal($(".noTransportItems a:eq(0)").text(), 'Close Offer');
   });
 });
 
