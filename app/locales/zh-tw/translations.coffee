@@ -104,6 +104,9 @@ I18nTranslationsZhTw =
       "expecting": "等候中"
       "all_items_processed": "所有項目皆被接收或列作遺失"
       "inactive_offer": "This offer is marked as inactive."
+      "message_donor": "Send message to donor about closing offer:"
+      "receive_offer_message": "Your offer was received, thank you."
+      "missing_offer_message": "The delivery arrived at Crossroads but expected items were missing. We may follow up with you to confirm what happened."
 
       "donor":
         "offer_id": "Offer ID"
