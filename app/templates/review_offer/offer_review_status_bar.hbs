@@ -3,7 +3,7 @@
     <div class="offer-status is-closed">
       <div class='status-message review_message'>
         {{t "review_offer.all_items_processed"}}
-        <a {{action "closeReceivedOffer"}}>{{t "review_offer.close_offer"}}</a>
+        {{complete-receive-offer offer=offer}}
       </div>
     </div>
 
