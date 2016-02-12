@@ -19,15 +19,6 @@
 
             {{#if model.isClosed}}
               <div class='info-text'>{{t "logistics.offer_closed"}}</div>
-            {{else}}
-              <div class="row transport-buttons">
-                <div class="small-6 columns">
-                  <a href="#" {{action 'closeOffer'}} class="button secondary expand">{{t "logistics.close_offer"}}</a>
-                </div>
-                <div class="small-6 columns">
-                  {{#link-to 'offer.donor_messages' this classNames='button expand'}}{{t "logistics.message_donor"}}{{/link-to}}
-                </div>
-              </div>
             {{/if}}
           </div>
         {{else}}

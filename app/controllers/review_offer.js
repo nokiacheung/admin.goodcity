@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import AjaxPromise from './../utils/ajax-promise';
 
 export default Ember.Controller.extend({
 
@@ -106,20 +105,6 @@ export default Ember.Controller.extend({
       adapter.ajax(url, 'PUT')
         .then(data => this.store.pushPayload(data))
         .finally(() => this.set("isStartReviewClicked", false));
-    },
-
-    closeOffer() {
-      var loadingView = this.container.lookup('component:loading').append();
-      var offerId = this.get('model.id');
-      var offerProperties = {id: offerId, state_event: 'close'};
-      var url = "/offers/" + offerId + "/close_offer";
-
-      new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
-        .then(data => {
-          this.store.pushPayload(data);
-          this.transitionToRoute('review_offer.items');
-        })
-        .finally(() => loadingView.destroy());
     },
 
     cancelOffer() {

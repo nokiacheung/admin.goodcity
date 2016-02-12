@@ -107,6 +107,7 @@ I18nTranslationsEn =
       "message_donor": "Send message to donor about closing offer:"
       "receive_offer_message": "Your offer was received, thank you."
       "missing_offer_message": "The delivery arrived at Crossroads but expected items were missing. We may follow up with you to confirm what happened."
+      "close_offer_message": "We have finished processing your offer. Unfortunately we are unable to receive your items this time. We hope we can place items you offer in the future."
 
       "donor":
         "offer_id": "Offer ID"

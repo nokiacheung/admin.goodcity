@@ -6,7 +6,6 @@ import { translationMacro as t } from "ember-i18n";
 
 export default transportDetails.extend({
 
-  review_offer: Ember.inject.controller(),
   accepted: Ember.computed.filterBy('model.items', 'state', 'accepted'),
   pendingItem: Ember.computed.filterBy('model.items', 'state', 'submitted'),
   crossroadsOptionsPrompt: t("select"),
@@ -71,9 +70,5 @@ export default transportDetails.extend({
         })
         .finally(() => loadingView.destroy());
     },
-
-    closeOffer() {
-      this.get('review_offer').send('closeOffer');
-    }
   }
 });
