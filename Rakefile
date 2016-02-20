@@ -148,7 +148,7 @@ namespace :cordova do
         config.build_settings['ENABLE_BITCODE'] = 'NO'
         config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
         config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
-        config.build_settings['CODE_SIGN_IDENTITY'] = 'iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)'
+        config.build_settings['CODE_SIGN_IDENTITY'] = app_signing_identity
         # config.build_settings['HEADER_SEARCH_PATHS'] = "\$(TARGET_BUILD_DIR)/usr/local/lib/include \$(OBJROOT)/UninstalledProducts/include \$(BUILT_PRODUCTS_DIR) \$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
       end
       project.save
