@@ -114,6 +114,7 @@ export default Ember.Component.extend({
   closeConfirmBox: function() {
     Ember.run.next(function() {
       Ember.$("#confirmReceivingModal").foundation("reveal", "close");
+      Ember.$("#confirmReceivingModal *").unbind('click');
     });
   },
 });

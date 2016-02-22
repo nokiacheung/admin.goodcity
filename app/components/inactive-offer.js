@@ -63,6 +63,7 @@ export default Ember.Component.extend({
   closeConfirmBox: function() {
     Ember.run.next(function() {
       Ember.$("#confirmOfferInactiveModal").foundation("reveal", "close");
+      Ember.$("#confirmOfferInactiveModal *").unbind('click');
     });
   },
 });
