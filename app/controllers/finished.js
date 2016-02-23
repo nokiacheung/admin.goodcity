@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  finishedOffers: true,
+
+  i18n: Ember.inject.service(),
+  pageTitle: Ember.computed(function() {
+    return this.get("i18n").t("inbox.closed_offers");
+  }),
+
 });
 

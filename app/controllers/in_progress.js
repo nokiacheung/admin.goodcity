@@ -1,7 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  inProgress: true,
+  i18n: Ember.inject.service(),
+
+  pageTitle: Ember.computed(function() {
+    return this.get("i18n").t("inbox.in_review");
+  }),
 
   allOffers: Ember.computed(function(){
     return this.store.peekAll("offer");
