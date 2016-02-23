@@ -1,6 +1,7 @@
 <span class="item-image image">
   <i class="fa fa-bullhorn thumb"></i>
 </span>
+
 <span class="info">
   <div class="row item-name">
     <div class="small-9 columns">
@@ -13,17 +14,19 @@
 
   <div class="row">
     <div class="small-1 columns">
-      {{#if model.lastMessage}}
-        <span class="no-avatar">{{model.lastMessage.sender.nameInitial}}</span>
-      {{/if}}
+      <span class="no-avatar {{unless model.lastMessage 'hidden'}}">
+        {{model.lastMessage.sender.nameInitial}}
+      </span>
     </div>
     <div class="small-10 columns">
-      <div class='ellipsis two-line-ellipsis message-text'>{{{model.lastMessage.body}}}</div>
+      <div class='ellipsis two-line-ellipsis message-text'>
+        {{{model.lastMessage.body}}}
+      </div>
     </div>
     <div class="small-1 columns right">
-      {{#if model.unreadOfferMessages.length}}
-        <span class='unread_length'>{{model.unreadOfferMessagesCount}}</span>
-      {{/if}}
+      <span class="unread_length {{unless model.unreadOfferMessages.length 'hidden'}}">
+        {{model.unreadOfferMessagesCount}}
+      </span>
     </div>
   </div>
 </span>

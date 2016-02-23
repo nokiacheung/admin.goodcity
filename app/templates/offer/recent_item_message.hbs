@@ -1,11 +1,12 @@
 <span class="item-image">
   <img src={{item.displayImageUrl}} class="thumb" />
-  {{#if item.isAccepted}}<div class='accept_badge'>{{t 'offer.offer_details.accepted'}}</div>{{/if}}
-  {{#if item.isRejected}}<div class='reject_badge'>{{t 'offer.offer_details.not_needed'}}</div>{{/if}}
+  <div class="accept_badge {{unless item.isAccepted 'hidden'}}">{{t 'offer.offer_details.accepted'}}</div>
+  <div class="reject_badge {{unless item.isRejected 'hidden'}}">{{t 'offer.offer_details.not_needed'}}</div>
 </span>
 
 <span class="info">
   {{#if item.lastMessage}}
+
     <div class="row item-name">
       <div class="small-9 columns">
         <div class="ellipsis one-line-ellipsis item-name">{{{item.donorDescription}}}</div>
@@ -17,22 +18,22 @@
 
     <div class="row">
       <div class="small-1 columns">
-        {{#if item.lastMessage}}
-          <span class="no-avatar">{{item.lastMessage.sender.nameInitial}}</span>
-        {{/if}}
+        <span class="no-avatar {{unless item.lastMessage 'hidden'}}">{{item.lastMessage.sender.nameInitial}}</span>
       </div>
+
       <div class="small-10 columns">
         <div class='ellipsis two-line-ellipsis message-text'>
           {{item.lastMessage.body}}
         </div>
       </div>
+
       <div class="small-1 columns right">
-        {{#if item.unreadMessagesCount}}
-          <span class='unread_length'>{{item.unreadMessagesCount}}</span>
-          {{/if}}
+        <span class="unread_length {{unless item.unreadMessagesCount 'hidden'}}">{{item.unreadMessagesCount}}</span>
       </div>
     </div>
+
   {{else}}
+
     <div class="row item-name">
       <div class="small-12 columns">
         <div class="ellipsis three-line-ellipsis item-name">{{{item.donorDescription}}}</div>
