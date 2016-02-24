@@ -73,8 +73,8 @@ test("visit pending review item", function() {
   andThen(function() {
     click(".list li a:contains('"+ item3.get('donorDescription') +"')");
     andThen(function() {
-      Ember.Logger.log("Pending review expected url ", currentURL());
-      Ember.Logger.log("Pending review Actual url ", "/offers/" + offer.id + "/review_item/"+ item3.id +"/accept");
+      console.log("Pending review expected url ", currentURL());
+      console.log("Pending review Actual url ", "/offers/" + offer.id + "/review_item/"+ item3.id +"/accept");
       equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item3.id +"/accept");
     });
   });
@@ -85,8 +85,8 @@ test("visit accepted item", function() {
   andThen(function() {
     click(".list li a:contains('"+ item1.get('donorDescription') +"')");
     andThen(function() {
-      Ember.Logger.log("Accepted review expected url ", currentURL());
-      Ember.Logger.log("Accepted review Actual url ", "/offers/" + offer.id + "/review_item/"+ item1.id +"/accept");
+      console.log("Accepted review expected url ", currentURL());
+      console.log("Accepted review Actual url ", "/offers/" + offer.id + "/review_item/"+ item1.id +"/accept");
       equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item1.id +"/accept");
     });
   });
@@ -97,8 +97,8 @@ test("visit rejected item", function() {
   andThen(function() {
     click(".list li a:contains('"+ item2.get('donorDescription') +"')");
     andThen(function() {
-      Ember.Logger.log("Rejected review expected url ", currentURL());
-      Ember.Logger.log("Rejected review Actual url ", "/offers/" + offer.id + "/review_item/"+ item2.id +"/accept");
+      console.log("Rejected review expected url ", currentURL());
+      console.log("Rejected review Actual url ", "/offers/" + offer.id + "/review_item/"+ item2.id +"/accept");
       equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item2.id +"/reject");
     });
   });
