@@ -35,7 +35,7 @@ test("item status badge on item-image", function() {
     equal($(".item-image .accept_badge").not(".hidden").length, 1);
 
     // display 'Rejected' status for accepted-item
-    equal($(".item-image .reject_badge").length, 1);
+    equal($(".item-image .reject_badge").not(".hidden").length, 1);
   });
 });
 

@@ -10,88 +10,22 @@
       </h3>
 
       <div class='time_indicator'>
-        {{!-- Submitted Offer --}}
-        {{#if offer.isSubmitted}}
-          {{t "submitted"}} <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.submittedAt smallPrefix=true}}
 
-        {{!-- Offer Under Review --}}
-        {{else if offer.isUnderReview}}
-          {{t "review_offer.review_started_by" firstName=offer.reviewedBy.firstName lastName=offer.reviewedBy.lastName}}
-          <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.reviewedAt smallPrefix=true}}
-
-        {{!-- Offer Completed with Review --}}
-        {{else if offer.isReviewed}}
-          {{t "review_offer.reviewed"}}
-          <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.reviewCompletedAt smallPrefix=true}}.
-          {{t "review_offer.plan_transport"}}
-
-        {{!-- Closed Offer --}}
-        {{else if offer.isClosed}}
-          Closed by {{offer.closedBy.firstName}} {{offer.closedBy.lastName}}
-          <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.reviewCompletedAt smallPrefix=true}}
-
-        {{!-- Cancelled Offer --}}
-        {{else if offer.isCancelled}}
-          Cancelled by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
-          <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.cancelledAt smallPrefix=true}}
-
-        {{!-- Received Offer --}}
-        {{else if offer.isReceived}}
-          Received by {{offer.createdBy.firstName}} {{offer.createdBy.lastName}}
-          <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.receivedAt smallPrefix=true}}
-
-        {{!-- Receiving Offer --}}
-        {{else if offer.isReceiving}}
-          {{t "offer.offer_details.start_receiving_by" firstName=offer.receivedBy.firstName lastName=offer.receivedBy.lastName}}
-          <i class="fa fa-clock-o"></i>
-          {{time-ago timeValue=offer.startReceivingAt smallPrefix=true}}
-
-        {{!-- Scheduled Offer --}}
-        {{else if offer.isScheduled}}
-          {{#if offer.delivery.isAlternate}}
-            {{t 'offer.offer_details.is_collection'}}
-          {{else if offer.delivery.isDropOff}}
-            {{t 'offer.offer_details.is_drop_off'}}
-          {{else if offer.delivery.isGogovan}}
-            {{offer.delivery.gogovanOrder.ggvOrderStatus}}
-          {{/if}}
-
+        {{offer.timeDetail.prefix}}
+        {{#if offer.isScheduled}}
           <i class="fa fa-truck"></i>
           <b>
-            {{#if offer.delivery.completedWithGogovan}}
-              {{display-datetime offer.delivery.gogovanOrder.completedAt format='h:mm A, ddd Do MMM'}}
-            {{else}}
-              {{#if offer.delivery.isGogovan}}
-                {{offer.delivery.schedule.slotName}},
-              {{/if}}
-
-              {{display-datetime offer.delivery.schedule.scheduledAt format='ddd Do MMM'}}
-            {{/if}}
-
-            {{#if offer.delivery.noGogovan}}
-              {{offer.delivery.schedule.dayTime}}
-            {{/if}}
+            {{display-datetime offer.timeDetail.date format='h:mm A, ddd Do MMM'}}
+            {{offer.timeDetail.suffix}}
           </b>
-
+        {{else}}
+          {{time-ago timeValue=offer.timeDetail.date smallPrefix=true}}
+          {{offer.timeDetail.suffix}}
         {{/if}}
       </div>
 
       <div>
-        {{#if offer.hasReceived}}
-          {{offer.receivedCount}} {{t "offer.offer_details.received"}},
-          {{offer.missingCount}} {{t "offer.offer_details.missing"}},
-          {{offer.rejectedItems.length}} {{t "offer.offer_details.rejected"}}
-        {{else}}
-          {{offer.approvedItems.length}} {{t "offer.offer_details.accepted"}},
-          {{offer.rejectedItems.length}} {{t "offer.offer_details.rejected"}},
-          {{offer.submittedItems.length}} {{t "offer.offer_details.pending"}}
-        {{/if}}
+        {{offer.itemStatus}}
       </div>
     </span>
   </div>
