@@ -5,9 +5,15 @@
         {{schedule-selection schedules=allScheduled on-change=(action (mut filterValue)) }}
       {{/if}}
 
-      {{#each (js-x "p0 || p1" filteredOffers (js-x "p0 || p1" arrangedContent model)) as |offer|}}
-        {{partial 'offers/offer_details'}}
-      {{/each}}
+      {{#vertical-collection
+        content=(js-x "p0 || p1" filteredOffers (js-x "p0 || p1" arrangedContent model))
+        alwaysUseDefaultHeight=true
+        containerSelector="body"
+        as |offer|
+        }}
+            {{partial 'offers/offer_details'}}
+        {{/vertical-collection}}
+
     </ul>
   </div>
 </div>
