@@ -61,7 +61,7 @@ export default Ember.Controller.extend({
     return this.store.peekAll('rejection_reason').sortBy('id');
   }),
 
-  confirm: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   actions: {
     setRejectOption() {
@@ -122,7 +122,7 @@ export default Ember.Controller.extend({
       var itemIsLastAccepted = offer.get("approvedItems").every(i => i.id === this.get('itemId'));
 
       if (itemIsLastAccepted && gogovanOrder) {
-        this.get("confirm").show(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
+        this.get("messageBox").confirm(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
           if (gogovanOrder.get("isActive")) {
             this.transitionToRoute('offer.cancel_gogovan', offer);
           } else {

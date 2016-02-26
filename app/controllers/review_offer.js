@@ -5,9 +5,8 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
-  confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   displayOfferOptions: Ember.computed({
     get: function() {
@@ -44,7 +43,7 @@ export default Ember.Controller.extend({
 
     if(this.get("isOfferVanished") && !this.get("cancelByMe")) {
       if(currentPath.indexOf("review_item") < 0 && currentPath.indexOf(`offers/${this.get("offer.id")}`) >= 0) {
-        this.get("alert").show(this.get("i18n").t("404_error"), () => {
+        this.get("messageBox").alert(this.get("i18n").t("404_error"), () => {
           this.transitionTo("my_list");
         });
       }
@@ -110,7 +109,7 @@ export default Ember.Controller.extend({
     cancelOffer() {
       this.send("toggleOfferOptions");
       var offer = this.get("model");
-      this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
+      this.get("messageBox").confirm(this.get("i18n").t("delete_confirm"), () => {
         this.set("cancelByMe", true);
         var loadingView = this.container.lookup('component:loading').append();
         offer.deleteRecord();

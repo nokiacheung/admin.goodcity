@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   hidden: true,
   packageId: null,
   store: Ember.inject.service(),
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   isReceived: Ember.computed.equal("package.state", "received"),
   isMissing: Ember.computed.equal("package.state", "missing"),
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
         var errorMessage = pkg.get("errors.firstObject.message");
         var matchFound = ["Connection error", "Dispatched"].some(v => errorMessage.indexOf(v) >= 0);
         if(matchFound) {
-          this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
+          this.get("messageBox").alert(pkg.get("errors.firstObject.message"), () => {
             pkg.rollbackAttributes();
           });
         } else {

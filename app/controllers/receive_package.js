@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   cordova: Ember.inject.service(),
 
   package: Ember.computed.alias("model"),
@@ -161,7 +161,7 @@ export default Ember.Controller.extend({
           loadingView.destroy();
           var errorMessage = pkg.get("errors.firstObject.message");
           if(errorMessage.indexOf("Connection error") >= 0) {
-            this.get("alert").show(errorMessage, () => pkg.rollbackAttributes());
+            this.get("messageBox").alert(errorMessage, () => pkg.rollbackAttributes());
           } else {
             _this.set("hasErrors", true);
           }
