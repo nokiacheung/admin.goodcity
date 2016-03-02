@@ -19,9 +19,9 @@ export default function startApp(attrs, permissionId) {
     window.localStorage.currentUserId = '"1"';
   }
 
-  var App;
+  let application;
 
-  var attributes = Ember.merge({}, config.APP);
+  let attributes = Ember.merge({}, config.APP);
   attributes = Ember.merge(attributes, attrs); // use defaults, but you can override;
 
   Router.reopen({
@@ -29,10 +29,10 @@ export default function startApp(attrs, permissionId) {
   });
 
   Ember.run(function() {
-    App = Application.create(attributes);
-    App.__container__.lookup('service:i18n').set("locale", "en");
-    App.setupForTesting();
-    App.injectTestHelpers();
+    application = Application.create(attributes);
+    application.__container__.lookup('service:i18n').set("locale", "en");
+    application.setupForTesting();
+    application.injectTestHelpers();
   });
 
   window.navigator = {onLine:true,plugins:[]};
@@ -44,5 +44,5 @@ export default function startApp(attrs, permissionId) {
   //needed by application controller init
   lookup("controller:subscriptions")._actions.wire = function() {};
 
-  return App;
+  return application;
 }
