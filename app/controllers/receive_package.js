@@ -9,6 +9,26 @@ export default Ember.Controller.extend({
   watchErrors: true,
   isAndroidDevice: false,
 
+  donorConditions: Ember.computed(function(){
+    return this.get("store").peekAll('donor_condition').sortBy('id');
+  }),
+
+  selectedCondition: Ember.computed.alias("model.donorCondition"),
+
+  grades: Ember.computed(function(){
+    return [
+      { name: "Grade: A", id: "A" },
+      { name: "Grade: B", id: "B" },
+      { name: "Grade: C", id: "C" },
+      { name: "Grade: D", id: "D" }
+    ];
+  }),
+
+  selectedGrade: Ember.computed("model", function(){
+    var grade = this.get("model.grade");
+    return this.get("grades").filterBy('id', grade).get("firstObject");
+  }),
+
   identifyDevice: Ember.on('init', function() {
     var isAndroidDevice = this.get("cordova").isAndroid();
     this.set("isAndroidDevice", isAndroidDevice);
@@ -130,6 +150,8 @@ export default Ember.Controller.extend({
       pkg.set("height", pkgData.height);
       pkg.set("notes", pkgData.notes);
       pkg.set("inventoryNumber", pkgData.inventoryNumber);
+      pkg.set("grade", this.get("selectedGrade.id"));
+      pkg.set("donorCondition", this.get("selectedCondition"));
       pkg.save()
         .then(() => {
           loadingView.destroy();
