@@ -155,7 +155,7 @@ export default Ember.Controller.extend({
   },
 
   verifyInventoryNumber: function(value) {
-    return /[#{A-Z}][0-9]{5}[a-zA-Z]{0,1}[0-9]*/.test(value);
+    return /^[A-Z]{0,1}[0-9]{5,6}(Q[0-9]*){0,1}$/i.test(value);
   },
 
 });
