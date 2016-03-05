@@ -28,21 +28,22 @@ export default Ember.Component.extend({
   }),
 
   initTwilioDeviceBindings: function() {
-    var _this         = this;
-    var twilio_token  = _this.get("twilioToken");
-    var twilio_device = _this.get("twilio_device");
+    var twilio_token  = this.get("twilioToken");
+    var twilio_device = this.get("twilio_device");
 
     twilio_device.setup(twilio_token, {
       debug: true
     });
 
-    twilio_device.error(function() {
+    twilio_device.error(() => {
+      if (!this.get("isDestroying")) {
+        this.set("activeCall", false);
+      }
       this.get("twilio_device").disconnectAll();
-      _this.set("activeCall", false);
     });
 
-    twilio_device.disconnect(function() {
-      _this.set("activeCall", false);
+    twilio_device.disconnect(() => {
+      this.set("activeCall", false);
     });
   },
 
