@@ -4,7 +4,6 @@ export default Ember.Component.extend({
   hidden: true,
   packageId: null,
   store: Ember.inject.service(),
-  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
   selectedReason: null,

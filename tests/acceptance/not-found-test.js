@@ -23,7 +23,7 @@ test("Display error popup for invalid offer", function() {
   visit("/offers/invalid/review_offer/items");
 
   andThen(function(){
-    equal(Ember.$("#errorMessage").text(), t("404_error"));
+    equal(Ember.$("#messageBoxText").text(), t("404_error").toString());
     Ember.$('#errorModal').foundation('reveal', 'close');
   });
 });
@@ -34,7 +34,7 @@ test("Display error popup for invalid item", function() {
   $.mockjax({url:"/api/v1/items/*",status:404});
 
   andThen(function(){
-    equal(Ember.$("#errorMessage").text(), t("404_error"));
+    equal(Ember.$("#messageBoxText").text(), t("404_error").toString());
     Ember.$('#errorModal').foundation('reveal', 'close');
   });
 });
