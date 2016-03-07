@@ -17,6 +17,12 @@
               {{t "my_notifications.heading" name=notification.offer.createdBy.fullName}}
             {{/if}}
           </div>
+
+          <div class="sender">
+            {{notification.sender.fullName}}
+            <i class="fa fa-clock-o"></i>
+            {{message-time notification.createdAt}}
+          </div>
         </div>
         <div class="small-3 large-2 columns thread_icon right">
           {{#if notification.unreadCount}}
@@ -34,13 +40,7 @@
           {{/if}}
         </div>
       </div>
-      <div class="row">
-        <div class="small-12 columns sender">
-          {{notification.sender.fullName}}
-          <i class="fa fa-clock-o"></i>
-          {{message-time notification.createdAt}}
-        </div>
-      </div>
+
       <div class="row thread_last_message">
         <div class="small-12 columns">
           {{{apply-line-break notification.text}}}

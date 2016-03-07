@@ -17,6 +17,8 @@
 
 .thread {
   padding: 1rem;
+  padding-right: 0.5rem;
+
   span {
     display: table-cell;
   }
@@ -53,6 +55,7 @@
       display: inline-table;
       .unread{
         display: inline-table;
+        padding-bottom: 0.4rem;
         .unread_length{
           color: $white;
         }
@@ -79,9 +82,9 @@
 
 .mark_read {
   font-weight: bolder;
-  margin-left: 0.5rem;
   font-size: 1rem;
   vertical-align: bottom;
+  padding: 0.4rem 0.35rem;
 }
 
 .no_unread_message {
