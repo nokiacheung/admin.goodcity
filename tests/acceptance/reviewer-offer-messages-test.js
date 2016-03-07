@@ -2,6 +2,7 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import testSkip from '../helpers/test-skip';
 
 var App, offer, message1, message2, message3,
   message4, message5, user1, user2, offer1;
@@ -73,7 +74,7 @@ test("offer-messages from staff should add unread bubble in supervisor message t
   });
 });
 
-test("offer-message with image", function() {
+testSkip("offer-message with image", function() {
   visit('/offers/' + offer1.id + "/donor_messages");
   andThen(function() {
     var src = $(".received_message#"+message4.id+" img").attr("src");
