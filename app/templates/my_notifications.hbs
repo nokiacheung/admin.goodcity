@@ -25,9 +25,16 @@
 
       {{#if myNotifications}}
         <ul class="list list-notifications">
-          {{#each myNotifications as |notification|}}
-            <li>{{partial "notificationThread"}}</li>
-          {{/each}}
+
+          {{#vertical-collection
+            containerSelector="body"
+            content=myNotifications
+            alwaysUseDefaultHeight=true
+            as |notification|
+            }}
+              <li>{{partial "notificationThread"}}</li>
+          {{/vertical-collection}}
+
         </ul>
       {{else if showUnread}}
         <div class="no_unread_message">
