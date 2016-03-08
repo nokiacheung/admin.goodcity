@@ -4,10 +4,19 @@
   <div class="row">
     <div class="small-12 columns item-content">
       <ul class="list list-activity list-offer-items">
-        {{#each arrangedContent as |offer|}}
-          {{partial 'offers/offer_details'}}
-        {{/each}}
+
+        {{#vertical-collection
+          content=arrangedContent
+          alwaysUseDefaultHeight=true
+          containerSelector="body"
+          as |offer|
+          }}
+              {{partial 'offers/offer_details'}}
+          {{/vertical-collection}}
+
       </ul>
     </div>
   </div>
 </section>
+
+
