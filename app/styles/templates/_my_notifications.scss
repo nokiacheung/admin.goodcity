@@ -7,8 +7,16 @@
   }
 }
 
-.list.list-notifications li{
-  border-bottom: 1px solid $light-gray-1;
+.list.list-notifications {
+  vertical-item {
+    height: 6.8rem !important;
+  }
+
+  overflow: hidden !important;
+
+  li{
+    border-bottom: 1px solid $light-gray-1;
+  }
 }
 
 .thread.unread {
@@ -56,6 +64,7 @@
       .unread{
         display: inline-table;
         padding-bottom: 0.4rem;
+        margin-left: -0.3rem;
         .unread_length{
           color: $white;
         }
@@ -73,6 +82,10 @@
   .thread_last_message{
     padding-top: 0.3rem;
     color: $white;
+
+    .ellipsis {
+      min-height: 2.35rem;
+    }
 
     audio {
       width: 100%;
