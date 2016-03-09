@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   arrangedContent: Ember.computed.sort("offersForMerge", "sortProperties"),
 
   offerDonor: Ember.computed.alias("model.createdBy"),
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   allOffers: Ember.computed(function(){
     return this.store.peekAll("offer");
@@ -36,7 +36,7 @@ export default Ember.Controller.extend({
           if(data.status) {
             this.transitionToRoute("review_offer.items", baseOffer);
           } else {
-            this.get("alert").show(this.get("i18n").t('offer.merge.error'));
+            this.get("messageBox").alert(this.get("i18n").t('offer.merge.error'));
           }
         });
     },

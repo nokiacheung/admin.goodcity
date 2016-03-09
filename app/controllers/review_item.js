@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
 
   application: Ember.inject.controller(),
   store: Ember.inject.service(),
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
   defaultPackage: Ember.computed.alias('model.packageType'),
   item: Ember.computed.alias('model'),
@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
 
     if(this.get("isItemVanished")) {
       if(currentRoute.indexOf("review_item") >= 0) {
-        this.get("alert").show(this.get("i18n").t("404_error"), () => {
+        this.get("messageBox").alert(this.get("i18n").t("404_error"), () => {
           this.transitionTo("my_list");
         });
       }

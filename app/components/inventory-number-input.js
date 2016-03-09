@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   attributeBindings: ["name", "inputId", "value", "invalid", "disabled", "packageId"],
   isCordovaApp: config.cordova.enabled,
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   showMenu: false,
   bardcodeReadonly: true,
 
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
           this.set("value", res.text);
         }
       };
-      var onError = error => this.get("alert").show("Scanning failed: " + error);
+      var onError = error => this.get("messageBox").alert("Scanning failed: " + error);
       var options = {"formats": "CODE_128"};
       cordova.plugins.barcodeScanner.scan(onSuccess, onError, options);
     },
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
             var errors = xhr.responseText;
             try { errors = Ember.$.parseJSON(xhr.responseText).errors; }
             catch(err) {}
-            this.get("alert").show(errors);
+            this.get("messageBox").alert(errors);
           } else {
             throw xhr;
           }
