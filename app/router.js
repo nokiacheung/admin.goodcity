@@ -29,7 +29,7 @@ Router.map(function() {
       this.route('receive');
     });
 
-    this.route('receive_package', {path: '/receive_package/:package_id'});
+    this.route('receive_package', { path: '/receive_package/:package_id', resetNamespace: true });
 
     this.route('review_item', { resetNamespace: true, path: '/review_item/:item_id' },function() {
       this.route('index', { path: '/'});
