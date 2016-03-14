@@ -33,6 +33,10 @@ module.exports = function(app) {
     res.send(items_json);
   });
 
+  itemsRouter.get("/:id", function(req, res) {
+    res.send(items_json);
+  });
+
   app.use('/api/v1/items', itemsRouter);
   app.use('/api/v1/items/:id', itemsRouter);
 };
