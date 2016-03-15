@@ -27,23 +27,23 @@ export default Ember.Component.extend({
   }),
 
   overdueCount: function(){
-    return this.get('_controller').overdue().length;
+    return this.get('currentController').overdue().length;
   },
 
   scheduleCount: function(dayValue){
-    return this.get('_controller').daySchedule(dayValue).length;
+    return this.get('currentController').daySchedule(dayValue).length;
   },
 
   nextWeekCount: function(){
-    return this.get('_controller').nextWeek().length;
+    return this.get('currentController').nextWeek().length;
   },
 
   afterNextWeekCount: function(){
-    return this.get('_controller').afterNextWeek().length;
+    return this.get('currentController').afterNextWeek().length;
   },
 
   allCount: function() {
-    return this.get('_controller.allScheduled.length');
+    return this.get('currentController.allScheduled.length');
   },
 
   actions: {

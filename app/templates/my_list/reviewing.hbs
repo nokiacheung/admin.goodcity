@@ -2,7 +2,7 @@
   <div class="small-12 columns item-content">
     <ul class="list list-activity list-offer-items">
       {{#if scheduledOffers}}
-        {{schedule-selection schedules=allScheduled on-change=(action (mut filterValue)) }}
+        {{schedule-selection schedules=allScheduled currentController=this on-change=(action (mut filterValue)) }}
       {{/if}}
 
       {{#vertical-collection
