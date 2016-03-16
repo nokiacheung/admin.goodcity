@@ -1,9 +1,9 @@
 {
   "name": "goodcity",
   "dependencies": {
-    "ember": "2.3.1",
-    "ember-cli-shims": "https://github.com/ember-cli/ember-cli-shims.git#0.1.0",
-    "ember-cli-test-loader": "0.2.1",
+    "ember": "2.4.2",
+    "ember-cli-shims": "0.1.0",
+    "ember-cli-test-loader": "0.2.2",
     "cloudinary": "~1.0.12",
     "ember-i18n": "4.2.0",
     "moment": "~2.10.3",
@@ -24,11 +24,11 @@
     "active-model-adapter": "2.1.1"
   },
   "resolutions": {
-    "ember-cli-test-loader": "0.2.1",
+    "ember-cli-test-loader": "0.2.2",
     "jquery-placeholder": "~2.1.0",
     "ember-qunit-notifications": "0.1.0",
     "ember-cli-shims": "0.1.0",
     "qunit-notifications": "~0.1.0",
-    "ember": "2.3.1"
+    "ember": "2.4.2"
   }
 }
