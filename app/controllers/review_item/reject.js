@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { translationMacro as t } from "ember-i18n";
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -91,7 +92,7 @@ export default Ember.Controller.extend({
       var offer = this.get("offer.model");
 
       var saveItem = () => {
-        var loadingView = this.container.lookup('component:loading').append();
+        var loadingView = getOwner(this).lookup('component:loading').append();
         rejectProperties.rejectionReason = this.store.peekRecord('rejection_reason', selectedReason);
         rejectProperties.state_event = 'reject';
         rejectProperties.id = this.get('itemId');

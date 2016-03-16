@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
 
@@ -65,7 +66,7 @@ export default Ember.Component.extend({
     if(this.get("hasTwilioSupport")) {
       this._super();
       var _this = this;
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
 
       new AjaxPromise("/twilio_outbound/generate_call_token", "GET", this.get('session.authToken'))
         .then(data => {

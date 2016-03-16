@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   user: Ember.computed.alias('model'),
@@ -13,7 +14,7 @@ export default Ember.Controller.extend({
       var user = this.get("model");
       var selectedId = this.get("selectedId");
       if(selectedId) {
-        var loadingView = this.container.lookup('component:loading').append();
+        var loadingView = getOwner(this).lookup('component:loading').append();
         var permission = selectedId === "-1" ? null : this.store.peekRecord('permission', selectedId);
         user.set("permission", permission);
         user.save()

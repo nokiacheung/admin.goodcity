@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -133,7 +134,7 @@ export default Ember.Controller.extend({
       this.notifyPropertyChange("watchErrors"); // this will recalculate 'hasErrors' property, sometimes it does return true for valid form.
       if(this.get("hasErrors")) { return false; }
 
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var pkg = this.get("package");
 
       var locationId = this.get("locationId.id") || this.get("locationId");

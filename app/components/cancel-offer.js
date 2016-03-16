@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
   hidden: true,
@@ -39,7 +40,7 @@ export default Ember.Component.extend({
       } else {
         selectedReason = this.get("selectedReason");
       }
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var offer = this.get("offer");
       offer.set("cancelReason", cancelReason);
       offer.set("cancellationReason", selectedReason);

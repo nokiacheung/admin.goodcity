@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Route.extend({
 
@@ -14,7 +15,7 @@ export default Ember.Route.extend({
           this.transitionTo('offers.submitted');
         }
       } else {
-        this.container.lookup("route:application")._loadDataStore();
+        getOwner(this).lookup("route:application")._loadDataStore();
       }
 
     }

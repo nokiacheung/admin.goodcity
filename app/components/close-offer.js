@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AjaxPromise from 'goodcity/utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
 
@@ -41,7 +42,7 @@ export default Ember.Component.extend({
 
       this.set("invalidMessage", false);
 
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var offerId = this.get('offerId');
 
       var url = "/offers/" + offerId + "/close_offer";

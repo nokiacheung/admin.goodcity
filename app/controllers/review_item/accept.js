@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import substring from 'goodcity/utils/substring';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -92,7 +93,7 @@ export default Ember.Controller.extend({
       // to save item same time as a package is being deleted
       this.set("itemSaving", true);
 
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
 
       // save packages
       var promises = [];

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
   hidden: true,
@@ -18,7 +19,7 @@ export default Ember.Component.extend({
   }),
 
   currentUrl: Ember.computed('packageId', function(){
-    return this.container.lookup("router:main").get("url");
+    return getOwner(this).lookup("router:main").get("url");
   }),
 
   isFirstReceivingPackage: Ember.computed('package', function(){
@@ -27,7 +28,7 @@ export default Ember.Component.extend({
   }),
 
   updatePackage: function(action) {
-    var loadingView = this.container.lookup('component:loading').append();
+    var loadingView = getOwner(this).lookup('component:loading').append();
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
