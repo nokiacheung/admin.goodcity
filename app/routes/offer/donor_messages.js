@@ -1,8 +1,6 @@
 import ReadMessagesRoute from './../read_messages';
 
 export default ReadMessagesRoute.extend({
-  staffRestricted: true,
-
   model() {
     var offerId = this.modelFor('offer').get('id');
     return this.store.filter('message', function(message) {

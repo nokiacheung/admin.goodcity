@@ -1,8 +1,6 @@
 import ReadMessagesRoute from './../read_messages';
 
 export default ReadMessagesRoute.extend({
-  staffRestricted: true,
-
   renderTemplate() {
     this.render('offer/donor_messages', {controller: 'offer.supervisor_messages'});
   },
