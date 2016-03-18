@@ -9,4 +9,12 @@ export default Ember.Controller.extend({
     return this.get("i18n").t("inbox.receiving");
   }),
 
+  allOffers: Ember.computed(function(){
+    return this.store.peekAll("offer");
+  }),
+
+  model: Ember.computed("allOffers.@each.state", function(){
+    return this.get("allOffers").filterBy("isReceiving");
+  }),
+
 });
