@@ -10,12 +10,16 @@ module.exports = function(app) {
     ]
   };
 
+  var message_json = {
+    "message": {"id":1,"body":"example1", "state": "read"}
+  };
+
   messagesRouter.get('/', function(req, res) {
     res.send({"messages": []});
   });
 
   messagesRouter.put("/:id/mark_read", function(req, res) {
-    res.send(messages_json);
+    res.send(message_json);
   });
 
   messagesRouter.post('/', function(req, res) {

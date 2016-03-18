@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import config from '../config/environment';
 import AjaxPromise from '../utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
 
@@ -27,7 +28,7 @@ export default Ember.Component.extend({
     },
 
     printBarcode() {
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       new AjaxPromise("/packages/print_barcode", "POST", this.get('session.authToken'), {package_id: this.get("packageId")})
         .catch(xhr => {
           if (xhr.status !== 200) {

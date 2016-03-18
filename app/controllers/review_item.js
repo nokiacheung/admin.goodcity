@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -83,7 +84,7 @@ export default Ember.Controller.extend({
     },
 
     copyItem() {
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var _this = this;
       var item = _this.get("model");
       var images = item.get("images");

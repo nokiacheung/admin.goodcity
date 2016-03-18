@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -98,7 +99,7 @@ export default Ember.Controller.extend({
       if(this.get("isStartReviewClicked")) { return; }
       var offer = this.store.peekRecord('offer', this.get('offer.id'));
       this.set("isStartReviewClicked", true);
-      var adapter = this.container.lookup('adapter:application');
+      var adapter = getOwner(this).lookup('adapter:application');
       var url = adapter.buildURL('offer', offer.get('id')) + '/review';
 
       adapter.ajax(url, 'PUT')
@@ -111,7 +112,7 @@ export default Ember.Controller.extend({
       var offer = this.get("model");
       this.get("messageBox").confirm(this.get("i18n").t("delete_confirm"), () => {
         this.set("cancelByMe", true);
-        var loadingView = this.container.lookup('component:loading').append();
+        var loadingView = getOwner(this).lookup('component:loading').append();
         offer.deleteRecord();
         offer.save()
           .then(() => {
@@ -124,11 +125,9 @@ export default Ember.Controller.extend({
 
     submitOffer() {
       this.toggleProperty("displayOfferOptions");
-      var loadingView = this.container.lookup('component:loading').append();
-      var offer = this.store.push('offer', {
-        id: this.get('model.id'),
-        state_event: 'submit'
-      });
+      var loadingView = getOwner(this).lookup('component:loading').append();
+      var offer = this.get("model");
+      offer.setProperties({ state_event: 'submit' });
 
       offer.save()
         .finally(() => loadingView.destroy());

@@ -98,6 +98,6 @@ test("redirect to finished offers page", function() {
 
     // items accept-reject status
      var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
-    equal(itemStatus, " 0 Received, 0 missing, 0 rejected ");
+    equal(itemStatus, " 0 Accepted, 1 rejected, 0 pending ");
   });
 });

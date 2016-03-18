@@ -30,4 +30,12 @@ export default function() {
   Ember.Test.registerHelper('lookup', function(app, name) {
     return app.__container__.lookup(name);
   });
+
+  Ember.Test.registerHelper('runloopFix', function(app, callbackFunction) {
+    var callback = function() {
+      Ember.run(callbackFunction);
+    };
+    Ember.run.scheduleOnce('afterRender', this, callback);
+  });
+
 }()

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AjaxPromise from 'goodcity/utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   sortProperties: ["updatedAt:desc"],
@@ -25,7 +26,7 @@ export default Ember.Controller.extend({
     },
 
     mergeOffer(baseOffer) {
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
 
       var offer = this.get("model");
       var url   = "/offers/" + offer.id + "/merge_offer";

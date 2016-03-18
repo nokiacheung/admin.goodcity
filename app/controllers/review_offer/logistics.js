@@ -3,6 +3,7 @@ import AjaxPromise from './../../utils/ajax-promise';
 import transportDetails from './../offer/transport_details';
 import config from './../../config/environment';
 import { translationMacro as t } from "ember-i18n";
+const { getOwner } = Ember;
 
 export default transportDetails.extend({
 
@@ -52,7 +53,7 @@ export default transportDetails.extend({
     completeReview() {
       var gogovanOptionId = this.get('selectedGogovanOption');
       var crossroadsOptionId = this.get('selectedCrossroadsOption.id');
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var offerId = this.get('model.id');
 
       var offerProperties = {

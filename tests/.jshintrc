@@ -53,7 +53,8 @@
     "logoutUser",
     "lookup",
     "skipTest",
-    "Twilio"
+    "Twilio",
+    "runloopFix"
   ],
   "node": false,
   "browser": false,

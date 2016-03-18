@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { translationMacro as t } from "ember-i18n";
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   filter: '',
@@ -65,7 +66,7 @@ export default Ember.Controller.extend({
 
     searchOnServer() {
       var controller = this;
-      var loadingView = controller.container.lookup('component:loading').append();
+      var loadingView = getOwner(controller).lookup('component:loading').append();
       return this.store.findAll('user').finally(function(){
         controller.set('fetchMoreResult', false);
         loadingView.destroy();
