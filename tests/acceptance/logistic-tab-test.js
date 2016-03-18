@@ -8,7 +8,7 @@ var App, offer, item, reviewer, offer2, item2, offer3, item3,
   offer6, item6, offer7, t;
 
 module('Review Offer Logistics', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     lookup('service:session').set('isAdmin', true);
@@ -36,7 +36,7 @@ module('Review Offer Logistics', {
 
     offer7 = FactoryGuy.make("offer_with_items", {state:"received", deliveredBy: "Gogovan"});
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

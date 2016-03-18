@@ -6,7 +6,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, offer, offer1, reviewer1;
 
 module('App Menu', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -15,7 +15,7 @@ module('App Menu', {
     offer = FactoryGuy.make("offer_with_items", { state: "under_review", reviewed_by: reviewer1 });
     offer1 = FactoryGuy.make("offer_with_items", { state: "is_reviewed", reviewed_by: reviewer1 });
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

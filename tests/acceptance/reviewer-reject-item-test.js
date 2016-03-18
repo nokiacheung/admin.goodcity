@@ -6,7 +6,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, offer, item1, item2;
 
 module('Reviewer: Rejct Item Tab', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -15,7 +15,7 @@ module('Reviewer: Rejct Item Tab', {
     item2 = FactoryGuy.make("item", { offer: offer});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

@@ -4,10 +4,10 @@ import startApp from '../helpers/start-app';
 var App;
 
 module('Home Page', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 1);
   },
-  teardown: function() {
+  afterEach: function() {
     Ember.run(App, 'destroy');
   }
 });

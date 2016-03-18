@@ -8,7 +8,7 @@ var App, offer, message1, message2, message3,
   message4, message5, user1, user2, offer1;
 
 module('Reviewer: Display Offer Messages', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     user1 = FactoryGuy.make("user");
@@ -22,7 +22,7 @@ module('Reviewer: Display Offer Messages', {
     message3 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Supervisor", isPrivate: true});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

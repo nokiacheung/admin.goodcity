@@ -7,7 +7,7 @@ var App, offer1, reviewer, reviewerName, offer2, item1, item2,
   delivery, offer3, item3, item4, offer4, item5, ggv_order;
 
 module('My Offers', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     reviewer = FactoryGuy.make('user', { id: 3 });
@@ -27,7 +27,7 @@ module('My Offers', {
     offer4 = FactoryGuy.make("offer", {state:"closed", reviewedBy: reviewer});
     item5 = FactoryGuy.make("item", { state:"rejected", offer: offer4 });
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

@@ -5,10 +5,10 @@ import '../helpers/custom-helpers';
 var App;
 
 module('Submitted Offers', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
   },
-  teardown: function() {
+  afterEach: function() {
     Ember.run(App, 'destroy');
   }
 });

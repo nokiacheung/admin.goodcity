@@ -6,7 +6,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, offer, item, message1, message2, message3;
 
 module('Reviewer: Display Item Messages', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -17,7 +17,7 @@ module('Reviewer: Display Item Messages', {
     message3 = FactoryGuy.make("message", { offer: offer, item: item, body: "Message from Supervisor", isPrivate: true});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

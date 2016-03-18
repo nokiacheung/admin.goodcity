@@ -6,7 +6,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, offer1, item1, package1, package2, package3;
 
 module('Received Offers', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     item1 = FactoryGuy.make("item", {state: "accepted"});
@@ -16,7 +16,7 @@ module('Received Offers', {
     package3 = FactoryGuy.make("package", { offerId: parseInt(offer1.id), state: "missing", item: item1});
 
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

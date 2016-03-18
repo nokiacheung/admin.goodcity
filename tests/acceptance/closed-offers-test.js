@@ -6,13 +6,13 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, offer, item;
 
 module('Closed Offer', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     offer = FactoryGuy.make("offer", { state: "closed" });
     item = FactoryGuy.make("item", { state: "rejected", offer: offer });
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

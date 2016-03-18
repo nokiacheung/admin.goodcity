@@ -6,7 +6,7 @@ import FactoryGuy from 'ember-data-factory-guy';
 var App, offer, t;
 
 module('Display not found error', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp();
     Ember.run.later = () => true;
     offer = FactoryGuy.make("offer");
@@ -14,7 +14,7 @@ module('Display not found error', {
     t = i18n.t.bind(i18n);
     App.__container__.lookup("service:logger").error = () => {};
   },
-  teardown: function() {
+  afterEach: function() {
     Ember.run(App, 'destroy');
   }
 });

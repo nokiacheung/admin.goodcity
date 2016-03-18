@@ -8,7 +8,7 @@ import '../helpers/custom-helpers';
 var App, offer, item, message1, message2, message3, message4, message5;
 
 module('Reviewer: Notifications', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -21,7 +21,7 @@ module('Reviewer: Notifications', {
     message5 = FactoryGuy.make("message", { offer: offer, item: null, state: "read", isPrivate: true});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

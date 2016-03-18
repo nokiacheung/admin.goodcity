@@ -6,7 +6,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, offer, user, ggvOrder, delivery, address, contact, item;
 
 module('Search Offers', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     Ember.run.debounce = (context, func) => func.call(context);
@@ -20,7 +20,7 @@ module('Search Offers', {
     delivery = FactoryGuy.make("delivery", { gogovanOrder: ggvOrder, offer: offer, contact: contact });
     address  = FactoryGuy.make("address", { 'addressable': contact });
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

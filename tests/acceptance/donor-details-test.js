@@ -6,7 +6,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 var App, user, offer1, offer2, offer3, offer4;
 
 module('Reviewer: Display Donor Details Tab', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -17,7 +17,7 @@ module('Reviewer: Display Donor Details Tab', {
     offer4 = FactoryGuy.make("offer_with_items", { state:"draft", createdBy: user});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

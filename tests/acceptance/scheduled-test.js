@@ -7,7 +7,7 @@ var App, offer1, delivery1, offer2, delivery2, offer3,
   delivery3, schedule4, offer4, delivery4, ggv_order;
 
 module('Scheduled Offers', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -26,7 +26,7 @@ module('Scheduled Offers', {
     delivery3 = FactoryGuy.make('delivery', {deliveryType: "Drop Off"});
     offer3 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery3 });
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
