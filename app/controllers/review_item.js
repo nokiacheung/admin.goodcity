@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
     if(this.get("isItemVanished")) {
       if(currentRoute.indexOf("review_item") >= 0) {
         this.get("messageBox").alert(this.get("i18n").t("404_error"), () => {
-          this.transitionTo("my_list");
+          this.transitionToRoute("my_list");
         });
       }
     }

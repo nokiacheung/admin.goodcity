@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
     if(this.get("isOfferVanished") && !this.get("cancelByMe")) {
       if(currentPath.indexOf("review_item") < 0 && currentPath.indexOf(`offers/${this.get("offer.id")}`) >= 0) {
         this.get("messageBox").alert(this.get("i18n").t("404_error"), () => {
-          this.transitionTo("my_list");
+          this.transitionToRoute("my_list");
         });
       }
     }
