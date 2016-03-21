@@ -29,8 +29,9 @@ export default DS.Model.extend({
   _getPackages: function(model, packageNames){
     var array = (packageNames || "").split(',');
     var packages = [];
+    var allPackageTypes = model.store.peekAll("packageType");
     array.forEach(function(type) {
-      model.store.filter("packageType", function (pkg) {
+      allPackageTypes.filter(function (pkg) {
         return pkg.get("code") === type ? packages.push(pkg) : "";
       });
     });
