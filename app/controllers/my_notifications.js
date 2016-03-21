@@ -65,9 +65,13 @@ export default offers.extend({
       this.transitionToRoute.apply(this, route);
     },
 
-    markThreadRead(messageId) {
-      var message = this.store.peekRecord('message', messageId);
-      this.get("messagesUtil").markRead(message);
+    markThreadRead(notification) {
+      if(notification.unreadCount === 1) {
+        var message = this.store.peekRecord('message', notification.id);
+        this.get("messagesUtil").markRead(message);
+      } else {
+        this.send("view", notification.id);
+      }
     },
 
     toggleShowUnread() {
