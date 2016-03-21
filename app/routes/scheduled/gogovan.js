@@ -6,7 +6,7 @@ export default AuthorizeRoute.extend({
   },
 
   setupController: function(controller, model){
-    controller.set("model", model);
+    this._super(controller, model);
     controller.set("filterValue", null);
   }
 });

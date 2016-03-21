@@ -5,9 +5,4 @@ export default AuthorizeRoute.extend({
     this.render('my_list.reviewing', {controller: 'in_progress.reviewing'});
   },
 
-  model() {
-    return this.get("store").filter('offer', function(offer) {
-      return offer.get('isUnderReview');
-    });
-  }
 });

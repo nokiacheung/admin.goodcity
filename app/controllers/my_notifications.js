@@ -6,6 +6,16 @@ export default offers.extend({
   sortedModel: Ember.computed.sort("model", "sortProperties"),
   messagesUtil: Ember.inject.service("messages"),
 
+  allMessages: Ember.computed(function(){
+    return this.store.peekAll("message");
+  }),
+
+  model: Ember.computed("allMessages.@each.state", "session.currentUser.id", "allMessages.@each.offer.createdBy", function(){
+    var currentUserId = this.get('session.currentUser.id');
+
+    return this.get("allMessages").rejectBy("state", "never-subscribed").rejectBy("offer.createdBy.id", currentUserId);
+  }),
+
   showUnread: Ember.computed({
     get: function() {
       return false;
