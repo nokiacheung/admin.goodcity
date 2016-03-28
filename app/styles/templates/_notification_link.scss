@@ -23,6 +23,10 @@
       margin-top: -0.4rem;
     }
   }
+
+  &.fixed_to_header {
+    position: fixed;
+  }
 }
 
 .right-small {
