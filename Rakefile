@@ -22,10 +22,6 @@
 #     > rake cordova:prepare
 #     > rake cordova:build
 #
-# iOS Build Server
-#     > rake ios_build_server:notify (tells the iOS server to start a build)
-#     > rake ios_build_server:build (checks and starts a build)
-#
 #     Cronjob entry
 # * * * * * source /Users/developer/.bash_profile; rake -f /Users/developer/Workspace/admin.goodcity/Rakefile app:release  >> /tmp/goodcity_admin_ios_build.log 2>&1
 #
@@ -36,7 +32,6 @@
 
 require "json"
 require "fileutils"
-require "iron_mq"
 require "rake/clean"
 require "xcodeproj"
 
@@ -168,21 +163,6 @@ namespace :cordova do
       sh %{ if [ -e "#{ipa_file}" ]; then cp #{ipa_file} $CIRCLE_ARTIFACTS/; fi }
     end
   end
-  task :bump_version do
-    increment_app_version!
-    if ENV["CI"]
-      Dir.chdir(ROOT_PATH) do
-        sh %{ git config --global user.email "none@none" }
-        sh %{ git config --global user.name "CircleCi" }
-        sh %{ git config --global push.default current }
-        sh %{ git add #{APP_DETAILS_PATH} }
-        sh %{ git commit -m "Update build version [ci skip]" }
-        sh %{ git stash }
-        sh %{ git push; true } # try but don't care if this fails
-        sh %{ git stash pop; true }
-      end
-    end
-  end
 end
 
 namespace :testfairy do
@@ -198,40 +178,6 @@ namespace :testfairy do
     end
     log("Uploaded app...")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
-  end
-end
-
-namespace :ios_build_server do
-  desc "Sends a message to the iOS build server to begin building an app"
-  task notify: :check_env do
-    iron_queue.post("build")
-  end
-  desc "Checks to see if we should begin a build"
-  task build: :check_env do
-    log("Checking for build messages on #{iron_queue.name}...")
-    msg = iron_queue.get
-    if msg
-      if !lock_expired?
-        log("Build starting...")
-        Dir.chdir(ROOT_PATH) do
-          sh %{ git fetch origin; git reset --hard HEAD; git pull }
-        end
-        create_lock!
-        msg.delete
-        Rake::Task["app:release"].invoke
-        delete_lock!
-      else
-        log("Build currently in progress")
-      end
-    else
-      log("No build requested")
-    end
-  end
-  task :check_env do
-    %w(GOODCITY_IRON_MQ_OAUTH_KEY GOODCITY_IRON_MQ_PROJECT_KEY
-      GOODCITY_IRON_MQ_QUEUE_NAME TESTFAIRY_API_KEY).each do |env|
-        raise(BuildError, "#{env} not set.") unless env?(env)
-    end
   end
 end
 
@@ -314,7 +260,14 @@ def app_url
 end
 
 def app_version
-  app_details[environment]["version"]
+  if ENV["CI"]
+    is_staging ? "#{ENV['APP_VERSION']}.#{ENV['CIRCLE_BUILD_NUM']}" : ENV['APP_VERSION']
+  elsif @ver
+    @ver
+  else
+    print "Input version: "
+    @ver = gets
+  end
 end
 
 def app_signing_identity
@@ -323,12 +276,6 @@ end
 
 def app_details
   @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
-end
-
-def increment_app_version!
-  version_array = app_version.split(".")
-  app_details[environment]["version"] = (version_array[0..1] << version_array.last.to_i + 1).join(".")
-  File.open(APP_DETAILS_PATH, "w"){|f| f.puts JSON.pretty_generate(app_details)}
 end
 
 def testfairy_upload_script
@@ -343,34 +290,6 @@ def build_details
   _build_details = {app_name: app_name, env: environment, platform: platform, app_version: app_version}
   _build_details[:app_signing_identity] = app_signing_identity if platform == "ios"
   _build_details
-end
-
-def iron_mq
-  @ironmq ||= IronMQ::Client.new(token: iron_token, project_id: iron_project_id)
-end
-
-def iron_queue
-  iron_mq.queue(app_url)
-end
-
-def iron_token
-  ENV['GOODCITY_IRON_MQ_OAUTH_KEY']
-end
-
-def iron_project_id
-  ENV['GOODCITY_IRON_MQ_PROJECT_KEY']
-end
-
-def lock_expired?
-  File.exists?(LOCK_FILE) && (Time.now - File.mtime(LOCK_FILE)).to_i > LOCK_FILE_MAX_AGE
-end
-
-def create_lock!
-  FileUtils.touch(LOCK_FILE)
-end
-
-def delete_lock!
-  FileUtils.rm(LOCK_FILE) if File.exists?(LOCK_FILE)
 end
 
 def log(msg="")
