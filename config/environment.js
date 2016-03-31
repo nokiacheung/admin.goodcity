@@ -135,7 +135,7 @@ module.exports = function(environment) {
     ENV.cordova.GcmSenderId = '876198075877';
   }
 
-  if (process.env.staging === 'true') {
+  if ((process.env.staging || process.env.STAGING) === 'true') {
     ENV.staging = true;
     ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
     ENV.ADMIN_APP_HOST_URL = 'https://admin-staging.goodcity.hk';
