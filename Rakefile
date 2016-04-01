@@ -260,11 +260,12 @@ end
 def app_version
   if ENV["CI"]
     is_staging ? "#{ENV['APP_VERSION']}.#{ENV['CIRCLE_BUILD_NUM']}" : ENV['APP_VERSION']
-  elsif !@ver
+  elsif @ver
+    @ver
+  else
     print "Enter GoodCity app version: "
-    @ver = STDIN.gets
+    @ver = STDIN.gets.strip
   end
-  @ver
 end
 
 def app_signing_identity
