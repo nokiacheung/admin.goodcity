@@ -71,6 +71,7 @@ export default Ember.Component.extend({
 
     receivePackage() {
       this.updatePackage(p => {
+        p.set("inventoryNumber", null);
         p.set("state", "received");
         p.set("state_event", "mark_received");
       });
