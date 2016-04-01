@@ -158,6 +158,12 @@ module.exports = function(environment) {
     ].join(' ');
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     ENV.cordova.GcmSenderId = '907786683525';
+
+    // VSO build
+    if (process.env.BUILD_BUILDNUMBER) {
+      ENV.APP.VERSION = process.env.VERSION + "." + process.env.BUILD_BUILDNUMBER;
+      ENV.APP.APP_SHA = process.env.BUILD_SOURCEVERSION;
+    }
   } else {
     ENV.staging = false;
   }
