@@ -57,7 +57,7 @@ task default: %w(app:build)
 # Main namespace
 namespace :app do
   desc "Builds the app"
-  task build: %w(ember:install cordova:install cordova:prepare cordova:build)
+  task build: %w(ember:install ember:build cordova:install cordova:prepare cordova:build)
   desc "Uploads the app to TestFairy"
   task deploy: %w(testfairy:upload)
   desc "Equivalent to rake app:build app:deploy"
