@@ -33,7 +33,6 @@
 require "json"
 require "fileutils"
 require "rake/clean"
-require "xcodeproj"
 
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
@@ -42,7 +41,6 @@ CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
 CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
-APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
 TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
@@ -107,6 +105,7 @@ namespace :cordova do
   desc "Install cordova package globally"
   task :install do
     sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova; fi }
+    sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
   end
   desc "Cordova prepare {platform}"
   task :prepare do
@@ -115,6 +114,7 @@ namespace :cordova do
     create_build_json_file
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
+    sh %{ cordova-update-config --appname "#{app_name}" --appid #{app_id} --appversion #{app_version} }
 
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
@@ -132,28 +132,9 @@ namespace :cordova do
   end
   desc "Cordova build {platform}"
   task build: :prepare do
-    if platform == "ios"
-      xcodeproject_file = Dir.glob("#{CORDOVA_PATH}/platforms/ios/*.xcodeproj")[0]
-      xcodefile_name = File.basename(xcodeproject_file, ".xcodeproj")
-      project = Xcodeproj::Project.open(xcodeproject_file)
-      target = project.targets.select { |t| t.name == xcodefile_name }
-      project.build_configurations.each do |config|
-        config.build_settings['ENABLE_BITCODE'] = 'NO'
-        config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
-        config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
-        config.build_settings['CODE_SIGN_IDENTITY'] = app_signing_identity
-        # config.build_settings['HEADER_SEARCH_PATHS'] = "\$(TARGET_BUILD_DIR)/usr/local/lib/include \$(OBJROOT)/UninstalledProducts/include \$(BUILT_PRODUCTS_DIR) \$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
-      end
-      project.save
-    end
-
     Dir.chdir(CORDOVA_PATH) do
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
-      if platform == "ios"
-        # sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
-        sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}'}
-      end
     end
     # Copy build artifacts
     if ENV["CI"]
@@ -250,11 +231,11 @@ def ipa_file
 end
 
 def app_name
-  app_details[environment]["name"]
+  is_staging ? "S. Admin GoodCity" : "Admin GoodCity"
 end
 
-def app_url
-  app_details[environment]["url"]
+def app_id
+  is_staging ? "hk.goodcity.adminstaging" : "hk.goodcity.admin"
 end
 
 def app_version
@@ -268,14 +249,6 @@ def app_version
   end
 end
 
-def app_signing_identity
-  app_details[environment]["signing_detail"]
-end
-
-def app_details
-  @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
-end
-
 def testfairy_upload_script
   "#{CORDOVA_PATH}/deploy/testfairy-#{platform}-upload.sh"
 end
@@ -285,9 +258,7 @@ def is_staging
 end
 
 def build_details
-  _build_details = {app_name: app_name, env: environment, platform: platform, app_version: app_version}
-  _build_details[:app_signing_identity] = app_signing_identity if platform == "ios"
-  _build_details
+  {app_name: app_name, env: environment, platform: platform, app_version: app_version}
 end
 
 def log(msg="")
