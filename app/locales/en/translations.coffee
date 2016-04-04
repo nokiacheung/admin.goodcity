@@ -14,6 +14,9 @@ I18nTranslationsEn =
       "server_search": "Find more on server"
       "placeholder": "Search"
 
+    "users":
+      "search": "Search User"
+
     "offer":
       "title": "Offer"
       "donor": "Donor"

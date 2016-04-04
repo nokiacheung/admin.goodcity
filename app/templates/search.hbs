@@ -3,13 +3,13 @@
     {{focus-textfield
       name="searchText"
       id="searchText"
-      placeholder="Search"
+      placeholder=(t 'search.placeholder')
       value=searchText }}
 
     {{#if hasSearchText}}
       <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
     {{/if}}
-    <a href="#" {{action "cancelSearch"}}>Cancel</a>
+    <a href="#" {{action "cancelSearch"}}>{{t "cancel"}}</a>
   </div>
 </div>
 

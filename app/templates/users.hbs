@@ -5,13 +5,13 @@
         type="text"
         name="searchText"
         id="searchText"
-        placeholder="Search User"
+        placeholder=(t 'users.search')
         value=searchText }}
 
       {{#if hasSearchText}}
         <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
       {{/if}}
-      <a href="#" {{action "cancelSearch"}}>Cancel</a>
+      <a href="#" {{action "cancelSearch"}}>{{t "cancel"}}</a>
     </div>
   </div>
 

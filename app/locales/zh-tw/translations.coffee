@@ -14,6 +14,9 @@ I18nTranslationsZhTw =
       "server_search": "於服務器上尋找更多資訊"
       "placeholder": "搜索"
 
+    "users":
+      "search": "Search User"
+
     "offer":
       "title": "捐獻細節"
       "donor": "捐贈者"
@@ -124,6 +127,7 @@ I18nTranslationsZhTw =
         "add_item": "添加項目"
         "delete_offer": "刪除捐獻項"
         "submit_offer": "重新提交捐獻項"
+        "merge_offer": "Merge Offer"
 
     "mark_received":
       "delivered_by": "運送人員："
@@ -229,6 +233,7 @@ I18nTranslationsZhTw =
       "invalid_description": "空格不能留空"
       "receive": "接收"
       "cancel": "取消"
+      "enter_barcode": "Enter barcode"
 
     "user":
       "permission": "准許"
