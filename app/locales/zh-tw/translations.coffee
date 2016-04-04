@@ -183,6 +183,7 @@ I18nTranslationsZhTw =
       "supply_message" : "很抱歉，由於我們已經有很多同類型的物資，我們無法接受您的捐獻。"
       "cancel_gogovan_confirm": "拒絕接受最後一項物資將會取消GoGoVan的預約，您是否確認？"
       "custom_reason": "特別原因"
+      "cannot_reject_error": "Cannot reject last item if there's a confirmed GoGoVan booking."
 
     "cancel_gogovan":
       "title": "取消預約GoGoVan"

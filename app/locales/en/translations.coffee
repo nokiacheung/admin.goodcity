@@ -183,6 +183,7 @@ I18nTranslationsEn =
       "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
       "cancel_gogovan_confirm": "Rejecting the last item will cancel the gogovan booking, do you wish to proceed?"
       "custom_reason": "Custom Reason"
+      "cannot_reject_error": "Cannot reject last item if there's a confirmed GoGoVan booking."
 
     "cancel_gogovan":
       "title": "Cancel GoGoVan Booking"

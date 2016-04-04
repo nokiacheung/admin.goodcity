@@ -124,13 +124,18 @@ export default Ember.Controller.extend({
       var itemIsLastAccepted = offer.get("approvedItems").every(i => i.id === this.get('itemId'));
 
       if (itemIsLastAccepted && gogovanOrder) {
-        this.get("messageBox").confirm(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
-          if (gogovanOrder.get("isActive")) {
-            this.transitionToRoute('offer.cancel_gogovan', offer);
-          } else {
-            saveItem();
-          }
-        });
+
+        if(gogovanOrder.get("isPickedUp")) {
+          this.get("messageBox").alert(this.get("i18n").t("reject.cannot_reject_error"));
+        } else {
+          this.get("messageBox").confirm(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
+            if (gogovanOrder.get("isActive")) {
+              this.transitionToRoute('offer.cancel_gogovan', offer);
+            } else {
+              saveItem();
+            }
+          });
+        }
       } else {
         saveItem();
       }
