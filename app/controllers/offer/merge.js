@@ -8,6 +8,11 @@ export default Ember.Controller.extend({
 
   offerDonor: Ember.computed.alias("model.createdBy"),
   messageBox: Ember.inject.service(),
+  i18n: Ember.inject.service(),
+
+  locale: function(str){
+    return this.get("i18n").t(str);
+  },
 
   allOffers: Ember.computed(function(){
     return this.store.peekAll("offer");
@@ -22,7 +27,11 @@ export default Ember.Controller.extend({
 
   actions: {
     confirmMergeOffer(offer) {
-      this.confirmMergeOffer(() => this.send("mergeOffer", offer));
+        this.get("messageBox").custom(
+        this.locale("offer.merge.message"),
+        this.locale("offer.merge.merge"), () => this.send("mergeOffer", offer),
+        this.locale("cancel")
+      );
     },
 
     mergeOffer(baseOffer) {
@@ -37,33 +46,10 @@ export default Ember.Controller.extend({
           if(data.status) {
             this.transitionToRoute("review_offer.items", baseOffer);
           } else {
-            this.get("messageBox").alert(this.get("i18n").t('offer.merge.error'));
+            this.get("messageBox").alert(this.locale('offer.merge.error'));
           }
         });
     },
-  },
-
-  confirmMergeOffer: function(successCallback) {
-    var _this = this;
-    Ember.$("#confirmOfferMergeModal").removeClass("open");
-    Ember.$("#confirmOfferMergeModal").foundation("reveal", "open");
-    Ember.$(".loading-indicator").remove();
-
-    Ember.$("#confirmOfferMergeModal .closeLink").click(() => {
-      _this.closeConfirmBox();
-    });
-
-    Ember.$("#confirmOfferMergeModal .confirmLink").click(() => {
-      successCallback();
-      _this.closeConfirmBox();
-    });
-  },
-
-  closeConfirmBox: function() {
-    Ember.run.next(function() {
-      Ember.$("#confirmOfferMergeModal").foundation("reveal", "close");
-      Ember.$("#confirmOfferMergeModal *").unbind('click');
-    });
   },
 
 });
