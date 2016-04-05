@@ -1,16 +1,13 @@
 <a {{action 'confirmCloseOffer'}}>{{t "review_offer.close_offer"}}</a>
 
-<div id="confirmCompleteReceiveModal" class="small reveal-modal ui" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<div class="confirmOfferModal ui">
+  {{#message-box btn1Text=(t "review_offer.close_offer") btn1Callback=(action "closeOffer") btn2Text=(t "receive.receiving.not_now")  isVisible=displayUserPrompt}}
+    <div class="receive_title">
+      {{t "review_offer.message_donor"}}
+    </div>
 
-  <div class="receive_title">
-    {{t "review_offer.message_donor"}}
-  </div>
-
-  <div class="{{if invalidMessage 'has-error'}}">
-    {{auto-resize-textarea data-autoresize=true id="closeOfferMessage" name="closeOfferMessage" value=closeMessage maxlength=255 }}
-  </div>
-
-  <a class="right button closeLink action1">{{t "receive.receiving.not_now"}}</a>
-  <a class="right button confirmLink action2">{{t "review_offer.close_offer"}}</a>
+    <div class="{{if invalidMessage 'has-error'}}">
+      {{auto-resize-textarea data-autoresize=true id="closeOfferMessage" name="closeOfferMessage" value=closeMessage maxlength=255 }}
+    </div>
+  {{/message-box}}
 </div>
-
