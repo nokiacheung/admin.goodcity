@@ -26,10 +26,19 @@ export default Ember.Component.extend({
     }
   }),
 
+  displayUserPrompt: Ember.computed({
+    get() {
+      return false;
+    },
+    set(key, value) {
+      return value;
+    }
+  }),
+
   actions: {
 
     confirmCloseOffer() {
-      this.confirmCloseOffer(() => this.send("closeOffer"));
+      this.set("displayUserPrompt", true);
     },
 
     closeOffer() {
@@ -52,32 +61,9 @@ export default Ember.Component.extend({
           this.get("store").pushPayload(data);
         })
         .finally(() => {
-          this.closeConfirmBox();
           loadingView.destroy();
         });
     },
-  },
-
-  confirmCloseOffer: function(successCallback) {
-    var _this = this;
-    Ember.$("#confirmOfferCloseModal").removeClass("open");
-    Ember.$("#confirmOfferCloseModal").foundation("reveal", "open");
-    Ember.$(".loading-indicator").remove();
-
-    Ember.$("#confirmOfferCloseModal .closeLink").click(() => {
-      _this.closeConfirmBox();
-    });
-
-    Ember.$("#confirmOfferCloseModal .confirmLink").click(() => {
-      successCallback();
-    });
-  },
-
-  closeConfirmBox: function() {
-    Ember.run.next(function() {
-      Ember.$("#confirmOfferCloseModal").foundation("reveal", "close");
-      Ember.$("#confirmOfferCloseModal *").unbind('click');
-    });
   },
 
 });
