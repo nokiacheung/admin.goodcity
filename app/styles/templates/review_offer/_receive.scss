@@ -82,7 +82,7 @@
   }
 }
 
-#confirmReceivingModal, #confirmOfferCancelModal, #confirmOfferInactiveModal {
+#confirmReceivingModal, #confirmOfferCancelModal, .confirmOfferModal #messageBox {
   top: 20% !important;
 
   @media #{$small-only} {

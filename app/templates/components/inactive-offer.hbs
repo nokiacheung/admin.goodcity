@@ -3,16 +3,14 @@
   {{t "inactive_offer.mark_inactive"}}
 </a>
 
-<div id="confirmOfferInactiveModal" class="small reveal-modal ui" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<div class="confirmOfferModal">
+  {{#message-box btn1Text=(t "inactive_offer.mark_inactive") btn1Callback=(action "markOfferInactive") btn2Text=(t "receive.receiving.not_now")  isVisible=displayUserPrompt}}
+    <div class="receive_title">
+      {{t "inactive_offer.add_message"}}:
+    </div>
 
-  <div class="receive_title">
-    {{t "inactive_offer.add_message"}}:
-  </div>
-
-  <div class="{{if invalidMessage 'has-error'}}">
-    {{auto-resize-textarea data-autoresize=true name="inactiveMessage" id="inactiveMessage" value=inactiveMessage maxlength=140 }}
-  </div>
-
-  <a class="right button closeLink action1">{{t "receive.receiving.not_now"}}</a>
-  <a class="right button confirmLink action2">{{t "inactive_offer.mark_inactive"}}</a>
+    <div class="{{if invalidMessage 'has-error'}} ui">
+      {{auto-resize-textarea data-autoresize=true name="inactiveMessage" id="inactiveMessage" value=inactiveMessage maxlength=140 }}
+    </div>
+  {{/message-box}}
 </div>
