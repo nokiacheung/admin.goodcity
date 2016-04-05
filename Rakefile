@@ -93,7 +93,13 @@ namespace :ember do
     # Before starting Ember build clean up folders
     Rake::Task["clobber"].invoke
     Dir.chdir(ROOT_PATH) do
-      system({"EMBER_CLI_CORDOVA" => "1", "APP_SHA" => app_sha, "APP_SHARED_SHA" => app_shared_sha, "staging" => is_staging, "VERSION" => app_version }, "ember build --environment=production")
+      system({
+        "EMBER_CLI_CORDOVA" => "1",
+        "APP_SHA" => app_sha,
+        "APP_SHARED_SHA" => app_shared_sha,
+        "staging" => is_staging.to_s,
+        "VERSION" => app_version
+      }, "ember build --environment=production")
     end
   end
   task :select_branch do
@@ -219,7 +225,7 @@ def app_file
   when /ios/
     "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.app"
   when /android/
-    build = (environment == "production") ? "release" : "debug"
+    build = is_staging ? "debug" : "release"
     "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-#{build}.apk"
   when /windows/
     raise(BuildError, "TODO: Need to get Windows app path")
@@ -254,7 +260,7 @@ def testfairy_upload_script
 end
 
 def is_staging
-  (environment == "staging").to_s
+  environment == "staging"
 end
 
 def build_details
