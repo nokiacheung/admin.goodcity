@@ -7,7 +7,7 @@ var App, offer1, offer2, item2, item1, item3, item4,
   offer3, item5;
 
 module('Reviewer: Display Item Status', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -23,7 +23,7 @@ module('Reviewer: Display Item Status', {
     item5 = FactoryGuy.make("item", {offer: offer3, state:"accepted"});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

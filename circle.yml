@@ -1,8 +1,8 @@
 machine:
   pre:
-    - curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | bash
+    - curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
   node:
-    version: 0.12
+    version: 4.4
 
 dependencies:
   pre:
@@ -24,14 +24,10 @@ deployment:
     branch: master
     commands:
       - bundle exec cap staging deploy
-      - bundle exec rake staging cordova:bump_version
-      - bundle exec rake staging ios_build_server:notify
       - bundle exec rake staging android app:release
   production:
     branch: live
     commands:
       - bundle exec cap production deploy
-      - bundle exec rake production cordova:bump_version
-      - bundle exec rake production ios_build_server:notify
       - "scp -P 59207 deployer@admin-staging.goodcity.hk:/home/deployer/goodcity.keystore cordova/goodcity.keystore"
       - bundle exec rake production android app:release

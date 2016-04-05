@@ -1,0 +1,37 @@
+<span class="item-image">
+  <img src={{offer.displayImageUrl}} class="thumb small" />
+</span>
+
+<div class="row offer">
+  <div class="small-11 columns">
+    <span class="info">
+      <h3>
+        {{t "full_name" firstName=offer.createdBy.firstName lastName=offer.createdBy.lastName}}
+      </h3>
+
+      <div class='time_indicator'>
+        {{offer.timeDetail.prefix}}
+        {{#if offer.isScheduled}}
+          <i class="fa fa-truck"></i>
+          <b>
+            {{display-datetime offer.timeDetail.date format='h:mm A, ddd Do MMM'}}
+            {{offer.timeDetail.suffix}}
+          </b>
+        {{else}}
+          {{time-ago timeValue=offer.timeDetail.date smallPrefix=true}}
+          {{offer.timeDetail.suffix}}
+        {{/if}}
+      </div>
+
+      <div>
+        {{offer.itemStatus}}
+      </div>
+    </span>
+  </div>
+
+  <div class="small-1 columns">
+    {{#if offer.unreadMessagesCount}}
+      <span class='unread_length'>{{offer.unreadMessagesCount}}</span>
+    {{/if}}
+  </div>
+</div>

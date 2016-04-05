@@ -14,6 +14,9 @@ I18nTranslationsZhTw =
       "server_search": "於服務器上尋找更多資訊"
       "placeholder": "搜索"
 
+    "users":
+      "search": "Search User"
+
     "offer":
       "title": "捐獻細節"
       "donor": "捐贈者"
@@ -22,6 +25,13 @@ I18nTranslationsZhTw =
       "donor_messages" : "捐贈者信息"
       "supervisor_messages" : "監察員信息"
       "empty_msg" : "對不起！這項捐獻並不存在。"
+
+      "merge":
+        "title": "選擇捐獻項，將之合拼"
+        "message": "合拼後無法還原。除了剛才點選的項目的一般討論外，所有數據皆會保留"
+        "cancel": "取消"
+        "merge": "合拼"
+        "error": "無法合拼這幾個項目"
 
       "offer_details" :
         "heading" : "捐贈詳情"
@@ -38,7 +48,7 @@ I18nTranslationsZhTw =
         "rejected": "已拒絕"
         "pending": "正在等候"
         "missing": "遺失"
-        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
+        "start_receiving_by": "{{firstName}} {{lastName}} 開始接收"
 
     "items":
       "add_item":
@@ -66,15 +76,15 @@ I18nTranslationsZhTw =
       "my_list" : "我的列表"
       "finished": "已完成"
       "closed_offers": "已完成"
-      "receiving": "Receiving"
-      "users": "Users"
+      "receiving": "正在接收"
+      "users": "使用者"
 
     "my_notifications":
       "heading" : "{{name}}的捐獻"
-      "all_notifications" : "All notifications"
-      "show_unread" : "Show unread only"
-      "mark_all_read" : "Mark all read"
-      "no_unread": "No unread messages!"
+      "all_notifications" : "所有新信息"
+      "show_unread" : "顯示未讀信息"
+      "mark_all_read" : "全部標示為已讀"
+      "no_unread": "沒有未讀信息"
 
     "review_offer":
       "title" : "審查捐獻項目"
@@ -88,7 +98,7 @@ I18nTranslationsZhTw =
       "reviewed": "審查完畢"
       "start_review": "開始審查"
       "goods_received_by" : "已經收到由 {{firstName}} {{lastName}} 捐贈的物資"
-      "goods_start_receiving_by": "{{firstName}} {{lastName}} began receiving items"
+      "goods_start_receiving_by": "{{firstName}} {{lastName}} 開始接收物資"
       "offer_closed_by": "捐贈項目由 {{firstName}} {{lastName}} 關閉"
       "offer_cancelled_by": "捐贈項目由 {{firstName}} {{lastName}} 取消"
       "receive": "收到"
@@ -96,23 +106,28 @@ I18nTranslationsZhTw =
       "received": "已經收到"
       "expecting": "等候中"
       "all_items_processed": "所有項目皆被接收或列作遺失"
-      "inactive_offer": "This offer is marked as inactive."
+      "inactive_offer": "這項捐獻已被暫停"
+      "message_donor": "傳送信息給捐獻人士，告知其捐獻已被暫停："
+      "receive_offer_message": "已經收到你捐贈的物資，謝謝。"
+      "missing_offer_message": "貨車已抵達十字路會，惟未見物資，我們或會和你跟進，確認事件狀況。"
+      "close_offer_message": "閣下的捐獻項目處理完畢，但我們現時無法接收閣下的物資，請見諒，還望下次有機會為閣下的物資找到合適的安置。"
 
       "donor":
-        "offer_id": "Offer ID"
+        "offer_id": "捐獻項目號碼"
         "district": "地區"
         "registered": "已註冊"
         "last_seen": "最後上線"
         "total_offers": "捐獻總數"
         "crm": "CRM"
         "other_offers": "所有好人好市捐獻"
-        "internet_call": "Internet Call"
-        "end_call": "End Call"
+        "internet_call": "網上通話"
+        "end_call": "結束通話"
 
       "options":
-        "add_item": "Add an item"
-        "delete_offer": "Delete Offer"
-        "submit_offer": "Re-submit Offer"
+        "add_item": "添加項目"
+        "delete_offer": "刪除捐獻項"
+        "submit_offer": "重新提交捐獻項"
+        "merge_offer": "Merge Offer"
 
     "mark_received":
       "delivered_by": "運送人員："
@@ -136,8 +151,8 @@ I18nTranslationsZhTw =
       "goods_received" : "物資接收日期"
       "arrange_transport": "安排運輸"
       "van": "麵包車"
-      "receiving" : "This offer is currently being received."
-      "offer_cancelled_by": "Offer cancelled by {{lastName}} {{firstName}}"
+      "receiving" : "正在接收這項捐獻"
+      "offer_cancelled_by": "這項捐獻由 {{lastName}} {{firstName}} 取消"
 
     "review_item":
       "title" : "審查物資"
@@ -168,6 +183,7 @@ I18nTranslationsZhTw =
       "supply_message" : "很抱歉，由於我們已經有很多同類型的物資，我們無法接受您的捐獻。"
       "cancel_gogovan_confirm": "拒絕接受最後一項物資將會取消GoGoVan的預約，您是否確認？"
       "custom_reason": "特別原因"
+      "cannot_reject_error": "Cannot reject last item if there's a confirmed GoGoVan booking."
 
     "cancel_gogovan":
       "title": "取消預約GoGoVan"
@@ -178,19 +194,19 @@ I18nTranslationsZhTw =
     "receive":
       "missing": "遺失"
       "receive": "接收"
-      "inventory": "Inventory"
+      "inventory": "存貨"
       "receiving":
-        "header": "Begin Receiving Offer"
-        "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
-        "not_now": "Not Now"
-        "begin_receiving": "Begin Receiving"
+        "header": "開始接收捐獻項目"
+        "cant_modify_note": "提示：一旦捐獻項目狀態改成「正在接收」，將無法還原，捐獻人士亦無法更改物資資料。"
+        "not_now": "現在無法進行"
+        "begin_receiving": "開始接收"
 
 
     "finished":
       "title": "已完成"
       "received": "已接收"
       "cancelled": "已取消"
-      "inactive": "Inactive"
+      "inactive": "暫停"
 
     "scheduled":
       "title": "已安排時間"
@@ -212,23 +228,24 @@ I18nTranslationsZhTw =
       "comments": "描述"
 
     "receive_package":
-      "inventory": "Inventory Number"
-      "invalid_inventory": "Inventory number is invalid."
-      "invalid_quantity": "Quantity can not be blank."
-      "invalid_description": "Description can not be blank."
-      "receive": "Receive"
-      "cancel": "Cancel"
+      "inventory": "存貨號碼"
+      "invalid_inventory": "存貨號碼不正確"
+      "invalid_quantity": "空格不能留空"
+      "invalid_description": "空格不能留空"
+      "receive": "接收"
+      "cancel": "取消"
+      "enter_barcode": "Enter barcode"
 
     "user":
-      "permission": "Permission"
+      "permission": "准許"
 
     "inactive_offer":
-      "message": "This offer seems to be inactive. Please feel free to modify, re-submit or cancel it."
-      "add_message": "Add message for donor"
-      "mark_inactive": "Mark Inactive"
+      "message": "此捐獻項目被暫停，可以隨意更改、重新提交或取消。"
+      "add_message": "向捐獻人士傳送信息"
+      "mark_inactive": "將狀態改成暫停"
 
     "cancel_offer":
-      "donor_message": "Choose why the donor wishes to cancel this offer."
-      "cancel": "Cancel Offer"
+      "donor_message": "選擇捐獻人士取消的原因"
+      "cancel": "取消捐獻"
 
 `export default I18nTranslationsZhTw`

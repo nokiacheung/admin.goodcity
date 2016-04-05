@@ -1,10 +1,11 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
   hidden: true,
   packageId: null,
   store: Ember.inject.service(),
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   isReceived: Ember.computed.equal("package.state", "received"),
   isMissing: Ember.computed.equal("package.state", "missing"),
@@ -18,7 +19,7 @@ export default Ember.Component.extend({
   }),
 
   currentUrl: Ember.computed('packageId', function(){
-    return this.container.lookup("router:main").get("url");
+    return getOwner(this).lookup("router:main").get("url");
   }),
 
   isFirstReceivingPackage: Ember.computed('package', function(){
@@ -27,7 +28,7 @@ export default Ember.Component.extend({
   }),
 
   updatePackage: function(action) {
-    var loadingView = this.container.lookup('component:loading').append();
+    var loadingView = getOwner(this).lookup('component:loading').append();
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
@@ -37,7 +38,7 @@ export default Ember.Component.extend({
         var errorMessage = pkg.get("errors.firstObject.message");
         var matchFound = ["Connection error", "Dispatched"].some(v => errorMessage.indexOf(v) >= 0);
         if(matchFound) {
-          this.get("alert").show(pkg.get("errors.firstObject.message"), () => {
+          this.get("messageBox").alert(pkg.get("errors.firstObject.message"), () => {
             pkg.rollbackAttributes();
           });
         } else {
@@ -70,6 +71,7 @@ export default Ember.Component.extend({
 
     receivePackage() {
       this.updatePackage(p => {
+        p.set("inventoryNumber", null);
         p.set("state", "received");
         p.set("state_event", "mark_received");
       });
@@ -114,6 +116,7 @@ export default Ember.Component.extend({
   closeConfirmBox: function() {
     Ember.run.next(function() {
       Ember.$("#confirmReceivingModal").foundation("reveal", "close");
+      Ember.$("#confirmReceivingModal *").unbind('click');
     });
   },
 });

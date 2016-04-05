@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { translationMacro as t } from "ember-i18n";
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -61,7 +62,7 @@ export default Ember.Controller.extend({
     return this.store.peekAll('rejection_reason').sortBy('id');
   }),
 
-  confirm: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   actions: {
     setRejectOption() {
@@ -91,7 +92,7 @@ export default Ember.Controller.extend({
       var offer = this.get("offer.model");
 
       var saveItem = () => {
-        var loadingView = this.container.lookup('component:loading').append();
+        var loadingView = getOwner(this).lookup('component:loading').append();
         rejectProperties.rejectionReason = this.store.peekRecord('rejection_reason', selectedReason);
         rejectProperties.state_event = 'reject';
         rejectProperties.id = this.get('itemId');
@@ -99,7 +100,8 @@ export default Ember.Controller.extend({
         rejectProperties.offer = offer;
         rejectProperties.packageType = this.store.peekRecord('packageType', this.get('itemTypeId'));
 
-        var item = this.store.push('item', rejectProperties);
+        var item = this.store.peekRecord("item", this.get("itemId"));
+        item.setProperties(rejectProperties);
 
         // Save changes to Item
         item.save()
@@ -122,13 +124,18 @@ export default Ember.Controller.extend({
       var itemIsLastAccepted = offer.get("approvedItems").every(i => i.id === this.get('itemId'));
 
       if (itemIsLastAccepted && gogovanOrder) {
-        this.get("confirm").show(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
-          if (gogovanOrder.get("isActive")) {
-            this.transitionToRoute('offer.cancel_gogovan', offer);
-          } else {
-            saveItem();
-          }
-        });
+
+        if(gogovanOrder.get("isPickedUp")) {
+          this.get("messageBox").alert(this.get("i18n").t("reject.cannot_reject_error"));
+        } else {
+          this.get("messageBox").confirm(this.get("i18n").t("reject.cancel_gogovan_confirm"), () => {
+            if (gogovanOrder.get("isActive")) {
+              this.transitionToRoute('offer.cancel_gogovan', offer);
+            } else {
+              saveItem();
+            }
+          });
+        }
       } else {
         saveItem();
       }

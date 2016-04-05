@@ -2,12 +2,13 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import testSkip from '../helpers/test-skip';
 
 var App, offer, message1, message2, message3,
   message4, message5, user1, user2, offer1;
 
 module('Reviewer: Display Offer Messages', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     user1 = FactoryGuy.make("user");
@@ -21,7 +22,7 @@ module('Reviewer: Display Offer Messages', {
     message3 = FactoryGuy.make("message", {offer: offer, item: null, body: "Message from Supervisor", isPrivate: true});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
@@ -73,7 +74,7 @@ test("offer-messages from staff should add unread bubble in supervisor message t
   });
 });
 
-test("offer-message with image", function() {
+testSkip("offer-message with image", function() {
   visit('/offers/' + offer1.id + "/donor_messages");
   andThen(function() {
     var src = $(".received_message#"+message4.id+" img").attr("src");

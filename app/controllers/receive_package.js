@@ -1,13 +1,34 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   cordova: Ember.inject.service(),
 
   package: Ember.computed.alias("model"),
   watchErrors: true,
   isAndroidDevice: false,
+
+  donorConditions: Ember.computed(function(){
+    return this.get("store").peekAll('donor_condition').sortBy('id');
+  }),
+
+  selectedCondition: Ember.computed.alias("model.donorCondition"),
+
+  grades: Ember.computed(function(){
+    return [
+      { name: "Grade: A", id: "A" },
+      { name: "Grade: B", id: "B" },
+      { name: "Grade: C", id: "C" },
+      { name: "Grade: D", id: "D" }
+    ];
+  }),
+
+  selectedGrade: Ember.computed("model", function(){
+    var grade = this.get("model.grade");
+    return this.get("grades").filterBy('id', grade).get("firstObject");
+  }),
 
   identifyDevice: Ember.on('init', function() {
     var isAndroidDevice = this.get("cordova").isAndroid();
@@ -113,7 +134,7 @@ export default Ember.Controller.extend({
       this.notifyPropertyChange("watchErrors"); // this will recalculate 'hasErrors' property, sometimes it does return true for valid form.
       if(this.get("hasErrors")) { return false; }
 
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var pkg = this.get("package");
 
       var locationId = this.get("locationId.id") || this.get("locationId");
@@ -130,6 +151,8 @@ export default Ember.Controller.extend({
       pkg.set("height", pkgData.height);
       pkg.set("notes", pkgData.notes);
       pkg.set("inventoryNumber", pkgData.inventoryNumber);
+      pkg.set("grade", this.get("selectedGrade.id"));
+      pkg.set("donorCondition", this.get("selectedCondition"));
       pkg.save()
         .then(() => {
           loadingView.destroy();
@@ -139,7 +162,7 @@ export default Ember.Controller.extend({
           loadingView.destroy();
           var errorMessage = pkg.get("errors.firstObject.message");
           if(errorMessage.indexOf("Connection error") >= 0) {
-            this.get("alert").show(errorMessage, () => pkg.rollbackAttributes());
+            this.get("messageBox").alert(errorMessage, () => pkg.rollbackAttributes());
           } else {
             _this.set("hasErrors", true);
           }
@@ -155,7 +178,7 @@ export default Ember.Controller.extend({
   },
 
   verifyInventoryNumber: function(value) {
-    return /[#{A-Z}][0-9]{5}[a-zA-Z]{0,1}[0-9]*/.test(value);
+    return /^[A-Z]{0,1}[0-9]{5,6}(Q[0-9]*){0,1}$/i.test(value);
   },
 
 });

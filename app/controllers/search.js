@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { translationMacro as t } from "ember-i18n";
 import backNavigator from './../mixins/back_navigator';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend(backNavigator, {
   filter: '',
@@ -109,7 +110,7 @@ export default Ember.Controller.extend(backNavigator, {
 
     searchOnServer() {
       var controller = this;
-      var loadingView = controller.container.lookup('component:loading').append();
+      var loadingView = getOwner(controller).lookup('component:loading').append();
       return this.store.query('offer', { states: ["not_active"] }).finally(function(){
         controller.set('fetchMoreResult', false);
         loadingView.destroy();

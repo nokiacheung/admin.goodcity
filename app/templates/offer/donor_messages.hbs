@@ -18,9 +18,7 @@
           {{#link-to 'offer.donor_messages' tagName="dd" classNames="small-6 columns text-center"}}
             {{#link-to 'offer.donor_messages'}}
               <i class="fa fa-comment-o fa-2x"></i>
-              {{#if offer.hasUnreadDonorMessages}}
-                <i class="fa fa-circle fa-1x unread"></i>
-              {{/if}}
+              <i class="fa fa-circle fa-1x unread {{unless offer.hasUnreadDonorMessages 'hidden'}}"></i>
               <span class='tab_title'>{{t "offer.donor_messages"}}</span>
             {{/link-to}}
           {{/link-to}}
@@ -28,9 +26,7 @@
           {{#link-to 'offer.supervisor_messages' tagName="dd" classNames="small-6 columns text-center"}}
             {{#link-to 'offer.supervisor_messages'}}
               <i class="fa fa-comment-o fa-2x"></i>
-              {{#if offer.hasUnreadPrivateMessages}}
-                <i class="fa fa-circle fa-1x unread"></i>
-              {{/if}}
+              <i class="fa fa-circle fa-1x unread {{unless offer.hasUnreadPrivateMessages 'hidden'}}"></i>
               <span class='tab_title'>{{t "offer.supervisor_messages"}}</span>
             {{/link-to}}
           {{/link-to}}

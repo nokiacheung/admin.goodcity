@@ -22,10 +22,6 @@
 #     > rake cordova:prepare
 #     > rake cordova:build
 #
-# iOS Build Server
-#     > rake ios_build_server:notify (tells the iOS server to start a build)
-#     > rake ios_build_server:build (checks and starts a build)
-#
 #     Cronjob entry
 # * * * * * source /Users/developer/.bash_profile; rake -f /Users/developer/Workspace/admin.goodcity/Rakefile app:release  >> /tmp/goodcity_admin_ios_build.log 2>&1
 #
@@ -36,9 +32,7 @@
 
 require "json"
 require "fileutils"
-require "iron_mq"
 require "rake/clean"
-require "xcodeproj"
 
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova"
@@ -47,14 +41,11 @@ CLEAN.include("dist", "cordova/www", "#{CORDOVA_PATH}/platforms/android/build",
 CLOBBER.include("cordova/platforms", "cordova/plugins")
 PLATFORMS = %w(android ios windows).freeze
 ENVIRONMENTS = %w(staging production).freeze
-APP_DETAILS_PATH = "#{CORDOVA_PATH}/appDetails.json"
 TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
 TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
 SPLUNKMINT_PLUGIN_URL = "https://github.com/swatijadhav/splunkmint-cordova-plugin.git"
-LOCK_FILE="#{CORDOVA_PATH}/.ios_build.lock"
-LOCK_FILE_MAX_AGE = 1000 # number of seconds before we remove lock file if failing build
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
 BUILD_JSON_FILE = "#{CORDOVA_PATH}/build.json"
 
@@ -64,7 +55,7 @@ task default: %w(app:build)
 # Main namespace
 namespace :app do
   desc "Builds the app"
-  task build: %w(ember:install cordova:install cordova:prepare cordova:build)
+  task build: %w(ember:install ember:build cordova:install cordova:prepare cordova:build)
   desc "Uploads the app to TestFairy"
   task deploy: %w(testfairy:upload)
   desc "Equivalent to rake app:build app:deploy"
@@ -114,6 +105,7 @@ namespace :cordova do
   desc "Install cordova package globally"
   task :install do
     sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova; fi }
+    sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
   end
   desc "Cordova prepare {platform}"
   task :prepare do
@@ -122,6 +114,7 @@ namespace :cordova do
     create_build_json_file
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
+    sh %{ cd #{CORDOVA_PATH}; cordova-update-config --appname "#{app_name}" --appid #{app_id} --appversion #{app_version} }
 
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
@@ -139,47 +132,14 @@ namespace :cordova do
   end
   desc "Cordova build {platform}"
   task build: :prepare do
-    if platform == "ios"
-      xcodeproject_file = Dir.glob("#{CORDOVA_PATH}/platforms/ios/*.xcodeproj")[0]
-      xcodefile_name = File.basename(xcodeproject_file, ".xcodeproj")
-      project = Xcodeproj::Project.open(xcodeproject_file)
-      target = project.targets.select { |t| t.name == xcodefile_name }
-      project.build_configurations.each do |config|
-        config.build_settings['CODE_SIGNING_ALLOWED'] = 'YES'
-        config.build_settings['CODE_SIGNING_REQUIRED'] = 'YES'
-        config.build_settings['CODE_SIGN_IDENTITY'] = 'iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)'
-        # config.build_settings['HEADER_SEARCH_PATHS'] = "\$(TARGET_BUILD_DIR)/usr/local/lib/include \$(OBJROOT)/UninstalledProducts/include \$(BUILT_PRODUCTS_DIR) \$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include"
-      end
-      project.save
-    end
-
     Dir.chdir(CORDOVA_PATH) do
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
-      if platform == "ios"
-        # sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}' --sign "#{app_signing_identity}"}
-        sh %{ xcrun -sdk iphoneos PackageApplication -v '#{app_file}' -o '#{ipa_file}'}
-      end
     end
     # Copy build artifacts
     if ENV["CI"]
       sh %{ if [ -e "#{app_file}" ]; then cp #{app_file} $CIRCLE_ARTIFACTS/; fi }
       sh %{ if [ -e "#{ipa_file}" ]; then cp #{ipa_file} $CIRCLE_ARTIFACTS/; fi }
-    end
-  end
-  task :bump_version do
-    increment_app_version!
-    if ENV["CI"]
-      Dir.chdir(ROOT_PATH) do
-        sh %{ git config --global user.email "none@none" }
-        sh %{ git config --global user.name "CircleCi" }
-        sh %{ git config --global push.default current }
-        sh %{ git add #{APP_DETAILS_PATH} }
-        sh %{ git commit -m "Update build version [ci skip]" }
-        sh %{ git stash }
-        sh %{ git push; true } # try but don't care if this fails
-        sh %{ git stash pop; true }
-      end
     end
   end
 end
@@ -197,40 +157,6 @@ namespace :testfairy do
     end
     log("Uploaded app...")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
-  end
-end
-
-namespace :ios_build_server do
-  desc "Sends a message to the iOS build server to begin building an app"
-  task notify: :check_env do
-    iron_queue.post("build")
-  end
-  desc "Checks to see if we should begin a build"
-  task build: :check_env do
-    log("Checking for build messages on #{iron_queue.name}...")
-    msg = iron_queue.get
-    if msg
-      if !lock_expired?
-        log("Build starting...")
-        Dir.chdir(ROOT_PATH) do
-          sh %{ git fetch origin; git reset --hard HEAD; git pull }
-        end
-        create_lock!
-        msg.delete
-        Rake::Task["app:release"].invoke
-        delete_lock!
-      else
-        log("Build currently in progress")
-      end
-    else
-      log("No build requested")
-    end
-  end
-  task :check_env do
-    %w(GOODCITY_IRON_MQ_OAUTH_KEY GOODCITY_IRON_MQ_PROJECT_KEY
-      GOODCITY_IRON_MQ_QUEUE_NAME TESTFAIRY_API_KEY).each do |env|
-        raise(BuildError, "#{env} not set.") unless env?(env)
-    end
   end
 end
 
@@ -305,29 +231,22 @@ def ipa_file
 end
 
 def app_name
-  app_details[environment]["name"]
+  is_staging ? "S. Admin GoodCity" : "Admin GoodCity"
 end
 
-def app_url
-  app_details[environment]["url"]
+def app_id
+  is_staging ? "hk.goodcity.adminstaging" : "hk.goodcity.admin"
 end
 
 def app_version
-  app_details[environment]["version"]
-end
-
-def app_signing_identity
-  app_details[environment]["signing_detail"]
-end
-
-def app_details
-  @app_details ||= JSON.parse(File.read(APP_DETAILS_PATH))
-end
-
-def increment_app_version!
-  version_array = app_version.split(".")
-  app_details[environment]["version"] = (version_array[0..1] << version_array.last.to_i + 1).join(".")
-  File.open(APP_DETAILS_PATH, "w"){|f| f.puts JSON.pretty_generate(app_details)}
+  if ENV["CI"]
+    is_staging ? "#{ENV['APP_VERSION']}.#{ENV['CIRCLE_BUILD_NUM']}" : ENV['APP_VERSION']
+  elsif @ver
+    @ver
+  else
+    print "Enter GoodCity app version: "
+    @ver = STDIN.gets.strip
+  end
 end
 
 def testfairy_upload_script
@@ -339,37 +258,7 @@ def is_staging
 end
 
 def build_details
-  _build_details = {app_name: app_name, env: environment, platform: platform, app_version: app_version}
-  _build_details[:app_signing_identity] = app_signing_identity if platform == "ios"
-  _build_details
-end
-
-def iron_mq
-  @ironmq ||= IronMQ::Client.new(token: iron_token, project_id: iron_project_id)
-end
-
-def iron_queue
-  iron_mq.queue(app_url)
-end
-
-def iron_token
-  ENV['GOODCITY_IRON_MQ_OAUTH_KEY']
-end
-
-def iron_project_id
-  ENV['GOODCITY_IRON_MQ_PROJECT_KEY']
-end
-
-def lock_expired?
-  File.exists?(LOCK_FILE) && (Time.now - File.mtime(LOCK_FILE)).to_i > LOCK_FILE_MAX_AGE
-end
-
-def create_lock!
-  FileUtils.touch(LOCK_FILE)
-end
-
-def delete_lock!
-  FileUtils.rm(LOCK_FILE) if File.exists?(LOCK_FILE)
+  {app_name: app_name, env: environment, platform: platform, app_version: app_version}
 end
 
 def log(msg="")

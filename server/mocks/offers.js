@@ -45,6 +45,32 @@ module.exports = function(app) {
     ]
   };
 
+  var offer_json = {
+    "offer": { "id": "3", "language": "en", "state": "submitted",
+        "created_by_id": "1", "item_ids": ["4"], "delivery_id": null },
+
+    "items": [
+      { "id": "4", "donor_description": "Velit fugit amet quos ut minima quis", "offer_id": "3", "donor_condition_id": "1", "image_ids": ["1"], "state": "submitted" },
+    ],
+    "images": [
+      { "id": "1", "favourite": "false", "cloudinary_id": image_id },
+    ],
+    "addresses": [
+      { "id": 1, "street": null, "flat": null, "building": null, "district_id": null, "addressable_type": "User", "addressable_id": 1 }
+    ],
+    "messages": [
+      { "id": "1", "body": "I have made an offer.", "state": null, "sender_id": "1", "is_private": false, "offer_id": "4", "item_id": null }
+    ],
+    "user": [
+      { "id": "1", "first_name": "Kendrick", "last_name": "Kiehn", "permission_id": null, "mobile": "+85251111111" },
+      { "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2", "mobile": "12345678" }
+    ],
+    "permissions":[
+      { "id": "2", "name": "Supervisor" },
+      { "id": "1", "name": "Reviewer" }
+    ]
+  };
+
   var finishedOffers = {
       "offers": [ {"id": "5", "state": "closed" }, {"id": "6", "state": "received", "created_by_id": "4" }],
       "user": [{ "id": "2", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": "2", "mobile": "12345678" }, { "id": "4", "first_name": "Jaleel", "last_name": "Ondricka", "permission_id": null, "mobile": "12345678" }],
@@ -82,7 +108,7 @@ module.exports = function(app) {
   });
 
   offersRouter.get("/:id", function(req, res) {
-    res.send(offers_json);
+    res.send(offer_json);
   });
 
   offersRouter.delete("/:id", function(req, res) {
@@ -90,7 +116,7 @@ module.exports = function(app) {
   });
 
   offersRouter.put("/:id", function(req, res) {
-    res.send(offers_json);
+    res.send(offer_json);
   });
 
   offersRouter.post("/", function(req, res) {

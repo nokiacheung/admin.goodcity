@@ -4,10 +4,10 @@ import startApp from '../helpers/start-app';
 var App;
 
 module('Display review Item', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
   },
-  teardown: function() {
+  afterEach: function() {
     Ember.run(App, 'destroy');
   }
 });

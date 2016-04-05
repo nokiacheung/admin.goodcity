@@ -1,14 +1,13 @@
 import Ember from 'ember';
-import AjaxPromise from './../utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
   application: Ember.inject.controller(),
   offer: Ember.computed.alias('model'),
   isStartReviewClicked: false,
-  confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   displayOfferOptions: Ember.computed({
     get: function() {
@@ -45,8 +44,8 @@ export default Ember.Controller.extend({
 
     if(this.get("isOfferVanished") && !this.get("cancelByMe")) {
       if(currentPath.indexOf("review_item") < 0 && currentPath.indexOf(`offers/${this.get("offer.id")}`) >= 0) {
-        this.get("alert").show(this.get("i18n").t("404_error"), () => {
-          this.transitionTo("my_list");
+        this.get("messageBox").alert(this.get("i18n").t("404_error"), () => {
+          this.transitionToRoute("my_list");
         });
       }
     }
@@ -100,7 +99,7 @@ export default Ember.Controller.extend({
       if(this.get("isStartReviewClicked")) { return; }
       var offer = this.store.peekRecord('offer', this.get('offer.id'));
       this.set("isStartReviewClicked", true);
-      var adapter = this.container.lookup('adapter:application');
+      var adapter = getOwner(this).lookup('adapter:application');
       var url = adapter.buildURL('offer', offer.get('id')) + '/review';
 
       adapter.ajax(url, 'PUT')
@@ -108,33 +107,12 @@ export default Ember.Controller.extend({
         .finally(() => this.set("isStartReviewClicked", false));
     },
 
-    closeOffer() {
-      var loadingView = this.container.lookup('component:loading').append();
-      var offerId = this.get('model.id');
-      var offerProperties = {id: offerId, state_event: 'close'};
-      var url = "/offers/" + offerId + "/close_offer";
-
-      new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties})
-        .then(data => {
-          this.store.pushPayload(data);
-          this.transitionToRoute('review_offer.items');
-        })
-        .finally(() => loadingView.destroy());
-    },
-
-    closeReceivedOffer() {
-      var offer = this.get("model");
-      offer.set("state_event", "receive");
-      offer.save()
-        .catch(error => { offer.rollback(); throw error; });
-    },
-
     cancelOffer() {
       this.send("toggleOfferOptions");
       var offer = this.get("model");
-      this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
+      this.get("messageBox").confirm(this.get("i18n").t("delete_confirm"), () => {
         this.set("cancelByMe", true);
-        var loadingView = this.container.lookup('component:loading').append();
+        var loadingView = getOwner(this).lookup('component:loading').append();
         offer.deleteRecord();
         offer.save()
           .then(() => {
@@ -147,11 +125,9 @@ export default Ember.Controller.extend({
 
     submitOffer() {
       this.toggleProperty("displayOfferOptions");
-      var loadingView = this.container.lookup('component:loading').append();
-      var offer = this.store.push('offer', {
-        id: this.get('model.id'),
-        state_event: 'submit'
-      });
+      var loadingView = getOwner(this).lookup('component:loading').append();
+      var offer = this.get("model");
+      offer.setProperties({ state_event: 'submit' });
 
       offer.save()
         .finally(() => loadingView.destroy());

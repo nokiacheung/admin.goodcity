@@ -4,10 +4,10 @@ import startApp from '../helpers/start-app';
 var App;
 
 module('Authorization', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 1);
   },
-  teardown: function() {
+  afterEach: function() {
     Ember.run(App, 'destroy');
   }
 });

@@ -8,7 +8,7 @@ var App, offer, item, reviewer, offer2, item2, offer3, item3,
   offer6, item6, offer7, t;
 
 module('Review Offer Logistics', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     lookup('service:session').set('isAdmin', true);
@@ -36,7 +36,7 @@ module('Review Offer Logistics', {
 
     offer7 = FactoryGuy.make("offer_with_items", {state:"received", deliveredBy: "Gogovan"});
   },
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
@@ -81,12 +81,6 @@ test("for rejected offer-items", function() {
   andThen(function() {
     equal(currentURL(), "/offers/" + offer3.id + "/review_offer/logistics");
     equal($(".info-text").text(), "No items to transport.");
-
-    // page has link to donor-messages page
-    equal($("a[href='/offers/"+ offer3.id +"/donor_messages']").length, 1);
-
-    // page has button to close offer
-    equal($(".noTransportItems a:eq(0)").text(), 'Close Offer');
   });
 });
 
@@ -102,18 +96,22 @@ test("for scheduled offer", function() {
 });
 
 test("cancel booking of scheduled offer with pending GGV order state", function() {
+  // todo: remove workaround for message box button actions not firing only under test environment
+  lookup("service:messageBox").custom = (message, btn1Text, btn1Callback, btn2Text, btn2Callback) => {
+    btn2Callback();
+  };
+
   visit('/offers/' + offer5.id + "/review_offer/logistics");
+
   andThen(function() {
     equal(currentURL(), "/offers/" + offer5.id + "/review_offer/logistics");
+  });
 
-    click(find("a:contains('Cancel Booking')"));
-    andThen(function(){
-      Ember.$("#confirmModal .ok").click();
-    });
+  click("a:contains('Cancel Booking')");
+  // confirm prompt invoked, ok automatically called with above workaround
 
-    andThen(function(){
-      equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
-    });
+  andThen(function(){
+    equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
   });
 });
 

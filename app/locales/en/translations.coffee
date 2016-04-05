@@ -14,6 +14,9 @@ I18nTranslationsEn =
       "server_search": "Find more on server"
       "placeholder": "Search"
 
+    "users":
+      "search": "Search User"
+
     "offer":
       "title": "Offer"
       "donor": "Donor"
@@ -23,6 +26,12 @@ I18nTranslationsEn =
       "supervisor_messages" : "Supervisors Messages"
       "empty_msg" : "Sorry! This offer is empty."
 
+      "merge":
+        "title": "Select offer to merge with"
+        "message": "Merging offers cannot be undone. All data will be retained except general discussion messages on the offer you just selected."
+        "cancel": "Cancel"
+        "merge": "Merge"
+        "error": "These offers can not be merged."
 
       "offer_details" :
         "heading" : "Offer Details"
@@ -98,6 +107,10 @@ I18nTranslationsEn =
       "expecting": "Expecting"
       "all_items_processed": "All items marked received or missing."
       "inactive_offer": "This offer is marked as inactive."
+      "message_donor": "Send message to donor about closing offer:"
+      "receive_offer_message": "Your offer was received, thank you."
+      "missing_offer_message": "The delivery arrived at Crossroads but expected items were missing. We may follow up with you to confirm what happened."
+      "close_offer_message": "We have finished processing your offer. Unfortunately we are unable to receive your items this time. We hope we can place items you offer in the future."
 
       "donor":
         "offer_id": "Offer ID"
@@ -114,6 +127,7 @@ I18nTranslationsEn =
         "add_item": "Add an item"
         "delete_offer": "Delete Offer"
         "submit_offer": "Re-submit Offer"
+        "merge_offer": "Merge Offer"
 
     "mark_received":
       "delivered_by": "Delivered by:"
@@ -169,6 +183,7 @@ I18nTranslationsEn =
       "supply_message" : "Unfortunately we cannot receive this item because we have a large quantity already in stock."
       "cancel_gogovan_confirm": "Rejecting the last item will cancel the gogovan booking, do you wish to proceed?"
       "custom_reason": "Custom Reason"
+      "cannot_reject_error": "Cannot reject last item if there's a confirmed GoGoVan booking."
 
     "cancel_gogovan":
       "title": "Cancel GoGoVan Booking"

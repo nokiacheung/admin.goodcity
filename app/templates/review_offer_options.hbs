@@ -11,7 +11,7 @@
   {{/unless}}
 
   {{#if offer.isInactive}}
-    <div class="add_item_option option_menu">
+    <div class="option_menu">
       <a {{action "submitOffer"}} >
         <i class="fa fa-shopping-cart"></i>
         {{t "review_offer.options.submit_offer"}}
@@ -19,7 +19,7 @@
     </div>
   {{/if}}
 
-  {{#unless offer.isFinished}}
+  {{#unless (js-or offer.isFinished offer.isReceiving)}}
     <div class="option_menu">
       {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
     </div>
@@ -37,5 +37,14 @@
       {{t "review_offer.options.delete_offer"}}
     </a>
   </div>
+
+  {{#if offer.canMerged}}
+    <div class="merge_option option_menu">
+      {{#link-to "offer.merge" offer}}
+        <i class="fa fa-compress"></i>
+        {{t "review_offer.options.merge_offer"}}
+      {{/link-to}}
+    </div>
+  {{/if}}
 
 </div>

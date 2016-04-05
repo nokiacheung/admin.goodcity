@@ -53,6 +53,26 @@
 
     </div>
 
+    <div class="row inventory-number">
+      <div class="small-6 columns">
+        {{select-list
+          content=grades
+          on-change=(action (mut selectedGrade))
+          selectedValue=selectedGrade
+          value=selectedGrade
+          selectArrow=true }}
+      </div>
+
+      <div class="small-6 columns">
+        {{select-list
+          content=donorConditions
+          on-change=(action (mut selectedCondition))
+          selectedValue=selectedCondition
+          value=selectedCondition
+          selectArrow=true }}
+      </div>
+    </div>
+
     {{inventory-number-input inputId=(concat 'inventory_number' package.id) value=packageForm.inventoryNumber packageId=package.id invalid=invalidInventoryNo name="inventoryNumber" }}
 
     <div class="row inventory-number">

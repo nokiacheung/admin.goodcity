@@ -3,12 +3,14 @@ import backNavigator from './../mixins/back_navigator';
 
 export default Ember.Controller.extend(backNavigator, {
 
-  model: Ember.computed('message.@each.state', function(){
-    var currentUserId = this.get("session.currentUser.id");
+  allMessages: Ember.computed(function(){
+    return this.store.peekAll("message");
+  }),
 
-    return this.store.filter('message', function(message) {
-      return message.get('state') === 'unread' && message.get('offer.createdBy.id') !== currentUserId;
-    });
+  model: Ember.computed("allMessages.@each.state", "session.currentUser.id", "allMessages.@each.offer.createdBy", function(){
+    var currentUserId = this.get('session.currentUser.id');
+
+    return this.get("allMessages").filterBy("state", "unread").rejectBy("offer.createdBy.id", currentUserId);
   }),
 
   actions: {

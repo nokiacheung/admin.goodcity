@@ -6,9 +6,4 @@ export default AuthorizeRoute.extend({
     this.render('offers.submitted', {controller: 'offers.receiving'});
   },
 
-  model() {
-    return this.store.filter('offer', function(offer) {
-      return offer.get('isReceiving');
-    });
-  }
 });

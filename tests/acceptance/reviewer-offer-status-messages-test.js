@@ -9,7 +9,7 @@ var App, offer1, offer2, reviewer, reviewerName,
   offer11, offer12;
 
 module('Reviewer: Display Offer Status', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -47,7 +47,7 @@ module('Reviewer: Display Offer Status', {
     offer12 = FactoryGuy.make("offer_with_items", {state:"cancelled"});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
@@ -138,7 +138,7 @@ test("Display offer status for all rejected items", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer8.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()), "No items needed  Close Offer");
+    equal($.trim(find('.status-message').text()).indexOf("No items needed  Close Offer") >= 0, true);
   });
 });
 

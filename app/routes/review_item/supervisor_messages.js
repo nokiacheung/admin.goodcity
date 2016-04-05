@@ -1,15 +1,7 @@
-import ReadMessagesRoute from './../read_messages';
+import MessagesBaseRoute from 'shared-goodcity/routes/messages_base';
 
-export default ReadMessagesRoute.extend({
-
+export default MessagesBaseRoute.extend({
   renderTemplate() {
     this.render('message_template', {controller: 'review_item.supervisor_messages'});
-  },
-
-  model() {
-    var itemId = this.modelFor('reviewItem').get('id');
-    return this.store.filter('message', function(message) {
-      return message.get('item.id') === itemId && message.get('isPrivate') === true;
-    });
   }
 });

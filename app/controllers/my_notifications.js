@@ -6,6 +6,16 @@ export default offers.extend({
   sortedModel: Ember.computed.sort("model", "sortProperties"),
   messagesUtil: Ember.inject.service("messages"),
 
+  allMessages: Ember.computed(function(){
+    return this.store.peekAll("message");
+  }),
+
+  model: Ember.computed("allMessages.@each.state", "session.currentUser.id", "allMessages.@each.offer.createdBy", function(){
+    var currentUserId = this.get('session.currentUser.id');
+
+    return this.get("allMessages").rejectBy("state", "never-subscribed").rejectBy("offer.createdBy.id", currentUserId);
+  }),
+
   showUnread: Ember.computed({
     get: function() {
       return false;
@@ -55,9 +65,13 @@ export default offers.extend({
       this.transitionToRoute.apply(this, route);
     },
 
-    markThreadRead(messageId) {
-      var message = this.store.peekRecord('message', messageId);
-      this.get("messagesUtil").markRead(message);
+    markThreadRead(notification) {
+      if(notification.unreadCount === 1) {
+        var message = this.store.peekRecord('message', notification.id);
+        this.get("messagesUtil").markRead(message);
+      } else {
+        this.send("view", notification.id);
+      }
     },
 
     toggleShowUnread() {

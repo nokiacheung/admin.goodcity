@@ -7,8 +7,16 @@
   }
 }
 
-.list.list-notifications li{
-  border-bottom: 1px solid $light-gray-1;
+.list.list-notifications {
+  vertical-item {
+    height: 6.8rem !important;
+  }
+
+  overflow: hidden !important;
+
+  li{
+    border-bottom: 1px solid $light-gray-1;
+  }
 }
 
 .thread.unread {
@@ -17,6 +25,8 @@
 
 .thread {
   padding: 1rem;
+  padding-right: 0.5rem;
+
   span {
     display: table-cell;
   }
@@ -53,6 +63,8 @@
       display: inline-table;
       .unread{
         display: inline-table;
+        padding-bottom: 0.4rem;
+        margin-left: -0.3rem;
         .unread_length{
           color: $white;
         }
@@ -71,6 +83,10 @@
     padding-top: 0.3rem;
     color: $white;
 
+    .ellipsis {
+      min-height: 2.35rem;
+    }
+
     audio {
       width: 100%;
     }
@@ -79,9 +95,9 @@
 
 .mark_read {
   font-weight: bolder;
-  margin-left: 0.5rem;
   font-size: 1rem;
   vertical-align: bottom;
+  padding: 0.4rem 0.35rem;
 }
 
 .no_unread_message {

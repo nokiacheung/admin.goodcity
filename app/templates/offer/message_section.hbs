@@ -2,29 +2,18 @@
   <ul class="list list-offer-items">
 
     {{#each sortedItems as |item|}}
-      {{#if item.isOffer}}
-        <li>
+      <li>
+        {{#if item.isOffer}}
           {{#link-to 'offer.donor_messages' model}}
             {{partial 'offer/recent_offer_message'}}
           {{/link-to}}
-        </li>
-      {{else}}
-        <li>
-          {{#if item.isAccepted}}
-            {{#link-to 'review_item.accept' item}}
-              {{partial 'offer/recent_item_message'}}
-            {{/link-to}}
-          {{else if item.isRejected}}
-            {{#link-to 'review_item.reject' item}}
-              {{partial 'offer/recent_item_message'}}
-            {{/link-to}}
-          {{else}}
-            {{#link-to 'review_item' item}}
-              {{partial 'offer/recent_item_message'}}
-            {{/link-to}}
-          {{/if}}
-        </li>
-      {{/if}}
+        {{else}}
+          {{#link-to item.pageLink item}}
+            {{partial 'offer/recent_item_message'}}
+          {{/link-to}}
+        {{/if}}
+      </li>
     {{/each}}
+
   </ul>
 </div>

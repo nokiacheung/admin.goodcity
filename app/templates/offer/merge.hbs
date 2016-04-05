@@ -1,0 +1,42 @@
+<nav class="tab-bar submitted_page merge_page">
+  <section class="left-small">
+    {{#link-to "review_offer.items" model classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">
+      {{t "offer.merge.title"}}
+    </h1>
+  </section>
+</nav>
+
+<section class="main-section">
+  <div class="row">
+    <div class="small-12 columns item-content">
+      <ul class="list list-activity list-offer-items">
+        {{#each arrangedContent as |offer|}}
+          <li class='inbox_page'>
+            <a {{action "confirmMergeOffer" offer}}>
+              {{partial "offers/display_offer_data"}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div id="confirmOfferMergeModal" class="small reveal-modal ui overlayModal" data-options="close_on_background_click:false" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+  <div class="modal_message">
+    {{t "offer.merge.message"}}
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <a class="right button closeLink action1">{{t "offer.merge.cancel"}}</a>
+      <a class="right button confirmLink action2">{{t "offer.merge.merge"}}</a>
+    </div>
+  </div>
+
+</div>

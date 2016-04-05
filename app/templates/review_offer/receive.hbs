@@ -1,34 +1,46 @@
 <br/>
-<section id="receive-list-menu" class="main-section review_offer">
-  <div class="row">
-    <div class="small-12 columns tab_row">
-      <dl class="tabs" data-tab>
-  {{#link-to 'review_offer.receive' (query-params state="expecting") tagName="dd" classNames="small-4 columns text-center"}}
-    {{#link-to 'review_offer.receive' (query-params state="expecting")}}
-      <div>{{t "review_offer.expecting"}}({{expectingCount}})</div>
-    {{/link-to}}
-  {{/link-to}}
 
-  {{#link-to 'review_offer.receive' (query-params state="received") tagName="dd" classNames="small-4 columns text-center"}}
-    {{#link-to 'review_offer.receive' (query-params state="received")}}
-      <div>{{t "review_offer.received"}}({{receivedCount}})</div>
-    {{/link-to}}
-  {{/link-to}}
+{{#if model.allItemsReviewed}}
 
-  {{#link-to 'review_offer.receive' (query-params state="missing") tagName="dd" classNames="small-4 columns text-center"}}
-    {{#link-to 'review_offer.receive' (query-params state="missing")}}
-      <div>{{t "review_offer.missing"}}({{missingCount}})</div>
-    {{/link-to}}
-  {{/link-to}}
-      </dl>
+  <section id="receive-list-menu" class="main-section review_offer">
+    <div class="row">
+      <div class="small-12 columns tab_row">
+        <dl class="tabs" data-tab>
+          {{#link-to 'review_offer.receive' (query-params state="expecting") tagName="dd" classNames="small-4 columns text-center"}}
+            {{#link-to 'review_offer.receive' (query-params state="expecting")}}
+              <div>{{t "review_offer.expecting"}}({{expectingCount}})</div>
+            {{/link-to}}
+          {{/link-to}}
+
+          {{#link-to 'review_offer.receive' (query-params state="received") tagName="dd" classNames="small-4 columns text-center"}}
+            {{#link-to 'review_offer.receive' (query-params state="received")}}
+              <div>{{t "review_offer.received"}}({{receivedCount}})</div>
+            {{/link-to}}
+          {{/link-to}}
+
+          {{#link-to 'review_offer.receive' (query-params state="missing") tagName="dd" classNames="small-4 columns text-center"}}
+            {{#link-to 'review_offer.receive' (query-params state="missing")}}
+              <div>{{t "review_offer.missing"}}({{missingCount}})</div>
+            {{/link-to}}
+          {{/link-to}}
+        </dl>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<ul class="list receive-list">
-{{#each items as |item|}}
-  {{receive-item pState=state itemId=item.id}}
-{{/each}}
-</ul>
+  <ul class="list receive-list">
+  {{#each items as |item|}}
+    {{receive-item pState=state itemId=item.id}}
+  {{/each}}
+  </ul>
 
-{{partial "review_offer/confirm_receiving_overlay"}}
+  {{partial "review_offer/confirm_receiving_overlay"}}
+
+{{else}}
+  <p>
+    <p><span class="icon-no-items"></span></p>
+    <p class="no-items">
+      {{t "logistics.finish_review_request"}}
+    </p>
+  </p>
+{{/if}}

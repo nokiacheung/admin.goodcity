@@ -7,7 +7,7 @@ var App, offer, item1, item2, item3,
   message1, message2, donor, msg_time;
 
 module('Reviewer: Display Offer Tab', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -20,7 +20,7 @@ module('Reviewer: Display Offer Tab', {
     message2 = FactoryGuy.make("message", { sender: donor, offer: offer, item: item3});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
@@ -32,10 +32,10 @@ test("item status badge on item-image", function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
 
     // display 'Accepted' status for accepted-item
-    equal($(".item-image .accept_badge").length, 1);
+    equal($(".item-image .accept_badge").not(".hidden").length, 1);
 
     // display 'Rejected' status for accepted-item
-    equal($(".item-image .reject_badge").length, 1);
+    equal($(".item-image .reject_badge").not(".hidden").length, 1);
   });
 });
 

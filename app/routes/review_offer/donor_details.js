@@ -17,7 +17,7 @@ export default AuthorizeRoute.extend({
   },
 
   setupController(controller, model) {
-    controller.set("model", model);
+    this._super(controller, model);
     controller.set("donor", this.get("currentDonor"));
     controller.set("currentOffer", this.get("currentOffer"));
   },

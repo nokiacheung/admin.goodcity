@@ -13,7 +13,7 @@ module.exports = function(environment) {
       }
     },
     contentSecurityPolicy: {
-      "img-src": "'self' data: https://res.cloudinary.com",
+      "img-src": "'self' data: https://res.cloudinary.com filesystem: *",
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
       "font-src": "'self' data: https://maxcdn.bootstrapcdn.com",
       "media-src": "'self' data: https://api.twilio.com http://api.twilio.com http://static.twilio.com https://static.twilio.com",
@@ -70,7 +70,7 @@ module.exports = function(environment) {
     // RESTAdapter Settings
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
-    ENV.DONOR_APP_HOST_URL = 'http://localhost:4200';
+    ENV.ADMIN_APP_HOST_URL = 'http://localhost:4201';
 
     ENV.APP.GOODCITY_NUMBER = "+85258087803"
 
@@ -135,7 +135,7 @@ module.exports = function(environment) {
     ENV.cordova.GcmSenderId = '876198075877';
   }
 
-  if (process.env.staging === 'true') {
+  if ((process.env.staging || process.env.STAGING) === 'true') {
     ENV.staging = true;
     ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
     ENV.ADMIN_APP_HOST_URL = 'https://admin-staging.goodcity.hk';
@@ -158,6 +158,12 @@ module.exports = function(environment) {
     ].join(' ');
     ENV.googleAnalytics = { webPropertyId: 'UA-62978462-3' };
     ENV.cordova.GcmSenderId = '907786683525';
+
+    // VSO build
+    if (process.env.BUILD_BUILDNUMBER) {
+      ENV.APP.VERSION = process.env.VERSION + "." + process.env.BUILD_BUILDNUMBER;
+      ENV.APP.APP_SHA = process.env.BUILD_SOURCEVERSION;
+    }
   } else {
     ENV.staging = false;
   }

@@ -15,14 +15,10 @@
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
   </div>
-
-  {{!-- menu-option to add item in stockit inventory
-    <div {{action "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
-      <i class= "fa fa-barcode"></i>
-      {{t "receive.inventory"}}
-    </div>
-  --}}
-
+  <div {{action "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
+    <i class= "fa fa-barcode"></i>
+    {{t "receive.inventory"}}
+  </div>
   <div class="options-link-close" {{action "toggle" true}}>
     <i class="fa fa-angle-right"></i>
   </div>

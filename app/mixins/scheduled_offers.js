@@ -3,6 +3,12 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   scheduledOffers: true,
 
+  i18n: Ember.inject.service(),
+
+  pageTitle: Ember.computed(function() {
+    return this.get("i18n").t("inbox.scheduled_offers");
+  }),
+
   allDeliveries: Ember.computed(function(){
     return this.store.peekAll("delivery");
   }),

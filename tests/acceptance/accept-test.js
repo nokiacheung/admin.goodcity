@@ -7,7 +7,7 @@ var App, offer, item1, item2, package1, package2, item3, package3,
   item4, package4;
 
 module('Reviewer: Accept Item Tab', {
-  setup: function() {
+  beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
 
@@ -25,7 +25,7 @@ module('Reviewer: Accept Item Tab', {
     package4 = FactoryGuy.make("package", { item: item4, packageType: item4.get('packageType')});
   },
 
-  teardown: function() {
+  afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }

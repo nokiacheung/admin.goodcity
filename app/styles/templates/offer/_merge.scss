@@ -1,0 +1,26 @@
+#confirmOfferMergeModal {
+  @extend .reveal-modal#errorModal;
+}
+
+.overlayModal {
+  padding: 1rem;
+
+  .modal_message {
+    margin: 0.5rem;
+
+    @media #{$small-only} {
+      margin: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    margin-bottom: 1rem;
+  }
+}
+
+.merge_page {
+  .title{
+    @media #{$small-only} {
+      font-size: 0.7rem !important;
+    }
+  }
+}

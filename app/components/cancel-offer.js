@@ -1,10 +1,10 @@
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
   hidden: true,
   packageId: null,
   store: Ember.inject.service(),
-  alert: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
   selectedReason: null,
@@ -40,7 +40,7 @@ export default Ember.Component.extend({
       } else {
         selectedReason = this.get("selectedReason");
       }
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var offer = this.get("offer");
       offer.set("cancelReason", cancelReason);
       offer.set("cancellationReason", selectedReason);
@@ -72,6 +72,7 @@ export default Ember.Component.extend({
   closeConfirmBox: function() {
     Ember.run.next(function() {
       Ember.$("#confirmOfferCancelModal").foundation("reveal", "close");
+      Ember.$("#confirmOfferCancelModal *").unbind('click');
     });
   },
 });

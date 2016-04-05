@@ -2,12 +2,19 @@
   <div class="small-12 columns item-content">
     <ul class="list list-activity list-offer-items">
       {{#if scheduledOffers}}
-        {{schedule-selection schedules=allScheduled on-change=(action (mut filterValue)) }}
+        {{schedule-selection schedules=allScheduled currentController=this on-change=(action (mut filterValue)) }}
       {{/if}}
 
-      {{#each (js-x "p0 || p1" filteredOffers (js-x "p0 || p1" arrangedContent model)) as |offer|}}
-        {{partial 'offers/offer_details'}}
-      {{/each}}
+      {{#vertical-collection
+        content=(js-x "p0 || p1" filteredOffers (js-x "p0 || p1" arrangedContent model))
+        defaultHeight=90
+        alwaysUseDefaultHeight=true
+        containerSelector="body"
+        as |offer|
+        }}
+            {{partial 'offers/offer_details'}}
+        {{/vertical-collection}}
+
     </ul>
   </div>
 </div>
