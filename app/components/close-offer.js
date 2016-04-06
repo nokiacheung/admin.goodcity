@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   i18n: Ember.inject.service(),
   loadCloseOfferForm: true,
+  displayUserPrompt: false,
 
   invalidMessage: Ember.computed({
     get() {
@@ -20,15 +21,6 @@ export default Ember.Component.extend({
   closeMessage: Ember.computed({
     get() {
       return this.get("i18n").t("review_offer.close_offer_message").string;
-    },
-    set(key, value) {
-      return value;
-    }
-  }),
-
-  displayUserPrompt: Ember.computed({
-    get() {
-      return false;
     },
     set(key, value) {
       return value;

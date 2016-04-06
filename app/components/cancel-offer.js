@@ -9,15 +9,7 @@ export default Ember.Component.extend({
 
   selectedReason: null,
   invalidReason: false,
-
-  displayUserPrompt: Ember.computed({
-    get() {
-      return false;
-    },
-    set(key, value) {
-      return value;
-    }
-  }),
+  displayUserPrompt: false,
 
   displayCustomReason: Ember.computed("selectedReason", function(){
     return this.get("selectedReason.id") === "-1";

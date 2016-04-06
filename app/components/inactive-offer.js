@@ -8,15 +8,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   i18n: Ember.inject.service(),
   invalidMessage: false,
-
-  displayUserPrompt: Ember.computed({
-    get() {
-      return false;
-    },
-    set(key, value) {
-      return value;
-    }
-  }),
+  displayUserPrompt: false,
 
   inactiveMessage: Ember.computed(function(){
     return this.get("i18n").t("inactive_offer.message");

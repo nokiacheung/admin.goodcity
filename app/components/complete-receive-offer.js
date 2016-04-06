@@ -6,17 +6,9 @@ export default Ember.Component.extend({
 
   store: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  displayUserPrompt: false,
 
   invalidMessage: Ember.computed({
-    get() {
-      return false;
-    },
-    set(key, value) {
-      return value;
-    }
-  }),
-
-  displayUserPrompt: Ember.computed({
     get() {
       return false;
     },
