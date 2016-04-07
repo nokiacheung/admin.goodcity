@@ -144,8 +144,7 @@ namespace :cordova do
     end
     # Copy build artifacts
     if ENV["CI"]
-      sh %{ if [ -e "#{app_file}" ]; then cp #{app_file} $CIRCLE_ARTIFACTS/; fi }
-      sh %{ if [ -e "#{ipa_file}" ]; then cp #{ipa_file} $CIRCLE_ARTIFACTS/; fi }
+      sh %{ if [ -e "#{app_file}" ]; then cp "#{app_file}" "${CIRCLE_ARTIFACTS:-$BUILD_STAGINGDIRECTORY}/"; fi }
     end
   end
 end
@@ -153,13 +152,12 @@ end
 namespace :testfairy do
   task :upload do
     return unless TESTFAIRY_PLATFORMS.include?(platform)
-    app = (platform == "ios") ? ipa_file : app_file
-    raise(BuildError, "#{app} does not exist!") unless File.exists?(app)
+    raise(BuildError, "#{app_file} does not exist!") unless File.exists?(app_file)
     raise(BuildError, "TESTFAIRY_API_KEY not set.") unless env?("TESTFAIRY_API_KEY")
     if ENV["CI"]
-      sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} "#{app}" }
+      sh %{ export PATH="$ANDROID_HOME/build-tools/22.0.1:$PATH"; #{testfairy_upload_script} "#{app_file}" }
     else
-      sh %{ #{testfairy_upload_script} "#{app}" }
+      sh %{ #{testfairy_upload_script} "#{app_file}" }
     end
     log("Uploaded app...")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
@@ -223,17 +221,13 @@ end
 def app_file
   case platform
   when /ios/
-    "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.app"
+    "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.ipa"
   when /android/
     build = is_staging ? "debug" : "release"
     "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-#{build}.apk"
   when /windows/
     raise(BuildError, "TODO: Need to get Windows app path")
   end
-end
-
-def ipa_file
-  "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.ipa"
 end
 
 def app_name
