@@ -43,8 +43,10 @@
       {{/if}}
 
       <div class="row top-bottom-margin">
-        <div class="small-12 columns link">
-          {{custom-select2 content=itemTypes record=itemType recordId=itemTypeId placeholder=(t "review_item.add_item_label") enabled=(js-x "this == false" model.offer.isFinished)}}
+        <div class="small-12 columns link item_lable_input">
+          {{#link-to "search_label" model}}
+            {{input value=itemType.name disabled=true placeholder=(t "review_item.add_item_label")}}
+          {{/link-to}}
         </div>
       </div>
 

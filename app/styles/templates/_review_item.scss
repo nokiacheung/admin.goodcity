@@ -46,6 +46,22 @@
     filter: alpha(opacity=90);
     cursor: not-allowed;
   }
+
+  .item_lable_input {
+    a {
+      text-decoration: none;
+    }
+
+    input {
+      @media #{$small-only} {
+        font-size: 0.9rem;
+      }
+    }
+
+    input[disabled] {
+      background-color: white;
+    }
+  }
 }
 
 .accept_widget {
