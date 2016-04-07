@@ -35,7 +35,7 @@ test("visit accept item tab without item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
-    equal($('.select2-chosen').text(), "Add item label");
+    equal($('input[disabled]').val(), "");
     equal($('p.no-items').text(), "Please choose Item Type first!");
   });
 });
@@ -44,7 +44,7 @@ test("visit accepted item with item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
-    equal($('.select2-chosen').text(), item1.get('packageType.name'));
+    equal($('input[disabled]').val(), item1.get('packageType.name'));
 
     // two package components
     equal($(".detail_container").length, 2);
@@ -95,7 +95,7 @@ test("visit submitted item with item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
-    equal($('.select2-chosen').text(), item3.get('packageType.name'));
+    equal($('input[disabled]').val(), item3.get('packageType.name'));
 
     // one package components
     equal($(".detail_container").length, 1);
@@ -113,7 +113,7 @@ test("visit rejected item with item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
-    equal($('.select2-chosen').text(), item4.get('packageType.name'));
+    equal($('input[disabled]').val(), item4.get('packageType.name'));
 
     // one package components
     equal($(".detail_container").length, 1);
@@ -127,7 +127,7 @@ test("visit rejected item page", function() {
   visit("/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
-    equal($('.select2-chosen').text(), item4.get('packageType.name'));
+    equal($('input[disabled]').val(), item4.get('packageType.name'));
 
     // hide item-edit link
     equal($(".edit-item-link").length, 0);

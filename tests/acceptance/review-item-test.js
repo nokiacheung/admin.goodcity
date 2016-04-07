@@ -21,7 +21,7 @@ test("Display Item under review", function() {
     equal(/Review Item:/i.test($('body').text()), true);
     equal(/Velit fugit amet quos ut minima quis/i.test($('body').text()), true);
     equal(/Condition: New/i.test($('body').text()), true);
-    equal(find('.select2-chosen').text(), "Add item label");
+    equal($('input[disabled]').val(), "");
     equal(find("img.thumb").length, 1);
   });
 });
