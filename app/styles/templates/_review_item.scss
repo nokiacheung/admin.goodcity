@@ -106,5 +106,11 @@
     color: white;
     font-size: 0.85rem;
   }
+
+  em {
+    font-style: inherit;
+    background: #ff6;
+    color: black;
+  }
 }
 

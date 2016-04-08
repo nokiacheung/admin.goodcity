@@ -22,7 +22,7 @@
             {{#each filteredResults as |type|}}
               <li {{action "assignItemLabel" type}}>
                 <div class="package_name">{{type.name}}</div>
-                {{type.otherTerms}}
+                <div>{{type.otherTerms}}</div>
               </li>
             {{/each}}
           </ul>
