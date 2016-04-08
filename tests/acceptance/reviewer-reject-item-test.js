@@ -25,7 +25,7 @@ test("visit rejected item without item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item2.id + "/reject");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item2.id + "/reject");
-    equal($('.select2-chosen').text(), "Add item label");
+    equal($('input[disabled]').val(), "");
     equal($('p.no-items').text(), "Please choose Item Type first!");
   });
 });
@@ -34,7 +34,7 @@ test("visit rejected item with item_type", function() {
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/reject");
   andThen(function() {
     equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item1.id + "/reject");
-    equal($('.select2-chosen').text(), item1.get('packageType.name'));
+    equal($('input[disabled]').val(), item1.get('packageType.name'));
     equal($(".reject-offer ul li").length, 4);
 
     //placeholder message in recjectio comments textarea

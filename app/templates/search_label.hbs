@@ -1,0 +1,35 @@
+{{#visit-page-start}}
+  <div class="row">
+    <div class="small-12 columns search-box ui">
+      {{input
+        type="text"
+        name="searchText"
+        id="searchText"
+        placeholder="Search item label"
+        value=searchText }}
+
+      {{#if hasSearchText}}
+        <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+      {{/if}}
+      <a href="#" {{action "cancelSearch"}}>{{t "cancel"}}</a>
+    </div>
+  </div>
+
+  <section class="main-section review_offer search users">
+    <div class="row">
+      <div class="small-12 columns item-content">
+        {{#if filteredResults}}
+          <ul class="list list-activity list-offer-items">
+            {{#each filteredResults as |type|}}
+              <li {{action "assignItemLabel" type}}>
+                {{type.name}}
+              </li>
+            {{/each}}
+          </ul>
+        {{else if hasFilter}}
+          <div class='no_result'>{{t "search.no_results"}}</div>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+{{/visit-page-start}}
