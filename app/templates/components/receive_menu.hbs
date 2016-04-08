@@ -7,15 +7,15 @@
     <i class="fa fa-pencil-square-o"></i>
     {{t "edit"}}
   {{/link-to}}
-  <div {{action "missing"}} class="{{if isMissing 'disabled'}}">
+  <div {{action "checkReceiving" "missing"}} class="{{if isMissing 'disabled'}}">
     <i class="fa fa-exclamation-triangle"></i>
     {{t "receive.missing"}}
   </div>
-  <div {{action "receive"}} class="{{if isReceived 'disabled'}}">
+  <div {{action "checkReceiving" "receive"}} class="{{if isReceived 'disabled'}}">
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
   </div>
-  <div {{action "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
+  <div {{action "checkReceiving" "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
     <i class= "fa fa-barcode"></i>
     {{t "receive.inventory"}}
   </div>
@@ -23,3 +23,18 @@
     <i class="fa fa-angle-right"></i>
   </div>
 </div>
+
+{{#message-box btn1Text=(t "receive.receiving.not_now") btn2Text=(t "receive.receiving.begin_receiving") btn2Callback=(action "confirmReceiving") isVisible=displayUserPrompt classNames="popupOverlay"}}
+  <strong>{{t "receive.receiving.header"}}</strong>
+
+  <p>{{t "receive.receiving.cant_modify_note"}}</p>
+
+  {{t "mark_received.delivered_by"}}<br/>
+
+  {{select-list
+    content=deliveredOptions
+    on-change=(action (mut deliveredBy))
+    selectedValue=deliveredBy
+    selectArrow=true}}
+
+{{/message-box}}

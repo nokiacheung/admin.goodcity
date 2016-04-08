@@ -28,13 +28,11 @@
     </div>
   </section>
 
-  <ul class="list receive-list">
+  <ul class="receive-list">
   {{#each items as |item|}}
     {{receive-item pState=state itemId=item.id}}
   {{/each}}
   </ul>
-
-  {{partial "review_offer/confirm_receiving_overlay"}}
 
 {{else}}
   <p>
