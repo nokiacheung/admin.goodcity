@@ -3,10 +3,8 @@
   {{t "cancel_offer.cancel"}}
 </a>
 
-{{#message-box btn1Text=(t "cancel_offer.cancel") btn1Callback=(action "cancelOffer") btn2Text=(t "receive.receiving.not_now")  isVisible=displayUserPrompt classNames="popupOverlay"}}
-  <div class="receive_title">
-    {{t "cancel_offer.donor_message"}}
-  </div>
+{{#message-box btn1Text=(t "cancel_offer.cancel") btn1Callback=(action "cancelOffer") btn2Text=(t "receive.receiving.not_now") isVisible=displayUserPrompt classNames="popupOverlay"}}
+  <strong>{{t "cancel_offer.donor_message"}}</strong>
 
   <div class="ui">
     {{select-list
@@ -22,4 +20,3 @@
     </div>
   {{/if}}
 {{/message-box}}
-
