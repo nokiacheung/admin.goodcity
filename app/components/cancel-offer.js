@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 
   selectedReason: null,
   invalidReason: false,
+  displayUserPrompt: false,
 
   displayCustomReason: Ember.computed("selectedReason", function(){
     return this.get("selectedReason.id") === "-1";
@@ -23,8 +24,7 @@ export default Ember.Component.extend({
   actions: {
 
     confirmCancelOffer() {
-      this.sendAction("toggleAction");
-      this.confirmReceiving(() => this.send("cancelOffer"));
+      this.set("displayUserPrompt", true);
     },
 
     cancelOffer() {
@@ -47,32 +47,10 @@ export default Ember.Component.extend({
       offer.set("state_event", "cancel");
 
       offer.save().finally(() => {
+        this.sendAction("toggleAction");
         loadingView.destroy();
-        this.closeConfirmBox();
       });
     }
-
   },
 
-  confirmReceiving: function(successCallback) {
-    var _this = this;
-    Ember.$("#confirmOfferCancelModal").removeClass("open");
-    Ember.$("#confirmOfferCancelModal").foundation("reveal", "open");
-    Ember.$(".loading-indicator").remove();
-
-    Ember.$("#confirmOfferCancelModal .closeLink").click(() => {
-      _this.closeConfirmBox();
-    });
-
-    Ember.$("#confirmOfferCancelModal .confirmLink").click(() => {
-      successCallback();
-    });
-  },
-
-  closeConfirmBox: function() {
-    Ember.run.next(function() {
-      Ember.$("#confirmOfferCancelModal").foundation("reveal", "close");
-      Ember.$("#confirmOfferCancelModal *").unbind('click');
-    });
-  },
 });

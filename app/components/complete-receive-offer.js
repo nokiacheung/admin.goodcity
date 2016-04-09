@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 
   store: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  displayUserPrompt: false,
 
   invalidMessage: Ember.computed({
     get() {
@@ -33,7 +34,7 @@ export default Ember.Component.extend({
   actions: {
 
     confirmCloseOffer() {
-      this.confirmCloseOffer(() => this.send("closeOffer"));
+      this.set("displayUserPrompt", true);
     },
 
     closeOffer() {
@@ -56,32 +57,9 @@ export default Ember.Component.extend({
           this.get("store").pushPayload(data);
         })
         .finally(() => {
-          this.closeConfirmBox();
           loadingView.destroy();
         });
     },
-  },
-
-  confirmCloseOffer: function(successCallback) {
-    var _this = this;
-    Ember.$("#confirmCompleteReceiveModal").removeClass("open");
-    Ember.$("#confirmCompleteReceiveModal").foundation("reveal", "open");
-    Ember.$(".loading-indicator").remove();
-
-    Ember.$("#confirmCompleteReceiveModal .closeLink").click(() => {
-      _this.closeConfirmBox();
-    });
-
-    Ember.$("#confirmCompleteReceiveModal .confirmLink").click(() => {
-      successCallback();
-    });
-  },
-
-  closeConfirmBox: function() {
-    Ember.run.next(function() {
-      Ember.$("#confirmCompleteReceiveModal").foundation("reveal", "close");
-      Ember.$("#confirmCompleteReceiveModal *").unbind('click');
-    });
   },
 
 });
