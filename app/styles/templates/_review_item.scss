@@ -1,4 +1,11 @@
 .review_item {
+
+  .tabs-content {
+    @media #{$medium-only} {
+      padding-bottom: 3rem;
+    }
+  }
+
   .message-textbar{
     position: relative;
   }
