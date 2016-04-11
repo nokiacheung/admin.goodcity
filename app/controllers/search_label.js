@@ -41,12 +41,34 @@ export default Ember.Controller.extend({
           types.push(type);
         }
       });
+      Ember.run.later(this, this.highlight);
     } else {
       types = types.concat(this.get('allPackageTypes').toArray());
+      this.clearHiglight();
     }
 
     return types.sortBy("name").uniq();
   }),
+
+  highlight() {
+    var string = Ember.$.trim(this.get('filter').toLowerCase());
+    this.clearHiglight();
+    Ember.$(".item_types_result li div").each(function () {
+      var text = Ember.$(this).text();
+      if((text.toLowerCase()).indexOf(string.toLowerCase()) > -1) {
+        var matchStart = text.toLowerCase().indexOf("" + string.toLowerCase() + "");
+        var matchEnd = matchStart + string.length - 1;
+        var beforeMatch = text.slice(0, matchStart);
+        var matchText = text.slice(matchStart, matchEnd + 1);
+        var afterMatch = text.slice(matchEnd + 1);
+        Ember.$(this).html(beforeMatch + "<em>" + matchText + "</em>" + afterMatch);
+      }
+    });
+  },
+
+  clearHiglight() {
+    Ember.$("em").replaceWith(function() { return this.innerHTML; });
+  },
 
   actions: {
     clearSearch(isCancelled) {

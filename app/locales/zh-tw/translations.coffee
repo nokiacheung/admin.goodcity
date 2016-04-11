@@ -9,6 +9,7 @@ I18nTranslationsZhTw =
     "submitted": "已提交"
     "messages_title" : "信息"
     "select": "選擇"
+    "search_item_label": "Search item label"
     "search":
       "no_results": "抱歉，未能找到結果"
       "server_search": "於服務器上尋找更多資訊"
