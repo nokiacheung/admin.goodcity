@@ -22,6 +22,7 @@ export default Ember.TextField.extend({
   },
 
   didInsertElement() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.$().focus();
     if(this.get("iosItemTypeSearchPage")) {
       this.element.addEventListener('touchstart', this.scrollToStart);
