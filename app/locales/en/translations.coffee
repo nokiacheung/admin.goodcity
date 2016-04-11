@@ -9,6 +9,7 @@ I18nTranslationsEn =
     "submitted": "Submitted"
     "messages_title" : "Messages"
     "select": "Select"
+    "search_item_label": "Search item label"
     "search":
       "no_results": "Sorry, No results found."
       "server_search": "Find more on server"
