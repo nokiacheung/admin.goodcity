@@ -18,7 +18,9 @@
             {{offer.timeDetail.suffix}}
           </b>
         {{else}}
-          {{time-ago timeValue=offer.timeDetail.date smallPrefix=true}}
+          {{#if offer.timeDetail.date}}
+            {{time-ago timeValue=offer.timeDetail.date smallPrefix=true}}
+          {{/if}}
           {{offer.timeDetail.suffix}}
         {{/if}}
       </div>
