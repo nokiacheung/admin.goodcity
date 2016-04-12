@@ -8,19 +8,19 @@
         <dl class="tabs" data-tab>
           {{#link-to 'review_offer.receive' (query-params state="expecting") tagName="dd" classNames="small-4 columns text-center"}}
             {{#link-to 'review_offer.receive' (query-params state="expecting")}}
-              <div>{{t "review_offer.expecting"}}({{expectingCount}})</div>
+              <div>{{t "review_offer.expecting"}}({{model.expectingCount}})</div>
             {{/link-to}}
           {{/link-to}}
 
           {{#link-to 'review_offer.receive' (query-params state="received") tagName="dd" classNames="small-4 columns text-center"}}
             {{#link-to 'review_offer.receive' (query-params state="received")}}
-              <div>{{t "review_offer.received"}}({{receivedCount}})</div>
+              <div>{{t "review_offer.received"}}({{model.receivedCount}})</div>
             {{/link-to}}
           {{/link-to}}
 
           {{#link-to 'review_offer.receive' (query-params state="missing") tagName="dd" classNames="small-4 columns text-center"}}
             {{#link-to 'review_offer.receive' (query-params state="missing")}}
-              <div>{{t "review_offer.missing"}}({{missingCount}})</div>
+              <div>{{t "review_offer.missing"}}({{model.missingCount}})</div>
             {{/link-to}}
           {{/link-to}}
         </dl>
