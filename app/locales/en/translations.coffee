@@ -49,7 +49,7 @@ I18nTranslationsEn =
         "rejected": "rejected"
         "pending": "pending"
         "missing": "missing"
-        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
+        "start_receiving_by": "{{firstName}} {{lastName}} began receiving"
 
     "items":
       "add_item":

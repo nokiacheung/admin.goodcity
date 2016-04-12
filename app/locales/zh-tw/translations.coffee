@@ -49,7 +49,7 @@ I18nTranslationsZhTw =
         "rejected": "已拒絕"
         "pending": "正在等候"
         "missing": "遺失"
-        "start_receiving_by": "{{firstName}} {{lastName}} 開始接收"
+        "start_receiving_by": "{{lastName}} {{firstName}} began receiving"
 
     "items":
       "add_item":
