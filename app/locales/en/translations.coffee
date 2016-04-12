@@ -50,6 +50,7 @@ I18nTranslationsEn =
         "pending": "pending"
         "missing": "missing"
         "start_receiving_by": "{{firstName}} {{lastName}} began receiving"
+        "inactive": "Marked as inactive"
 
     "items":
       "add_item":

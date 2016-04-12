@@ -50,6 +50,7 @@ I18nTranslationsZhTw =
         "pending": "正在等候"
         "missing": "遺失"
         "start_receiving_by": "{{lastName}} {{firstName}} began receiving"
+        "inactive": "Marked as inactive"
 
     "items":
       "add_item":
