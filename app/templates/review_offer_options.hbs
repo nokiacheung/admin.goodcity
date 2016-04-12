@@ -19,13 +19,13 @@
     </div>
   {{/if}}
 
-  {{#unless (js-or offer.isFinished offer.isReceiving)}}
+  {{#unless offer.hideInactiveOfferOption}}
     <div class="option_menu">
       {{inactive-offer offer=offer toggleAction="toggleOfferOptions"}}
     </div>
   {{/unless}}
 
-  {{#unless offer.isCancelled}}
+  {{#unless offer.hideCancelOfferOption}}
     <div class="option_menu">
       {{cancel-offer offer=offer toggleAction="toggleOfferOptions"}}
     </div>
