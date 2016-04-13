@@ -70,7 +70,17 @@ export default Ember.Component.extend({
     },
 
     checkReceiving(event) {
-      if (!this.get("isFirstReceivingPackage")) {
+      if(this.get("offer.isFinished")) {
+        this.get("messageBox").confirm(
+          this.get("i18n").t("review_offer.confirm_receiving_message"),
+          () => this.send("applyReceiving", event, false) );
+      } else {
+        this.send("applyReceiving", event);
+      }
+    },
+
+    applyReceiving(event, allow_event=true) {
+      if (!this.get("isFirstReceivingPackage") && allow_event) {
         return this.send(event);
       }
       this.set("confirmReceivingEvent", event);

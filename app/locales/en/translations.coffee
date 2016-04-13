@@ -113,6 +113,7 @@ I18nTranslationsEn =
       "receive_offer_message": "Your offer was received, thank you."
       "missing_offer_message": "The delivery arrived at Crossroads but expected items were missing. We may follow up with you to confirm what happened."
       "close_offer_message": "We have finished processing your offer. Unfortunately we are unable to receive your items this time. We hope we can place items you offer in the future."
+      "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'. Are you sure you want to receive the item(s)?"
 
       "donor":
         "offer_id": "Offer ID"
