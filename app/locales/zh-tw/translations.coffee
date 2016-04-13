@@ -113,6 +113,7 @@ I18nTranslationsZhTw =
       "receive_offer_message": "已經收到你捐贈的物資，謝謝。"
       "missing_offer_message": "貨車已抵達十字路會，惟未見物資，我們或會和你跟進，確認事件狀況。"
       "close_offer_message": "閣下的捐獻項目處理完畢，但我們現時無法接收閣下的物資，請見諒，還望下次有機會為閣下的物資找到合適的安置。"
+      "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'. Are you sure you want to receive the item(s)?"
 
       "donor":
         "offer_id": "捐獻項目號碼"
