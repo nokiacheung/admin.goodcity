@@ -23,6 +23,7 @@ deployment:
   staging:
     branch: master
     commands:
+      - curl -H "Content-Type:application/json" -X POST -d '{"definition":{"id":7},"sourceBranch":"refs/heads/master"}' -u default:$vsts_pat https://goodcity.visualstudio.com/defaultcollection/admin.goodcity/_apis/build/builds?api-version=2
       - bundle exec cap staging deploy
       - bundle exec rake staging android app:release
   production:
