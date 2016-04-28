@@ -1,0 +1,68 @@
+{{#if offerReadyForClosure}}
+  <div class="offer-status is-closed">
+    <div class='status-message review_message'>
+      {{t "review_offer.all_items_processed"}}
+      {{complete-receive-offer offer=offer}}
+    </div>
+  </div>
+
+{{else if offer.isSubmitted}}
+  <a {{action 'startReview'}} class="{{if isStartReviewClicked 'waiting' 'start_review_link'}}">
+    <div class="offer-status is-submitted">
+      <div class='status-message'>
+        {{t "review_offer.start_review"}}
+        {{#if isStartReviewClicked}}
+          <img src="assets/images/waiting.gif" alt="">
+        {{/if}}
+      </div>
+    </div>
+  </a>
+
+{{else if offer.isScheduled}}
+  <div class="offer-status is-scheduled">
+    <div class='status-message'>
+      {{#with offer.delivery as |delivery|}}
+        {{transportStatus}}
+        <i class="fa fa-truck"></i>
+        <b>
+          {{transportTime.prefix}}
+          {{display-datetime transportTime.date format=transportTime.format}}
+          {{transportTime.suffix}}
+        </b>
+      {{/with}}
+    </div>
+  </div>
+
+{{else if offer.isCancelled}}
+  <div class="offer-status is-closed">
+    <div class='status-message review_message'>
+      {{t "review_offer.offer_cancelled_by" firstName=offer.closedBy.firstName lastName=offer.closedBy.lastName}}
+      {{display-datetime offer.cancelledAt format='h:mm a, ddd Do MMM'}}
+    </div>
+  </div>
+
+
+{{else if displayCloseOfferAction}}
+  <div class="offer-status is-submitted">
+    <div class='status-message'>
+      {{t "review_offer.no_items"}} <i class="fa fa-frown-o"></i> {{close-offer offerId=model.id}}
+    </div>
+  </div>
+
+{{else if offer.readyForSchedule}}
+  <div class="offer-status is-submitted">
+    <div class='status-message'>
+      {{t "review_offer.items_reviewed"}} <i class="fa fa-smile-o"></i> {{#link-to 'review_offer.logistics' offer }}{{t "review_offer.set_logistics"}}{{/link-to}} {{t "review_offer.to_complete"}}
+    </div>
+  </div>
+
+{{else if reviewStatusMessage.prefix}}
+  <div class="offer-status {{reviewStatusMessage.className}}">
+    <div class='status-message review_message'>
+      {{reviewStatusMessage.prefix}}
+      {{time-ago timeValue=reviewStatusMessage.date}}
+      {{reviewStatusMessage.suffix}}
+    </div>
+  </div>
+
+{{/if}}
