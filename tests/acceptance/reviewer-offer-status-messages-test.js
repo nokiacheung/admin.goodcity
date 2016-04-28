@@ -101,7 +101,7 @@ test("Display offer status for scheduled offer: Gogovan pending", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm, Mon 1st Dec");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm Mon 1st Dec");
   });
 });
 
