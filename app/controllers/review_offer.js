@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   isStartReviewClicked: false,
   i18n: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  backLinkPath: "",
 
   displayOfferOptions: Ember.computed({
     get: function() {
@@ -48,32 +49,6 @@ export default Ember.Controller.extend({
           this.transitionToRoute("my_list");
         });
       }
-    }
-  }),
-
-
-  backLinkPath: Ember.computed('offer.state', 'isMyOffer', function(){
-    var offer = this.get("offer");
-    var isMyOffer = this.get("isMyOffer");
-
-    if(offer.get("isSubmitted")) { return "offers"; }
-    else if(offer.get("isReceiving")) { return "offers.receiving"; }
-    else if(offer.get("isReviewed")) {
-      return isMyOffer ? "my_list.reviewed" : "in_progress.reviewed"; }
-    else if(offer.get("isUnderReview")) {
-      return isMyOffer ? "my_list.reviewing" : "in_progress.reviewing"; }
-    else if(offer.get("isClosed") || offer.get("isCancelled")) {
-      return isMyOffer ? "my_list.finished" : "finished.cancelled"; }
-    else if(offer.get("isReceived")) {
-      return isMyOffer ? "my_list.finished" : "finished.received"; }
-    else if(offer.get("isInactive")) {
-      return isMyOffer ? "my_list.finished" : "finished.inactive"; }
-    else if(offer.get("isScheduled")) {
-      if(isMyOffer) { return "my_list.scheduled"; }
-      else if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }
-      else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
-      else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
-    else { return "offers"; }
     }
   }),
 
