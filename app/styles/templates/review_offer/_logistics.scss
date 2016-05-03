@@ -36,8 +36,3 @@
     }
   }
 }
-
-#confirmOfferCloseModal {
-  @extend .reveal-modal#errorModal;
-  @extend #confirmReceivingModal;
-}
