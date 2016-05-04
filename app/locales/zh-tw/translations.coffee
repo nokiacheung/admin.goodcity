@@ -80,6 +80,7 @@ I18nTranslationsZhTw =
       "closed_offers": "已完成"
       "receiving": "正在接收"
       "users": "使用者"
+      "search_offer_message": "Only recently updated offers are shown. Use search to find older offers."
 
     "my_notifications":
       "heading" : "{{name}}的捐獻"
