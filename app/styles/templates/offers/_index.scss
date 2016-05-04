@@ -13,3 +13,13 @@
 .dynamic_filter {
   margin: 0 0.8rem;
 }
+
+.search-offer-message {
+  color: white;
+  padding: 0.5rem 1rem 0.8rem;
+  font-size: 0.9rem;
+
+  @media #{$small-only} {
+    font-size: 0.7rem;
+  }
+}

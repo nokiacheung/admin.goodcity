@@ -29,7 +29,7 @@ test("redirect to finished offers page", function() {
 
     var assertions = function() {
       equal(currentURL(), "/offers/finished/received");
-      equal(find("ul.list li").length, 1);
+      equal(find("ul.list li").length, 2);
       equal(find("ul.list img").length, 1);
 
       // under-review status
@@ -49,7 +49,7 @@ test("redirect to cancelled offers page", function() {
 
   andThen(function(){
     equal(currentURL(), "/offers/finished/cancelled");
-    equal(find("ul.list li").length, 1);
+    equal(find("ul.list li").length, 2);
     equal(find("ul.list img").length, 1);
 
     // cancelled status

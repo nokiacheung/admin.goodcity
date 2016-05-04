@@ -80,6 +80,7 @@ I18nTranslationsEn =
       "closed_offers": "Finished"
       "receiving": "Receiving"
       "users": "Users"
+      "search_offer_message": "Only recently updated offers are shown. Use search to find older offers."
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
