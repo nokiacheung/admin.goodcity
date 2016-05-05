@@ -14,7 +14,12 @@
         {{#if offer.isScheduled}}
           <i class="fa fa-truck"></i>
           <b>
-            {{display-datetime offer.timeDetail.date format='h:mm A, ddd Do MMM'}}
+            {{#if offer.delivery.isGogovan}}
+              {{display-datetime offer.timeDetail.date format='h:mm A, ddd Do MMM'}}
+            {{else}}
+              {{display-datetime offer.timeDetail.date format='ddd Do MMM'}}
+            {{/if}}
+
             {{offer.timeDetail.suffix}}
           </b>
         {{else}}
