@@ -13,6 +13,10 @@ export default transportDetails.extend({
   i18n: Ember.inject.service(),
   selectedGogovanOption: "",
 
+  crossroadsContact: Ember.computed(function(){
+    return config.APP.CROSSROADS_CONTACT;
+  }),
+
   selectedCrossroadsOption: Ember.computed('crossroadsOptions', function(){
     var options = this.get('crossroadsOptions').filter(option => {
       return option.get('name') === this.get("i18n").t("offer.disable").string;
