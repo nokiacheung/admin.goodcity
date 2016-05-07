@@ -135,7 +135,7 @@ test("for scheduled offer with pending GGV order state", function() {
     equal(($.trim($(".delivery-details .row:eq(0)").text()).indexOf('Awaiting Driver Confirmation') >= 0), true);
     equal(($.trim($(".delivery-details .row:eq(0)").text()).indexOf('Driver & vehicle details will appear here once a driver accepts your booking.') > 0), true);
 
-    equal($.trim($('.delivery-details .row:eq(1)').text()), "Accepted items to be transported");
+    equal($.trim($('.delivery-details .row:eq(3)').text()), "Accepted items to be transported");
     equal($(".items_list img").length, 1);
     equal($('.transport-buttons a').length, 2);
   });
@@ -159,14 +159,14 @@ test("for scheduled offer with active GGV order state", function() {
 
     equal((($.trim($(".delivery-details .gogovan_status .row:eq(3)").text())).indexOf(ggv_order2.get('price')) > 0), true);
 
-    equal($.trim($('.delivery-details .row:eq(5)').text()), "Accepted items to be transported");
+    equal($.trim($('.delivery-details .row:eq(7)').text()), "Accepted items to be transported");
     equal($(".items_list img").length, 1);
     equal($('.transport-buttons a').length, 2);
 
     equal($(".booking-id div:first").text().trim(), t("delivery_details.id"));
     equal($(".booking-id div:last").text().trim().indexOf("654321") >= 0, true);
     equal($(".booking-id div:last a").text().trim().indexOf(t("delivery_details.driver_screen")) >=0, true);
-    equal($(".delivery-details .row:eq(7) div a").text().trim().indexOf("Driver Screen") >=0, true);
+    equal($(".delivery-details .row:eq(9) div a").text().trim().indexOf("Driver Screen") >=0, true);
   });
 });
 
