@@ -1,0 +1,28 @@
+
+{{#if displayButton}}
+  <div class="small-8 small-offset-2 columns">
+    <a {{action 'confirmCloseOffer'}} class="button expand">{{t "logistics.complete_review"}}</a>
+  </div>
+{{else}}
+  <a {{action 'confirmCloseOffer'}}>{{t "logistics.complete_review"}}</a>
+{{/if}}
+
+{{#message-box btn1Text=(t "logistics.complete_review") btn1Callback=(action "completeReview") btn2Text=(t "receive.receiving.not_now")  isVisible=displayUserPrompt classNames="popupOverlay complete_receive_overlay"}}
+
+  <div class= "popup_heading">Finished reviewing this offer?</div>
+
+  <div class="ui {{if invalidSelection 'has-error'}}">
+    {{select-list
+      content=gogovanOptions
+      on-change=(action (mut selectedGogovanOption))
+      selectedValue=selectedGogovanOption
+      selectArrow=true
+      prompt=ggvOptionPlaceholder}}
+  </div>
+
+  <div class= "popup_subheading">Message to the donor:</div>
+
+  <div class="{{if invalidMessage 'has-error'}} ui">
+    {{auto-resize-textarea data-autoresize=true id=(concat this "closeOfferMessage") name="closeOfferMessage" value=closeMessage maxlength=255 }}
+  </div>
+{{/message-box}}

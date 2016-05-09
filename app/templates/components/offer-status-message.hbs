@@ -52,7 +52,8 @@
 {{else if offer.readyForSchedule}}
   <div class="offer-status is-submitted">
     <div class='status-message'>
-      {{t "review_offer.items_reviewed"}} <i class="fa fa-smile-o"></i> {{#link-to 'review_offer.logistics' offer }}{{t "review_offer.set_logistics"}}{{/link-to}} {{t "review_offer.to_complete"}}
+      {{t "review_offer.items_reviewed"}} <i class="fa fa-smile-o"></i>
+      {{complete-review-offer offer=offer displayUserPrompt=displayCompleteReviewPopup}}
     </div>
   </div>
 
