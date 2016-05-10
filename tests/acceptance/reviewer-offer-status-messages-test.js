@@ -147,7 +147,7 @@ test("Display offer status for all reviewed items", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer9.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()), "All items reviewed  Set logistics to complete");
+    equal(find('.status-message').text().replace(/ /g,' ').indexOf("All items reviewed") >= 0, true);
   });
 });
 

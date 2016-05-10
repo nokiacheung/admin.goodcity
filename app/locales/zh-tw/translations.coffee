@@ -157,6 +157,8 @@ I18nTranslationsZhTw =
       "van": "麵包車"
       "receiving" : "正在接收這項捐獻"
       "offer_cancelled_by": "這項捐獻由 {{lastName}} {{firstName}} 取消"
+      "complete_review_message": "Your offer has been reviewed. Please <a href='/offers/{{offer_id}}/plan_delivery'>click here</a> to arrange transportation."
+      "choose_ggv_option": "Choose GoGoVan hire requirement"
 
     "review_item":
       "title" : "審查物資"
