@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   backLinkPath: "",
   displayCompleteReviewPopup: false,
+  displayCompleteReceivePopup: false,
 
   displayOfferOptions: Ember.computed({
     get: function() {

@@ -30,6 +30,7 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(controller, model);
     controller.set("displayOfferOptions", false);
+    controller.set("displayCompleteReceivePopup", false);
 
     if(this.get('backLinkPath') !== null) {
       controller.set('backLinkPath', this.get('backLinkPath'));
