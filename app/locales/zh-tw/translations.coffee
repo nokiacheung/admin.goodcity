@@ -115,6 +115,7 @@ I18nTranslationsZhTw =
       "missing_offer_message": "貨車已抵達十字路會，惟未見物資，我們或會和你跟進，確認事件狀況。"
       "close_offer_message": "閣下的捐獻項目處理完畢，但我們現時無法接收閣下的物資，請見諒，還望下次有機會為閣下的物資找到合適的安置。"
       "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'. Are you sure you want to receive the item(s)?"
+      "close_offer_summary": "This will close the offer."
 
       "donor":
         "offer_id": "捐獻項目號碼"
@@ -159,6 +160,8 @@ I18nTranslationsZhTw =
       "offer_cancelled_by": "這項捐獻由 {{lastName}} {{firstName}} 取消"
       "complete_review_message": "Your offer has been reviewed. Please <a href='/offers/{{offer_id}}/plan_delivery'>click here</a> to arrange transportation."
       "choose_ggv_option": "Choose GoGoVan hire requirement"
+      "finished_review": "Finished reviewing this offer?"
+      "add_message_to_donor": "Message to the donor:"
 
     "review_item":
       "title" : "審查物資"

@@ -138,7 +138,7 @@ test("Display offer status for all rejected items", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer8.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()).indexOf("No items needed  Close Offer") >= 0, true);
+    equal($.trim(find('.status-message').text()).indexOf("No items needed") >= 0, true);
   });
 });
 

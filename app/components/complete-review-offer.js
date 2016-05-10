@@ -9,12 +9,23 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
   invalidMessage: false,
   invalidSelection: false,
+  rejectOffer: Ember.computed.alias("offer.allItemsRejected"),
 
   selectedGogovanOption: "",
   ggvOptionPlaceholder: t("logistics.choose_ggv_option"),
 
+  summaryText: Ember.computed('rejectOffer', function(){
+    if(this.get("rejectOffer")) {
+      return this.get("i18n").t("review_offer.close_offer_summary");
+    }
+  }),
+
   closeMessage: Ember.computed("offer", function(){
-    return this.get("i18n").t("logistics.complete_review_message", { offer_id: this.get("offer.id") });
+    if(this.get("rejectOffer")) {
+      return this.get("i18n").t("review_offer.close_offer_message");
+    } else {
+      return this.get("i18n").t("logistics.complete_review_message", { offer_id: this.get("offer.id") });
+    }
   }),
 
   gogovanOptions: Ember.computed(function(){
@@ -38,23 +49,30 @@ export default Ember.Component.extend({
       }
       this.set("invalidMessage", false);
 
-      var gogovanOptionId = this.get('selectedGogovanOption.id');
-      if(gogovanOptionId === undefined) {
-        this.set("invalidSelection", true);
-        return false;
+      var offerId = this.get('offer.id');
+      var offerProperties = {}, action;
+
+      if(this.get("rejectOffer")) {
+        action = "close_offer";
+      } else {
+
+        var gogovanOptionId = this.get('selectedGogovanOption.id');
+        if(gogovanOptionId === undefined) {
+          this.set("invalidSelection", true);
+          return false;
+        }
+        this.set("invalidSelection", false);
+
+        offerProperties = {
+          gogovan_transport_id: gogovanOptionId,
+          state_event: 'finish_review',
+          id: offerId
+        };
+        action = "complete_review";
       }
-      this.set("invalidSelection", false);
 
       var loadingView = getOwner(this).lookup('component:loading').append();
-      var offerId = this.get('offer.id');
-
-      var offerProperties = {
-        gogovan_transport_id: gogovanOptionId,
-        state_event: 'finish_review',
-        id: offerId
-      };
-
-      var url   = "/offers/" + offerId + "/complete_review";
+      var url = `/offers/${offerId}/${action}`;
 
       new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties, complete_review_message: completeReviewMessage})
         .then(data => {

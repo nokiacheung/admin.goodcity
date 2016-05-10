@@ -41,11 +41,11 @@
     </div>
   </div>
 
-
 {{else if displayCloseOfferAction}}
   <div class="offer-status is-submitted">
     <div class='status-message'>
-      {{t "review_offer.no_items"}} <i class="fa fa-frown-o"></i> {{close-offer offerId=model.id}}
+      {{t "review_offer.no_items"}} <i class="fa fa-frown-o"></i>
+      {{complete-review-offer offer=offer displayUserPrompt=displayCompleteReviewPopup}}
     </div>
   </div>
 

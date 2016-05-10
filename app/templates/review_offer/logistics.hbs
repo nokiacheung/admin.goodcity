@@ -19,6 +19,8 @@
 
             {{#if model.isClosed}}
               <div class='info-text'>{{t "logistics.offer_closed"}}</div>
+            {{else}}
+              {{complete-review-offer offer=model displayButton=true}}
             {{/if}}
           </div>
         {{else}}

@@ -115,6 +115,7 @@ I18nTranslationsEn =
       "missing_offer_message": "The delivery arrived at Crossroads but expected items were missing. We may follow up with you to confirm what happened."
       "close_offer_message": "We have finished processing your offer. Unfortunately we are unable to receive your items this time. We hope we can place items you offer in the future."
       "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'. Are you sure you want to receive the item(s)?"
+      "close_offer_summary": "This will close the offer."
 
       "donor":
         "offer_id": "Offer ID"
@@ -159,6 +160,8 @@ I18nTranslationsEn =
       "offer_cancelled_by": "Offer cancelled by {{firstName}} {{lastName}}"
       "complete_review_message": "Your offer has been reviewed. Please <a href='/offers/{{offer_id}}/plan_delivery'>click here</a> to arrange transportation."
       "choose_ggv_option": "Choose GoGoVan hire requirement"
+      "finished_review": "Finished reviewing this offer?"
+      "add_message_to_donor": "Message to the donor:"
 
     "review_item":
       "title" : "Review Item"
