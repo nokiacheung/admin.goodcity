@@ -33,7 +33,10 @@ export default Ember.Component.extend({
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
-      .then(() => loadingView.destroy())
+      .then(() => {
+        loadingView.destroy();
+        getOwner(this).lookup("controller:review_offer").set("displayCompleteReceivePopup", this.get("offer.readyForClosure"));
+      })
       .catch(error => {
         loadingView.destroy();
         var errorMessage = pkg.get("errors.firstObject.message");
