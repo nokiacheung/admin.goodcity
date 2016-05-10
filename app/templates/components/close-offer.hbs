@@ -1,9 +1,0 @@
-<a {{action 'confirmCloseOffer'}} class="{{classNames}}">{{t "logistics.close_offer"}}</a>
-
-{{#message-box btn1Text=(t "review_offer.close_offer") btn1Callback=(action "closeOffer") btn2Text=(t "receive.receiving.not_now")  isVisible=displayUserPrompt classNames="popupOverlay"}}
-  <strong>{{t "review_offer.message_donor"}}</strong>
-
-  <div class="{{if invalidMessage 'has-error'}} ui">
-    {{auto-resize-textarea data-autoresize=true id="closeOfferMessage" name="closeOfferMessage" value=closeMessage maxlength=255 }}
-  </div>
-{{/message-box}}
