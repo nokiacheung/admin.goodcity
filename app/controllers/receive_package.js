@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   package: Ember.computed.alias("model"),
   watchErrors: true,
   isAndroidDevice: false,
+  i18n: Ember.inject.service(),
 
   donorConditions: Ember.computed(function(){
     return this.get("store").peekAll('donor_condition').sortBy('id');
@@ -18,10 +19,10 @@ export default Ember.Controller.extend({
 
   grades: Ember.computed(function(){
     return [
-      { name: "Grade: A", id: "A" },
-      { name: "Grade: B", id: "B" },
-      { name: "Grade: C", id: "C" },
-      { name: "Grade: D", id: "D" }
+      { name: this.get("i18n").t("receive_package.grade_a"), id: "A" },
+      { name: this.get("i18n").t("receive_package.grade_b"), id: "B" },
+      { name: this.get("i18n").t("receive_package.grade_c"), id: "C" },
+      { name: this.get("i18n").t("receive_package.grade_d"), id: "D" }
     ];
   }),
 

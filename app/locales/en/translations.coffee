@@ -244,6 +244,11 @@ I18nTranslationsEn =
       "cancel": "Cancel"
       "scan_barcode": "Scan barcode"
       "enter_barcode": "Enter barcode"
+      "add_location": "Add Location"
+      "grade_a": "Grade: A"
+      "grade_b": "Grade: B"
+      "grade_c": "Grade: C"
+      "grade_d": "Grade: D"
 
     "user":
       "permission": "Permission"

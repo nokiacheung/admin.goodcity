@@ -244,6 +244,12 @@ I18nTranslationsZhTw =
       "receive": "接收"
       "cancel": "取消"
       "enter_barcode": "輸入條碼"
+      "scan_barcode": "Scan barcode"
+      "add_location": "Add Location"
+      "grade_a": "Grade: A"
+      "grade_b": "Grade: B"
+      "grade_c": "Grade: C"
+      "grade_d": "Grade: D"
 
     "user":
       "permission": "准許"
