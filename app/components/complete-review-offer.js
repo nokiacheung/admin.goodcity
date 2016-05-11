@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   invalidMessage: false,
   invalidSelection: false,
   rejectOffer: Ember.computed.alias("offer.allItemsRejected"),
+  displayUserPrompt: false,
 
   selectedGogovanOption: "",
   ggvOptionPlaceholder: t("logistics.choose_ggv_option"),
