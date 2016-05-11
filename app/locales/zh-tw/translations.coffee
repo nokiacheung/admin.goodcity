@@ -9,14 +9,14 @@ I18nTranslationsZhTw =
     "submitted": "已提交"
     "messages_title" : "信息"
     "select": "選擇"
-    "search_item_label": "Search item label"
+    "search_item_label": "搜尋物資標籤"
     "search":
       "no_results": "抱歉，未能找到結果"
       "server_search": "於服務器上尋找更多資訊"
       "placeholder": "搜索"
 
     "users":
-      "search": "Search User"
+      "search": "搜尋使用者"
 
     "offer":
       "title": "捐獻細節"
@@ -49,8 +49,8 @@ I18nTranslationsZhTw =
         "rejected": "已拒絕"
         "pending": "正在等候"
         "missing": "遺失"
-        "start_receiving_by": "{{lastName}} {{firstName}} began receiving"
-        "inactive": "Marked as inactive"
+        "start_receiving_by": "{{lastName}} {{firstName}} 正在接收"
+        "inactive": "列作暫停"
 
     "items":
       "add_item":
@@ -80,7 +80,7 @@ I18nTranslationsZhTw =
       "closed_offers": "已完成"
       "receiving": "正在接收"
       "users": "使用者"
-      "search_offer_message": "Only recently updated offers are shown. Use search to find older offers."
+      "search_offer_message": "只顯示最近更新的捐贈項目，請使用搜尋功能檢閱過往項目。"
 
     "my_notifications":
       "heading" : "{{name}}的捐獻"
@@ -114,8 +114,8 @@ I18nTranslationsZhTw =
       "receive_offer_message": "已經收到你捐贈的物資，謝謝。"
       "missing_offer_message": "貨車已抵達十字路會，惟未見物資，我們或會和你跟進，確認事件狀況。"
       "close_offer_message": "閣下的捐獻項目處理完畢，但我們現時無法接收閣下的物資，請見諒，還望下次有機會為閣下的物資找到合適的安置。"
-      "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'. Are you sure you want to receive the item(s)?"
-      "close_offer_summary": "This will close the offer."
+      "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'.在完成捐獻後接收物資，會將捐獻項目的狀態轉成「正在接收」。閣下確定接收物資嗎？"
+      "close_offer_summary": "這項捐獻項目將列為完成。"
 
       "donor":
         "offer_id": "捐獻項目號碼"
@@ -132,7 +132,7 @@ I18nTranslationsZhTw =
         "add_item": "添加項目"
         "delete_offer": "刪除捐獻項"
         "submit_offer": "重新提交捐獻項"
-        "merge_offer": "Merge Offer"
+        "merge_offer": "合拼捐獻項目"
 
     "mark_received":
       "delivered_by": "運送人員："
@@ -158,10 +158,10 @@ I18nTranslationsZhTw =
       "van": "麵包車"
       "receiving" : "正在接收這項捐獻"
       "offer_cancelled_by": "這項捐獻由 {{lastName}} {{firstName}} 取消"
-      "complete_review_message": "Your offer has been reviewed. Please <a href='/offers/{{offer_id}}/plan_delivery'>click here</a> to arrange transportation."
-      "choose_ggv_option": "Choose GoGoVan hire requirement"
-      "finished_review": "Finished reviewing this offer?"
-      "add_message_to_donor": "Message to the donor:"
+      "complete_review_message": "正在審查閣下的捐獻項目， 請 <a href='/offers/{{offer_id}}/plan_delivery'>點擊這裏</a> 安排遞送服務。"
+      "choose_ggv_option": "選擇GoGoVan租賃服務"
+      "finished_review": "完成審查了嗎？"
+      "add_message_to_donor": "聯絡捐款人："
 
     "review_item":
       "title" : "審查物資"
@@ -192,7 +192,7 @@ I18nTranslationsZhTw =
       "supply_message" : "很抱歉，由於我們已經有很多同類型的物資，我們無法接受您的捐獻。"
       "cancel_gogovan_confirm": "拒絕接受最後一項物資將會取消GoGoVan的預約，您是否確認？"
       "custom_reason": "特別原因"
-      "cannot_reject_error": "Cannot reject last item if there's a confirmed GoGoVan booking."
+      "cannot_reject_error": "已確認預約GoGoVan，因此無法拒絕最後一項物資。"
 
     "cancel_gogovan":
       "title": "取消預約GoGoVan"
@@ -243,7 +243,7 @@ I18nTranslationsZhTw =
       "invalid_description": "空格不能留空"
       "receive": "接收"
       "cancel": "取消"
-      "enter_barcode": "Enter barcode"
+      "enter_barcode": "輸入條碼"
 
     "user":
       "permission": "准許"
