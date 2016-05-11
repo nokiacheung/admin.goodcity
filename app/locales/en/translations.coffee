@@ -80,6 +80,7 @@ I18nTranslationsEn =
       "closed_offers": "Finished"
       "receiving": "Receiving"
       "users": "Users"
+      "holidays": "Holidays"
       "search_offer_message": "Only recently updated offers are shown. Use search to find older offers."
 
     "my_notifications":

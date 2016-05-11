@@ -1,0 +1,25 @@
+.holidays_page {
+  .holiday-description {
+    padding: 1rem;
+  }
+
+  .inbox_page {
+    padding: 0.5rem;
+
+    .columns {
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+      }
+    }
+
+    .fa {
+      font-size: 1.2rem;
+    }
+
+    .highlight {
+      color: $white;
+    }
+  }
+}
