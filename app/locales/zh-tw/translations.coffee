@@ -114,7 +114,7 @@ I18nTranslationsZhTw =
       "receive_offer_message": "已經收到你捐贈的物資，謝謝。"
       "missing_offer_message": "貨車已抵達十字路會，惟未見物資，我們或會和你跟進，確認事件狀況。"
       "close_offer_message": "閣下的捐獻項目處理完畢，但我們現時無法接收閣下的物資，請見諒，還望下次有機會為閣下的物資找到合適的安置。"
-      "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'.在完成捐獻後接收物資，會將捐獻項目的狀態轉成「正在接收」。閣下確定接收物資嗎？"
+      "confirm_receiving_message": "在捐獻取消後接收物資，會將捐獻項目的狀態轉成「正在接收」。確定接收物資嗎？"
       "close_offer_summary": "這項捐獻項目將列為完成。"
 
       "donor":
@@ -244,12 +244,12 @@ I18nTranslationsZhTw =
       "receive": "接收"
       "cancel": "取消"
       "enter_barcode": "輸入條碼"
-      "scan_barcode": "Scan barcode"
-      "add_location": "Add Location"
-      "grade_a": "Grade: A"
-      "grade_b": "Grade: B"
-      "grade_c": "Grade: C"
-      "grade_d": "Grade: D"
+      "scan_barcode": "掃描條碼"
+      "add_location": "加入地點"
+      "grade_a": "等級: A"
+      "grade_b": "等級: B"
+      "grade_c": "等級: C"
+      "grade_d": "等級: D"
 
     "user":
       "permission": "准許"
