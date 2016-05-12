@@ -5,6 +5,7 @@ const { getOwner } = Ember;
 export default Ember.Controller.extend({
 
   reviewItem: Ember.inject.controller(),
+  reviewOfferController: Ember.inject.controller('review_offer'),
   offer: Ember.inject.controller(),
 
   itemTypeId: Ember.computed.alias('reviewItem.itemTypeId'),
@@ -105,7 +106,10 @@ export default Ember.Controller.extend({
 
         // Save changes to Item
         item.save()
-          .then(() => this.transitionToRoute('review_offer.items'))
+          .then(() => {
+            this.transitionToRoute('review_offer.items');
+            this.get("reviewOfferController").set("displayCompleteReviewPopup", offer.get("allItemsReviewed") && offer.get("isUnderReview"));
+          })
           .catch(error => {
             item.rollback();
 

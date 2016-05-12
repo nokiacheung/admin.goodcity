@@ -80,7 +80,7 @@
               </div>
             {{else}}
               <div class="small-6 columns">
-                {{#online-button id="saveItem" classNames="button expand save_item" disabled=offer.isFinished didInsertElement=(action "setupAcceptClick" "saveItem" false)}}
+                {{#online-button id="saveItem" classNames="button expand save_item" disabled=offer.isFinished didInsertElement=(action "setupAcceptClick" "saveItem")}}
                   {{t "review_item.save_item"}}
                 {{/online-button}}
               </div>

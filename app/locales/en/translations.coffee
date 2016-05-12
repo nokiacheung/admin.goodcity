@@ -9,6 +9,7 @@ I18nTranslationsEn =
     "submitted": "Submitted"
     "messages_title" : "Messages"
     "select": "Select"
+    "search_item_label": "Search item label"
     "search":
       "no_results": "Sorry, No results found."
       "server_search": "Find more on server"
@@ -48,7 +49,8 @@ I18nTranslationsEn =
         "rejected": "rejected"
         "pending": "pending"
         "missing": "missing"
-        "start_receiving_by": "Start receiving by {{firstName}} {{lastName}}"
+        "start_receiving_by": "{{firstName}} {{lastName}} began receiving"
+        "inactive": "Marked as inactive"
 
     "items":
       "add_item":
@@ -78,6 +80,7 @@ I18nTranslationsEn =
       "closed_offers": "Finished"
       "receiving": "Receiving"
       "users": "Users"
+      "search_offer_message": "Only recently updated offers are shown. Use search to find older offers."
 
     "my_notifications":
       "heading" : "{{name}}'s Offer"
@@ -111,6 +114,8 @@ I18nTranslationsEn =
       "receive_offer_message": "Your offer was received, thank you."
       "missing_offer_message": "The delivery arrived at Crossroads but expected items were missing. We may follow up with you to confirm what happened."
       "close_offer_message": "We have finished processing your offer. Unfortunately we are unable to receive your items this time. We hope we can place items you offer in the future."
+      "confirm_receiving_message": "Receiving items after an offer has been finished will change the state of the offer to 'Receiving'. Are you sure you want to receive the item(s)?"
+      "close_offer_summary": "This will close the offer."
 
       "donor":
         "offer_id": "Offer ID"
@@ -153,6 +158,10 @@ I18nTranslationsEn =
       "van": "Van"
       "receiving" : "This offer is currently being received."
       "offer_cancelled_by": "Offer cancelled by {{firstName}} {{lastName}}"
+      "complete_review_message": "Your offer has been reviewed. Please <a href='/offers/{{offer_id}}/plan_delivery'>click here</a> to arrange transportation."
+      "choose_ggv_option": "Choose GoGoVan hire requirement"
+      "finished_review": "Finished reviewing this offer?"
+      "add_message_to_donor": "Message to the donor:"
 
     "review_item":
       "title" : "Review Item"
@@ -235,6 +244,11 @@ I18nTranslationsEn =
       "cancel": "Cancel"
       "scan_barcode": "Scan barcode"
       "enter_barcode": "Enter barcode"
+      "add_location": "Add Location"
+      "grade_a": "Grade: A"
+      "grade_b": "Grade: B"
+      "grade_c": "Grade: C"
+      "grade_d": "Grade: D"
 
     "user":
       "permission": "Permission"

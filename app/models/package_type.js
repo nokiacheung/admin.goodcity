@@ -6,6 +6,7 @@ var attr = DS.attr,
 
 export default DS.Model.extend({
   name:                 attr('string'),
+  otherTerms:           attr('string'),
   code:                 attr('string'),
   isItemTypeNode:       attr('boolean', {defaultValue: false}),
   defaultChildPackages: attr('string'),

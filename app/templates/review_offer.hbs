@@ -13,7 +13,13 @@
 </nav>
 
 <section class="main-section review_offer offer_details">
-  {{partial 'review_offer/offer_review_status_bar'}}
+
+  {{offer-status-message
+    offer=offer
+    isStartReviewClicked=isStartReviewClicked
+    startReview="startReview" displayCompleteReviewPopup=displayCompleteReviewPopup
+    displayCompleteReceivePopup=displayCompleteReceivePopup
+  }}
 
   <div class="row">
     <div class="small-12 columns">

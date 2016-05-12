@@ -1,8 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  sortProperties: ["unreadMessagesCount:desc"],
+  sortProperties: ["unreadMessagesCount:desc", "inactiveAt:desc"],
   arrangedContent: Ember.computed.sort("model", "sortProperties"),
+
+  displaySearchOfferMessage: true,
 
   allOffers: Ember.computed(function(){
     return this.store.peekAll("offer");

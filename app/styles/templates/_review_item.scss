@@ -1,4 +1,11 @@
 .review_item {
+
+  .tabs-content {
+    @media #{$medium-only} {
+      padding-bottom: 3rem;
+    }
+  }
+
   .message-textbar{
     position: relative;
   }
@@ -46,6 +53,23 @@
     filter: alpha(opacity=90);
     cursor: not-allowed;
   }
+
+  .item_lable_input {
+    a {
+      text-decoration: none;
+    }
+
+    input {
+      @media #{$small-only} {
+        font-size: 0.9rem;
+      }
+    }
+
+    input[disabled] {
+      background-color: white;
+      opacity: 1;
+    }
+  }
 }
 
 .accept_widget {
@@ -73,3 +97,27 @@
 .copy_icon {
   padding: 0rem 0.5rem;
 }
+
+.fixed_item_type_search {
+  position: fixed;
+  z-index: 1000;
+
+  @media #{$large-up} {
+    margin-left: 12rem;
+  }
+}
+.item_types_result {
+  padding-top: 3rem;
+
+  .package_name {
+    color: white;
+    font-size: 0.85rem;
+  }
+
+  em {
+    font-style: inherit;
+    background: #ff6;
+    color: black;
+  }
+}
+

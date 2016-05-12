@@ -19,6 +19,8 @@
 
             {{#if model.isClosed}}
               <div class='info-text'>{{t "logistics.offer_closed"}}</div>
+            {{else}}
+              {{complete-review-offer offer=model displayButton=true}}
             {{/if}}
           </div>
         {{else}}
@@ -30,25 +32,29 @@
               </p>
             </p>
           {{else}}
-            <div class="small-12 columns">
-              <h3>{{t "logistics.accepted_items"}} ({{accepted.length}})</h3>
-              {{image-full-preview items=accepted}}
-            </div>
 
             {{#if model.isReviewed}}
+              <div class="small-12 columns">
+                <h3>{{t "logistics.accepted_items"}} ({{accepted.length}})</h3>
+                {{image-full-preview items=accepted}}
+              </div>
+
               <div class="small-12 columns">
                 <div class = 'transport_details'>
                   {{t "logistics.gogovan_requirement"}}: {{model.gogovanTransport.name}}
                 </div>
-                <div class = 'transport_details'>
-                  {{t "logistics.crossroads_requirement"}}: {{model.crossroadsTransport.name}}
-                </div>
+
                 <div class="small-8 small-offset-2 columns transport_details">
                   {{#link-to 'offer.plan_delivery' model class="button expand"}}{{t 'logistics.arrange_transport'}}{{/link-to}}
                 </div>
               </div>
+
             {{else}}
-              {{partial 'review_offer/logistics_details_form'}}
+              <div class='noTransportItems'>
+                <i class="fa fa-info-circle fa-5x"></i>
+                <div class='info-text'>Please complete review first</div>
+              </div>
+              {{complete-review-offer offer=model displayButton=true}}
             {{/if}}
           {{/if}}
         {{/if}}

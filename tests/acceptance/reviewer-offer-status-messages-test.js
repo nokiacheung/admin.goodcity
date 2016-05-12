@@ -101,7 +101,7 @@ test("Display offer status for scheduled offer: Gogovan pending", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm, Mon 1st Dec");
+    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm Mon 1st Dec");
   });
 });
 
@@ -138,7 +138,7 @@ test("Display offer status for all rejected items", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer8.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()).indexOf("No items needed  Close Offer") >= 0, true);
+    equal($.trim(find('.status-message').text()).indexOf("No items needed") >= 0, true);
   });
 });
 
@@ -147,7 +147,7 @@ test("Display offer status for all reviewed items", function() {
 
   andThen(function() {
     equal(currentURL(), "/offers/" + offer9.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()), "All items reviewed  Set logistics to complete");
+    equal(find('.status-message').text().replace(/ /g,' ').indexOf("All items reviewed") >= 0, true);
   });
 });
 

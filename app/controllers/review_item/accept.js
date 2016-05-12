@@ -5,6 +5,7 @@ const { getOwner } = Ember;
 export default Ember.Controller.extend({
 
   applicationController: Ember.inject.controller('application'),
+  reviewOfferController: Ember.inject.controller('review_offer'),
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
   item: Ember.computed.alias("reviewItem.item"),
@@ -135,6 +136,7 @@ export default Ember.Controller.extend({
             this.set("itemSaving", false);
             loadingView.destroy();
             this.transitionToRoute("review_offer.items");
+            this.get("reviewOfferController").set("displayCompleteReviewPopup", this.get("offer.allItemsReviewed") && this.get("offer.isUnderReview"));
           });
         });
     },

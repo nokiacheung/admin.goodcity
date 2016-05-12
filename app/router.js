@@ -39,6 +39,8 @@ Router.map(function() {
       this.route('supervisor_messages');
     });
 
+    this.route('search_label', { resetNamespace: true, path: '/item/:item_id/search_label' });
+
     this.route('package', { resetNamespace: true, path:'/package/:package_id' }, function() {
       this.route('edit_images');
     });

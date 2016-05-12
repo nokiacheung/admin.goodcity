@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   packageId: null,
   store: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  displayUserPrompt: false,
 
   isReceived: Ember.computed.equal("package.state", "received"),
   isMissing: Ember.computed.equal("package.state", "missing"),
@@ -32,7 +33,10 @@ export default Ember.Component.extend({
     var pkg = this.get("package");
     action(pkg);
     pkg.save()
-      .then(() => loadingView.destroy())
+      .then(() => {
+        loadingView.destroy();
+        getOwner(this).lookup("controller:review_offer").set("displayCompleteReceivePopup", this.get("offer.readyForClosure"));
+      })
       .catch(error => {
         loadingView.destroy();
         var errorMessage = pkg.get("errors.firstObject.message");
@@ -48,28 +52,61 @@ export default Ember.Component.extend({
       });
   },
 
+  i18n: Ember.inject.service(),
+
+  deliveredOptions: Ember.computed(function() { return [
+    { value: "Unknown", name: this.get("i18n").t("mark_received.unknown") },
+    { value: "Gogovan", name: this.get("i18n").t("mark_received.gogovan") },
+    { value: "Alternate", name: this.get("i18n").t("mark_received.crossroads_truck") },
+    { value: "Drop Off", name: this.get("i18n").t("mark_received.dropped_off") }
+  ]; }),
+
+  deliveredBy: Ember.computed("offer.deliveredBy", function() {
+    return this.get("offer.deliveredBy");
+  }),
+
+  confirmReceivingEvent: null,
+
   actions: {
     toggle(hidden) {
       this.set("hidden", hidden);
     },
 
-    missing() {
-      if(this.get("isFirstReceivingPackage")) {
-        this.confirmReceiving(() => this.send("missingPackage"));
+    checkReceiving(event) {
+      if(this.get("offer.isFinished")) {
+        this.get("messageBox").confirm(
+          this.get("i18n").t("review_offer.confirm_receiving_message"),
+          () => this.send("applyReceiving", event, false) );
       } else {
-        this.send("missingPackage");
+        this.send("applyReceiving", event);
       }
+    },
+
+    applyReceiving(event, allow_event=true) {
+      if (!this.get("isFirstReceivingPackage") && allow_event) {
+        return this.send(event);
+      }
+      this.set("confirmReceivingEvent", event);
+      this.set("displayUserPrompt", true);
+    },
+
+    confirmReceiving() {
+      var offer = this.get("offer");
+      offer.set("deliveredBy", this.get("deliveredBy.value"));
+      offer.set("state_event", "start_receiving");
+      offer.save()
+        .catch(error => { offer.rollback(); throw error; })
+        .then(() => this.send(this.get("confirmReceivingEvent")));
+    },
+
+    missing() {
+      this.updatePackage(p => {
+        p.set("state", "missing");
+        p.set("state_event", "mark_missing");
+      });
     },
 
     receive() {
-      if(this.get("isFirstReceivingPackage")) {
-        this.confirmReceiving(() => this.send("receivePackage"));
-      } else {
-        this.send("receivePackage");
-      }
-    },
-
-    receivePackage() {
       this.updatePackage(p => {
         p.set("inventoryNumber", null);
         p.set("state", "received");
@@ -78,45 +115,7 @@ export default Ember.Component.extend({
     },
 
     receiveInInventory() {
-      if(this.get("isFirstReceivingPackage")) {
-        this.confirmReceiving(() => this.send("addToStockit"));
-      } else {
-        if(!this.get("isReceived")) { this.send("addToStockit"); }
-      }
-    },
-
-    addToStockit() {
       this.get('router').transitionTo("receive_package", this.get("packageId"));
-    },
-
-    missingPackage() {
-      this.updatePackage(p => {
-        p.set("state", "missing");
-        p.set("state_event", "mark_missing");
-      });
-    },
-  },
-
-  confirmReceiving: function(successCallback) {
-    var _this = this;
-    Ember.$("#confirmReceivingModal").removeClass("open");
-    Ember.$("#confirmReceivingModal").foundation("reveal", "open");
-    Ember.$(".loading-indicator").remove();
-
-    Ember.$("#confirmReceivingModal .closeLink").click(() => {
-      _this.closeConfirmBox();
-    });
-
-    Ember.$("#confirmReceivingModal .confirmLink").click(() => {
-      _this.closeConfirmBox();
-      successCallback();
-    });
-  },
-
-  closeConfirmBox: function() {
-    Ember.run.next(function() {
-      Ember.$("#confirmReceivingModal").foundation("reveal", "close");
-      Ember.$("#confirmReceivingModal *").unbind('click');
-    });
-  },
+    }
+  }
 });

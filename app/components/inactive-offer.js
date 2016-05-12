@@ -7,8 +7,8 @@ export default Ember.Component.extend({
   packageId: null,
   store: Ember.inject.service(),
   i18n: Ember.inject.service(),
-
   invalidMessage: false,
+  displayUserPrompt: false,
 
   inactiveMessage: Ember.computed(function(){
     return this.get("i18n").t("inactive_offer.message");
@@ -17,8 +17,7 @@ export default Ember.Component.extend({
   actions: {
 
     confirmMarkOfferInactive() {
-      this.sendAction("toggleAction");
-      this.confirmReceiving(() => this.send("markOfferInactive"));
+      this.set("displayUserPrompt", true);
     },
 
     markOfferInactive() {
@@ -40,31 +39,9 @@ export default Ember.Component.extend({
         })
         .finally(() => {
           loadingView.destroy();
-          this.closeConfirmBox();
+          this.sendAction("toggleAction");
         });
     }
-
   },
 
-  confirmReceiving: function(successCallback) {
-    var _this = this;
-    Ember.$("#confirmOfferInactiveModal").removeClass("open");
-    Ember.$("#confirmOfferInactiveModal").foundation("reveal", "open");
-    Ember.$(".loading-indicator").remove();
-
-    Ember.$("#confirmOfferInactiveModal .closeLink").click(() => {
-      _this.closeConfirmBox();
-    });
-
-    Ember.$("#confirmOfferInactiveModal .confirmLink").click(() => {
-      successCallback();
-    });
-  },
-
-  closeConfirmBox: function() {
-    Ember.run.next(function() {
-      Ember.$("#confirmOfferInactiveModal").foundation("reveal", "close");
-      Ember.$("#confirmOfferInactiveModal *").unbind('click');
-    });
-  },
 });

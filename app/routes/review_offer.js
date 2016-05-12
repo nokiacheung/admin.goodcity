@@ -3,7 +3,7 @@ import AuthorizeRoute from './authorize';
 import './../computed/local-storage';
 
 export default AuthorizeRoute.extend({
-  fromMyListPage: Ember.computed.localStorage(),
+  backLinkPath: Ember.computed.localStorage(),
 
   beforeModel() {
     var previousRoutes = this.router.router.currentHandlerInfos;
@@ -13,10 +13,11 @@ export default AuthorizeRoute.extend({
       var parentRoute = previousRoutes[1];
       var hasParentRoute = parentRoute && parentRoute.name === "offers";
       var isSearchRoute = previousRoute.name === "search";
-      var isFromMyListPage = previousRoute.name.indexOf("my_list") > -1;
 
       if(!isSearchRoute && hasParentRoute) {
-        this.set("fromMyListPage", isFromMyListPage);
+        this.set("backLinkPath", previousRoute.name);
+      } else if(isSearchRoute) {
+        this.set("backLinkPath", null);
       }
     }
   },
@@ -29,8 +30,29 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(controller, model);
     controller.set("displayOfferOptions", false);
-    if(this.get('fromMyListPage') !== null) {
-      controller.set('isMyOffer', this.get('fromMyListPage'));
+    controller.set("displayCompleteReceivePopup", false);
+
+    if(this.get('backLinkPath') !== null) {
+      controller.set('backLinkPath', this.get('backLinkPath'));
+    } else {
+      controller.set('backLinkPath', this.getBackLinkPath(model));
+    }
+  },
+
+  getBackLinkPath(offer) {
+    if(offer.get("isSubmitted")) { return "offers"; }
+    else if(offer.get("isReceiving")) { return "offers.receiving"; }
+    else if(offer.get("isReviewed")) { return "in_progress.reviewed"; }
+    else if(offer.get("isUnderReview")) { return "in_progress.reviewing"; }
+    else if(offer.get("isClosed") || offer.get("isCancelled")) {
+      return "finished.cancelled"; }
+    else if(offer.get("isReceived")) { return "finished.received"; }
+    else if(offer.get("isInactive")) { return "finished.inactive"; }
+    else if(offer.get("isScheduled")) {
+      if(offer.get("delivery.isGogovan")) { return "scheduled.gogovan"; }
+      else if(offer.get("delivery.isDropOff")) { return "scheduled.other_delivery"; }
+      else if(offer.get("delivery.isAlternate")) { return "scheduled.collection"; }
+    else { return "offers"; }
     }
   }
 });
