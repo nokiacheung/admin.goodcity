@@ -1,13 +1,13 @@
 <a class="" {{action "displayAddHolidayForm"}}>
   <i class="fa fa-plus"></i>
-  Add
+  {{t "holiday.add"}}
 </a>
 
 {{#message-box btn1Text=(t "save") btn1Callback=(action "addHoliday") btn2Text=(t "cancel") btn2Callback=(action "resetForm") isVisible=displayUserPrompt classNames="popupOverlay"}}
 
     <div class="row">
       <div class="small-12 columns {{if invalidName 'has-error'}}">
-        {{input name='name' value=holidayName required="true" placeholder="Name"}}
+        {{input name='name' value=holidayName required="true" placeholder=(t "holiday.name")}}
       </div>
     </div>
 
@@ -20,7 +20,7 @@
           selection=selectedDate
           required='true'
           allHolidays=allHolidays
-          placeholder="Holiday"
+          placeholder=(t "holiday.holiday")
           pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
       </div>
     </div>

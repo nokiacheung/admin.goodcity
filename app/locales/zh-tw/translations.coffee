@@ -18,6 +18,14 @@ I18nTranslationsZhTw =
     "users":
       "search": "搜尋使用者"
 
+    "holiday":
+      "holiday": "Holiday"
+      "add": "Add"
+      "name": "Name"
+      "manage": "Manage Holidays"
+      "description": "Donors will not be able to book a delivery or drop-off on the 'holiday' dates listed below."
+      "delete_confirm": "Are you sure you wish to delete this holiday?"
+
     "offer":
       "title": "捐獻細節"
       "donor": "捐贈者"
@@ -80,6 +88,7 @@ I18nTranslationsZhTw =
       "closed_offers": "已完成"
       "receiving": "正在接收"
       "users": "使用者"
+      "holidays": "Holidays"
       "search_offer_message": "只顯示最近更新的捐贈項目，請使用搜尋功能檢閱過往項目。"
 
     "my_notifications":

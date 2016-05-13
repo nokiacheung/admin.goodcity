@@ -4,12 +4,12 @@
 
     <div class="row">
       <div class="small-12 columns">
-        {{input name='name' value=day.name required="true"}}
+        {{input name='name' value=day.name required="true" placeholder=(t "holiday.name")}}
       </div>
     </div>
 
     <div class="row">
-      <div class="small-6 columns">
+      <div class="small-6 large-8 columns date_selector">
         {{holiday-calender
           name='selectedDate'
           id=(concat this 'selectedDate')
@@ -17,12 +17,14 @@
           selection=selectedDate
           required='true'
           allHolidays=allHolidays
+          placeholder=(t "holiday.holiday")
           pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
+        <i class="fa fa-calendar calender_icon"></i>
       </div>
-      <div class="small-3 columns">
+      <div class="small-3 large-2 columns">
         <button class="right" {{action "saveHoliday"}}>Save</button>
       </div>
-      <div class="small-3 columns">
+      <div class="small-3 large-2 columns">
         <button class="right secondary" {{action "hideEditForm"}}>{{t "cancel"}}</button>
       </div>
     </div>

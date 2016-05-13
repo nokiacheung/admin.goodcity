@@ -10,14 +10,19 @@ export default Ember.Component.extend({
 
   actions: {
     removeHoliday(holiday) {
-      this.get("messageBox").confirm(this.get("i18n").t("edit_images.delete_confirm"), () => {
+      this.get("messageBox").custom(
+        this.get("i18n").t("holiday.delete_confirm"),
+        this.get("i18n").t("yes"),
+        () => {
           var loadingView = getOwner(this).lookup('component:loading').append();
 
           holiday.deleteRecord();
           holiday.save()
             .catch(error => { holiday.rollback(); throw error; })
             .finally(() => loadingView.destroy());
-        });
+        },
+        this.get("i18n").t("no")
+        );
     },
 
     displayEditForm() {
