@@ -15,7 +15,7 @@
         </section>
 
         <section class="right-small">
-          <a class="" href="#"><i class="fa fa-plus"></i>Add</a>
+          {{add-holiday}}
         </section>
 
       </nav>
@@ -28,7 +28,7 @@
             <li class="holiday-description">
               Donors will not be able to book a delivery or drop-off on the 'holiday' dates listed below.
             </li>
-            {{#each model as |day|}}
+            {{#each arrangedContent as |day|}}
 
               <li class='inbox_page'>
                 {{holiday-detail day=day}}

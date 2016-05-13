@@ -1,5 +1,4 @@
 import Ember from 'ember';
-// import AjaxPromise from 'goodcity/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Component.extend({
@@ -31,17 +30,19 @@ export default Ember.Component.extend({
     },
 
     saveHoliday() {
-      var loadingView = getOwner(this).lookup('component:loading').append();
       var holiday = this.get("day");
-      holiday.save()
-        .catch(error => { holiday.rollback(); throw error; })
-        .finally(() => {
-          loadingView.destroy();
-          this.set('isEditing', false);
-        });
+
+      if(holiday.get("name").length !== 0) {
+        var loadingView = getOwner(this).lookup('component:loading').append();
+
+        holiday.save()
+          .catch(error => { holiday.rollback(); throw error; })
+          .finally(() => {
+            loadingView.destroy();
+            this.set('isEditing', false);
+          });
+      }
+
     },
-
-
   }
-
 });

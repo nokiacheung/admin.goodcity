@@ -1,6 +1,6 @@
 {{#if isEditing}}
 
-  {{#validatable-form class="form-horizontal" action="saveHoliday" on="submit"}}
+  {{#validatable-form class="form-horizontal ui" action="saveHoliday" on="submit"}}
 
     <div class="row">
       <div class="small-12 columns">
@@ -23,7 +23,7 @@
         <button class="right" {{action "saveHoliday"}}>Save</button>
       </div>
       <div class="small-3 columns">
-        <button class="right" {{action "hideEditForm"}}>{{t "cancel"}}</button>
+        <button class="right secondary" {{action "hideEditForm"}}>{{t "cancel"}}</button>
       </div>
     </div>
 

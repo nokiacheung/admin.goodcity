@@ -1,6 +1,6 @@
 import Ember from 'ember';
-// const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
-
+  sortProperties: ["holiday"],
+  arrangedContent: Ember.computed.sort("model", "sortProperties"),
 });

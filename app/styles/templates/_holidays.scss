@@ -1,4 +1,13 @@
 .holidays_page {
+
+  .right-small  {
+    margin-right: 0;
+    z-index: 1000;
+    background-color: #002352;
+    height: 2.5rem;
+    padding-right: 1rem;
+  }
+
   .holiday-description {
     padding: 1rem;
   }
@@ -20,6 +29,21 @@
 
     .highlight {
       color: $white;
+    }
+  }
+
+  button {
+    @media #{$small-only} {
+      width: 4rem;
+      padding: 0.37rem 0.4rem;
+      margin-bottom: 0;
+      font-size: 0.8rem;
+    }
+  }
+
+  .ui {
+    .row:first-child {
+      margin-bottom: 0.5rem;
     }
   }
 }
