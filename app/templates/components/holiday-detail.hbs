@@ -12,11 +12,11 @@
       <div class="small-6 columns">
         {{holiday-calender
           name='selectedDate'
-          id='selectedDate'
+          id=(concat this 'selectedDate')
           value=(display-datetime day.holiday format='ddd MMM Do')
           selection=selectedDate
           required='true'
-          available=available_dates
+          allHolidays=allHolidays
           pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
       </div>
       <div class="small-3 columns">

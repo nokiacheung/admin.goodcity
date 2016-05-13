@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.TextField.extend({
   tagName: 'input',
   classNames: 'pickadate',
-  attributeBindings: [ "name", "type", "value", "id", 'required', 'pattern', 'available', 'placeholder' ],
+  attributeBindings: [ "name", "type", "value", "id", 'required', 'pattern', 'placeholder', "allHolidays" ],
 
   _getValidDate: function(selectedDate){
     var today = new Date();
@@ -12,6 +12,13 @@ export default Ember.TextField.extend({
     currentDate.setHours(0,0,0,0);
     selected.setHours(0,0,0,0);
     return currentDate > selected ? today : selectedDate;
+  },
+
+  isDateEqual: function(date) {
+    var selected = this.get('selection');
+    selected.setHours(0,0,0,0);
+    date.setHours(0,0,0,0);
+    return selected.getTime() === date.getTime();
   },
 
   didInsertElement() {
@@ -52,6 +59,29 @@ export default Ember.TextField.extend({
             this.set('select', new Date(date), { format: 'ddd mmm d' });
           }
         },
+
+        onOpen: function(){
+          var list = _this.get("allHolidays");
+          var holidays_array = [1,2];
+          var selected = _this.get('selection').toString().length;
+
+          if(list) {
+            var holidays_count = list.length;
+            for (var i = holidays_count - 1; i >= 0; i--) {
+              var date = new Date(list[i].get('holiday'));
+
+              if(selected === 0 || !_this.isDateEqual(date)) {
+                var date_array = [];
+                date_array.push(date.getFullYear());
+                date_array.push(date.getMonth());
+                date_array.push(date.getDate());
+                holidays_array.push(date_array);
+              }
+            }
+          }
+
+          this.set('disable', holidays_array);
+        }
       });
 
       closeOnClick();
@@ -60,7 +90,7 @@ export default Ember.TextField.extend({
     function closeOnClick(){
       Ember.$(".picker__holder").click(function(e){
         if(e.target !== this) { return; }
-        Ember.$('#selectedDate').trigger("blur");
+        Ember.$("[id$=selectedDate]").trigger("blur");
       });
     }
   }

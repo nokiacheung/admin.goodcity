@@ -15,7 +15,7 @@
         </section>
 
         <section class="right-small">
-          {{add-holiday}}
+          {{add-holiday allHolidays=arrangedContent}}
         </section>
 
       </nav>
@@ -31,7 +31,7 @@
             {{#each arrangedContent as |day|}}
 
               <li class='inbox_page'>
-                {{holiday-detail day=day}}
+                {{holiday-detail day=day allHolidays=arrangedContent}}
               </li>
 
             {{/each}}
