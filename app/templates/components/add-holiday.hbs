@@ -3,7 +3,7 @@
   {{t "holiday.add"}}
 </a>
 
-{{#message-box btn1Text=(t "save") btn1Callback=(action "addHoliday") btn2Text=(t "cancel") btn2Callback=(action "resetForm") isVisible=displayUserPrompt classNames="popupOverlay"}}
+{{#message-box btn1Text=(t "save") btn1Callback=(action "addHoliday") btn2Text=(t "cancel") btn2Callback=(action "resetForm") isVisible=displayUserPrompt classNames="popupOverlay ui holidayForm"}}
 
     <div class="row">
       <div class="small-12 columns {{if invalidName 'has-error'}}">
@@ -22,6 +22,7 @@
           allHolidays=allHolidays
           placeholder=(t "holiday.holiday")
           pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
+        <i class="fa fa-calendar calender_icon"></i>
       </div>
     </div>
 
