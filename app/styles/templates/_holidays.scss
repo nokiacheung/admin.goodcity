@@ -1,0 +1,80 @@
+.holidays_page {
+
+  .inbox_page {
+    padding: 0.5rem;
+
+    .columns {
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+      }
+    }
+
+    .fa {
+      font-size: 1.2rem;
+    }
+
+    .highlight {
+      color: $white;
+    }
+  }
+
+  .input_icon:before {
+    position: absolute;
+  }
+
+  .input_icon {
+    float: right;
+    display: inline;
+    color: #FFA3A3;
+  }
+
+  .calender_icon{
+    @extend .input_icon;
+    font-size: 1.3rem;
+    margin-right: 1.6rem;
+    margin-top: -1.6rem;
+
+    @media #{$small-only} {
+      margin-right: 1.4rem;
+      font-size: 1rem !important;
+      margin-top: -1.4rem;
+    }
+  }
+
+  .right-small  {
+    margin-right: 0;
+    z-index: 1000;
+    background-color: #002352;
+    height: 2.5rem;
+    padding-right: 1rem;
+  }
+
+  .holiday-description {
+    padding: 1rem;
+  }
+
+  button {
+    width: 6.5rem;
+    padding: 0.45rem 0.4rem;
+    margin-bottom: 0;
+
+    @media #{$medium-only} {
+      width: 9rem;
+    }
+
+    @media #{$small-only} {
+      width: 4rem;
+      padding: 0.37rem 0.4rem;
+      margin-bottom: 0;
+      font-size: 0.8rem;
+    }
+  }
+
+  .ui {
+    .row:first-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{{#if isEditing}}
+
+  {{#validatable-form class="form-horizontal ui" action="saveHoliday" on="submit"}}
+
+    <div class="row">
+      <div class="small-12 columns">
+        {{input name='name' value=day.name required="true" placeholder=(t "holiday.name")}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-6 large-8 columns date_selector">
+        {{holiday-calender
+          name='selectedDate'
+          id=(concat this 'selectedDate')
+          value=(display-datetime day.holiday format='ddd MMM Do')
+          selection=selectedDate
+          required='true'
+          allHolidays=allHolidays
+          placeholder=(t "holiday.holiday")
+          pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
+        <i class="fa fa-calendar calender_icon"></i>
+      </div>
+      <div class="small-3 large-2 columns">
+        <button class="right" {{action "saveHoliday"}}>Save</button>
+      </div>
+      <div class="small-3 large-2 columns">
+        <button class="right secondary" {{action "hideEditForm"}}>{{t "cancel"}}</button>
+      </div>
+    </div>
+
+  {{/validatable-form}}
+
+{{else}}
+
+  <div class="row">
+    <div class="small-6 columns">
+      <div class="highlight">
+        {{display-datetime day.holiday format="dddd, MMMM Do"}}
+      </div>
+
+      {{day.name}}
+    </div>
+
+    <div class="small-2 columns highlight">
+      {{day.year}}
+    </div>
+    <div class="small-2 columns" {{action "removeHoliday" day}}>
+      <i class="fa fa-trash"></i>
+    </div>
+    <div class="small-2 columns" {{action "displayEditForm"}}>
+      <i class="fa fa-pencil edit-item-link"></i>
+    </div>
+  </div>
+
+{{/if}}
