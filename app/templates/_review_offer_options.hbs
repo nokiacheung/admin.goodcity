@@ -10,7 +10,7 @@
     </div>
   {{/unless}}
 
-  {{#if offer.isInactive}}
+  {{#if offer.allowResubmit}}
     <div class="option_menu">
       <a {{action "submitOffer"}} >
         <i class="fa fa-shopping-cart"></i>

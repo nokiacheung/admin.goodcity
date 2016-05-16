@@ -213,6 +213,7 @@ I18nTranslationsEn =
       "missing": "Missing"
       "receive": "Receive"
       "inventory": "Inventory"
+      "resubmit": "To receive this offer, please re-submit and review the offer."
       "receiving":
         "header": "Begin Receiving Offer"
         "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."
