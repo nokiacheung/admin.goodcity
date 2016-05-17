@@ -213,6 +213,7 @@ I18nTranslationsZhTw =
       "missing": "遺失"
       "receive": "接收"
       "inventory": "存貨"
+      "resubmit": "To receive this offer, please re-submit and review the offer."
       "receiving":
         "header": "開始接收捐獻項目"
         "cant_modify_note": "提示：一旦捐獻項目狀態改成「正在接收」，將無法還原，捐獻人士亦無法更改物資資料。"

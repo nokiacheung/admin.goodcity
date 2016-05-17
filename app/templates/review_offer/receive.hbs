@@ -38,7 +38,11 @@
   <p>
     <p><span class="icon-no-items"></span></p>
     <p class="no-items">
-      {{t "logistics.finish_review_request"}}
+      {{#if model.allowResubmit}}
+        {{t "receive.resubmit"}}
+      {{else}}
+        {{t "logistics.finish_review_request"}}
+      {{/if}}
     </p>
   </p>
 {{/if}}
