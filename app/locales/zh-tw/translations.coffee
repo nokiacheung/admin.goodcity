@@ -19,9 +19,9 @@ I18nTranslationsZhTw =
       "search": "搜尋使用者"
 
     "holiday":
-      "holiday": "Holiday"
+      "name": "Holiday Name"
+      "date": "Date"
       "add": "Add"
-      "name": "Name"
       "manage": "Manage Holidays"
       "description": "Donors will not be able to book a delivery or drop-off on the 'holiday' dates listed below."
       "delete_confirm": "Are you sure you wish to delete this holiday?"
