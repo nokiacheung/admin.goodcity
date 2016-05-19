@@ -100,22 +100,28 @@ export default Ember.Component.extend({
     },
 
     missing() {
-      this.updatePackage(p => {
-        p.set("state", "missing");
-        p.set("state_event", "mark_missing");
-      });
+      if (!this.get("isMissing")) {
+        this.updatePackage(p => {
+          p.set("state", "missing");
+          p.set("state_event", "mark_missing");
+        });
+      }
     },
 
     receive() {
-      this.updatePackage(p => {
-        p.set("inventoryNumber", null);
-        p.set("state", "received");
-        p.set("state_event", "mark_received");
-      });
+      if (!this.get("isReceived")) {
+        this.updatePackage(p => {
+          p.set("inventoryNumber", null);
+          p.set("state", "received");
+          p.set("state_event", "mark_received");
+        });
+      }
     },
 
     receiveInInventory() {
-      this.get('router').transitionTo("receive_package", this.get("packageId"));
+      if (!this.get("isReceived")) {
+        this.get('router').transitionTo("receive_package", this.get("packageId"));
+      }
     }
   }
 });
