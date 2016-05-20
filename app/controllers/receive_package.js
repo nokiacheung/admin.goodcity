@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   watchErrors: true,
   isAndroidDevice: false,
   i18n: Ember.inject.service(),
+  reviewOfferController: Ember.inject.controller("review_offer"),
 
   donorConditions: Ember.computed(function(){
     return this.get("store").peekAll('donor_condition').sortBy('id');
@@ -29,6 +30,10 @@ export default Ember.Controller.extend({
   selectedGrade: Ember.computed("model", function(){
     var grade = this.get("model.grade");
     return this.get("grades").filterBy('id', grade).get("firstObject");
+  }),
+
+  offer: Ember.computed("model", function(){
+    return this.get("store").peekRecord("offer", this.get("package.offerId"));
   }),
 
   identifyDevice: Ember.on('init', function() {
@@ -158,6 +163,8 @@ export default Ember.Controller.extend({
         .then(() => {
           loadingView.destroy();
           this.transitionToRoute("review_offer.receive");
+          Ember.run.scheduleOnce('afterRender', this, () =>
+          this.get("reviewOfferController").set("displayCompleteReceivePopup", this.get("offer.readyForClosure")));
         })
         .catch(() => {
           loadingView.destroy();
