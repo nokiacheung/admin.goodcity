@@ -24,7 +24,7 @@
   </div>
 </div>
 
-{{#message-box btn1Text=(t "receive.receiving.not_now") btn2Text=(t "receive.receiving.begin_receiving") btn2Callback=(action "confirmReceiving") isVisible=displayUserPrompt classNames="popupOverlay"}}
+{{#message-box btn1Text=(t "receive.receiving.not_now") btn2Text=(t "receive.receiving.begin_receiving") btn2Callback=(action "confirmReceiving") isVisible=displayUserPrompt classNames="popupOverlay ui"}}
   <strong>{{t "receive.receiving.header"}}</strong>
 
   <p>{{t "receive.receiving.cant_modify_note"}}</p>
@@ -34,6 +34,7 @@
   {{select-list
     content=deliveredOptions
     on-change=(action (mut deliveredBy))
-    selectedValue=deliveredBy}}
+    selectedValue=deliveredBy
+    selectArrow=true}}
 
 {{/message-box}}
