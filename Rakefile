@@ -240,7 +240,7 @@ end
 
 def app_version
   if ENV["CI"]
-    is_staging ? "#{ENV['APP_VERSION']}.#{ENV['CIRCLE_BUILD_NUM']}" : ENV['APP_VERSION']
+    is_staging ? "#{ENV['APP_VERSION']}.#{ENV['CIRCLE_BUILD_NUM']||ENV['BUILD_BUILDNUMBER']}" : ENV['APP_VERSION']
   elsif @ver
     @ver
   else
