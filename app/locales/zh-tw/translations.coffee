@@ -29,7 +29,7 @@ I18nTranslationsZhTw =
     "offer":
       "title": "捐獻細節"
       "donor": "捐贈者"
-      "logistics": "運送詳情"
+      "transport": "運輸"
       "details" : "捐獻詳情"
       "donor_messages" : "捐贈者信息"
       "supervisor_messages" : "監察員信息"
