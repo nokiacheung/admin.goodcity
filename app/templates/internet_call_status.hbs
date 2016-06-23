@@ -1,0 +1,12 @@
+{{#if session.isLoggedIn}}
+  {{#if activeCall}}
+    <div class="internet_call_status">
+      <div class="call_status">
+      {{t "review_offer.donor.active_call"}} <i class="fa fa-arrow-circle-right"></i> {{donorName}}</div>
+
+      <div class="end_call_button" {{action "hangupCall"}}>
+        <i class="fa fa-phone-square"></i> {{t "review_offer.donor.end_call"}}
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
