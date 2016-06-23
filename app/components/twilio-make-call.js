@@ -48,6 +48,7 @@ export default Ember.Component.extend({
     twilio_device.disconnect(() => {
       if(!this.isDestroying && !this.isDestroyed) {
         this.set("activeCall", false);
+        this.get("internetCallStatus").set("activeCall", false);
       }
     });
   },
