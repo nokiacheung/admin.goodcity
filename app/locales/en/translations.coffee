@@ -136,6 +136,7 @@ I18nTranslationsEn =
         "other_offers": "All offers on GoodCity"
         "internet_call": "Internet Call"
         "end_call": "End Call"
+        "active_call": "Active Call"
 
       "options":
         "add_item": "Add an item"

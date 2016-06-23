@@ -136,6 +136,7 @@ I18nTranslationsZhTw =
         "other_offers": "所有好人好市捐獻"
         "internet_call": "網上通話"
         "end_call": "結束通話"
+        "active_call": "即時通話"
 
       "options":
         "add_item": "添加項目"
