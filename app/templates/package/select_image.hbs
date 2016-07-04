@@ -1,0 +1,50 @@
+<section class="main-section row edit-images-page">
+
+  <div id="main-image" class="{{if isExpanded 'is-expanded'}}">
+    {{#unless noImage}}
+      <div style={{previewImageBgCss}}>
+      </div>
+
+      <div id="main-image-controls">
+        <a {{action "setFavourite"}} title={{t "edit_images.favourite_tooltip"}}>
+          <i class="fa {{if previewMatchesFavourite 'fa-star' 'fa-star-o'}}"></i>
+        </a>
+        <a {{action "expandImage"}} title={{t "edit_images.fullscreen_tooltip"}}>
+          <i class="fa {{if isExpanded 'fa-compress' 'fa-expand'}}"></i>
+        </a>
+      </div>
+    {{else}}
+    <div class="center-box" style={{instructionBoxCss}}>
+      <span class="center-item">
+        <h3>{{t "edit_images.donating_what"}}</h3>
+        <p>{{t "edit_images.take_photos"}}</p>
+      </span>
+    </div>
+    {{/unless}}
+  </div>
+
+  <ul id="photo-list" class="{{if isExpanded 'hidden'}}">
+    {{#if noImageLink}}
+      <li class="noImage">
+        <a {{action "nextWithoutImage"}}>{{t "edit_images.cannot_provide_photo"}}</a>
+      </li>
+    {{else}}
+      {{#each images as |image|}}
+        <li>
+          <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
+            <img src="{{image.thumbImageUrl}}" style={{thumbImageCss}} class="thumb" />
+            <i class="fa fa-star {{if (js-x 'p0 == p1' image.id favouriteImage.id) '' 'hidden'}}"></i>
+          </a>
+        </li>
+      {{/each}}
+    {{/if}}
+  </ul>
+</section>
+
+<div class="btm {{if isExpanded 'hidden'}}">
+  <div class="row">
+    <div class="small-12 columns">
+      <button {{ action "next"}} disabled={{noImage}} class="button expand">{{t "done"}}</button>
+    </div>
+  </div>
+</div>

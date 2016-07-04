@@ -14,10 +14,11 @@
               <div class="small-12 columns detail_container">
                 <div class="row top">
                   <div class="small-3 columns">
-                    {{!-- We will enable once feature is implemented fully. --}}
-                    {{!-- {{#link-to "package.edit_images" pkg.packageTypeId}} --}}
+
+                    {{#link-to "package.select_image" pkg.id}}
                       <img src="{{pkg.displayImageUrl}}" class="thumb small">
-                    {{!-- {{/link-to}} --}}
+                    {{/link-to}}
+
                   </div>
                   <div class="small-7 columns head">
                     <span class="ui">

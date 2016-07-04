@@ -42,7 +42,7 @@ Router.map(function() {
     this.route('search_label', { resetNamespace: true, path: '/item/:item_id/search_label' });
 
     this.route('package', { resetNamespace: true, path:'/package/:package_id' }, function() {
-      this.route('edit_images');
+      this.route('select_image');
     });
 
     this.route('delivery', { resetNamespace: true, path: '/delivery/:delivery_id' }, function(){
