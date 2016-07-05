@@ -15,9 +15,7 @@
                 <div class="row top">
                   <div class="small-3 columns">
 
-                    {{#link-to "package.select_image" pkg.id}}
-                      <img src="{{pkg.displayImageUrl}}" class="thumb small">
-                    {{/link-to}}
+                    {{package-image package=pkg index=index setPackageImage="setPackageImage"}}
 
                   </div>
                   <div class="small-7 columns head">

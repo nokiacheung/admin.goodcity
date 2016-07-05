@@ -187,6 +187,7 @@ I18nTranslationsEn =
       "condition": "Condition"
       "add_component": "Add component"
       "add_item_label": "Add item label"
+      "assign": "Assign"
 
     "reject":
       "select_type": "Please choose Item Type first!"

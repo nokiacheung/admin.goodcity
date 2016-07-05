@@ -187,6 +187,7 @@ I18nTranslationsZhTw =
       "condition": "狀況"
       "add_component": "增加配件"
       "add_item_label": "增加物品標籤"
+      "assign": "Assign"
 
     "reject":
       "select_type": "請先選取物資類型！"
