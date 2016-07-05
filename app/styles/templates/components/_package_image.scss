@@ -1,0 +1,17 @@
+.package-image-list {
+  margin-left: 0;
+  li {
+    list-style-type: none;
+    padding: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    img:hover, .selected img {
+      border: black 3px solid;
+    }
+  }
+
+  .thumb {
+    width: 5rem;
+  }
+}

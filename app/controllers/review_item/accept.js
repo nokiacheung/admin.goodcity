@@ -47,8 +47,9 @@ export default Ember.Controller.extend({
     // load existing packages
     if (itemType && itemType.get("id") === this.get("item.packageType.id")) {
       this.get("item.packages").forEach(p => {
-        var obj = p.getProperties("id", "quantity", "length", "width", "height", "notes",
-          "packageTypeId", "displayImageUrl", "packageType");
+        var obj = p.getProperties("id", "quantity", "length", "width",
+          "height", "notes", "item", "packageTypeId", "displayImageUrl",
+          "packageType", "favouriteImage");
         obj.hideComment = false;
         obj.quantity = obj.quantity || 1;
         packages.pushObject(obj);
@@ -80,8 +81,16 @@ export default Ember.Controller.extend({
         packageTypeId,
         packageType: _this.get("store").peekRecord("packageType", packageTypeId),
         offerId: this.get("item.offer.id"),
-        item: this.get("item")
+        item: this.get("item"),
+        favouriteImage: this.get("item.displayImage")
       });
+    },
+
+    setPackageImage(index, image) {
+      var currentPackage = this.get("packages")[index];
+      Ember.set(currentPackage, "favouriteImage", image);
+      Ember.set(currentPackage, "displayImageUrl", image.get("thumbImageUrl"));
+      this.get("packages")[index] = currentPackage;
     },
 
     removePackage(index) {
