@@ -4,6 +4,8 @@
 
 {{#message-box btn1Text=(t "review_item.assign") btn1Callback=(action "setPackageImage") btn2Text=(t "cancel") isVisible=displayUserPrompt classNames="popupOverlay"}}
 
+  <p>{{t "review_item.select_package_image"}}</p>
+
   <ul class="package-image-list">
     {{#each images as |image|}}
       <li>

@@ -188,6 +188,7 @@ I18nTranslationsZhTw =
       "add_component": "增加配件"
       "add_item_label": "增加物品標籤"
       "assign": "Assign"
+      "select_package_image": "Choose the favourite image for this package:"
 
     "reject":
       "select_type": "請先選取物資類型！"

@@ -188,6 +188,7 @@ I18nTranslationsEn =
       "add_component": "Add component"
       "add_item_label": "Add item label"
       "assign": "Assign"
+      "select_package_image": "Choose the favourite image for this package:"
 
     "reject":
       "select_type": "Please choose Item Type first!"
