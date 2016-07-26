@@ -18,10 +18,18 @@ I18nTranslationsEn =
     "users":
       "search": "Search User"
 
+    "holiday":
+      "name": "Holiday Name"
+      "date": "Date"
+      "add": "Add"
+      "manage": "Manage Holidays"
+      "description": "Donors will not be able to book a delivery or drop-off on the 'holiday' dates listed below."
+      "delete_confirm": "Are you sure you wish to delete this holiday?"
+
     "offer":
       "title": "Offer"
       "donor": "Donor"
-      "logistics": "Logistics"
+      "transport": "Transport"
       "details" : "Offer details"
       "donor_messages" : "Donor Messages"
       "supervisor_messages" : "Supervisors Messages"
@@ -80,6 +88,7 @@ I18nTranslationsEn =
       "closed_offers": "Finished"
       "receiving": "Receiving"
       "users": "Users"
+      "holidays": "Holidays"
       "search_offer_message": "Only recently updated offers are shown. Use search to find older offers."
 
     "my_notifications":
@@ -127,6 +136,7 @@ I18nTranslationsEn =
         "other_offers": "All offers on GoodCity"
         "internet_call": "Internet Call"
         "end_call": "End Call"
+        "active_call": "Active Call"
 
       "options":
         "add_item": "Add an item"
@@ -177,6 +187,8 @@ I18nTranslationsEn =
       "condition": "Condition"
       "add_component": "Add component"
       "add_item_label": "Add item label"
+      "assign": "Assign"
+      "select_package_image": "Choose the favourite image for this package:"
 
     "reject":
       "select_type": "Please choose Item Type first!"
@@ -204,6 +216,7 @@ I18nTranslationsEn =
       "missing": "Missing"
       "receive": "Receive"
       "inventory": "Inventory"
+      "resubmit": "To receive this offer, please re-submit and review the offer."
       "receiving":
         "header": "Begin Receiving Offer"
         "cant_modify_note": "Note: Putting an offer in the \"receiving\" state cannot be undone. Donors cannot modify their offer once you start receiving the items."

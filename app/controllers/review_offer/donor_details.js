@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   currentOffer:   null,
   offersCount:    Ember.computed.alias('model.length'),
   goodcityNumber: config.APP.GOODCITY_NUMBER,
+  internetCallStatus: Ember.inject.controller(),
 
   displayNumber: Ember.computed("donor.mobile", function(){
     var num = this.get("donor.mobile").replace(/\+852/, "");

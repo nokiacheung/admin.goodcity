@@ -37,7 +37,7 @@ module.exports = function(environment) {
       NAMESPACE: 'api/v1',
 
       PRELOAD_TYPES: ["territory"],
-      PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "version", "location", "cancellation_reason"],
+      PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "version", "location", "cancellation_reason", "holiday"],
       SHA: process.env.APP_SHA || "00000000",
       SHARED_SHA:  process.env.APP_SHARED_SHA || "00000000",
       VERSION: process.env.VERSION || "1.0.0",

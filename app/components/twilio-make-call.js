@@ -9,9 +9,11 @@ export default Ember.Component.extend({
   offerId:     null,
   twilioToken: null,
   activeCall:  false,
+  donorName:   null,
   isCordovaApp:  config.cordova.enabled,
   hidden:        Ember.computed.empty("mobile"),
   currentUserId: Ember.computed.alias("session.currentUser.id"),
+  internetCallStatus: {},
 
   hasTwilioSupport: Ember.computed("hasTwilioBrowserSupport", "isCordovaApp", function(){
     return this.get("isCordovaApp") || this.get("hasTwilioBrowserSupport");
@@ -44,7 +46,10 @@ export default Ember.Component.extend({
     });
 
     twilio_device.disconnect(() => {
-      this.set("activeCall", false);
+      if(!this.isDestroying && !this.isDestroyed) {
+        this.set("activeCall", false);
+        this.get("internetCallStatus").set("activeCall", false);
+      }
     });
   },
 
@@ -53,11 +58,13 @@ export default Ember.Component.extend({
     makeCall() {
       var params = { "phone_number": this.get('offerId') + "#" + this.get("currentUserId") };
       this.set("activeCall", true);
+      this.get("internetCallStatus").set("activeCall", true);
       return this.get("twilio_device").connect(params);
     },
 
     hangupCall() {
       this.set("activeCall", false);
+      this.get("internetCallStatus").set("activeCall", false);
       return this.get("twilio_device").disconnectAll();
     },
   },
@@ -72,6 +79,8 @@ export default Ember.Component.extend({
         .then(data => {
           _this.set("twilioToken", data["token"]);
           _this.initTwilioDeviceBindings();
+          _this.get("internetCallStatus").set("twilio_device", _this.get("twilio_device"));
+          _this.get("internetCallStatus").set("donorName", _this.get("donorName"));
         })
         .finally(() => loadingView.destroy());
     }

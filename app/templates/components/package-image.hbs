@@ -1,0 +1,19 @@
+<a {{action 'displayImagesListOverlay'}}>
+  <img src="{{package.displayImageUrl}}" class="thumb small">
+</a>
+
+{{#message-box btn1Text=(t "review_item.assign") btn1Callback=(action "setPackageImage") btn2Text=(t "cancel") isVisible=displayUserPrompt classNames="popupOverlay"}}
+
+  <p>{{t "review_item.select_package_image"}}</p>
+
+  <ul class="package-image-list">
+    {{#each images as |image|}}
+      <li>
+        <a {{action "selectImage" image}} class="{{if image.selected 'selected'}}">
+          <img src="{{image.thumbImageUrl}}" style={{thumbImageCss}} class="thumb" />
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+
+{{/message-box}}

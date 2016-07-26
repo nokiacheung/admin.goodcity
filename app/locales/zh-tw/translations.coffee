@@ -18,10 +18,18 @@ I18nTranslationsZhTw =
     "users":
       "search": "搜尋使用者"
 
+    "holiday":
+      "name": "Holiday Name"
+      "date": "Date"
+      "add": "Add"
+      "manage": "Manage Holidays"
+      "description": "Donors will not be able to book a delivery or drop-off on the 'holiday' dates listed below."
+      "delete_confirm": "Are you sure you wish to delete this holiday?"
+
     "offer":
       "title": "捐獻細節"
       "donor": "捐贈者"
-      "logistics": "運送詳情"
+      "transport": "運輸"
       "details" : "捐獻詳情"
       "donor_messages" : "捐贈者信息"
       "supervisor_messages" : "監察員信息"
@@ -80,6 +88,7 @@ I18nTranslationsZhTw =
       "closed_offers": "已完成"
       "receiving": "正在接收"
       "users": "使用者"
+      "holidays": "Holidays"
       "search_offer_message": "只顯示最近更新的捐贈項目，請使用搜尋功能檢閱過往項目。"
 
     "my_notifications":
@@ -127,6 +136,7 @@ I18nTranslationsZhTw =
         "other_offers": "所有好人好市捐獻"
         "internet_call": "網上通話"
         "end_call": "結束通話"
+        "active_call": "即時通話"
 
       "options":
         "add_item": "添加項目"
@@ -177,6 +187,8 @@ I18nTranslationsZhTw =
       "condition": "狀況"
       "add_component": "增加配件"
       "add_item_label": "增加物品標籤"
+      "assign": "Assign"
+      "select_package_image": "Choose the favourite image for this package:"
 
     "reject":
       "select_type": "請先選取物資類型！"
@@ -204,6 +216,7 @@ I18nTranslationsZhTw =
       "missing": "遺失"
       "receive": "接收"
       "inventory": "存貨"
+      "resubmit": "To receive this offer, please re-submit and review the offer."
       "receiving":
         "header": "開始接收捐獻項目"
         "cant_modify_note": "提示：一旦捐獻項目狀態改成「正在接收」，將無法還原，捐獻人士亦無法更改物資資料。"
