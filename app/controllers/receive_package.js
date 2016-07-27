@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
     return this.store.peekAll("location");
   }),
 
-  packageForm: Ember.computed("package", {
+  packageForm: Ember.computed("package.inventoryNumber", {
     get: function() {
       var pkg = this.get('package');
       return {
