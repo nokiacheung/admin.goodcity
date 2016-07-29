@@ -9,6 +9,7 @@ export default DS.Model.extend({
   otherTerms:           attr('string'),
   code:                 attr('string'),
   isItemTypeNode:       attr('boolean', {defaultValue: false}),
+  visibleInSelects:     attr('boolean', {defaultValue: false}),
   defaultChildPackages: attr('string'),
   otherChildPackages:   attr('string'),
 
