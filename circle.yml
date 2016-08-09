@@ -18,6 +18,8 @@ test:
     - sleep 5
   override:
     - ./node_modules/ember-cli/bin/ember test
+  post:
+    - echo "Killing ember server to free memory for app build" && killall ember
 
 deployment:
   staging:
