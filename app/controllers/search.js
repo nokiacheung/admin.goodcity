@@ -49,10 +49,13 @@ export default Ember.Controller.extend(backNavigator, {
   },
 
   filteredResults: Ember.computed('filter', 'fetchMoreResult', 'allUsers.[]', 'allItems.@each.donorDescription', 'allGogovanOrders.@each.driverLicense', 'allPackageTypes.@each.name', 'allAddresses.@each.regionDetails', function(){
-    var filter = Ember.$.trim(this.get('filter').toLowerCase());
+    var filter = Ember.$.trim(this.get('filter').toLowerCase().replace(/\s\s+/g, ' '));
     var offers = [];
     var store = this.store;
-    var matchFilter = value => (value || "").toLowerCase().indexOf(filter) !== -1;
+    var matchFilter = function(value) {
+      value = value.replace(/\n/g, " ").replace(/\s\s+/g, ' ');
+      return (value || "").toLowerCase().indexOf(filter) !== -1;
+    };
 
     if (filter.length > 0) {
       this.get('allUsers').forEach(function(donor) {
