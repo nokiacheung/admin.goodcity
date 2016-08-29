@@ -9,7 +9,11 @@
         {{#if (is-equal pState "missing")}}
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
         {{/if}}
-        {{capitalize-string pState}}
+        {{#if (is-equal pState "expecting")}}
+          Accepted
+        {{else}}
+          {{capitalize-string pState}}
+        {{/if}}
       </div>
       <div class="small-5 columns location-name">
         <i class="fa fa-map-marker"></i>
