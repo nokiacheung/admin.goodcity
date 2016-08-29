@@ -5,7 +5,7 @@
 {{#each packages as |package idx|}}
   <div>
     <div class="package-name package-{{pState}}">
-      <div class="small-3 columns">
+      <div class="{{if (is-equal pState 'missing') 'small-4' 'small-3'}} columns">
         {{#if (is-equal pState "missing")}}
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
         {{/if}}
@@ -15,7 +15,7 @@
           {{capitalize-string pState}}
         {{/if}}
       </div>
-      <div class="small-5 columns location-name">
+      <div class="{{if (is-equal pState 'missing') 'small-3' 'small-5'}} columns location-name">
         <i class="fa fa-map-marker"></i>
         {{#if package.inventoryNumber}}
           {{package.location.name}}
@@ -23,7 +23,7 @@
           NA
         {{/if}}
       </div>
-      <div class="small-4 columns inventory-number">
+      <div class="{{if (is-equal pState 'missing') 'small-5' 'small-4'}} columns inventory-number">
         <i class="fa {{if item.isSet 'fa-tags' 'fa-tag'}}"></i>
         {{#if package.inventoryNumber}}
           {{package.inventoryNumber}}
