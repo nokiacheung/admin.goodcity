@@ -26,6 +26,9 @@
   .package-name {
     padding: 3px 0 3px 10px;
     background-color: #23416A;
+    @media #{$small-only} {
+      font-size: 0.87em;
+    }
   }
   .package-missing {
     background-color: black;
@@ -36,13 +39,18 @@
   .package-expecting {
     background-color: #6fab4a;
   }
+  .dispatched {
+    background-color: #001C42;
+  }
+  .designated {
+    background-color: #334f75;
+  }
   .package-description {
     padding: 10px 0 0 20px;
   }
   .location-name {
     text-align: center;
     word-break: break-all;
-    left: 1rem;
   }
   .inventory-number {
     text-align: right;
