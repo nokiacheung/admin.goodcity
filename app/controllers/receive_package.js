@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
 
   locationId: Ember.computed("package", {
     get: function() {
-      return this.get("package.location.id");
+      return this.get("package.location.id") || this.get("package.packageType.location.id");
     },
     set: function(key, value) {
       return value;
@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
     return this.store.peekAll("location");
   }),
 
-  packageForm: Ember.computed("package", {
+  packageForm: Ember.computed("package.inventoryNumber", {
     get: function() {
       var pkg = this.get('package');
       return {

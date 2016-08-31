@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   allPackageTypes: Ember.computed("fetchMoreResult", function(){
-    return this.store.peekAll('package_type');
+    return this.store.peekAll('package_type').filterBy('visibleInSelects', true);
   }),
 
   hasSearchText: Ember.computed('searchText', function(){
