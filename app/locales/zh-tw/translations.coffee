@@ -216,6 +216,7 @@ I18nTranslationsZhTw =
       "missing": "遺失"
       "receive": "接收"
       "inventory": "存貨"
+      "label": "Label"
       "resubmit": "To receive this offer, please re-submit and review the offer."
       "receiving":
         "header": "開始接收捐獻項目"
