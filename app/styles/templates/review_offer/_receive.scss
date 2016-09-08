@@ -119,3 +119,14 @@
     width: 100%;
   }
 }
+
+.printer_message {
+  float: right;
+  margin-right: 1.5rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #ee4c4e;
+  border-radius: 0.2rem;
+  display: none;
+  position: absolute;
+  right: 0.2rem;
+}
