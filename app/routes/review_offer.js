@@ -24,7 +24,8 @@ export default AuthorizeRoute.extend({
 
   model() {
     var offerId = this.modelFor('offer').get('id');
-    return this.store.findRecord('offer', offerId);
+    var offer = this.get("store").peekRecord("offer", offerId);
+    return offer || this.store.findRecord('offer', offerId);
   },
 
   setupController(controller, model) {
