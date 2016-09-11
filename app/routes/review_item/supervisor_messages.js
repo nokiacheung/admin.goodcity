@@ -5,8 +5,8 @@ export default MessagesBaseRoute.extend({
     this.render('message_template', {controller: 'review_item.supervisor_messages'});
   },
 
-  model() {
+  afterModel() {
     var itemId = this.modelFor('review_item').get('id');
-    return this.store.query('version', { item_id: itemId, for_item: true });
+    this.store.query('version', { item_id: itemId, for_item: true });
   },
 });
