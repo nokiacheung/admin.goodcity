@@ -152,6 +152,6 @@ export default Ember.Component.extend({
   },
 
   hidePrinterMessage() {
-    Ember.$(`#printer_message_${this.get('package.id')}`).fadeOut(1000);
+    Ember.$(`#printer_message_${this.get('package.id')}`).fadeOut(3000);
   },
 });
