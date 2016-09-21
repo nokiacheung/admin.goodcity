@@ -82,13 +82,14 @@ export default Ember.Controller.extend({
         packageType: _this.get("store").peekRecord("packageType", packageTypeId),
         offerId: this.get("item.offer.id"),
         item: this.get("item"),
-        favouriteImage: this.get("item.displayImage")
+        favouriteImage: this.get("item.displayImage"),
+        favouriteImageId: this.get("item.displayImage.id")
       });
     },
 
     setPackageImage(index, image) {
       var currentPackage = this.get("packages")[index];
-      Ember.set(currentPackage, "favouriteImage", image);
+      Ember.set(currentPackage, "favouriteImageId", image.get("id"));
       Ember.set(currentPackage, "displayImageUrl", image.get("thumbImageUrl"));
       this.get("packages")[index] = currentPackage;
     },

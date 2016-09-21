@@ -1,5 +1,6 @@
 import Ember from 'ember';
 const { getOwner } = Ember;
+import AjaxPromise from '../utils/ajax-promise';
 
 export default Ember.Component.extend({
   hidden: true,
@@ -10,6 +11,10 @@ export default Ember.Component.extend({
 
   isReceived: Ember.computed.equal("package.state", "received"),
   isMissing: Ember.computed.equal("package.state", "missing"),
+
+  allowLabelPrint: Ember.computed("isReceived", "package.inventoryNumber", function(){
+    return this.get("isReceived") && this.get("package.inventoryNumber");
+  }),
 
   offer: Ember.computed('packageId', function(){
     return this.get("store").peekRecord("offer", this.get("package.offerId"));
@@ -122,6 +127,31 @@ export default Ember.Component.extend({
       if (!this.get("isReceived")) {
         this.get('router').transitionTo("receive_package", this.get("packageId"));
       }
+    },
+
+    printBarcode() {
+      var loadingView = getOwner(this).lookup('component:loading').append();
+      new AjaxPromise(`/packages/${this.get('packageId')}/print_inventory_label`, "GET", this.get('session.authToken'))
+        .catch(xhr => {
+          if (xhr.status !== 200) {
+            var errors = xhr.responseText;
+            try { errors = Ember.$.parseJSON(xhr.responseText).errors; }
+            catch(err) {}
+            this.get("messageBox").alert(errors);
+          } else {
+            throw xhr;
+          }
+        })
+        .finally(() => {
+          loadingView.destroy();
+          this.send("toggle", true);
+          Ember.$(`#printer_message_${this.get('package.id')}`).css({"display": "block"});
+          Ember.run.debounce(this, this.hidePrinterMessage, 200);
+        });
     }
-  }
+  },
+
+  hidePrinterMessage() {
+    Ember.$(`#printer_message_${this.get('package.id')}`).fadeOut(3000);
+  },
 });

@@ -2,6 +2,10 @@
   <i class="fa fa-angle-left"></i>
 </div>
 
+<div class="printer_message" id="{{concat 'printer_message_' package.id}}">
+  Sent to Printer..
+</div>
+
 <div class="receive-options {{if hidden 'hidden' ''}}">
   {{#link-to "review_item.accept" package.item (query-params returnurl=currentUrl) tagName="div"}}
     <i class="fa fa-pencil-square-o"></i>
@@ -15,10 +19,19 @@
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
   </div>
-  <div {{action "checkReceiving" "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
-    <i class= "fa fa-barcode"></i>
-    {{t "receive.inventory"}}
-  </div>
+
+  {{#if allowLabelPrint}}
+    <div {{action "printBarcode"}} >
+      <i class= "fa fa-print"></i>
+      {{t "receive.label"}}
+    </div>
+  {{else}}
+    <div {{action "checkReceiving" "receiveInInventory"}} class="{{if isReceived 'disabled'}}">
+      <i class= "fa fa-barcode"></i>
+      {{t "receive.inventory"}}
+    </div>
+  {{/if}}
+
   <div class="options-link-close" {{action "toggle" true}}>
     <i class="fa fa-angle-right"></i>
   </div>

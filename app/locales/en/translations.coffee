@@ -216,6 +216,7 @@ I18nTranslationsEn =
       "missing": "Missing"
       "receive": "Receive"
       "inventory": "Inventory"
+      "label": "Label"
       "resubmit": "To receive this offer, please re-submit and review the offer."
       "receiving":
         "header": "Begin Receiving Offer"

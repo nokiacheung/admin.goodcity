@@ -2,6 +2,7 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import testSkip from '../helpers/test-skip';
 
 var App, offer1, delivery1, offer2, delivery2, offer3,
   delivery3, schedule4, offer4, delivery4, ggv_order;
@@ -32,7 +33,7 @@ module('Scheduled Offers', {
   }
 });
 
-test("viewing collection schedule", function() {
+testSkip("viewing collection schedule", function() {
   visit("/offers/scheduled");
 
   andThen(function(){
@@ -44,7 +45,7 @@ test("viewing collection schedule", function() {
   });
 });
 
-test("viewing gogovan delivery schedule", function() {
+testSkip("viewing gogovan delivery schedule", function() {
   visit("/offers/scheduled/gogovan");
 
   andThen(function(){
@@ -55,7 +56,7 @@ test("viewing gogovan delivery schedule", function() {
   });
 });
 
-test("filtering gogovan delivery schedule", function() {
+testSkip("filtering gogovan delivery schedule", function() {
   visit("/offers/scheduled/gogovan");
 
   andThen(function(){
@@ -73,7 +74,7 @@ test("filtering gogovan delivery schedule", function() {
   });
 });
 
-test("viewing other delivery schedule", function() {
+testSkip("viewing other delivery schedule", function() {
   visit("/offers/scheduled/other_delivery");
 
   andThen(function(){

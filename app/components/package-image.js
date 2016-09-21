@@ -4,8 +4,21 @@ export default Ember.Component.extend({
 
   store: Ember.inject.service(),
   displayUserPrompt: false,
-  images: Ember.computed.alias("package.item.images"),
   selectedImage: null,
+
+  // images: Ember.computed.alias("package.item.images"),
+
+  currentPackage: Ember.computed("package", function() {
+    return this.get("store").peekRecord("package", this.get("package.id")) || this.get("package");
+  }),
+
+  images: Ember.computed("currentPackage.item.images.[]", "currentPackage.packageImages.[]", function() {
+    if(this.get("currentPackage.packageImages.length") > 0) {
+      return this.get("currentPackage.packageImages");
+    } else {
+      return this.get("currentPackage.item.images");
+    }
+  }),
 
   actions: {
 
@@ -24,7 +37,8 @@ export default Ember.Component.extend({
     displayImagesListOverlay() {
       if(this.get("images").length > 0) {
         this.set("displayUserPrompt", true);
-        this.send("selectImage", this.get("package.favouriteImage"));
+        var favouriteImage = this.get("package.favouriteImage");
+        if(favouriteImage) { this.send("selectImage", favouriteImage); }
       }
     },
   },
