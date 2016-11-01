@@ -21,6 +21,12 @@ dependencies:
     - gem update fastlane
   post:
     - bower install
+    - |
+      if [ "${CIRCLE_BRANCH}" = 'live' ] ; then
+        echo 'export PROVISIONING_FILE=admin.goodcity.hk.mobileprovision' >> ~/.circlerc
+      else
+        echo 'export PROVISIONING_FILE=admin-staging.goodcity.hk.mobileprovision' >> ~/.circlerc
+      fi
 
 test:
   pre:
