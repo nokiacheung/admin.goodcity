@@ -36,8 +36,11 @@ export default Ember.Controller.extend({
         donorDescription: this.get("model.donorDescription")
       };
     },
-    set: function(key, value) {
-      return value;
+    set: function() {
+      return {
+        donorConditionId: this.get("model.donorCondition.id"),
+        donorDescription: this.get("model.donorDescription")
+      };
     }
   }),
 
