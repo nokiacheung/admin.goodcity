@@ -5,7 +5,7 @@
   <author href="https://www.crossroads.org.hk">Crossroads</author>
   <icon src="www/assets/images/goodcity-icon-128.png"/>
   <content src="index.html"/>
-  <hook src="scripts/update_build_number.py" type="before_compile" />
+  <hook src="scripts/update_build_number.py" type="before_prepare" />
   <platform name="android">
     <hook type="after_prepare" src="scripts/copyAndroidAssets.js"/>
     <preference name="LoadUrlTimeoutValue" value="120000"/>

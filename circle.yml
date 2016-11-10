@@ -17,7 +17,6 @@ dependencies:
     - echo 'export PATH=$ANDROID_HOME/build-tools/23.0.3:$PATH' >> ~/.circlerc
     - npm install bower ember-cli phantomjs-prebuilt cordova
     - node circle-branch.js
-    - brew upgrade openssl
     - gem update fastlane
   post:
     - bower install
@@ -47,6 +46,8 @@ deployment:
       - ./install-provisioning-file.sh:
           pwd: scripts
       - bundle exec cap staging deploy
+      - PATH=$(npm bin):$PATH; azure-filestore download -f goodcity.keystore:
+          pwd: cordova
       - bundle exec rake staging android app:release --trace
       - bundle exec rake staging ios app:release --trace
   production:
