@@ -60,6 +60,7 @@
     "ember-resolver": "^2.0.3"
   },
   "dependencies": {
+    "azure-api": "git://github.com/crossroads/azure-api.git#master",
     "shared-goodcity": "git://github.com/crossroads/shared.goodcity.git#master",
     "slick-carousel": "^1.5.8",
     "ember-resolver": "^2.0.3",
