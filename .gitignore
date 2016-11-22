@@ -8,6 +8,16 @@ tmp
 node_modules
 bower_components
 
+# fastlane
+Preview.html
+fastlane/report.xml
+fastlane/*.json
+
+# code signing
+*.mobileprovision
+*.keystore
+*.p12
+
 # misc
 .sass-cache
 connect.lock
