@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   reviewOfferController: Ember.inject.controller('review_offer'),
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
+  review_item: Ember.inject.controller(),
   item: Ember.computed.alias("reviewItem.item"),
   offer: Ember.computed.alias("item.offer"),
   itemTypeId: Ember.computed.alias("reviewItem.itemTypeId"),
@@ -103,6 +104,7 @@ export default Ember.Controller.extend({
       // getting "Attempted to handle event *event* on *record* while in state root.deleted.saved" if try
       // to save item same time as a package is being deleted
       this.set("itemSaving", true);
+      this.get('review_item').set('isEditing', false);
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
