@@ -19,7 +19,7 @@ export default Ember.TextArea.extend({
 
     Ember.$(textarea)
       .css('height', 'auto')
-      .css('height', textarea.scrollHeight + offset)
+      .css('height', offset)
       .removeAttr('data-autoresize');
   }
 });
