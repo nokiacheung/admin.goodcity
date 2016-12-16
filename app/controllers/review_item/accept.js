@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
 
   subPackageTypes: Ember.computed('itemType', function(){
     var itemType = this.get("itemType");
-    return itemType.get("allChildPackagesList").apply(itemType);
+    return itemType.get("allChildPackagesList").apply(itemType).sort('name');
   }),
 
   onItemTypeChange: Ember.observer('itemTypeId', function () {
