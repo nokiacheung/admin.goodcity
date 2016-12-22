@@ -99,13 +99,12 @@
 }
 
 .fixed_item_type_search {
-  position: fixed;
-  z-index: 1000;
-
-  @media #{$large-up} {
-    margin-left: 12rem;
-  }
+    -webkit-transform: translate(-50%,0);
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
 }
+
 .item_types_result {
   padding-top: 3rem;
 
