@@ -159,6 +159,8 @@ export default Ember.Controller.extend({
       pkg.set("inventoryNumber", pkgData.inventoryNumber);
       pkg.set("grade", this.get("selectedGrade.id"));
       pkg.set("donorCondition", this.get("selectedCondition"));
+      pkg.set('packagesLocationsAttributes', { 0: {location_id: locationId, quantity: pkgData.quantity}});
+
       pkg.save()
         .then(() => {
           loadingView.destroy();

@@ -28,6 +28,7 @@ export default DS.Model.extend({
   sentOn:          attr('date'),
   designationId:   attr('number'),
   favouriteImageId: attr('number'),
+  packagesLocationsAttributes: attr(),
 
   isDispatched: Ember.computed.bool('sentOn'),
   isDesignated: Ember.computed('designationId', 'sentOn', 'inventoryNumber', function () {
