@@ -23,7 +23,7 @@ export default DS.Model.extend({
   designation:     belongsTo('designation', { async: true }),
   location:        belongsTo('location', { async: false }),
   donorCondition:   belongsTo('donor_condition', { async: false }),
-  ordersPackages:   hasMany('ordersPackages', { async: false }),
+  ordersPackages:   hasMany('ordersPackages', { async: true }),
   packageImages:   hasMany('package_image', { async: false }),
   offerId:         attr('number'),
   inventoryNumber: attr('string'),
