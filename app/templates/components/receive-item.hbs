@@ -61,7 +61,7 @@
       <div class="ellipsis name one-line-ellipsis" style="display: inline !important;">
         {{package.receivedQuantity}} x {{package.packageName}}
       </div>
-      <span style="margin-left: 0.25rem;">{{package.quantity}}/{{package.totalDesignatedQty}}/{{package.totalDispatchedQty}}</span>
+      <span style="margin-left: 0.25rem;">{{package.remainingQty}}/{{package.totalDesignatedQty}}/{{package.totalDispatchedQty}}</span>
       {{receive-menu packageId=package.id}}
       <div class="ellipsis two-line-ellipsis">
         {{js-or package.notes item.donorDescription}}

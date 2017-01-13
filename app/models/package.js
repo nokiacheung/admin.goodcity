@@ -23,7 +23,7 @@ export default DS.Model.extend({
   designation:     belongsTo('designation', { async: true }),
   location:        belongsTo('location', { async: false }),
   donorCondition:   belongsTo('donor_condition', { async: false }),
-  ordersPackages:   hasMany('ordersPackages', { async: true }),
+  ordersPackages:   hasMany('orders_package', { async: true }),
   packageImages:   hasMany('package_image', { async: false }),
   offerId:         attr('number'),
   inventoryNumber: attr('string'),
@@ -74,17 +74,30 @@ export default DS.Model.extend({
     return this.get("packageImages").filterBy("favourite").get("firstObject") || this.get("packageImages").sortBy("id").get("firstObject") || this.get("item.displayImage")|| null;
   }),
 
-  hasOneDesignatedPackage: Ember.computed("ordersPackages.@each.state", function() {
+  hasOneDesignatedPackage: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     var designatedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
     return (designatedOrdersPackages.get("length") > 1 || designatedOrdersPackages.get("length") === 0) ? false : designatedOrdersPackages[0];
   }),
 
-  hasOneDispatchedPackage: Ember.computed("ordersPackages.@each.state", function() {
+  hasOneDispatchedPackage: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
     return (dispatchedOrdersPackages.get("length") > 1 || dispatchedOrdersPackages.get("length") === 0) ? false : dispatchedOrdersPackages[0];
   }),
 
-  hasAllPackagesDispatched: Ember.computed("ordersPackages.@each.state", function() {
+  remainingQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.[]", "ordersPackages.@each.state", function() {
+    var qty = 0;
+    this.get('ordersPackages').forEach(record => {
+      if(record && record.get("state") !== "cancelled") {
+        this.store.findRecord('ordersPackage', record.get("id")).then(
+        qty += parseInt(record.get("quantity")));
+      }
+    });
+    return this.get("receivedQuantity") - qty;
+  }),
+
+  hasAllPackagesDispatched: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var ordersPackages = this.store.query("ordersPackage", { search_by_package_id: this.get("id") });
+    this.store.pushPayload(ordersPackages);
     var received_quantity = this.get("receivedQuantity");
     var totalDispatchedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
@@ -94,7 +107,7 @@ export default DS.Model.extend({
     return (totalDispatchedQty === received_quantity) ? true : false;
   }),
 
-  hasAllPackagesDesignated: Ember.computed("ordersPackages.@each.state", function() {
+  hasAllPackagesDesignated: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     var received_quantity = this.get("receivedQuantity");
     var totalDesignatedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
@@ -104,15 +117,15 @@ export default DS.Model.extend({
     return (totalDesignatedQty === received_quantity) ? true : false;
   }),
 
-  designatedOrdersPackages: Ember.computed("ordersPackages.@each.state", function() {
+  designatedOrdersPackages: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     return this.get("ordersPackages").filterBy("state", "designated");
   }),
 
-  dispatchedOrdersPackages: Ember.computed("ordersPackages.@each.state", function() {
+  dispatchedOrdersPackages: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     return this.get("ordersPackages").filterBy("state", "dispatched");
   }),
 
-  totalDispatchedQty: Ember.computed("ordersPackages.@each.state", function() {
+  totalDispatchedQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     var totalDispatchedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
     dispatchedOrdersPackages.forEach(record => {
@@ -121,7 +134,7 @@ export default DS.Model.extend({
     return totalDispatchedQty;
   }),
 
-  totalDesignatedQty: Ember.computed("ordersPackages.@each.state", function() {
+  totalDesignatedQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     var totalDesignatedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
     dispatchedOrdersPackages.forEach(record => {
