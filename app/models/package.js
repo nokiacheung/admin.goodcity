@@ -92,7 +92,7 @@ export default DS.Model.extend({
         qty += parseInt(record.get("quantity")));
       }
     });
-    return this.get("receivedQuantity") - qty;
+    return (this.get("receivedQuantity") - qty) || 0;
   }),
 
   hasAllPackagesDispatched: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
