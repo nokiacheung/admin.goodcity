@@ -86,6 +86,4 @@
   <plugin name="cordova-plugin-splashscreen" spec="~3.1.0"/>
   <plugin name="phonegap-plugin-barcodescanner" spec="https://github.com/Telerik-Verified-Plugins/BarcodeScanner.git"/>
   <plugin name="com.phonegap.plugins.twilioclient" spec="https://github.com/crossroads/twilio_client_phonegap.git"/>
-  <plugin name="cordova-plugin-ios-no-export-compliance" spec="https://github.com/mikaoelitiana/cordova-plugin-ios-no-export-compliance.git" />
-  <plugins></plugins>
 </widget>
