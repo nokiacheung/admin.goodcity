@@ -66,6 +66,9 @@ I18nTranslationsEn =
         "description_placeholder" : "What is it? How many items? What's the size?"
 
     "item":
+      "accepted": "Accepted"
+      "multiple_designation": "designated"
+      "all_dispatched": "Out of stock"
       "submitted_status": "This item is awaiting review."
       "in_review_status": "This item is being reviewed."
       "accepted_status": "This item has been accepted."

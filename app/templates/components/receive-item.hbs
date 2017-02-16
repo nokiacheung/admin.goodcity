@@ -4,20 +4,36 @@
 
 {{#each packages as |package idx|}}
   <div>
-    <div class="package-name package-{{pState}} {{if package.isDispatched 'dispatched'}} {{if package.isDesignated 'designated'}}">
+    <div class="package-name package-{{pState}} {{if package.hasAllPackagesDispatched 'dispatched'}} {{if package.hasAllPackagesDesignated 'designated'}} {{if (js-and (is-not package.quantity) package.designatedOrdersPackages.length) 'designated'}}">
       <div class="small-4 columns">
         {{#if (is-equal pState "missing")}}
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
           {{capitalize-string pState}}
-        {{else if package.isDispatched}}
-          <i class="fa fa-ship" aria-hidden="true"></i>
-          Dispatched
-        {{else if package.isDesignated}}
-          <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-          Designated
+        {{else if package.hasAllPackagesDesignated}}
+          {{#if package.hasOneDesignatedPackage}}
+            <i class="fa fa-shopping-basket"></i> {{package.designation.code}}
+          {{else}}
+            <i class="fa fa-shopping-basket"></i> {{t "item.multiple_designation"}}
+          {{/if}}
+        {{else if package.hasAllPackagesDispatched}}
+          {{#if package.hasOneDispatchedPackage}}
+            <i class="fa fa-ship"></i> {{package.hasOneDispatchedPackage.designation.code}}
+          {{else}}
+            <i class="fa fa-ship"></i> {{t "item.all_dispatched"}}
+          {{/if}}
+        {{else if (is-not package.quantity)}}
+          {{#if package.hasOneDesignatedPackage}}
+            <i class="fa fa-shopping-basket"></i> {{package.designation.code}}
+          {{else if package.designatedOrdersPackages.length}}
+            <i class="fa fa-shopping-basket"></i> {{t "item.multiple_designation"}}
+          {{else if package.hasOneDispatchedPackage}}
+            <i class="fa fa-ship"></i> {{package.hasOneDispatchedPackage.designation.code}}
+          {{else if package.dispatchedOrdersPackages.length}}
+            <i class="fa fa-ship"></i> {{t "item.all_dispatched"}}
+          {{/if}}
         {{else}}
           {{#if (is-equal pState "expecting")}}
-            Accepted
+            {{t "item.accepted"}}
           {{else}}
             {{capitalize-string pState}}
           {{/if}}
@@ -42,9 +58,10 @@
     </div>
     <img src="{{package.displayImageUrl}}" />
     <div class="package-description">
-      <div class="ellipsis name one-line-ellipsis">
-        {{package.quantity}} x {{package.packageName}}
+      <div class="ellipsis name one-line-ellipsis" style="display: inline !important;">
+        {{package.receivedQuantity}} x {{package.packageName}}
       </div>
+      <span style="margin-left: 0.25rem;">{{package.remainingQty}}/{{package.totalDesignatedQty}}/{{package.totalDispatchedQty}}</span>
       {{receive-menu packageId=package.id}}
       <div class="ellipsis two-line-ellipsis">
         {{js-or package.notes item.donorDescription}}
