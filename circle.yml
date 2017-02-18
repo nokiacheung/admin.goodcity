@@ -29,7 +29,6 @@ dependencies:
     - PATH=$(npm bin):$PATH; azure-filestore download -d google-play -f $GOOGLE_PLAY_KEY_FILE:
         pwd: fastlane
 
-
 test:
   pre:
     - ./node_modules/ember-cli/bin/ember server --port 4201:
