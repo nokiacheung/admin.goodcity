@@ -20,8 +20,8 @@ dependencies:
     - npm rebuild node-sass
     - npm install bower ember-cli phantomjs-prebuilt cordova
     - gem update fastlane
-    - node circle-branch.js
-
+    - gem install CFPropertyList # deal with error: exportArchive: The operation couldn’t be completed. (IDEDistributionErrorDomain error 1.)
+  
   post:
     - ./node_modules/bower/bin/bower install
     - PATH=$(npm bin):$PATH; azure-filestore download -f goodcity.keystore:
