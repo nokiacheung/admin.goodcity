@@ -47,8 +47,7 @@ deployment:
       #- bundle exec cap staging deploy
       #- bundle exec rake staging android app:build
       #- fastlane android staging
-      - chruby system && bundle install # fixes ExportArchive error in ipatool
-      - bundle exec rake staging ios app:build
+      - (chruby system && bundle install && bundle exec rake staging ios app:build) # fixes ExportArchive error in ipatool
       - fastlane ios staging
   production:
     branch: live
