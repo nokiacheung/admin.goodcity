@@ -12,6 +12,8 @@ dependencies:
   pre:
     - security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Users/distiller/Library/Keychains/login.keychain
     - sudo security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Library/Keychains/System.keychain
+    - curl -O -L http://developer.apple.com/certificationauthority/AppleWWDRCA.cer
+    - security import AppleWWDRCA.cer  -k ~/Library/Keychains/login.keychain -A
     - brew update
     - brew install homebrew/versions/node4-lts
     - brew install watchman
@@ -22,7 +24,7 @@ dependencies:
     - npm rebuild node-sass
     - npm install bower ember-cli phantomjs-prebuilt cordova
     - gem update fastlane
-  
+
   post:
     - ./node_modules/bower/bin/bower install
     - PATH=$(npm bin):$PATH; azure-filestore download -f goodcity.keystore:
