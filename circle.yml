@@ -10,8 +10,6 @@ machine:
 
 dependencies:
   pre:
-    - security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Users/distiller/Library/Keychains/login.keychain
-    - sudo security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Library/Keychains/System.keychain
     - brew update
     - brew install homebrew/versions/node4-lts
     - brew install watchman
@@ -48,6 +46,8 @@ deployment:
       #- bundle exec cap staging deploy
       #- bundle exec rake staging android app:build
       #- fastlane android staging
+      - security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Users/distiller/Library/Keychains/login.keychain
+      - sudo security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Library/Keychains/System.keychain
       - bundle exec rake staging ios app:build
       - fastlane ios staging
   production:
