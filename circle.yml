@@ -46,7 +46,7 @@ deployment:
       #- bundle exec cap staging deploy
       #- bundle exec rake staging android app:build
       #- fastlane android staging
-      - security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Users/distiller/Library/Keychains/login.keychain
+      - sudo security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Users/distiller/Library/Keychains/login.keychain
       - sudo security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Library/Keychains/System.keychain
       - curl -O -L http://developer.apple.com/certificationauthority/AppleWWDRCA.cer
       - security import AppleWWDRCA.cer  -k ~/Library/Keychains/login.keychain -A
