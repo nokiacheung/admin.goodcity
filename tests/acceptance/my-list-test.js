@@ -1,5 +1,11 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import { module, test } from 'qunit';
+import '../factories/user';
+import '../factories/offer';
+import '../factories/item';
+import '../factories/gogovan_order';
+import '../factories/delivery';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
@@ -33,71 +39,75 @@ module('My Offers', {
   }
 });
 
-test("redirect to reviewing offers page", function() {
+test("redirect to reviewing offers page", function(assert) {
+  assert.expect(5);
   visit("/offers/my_list");
 
   andThen(function(){
-    equal(currentURL(), "/offers/my_list/reviewing");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
+    assert.equal(currentURL(), "/offers/my_list/reviewing");
+    assert.equal(find("ul.list li").length, 1);
+    assert.equal(find("ul.list img").length, 1);
 
     // under-review status
-    equal($('.time_indicator').text().indexOf('Started by ') > 0, true);
+    assert.equal($('.time_indicator').text().indexOf('Started by ') > 0, true);
     var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
 
     // items accept-reject status
-    equal(itemStatus, " 0 Accepted, 0 rejected, 2 pending ");
+    assert.equal(itemStatus, " 0 Accepted, 0 rejected, 2 pending ");
   });
 });
 
-test("redirect to reviewed offers page", function() {
+test("redirect to reviewed offers page", function(assert) {
+  assert.expect(6);
   visit("/offers/my_list/reviewed");
 
   andThen(function(){
-    equal(currentURL(), "/offers/my_list/reviewed");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
+    assert.equal(currentURL(), "/offers/my_list/reviewed");
+    assert.equal(find("ul.list li").length, 1);
+    assert.equal(find("ul.list img").length, 1);
 
     // reviewed status
-    equal($('.time_indicator').text().indexOf('Reviewed') > 0, true);
-    equal($('.time_indicator').text().indexOf('User to plan transport.') > 0, true);
+    assert.equal($('.time_indicator').text().indexOf('Reviewed') > 0, true);
+    assert.equal($('.time_indicator').text().indexOf('User to plan transport.') > 0, true);
 
     // items accept-reject status
      var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
-    equal(itemStatus, " 1 Accepted, 1 rejected, 0 pending ");
+    assert.equal(itemStatus, " 1 Accepted, 1 rejected, 0 pending ");
   });
 });
 
-test("redirect to scheduled offers page", function() {
+test("redirect to scheduled offers page", function(assert) {
+  assert.expect(5);
   visit("/offers/my_list/scheduled");
 
   andThen(function(){
-    equal(currentURL(), "/offers/my_list/scheduled");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
+    assert.equal(currentURL(), "/offers/my_list/scheduled");
+    assert.equal(find("ul.list li").length, 1);
+    assert.equal(find("ul.list img").length, 1);
 
     // scheduled status
-    equal($('.time_indicator').text().indexOf('Van ordered') >= 0, true);
+    assert.equal($('.time_indicator').text().indexOf('Van ordered') >= 0, true);
 
     // items accept-reject status
      var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
-    equal(itemStatus, " 1 Accepted, 1 rejected, 0 pending ");
+    assert.equal(itemStatus, " 1 Accepted, 1 rejected, 0 pending ");
   });
 });
 
-test("redirect to finished offers page", function() {
+test("redirect to finished offers page", function(assert) {
+  assert.expect(5);
   visit("/offers/my_list/finished");
 
   andThen(function(){
-    equal(currentURL(), "/offers/my_list/finished");
-    equal(find("ul.list li").length, 2);
-    equal(find("ul.list img").length, 1);
+    assert.equal(currentURL(), "/offers/my_list/finished");
+    assert.equal(find("ul.list li").length, 2);
+    assert.equal(find("ul.list img").length, 1);
 
     // reviewed status
-    equal($('.time_indicator').text().indexOf('Closed') > 0, true);
+    assert.equal($('.time_indicator').text().indexOf('Closed') > 0, true);
 
     // items accept-reject status
      var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
-    equal(itemStatus, " 0 Accepted, 1 rejected, 0 pending ");
+    assert.equal(itemStatus, " 0 Accepted, 1 rejected, 0 pending ");
   });
 });

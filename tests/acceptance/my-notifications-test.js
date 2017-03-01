@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
+import { module, test } from 'qunit';
+import '../factories/message';
+import '../factories/offer';
+import '../factories/item';
+import '../factories/gogovan_order';
+import '../factories/delivery';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import '../helpers/custom-helpers';
 // import syncDataStub from '../helpers/empty-sync-data-stub';
@@ -27,71 +33,75 @@ module('Reviewer: Notifications', {
   }
 });
 
-test("display threads with icons and unread message count" , function() {
+test("display threads with icons and unread message count" , function(assert) {
+  assert.expect(8);
   visit('/my_notifications');
   andThen(function() {
     var assertions = function() {
       //Item thread with donor
       var item_thread = $(".thread:first");
       //item image, unread count and heading
-      equal($(item_thread).find(".thread_image img").length > 0, true);
-      equal($(item_thread).find(".unread_length").text(), 2);
-      equal($(item_thread).find(".message-text").text().indexOf(item.get("donorDescription")) >=0, true);
+      assert.equal($(item_thread).find(".thread_image img").length > 0, true);
+      assert.equal($(item_thread).find(".unread_length").text(), 2);
+      assert.equal($(item_thread).find(".message-text").text().indexOf(item.get("donorDescription")) >=0, true);
 
       //Item thread with supervisor
       var item_private_thread = $(".thread")[1];
       //group icon, unread count and message
-      equal($(item_private_thread).find(".fa-users").length > 0, true);
-      equal($(item_private_thread).find(".unread_length").length, 0);
-      equal($(item_private_thread).find(".thread_last_message").text().trim(), message3.get("body"));
+      assert.equal($(item_private_thread).find(".fa-users").length > 0, true);
+      assert.equal($(item_private_thread).find(".unread_length").length, 0);
+      assert.equal($(item_private_thread).find(".thread_last_message").text().trim(), message3.get("body"));
 
       //Offer thread message with donor
       var offer_thread = $(".thread")[2];
       //thread icon and heading
-      equal($(offer_thread).find(".thread_image .fa-bullhorn").length > 0, true);
-      equal($(offer_thread).find(".message-text").text().trim().indexOf(offer.get("createdBy.fullName") + "'s Offer") >= 0, true);
+      assert.equal($(offer_thread).find(".thread_image .fa-bullhorn").length > 0, true);
+      assert.equal($(offer_thread).find(".message-text").text().trim().indexOf(offer.get("createdBy.fullName") + "'s Offer") >= 0, true);
 
       // PENDING: not rendering last thread
       // Offer with supervisor
       // var offer_private_thread = $(".thread")[3];
-      // equal($(offer_thread).find(".fa-bullhorn").length > 0, true);
-      // equal($(offer_private_thread).find(".fa-users").length > 0, true);
+      // assert.equal($(offer_thread).find(".fa-bullhorn").length > 0, true);
+      // assert.equal($(offer_private_thread).find(".fa-users").length > 0, true);
     };
 
     runloopFix(assertions);
   });
 });
 
-test("display unread notification count on notification-bell icon" , function() {
+test("display unread notification count on notification-bell icon" , function(assert) {
+  assert.expect(2);
   visit('/offers');
   andThen(function() {
-    equal(currentURL(), "/offers/submitted");
-    equal($("span.unread .unread_length").text(), 3);
+    assert.equal(currentURL(), "/offers/submitted");
+    assert.equal($("span.unread .unread_length").text(), 3);
   });
 });
 
-test("redirect to notifications page on click of notification-bell icon" , function() {
+test("redirect to notifications page on click of notification-bell icon" , function(assert) {
+  assert.expect(3);
   visit('/offers');
   andThen(function() {
-    equal(currentURL(), "/offers/submitted");
-    equal($("span.unread .unread_length").text(), 3);
+    assert.equal(currentURL(), "/offers/submitted");
+    assert.equal($("span.unread .unread_length").text(), 3);
 
     click("a.all_unread_messages_count");
     andThen(function() {
-      equal(currentURL(), "/my_notifications");
+      assert.equal(currentURL(), "/my_notifications");
     });
   });
 });
 
-test("filter unread notifications" , function() {
+test("filter unread notifications" , function(assert) {
+  assert.expect(2);
   visit("/my_notifications");
   andThen(function() {
     var assertions = function() {
-      equal(currentURL(), "/my_notifications");
+      assert.equal(currentURL(), "/my_notifications");
 
       click(".my-notifications a:eq(0)");
       andThen(function() {
-        equal($(".thread").length, 2);
+        assert.equal($(".thread").length, 2);
       });
     };
 

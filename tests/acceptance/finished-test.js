@@ -26,7 +26,7 @@ module('Finished Offers', {
 });
 
 test("redirect to finished offers page", function(assert) {
-  assert.expect(6);
+  assert.expect(5);
   visit("/offers/finished");
 
   andThen(function(){
