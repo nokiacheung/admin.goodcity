@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
+import '../factories/offer';
+import '../factories/user';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
@@ -21,11 +24,12 @@ module('App Menu', {
   }
 });
 
-test("In progress tab count", function() {
+test("In progress tab count", function(assert) {
+  assert.expect(2);
   visit("/offers/in_progress/reviewing");
 
   andThen(function(){
-    equal(currentURL(), "/offers/in_progress/reviewing");
-    equal(find('a[href="/offers/in_progress"]').text(), "In Progress (2)");
+    assert.equal(currentURL(), "/offers/in_progress/reviewing");
+    assert.equal(find('a[href="/offers/in_progress"]').text(), "In Progress (2)");
   });
 });

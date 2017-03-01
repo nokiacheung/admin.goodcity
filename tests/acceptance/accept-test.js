@@ -35,12 +35,13 @@ module('Reviewer: Accept Item Tab', {
   }
 });
 
-test("visit accept item tab without item_type", function() {
+test("visit accept item tab without item_type", function(assert) {
+  assert.expect(3);
   visit("/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
-    equal($('input[disabled]').val(), "");
-    equal($('p.no-items').text(), "Please choose Item Type first!");
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
+    assert.equal($('input[disabled]').val(), "");
+    assert.equal($('p.no-items').text(), "Please choose Item Type first!");
   });
 });
 
@@ -96,45 +97,48 @@ test("visit accepted item with item_type", function(assert) {
   });
 });
 
-test("visit submitted item with item_type", function() {
+test("visit submitted item with item_type", function(assert) {
+  assert.expect(6);
   visit("/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
-    equal($('input[disabled]').val(), item3.get('packageType.name'));
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
+    assert.equal($('input[disabled]').val(), item3.get('packageType.name'));
 
     // one package components
-    equal($(".detail_container").length, 1);
+    assert.equal($(".detail_container").length, 1);
 
     // Display buttons
-    equal($(".accept_buttons button").length, 2);
+    assert.equal($(".accept_buttons button").length, 2);
 
     // Item Details Form
-    equal($('.item-details textarea').val(), "");
-    equal($('.item-details .radio-buttons li').length, 4);
+    assert.equal($('.item-details textarea').val(), "");
+    assert.equal($('.item-details .radio-buttons li').length, 4);
   });
 });
 
-test("visit rejected item with item_type", function() {
+test("visit rejected item with item_type", function(assert) {
+  assert.expect(4);
   visit("/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
-    equal($('input[disabled]').val(), item4.get('packageType.name'));
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
+    assert.equal($('input[disabled]').val(), item4.get('packageType.name'));
 
     // one package components
-    equal($(".detail_container").length, 1);
+    assert.equal($(".detail_container").length, 1);
 
     // Display buttons
-    equal($(".accept_buttons button").length, 2);
+    assert.equal($(".accept_buttons button").length, 2);
   });
 });
 
-test("visit rejected item page", function() {
+test("visit rejected item page", function(assert) {
+  assert.expect(3);
   visit("/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
-    equal($('input[disabled]').val(), item4.get('packageType.name'));
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
+    assert.equal($('input[disabled]').val(), item4.get('packageType.name'));
 
     // hide item-edit link
-    equal($(".edit-item-link").length, 0);
+    assert.equal($(".edit-item-link").length, 0);
   });
 });

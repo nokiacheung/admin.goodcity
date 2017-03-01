@@ -1,5 +1,8 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
+import '../factories/offer';
+import '../factories/user';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
@@ -23,7 +26,8 @@ module('Reviewer: Display Donor Details Tab', {
   }
 });
 
-test("verify donor details", function() {
+test("verify donor details", function(assert) {
+  assert.expect(7);
 
   $.mockjax({url:"/api/v1/twilio_outbound/generate_call_toke*",responseText:{}});
   window.Twilio = {
@@ -39,13 +43,13 @@ test("verify donor details", function() {
 
   visit("/offers/1/review_offer/donor_details");
   andThen(function() {
-    equal(currentURL(), "/offers/1/review_offer/donor_details");
+    assert.equal(currentURL(), "/offers/1/review_offer/donor_details");
 
-    equal($(".donor_details .no-avatar").text(), "K");
-    equal($(".donor_details .donor").text().indexOf('Kendrick Kiehn') >= 0, true);
-    equal($.trim($(".donor_details .donor").text()).indexOf('5111 1111') >= 0, true);
-    equal($(".donor_details li").length, 3);
-    equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('Total offers') >= 0, true);
-    equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('4') >= 0, true);
+    assert.equal($(".donor_details .no-avatar").text(), "K");
+    assert.equal($(".donor_details .donor").text().indexOf('Kendrick Kiehn') >= 0, true);
+    assert.equal($.trim($(".donor_details .donor").text()).indexOf('5111 1111') >= 0, true);
+    assert.equal($(".donor_details li").length, 3);
+    assert.equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('Total offers') >= 0, true);
+    assert.equal($.trim($(".donor_details .row .row:eq(5)").text()).indexOf('4') >= 0, true);
   });
 });
