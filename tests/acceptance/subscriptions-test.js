@@ -3,6 +3,7 @@ import startApp from '../helpers/start-app';
 import syncDataStub from '../helpers/empty-sync-data-stub';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import { module, test } from 'qunit';
 
 var App;
 
@@ -18,8 +19,8 @@ module('Subscriptions', {
   }
 });
 
-test("updateStore doesn't process before response to model.save request", function() {
-  expect(2);
+test("updateStore doesn't process before response to model.save request", function(assert) {
+  assert.expect(2);
 
   var store = FactoryGuy.store;
   var subscriptions = lookup('controller:subscriptions');
@@ -41,8 +42,8 @@ test("updateStore doesn't process before response to model.save request", functi
 
   Ember.run(function() {
     store.createRecord("offer",{createdBy:user}).save().then(function() {
-      equal(store.peekAll("offer").get("length"), 1);
-      equal(store.peekAll("offer").get("firstObject.id"), offer.id);
+      assert.equal(store.peekAll("offer").get("length"), 1);
+      assert.equal(store.peekAll("offer").get("firstObject.id"), offer.id);
     });
   });
 

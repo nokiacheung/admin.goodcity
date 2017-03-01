@@ -2,6 +2,13 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import { module, test } from 'qunit';
+import '../factories/user';
+import '../factories/offer';
+import '../factories/item';
+import '../factories/schedule';
+import '../factories/gogovan_order';
+import '../factories/delivery';
 
 var App, offer1, offer2, reviewer, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
@@ -53,120 +60,132 @@ module('Reviewer: Display Offer Status', {
   }
 });
 
-test("Display offer status for submitted offer", function() {
+test("Display offer status for submitted offer", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer1.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer1.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()), "Start Review");
+    assert.equal(currentURL(), "/offers/" + offer1.id + "/review_offer/items");
+    assert.equal($.trim(find('.status-message').text()), "Start Review");
   });
 });
 
 // display initial char with message
-test("Display offer status for offer under review", function() {
+test("Display offer status for offer under review", function(assert) {
+  assert.expect(3);
   visit('/offers/' + offer2.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer2.id + "/review_offer/items");
+    assert.equal(currentURL(), "/offers/" + offer2.id + "/review_offer/items");
 
     // message detail
     var status = $.trim(find('.status-message').text());
-    equal(status.indexOf("Started by "+ reviewerName) >= 0, true);
-    equal(status.indexOf(reviewer.get('nameInitial')) >= 0, true);
+    assert.equal(status.indexOf("Started by "+ reviewerName) >= 0, true);
+    assert.equal(status.indexOf(reviewer.get('nameInitial')) >= 0, true);
   });
 });
 
-test("Display offer status for reviewed offer", function() {
+test("Display offer status for reviewed offer", function(assert) {
+  assert.expect(1);
   visit('/offers/' + offer3.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer3.id + "/review_offer/items");
+    assert.equal(currentURL(), "/offers/" + offer3.id + "/review_offer/items");
 
     // var message = $.trim(find('.status-message').text().replace(/\n/g, ''));
-    // equal(message, "Reviewed less than a minute ago. User to plan transport." );
+    // assert.equal(message, "Reviewed less than a minute ago. User to plan transport." );
   });
 });
 
-test("Display offer status for scheduled offer: Collection", function() {
+test("Display offer status for scheduled offer: Collection", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer4.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer4.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st Dec Afternoon");
+    assert.equal(currentURL(), "/offers/" + offer4.id + "/review_offer/items");
+    assert.equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Collection Mon 1st Dec Afternoon");
   });
 });
 
-test("Display offer status for scheduled offer: Gogovan pending", function() {
+test("Display offer status for scheduled offer: Gogovan pending", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer5.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm Mon 1st Dec");
+    assert.equal(currentURL(), "/offers/" + offer5.id + "/review_offer/items");
+    assert.equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Van ordered Afternoon, 2pm-4pm Mon 1st Dec");
   });
 });
 
-test("Display offer status for scheduled offer: Gogovan active", function() {
+test("Display offer status for scheduled offer: Gogovan active", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer11.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer11.id + "/review_offer/items");
+    assert.equal(currentURL(), "/offers/" + offer11.id + "/review_offer/items");
     var status = $.trim(find('.status-message').text().replace(/\s{2,}/g, ' '));
-    equal(status.indexOf("Van confirmed Afternoon, 2pm-4pm") >= 0, true);
+    assert.equal(status.indexOf("Van confirmed Afternoon, 2pm-4pm") >= 0, true);
   });
 });
 
-test("Display offer status for scheduled offer: Drop Off", function() {
+test("Display offer status for scheduled offer: Drop Off", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer6.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer6.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st Dec Afternoon");
+    assert.equal(currentURL(), "/offers/" + offer6.id + "/review_offer/items");
+    assert.equal($.trim(find('.status-message').text().replace(/\s{2,}/g, ' ')), "Drop-off Mon 1st Dec Afternoon");
   });
 });
 
-test("Display offer status for closed offer", function() {
+test("Display offer status for closed offer", function(assert) {
+  assert.expect(1);
   visit('/offers/' + offer7.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer7.id + "/review_offer/items");
-    // equal($.trim(find('.status-message').text()), "Offer closed by " + reviewerName + " less than a minute ago");
+    assert.equal(currentURL(), "/offers/" + offer7.id + "/review_offer/items");
+    // assert.equal($.trim(find('.status-message').text()), "Offer closed by " + reviewerName + " less than a minute ago");
   });
 });
 
-test("Display offer status for all rejected items", function() {
+test("Display offer status for all rejected items", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer8.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer8.id + "/review_offer/items");
-    equal($.trim(find('.status-message').text()).indexOf("No items needed") >= 0, true);
+    assert.equal(currentURL(), "/offers/" + offer8.id + "/review_offer/items");
+    assert.equal($.trim(find('.status-message').text()).indexOf("No items needed") >= 0, true);
   });
 });
 
-test("Display offer status for all reviewed items", function() {
+test("Display offer status for all reviewed items", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer9.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer9.id + "/review_offer/items");
-    equal(find('.status-message').text().replace(/ /g,' ').indexOf("All items reviewed") >= 0, true);
+    assert.equal(currentURL(), "/offers/" + offer9.id + "/review_offer/items");
+    assert.equal(find('.status-message').text().replace(/ /g,' ').indexOf("All items reviewed") >= 0, true);
   });
 });
 
-test("Display offer status for received offer-items", function() {
+test("Display offer status for received offer-items", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer10.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer10.id + "/review_offer/items");
+    assert.equal(currentURL(), "/offers/" + offer10.id + "/review_offer/items");
     var donor_name = offer10.get("createdBy.firstName") + " " + offer10.get("createdBy.lastName");
-    equal($('.status-message').text().trim().indexOf("Goods donated by " + donor_name + " received") >= 0, true);
+    assert.equal($('.status-message').text().trim().indexOf("Goods donated by " + donor_name + " received") >= 0, true);
   });
 });
 
-test("Display offer status for cancelled offer", function() {
+test("Display offer status for cancelled offer", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer12.id + "/review_offer/items");
 
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer12.id + "/review_offer/items");
+    assert.equal(currentURL(), "/offers/" + offer12.id + "/review_offer/items");
     var donor_name = offer12.get("closedBy.firstName") + " " + offer12.get("closedBy.lastName");
-    equal($('.status-message').text().trim().indexOf("Cancelled by " + donor_name) >= 0, true);
+    assert.equal($('.status-message').text().trim().indexOf("Cancelled by " + donor_name) >= 0, true);
   });
 });

@@ -2,6 +2,14 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import { module, test } from 'qunit';
+import '../factories/message';
+import '../factories/offer';
+import '../factories/item';
+import '../factories/schedule';
+import '../factories/gogovan_order';
+import '../factories/delivery';
+
 
 var App, offer, item1, item2, item3,
   message1, message2, donor, msg_time;
@@ -26,85 +34,92 @@ module('Reviewer: Display Offer Tab', {
   }
 });
 
-test("item status badge on item-image", function() {
+test("item status badge on item-image", function(assert) {
+  assert.expect();
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
-    equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
 
     // display 'Accepted' status for accepted-item
-    equal($(".item-image .accept_badge").not(".hidden").length, 1);
+    assert.equal($(".item-image .accept_badge").not(".hidden").length, 1);
 
     // display 'Rejected' status for accepted-item
-    equal($(".item-image .reject_badge").not(".hidden").length, 1);
+    assert.equal($(".item-image .reject_badge").not(".hidden").length, 1);
   });
 });
 
-test("offer-messages thread details", function() {
+test("offer-messages thread details", function(assert) {
+  assert.expect(3);
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     // display 'General Messages' thread
-    equal($('div:contains("General Messages"):last').length, 1);
+    assert.equal($('div:contains("General Messages"):last').length, 1);
 
     var offer_message_thread_text = $('div:contains("General Messages"):last').closest('span.info').text();
 
     // display latest offer message in 'General Messages' thread
-    equal(offer_message_thread_text.indexOf(message1.get('body')) > 0, true);
+    assert.equal(offer_message_thread_text.indexOf(message1.get('body')) > 0, true);
 
     // display unread offer message count in 'General Messages' thread
-    equal(offer_message_thread_text.indexOf('1') > 0, true);
+    assert.equal(offer_message_thread_text.indexOf('1') > 0, true);
   });
 });
 
-test("ordering of message threads", function() {
+test("ordering of message threads", function(assert) {
+  assert.expect(2);
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     // latest item message thread
     var latest_message_thread = $('.list li:eq(0)').text();
-    equal(latest_message_thread.indexOf(item3.get('donorDescription')) > 0, true);
+    assert.equal(latest_message_thread.indexOf(item3.get('donorDescription')) > 0, true);
 
     // second offer message thread
     var offer_message_thread = $('.list li:eq(1)').text();
-    equal(offer_message_thread.indexOf("General Messages") > 0, true);
+    assert.equal(offer_message_thread.indexOf("General Messages") > 0, true);
   });
 });
 
-test("visit pending review item", function() {
+test("visit pending review item", function(assert) {
+  assert.expect(1);
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     click(".list li a:contains('"+ item3.get('donorDescription') +"')");
     andThen(function() {
-      equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item3.id +"/accept");
+      assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item3.id +"/accept");
     });
   });
 });
 
-test("visit accepted item", function() {
+test("visit accepted item", function(assert) {
+  assert.expect(1);
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     click(".list li a:contains('"+ item1.get('donorDescription') +"')");
     andThen(function() {
-      equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item1.id +"/accept");
+      assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item1.id +"/accept");
     });
   });
 });
 
-test("visit rejected item", function() {
+test("visit rejected item", function(assert) {
+  assert.expect();
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     click(".list li a:contains('"+ item2.get('donorDescription') +"')");
     andThen(function() {
-      equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item2.id +"/reject");
+      assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/"+ item2.id +"/reject");
     });
   });
 });
 
-test("visit offer message threads", function() {
+test("visit offer message threads", function(assert) {
+  assert.expect(1);
   visit('/offers/' + offer.id + "/review_offer/items");
   andThen(function() {
     //offer message thread
     click(".list li a:contains('General Messages')");
     andThen(function() {
-      equal(currentURL(), "/offers/" + offer.id + "/donor_messages");
+      assert.equal(currentURL(), "/offers/" + offer.id + "/donor_messages");
     });
   });
 });

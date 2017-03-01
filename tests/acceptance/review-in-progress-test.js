@@ -3,6 +3,9 @@ import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import '../helpers/custom-helpers';
+import { module, test } from 'qunit';
+import '../factories/offer';
+import '../factories/item';
 
 var App, offer1, reviewer, reviewerName, offer2, item1, item2;
 
@@ -24,42 +27,44 @@ module('In Review Offers', {
   }
 });
 
-test("redirect to reviewing offers page", function() {
+test("redirect to reviewing offers page", function(assert) {
+  assert.expect(5);
   visit("/offers/in_progress");
 
   andThen(function(){
     var assertions = function() {
-      equal(currentURL(), "/offers/in_progress/reviewing");
-      equal(find("ul.list li").length, 2);
-      equal(find("ul.list img").length, 2);
+      assert.equal(currentURL(), "/offers/in_progress/reviewing");
+      assert.equal(find("ul.list li").length, 2);
+      assert.equal(find("ul.list img").length, 2);
 
       // under-review status
-      equal($('.time_indicator').text().indexOf('Started by ') > 0, true);
+      assert.equal($('.time_indicator').text().indexOf('Started by ') > 0, true);
       var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
 
-      equal(itemStatus, " 0 Accepted, 0 rejected, 2 pending ");
+      assert.equal(itemStatus, " 0 Accepted, 0 rejected, 2 pending ");
     };
 
     runloopFix(assertions);
   });
 });
 
-test("redirect to reviewed offers page", function() {
+test("redirect to reviewed offers page", function(assert) {
+  assert.expect(6);
   visit("/offers/in_progress/reviewed");
 
   andThen(function(){
     var assertions = function() {
-      equal(currentURL(), "/offers/in_progress/reviewed");
-      equal(find("ul.list li").length, 1);
-      equal(find("ul.list img").length, 1);
+      assert.equal(currentURL(), "/offers/in_progress/reviewed");
+      assert.equal(find("ul.list li").length, 1);
+      assert.equal(find("ul.list img").length, 1);
 
       // reviewed status
-      equal($('.time_indicator').text().indexOf('Reviewed') > 0, true);
-      equal($('.time_indicator').text().indexOf('User to plan transport.') > 0, true);
+      assert.equal($('.time_indicator').text().indexOf('Reviewed') > 0, true);
+      assert.equal($('.time_indicator').text().indexOf('User to plan transport.') > 0, true);
 
       // items accept-reject status
        var itemStatus = $('li.inbox_page:first span.info div:last').text().replace(/\s{1,}/g,' ');
-      equal(itemStatus, " 1 Accepted, 1 rejected, 0 pending ");
+      assert.equal(itemStatus, " 1 Accepted, 1 rejected, 0 pending ");
     };
 
     runloopFix(assertions);

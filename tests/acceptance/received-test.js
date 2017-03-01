@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import '../factories/orders_package';
+import { module, test } from 'qunit';
+import '../factories/offer';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import { mockFindAll } from 'ember-data-factory-guy';
@@ -25,19 +27,20 @@ module('Received Offers', {
   }
 });
 
-test("expecting, received and missing count", function() {
+test("expecting, received and missing count", function(assert) {
+  assert.expect(3);
   visit("/offers/"+offer1.id+"/review_offer/receive");
   mockFindAll('orders_package').returns({ json: {orders_packages: [orders_pkg1.toJSON({includeId: true})]}});
 
   andThen(function(){
     //expecting
     var href = "/offers/"+offer1.id+"/review_offer/receive";
-    equal($('a[href="'+href+'"]:last').text().trim(), "Expecting(1)");
+    assert.equal($('a[href="'+href+'"]:last').text().trim(), "Expecting(1)");
     //received
     var href1 = href +"?state=received";
-    equal($('a[href="'+href1+'"]:last').text().trim(), "Received(1)");
+    assert.equal($('a[href="'+href1+'"]:last').text().trim(), "Received(1)");
     //missing
     href1 = href +"?state=missing";
-    equal($('a[href="'+href1+'"]').text().trim(), "Missing(1)");
+    assert.equal($('a[href="'+href1+'"]').text().trim(), "Missing(1)");
   });
 });
