@@ -10,7 +10,7 @@ platform :ios do
 
   desc "Generate staging build (just upload to TestFairy)"
   lane :staging do
-    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
+    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY"])
     testfairy
   end
 
@@ -53,7 +53,7 @@ platform :android do
 
   desc "Generate staging build (just upload to TestFairy)"
   lane :staging do
-    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
+    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY"])
     testfairy
   end
 
