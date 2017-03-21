@@ -65,11 +65,6 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    toggleComment(index) {
-      var pkg = this.get("packages")[index];
-      Ember.set(pkg, "hideComment", !pkg.hideComment);
-    },
-
     addPackage(packageTypeId) {
       var _this = this;
       var note_text = this.get("item.donorDescription") || this.get("reviewItem.formData.donorDescription") || "";
