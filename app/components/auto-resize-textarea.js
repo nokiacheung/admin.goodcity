@@ -21,13 +21,5 @@ export default Ember.TextArea.extend({
       .css('height', 'auto')
       .css('height', offset)
       .removeAttr('data-autoresize');
-  },
-  actions: {
-    clearText() {
-      this.set("comment", " ");
-    }
-
-
-
-}
+  }
 });
