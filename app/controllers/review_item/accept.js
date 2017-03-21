@@ -65,6 +65,13 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
+    clearText(index) {
+      console.log(index);
+      if(index != null){
+        Ember.$("#"+index).val("");
+      }
+    },
+
     addPackage(packageTypeId) {
       var _this = this;
       var note_text = this.get("item.donorDescription") || this.get("reviewItem.formData.donorDescription") || "";
