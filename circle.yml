@@ -13,7 +13,6 @@ dependencies:
   cache_directories:
     - ~/.cache/yarn
   pre:
-    - chruby --default use system
     - brew update
     - brew install homebrew/versions/node4-lts
     - brew install watchman
