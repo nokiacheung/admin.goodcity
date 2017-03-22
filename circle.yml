@@ -1,6 +1,6 @@
 machine:
-  xcode:
-    version: 8.2
+  # xcode:
+  #   version: 8.2
   environment:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
     XCODE_SCHEME: admin.goodcity
