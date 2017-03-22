@@ -117,7 +117,7 @@ namespace :cordova do
   task :prepare do
     # Before cordova prepare build ember app that will auto update the dist folder too
     Rake::Task["ember:build"].invoke
-    create_build_json_file
+    #create_build_json_file
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
     sh %{ cd #{CORDOVA_PATH}; cordova-update-config --appname "#{app_name}" --appid #{app_id} --appversion #{app_version} }
