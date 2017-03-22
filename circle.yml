@@ -1,4 +1,6 @@
 machine:
+  xcode:
+    version: 8.2
   environment:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
     XCODE_SCHEME: admin.goodcity
@@ -16,14 +18,14 @@ dependencies:
     - brew update
     - brew install homebrew/versions/node4-lts
     - brew install watchman
-    - brew install android-sdk
-    - echo 'export ANDROID_HOME=/usr/local/opt/android-sdk' >> ~/.circlerc
-    - ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all --filter platform-tools,build-tools-23.0.3,android-23,extra-android-m2repository,extra-google-m2repository
-    - echo 'export PATH=$ANDROID_HOME/build-tools/23.0.3:$PATH' >> ~/.circlerc
+    # - brew install android-sdk
+    # - echo 'export ANDROID_HOME=/usr/local/opt/android-sdk' >> ~/.circlerc
+    # - ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all --filter platform-tools,build-tools-23.0.3,android-23,extra-android-m2repository,extra-google-m2repository
+    # - echo 'export PATH=$ANDROID_HOME/build-tools/23.0.3:$PATH' >> ~/.circlerc
     - node circle-branch.js
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - yarn add --force node-sass
-    - yarn add bower ember-cli phantomjs-prebuilt cordova
+    - yarn add bower ember-cli cordova #phantomjs-prebuilt
     - bundle install
     - gem update fastlane
   override:
@@ -57,8 +59,6 @@ deployment:
       - sudo security delete-certificate -Z 0950B6CD3D2F37EA246A1AAA20DFAADBD6FE1F75 /Library/Keychains/System.keychain
       - curl -O -L http://developer.apple.com/certificationauthority/AppleWWDRCA.cer
       - security import AppleWWDRCA.cer  -k ~/Library/Keychains/login.keychain -A
-      - sudo security import AppleWWDRCA.cer  -k /Library/Keychains/System.keychain -A
-      - sudo security import AppleWWDRCA.cer  -k ~/Library/Keychains/circle.keychain -A
       - (chruby system && bundle install && bundle exec rake staging ios app:build)
       - fastlane ios staging
   production:
