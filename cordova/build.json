@@ -2,7 +2,7 @@
   "ios": {
     "release": {
       "developmentTeam": "6B8FS8W94M",
-      "codeSignIdentity": "iOS Distribution"
+      "codeSignIdentity": "iPhone Distribution: Crossroads Foundation Limited (6B8FS8W94M)"
     }
   }
 }
