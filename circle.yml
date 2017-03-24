@@ -4,7 +4,6 @@ machine:
   environment:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
     XCODE_SCHEME: admin.goodcity
-    XCODE_WORKSPACE: admin.goodcity
     GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Crossroads Foundation Limited"
     FL_TESTFAIRY_AUTO_UPDATE: "on"
     PILOT_SKIP_SUBMISSION: true
