@@ -1,7 +1,8 @@
 {
   "ios": {
     "release": {
-      "developmentTeam": "6B8FS8W94M"
+      "developmentTeam": "6B8FS8W94M",
+      "codeSignIdentity": "iPhone Developer"
     }
   }
 }
