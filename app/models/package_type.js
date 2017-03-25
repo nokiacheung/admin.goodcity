@@ -18,7 +18,6 @@ export default DS.Model.extend({
   packages:       hasMany('package', { inverse: 'packageType' }),
   packagesCount:  Ember.computed.alias("packages.length"),
 
-
   defaultChildPackagesList: function() {
     return this._getPackages(this, this.get("defaultChildPackages"));
   },
