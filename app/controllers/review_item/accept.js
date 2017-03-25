@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import substring from 'goodcity/utils/substring';
+// import substring from 'goodcity/utils/substring';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
@@ -114,7 +114,7 @@ export default Ember.Controller.extend({
       // save packages
       var promises = [];
       var existing = {};
-      var packages = this.get("packages")
+      var packages = this.get("packages");
       this.get("item.packages").forEach(pkg => existing[pkg.get("id")] = pkg);
 
       this.get("packages").forEach(data => {
