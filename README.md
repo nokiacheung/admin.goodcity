@@ -17,15 +17,15 @@ You will need the following things properly installed on your computer.
 Install and configure nodejs https://github.com/creationix/nvm#install-script
 
 ```shell
-yarn add bower ember-cli phantomjs-prebuilt
-git clone https://github.com/crossroads/shared.goodcity.git
-cd shared.goodcity
-yarn link
-cd ..
-git clone https://github.com/crossroads/admin.goodcity.git
-cd admin.goodcity
-yarn link shared-goodcity
-ember install
+* yarn add bower ember-cli phantomjs-prebuilt
+* git clone https://github.com/crossroads/shared.goodcity.git
+* cd shared.goodcity
+* yarn link
+* cd ..
+* git clone https://github.com/crossroads/admin.goodcity.git
+* cd admin.goodcity
+* yarn link shared-goodcity
+* ember install
 ```
 
 ## Running
