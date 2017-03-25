@@ -10,7 +10,7 @@ export default Ember.Component.extend(ValidatableInput, {
   didRender() {
     this._super(...arguments);
     if ( this.pkg != null && this.pkg.packageType != null && this.flag === true){
-      if(this.pkg.notes.length === 0){
+      if(this.pkg.notes.length === 0 || Ember.$("#"+this.index).val()){
         this.pkg.notes = this.pkg.packageType.get('name');
       }
       Ember.$("#"+this.index).val(this.pkg.notes);
@@ -78,11 +78,8 @@ export default Ember.Component.extend(ValidatableInput, {
       var content         = this.get('content').toArray();
       if (this.get("prompt")) { content = [{name:null}].concat(content); }
       const selectedValue = content[selectedIndex];
-      selectedValue.set('indexOfChild', this.get('index'));
       var availablePkg = this.get("pkg");
-      var name = selectedValue.get('name');
-      Ember.$("#"+this.get('index')).val(name);
-      selectedValue.set('indexOfChild', availablePkg.id);
+      Ember.$("#"+this.get('index')).val(this.pkg.notes);
       this.set('selectedValue', selectedValue);
       changeAction(selectedValue);
     }
