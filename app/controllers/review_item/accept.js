@@ -62,6 +62,8 @@ export default Ember.Controller.extend({
       itemType.get("defaultChildPackagesList").apply(itemType)
         .forEach(t => this.send("addPackage", t.get("id")));
     }
+
+
   }),
 
   actions: {
@@ -73,12 +75,12 @@ export default Ember.Controller.extend({
 
     addPackage(packageTypeId) {
       var _this = this;
-      var note_text = this.get("item.donorDescription") || this.get("reviewItem.formData.donorDescription") || "";
+      var note_text ="";
 
       this.get("packages").pushObject({
         hideComment: false,
         displayImageUrl: this.get("item.displayImageUrl"),
-        notes: substring(note_text, 50),
+        notes: note_text,
         quantity: 1,
         packageTypeId,
         packageType: _this.get("store").peekRecord("packageType", packageTypeId),
@@ -112,10 +114,12 @@ export default Ember.Controller.extend({
       // save packages
       var promises = [];
       var existing = {};
+      var packages = this.get("packages")
       this.get("item.packages").forEach(pkg => existing[pkg.get("id")] = pkg);
 
       this.get("packages").forEach(data => {
         var pkg;
+        data.notes = Ember.$("#"+packages.indexOf(data)).val();
         if (existing[data.id]) {
           pkg = existing[data.id];
           pkg.setProperties(data);

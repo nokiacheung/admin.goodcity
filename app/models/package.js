@@ -39,6 +39,7 @@ export default DS.Model.extend({
     return this.get('designationId') && this.get('sentOn') === null && this.get('inventoryNumber');
   }),
 
+
   donorConditionId: Ember.computed.foreignKey('donorCondition.id'),
 
   isReceived: Ember.computed.equal("state", "received"),
