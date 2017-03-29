@@ -119,7 +119,7 @@ export default Ember.Controller.extend({
 
       this.get("packages").forEach(data => {
         var pkg;
-        data.notes = Ember.$("#"+packages.indexOf(data)).val();
+        data.notes = Ember.$("#comment"+packages.indexOf(data)).val();
         if (existing[data.id]) {
           pkg = existing[data.id];
           pkg.setProperties(data);

@@ -6,35 +6,25 @@ export default Ember.Component.extend(ValidatableInput, {
   selectedValue: null,
   pkg: null,
   index: null,
-  flag: true,
+  allowValueSet: true,
+
   didRender() {
     this._super(...arguments);
-    if ( this.pkg != null && this.pkg.packageType != null && this.flag === true){
-      if(this.pkg.notes.length === 0 || Ember.$("#"+this.index).val()){
+    if ( this.pkg != null && this.pkg.packageType != null && this.allowValueSet === true){
+      if(this.pkg.notes === null || this.pkg.notes.length === 0) {
         this.pkg.notes = this.pkg.packageType.get('name');
       }
-      Ember.$("#"+this.index).val(this.pkg.notes);
-      this.flag=false;
-    //   Ember.$("#"+this.index).val(this.pkg.packageType.get('name'));
+      Ember.$("textarea#"+this.index).val(this.pkg.notes);
+      this.allowValueSet = false;
     }
-    // else{
-
-    // }
-
   },
 
   didUpdate() {
     this._super(...arguments);
-    if ( this.pkg != null && this.pkg.packageType != null && this.pkg.notes.length === 0 && this.flag === false){
-      this.flag=true;
-      // this.pkg.notes = this.pkg.packageType.get('name');
-       Ember.$("#"+this.index).val(this.pkg.notes);
-    //   Ember.$("#"+this.index).val(this.pkg.packageType.get('name'));
+    if ( this.allowValueSet === false && this.pkg != null && this.pkg.packageType != null && (this.pkg.notes === null || this.pkg.notes.length === 0 ) ){
+      this.allowValueSet=true;
+      Ember.$("textarea#"+this.index).val(this.pkg.notes);
     }
-    // else{
-
-    // }
-
   },
 
   // overriden from ember-cli-html5-validation addon
@@ -51,7 +41,6 @@ export default Ember.Component.extend(ValidatableInput, {
 
     if(input.hasAttribute('required')) {
       var content = Ember.$.trim(jQueryElement.val());
-
       if(content.length === 0) {
         jQueryElement.val('');
       }
@@ -78,7 +67,13 @@ export default Ember.Component.extend(ValidatableInput, {
       var content         = this.get('content').toArray();
       if (this.get("prompt")) { content = [{name:null}].concat(content); }
       const selectedValue = content[selectedIndex];
-      Ember.$("#"+this.get('index')).val(this.pkg.notes);
+      if(this.index != null && selectedValue.name != null ){
+        selectedValue.set('indexOfChild', this.get('index'));
+        var availablePkg = this.get("pkg");
+        var name = selectedValue.get('name');
+        Ember.$("textarea#"+this.get('index')).val(name);
+        selectedValue.set('indexOfChild', availablePkg.id);
+      }
       this.set('selectedValue', selectedValue);
       changeAction(selectedValue);
     }
