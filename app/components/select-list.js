@@ -78,7 +78,6 @@ export default Ember.Component.extend(ValidatableInput, {
       var content         = this.get('content').toArray();
       if (this.get("prompt")) { content = [{name:null}].concat(content); }
       const selectedValue = content[selectedIndex];
-      var availablePkg = this.get("pkg");
       Ember.$("#"+this.get('index')).val(this.pkg.notes);
       this.set('selectedValue', selectedValue);
       changeAction(selectedValue);
