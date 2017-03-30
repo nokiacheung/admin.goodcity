@@ -1,5 +1,4 @@
 import Ember from 'ember';
-// import substring from 'goodcity/utils/substring';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
@@ -62,8 +61,6 @@ export default Ember.Controller.extend({
       itemType.get("defaultChildPackagesList").apply(itemType)
         .forEach(t => this.send("addPackage", t.get("id")));
     }
-
-
   }),
 
   actions: {
