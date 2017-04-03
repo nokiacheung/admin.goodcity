@@ -21,9 +21,9 @@ dependencies:
     - echo y | android list sdk --all --use-sdk-wrapper
     - echo y | android update sdk --no-ui --filter "tools" --use-sdk-wrapper
     - echo y | android update sdk --no-ui --filter "platform-tools" --use-sdk-wrapper
-    - echo y | android update sdk --no-ui --filter "build-tools-23.0.3" --use-sdk-wrapper
-    - echo y | android update sdk --no-ui --filter "android-23" --use-sdk-wrapper
-    - echo y | android update sdk --no-ui --filter "extra-android-m2repository" --use-sdk-wrapper
+    - echo y | android update sdk --no-ui --filter "build-tools-25.0.2" --use-sdk-wrapper
+    - echo y | android update sdk --no-ui --filter "android-25" --use-sdk-wrapper
+    # - echo y | android update sdk --no-ui --filter "extra-android-m2repository" --use-sdk-wrapper
     # - echo y | android update sdk --no-ui --filter "extra-google-m2repository" --use-sdk-wrapper
     - echo 'export PATH=$ANDROID_HOME/build-tools/23.0.3:$PATH' >> ~/.circlerc
     - node circle-branch.js
