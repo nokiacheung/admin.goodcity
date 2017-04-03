@@ -16,14 +16,15 @@ dependencies:
     - brew update
     - brew install homebrew/versions/node4-lts
     - brew install watchman
-    - brew cask install android-sdk;
-    - echo 'export ANDROID_HOME=/usr/local/Caskroom/android-sdk' >> ~/.circlerc
+    - brew cask install android-sdk
+    # - echo 'export ANDROID_HOME=/usr/local/Caskroom/android-sdk' >> ~/.circlerc
     - echo y | android update sdk --no-ui --filter "tools" --use-sdk-wrapper
     - echo y | android update sdk --no-ui --filter "platform-tools" --use-sdk-wrapper
     # - echo y | android update sdk --no-ui --filter "extra-android-m2repository" --use-sdk-wrapper
     # - echo y | android update sdk --no-ui --filter "extra-google-m2repository" --use-sdk-wrapper
     - echo y | android update sdk --no-ui --filter "android-25" --use-sdk-wrapper
     - echo y | android update sdk --no-ui --filter "build-tools-25.0.2" --use-sdk-wrapper
+    - echo 'export ANDROID_HOME=/usr/local/share/android-sdk'
     - echo 'export PATH=$ANDROID_HOME/build-tools/25.0.2:$PATH' >> ~/.circlerc
     - node circle-branch.js
     - curl -o- -L https://yarnpkg.com/install.sh | bash
