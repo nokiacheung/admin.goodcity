@@ -35,7 +35,7 @@ export default function startApp(attrs, permissionId) {
     application.injectTestHelpers();
   });
 
-  //window.navigator = {onLine:true,plugins:[]};
+  window.navigator = {onLine:true,plugins:[]};
   window.alert = function(message) { console.log("Alert: " + message); };
   window.confirm = function(message) { console.log("Confirm: " + message); return true; };
   Ember.$("head").append("<style>.loading-indicator, .reveal-modal-bg, .reveal-modal {display:none !important;}</style>");
