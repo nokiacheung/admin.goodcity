@@ -10,20 +10,20 @@ export default Ember.Component.extend(ValidatableInput, {
 
   didRender() {
     this._super(...arguments);
-    if ( this.pkg != null && this.pkg.packageType != null && this.allowValueSet === true){
-      if(this.pkg.notes === null || this.pkg.notes.length === 0) {
-        this.pkg.notes = this.pkg.packageType.get('name');
+    if ( this.get('pkg') != null && this.get('pkg.packageType') != null && this.get('allowValueSet') === true){
+      if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0) {
+        this.set('pkg.notes', this.get('pkg.packageType.name'));
       }
-      Ember.$("textarea#"+this.index).val(this.pkg.notes);
-      this.allowValueSet = false;
+      Ember.$("textarea#"+this.get('index')).val(this.get('pkg.notes'));
+      this.set('allowValueSet', false);
     }
   },
 
   didUpdate() {
     this._super(...arguments);
-    if ( this.allowValueSet === false && this.pkg != null && this.pkg.packageType != null && (this.pkg.notes === null || this.pkg.notes.length === 0 ) ){
-      this.allowValueSet=true;
-      Ember.$("textarea#"+this.index).val(this.pkg.notes);
+    if ( this.get('allowValueSet') === false && this.get('pkg') != null && this.get('pkg.packageType') != null && (this.get('pkg.notes.length') === null || this.get('pkg.notes.length') === 0 ) ){
+      this.set('allowValueSet', true);
+      Ember.$("textarea#"+this.index).val(this.get('pkg.notes'));
     }
   },
 
