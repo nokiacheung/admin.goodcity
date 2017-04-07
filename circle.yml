@@ -37,7 +37,7 @@ dependencies:
 
 test:
   pre:
-    - ember server --port 4203:
+    - ember server --port 4201:
         background: true
     - sleep 5
   override:
