@@ -105,7 +105,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     // RESTAdapter Settings
-    ENV.APP.API_HOST_URL = 'http://localhost:4201';
+    ENV.APP.API_HOST_URL = 'http://localhost:3000';
     ENV.ADMIN_APP_HOST_URL = 'http://localhost:4201';
   }
 
