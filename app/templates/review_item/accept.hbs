@@ -20,7 +20,7 @@
                   </div>
                   <div class="small-9 columns head">
                     <span class="ui">
-                      {{select-list
+                      {{package-select-list
                         content=subPackageTypes
                         on-change=(action (mut pkg.packageTypeId))
                         selectedValue=pkg.packageType

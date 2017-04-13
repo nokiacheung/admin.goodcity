@@ -1,7 +1,8 @@
 import Ember from "ember";
-import ValidatableInput from 'ember-cli-html5-validation/mixins/validatable-input';
+import SelectList from './select-list';
 
-export default Ember.Component.extend(ValidatableInput, {
+export default SelectList.extend( {
+  layoutName: 'components/select-list',
   content: null,
   selectedValue: null,
   pkg: null,
@@ -24,39 +25,6 @@ export default Ember.Component.extend(ValidatableInput, {
     if ( this.get('allowValueSet') === false && this.get('pkg') != null && this.get('pkg.packageType') != null && (this.get('pkg.notes.length') === null || this.get('pkg.notes.length') === 0 ) ){
       this.set('allowValueSet', true);
       Ember.$("textarea#"+this.index).val(this.get('pkg.notes'));
-    }
-  },
-
-  // overriden from ember-cli-html5-validation addon
-  inputTagName: function() {
-    return "select";
-  }.property(),
-
-  // overriden from ember-cli-html5-validation addon
-  validate: function() {
-    var input = Ember.$(this.element).find("select")[0],
-      jQueryElement = Ember.$(input);
-
-    if (input.hasAttribute('formnovalidate')) { return; }
-
-    if(input.hasAttribute('required')) {
-      var content = Ember.$.trim(jQueryElement.val());
-      if(content.length === 0) {
-        jQueryElement.val('');
-      }
-    }
-
-    if (!input.validity.valid) {
-      this.set('errorMessage', "");
-    } else {
-      this.set('errorMessage', null);
-    }
-
-    input.setCustomValidity('');
-
-    if (!this.get('wasValidated')) {
-      jQueryElement.off('focusout').on('keyup', Ember.run.bind(this, this.validate));
-      this.set('wasValidated', true);
     }
   },
 
