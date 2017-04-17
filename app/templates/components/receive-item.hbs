@@ -40,12 +40,16 @@
         {{/if}}
       </div>
       <div class="small-4 columns location-name">
-        <i class="fa fa-map-marker"></i>
-        {{#if package.inventoryNumber}}
-          {{package.location.name}}
-        {{else}}
-          NA
-        {{/if}}
+        {{#unless package.hasAllPackagesDispatched}}
+          <i class="fa fa-map-marker"></i>
+          {{#if package.hasSingleLocation}}
+            {{package.firstLocationName}}
+          {{else if package.hasMultiLocations}}
+            Multiple
+          {{else}}
+            NA
+          {{/if}}
+        {{/unless}}
       </div>
       <div class="small-4 columns inventory-number">
         <i class="fa {{if item.isSet 'fa-tags' 'fa-tag'}}"></i>
