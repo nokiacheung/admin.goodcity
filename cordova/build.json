@@ -1,8 +1,9 @@
 {
   "ios": {
     "release": {
-      "developmentTeam": "6B8FS8W94M",
       "codeSignIdentity": "iPhone Distribution",
+      "developmentTeam": "6B8FS8W94M",
+      "provisioningProfile": "afd6d98f-c4cc-4781-a932-d0f8b84c9322",
       "packageType": "ad-hoc"
     }
   }
