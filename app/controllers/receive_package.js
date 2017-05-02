@@ -163,6 +163,7 @@ export default Ember.Controller.extend({
 
       pkg.save()
         .then(() => {
+          pkg.set('packagesLocationsAttributes', {});
           loadingView.destroy();
           this.transitionToRoute("review_offer.receive");
           Ember.run.scheduleOnce('afterRender', this, () =>

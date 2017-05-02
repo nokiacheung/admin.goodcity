@@ -8,6 +8,7 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
+    model.set('packagesLocationsAttributes','{}');
     controller.set("package", model);
     controller.send("resetInputs");
   }
