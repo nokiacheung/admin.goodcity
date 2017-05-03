@@ -96,7 +96,6 @@ module.exports = function(environment) {
     ENV.cordova.enabled = false;
     // Testem prefers this...
     ENV.baseURL = '/';
-    ENV.rootURL = '/';
     ENV.locationType = 'auto';
 
     // keep test console output quieter
