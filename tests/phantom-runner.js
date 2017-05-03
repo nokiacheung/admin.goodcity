@@ -1,8 +1,8 @@
 import system from 'system';
 import webpage from 'webpage';
 
-const page = webpage.create();
-const url = system.args[1];
+var page = webpage.create();
+var url = system.args[1];
 
 page.viewportSize = {
   width: 1024,
