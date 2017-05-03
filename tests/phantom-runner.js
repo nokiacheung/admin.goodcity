@@ -1,18 +1,17 @@
-// Custom version of the Testem PhantomJS runner.
-//   This exists to block requests to fonts.googleapis.com because this can cause
-//     Phantom to incompletely load JS files causing bizarre syntax errors.
-//   See https://github.com/ariya/phantomjs/issues/14173.
-var system = require('system');
-var page = require('webpage').create();
-var url = system.args[1];
+import system from 'system';
+import webpage from 'webpage';
+
+const page = webpage.create();
+const url = system.args[1];
+
 page.viewportSize = {
   width: 1024,
   height: 768
 };
+
 // The magic!
-page.onResourceRequested = function(requestData, networkRequest) {
-  if (requestData.url.match('fonts.googleapis.com')) {
+page.onResourceRequested = (requestData, networkRequest) => {
+  if (requestData.url.match('fast.fonts.net')) {
     networkRequest.abort();
   }
 };
-page.open(url);
