@@ -31,7 +31,6 @@
     "ember-ajax": "^2.4.1",
     "ember-cli": "~2.12.2",
     "ember-cli-app-version": "^1.0.0",
-    "ember-cli-babel": "^5.1.7",
     "ember-cli-coffeescript": "^1.13.2",
     "ember-cli-content-security-policy": "0.5.0",
     "ember-cli-cordova": "git://github.com/poetic/ember-cli-cordova.git",
@@ -66,6 +65,7 @@
     "xml2js": "^0.4.12"
   },
   "dependencies": {
+    "ember-cli-babel": "^5.1.7",
     "cordova": "^6.5.0",
     "phantomjs-prebuilt": "^2.1.14",
     "azure-api": "git://github.com/crossroads/azure-api.git#master",
