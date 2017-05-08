@@ -126,7 +126,7 @@ namespace :cordova do
     Dir.chdir(CORDOVA_PATH) do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
       unless platform == "ios"
-        sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
+        sh %{ cordova platform remove PLATFORM; cordova platform add PLATFORM; cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
       end
     end
     if platform == "ios"
