@@ -164,7 +164,7 @@ export default Ember.Controller.extend({
       pkg.save()
         .then(() => {
           loadingView.destroy();
-          pkg.set('packagesLocationsAttributes',{})
+          pkg.set('packagesLocationsAttributes',{});
           this.transitionToRoute("review_offer.receive");
           Ember.run.scheduleOnce('afterRender', this, () =>
           this.get("reviewOfferController").set("displayCompleteReceivePopup", this.get("offer.readyForClosure")));
