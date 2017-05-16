@@ -148,7 +148,6 @@ export default Ember.Controller.extend({
         var location = this.get("store").peekRecord("location", locationId);
         pkg.set("location", location);
       }
-
       pkg.set("state", "received");
       pkg.set("state_event", "mark_received");
       pkg.set("quantity", pkgData.quantity);
@@ -159,7 +158,6 @@ export default Ember.Controller.extend({
       pkg.set("inventoryNumber", pkgData.inventoryNumber);
       pkg.set("grade", this.get("selectedGrade.id"));
       pkg.set("donorCondition", this.get("selectedCondition"));
-      pkg.set('packagesLocationsAttributes', { 0: {location_id: locationId, quantity: pkgData.quantity}});
 
       pkg.save()
         .then(() => {
