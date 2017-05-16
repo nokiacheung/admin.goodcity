@@ -66,7 +66,6 @@
   },
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
-    "cordova": "^6.5.0",
     "phantomjs-prebuilt": "^2.1.14",
     "azure-api": "git://github.com/crossroads/azure-api.git#master",
     "shared-goodcity": "git://github.com/crossroads/shared.goodcity.git#master",
