@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import { module, test } from 'qunit';
+import '../factories/offer';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
@@ -17,14 +19,15 @@ module('Add new Item', {
   }
 });
 
-test("create without Image", function() {
+test("create without Image", function(assert) {
+  assert.expect(2);
   visit("/offers/"+ offer.id +"/items/new/edit_images");
 
   andThen(function(){
-    equal($(".noImage a:contains('Cannot provide photo')").length, 1);
+    assert.equal($(".noImage a:contains('Cannot provide photo')").length, 1);
     click(find("a:contains('Cannot provide photo')"));
       andThen(function(){
-        equal(currentURL(), "/offers/101/review_item/3/accept");
+        assert.equal(currentURL(), "/offers/101/review_item/3/accept");
       });
   });
 });

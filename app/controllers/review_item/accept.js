@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import substring from 'goodcity/utils/substring';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
@@ -8,6 +7,7 @@ export default Ember.Controller.extend({
   reviewOfferController: Ember.inject.controller('review_offer'),
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
+  review_item: Ember.inject.controller(),
   item: Ember.computed.alias("reviewItem.item"),
   offer: Ember.computed.alias("item.offer"),
   itemTypeId: Ember.computed.alias("reviewItem.itemTypeId"),
@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
 
   subPackageTypes: Ember.computed('itemType', function(){
     var itemType = this.get("itemType");
-    return itemType.get("allChildPackagesList").apply(itemType);
+    return itemType.get("allChildPackagesList").apply(itemType).sortBy('name');
   }),
 
   onItemTypeChange: Ember.observer('itemTypeId', function () {
@@ -64,19 +64,20 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    toggleComment(index) {
-      var pkg = this.get("packages")[index];
-      Ember.set(pkg, "hideComment", !pkg.hideComment);
+    clearText(index) {
+      if(index != null){
+        Ember.$("#"+index).val("");
+      }
     },
 
     addPackage(packageTypeId) {
       var _this = this;
-      var note_text = this.get("item.donorDescription") || this.get("reviewItem.formData.donorDescription") || "";
+      var note_text ="";
 
       this.get("packages").pushObject({
         hideComment: false,
         displayImageUrl: this.get("item.displayImageUrl"),
-        notes: substring(note_text, 50),
+        notes: note_text,
         quantity: 1,
         packageTypeId,
         packageType: _this.get("store").peekRecord("packageType", packageTypeId),
@@ -103,16 +104,19 @@ export default Ember.Controller.extend({
       // getting "Attempted to handle event *event* on *record* while in state root.deleted.saved" if try
       // to save item same time as a package is being deleted
       this.set("itemSaving", true);
+      this.get('review_item').set('isEditing', false);
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
       // save packages
       var promises = [];
       var existing = {};
+      var packages = this.get("packages");
       this.get("item.packages").forEach(pkg => existing[pkg.get("id")] = pkg);
 
       this.get("packages").forEach(data => {
         var pkg;
+        data.notes = Ember.$("#comment"+packages.indexOf(data)).val();
         if (existing[data.id]) {
           pkg = existing[data.id];
           pkg.setProperties(data);

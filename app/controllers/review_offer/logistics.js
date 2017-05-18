@@ -12,7 +12,7 @@ export default transportDetails.extend({
     return config.APP.CROSSROADS_CONTACT;
   }),
 
-  ggvDriverUrl: Ember.computed('model', function(){
+  ggvDriverUrl: Ember.computed('model', 'model.delivery.gogovanOrder', function(){
     var language = this.get("session.language");
     var uuid = this.get("model.delivery.gogovanOrder.ggvUuid");
     var url = config.ADMIN_APP_HOST_URL+"/ggv_orders/"+uuid;

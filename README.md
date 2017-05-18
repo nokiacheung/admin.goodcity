@@ -2,34 +2,45 @@
 
 The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
 
+## Prerequisites
+
+You will need the following things properly installed on your computer.
+
+* [Git](http://git-scm.com/)
+* [Yarn](https://yarnpkg.com/)
+* [Bower](http://bower.io/)
+* [Ember CLI](http://ember-cli.com/)
+* [PhantomJS](http://phantomjs.org/)
+
 ## Installation
 
 Install and configure nodejs https://github.com/creationix/nvm#install-script
 
-```shell
-npm install -g ember-cli bower phantomjs
-git clone https://github.com/crossroads/shared.goodcity.git
-cd shared.goodcity
-npm link
-cd ..
-git clone https://github.com/crossroads/admin.goodcity.git
-cd admin.goodcity
-npm link shared-goodcity
-ember install
-```
+
+* yarn add bower ember-cli phantomjs-prebuilt
+* git clone https://github.com/crossroads/shared.goodcity.git
+* cd shared.goodcity
+* yarn link
+* cd ..
+* git clone https://github.com/crossroads/admin.goodcity.git
+* cd admin.goodcity
+* yarn link shared-goodcity
+* ember install
+
 
 ## Running
 
-* `npm start`
+* `yarn start`
 * Visit your app at http://localhost:4201.
 
 ## Running Tests
 
-* `npm test`
+* `ember test`
+* `ember test --server`
 
 ## Building
 
-* `npm build`
+* `yarn build`
 * `EMBER_CLI_CORDOVA=0 ember build --environment=production`
 
 ## Deployment

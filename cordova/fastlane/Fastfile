@@ -6,11 +6,14 @@ platform :ios do
     ipa_file_path = Dir["#{ENV["CIRCLE_ARTIFACTS"]}/*.ipa"].first
     ENV["PILOT_IPA"] = ENV["TESTFAIRY_IPA_PATH"] = ipa_file_path
     COPYRIGHT = "#{Time.now.year} Crossroads Foundation Limited"
+    # CORDOVA_ANDROID_KEYSTORE_PATH
+    # CORDOVA_ANDROID_KEYSTORE_PASSWORD
+    # CORDOVA_ANDROID_KEYSTORE_ALIAS
   end
 
-  desc "Generate staging build (just upload to TestFairy)"
+  desc "Generate staging build and upload to TestFairy"
   lane :staging do
-    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY"])
+    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
     testfairy
   end
 
@@ -44,23 +47,27 @@ end
 platform :android do
 
   before_all do
-    apk_file_path = Dir["#{ENV["CIRCLE_ARTIFACTS"]}/*.apk"].first
-    ENV["SUPPLY_APK"] = ENV["TESTFAIRY_IPA_PATH"] = apk_file_path
-    raise_if_no_env_var("GOOGLE_PLAY_KEY_FILE")
-    ENV["SUPPLY_JSON_KEY"] = File.join(Dir.pwd, ENV["GOOGLE_PLAY_KEY_FILE"])
-    raise "Google Play private key file not found! (#{ENV["SUPPLY_JSON_KEY"]})" unless File.exist?(ENV["SUPPLY_JSON_KEY"])
+    #apk_file_path = Dir["#{ENV["CIRCLE_ARTIFACTS"]}/*.apk"].first
+    #ENV["TESTFAIRY_IPA_PATH"] = apk_file_path
+    #raise_if_no_env_var("GOOGLE_PLAY_KEY_FILE")
+    #ENV["SUPPLY_JSON_KEY"] = File.join(Dir.pwd, ENV["GOOGLE_PLAY_KEY_FILE"])
+    #raise "Google Play private key file not found! (#{ENV["SUPPLY_JSON_KEY"]})" unless File.exist?(ENV["SUPPLY_JSON_KEY"])
   end
 
   desc "Generate staging build (just upload to TestFairy)"
   lane :staging do
-    raise_if_no_env_var(["FL_TESTFAIRY_API_KEY"])
+    #raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
+    cordova
     testfairy
   end
 
   desc "Upload to GooglePlay beta track"
   lane :beta do
     raise_if_no_env_var(["SUPPLY_APK", "SUPPLY_JSON_KEY"])
+    cordova
     supply(
+      apk: ENV['CORDOVA_ANDROID_RELEASE_BUILD_PATH'],
+      keystore_path: SUPPLY_JSON_KEY,
       track: "beta",
       skip_upload_images: true,
       skip_upload_screenshots: true

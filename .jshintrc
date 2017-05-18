@@ -2,12 +2,12 @@
   "predef": [
     "document",
     "window",
-    "-Promise",
     "moment",
     "airbrakeJs",
     "Twilio",
     "$",
-    "cordova"
+    "cordova",
+    "-Promise"
   ],
   "browser": true,
   "boss": true,
@@ -32,6 +32,6 @@
   "strict": false,
   "white": false,
   "eqnull": true,
-  "esnext": true,
+  "esversion": 6,
   "unused": true
 }

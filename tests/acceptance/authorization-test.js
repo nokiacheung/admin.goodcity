@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 
 var App;
@@ -12,10 +13,11 @@ module('Authorization', {
   }
 });
 
-test("On restricted page doesn't redirect if staff", function() {
+test("On restricted page doesn't redirect if staff", function(assert) {
+  assert.expect(1);
   visit('/offers');
 
   andThen(function() {
-    equal(currentURL(), '/offers/submitted');
+    assert.equal(currentURL(), '/offers/submitted');
   });
 });

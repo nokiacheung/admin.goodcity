@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
+import { module, test } from 'qunit';
 
 var App;
 
@@ -12,26 +13,26 @@ module('Display review Item', {
   }
 });
 
-test("Display Item under review", function() {
-  expect(6);
+test("Display Item under review", function(assert) {
+  assert.expect(6);
   visit("/offers/1/review_item/4");
 
   andThen(function(){
-    equal(currentURL(), "/offers/1/review_item/4/accept");
-    equal(/Review Item:/i.test($('body').text()), true);
-    equal(/Velit fugit amet quos ut minima quis/i.test($('body').text()), true);
-    equal(/Condition: New/i.test($('body').text()), true);
-    equal($('input[disabled]').val(), "");
-    equal(find("img.thumb").length, 1);
+    assert.equal(currentURL(), "/offers/1/review_item/4/accept");
+    assert.equal(/Review Item:/i.test($('body').text()), true);
+    assert.equal(/Velit fugit amet quos ut minima quis/i.test($('body').text()), true);
+    assert.equal(/Condition: New/i.test($('body').text()), true);
+    assert.equal($('input[disabled]').val(), "");
+    assert.equal(find("img.thumb").length, 1);
   });
 });
 
-test("Back button redirects to review offer page", function() {
-  expect(1);
+test("Back button redirects to review offer page", function(assert) {
+  assert.expect(1);
   visit("/offers/1/review_item/4");
   click("a:contains('Back')");
 
   andThen(function() {
-    equal(currentURL(), "/offers/1/review_offer/items");
+    assert.equal(currentURL(), "/offers/1/review_offer/items");
   });
 });

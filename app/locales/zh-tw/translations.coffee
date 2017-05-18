@@ -9,6 +9,7 @@ I18nTranslationsZhTw =
     "submitted": "已提交"
     "messages_title" : "信息"
     "select": "選擇"
+    "QuotaExceededError": "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='https://itunes.apple.com/in/app/goodcityadmin.hk/id1013288708?mt=8' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>"
     "search_item_label": "搜尋物資標籤"
     "search":
       "no_results": "抱歉，未能找到結果"
@@ -65,6 +66,9 @@ I18nTranslationsZhTw =
         "description_placeholder" : "這是甚麼？有多少件物資？物資大小？"
 
     "item":
+      "accepted": "Accepted"
+      "multiple_designation": "designated"
+      "all_dispatched": "Out of stock"
       "submitted_status": "這項物品正在等候審查。"
       "in_review_status": "正在審查這項物品。"
       "accepted_status": "已接受這項物品。"

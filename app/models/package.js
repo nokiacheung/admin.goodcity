@@ -20,21 +20,26 @@ export default DS.Model.extend({
   updatedAt:       attr('date'),
   item:            belongsTo('item', { async: false }),
   packageType:     belongsTo('package_type', { async: false }),
+  designation:     belongsTo('designation', { async: true }),
   location:        belongsTo('location', { async: false }),
+  donorCondition:   belongsTo('donor_condition', { async: false }),
+  ordersPackages:   hasMany('orders_package', { async: true }),
   packageImages:   hasMany('package_image', { async: false }),
+  packagesLocations: hasMany('packages_location', { async: true }),
   offerId:         attr('number'),
   inventoryNumber: attr('string'),
   grade:           attr('string'),
   sentOn:          attr('date'),
   designationId:   attr('number'),
   favouriteImageId: attr('number'),
+  receivedQuantity: attr('number'),
+  packagesLocationsAttributes: attr(),
 
   isDispatched: Ember.computed.bool('sentOn'),
   isDesignated: Ember.computed('designationId', 'sentOn', 'inventoryNumber', function () {
     return this.get('designationId') && this.get('sentOn') === null && this.get('inventoryNumber');
   }),
 
-  donorCondition:   belongsTo('donor_condition', { async: false }),
   donorConditionId: Ember.computed.foreignKey('donorCondition.id'),
 
   isReceived: Ember.computed.equal("state", "received"),
@@ -68,5 +73,94 @@ export default DS.Model.extend({
 
   favouriteImage: Ember.computed('packageImages.@each.favourite', function(){
     return this.get("packageImages").filterBy("favourite").get("firstObject") || this.get("packageImages").sortBy("id").get("firstObject") || this.get("item.displayImage")|| null;
+  }),
+
+  hasOneDesignatedPackage: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var designatedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
+    return (designatedOrdersPackages.get("length") > 1 || designatedOrdersPackages.get("length") === 0) ? false : designatedOrdersPackages[0];
+  }),
+
+  hasOneDispatchedPackage: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
+    return (dispatchedOrdersPackages.get("length") > 1 || dispatchedOrdersPackages.get("length") === 0) ? false : dispatchedOrdersPackages[0];
+  }),
+
+  remainingQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.[]", "ordersPackages.@each.state", function() {
+    var qty = 0;
+    this.get('ordersPackages').forEach(record => {
+      if(record && record.get("state") !== "cancelled") {
+        this.store.findRecord('ordersPackage', record.get("id")).then(
+        qty += parseInt(record.get("quantity")));
+      }
+    });
+    return (this.get("receivedQuantity") - qty) || 0;
+  }),
+
+  hasAllPackagesDispatched: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var ordersPackages = this.store.query("ordersPackage", { search_by_package_id: this.get("id") });
+    this.store.pushPayload(ordersPackages);
+    var received_quantity = this.get("receivedQuantity");
+    var totalDispatchedQty = 0;
+    var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
+    dispatchedOrdersPackages.forEach(record => {
+      totalDispatchedQty += parseInt(record.get("quantity"));
+    });
+    return (totalDispatchedQty === received_quantity) ? true : false;
+  }),
+
+  hasAllPackagesDesignated: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var received_quantity = this.get("receivedQuantity");
+    var totalDesignatedQty = 0;
+    var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
+    dispatchedOrdersPackages.forEach(record => {
+      totalDesignatedQty += parseInt(record.get("quantity"));
+    });
+    return (totalDesignatedQty === received_quantity) ? true : false;
+  }),
+
+  designatedOrdersPackages: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    return this.get("ordersPackages").filterBy("state", "designated");
+  }),
+
+  dispatchedOrdersPackages: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    return this.get("ordersPackages").filterBy("state", "dispatched");
+  }),
+
+  totalDispatchedQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var totalDispatchedQty = 0;
+    var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
+    dispatchedOrdersPackages.forEach(record => {
+      totalDispatchedQty += parseInt(record.get("quantity"));
+    });
+    return totalDispatchedQty;
+  }),
+
+  totalDesignatedQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
+    var totalDesignatedQty = 0;
+    var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
+    dispatchedOrdersPackages.forEach(record => {
+      totalDesignatedQty += parseInt(record.get("quantity"));
+    });
+    return totalDesignatedQty;
+  }),
+
+  dispatchedItemCount: Ember.computed("ordersPackages.@each.quantity", function() {
+    return this.get("ordersPackages").filterBy('state', "dispatched").length;
+  }),
+
+  cancelledItemCount: Ember.computed("ordersPackages.@each.quantity", function() {
+    return this.get("ordersPackages").filterBy('state', "cancelled").length;
+  }),
+
+  hasSingleLocation: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity", function(){
+    return Ember.isEqual(this.get('packagesLocations.length'), 1);
+  }),
+
+  firstLocationName: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity", function(){
+    return this.get('packagesLocations.firstObject.location.name');
+  }),
+
+  hasMultiLocations: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity",  function(){
+    return this.get('packagesLocations.length') > 1;
   }),
 });

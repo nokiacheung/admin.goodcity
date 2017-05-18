@@ -11,5 +11,4 @@ export default AuthorizeRoute.extend({
     controller.set("package", model);
     controller.send("resetInputs");
   }
-
 });

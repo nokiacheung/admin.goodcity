@@ -2,6 +2,15 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
+import { module, test } from 'qunit';
+import '../factories/user';
+import '../factories/offer';
+import '../factories/item';
+import '../factories/contact';
+import '../factories/gogovan_order';
+import '../factories/delivery';
+import '../factories/address';
+
 
 var App, offer, user, ggvOrder, delivery, address, contact, item;
 
@@ -26,72 +35,77 @@ module('Search Offers', {
   }
 });
 
-test("search offers by donor name", function() {
+test("search offers by donor name", function(assert) {
+  assert.expect(2);
   visit("/search");
 
   andThen(function(){
-    equal(currentURL(), "/search");
+    assert.equal(currentURL(), "/search");
     fillIn('#searchText', user.get("firstName"));
 
     andThen(function(){
-      equal(find('ul li').length, 1);
+      assert.equal(find('ul li').length, 1);
     });
   });
 });
 
-test("search offers by item description", function() {
+test("search offers by item description", function(assert) {
+  assert.expect(2);
   visit("/search");
 
   andThen(function(){
-    equal(currentURL(), "/search");
+    assert.equal(currentURL(), "/search");
     fillIn('#searchText', item.get("donorDescription"));
 
     andThen(function(){
-      equal(find('ul li').length, 1);
+      assert.equal(find('ul li').length, 1);
     });
   });
 });
 
-test("search offers by donor mobile", function() {
+test("search offers by donor mobile", function(assert) {
+  assert.expect(2);
   visit("/search");
 
   andThen(function(){
-    equal(currentURL(), "/search");
+    assert.equal(currentURL(), "/search");
     fillIn('#searchText', user.get("mobile"));
 
     andThen(function(){
-      equal(find('ul li').length, 1);
+      assert.equal(find('ul li').length, 1);
     });
   });
 });
 
-test("search offers by vehicle number", function() {
+test("search offers by vehicle number", function(assert) {
+  assert.expect(3);
   visit("/search");
 
   andThen(function(){
-    equal(currentURL(), "/search");
+    assert.equal(currentURL(), "/search");
     fillIn('#searchText', ggvOrder.get("driverLicense"));
 
     andThen(function(){
-      equal(find('ul li').length, 1);
-      equal(find('ul li img').length, 1);
+      assert.equal(find('ul li').length, 1);
+      assert.equal(find('ul li img').length, 1);
     });
   });
 });
 
-test("search offers by delivery address", function() {
+test("search offers by delivery address", function(assert) {
+  assert.expect(3);
 
   visit("/search");
 
   andThen(function(){
-    equal(currentURL(), "/search");
+    assert.equal(currentURL(), "/search");
     Ember.run(function() {
       fillIn('#searchText', address.get("flat"));
     });
 
     andThen(function(){
-      equal(find('ul li').length, 1);
-      equal(find('ul li img').length, 1);
+      assert.equal(find('ul li').length, 1);
+      assert.equal(find('ul li img').length, 1);
     });
   });
 });

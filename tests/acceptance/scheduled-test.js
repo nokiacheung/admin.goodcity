@@ -3,6 +3,13 @@ import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import testSkip from '../helpers/test-skip';
+import { module } from 'qunit';
+import '../factories/user';
+import '../factories/offer';
+import '../factories/item';
+import '../factories/schedule';
+import '../factories/gogovan_order';
+import '../factories/delivery';
 
 var App, offer1, delivery1, offer2, delivery2, offer3,
   delivery3, schedule4, offer4, delivery4, ggv_order;
@@ -33,54 +40,58 @@ module('Scheduled Offers', {
   }
 });
 
-testSkip("viewing collection schedule", function() {
+testSkip("viewing collection schedule", function(assert) {
+  assert.expect(5);
   visit("/offers/scheduled");
 
   andThen(function(){
-    equal(currentURL(), "/offers/scheduled/collection");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
-    equal($('.time_indicator').text().indexOf('Collection') > 0, true);
-    equal($.trim(find('.dynamic_filter select option').first().text()), "All offers (1)");
+    assert.equal(currentURL(), "/offers/scheduled/collection");
+    assert.equal(find("ul.list li").length, 1);
+    assert.equal(find("ul.list img").length, 1);
+    assert.equal($('.time_indicator').text().indexOf('Collection') > 0, true);
+    assert.equal($.trim(find('.dynamic_filter select option').first().text()), "All offers (1)");
   });
 });
 
-testSkip("viewing gogovan delivery schedule", function() {
+testSkip("viewing gogovan delivery schedule", function(assert) {
+  assert.expect(4);
   visit("/offers/scheduled/gogovan");
 
   andThen(function(){
-    equal(currentURL(), "/offers/scheduled/gogovan");
-    equal(find("ul.list li").length, 2);
-    equal(find("ul.list img").length, 2);
-    equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
+    assert.equal(currentURL(), "/offers/scheduled/gogovan");
+    assert.equal(find("ul.list li").length, 2);
+    assert.equal(find("ul.list img").length, 2);
+    assert.equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
   });
 });
 
-testSkip("filtering gogovan delivery schedule", function() {
+testSkip("filtering gogovan delivery schedule", function(assert) {
+  assert.expect(5);
   visit("/offers/scheduled/gogovan");
 
   andThen(function(){
-    equal(currentURL(), "/offers/scheduled/gogovan");
+    assert.equal(currentURL(), "/offers/scheduled/gogovan");
 
     var option = find('.dynamic_filter select option:contains("After next week (1)")').val();
     $('.dynamic_filter select').val(option).change();
 
     andThen(function(){
-      equal($.trim(find('.dynamic_filter select :selected').text()), "After next week (1)");
-      equal(find("ul.list li").length, 1);
-      equal(find("ul.list img").length, 1);
-      equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
+      assert.equal($.trim(find('.dynamic_filter select :selected').text()), "After next week (1)");
+      assert.equal(find("ul.list li").length, 1);
+      assert.equal(find("ul.list img").length, 1);
+      assert.equal($('.time_indicator').text().indexOf('Van ordered') > 0, true);
     });
   });
 });
 
-testSkip("viewing other delivery schedule", function() {
+testSkip("viewing other delivery schedule", function(assert) {
+  assert.expect(4);
   visit("/offers/scheduled/other_delivery");
 
   andThen(function(){
-    equal(currentURL(), "/offers/scheduled/other_delivery");
-    equal(find("ul.list li").length, 1);
-    equal(find("ul.list img").length, 1);
-    equal($('.time_indicator').text().indexOf('Drop-off') > 0, true);
+    assert.equal(currentURL(), "/offers/scheduled/other_delivery");
+    assert.equal(find("ul.list li").length, 1);
+    assert.equal(find("ul.list img").length, 1);
+    assert.equal($('.time_indicator').text().indexOf('Drop-off') > 0, true);
   });
 });

@@ -29,20 +29,25 @@ xcode-select --install
 </table>
 # Available Actions
 ## iOS
+### ios staging
+```
+fastlane ios staging
+```
+Generate staging build and upload to TestFairy
 ### ios beta
 ```
 fastlane ios beta
 ```
 Upload to TestFlight
-### ios upload
-```
-fastlane ios upload
-```
-Upload to AppStore
 
 ----
 
 ## Android
+### android staging
+```
+fastlane android staging
+```
+Generate staging build (just upload to TestFairy)
 ### android beta
 ```
 fastlane android beta

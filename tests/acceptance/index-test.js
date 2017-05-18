@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 
 var App;
@@ -12,31 +13,34 @@ module('Home Page', {
   }
 });
 
-test("redirect to offers page if logged-in as Reviewer", function() {
+test("redirect to offers page if logged-in as Reviewer", function(assert) {
+  assert.expect(1);
   App = startApp({}, 1);
   visit("/");
 
   andThen(function(){
-    equal(currentURL(), "/offers/my_list/reviewing");
+    assert.equal(currentURL(), "/offers/my_list/reviewing");
   });
 });
 
-test("redirect to offers page if logged-in as Supervisor", function() {
+test("redirect to offers page if logged-in as Supervisor", function(assert) {
+  assert.expect(1);
   App = startApp({}, 2);
   visit("/");
 
   andThen(function(){
-    equal(currentURL(), "/offers/submitted");
+    assert.equal(currentURL(), "/offers/submitted");
   });
 });
 
-test("redirect to login page if try to visit home page", function() {
+test("redirect to login page if try to visit home page", function(assert) {
+  assert.expect(1);
   App = startApp();
   lookup('service:session').set('authToken', null);
 
   visit("/");
 
   andThen(function(){
-    equal(currentURL(), "/login");
+    assert.equal(currentURL(), "/login");
   });
 });

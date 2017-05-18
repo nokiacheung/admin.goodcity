@@ -1,5 +1,8 @@
 import Ember from 'ember';
+import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
+import '../factories/offer';
+import '../factories/item';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
@@ -18,22 +21,24 @@ module('Closed Offer', {
   }
 });
 
-test("display closed offer with rejected items", function() {
+test("display closed offer with rejected items", function(assert) {
+  assert.expect(2);
   visit("/offers/" + offer.id + "/review_offer/items");
 
   andThen(function(){
-    equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
-    equal(find(".reject_badge").length, 1);
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_offer/items");
+    assert.equal(find(".reject_badge").length, 1);
   });
 });
 
-test("display logistics tab of closed offer", function() {
+test("display logistics tab of closed offer", function(assert) {
+  assert.expect(2);
   visit("/offers/" + offer.id + "/review_offer/logistics");
 
   andThen(function(){
-    equal(currentURL(), "/offers/" + offer.id + "/review_offer/logistics");
+    assert.equal(currentURL(), "/offers/" + offer.id + "/review_offer/logistics");
 
     var logistics_text = $.trim($('.noTransportItems').text().replace(/\s+/g, " "));
-    equal(logistics_text, "No items to transport. This offer is closed now.");
+    assert.equal(logistics_text, "No items to transport. This offer is closed now.");
   });
 });

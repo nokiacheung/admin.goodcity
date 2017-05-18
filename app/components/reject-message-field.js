@@ -5,11 +5,11 @@ export default Ember.Component.extend({
   disabled: false,
   placeholderText: t("reject.message_placeholder"),
   i18n: Ember.inject.service(),
+  store: Ember.inject.service(),
 
   rejectMessage: Ember.computed('selectedId', {
     get: function() {
-      var store = this.get('targetObject.store');
-      var reasonRecord = store.peekRecord('rejection_reason', this.get('selectedId'));
+      var reasonRecord = this.get('store').peekRecord('rejection_reason', this.get('selectedId'));
       var reason = reasonRecord && reasonRecord.get('name');
       var message = "";
 
@@ -42,8 +42,7 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function(){
-    var store = this.get('targetObject.store');
-    var item = store.peekRecord('item', this.get('itemId'));
+    var item = this.get('store').peekRecord('item', this.get('itemId'));
     this.set('rejectMessage', item.get('rejectionComments'));
   }
 });

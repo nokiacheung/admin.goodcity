@@ -45,7 +45,7 @@ TESTFAIRY_PLATFORMS=%w(android ios)
 SHARED_REPO = "https://github.com/crossroads/shared.goodcity.git"
 TESTFAIRY_PLUGIN_URL = "https://github.com/testfairy/testfairy-cordova-plugin"
 TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
-SPLUNKMINT_PLUGIN_URL = "https://github.com/swatijadhav/splunkmint-cordova-plugin.git"
+SPLUNKMINT_PLUGIN_URL = "https://github.com/crossroads/cordova-plugin-splunkmint.git"
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
 BUILD_JSON_FILE = "#{CORDOVA_PATH}/build.json"
 
@@ -75,7 +75,7 @@ PLATFORMS.each do |platform|
 end
 
 namespace :ember do
-  multitask install_parallel: %w(bower_install npm_install)
+  multitask install_parallel: %w(bower_install yarn_install)
   desc "Ember install dependencies"
   task :install do
     Dir.chdir(ROOT_PATH) do
@@ -85,8 +85,8 @@ namespace :ember do
   task :bower_install do
     sh %{ bower install }
   end
-  task npm_install: :select_branch do
-    sh %{ npm install }
+  task yarn_install: :select_branch do
+    sh %{ yarn install }
   end
   desc "Ember build with Cordova enabled"
   task :build do
@@ -110,7 +110,7 @@ end
 namespace :cordova do
   desc "Install cordova package globally"
   task :install do
-    sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova; fi }
+    sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@6.5.0; fi }
     sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
   end
   desc "Cordova prepare {platform}"

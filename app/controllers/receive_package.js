@@ -148,7 +148,6 @@ export default Ember.Controller.extend({
         var location = this.get("store").peekRecord("location", locationId);
         pkg.set("location", location);
       }
-
       pkg.set("state", "received");
       pkg.set("state_event", "mark_received");
       pkg.set("quantity", pkgData.quantity);
@@ -159,9 +158,11 @@ export default Ember.Controller.extend({
       pkg.set("inventoryNumber", pkgData.inventoryNumber);
       pkg.set("grade", this.get("selectedGrade.id"));
       pkg.set("donorCondition", this.get("selectedCondition"));
+
       pkg.save()
         .then(() => {
           loadingView.destroy();
+          pkg.set('packagesLocationsAttributes',{});
           this.transitionToRoute("review_offer.receive");
           Ember.run.scheduleOnce('afterRender', this, () =>
           this.get("reviewOfferController").set("displayCompleteReceivePopup", this.get("offer.readyForClosure")));

@@ -18,27 +18,26 @@
                     {{package-image package=pkg index=index setPackageImage="setPackageImage"}}
 
                   </div>
-                  <div class="small-7 columns head">
+                  <div class="small-9 columns head">
                     <span class="ui">
-                      {{select-list
+                      {{package-select-list
                         content=subPackageTypes
                         on-change=(action (mut pkg.packageTypeId))
                         selectedValue=pkg.packageType
                         prompt=(t 'placeholder.package_type')
                         required='true'
+                        index=(concat 'comment' index)
+                        pkg=pkg
                       }}
                     </span>
                   </div>
-                  <div class="small-2 columns icon" {{action "toggleComment" index on="click"}}>
-                    <i class="fa fa-lg {{if pkg.hideComment 'fa-plus' 'is-hide'}}"></i>
-                  </div>
                 </div>
-                <div class="{{if pkg.hideComment 'is-hide'}} row bottom ui">
-                  <div class="small-10 columns head">
-                    {{input type="text" name="comment" value=pkg.notes placeholder=(t "placeholder.comments") maxlength="50" required="required" pattern=".*\S.*" }}
+                <div class="row bottom ui">
+                  <div class="small-10 medium-11 columns head" >
+                    {{auto-resize-textarea data-autoresize=true id=(concat 'comment' index) name="comment" value=pkg.packageName  placeholder=(t "placeholder.comments") required="required" pattern=".*\S.*" }}
                   </div>
-                  <div class="small-2 columns icon" {{action "toggleComment" index on="click"}}>
-                    <i class="fa fa-minus fa-lg"></i>
+                  <div class="small-2 medium-1 columns icon" {{action "clearText" (concat 'comment' index) on="click"}}>
+                    <i class="fa fa-times-circle remove-text"></i>
                   </div>
                 </div>
                 <div class="row bottom">
