@@ -11,7 +11,7 @@
     <i class="fa fa-pencil-square-o"></i>
     {{t "edit"}}
   {{/link-to}}
-  <div {{action "checkReceiving" "missing"}} class="{{if isMissing 'disabled'}}">
+  <div {{action "checkReceiving" "missing"}} class="{{if (js-or isMissing (js-or package.hasAllPackagesDesignated package.hasOneDesignatedPackage)) 'disabled'}}">
     <i class="fa fa-exclamation-triangle"></i>
     {{t "receive.missing"}}
   </div>
