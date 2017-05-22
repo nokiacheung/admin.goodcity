@@ -25,7 +25,7 @@ export default DS.Model.extend({
   donorCondition:   belongsTo('donor_condition', { async: false }),
   ordersPackages:   hasMany('orders_package', { async: true }),
   packageImages:   hasMany('package_image', { async: false }),
-  packagesLocations: hasMany('packages_location', { async: false }),
+  packagesLocations: hasMany('packages_location', { async: true }),
   offerId:         attr('number'),
   inventoryNumber: attr('string'),
   grade:           attr('string'),
@@ -152,15 +152,15 @@ export default DS.Model.extend({
     return this.get("ordersPackages").filterBy('state', "cancelled").length;
   }),
 
-  hasSingleLocation: Ember.computed('packagesLocations.[]', function(){
+  hasSingleLocation: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity", function(){
     return Ember.isEqual(this.get('packagesLocations.length'), 1);
   }),
 
-  firstLocationName: Ember.computed('packagesLocations.[]', function(){
+  firstLocationName: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity", function(){
     return this.get('packagesLocations.firstObject.location.name');
   }),
 
-  hasMultiLocations: Ember.computed('packagesLocations.[]',  function(){
+  hasMultiLocations: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity",  function(){
     return this.get('packagesLocations.length') > 1;
   }),
 });
