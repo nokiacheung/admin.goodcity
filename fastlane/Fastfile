@@ -22,6 +22,7 @@ platform :ios do
     latest_testflight_build_number(version: version_number, username: ENV['PILOT_USERNAME'])
     pilot
     deliver(
+      username: ENV['PILOT_USERNAME'],
       skip_binary_upload: true,
       skip_screenshots: true,
       app_version: version_number,
