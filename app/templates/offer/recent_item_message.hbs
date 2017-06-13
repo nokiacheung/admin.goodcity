@@ -1,5 +1,7 @@
 <span class="item-image">
-  <img src={{item.displayImageUrl}} class="thumb" />
+  {{#link-to "item.edit_images" item}}
+    <img src={{item.displayImageUrl}} class="thumb" />
+  {{/link-to}}
   <div class="accept_badge {{unless item.isAccepted 'hidden'}}">{{t 'offer.offer_details.accepted'}}</div>
   <div class="reject_badge {{unless item.isRejected 'hidden'}}">{{t 'offer.offer_details.not_needed'}}</div>
 </span>
