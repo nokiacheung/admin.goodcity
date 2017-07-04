@@ -13,11 +13,11 @@ export default Ember.Component.extend({
   }),
 
   images: Ember.computed("currentPackage.item.images.[]", "currentPackage.packageImages.[]", function() {
-    if(this.get("currentPackage.packageImages.length") > 0) {
-      return this.get("currentPackage.packageImages");
-    } else {
+    // if(this.get("currentPackage.packageImages.length") > 0) {
+    //   return this.get("currentPackage.packageImages");
+    // } else {
       return this.get("currentPackage.item.images");
-    }
+    // }
   }),
 
   actions: {
