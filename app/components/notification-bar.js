@@ -42,12 +42,11 @@ export default Ember.Component.extend({
 
   desktopNotification: function(data){
     if (Notification.permission === "granted") {
+      var text = data.message;
       if(data.category === "message"){
         let user = this.get('store').peekRecord('user', data.author_id);
-        var text = "New "+data.category+" from "+user.get('firstName')+" "+
+        text = "New "+data.category+" from "+user.get('firstName')+" "+
             user.get('lastName')+"\n"+ data.message ;
-      }else {
-        var text = data.message;
       }
       this.sendDesktopNotification(text);
     }
