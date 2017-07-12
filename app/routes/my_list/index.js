@@ -1,5 +1,5 @@
 import AuthorizeRoute from './../authorize';
-import config from '../config/environment';
+import config from '../../config/environment';
 
 export default AuthorizeRoute.extend({
   isCordovaApp: config.cordova.enabled,
