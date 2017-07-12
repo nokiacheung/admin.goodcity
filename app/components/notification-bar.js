@@ -41,13 +41,6 @@ export default Ember.Component.extend({
   },
 
   desktopNotification: function(data){
-    // if (Notification && Notification.permission === 'default') {
-    //   Notification.requestPermission(function (permission) {
-    //     if(!('permission' in Notification)) {
-    //       Notification.permission = permission;
-    //     }
-    //   });
-    // }
     if (Notification.permission === "granted") {
       if(data.category === "message"){
         let user = this.get('store').peekRecord('user', data.author_id);
@@ -56,20 +49,25 @@ export default Ember.Component.extend({
       }else {
         var text = data.message;
       }
-      //'tag' handles muti tab scenario i.e when multiple tabs are open then only
-      // only one notification is sent
-      let notification = new Notification('Goodcity Admin', {
-        icon: 'https://www.goodcity.hk/assets/images/Global-Distribution_logo.gif',
-        body:  text,
-        tag: 'soManyNotification'
-      });
-      var url = window.location.origin;
-      notification.onclick = function () {
-        parent.focus();
-        window.focus(); //just in case, older browsers
-        this.close();
-      };
-      setTimeout(notification.close.bind(notification), 3000);
+      this.sendDesktopNotification(text);
     }
+  },
+
+  sendDesktopNotification: function(text){
+    let notification = new Notification('Goodcity Admin', {
+      icon: 'https://www.goodcity.hk/assets/images/Global-Distribution_logo.gif',
+      body:  text,
+      tag: 'soManyNotification'
+    });
+    //'tag' handles muti tab scenario i.e when multiple tabs are open then only
+    // only one notification is sent
+
+    notification.onclick = function () {
+      parent.focus();
+      window.focus(); //just in case, older browsers
+      this.close();
+    };
+    setTimeout(notification.close.bind(notification), 3000);
   }
+
 });
