@@ -17,6 +17,6 @@ export default Ember.Controller.extend({
 
   underReviewCount: Ember.computed('allOffers.@each.isUnderReview', function(){
     return this.get('allOffers').filterBy('isUnderReview', true).length;
-  }),
+  })
 
 });

@@ -10,6 +10,6 @@ export default scheduleController.extend({
     set: function(key, value) {
       return value;
     }
-  }),
+  })
 
 });

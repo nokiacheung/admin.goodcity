@@ -59,7 +59,7 @@ export default Ember.Component.extend({
         .finally(() => {
           loadingView.destroy();
         });
-    },
-  },
+    }
+  }
 
 });

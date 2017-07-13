@@ -91,6 +91,6 @@ export default Ember.Controller.extend({
       this.send("clearSearch", true);
       this.transitionToRoute("review_item.accept", item);
     }
-  },
+  }
 
 });

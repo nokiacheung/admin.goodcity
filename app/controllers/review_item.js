@@ -117,6 +117,6 @@ export default Ember.Controller.extend({
             _this.transitionToRoute('item.edit_images', newItem);
           });
         });
-    },
+    }
   }
 });

@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
             this.get("messageBox").alert(this.locale('offer.merge.error'));
           }
         });
-    },
-  },
+    }
+  }
 
 });

@@ -13,5 +13,5 @@ export default Ember.Controller.extend({
     var currentUser = this.store.peekRecord('user', currentUserId);
 
     return this.get("allOffers").filterBy("isReviewed").filterBy("reviewedBy", currentUser);
-  }),
+  })
 });

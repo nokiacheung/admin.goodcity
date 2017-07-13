@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     hangupCall() {
       this.set("activeCall", false);
       return this.get("twilio_device").disconnectAll();
-    },
+    }
 
-  },
+  }
 });

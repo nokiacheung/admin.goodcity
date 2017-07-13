@@ -40,7 +40,7 @@ export default Ember.Component.extend({
         var favouriteImage = this.get("package.favouriteImage");
         if(favouriteImage) { this.send("selectImage", favouriteImage); }
       }
-    },
-  },
+    }
+  }
 
 });

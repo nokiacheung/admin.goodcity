@@ -12,6 +12,6 @@ export default Ember.Controller.extend({
 
   model: Ember.computed("allOffers.@each.state", function(){
     return this.get("allOffers").filterBy("isInactive");
-  }),
+  })
 
 });

@@ -9,5 +9,5 @@ export default Model.extend({
   locationId: attr('number'),
 
   package:    belongsTo('package', { async: false }),
-  location: belongsTo('location', { async: false }),
+  location: belongsTo('location', { async: false })
 });

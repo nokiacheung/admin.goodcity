@@ -162,5 +162,5 @@ export default DS.Model.extend({
 
   hasMultiLocations: Ember.computed('packagesLocations.[]', "packagesLocations.@each.quantity",  function(){
     return this.get('packagesLocations.length') > 1;
-  }),
+  })
 });

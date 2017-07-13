@@ -8,5 +8,5 @@ export default MessagesBaseRoute.extend({
   afterModel() {
     var itemId = this.modelFor('review_item').get('id');
     this.store.query('version', { item_id: itemId, for_item: true });
-  },
+  }
 });

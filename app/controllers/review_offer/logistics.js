@@ -20,5 +20,5 @@ export default transportDetails.extend({
     if(language) { params.push("ln="+language); }
     if(params.length) { url = url + "?" + params.join("&"); }
     return url;
-  }),
+  })
 });
