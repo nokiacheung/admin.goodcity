@@ -40,5 +40,5 @@ export default Ember.Mixin.create({
 
   ggv: Ember.computed('allScheduledOffers.@each.delivery.deliveryType', function(){
     return this.get('allScheduledOffers').filterBy('delivery.isGogovan');
-  }),
+  })
 });

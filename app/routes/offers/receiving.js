@@ -4,6 +4,6 @@ export default AuthorizeRoute.extend({
 
   renderTemplate() {
     this.render('offers.submitted', {controller: 'offers.receiving'});
-  },
+  }
 
 });

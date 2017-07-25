@@ -9,5 +9,5 @@ export default DS.Model.extend({
 
   name: Ember.computed('building', 'area', function(){
     return this.get('building') + this.get('area');
-  }),
+  })
 });

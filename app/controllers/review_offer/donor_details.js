@@ -19,5 +19,5 @@ export default Ember.Controller.extend({
 
   receivedOffers: Ember.computed('model', function(){
     return this.get('model').filterBy("isReceived", true).length;
-  }),
+  })
 });

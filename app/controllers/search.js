@@ -119,6 +119,6 @@ export default Ember.Controller.extend(backNavigator, {
         loadingView.destroy();
       });
     }
-  },
+  }
 
 });

@@ -9,5 +9,5 @@ export default Ember.Component.extend({
   didInsertElement() {
     var isAndroidDevice = this.get("cordova").isAndroid();
     this.set("isAndroidDevice", isAndroidDevice);
-  },
+  }
 });

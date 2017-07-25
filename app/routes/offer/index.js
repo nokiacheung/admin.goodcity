@@ -7,5 +7,5 @@ export default AuthorizeRoute.extend({
     if(my_offer.get('itemCount') > 0) {
       this.transitionTo('offer.offer_details', my_offer);
     }
-  },
+  }
 });

@@ -10,5 +10,5 @@ export default AuthorizeRoute.extend({
         _this.store.pushPayload(data);
         return _this.store.peekRecord('offer', data.offer.id);
       });
-  },
+  }
 });

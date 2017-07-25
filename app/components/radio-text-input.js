@@ -8,5 +8,5 @@ export default Ember.TextField.extend({
 
   click() {
     Ember.$(this.element).closest("li").find("input[type='radio']").prop('checked', true);
-  },
+  }
 });

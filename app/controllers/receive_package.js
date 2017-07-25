@@ -183,11 +183,11 @@ export default Ember.Controller.extend({
       this.set("invalidInventoryNo", false);
       this.set("invalidDescription", false);
       this.set("hasErrors", false);
-    },
+    }
   },
 
   verifyInventoryNumber: function(value) {
     return /^[A-Z]{0,1}[0-9]{5,6}(Q[0-9]*){0,1}$/i.test(value);
-  },
+  }
 
 });

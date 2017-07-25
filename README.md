@@ -1,4 +1,8 @@
-# GoodCity Admin App [![Circle CI](https://circleci.com/gh/crossroads/admin.goodcity.svg?style=svg)](https://circleci.com/gh/crossroads/admin.goodcity)
+# GoodCity ADMIN App
+[![Circle CI](https://circleci.com/gh/crossroads/admin.goodcity.svg?style=svg)](https://circleci.com/gh/crossroads/admin.goodcity)
+[![Code Climate](https://codeclimate.com/github/crossroads/admin.goodcity/badges/gpa.svg)](https://codeclimate.com/github/crossroads/admin.goodcity)
+[![Issue Count](https://codeclimate.com/github/crossroads/admin.goodcity/badges/issue_count.svg)](https://codeclimate.com/github/crossroads/admin.goodcity)
+[![Test Coverage](https://codeclimate.com/github/crossroads/admin.goodcity/badges/coverage.svg)](https://codeclimate.com/github/crossroads/admin.goodcity)
 
 The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
 

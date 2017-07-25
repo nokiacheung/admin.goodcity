@@ -33,6 +33,6 @@ export default Ember.TextField.extend({
     if(this.get("iosItemTypeSearchPage")) {
       this.element.addEventListener('touchstart', this.scrollToStart);
     }
-  },
+  }
 
 });

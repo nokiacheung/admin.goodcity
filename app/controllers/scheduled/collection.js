@@ -75,5 +75,5 @@ export default Ember.Controller.extend(scheduledOffersMixin, {
       default: offers = this.daySchedule(filterValue); break;
     }
     return offers;
-  },
+  }
 });

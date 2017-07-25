@@ -33,6 +33,6 @@ export default Model.extend({
 
   isInactive: Ember.computed('status', function(){
     return ["Sent", "Cancelled", "Closed"].indexOf(this.get("status")) >= 0;
-  }),
+  })
 
 });

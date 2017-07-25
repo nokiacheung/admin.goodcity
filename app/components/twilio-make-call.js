@@ -66,7 +66,7 @@ export default Ember.Component.extend({
       this.set("activeCall", false);
       this.get("internetCallStatus").set("activeCall", false);
       return this.get("twilio_device").disconnectAll();
-    },
+    }
   },
 
   didInsertElement() {

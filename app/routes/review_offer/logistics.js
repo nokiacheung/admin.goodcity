@@ -6,5 +6,5 @@ export default AuthorizeRoute.extend({
     this._super(controller, model);
     var defaultGogovanOption = controller.get("defaultGogovanOption");
     controller.set("selectedGogovanOption", defaultGogovanOption);
-  },
+  }
 });

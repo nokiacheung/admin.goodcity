@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
   reviewerOffers: Ember.computed("session.currentUser.id", "allOffers.@each.reviewedBy", function(){
     var currentUserId = this.session.get("currentUser.id");
     return this.get("allOffers").filterBy("reviewedBy.id", currentUserId);
-  }),
+  })
 
 });
 

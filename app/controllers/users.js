@@ -71,6 +71,6 @@ export default Ember.Controller.extend({
         loadingView.destroy();
       });
     }
-  },
+  }
 
 });

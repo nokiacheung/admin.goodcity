@@ -38,7 +38,7 @@ export default Ember.Component.extend({
   actions: {
     clearRejectMessage() {
       this.set('rejectMessage', '');
-    },
+    }
   },
 
   didInsertElement: function(){

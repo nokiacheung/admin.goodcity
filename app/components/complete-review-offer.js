@@ -80,7 +80,7 @@ export default Ember.Component.extend({
           this.get("store").pushPayload(data);
         })
         .finally(() => loadingView.destroy());
-    },
-  },
+    }
+  }
 
 });
