@@ -19,6 +19,15 @@
     <link rel="apple-touch-icon" href="assets/images/goodcity-icon-57.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="assets/images/goodcity-icon-72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="assets/images/goodcity-icon-114.png" />
+    <script type="text/javascript">
+      //manually setting up status bar for cordova
+      document.addEventListner("deviceready", onDeviceReady, false);
+
+      function onDeviceReady() {
+        StatusBar.overlayWebView(false);
+        StatusBar.backgroundColorByName("black");
+      }
+    </script>
 
     {{content-for 'head-footer'}}
 
