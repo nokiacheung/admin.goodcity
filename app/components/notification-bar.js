@@ -9,12 +9,16 @@ export default Ember.Component.extend({
     var box = Ember.$(".contain-to-grid.notification");
     let notification = this.get("currentController").retrieveNotification();
 
-    if (!notification) { box.hide(); return; }
+    if (!notification){
+      box.hide();
+      return;
+    }
+
     if(!this.get("isCordovaApp")){
       this.desktopNotification(notification);
     }
 
-    if (box.is(":hidden")) {
+    if(box.is(":hidden")) {
       box.slideDown();
       Ember.$(".sticky_title_bar").animate({
             top : '5%'
@@ -28,7 +32,7 @@ export default Ember.Component.extend({
     if(controller) {
       var remove = function() { controller.get("model").removeObject(notification); };
       var newNotification =  controller.retrieveNotification(1);
-      if (newNotification) {
+      if(newNotification) {
         remove();
         Ember.run.later(this, this.removeNotification, newNotification, 6000);
       } else {
@@ -41,7 +45,7 @@ export default Ember.Component.extend({
   },
 
   desktopNotification: function(data){
-    if (Notification.permission === "granted") {
+    if(Notification.permission === "granted") {
       var text = data.message;
       if(data.category === "message"){
         let user = this.get('store').peekRecord('user', data.author_id);
