@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     var box = Ember.$(".contain-to-grid.notification");
     let notification = this.get("currentController").retrieveNotification();
 
-    if (!notification){
+    if(!notification){
       box.hide();
       return;
     }

@@ -12,7 +12,7 @@ export default AuthorizeRoute.extend({
   },
 
   requestDesktopNotificationPermission(){
-    if (Notification && Notification.permission === 'default') {
+    if(Notification && Notification.permission === 'default') {
       Notification.requestPermission(function (permission) {
         if(!('permission' in Notification)) {
           Notification.permission = permission;
