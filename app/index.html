@@ -9,7 +9,7 @@
     {{content-for 'head'}}
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/goodcity.css">
-    <script type="text/javascript" src="cordova.js"></script>
+
     <!-- "Add to homescreen" icon for android devices -->
     <link rel="manifest" href="assets/manifest.json">
 
@@ -19,14 +19,6 @@
     <link rel="apple-touch-icon" href="assets/images/goodcity-icon-57.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="assets/images/goodcity-icon-72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="assets/images/goodcity-icon-114.png" />
-    <script type="text/javascript">
-      //manually setting up status bar for cordova
-      document.addEventListner("deviceready", onDeviceReady, false);
-
-      function onDeviceReady() {
-        StatusBar.hide();
-      }
-    </script>
 
     {{content-for 'head-footer'}}
 
