@@ -61,6 +61,9 @@
     <feature name="StatusBar">
       <param name="ios-package" onload="true" value="CDVStatusBar"/>
     </feature>
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <preference name="StatusBarBackgroundColor" value="#000000"/>
+    <preference name="StatusBarStyle" value="lightcontent"/>
     <preference name="Orientation" value="portrait"/>
     <preference name="Fullscreen" value="true"/>
   </platform>
@@ -79,11 +82,7 @@
   <plugin name="cordova-plugin-network-information" spec="^1.2.0"/>
   <plugin name="cordova-plugin-actionsheet" spec="https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git"/>
   <plugin name="cordova-plugin-camera" spec="~2.1.0"/>
-  <plugin name="cordova-plugin-statusbar" spec="~2.1.1">
-    <preference name="StatusBarOverlaysWebView" value="false"/>
-    <preference name="StatusBarBackgroundColor" value="#000000"/>
-    <preference name="StatusBarStyle" value="lightcontent"/>
-  </plugin>
+  <plugin name="cordova-plugin-statusbar" spec="~2.1.1"/>
   <plugin name="cordova-plugin-splashscreen" spec="~3.1.0"/>
   <plugin name="phonegap-plugin-barcodescanner" spec="https://github.com/Telerik-Verified-Plugins/BarcodeScanner.git"/>
   <plugin name="com.phonegap.plugins.twilioclient" spec="https://github.com/crossroads/twilio_client_phonegap.git"/>
