@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       return;
     }
 
-    if(!this.get("isCordovaApp")){
+    if(!this.get("isCordovaApp") && ('Notification' in window)){
       this.desktopNotification(notification);
     }
 
