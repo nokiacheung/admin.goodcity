@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       return;
     }
 
-    if(!this.get("isCordovaApp") && !this.iOS()){
+    if(!this.get("isCordovaApp") && ('Notification' in window)){
       this.desktopNotification(notification);
     }
 
@@ -26,25 +26,6 @@ export default Ember.Component.extend({
       Ember.run.later(this, this.removeNotification, notification, 6000);
     }
   }).on("didInsertElement"),
-
-  iOS: function() {
-    var iDevices = [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ];
-
-    if(navigator.platform) {
-      while (iDevices.length) {
-        if (navigator.platform === iDevices.pop()){ return true; }
-      }
-    }
-
-    return false;
-  },
 
   removeNotification: function(notification) {
     var controller = this.get("currentController");

@@ -4,27 +4,8 @@ import config from '../../config/environment';
 export default AuthorizeRoute.extend({
   isCordovaApp: config.cordova.enabled,
 
-  iOS() {
-    var iDevices = [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ];
-
-    if(navigator.platform) {
-      while (iDevices.length) {
-        if (navigator.platform === iDevices.pop()){ return true; }
-      }
-    }
-
-    return false;
-  },
-
   model() {
-    if(!this.get("isCordovaApp") && !this.iOS()){
+    if(!this.get("isCordovaApp") && ('Notification' in window)){
       this.requestDesktopNotificationPermission();
     }
     return this.transitionTo('my_list.reviewing');
