@@ -5,7 +5,7 @@ export default AuthorizeRoute.extend({
   isCordovaApp: config.cordova.enabled,
 
   model() {
-    if(!this.get("isCordovaApp")){
+    if(!this.get("isCordovaApp") && ('Notification' in window)){
       this.requestDesktopNotificationPermission();
     }
     return this.transitionTo('my_list.reviewing');
