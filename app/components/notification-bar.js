@@ -37,7 +37,7 @@ export default Ember.Component.extend({
       'iPod'
     ];
 
-    if (!!navigator.platform) {
+    if(navigator.platform) {
       while (iDevices.length) {
         if (navigator.platform === iDevices.pop()){ return true; }
       }
