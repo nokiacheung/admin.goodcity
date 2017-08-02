@@ -70,7 +70,7 @@ export default Ember.Component.extend({
       window.focus(); //just in case, older browsers
       this.close();
     };
-    setTimeout(notification.close.bind(notification), 3000);
+    setTimeout(notification.close.bind(notification), 5000);
   }
 
 });
