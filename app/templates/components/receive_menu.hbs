@@ -7,10 +7,12 @@
 </div>
 
 <div class="receive-options {{if hidden 'hidden' ''}}">
-  {{#link-to "review_item.accept" package.item (query-params returnurl=currentUrl) tagName="div"}}
-    <i class="fa fa-pencil-square-o"></i>
-    {{t "edit"}}
-  {{/link-to}}
+  <div class="{{if preventEdit 'disabled'}}">
+    {{#link-to "review_item.accept" package.item (query-params returnurl=currentUrl) tagName="div"}}
+      <i class="fa fa-pencil-square-o"></i>
+      {{t "edit"}}
+    {{/link-to}}
+  </div>
   <div {{action "checkReceiving" "missing"}} class="{{if isMissing 'disabled'}}">
     <i class="fa fa-exclamation-triangle"></i>
     {{t "receive.missing"}}
