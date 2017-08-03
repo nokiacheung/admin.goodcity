@@ -19,10 +19,19 @@
     {{/link-to}}
   {{/if}}
 
-  <div {{action "checkReceiving" "missing"}} class="{{if isMissing 'disabled'}}">
-    <i class="fa fa-exclamation-triangle"></i>
-    {{t "receive.missing"}}
-  </div>
+  {{#if preventEdit}}
+    <div class="disabled">
+      <i class="fa fa-exclamation-triangle"></i>
+      {{t "receive.missing"}}
+    </div>
+  {{else}}
+    <div {{action "checkReceiving" "missing"}} class="{{if isMissing 'disabled'}}">
+      <i class="fa fa-exclamation-triangle"></i>
+      {{t "receive.missing"}}
+    </div>
+  {{/if}}
+
+
   <div {{action "checkReceiving" "receive"}} class="{{if isReceived 'disabled'}}">
     <i class="fa fa-check-circle-o"></i>
     {{t "receive.receive"}}
