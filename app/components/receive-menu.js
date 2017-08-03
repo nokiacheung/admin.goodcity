@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 
   preventEdit: Ember.computed('packageId', function(){
     let pkg = this.get("store").peekRecord("package", this.get("packageId"));
-    return pkg.isDesignated || pkg.isDispatched;
+    return pkg.get('hasAllPackagesDispatched') || pkg.get('hasAllPackagesDesignated');
   }),
 
   offer: Ember.computed('packageId', function(){
