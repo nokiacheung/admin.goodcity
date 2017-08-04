@@ -16,6 +16,11 @@ export default Ember.Component.extend({
     return this.get("isReceived") && this.get("package.inventoryNumber");
   }),
 
+  preventEdit: Ember.computed('packageId', function(){
+    let pkg = this.get("store").peekRecord("package", this.get("packageId"));
+    return pkg.get('hasAllPackagesDispatched') || pkg.get('hasAllPackagesDesignated');
+  }),
+
   offer: Ember.computed('packageId', function(){
     return this.get("store").peekRecord("offer", this.get("package.offerId"));
   }),
