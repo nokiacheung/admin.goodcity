@@ -8,8 +8,8 @@ export default AuthorizeRoute.extend({
     var cannotSave = pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
 
     if(cannotSave){
-      transition.abort()
-      this.get('messageBox').alert(this.get("i18n").t('must_login'), () => {
+      transition.abort();
+      this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
         let my_offer = pkg.get("offerId");
         this.transitionTo('review_offer.items');
       });
