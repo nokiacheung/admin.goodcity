@@ -70,17 +70,17 @@ export default Ember.Controller.extend({
       this.set("selectedId", "-1");
     },
 
-    rejectItem() {
-
+    cannotSave(){
       let pkg = this.store.peekRecord("item", this.get("itemId")).get("packages.firstObject");
-      let cannotSave = pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
-      if(cannotSave){
-        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
-          // let my_offer = pkg.get("offerId");
-          this.transitionToRoute('review_offer.items');
-        });
+      if(pkg && (pkg.length > 0)){
+        return pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
+      }
+      else{
         return false;
       }
+    }
+
+    rejectItem() {
 
       var selectedReason = this.get('selectedId');
       if(selectedReason === undefined) {
@@ -99,6 +99,13 @@ export default Ember.Controller.extend({
       if(selectedReason !== "-1") {
         rejectProperties.rejectReason = null;
         this.set('rejectReason', null);
+      }
+
+      if(this.cannotSave()){
+        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
+          this.transitionToRoute('review_offer.items');
+        });
+        return false;
       }
 
       var offer = this.get("offer.model");

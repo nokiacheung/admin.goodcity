@@ -101,15 +101,24 @@ export default Ember.Controller.extend({
       this.get("packages").removeAt(index);
     },
 
+    cannotSave(){
+      let pkg = this.store.peekRecord("item", this.get("itemId")).get("packages.firstObject");
+      if(pkg && (pkg.length > 0)){
+        return pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
+      }
+      else{
+        return false;
+      }
+    },
+
     save() {
-      let pkg = this.get("itemPackages.firstObject");
-      let cannotSave = pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
-      if(cannotSave){
+      if(this.cannotSave()){
         this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
           this.transitionToRoute('review_offer.items');
         });
         return false;
       }
+
       // save item and packages
       // getting "Attempted to handle event *event* on *record* while in state root.deleted.saved" if try
       // to save item same time as a package is being deleted
