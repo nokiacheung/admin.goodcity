@@ -106,7 +106,6 @@ export default Ember.Controller.extend({
       let cannotSave = pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
       if(cannotSave){
         this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
-          let my_offer = pkg.get("offerId");
           this.transitionToRoute('review_offer.items');
         });
         return false;
