@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     return this.get("isReceived") && this.get("package.inventoryNumber");
   }),
 
-  preventEdit: Ember.computed('packageId', function(){
+  preventEdit: Ember.computed('packageId', "package.state", function(){
     let pkg = this.get("store").peekRecord("package", this.get("packageId"));
     return pkg.get('hasAllPackagesDispatched') || pkg.get('hasAllPackagesDesignated');
   }),
