@@ -66,19 +66,19 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
+
+    cannotSave(){
+      var pkg = this.store.peekRecord("item", this.get("itemId")).get("packages.firstObject");
+      if(pkg && (pkg.length > 0)){
+        return pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
+      } else {
+        return false;
+      }
+    },
+
     setRejectOption() {
       this.set("selectedId", "-1");
     },
-
-    cannotSave(){
-      let pkg = this.store.peekRecord("item", this.get("itemId")).get("packages.firstObject");
-      if(pkg && (pkg.length > 0)){
-        return pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
-      }
-      else{
-        return false;
-      }
-    }
 
     rejectItem() {
 
@@ -101,16 +101,15 @@ export default Ember.Controller.extend({
         this.set('rejectReason', null);
       }
 
-      if(this.cannotSave()){
-        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
-          this.transitionToRoute('review_offer.items');
-        });
-        return false;
-      }
-
       var offer = this.get("offer.model");
 
       var saveItem = () => {
+        if(this.cannotSave()){
+          this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
+            this.transitionToRoute('review_offer.items');
+          });
+          return false;
+        }
         var loadingView = getOwner(this).lookup('component:loading').append();
         rejectProperties.rejectionReason = this.store.peekRecord('rejection_reason', selectedReason);
         rejectProperties.state_event = 'reject';

@@ -105,8 +105,7 @@ export default Ember.Controller.extend({
       let pkg = this.store.peekRecord("item", this.get("itemId")).get("packages.firstObject");
       if(pkg && (pkg.length > 0)){
         return pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
-      }
-      else{
+      } else{
         return false;
       }
     },
