@@ -76,6 +76,7 @@ export default Ember.Controller.extend({
         var pkgs = this.store.peekRecord("item", this.get("itemId")).get("packages");
         if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
           this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
+          return false;
         }
       }
 
