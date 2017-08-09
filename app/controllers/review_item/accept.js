@@ -65,6 +65,15 @@ export default Ember.Controller.extend({
     }
   }),
 
+  cannotSave(){
+    var pkgs = this.get('itemPackages');
+    if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
+      this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
+      return true;
+    }
+    return false;
+  },
+
   actions: {
     clearText(index) {
       if(index != null){
@@ -103,9 +112,7 @@ export default Ember.Controller.extend({
 
 
     save() {
-      var pkgs = this.get('itemPackages');
-      if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
-        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
+      if(this.get('itemPackages') && this.cannotSave()){
         return false;
       }
 

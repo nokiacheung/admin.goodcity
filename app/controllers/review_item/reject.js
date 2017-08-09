@@ -65,6 +65,27 @@ export default Ember.Controller.extend({
     return this.store.peekAll('rejection_reason').sortBy('id');
   }),
 
+  cannotSave(){
+    var pkgs = this.store.peekRecord("item", this.get("itemId")).get("packages");
+    if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
+      this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
+      return true;
+    }
+    return false;
+  },
+
+  rejectValidation(selectedReason,rejectProperties){
+    if(selectedReason === undefined) {
+      this.set('noReasonSelected', true);
+      return false;
+    }
+    if(selectedReason === "-1" && Ember.$.trim(rejectProperties.rejectReason).length === 0) {
+      this.set("isBlank", true);
+      return false;
+    }
+    return true;
+  },
+
   actions: {
 
     setRejectOption() {
@@ -72,27 +93,15 @@ export default Ember.Controller.extend({
     },
 
     rejectItem() {
-      if(this.get("itemId")){
-        var pkgs = this.store.peekRecord("item", this.get("itemId")).get("packages");
-        if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
-          this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
-          return false;
-        }
+      if(this.get("itemId") && this.cannotSave()){
+        return false;
       }
-
       var selectedReason = this.get('selectedId');
-      if(selectedReason === undefined) {
-        this.set('noReasonSelected', true);
-        return false;
-      }
-
       var rejectProperties = this.getProperties('rejectReason');
-      rejectProperties.rejectionComments = Ember.$('#rejectMessage').val();
-
-      if(selectedReason === "-1" && Ember.$.trim(rejectProperties.rejectReason).length === 0) {
-        this.set("isBlank", true);
+      if(!this.rejectValidation(selectedReason, rejectProperties)){
         return false;
       }
+
 
       if(selectedReason !== "-1") {
         rejectProperties.rejectReason = null;
