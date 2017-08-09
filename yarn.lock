@@ -4954,13 +4954,6 @@ sha@~2.0.1:
     graceful-fs "^4.1.2"
     readable-stream "^2.0.2"
 
-"shared-goodcity@git://github.com/crossroads/shared.goodcity.git#master":
-  version "0.0.0"
-  resolved "git://github.com/crossroads/shared.goodcity.git#1af66506bd88accdc73c411fb93b2bdec5d72e06"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-coffeescript "^1.13.2"
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
