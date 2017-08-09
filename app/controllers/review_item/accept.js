@@ -101,12 +101,11 @@ export default Ember.Controller.extend({
       this.get("packages").removeAt(index);
     },
 
+
     save() {
       var pkgs = this.get('itemPackages');
       if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
-        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
-          this.transitionToRoute('review_offer.items');
-        });
+        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
         return false;
       }
 
