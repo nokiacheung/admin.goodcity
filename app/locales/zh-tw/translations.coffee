@@ -15,8 +15,7 @@ I18nTranslationsZhTw =
       "no_results": "抱歉，未能找到結果"
       "server_search": "於服務器上尋找更多資訊"
       "placeholder": "搜索"
-    "designated_dispatched_error": "You cannot edit designated/dispatched items."
-    
+
     "users":
       "search": "搜尋使用者"
 
