@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   reviewOfferController: Ember.inject.controller('review_offer'),
   reviewItem: Ember.inject.controller(),
   store: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
+  i18n: Ember.inject.service(),
   review_item: Ember.inject.controller(),
   item: Ember.computed.alias("reviewItem.item"),
   offer: Ember.computed.alias("item.offer"),
@@ -99,7 +101,23 @@ export default Ember.Controller.extend({
       this.get("packages").removeAt(index);
     },
 
+    cannotSave(){
+      let pkg = this.store.peekRecord("item", this.get("itemId")).get("packages.firstObject");
+      if(pkg && (pkg.length > 0)){
+        return pkg.get("hasAllPackagesDesignated") || pkg.get("hasAllPackagesDispatched");
+      } else{
+        return false;
+      }
+    },
+
     save() {
+      if(this.cannotSave()){
+        this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
+          this.transitionToRoute('review_offer.items');
+        });
+        return false;
+      }
+
       // save item and packages
       // getting "Attempted to handle event *event* on *record* while in state root.deleted.saved" if try
       // to save item same time as a package is being deleted

@@ -15,6 +15,7 @@ I18nTranslationsEn =
       "no_results": "Sorry, No results found."
       "server_search": "Find more on server"
       "placeholder": "Search"
+    "designated_dispatched_error": "You cannot edit designated/dispatched items."
 
     "users":
       "search": "Search User"
