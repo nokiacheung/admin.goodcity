@@ -12,7 +12,9 @@ export default Ember.Controller.extend({
   itemId: Ember.computed.alias('reviewItem.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
   rejectReasonPlaceholder: t("reject.custom_reason"),
+  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  itemPackages: Ember.computed.alias("item.packages"),
 
   rejectReason: Ember.computed('itemId', {
     get: function() {
@@ -63,27 +65,43 @@ export default Ember.Controller.extend({
     return this.store.peekAll('rejection_reason').sortBy('id');
   }),
 
-  messageBox: Ember.inject.service(),
+  cannotSave(){
+    var pkgs = this.store.peekRecord("item", this.get("itemId")).get("packages");
+    if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
+      this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'));
+      return true;
+    }
+    return false;
+  },
+
+  rejectValidation(selectedReason,rejectProperties){
+    if(selectedReason === undefined) {
+      this.set('noReasonSelected', true);
+      return false;
+    }
+    if(selectedReason === "-1" && Ember.$.trim(rejectProperties.rejectReason).length === 0) {
+      this.set("isBlank", true);
+      return false;
+    }
+    return true;
+  },
 
   actions: {
+
     setRejectOption() {
       this.set("selectedId", "-1");
     },
 
     rejectItem() {
+      if(this.get("itemId") && this.cannotSave()){
+        return false;
+      }
       var selectedReason = this.get('selectedId');
-      if(selectedReason === undefined) {
-        this.set('noReasonSelected', true);
-        return false;
-      }
-
       var rejectProperties = this.getProperties('rejectReason');
-      rejectProperties.rejectionComments = Ember.$('#rejectMessage').val();
-
-      if(selectedReason === "-1" && Ember.$.trim(rejectProperties.rejectReason).length === 0) {
-        this.set("isBlank", true);
+      if(!this.rejectValidation(selectedReason, rejectProperties)){
         return false;
       }
+
 
       if(selectedReason !== "-1") {
         rejectProperties.rejectReason = null;
@@ -93,6 +111,8 @@ export default Ember.Controller.extend({
       var offer = this.get("offer.model");
 
       var saveItem = () => {
+
+
         var loadingView = getOwner(this).lookup('component:loading').append();
         rejectProperties.rejectionReason = this.store.peekRecord('rejection_reason', selectedReason);
         rejectProperties.state_event = 'reject';

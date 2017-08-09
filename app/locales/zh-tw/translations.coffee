@@ -11,6 +11,7 @@ I18nTranslationsZhTw =
     "select": "選擇"
     "QuotaExceededError": "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='https://itunes.apple.com/in/app/goodcityadmin.hk/id1013288708?mt=8' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>"
     "search_item_label": "搜尋物資標籤"
+    "designated_dispatched_error": "You cannot edit designated/dispatched items."
     "search":
       "no_results": "抱歉，未能找到結果"
       "server_search": "於服務器上尋找更多資訊"
