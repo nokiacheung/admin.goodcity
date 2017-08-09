@@ -12,7 +12,9 @@ export default Ember.Controller.extend({
   itemId: Ember.computed.alias('reviewItem.model.id'),
   rejectionReasonId: Ember.computed.alias('model.rejectionReason.id'),
   rejectReasonPlaceholder: t("reject.custom_reason"),
+  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  itemPackages: Ember.computed.alias("item.packages"),
 
   rejectReason: Ember.computed('itemId', {
     get: function() {
@@ -63,9 +65,17 @@ export default Ember.Controller.extend({
     return this.store.peekAll('rejection_reason').sortBy('id');
   }),
 
-  messageBox: Ember.inject.service(),
-
   actions: {
+
+    cannotSave(){
+      var pkgs = this.get('itemPackages');
+      if(pkgs && (pkgs.length > 0)){
+        return pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched");
+      } else {
+        return "none";
+      }
+    },
+
     setRejectOption() {
       this.set("selectedId", "-1");
     },
@@ -93,6 +103,13 @@ export default Ember.Controller.extend({
       var offer = this.get("offer.model");
 
       var saveItem = () => {
+
+        var pkgs = this.get('itemPackages');
+        if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
+          this.get('messageBox').alert(this.get("i18n").t('designated_dispatched_error'), () => {
+            this.transitionToRoute('review_offer.items');
+          });
+        }
         var loadingView = getOwner(this).lookup('component:loading').append();
         rejectProperties.rejectionReason = this.store.peekRecord('rejection_reason', selectedReason);
         rejectProperties.state_event = 'reject';
