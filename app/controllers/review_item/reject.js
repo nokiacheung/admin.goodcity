@@ -67,15 +67,6 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    cannotSave(){
-      var pkgs = this.get('itemPackages');
-      if(pkgs && (pkgs.length > 0)){
-        return pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched");
-      } else {
-        return "none";
-      }
-    },
-
     setRejectOption() {
       this.set("selectedId", "-1");
     },

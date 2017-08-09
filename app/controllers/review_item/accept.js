@@ -101,15 +101,6 @@ export default Ember.Controller.extend({
       this.get("packages").removeAt(index);
     },
 
-    cannotSave(){
-      var pkgs = this.get('itemPackages');
-      if(pkgs && (pkgs.length > 0)){
-        return pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched");
-      } else {
-        return "none";
-      }
-    },
-
     save() {
       var pkgs = this.get('itemPackages');
       if(pkgs && pkgs.length > 0 && (pkgs.get("firstObject.hasAllPackagesDesignated") || pkgs.get("firstObject.hasAllPackagesDispatched"))){
