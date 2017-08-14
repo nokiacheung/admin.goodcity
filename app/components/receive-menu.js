@@ -114,6 +114,7 @@ export default Ember.Component.extend({
         this.updatePackage(p => {
           p.set("state", "missing");
           p.set("state_event", "mark_missing");
+          p.set("location", null);
         });
       }
     },
