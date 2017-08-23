@@ -65,10 +65,12 @@
     "xml2js": "^0.4.12"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.1.10",
+    "ember-cli-babel": "^5.1.7",
     "phantomjs-prebuilt": "^2.1.14",
     "azure-api": "git://github.com/crossroads/azure-api.git#master",
     "shared-goodcity": "git://github.com/crossroads/shared.goodcity.git#master",
     "slick-carousel": "^1.5.8",
+    "ember-resolver": "^2.0.3",
+    "loader.js": "^4.0.11",
   }
 }
