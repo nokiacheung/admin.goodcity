@@ -58,7 +58,7 @@ export default Ember.Component.extend({
 
   sendDesktopNotification: function(text){
     let notification = new Notification('Goodcity Admin', {
-      icon: 'https://raw.githubusercontent.com/crossroads/admin.goodcity/master/cordova/res/android/drawable-xxxhdpi/icon.png',
+      icon: 'assets/images/icon.png',
       body:  text,
       tag: 'soManyNotification'
     });
