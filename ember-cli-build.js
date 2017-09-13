@@ -16,6 +16,9 @@ module.exports = function(defaults) {
     }
   });
 
+  app.import('node_modules/raven-js/dist/raven.js');
+  app.import('node_modules/raven-js/dist/plugins/ember.js');
+
   app.import('bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
   app.import('bower_components/blueimp-file-upload/js/jquery.iframe-transport.js');
   app.import('bower_components/blueimp-file-upload/js/jquery.fileupload.js');

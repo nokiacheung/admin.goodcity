@@ -35,10 +35,13 @@
   <body>
     {{content-for 'body'}}
     <script src="assets/vendor.js"></script>
-    <script src="https://cdn.ravenjs.com/3.17.0/ember/raven.min.js" crossorigin="anonymous"></script>
-    <script>Raven.config('https://3ddbe2ce6d844dddb94e6a98f712abad@sentry.io/197688').install();</script>
+    <script>
+      Raven
+        .config('https://3ddbe2ce6d844dddb94e6a98f712abad@sentry.io/197688')
+        .addPlugin(Raven.Plugins.Ember)
+        .install();
+    </script>
     <script src="assets/goodcity.js"></script>
-
     {{content-for 'body-footer'}}
   </body>
 </html>
