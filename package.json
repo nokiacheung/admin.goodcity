@@ -62,8 +62,7 @@
     "glob": "^5.0.14",
     "loader.js": "4.1.0",
     "smoke-and-mirrors": "https://github.com/crossroads/smoke-and-mirrors.git#master",
-    "xml2js": "^0.4.12",
-    "raven-js": "3.16.1"
+    "xml2js": "^0.4.12"
 
   },
   "dependencies": {
