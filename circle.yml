@@ -60,6 +60,6 @@ deployment:
     commands:
       - bundle exec cap production deploy
       - bundle exec rake production android app:build
-      - bundle exec fastlane android beta
+      - fastlane android beta
       - bundle exec rake production ios app:build
-      - bundle exec fastlane ios beta
+      - fastlane ios beta
