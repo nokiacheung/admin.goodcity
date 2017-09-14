@@ -21,7 +21,9 @@
     "font-awesome": "~4.5.0",
     "ember-qunit-notifications": "0.1.0",
     "jquery-mockjax": "2.0.1",
-    "active-model-adapter": "2.1.1"
+    "active-model-adapter": "2.1.1",
+    "offline": "^0.7.19",
+    "raven-js": "^3.16.1"
   },
   "resolutions": {
     "ember-cli-test-loader": "0.2.2",
@@ -29,6 +31,7 @@
     "ember-qunit-notifications": "0.1.0",
     "ember-cli-shims": "0.1.0",
     "qunit-notifications": "~0.1.0",
-    "ember": "~2.9.0"
+    "ember": "~2.9.0",
+    "raven-js": "^3.16.1"
   }
 }

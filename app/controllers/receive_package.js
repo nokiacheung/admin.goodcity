@@ -169,9 +169,9 @@ export default Ember.Controller.extend({
         })
         .catch(() => {
           loadingView.destroy();
-          var errorMessage = pkg.get("errors.firstObject.message");
-          if(errorMessage.indexOf("Connection error") >= 0) {
-            this.get("messageBox").alert(errorMessage, () => pkg.rollbackAttributes());
+          var errorMessage = pkg.get("errors.firstObject.message") || pkg.get('adapterError.errors.firstObject.title');
+          if(errorMessage === "Adapter Error" || errorMessage.indexOf("Connection error") >= 0) {
+            this.get("messageBox").alert("could not contact Stockit, try again later.", () => pkg.rollbackAttributes());
           } else {
             _this.set("hasErrors", true);
           }

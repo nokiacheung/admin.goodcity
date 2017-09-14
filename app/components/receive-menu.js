@@ -16,6 +16,11 @@ export default Ember.Component.extend({
     return this.get("isReceived") && this.get("package.inventoryNumber");
   }),
 
+  preventEdit: Ember.computed('package.hasAllPackagesDispatched', "package.hasAllPackagesDesignated", function(){
+    let pkg = this.get("store").peekRecord("package", this.get("packageId"));
+    return pkg.get('hasAllPackagesDispatched') || pkg.get('hasAllPackagesDesignated');
+  }),
+
   offer: Ember.computed('packageId', function(){
     return this.get("store").peekRecord("offer", this.get("package.offerId"));
   }),
@@ -109,6 +114,7 @@ export default Ember.Component.extend({
         this.updatePackage(p => {
           p.set("state", "missing");
           p.set("state_event", "mark_missing");
+          p.set("location", null);
         });
       }
     },

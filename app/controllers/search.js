@@ -53,8 +53,12 @@ export default Ember.Controller.extend(backNavigator, {
     var offers = [];
     var store = this.store;
     var matchFilter = function(value) {
-      value = value.replace(/\n/g, " ").replace(/\s\s+/g, ' ');
-      return (value || "").toLowerCase().indexOf(filter) !== -1;
+      if(value) {
+        value = value.replace(/\n/g, " ").replace(/\s\s+/g, ' ');
+        return value.toLowerCase().indexOf(filter) !== -1;
+      } else {
+        return false;
+      }
     };
 
     if (filter.length > 0) {
