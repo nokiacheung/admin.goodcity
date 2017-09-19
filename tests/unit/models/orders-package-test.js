@@ -39,9 +39,4 @@ test('Relationships with other models', function(assert){
   assert.equal(relationshipsWithPackage.kind, 'belongsTo');
 });
 
-test('Checking computed properties', function(assert) {
-  assert.expect(1);
-  var orders_pkg = this.subject({ quantity: 5 });
-  assert.equal(orders_pkg.get('availableQty'), 5);
-});
 
