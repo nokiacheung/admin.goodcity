@@ -64,7 +64,7 @@ test('Relationships with other models', function(assert){
   assert.equal(relationshipsWithPackagesLocation.kind, 'hasMany');
 
   assert.equal(relationshipsWithOrdersPackages.key, 'ordersPackages');
-  assert.equal(relationshipsWithOrdersPackages.kind, 'hasMnay');
+  assert.equal(relationshipsWithOrdersPackages.kind, 'hasMany');
 
   assert.equal(relationshipsWithDonorCondition.key, 'donorCondition');
   assert.equal(relationshipsWithDonorCondition.kind, 'belongsTo');
