@@ -11,7 +11,7 @@ export default SelectList.extend( {
 
   didRender() {
     this._super(...arguments);
-    if ( this.get('pkg') != null && this.get('pkg.packageType') != null && this.get('allowValueSet') === true){
+    if ( this.get('pkg') !== null && this.get('pkg.packageType') !== null && this.get('allowValueSet') === true){
       if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0) {
         this.set('pkg.notes', this.get('pkg.packageType.name'));
       }
@@ -22,7 +22,7 @@ export default SelectList.extend( {
 
   didUpdate() {
     this._super(...arguments);
-    if ( this.get('allowValueSet') === false && this.get('pkg') != null && this.get('pkg.packageType') != null && (this.get('pkg.notes.length') === null || this.get('pkg.notes.length') === 0 ) ){
+    if ( this.get('allowValueSet') === false && this.get('pkg') !== null && this.get('pkg.packageType') !== null && (this.get('pkg.notes.length') === null || this.get('pkg.notes.length') === 0 ) ){
       this.set('allowValueSet', true);
       Ember.$("textarea#"+this.index).val(this.get('pkg.notes'));
     }
@@ -35,7 +35,7 @@ export default SelectList.extend( {
       var content         = this.get('content').toArray();
       if (this.get("prompt")) { content = [{name:null}].concat(content); }
       const selectedValue = content[selectedIndex];
-      if(this.index != null && selectedValue.name != null ){
+      if(this.index !== null && selectedValue.name !== null ){
         selectedValue.set('indexOfChild', this.get('index'));
         var availablePkg = this.get("pkg");
         var name = selectedValue.get('name');
