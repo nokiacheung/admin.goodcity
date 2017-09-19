@@ -29,7 +29,7 @@ test('Relationships with other models', function(assert){
   assert.expect(4);
 
   var orders_package = this.store().modelFor('orders_package');
-  var relationshipsWithPackage = Ember.get(orders_package, 'relationshipsByName').get('Package');
+  var relationshipsWithPackage = Ember.get(orders_package, 'relationshipsByName').get('package');
   var relationshipsWithDesignation = Ember.get(orders_package, 'relationshipsByName').get('designation');
 
   assert.equal(relationshipsWithDesignation.key, 'designation');
