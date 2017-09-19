@@ -16,6 +16,6 @@ test('check attributes', function(assert){
 test('Checking computed properties', function(assert) {
   assert.expect(1);
   var location = this.subject({ area: 24, building: 'Office' });
-  assert.equal(location.get('name'), "Office-24");
+  assert.equal(location.get('name'), "Office24");
 });
 
