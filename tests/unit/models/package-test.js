@@ -51,14 +51,14 @@ test('check attributes', function(assert){
 test('Relationships with other models', function(assert){
   assert.expect(14);
 
-  var package = this.store().modelFor('package');
+  var pkg = this.store().modelFor('package');
   var relationshipsWithItem = Ember.get(package, 'relationshipsByName').get('item');
-  var relationshipsWithPackageType = Ember.get(package, 'relationshipsByName').get('packageType');
-  var relationshipsWithDesignation = Ember.get(package, 'relationshipsByName').get('designation');
-  var relationshipsWithLocation = Ember.get(package, 'relationshipsByName').get('location');
-  var relationshipsWithDonorCondition = Ember.get(package, 'relationshipsByName').get('donorCondition');
-  var relationshipsWithOrdersPackages = Ember.get(package, 'relationshipsByName').get('ordersPackages');
-  var relationshipsWithPackagesLocation = Ember.get(package, 'relationshipsByName').get('packagesLocations');
+  var relationshipsWithPackageType = Ember.get(pkg, 'relationshipsByName').get('packageType');
+  var relationshipsWithDesignation = Ember.get(pkg, 'relationshipsByName').get('designation');
+  var relationshipsWithLocation = Ember.get(pkg, 'relationshipsByName').get('location');
+  var relationshipsWithDonorCondition = Ember.get(pkg, 'relationshipsByName').get('donorCondition');
+  var relationshipsWithOrdersPackages = Ember.get(pkg, 'relationshipsByName').get('ordersPackages');
+  var relationshipsWithPackagesLocation = Ember.get(pkg, 'relationshipsByName').get('packagesLocations');
 
   assert.equal(relationshipsWithPackagesLocation.key, 'PackagesLocations');
   assert.equal(relationshipsWithPackagesLocation.kind, 'hasMany');
