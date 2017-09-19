@@ -52,7 +52,7 @@ test('Relationships with other models', function(assert){
   assert.expect(14);
 
   var pkg = this.store().modelFor('package');
-  var relationshipsWithItem = Ember.get(package, 'relationshipsByName').get('item');
+  var relationshipsWithItem = Ember.get(pkg, 'relationshipsByName').get('item');
   var relationshipsWithPackageType = Ember.get(pkg, 'relationshipsByName').get('packageType');
   var relationshipsWithDesignation = Ember.get(pkg, 'relationshipsByName').get('designation');
   var relationshipsWithLocation = Ember.get(pkg, 'relationshipsByName').get('location');
