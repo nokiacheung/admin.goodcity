@@ -30,7 +30,7 @@ test('Relationships with other models', function(assert){
 
   var orders_package = this.store().modelFor('orders_package');
   var relationshipsWithPackage = Ember.get(orders_package, 'relationshipsByName').get('Package');
-  var relationshipsWithDesignation = Ember.get(orders_package, 'relationshipsByName').get('Package');
+  var relationshipsWithDesignation = Ember.get(orders_package, 'relationshipsByName').get('designation');
 
   assert.equal(relationshipsWithDesignation.key, 'designation');
   assert.equal(relationshipsWithDesignation.kind, 'belongsTo');
@@ -41,7 +41,7 @@ test('Relationships with other models', function(assert){
 
 test('Checking computed properties', function(assert) {
   assert.expect(1);
-  var orders_package = this.subject({ quantity: 5 });
-  assert.equal(orders_package.get('availableQty'), 5);
+  var orders_pkg = this.subject({ quantity: 5 });
+  assert.equal(orders_pkg.get('availableQty'), 5);
 });
 
