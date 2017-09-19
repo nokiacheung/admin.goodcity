@@ -2,7 +2,7 @@ import { test, moduleForModel } from 'ember-qunit';
 import Ember from 'ember';
 
 moduleForModel('package', 'Package Model', {
-  needs: ['model:item', 'model:packageType', 'model:designation', 'model:location', 'model:donorCondition', 'model:ordersPackages', 'model:packageImages', 'model:packagesLocations']
+  needs: ['model:item', 'model:package_type', 'model:designation', 'model:location', 'model:donor_condition', 'model:orders_package', 'model:package_image', 'model:packages_location']
 });
 
 test('check attributes', function(assert){
@@ -60,7 +60,7 @@ test('Relationships with other models', function(assert){
   var relationshipsWithOrdersPackages = Ember.get(pkg, 'relationshipsByName').get('ordersPackages');
   var relationshipsWithPackagesLocation = Ember.get(pkg, 'relationshipsByName').get('packagesLocations');
 
-  assert.equal(relationshipsWithPackagesLocation.key, 'PackagesLocations');
+  assert.equal(relationshipsWithPackagesLocation.key, 'packagesLocations');
   assert.equal(relationshipsWithPackagesLocation.kind, 'hasMany');
 
   assert.equal(relationshipsWithOrdersPackages.key, 'ordersPackages');
