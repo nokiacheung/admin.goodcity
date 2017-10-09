@@ -5406,7 +5406,7 @@ setprototypeof@1.0.3:
 
 "shared-goodcity@git://github.com/crossroads/shared.goodcity.git#master":
   version "0.0.0"
-  resolved "git://github.com/crossroads/shared.goodcity.git#dbba47e625c798421cc635f4725652100232cf30"
+  resolved "git://github.com/crossroads/shared.goodcity.git#bfc09e3dd5ee2695f2db69625cbf6833f6d64065"
   dependencies:
     ember-cli-babel "^5.1.6"
     ember-cli-coffeescript "^1.13.2"
