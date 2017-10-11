@@ -5404,13 +5404,6 @@ setprototypeof@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
 
-"shared-goodcity@git://github.com/crossroads/shared.goodcity.git#master":
-  version "0.0.0"
-  resolved "git://github.com/crossroads/shared.goodcity.git#bfc09e3dd5ee2695f2db69625cbf6833f6d64065"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-coffeescript "^1.13.2"
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
