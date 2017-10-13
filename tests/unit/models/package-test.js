@@ -81,3 +81,46 @@ test('Relationships with other models', function(assert){
   assert.equal(relationshipsWithItem.key, 'item');
   assert.equal(relationshipsWithItem.kind, 'belongsTo');
 });
+
+test('cancelledItemCount: Returns cancelled orders_packages count', function(assert){
+  var model, store, ordersPackage;
+
+  model = this.subject();
+  store = this.store();
+
+  Ember.run(function(){
+    ordersPackage = store.createRecord('ordersPackage', {id: 1, state: "cancelled", quantity: 1});
+    model.get('ordersPackages').pushObjects([ordersPackage]);
+  });
+
+  assert.equal(model.get('cancelledItemCount'), 1);
+});
+
+test('dispatchedItemCount: Returns dispatched orders_packages count', function(assert){
+  var model, store, ordersPackage;
+
+  model = this.subject();
+  store = this.store();
+
+  Ember.run(function(){
+    ordersPackage = store.createRecord('ordersPackage', {id: 1, state: "dispatched", quantity: 1});
+    model.get('ordersPackages').pushObjects([ordersPackage]);
+  });
+
+  assert.equal(model.get('dispatchedItemCount'), 1);
+});
+
+test('firstLocationName: Returns first location name', function(assert){
+  var model, store, packagesLocation, location;
+
+  model = this.subject();
+  store = this.store();
+
+  Ember.run(function(){
+    location = store.createRecord('location', { id: 1, building: 'abc' });
+    packagesLocation = store.createRecord('packagesLocation', { id: 1, quantity: 1, locationId: 1});
+    model.get('packagesLocations').pushObjects([packagesLocation]);
+  });
+
+  assert.equal(model.get('firstLocationName'), 'abc');
+});
