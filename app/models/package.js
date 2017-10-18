@@ -97,8 +97,8 @@ export default DS.Model.extend({
   }),
 
   hasAllPackagesDispatched: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
-    var offer = this.store.findRecord("offer", this.get("offerId"));
-    this.store.pushPayload(offer);
+    var pkg = this.store.findRecord("package", this.get("offerId"));
+    this.store.pushPayload(pkg);
     var received_quantity = this.get("receivedQuantity");
     var totalDispatchedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
