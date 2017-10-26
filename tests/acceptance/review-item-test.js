@@ -22,7 +22,7 @@ test("Display Item under review", function(assert) {
     assert.equal(/Review Item:/i.test($('body').text()), true);
     assert.equal(/Velit fugit amet quos ut minima quis/i.test($('body').text()), true);
     assert.equal(/Condition: New/i.test($('body').text()), true);
-    assert.equal($('input[disabled]').val(), "");
+    assert.equal($('.item_lable_input input').val(), "");
     assert.equal(find("img.thumb").length, 1);
   });
 });
