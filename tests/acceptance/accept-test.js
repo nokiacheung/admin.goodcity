@@ -40,7 +40,7 @@ test("visit accept item tab without item_type", function(assert) {
   visit("/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
   andThen(function() {
     assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item2.id + "/accept");
-    assert.equal($('input[disabled]').val(), "");
+    assert.equal($('.item_lable_input input').val(), "");
     assert.equal($('p.no-items').text(), "Please choose Item Type first!");
   });
 });
@@ -121,7 +121,7 @@ test("visit rejected item with item_type", function(assert) {
   visit("/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
   andThen(function() {
     assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/accept");
-    assert.equal($('input[disabled]').val(), item4.get('packageType.name'));
+    assert.equal($('.item_lable_input input').val(), item4.get('packageType.name'));
 
     // one package components
     assert.equal($(".detail_container").length, 1);
@@ -136,7 +136,7 @@ test("visit rejected item page", function(assert) {
   visit("/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
   andThen(function() {
     assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item4.id + "/reject");
-    assert.equal($('input[disabled]').val(), item4.get('packageType.name'));
+    assert.equal($('.item_lable_input input').val(), item4.get('packageType.name'));
 
     // hide item-edit link
     assert.equal($(".edit-item-link").length, 0);
