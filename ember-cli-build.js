@@ -6,7 +6,7 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     sourcemaps: {
       enabled: true,
-      extensions: ['js', 'css']
+      extensions: ['js']
     },
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map'],
