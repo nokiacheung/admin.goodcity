@@ -177,7 +177,6 @@ I18nTranslationsZhTw =
       "choose_ggv_option": "選擇GoGoVan租賃服務"
       "finished_review": "完成審查了嗎？"
       "add_message_to_donor": "聯絡捐款人："
-      "click_here": "點擊這裏"
 
     "review_item":
       "title" : "審查物資"
@@ -282,5 +281,8 @@ I18nTranslationsZhTw =
     "cancel_offer":
       "donor_message": "選擇捐獻人士取消的原因"
       "cancel": "取消捐獻"
+
+    "customized_variables":
+      "click_here": "點擊這裏"
 
 `export default I18nTranslationsZhTw`

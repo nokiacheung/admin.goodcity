@@ -177,7 +177,6 @@ I18nTranslationsEn =
       "choose_ggv_option": "Choose GoGoVan hire requirement"
       "finished_review": "Finished reviewing this offer?"
       "add_message_to_donor": "Message to the donor:"
-      "click_here": "Click here"
 
     "review_item":
       "title" : "Review Item"
@@ -281,5 +280,8 @@ I18nTranslationsEn =
     "cancel_offer":
       "donor_message": "Choose why the donor wishes to cancel this offer."
       "cancel": "Cancel Offer"
+
+    "customized_variables":
+      "click_here": "click here"
 
 `export default I18nTranslationsEn`
