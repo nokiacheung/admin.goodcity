@@ -173,10 +173,11 @@ I18nTranslationsEn =
       "van": "Van"
       "receiving" : "This offer is currently being received."
       "offer_cancelled_by": "Offer cancelled by {{firstName}} {{lastName}}"
-      "complete_review_message": "Your offer has been reviewed. Please [transport_page_link] to arrange transportation."
+      "complete_review_message": "Your offer has been reviewed. Please [click_here(transport_page)] to arrange transportation."
       "choose_ggv_option": "Choose GoGoVan hire requirement"
       "finished_review": "Finished reviewing this offer?"
       "add_message_to_donor": "Message to the donor:"
+      "click_here": "Click here"
 
     "review_item":
       "title" : "Review Item"
