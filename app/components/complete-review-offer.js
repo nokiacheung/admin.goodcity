@@ -75,7 +75,7 @@ export default Ember.Component.extend({
       var loadingView = getOwner(this).lookup('component:loading').append();
       var url = `/offers/${offerId}/${action}`;
 
-      completeReviewMessage = completeReviewMessage.replace('[transport_page_link]',`<a href='/offers/${offerId}/plan_delivery'>click here</a>`);
+      completeReviewMessage = completeReviewMessage.replace("[click_here(transport_page)]",`<a href='/offers/${offerId}/plan_delivery'>${this.get("i18n").t("customized_variables.click_here")}</a>`);
 
       new AjaxPromise(url, "PUT", this.get('session.authToken'), {offer: offerProperties, complete_review_message: completeReviewMessage})
         .then(data => {
