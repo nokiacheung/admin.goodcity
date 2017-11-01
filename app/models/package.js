@@ -85,7 +85,7 @@ export default DS.Model.extend({
     return (dispatchedOrdersPackages.get("length") > 1 || dispatchedOrdersPackages.get("length") === 0) ? false : dispatchedOrdersPackages[0];
   }),
 
-  remainingQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.[]", "ordersPackages.@each.state", function() {
+  remainingQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.[]", "ordersPackages.@each.state", "receivedQuantity", function() {
     var qty = 0;
     this.get('ordersPackages').forEach(record => {
       if(record && record.get("state") !== "cancelled") {
