@@ -6,6 +6,22 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     defaultLocationType: 'auto',
+
+    rollbar: {
+      accessToken: 'e0c3ee33bdc049fbbdecbad844c552da',
+      payload: {
+        client: {
+          javascript: {
+            source_map_enabled: true, //this is now true by default
+            code_version: "0",
+            // Optionally have Rollbar guess which frames the error was thrown from
+            // when the browser does not provide line and column numbers.
+            guess_uncaught_frames: true
+          }
+        }
+      }
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -56,6 +72,7 @@ module.exports = function(environment) {
     coffeeOptions: {
       blueprints: false
     },
+
     i18n: {
       defaultLocale: 'en'
     }
