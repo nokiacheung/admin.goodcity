@@ -81,3 +81,18 @@ test('Relationships with other models', function(assert){
   assert.equal(relationshipsWithItem.key, 'item');
   assert.equal(relationshipsWithItem.kind, 'belongsTo');
 });
+
+test('dispatchedOrdersPackages: Returns associated dispatched orders_packages', function(assert){
+  var store, package1, ordersPackage1, ordersPackage2;
+
+  store = this.store();
+
+  Ember.run(function(){
+    package1 = store.createRecord('package', { id: 1, receivedQuantity: 3 });
+    ordersPackage1 = store.createRecord('ordersPackage', {id: 1, state: "designated", quantity: 1});
+    ordersPackage2 = store.createRecord('ordersPackage', {id: 2, state: "dispatched", quantity: 2});
+    package1.get('ordersPackages').pushObjects([ordersPackage1, ordersPackage2]);
+  });
+
+  assert.equal(package1.get('dispatchedOrdersPackages').get('length'), 1);
+});
