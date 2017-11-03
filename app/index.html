@@ -34,14 +34,14 @@
   </head>
   <body>
     {{content-for 'body'}}
-    <script src="assets/vendor.js"></script>
+    <script src="assets/vendor.js" integrity=""></script>
     <script>
       Raven
         .config('https://3ddbe2ce6d844dddb94e6a98f712abad@sentry.io/197688')
         .addPlugin(Raven.Plugins.Ember)
         .install();
     </script>
-    <script src="assets/goodcity.js"></script>
+    <script src="assets/goodcity.js" integrity=""></script>
     {{content-for 'body-footer'}}
   </body>
 </html>
