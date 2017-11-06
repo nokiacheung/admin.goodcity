@@ -5469,7 +5469,7 @@ slide@^1.1.5:
 
 "smoke-and-mirrors@https://github.com/crossroads/smoke-and-mirrors.git#master":
   version "0.5.2"
-  resolved "https://github.com/crossroads/smoke-and-mirrors.git#0c8804334131f40c98748ce8d8fc9b5cb9a2f8f8"
+  resolved "https://github.com/crossroads/smoke-and-mirrors.git#a2ea92d7a1a729b35c1518180dff842d88a6d651"
   dependencies:
     ember-cli-babel "^5.1.5"
     ember-cli-htmlbars "^1.0.1"
