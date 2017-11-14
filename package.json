@@ -62,7 +62,7 @@
     "express": "^4.13.3",
     "glob": "^5.0.14",
     "loader.js": "4.1.0",
-    "smoke-and-mirrors": "https://github.com/crossroads/smoke-and-mirrors.git#master",
+    "smoke-and-mirrors": "0.6.2",
     "xml2js": "^0.4.12"
 
   },
