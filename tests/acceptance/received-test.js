@@ -6,7 +6,6 @@ import { module, test } from 'qunit';
 import '../factories/offer';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-import { mockFindAll } from 'ember-data-factory-guy';
 
 var App, offer1, item1, package1, package2, package3, orders_pkg1, packages_location;
 
@@ -32,8 +31,14 @@ module('Received Offers', {
 test("expecting, received and missing count", function(assert) {
   assert.expect(3);
   visit("/offers/"+offer1.id+"/review_offer/receive");
-  mockFindAll('orders_package').returns({ json: {orders_packages: [orders_pkg1.toJSON({includeId: true})]}});
-  mockFindAll('packages_location').returns({ json: {packages_locations: [packages_location.toJSON({includeId: true})]}});
+  $.mockjax({url: '/api/v1/packages_location*', type: 'GET', status: 200,responseText: {
+      packages_locations: [packages_location.toJSON({includeId: true})]
+    }
+  });
+  $.mockjax({url: '/api/v1/orders_package*', type: 'GET', status: 200,responseText: {
+      orders_packages: [orders_pkg1.toJSON({includeId: true})]
+    }
+  });
 
   andThen(function(){
     //expecting
