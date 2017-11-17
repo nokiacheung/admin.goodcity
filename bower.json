@@ -20,7 +20,7 @@
     "lightgallery": "~1.1.4",
     "font-awesome": "~4.7.0",
     "ember-qunit-notifications": "0.1.0",
-    "jquery-mockjax": "2.0.1",
+    "jquery-mockjax": "2.2.2",
     "active-model-adapter": "2.1.1",
     "offline": "^0.7.19",
     "raven-js": "^3.16.1"
