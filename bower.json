@@ -6,7 +6,7 @@
     "ember-cli-test-loader": "0.2.2",
     "cloudinary": "~1.0.12",
     "ember-i18n": "5.0.2",
-    "moment": "~2.10.3",
+    "moment": "^2.19.2",
     "foundation": "~5.5.0",
     "fastclick": "~1.0.3",
     "jquery-placeholder": "~2.1.0",
