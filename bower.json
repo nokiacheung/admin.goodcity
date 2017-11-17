@@ -5,7 +5,7 @@
     "ember-cli-shims": "0.1.1",
     "ember-cli-test-loader": "0.2.2",
     "cloudinary": "~1.0.12",
-    "ember-i18n": "4.2.0",
+    "ember-i18n": "5.0.2",
     "moment": "~2.10.3",
     "foundation": "~5.5.0",
     "fastclick": "~1.0.3",
