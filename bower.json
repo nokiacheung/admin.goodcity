@@ -9,7 +9,7 @@
     "moment": "^2.19.2",
     "foundation": "~5.5.0",
     "fastclick": "^1.0.6",
-    "jquery-placeholder": "~2.1.0",
+    "jquery-placeholder": "^2.3.1",
     "jquery.cookie": "~1.4.1",
     "modernizr": "~2.8.3",
     "select2": "~3.5.2",
