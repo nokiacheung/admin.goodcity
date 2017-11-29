@@ -13,7 +13,6 @@ module.exports = function(environment) {
         client: {
           javascript: {
             source_map_enabled: true, //this is now true by default
-            code_version: require('child_process').execSync('git rev-parse HEAD').toString().trim(),
             // Optionally have Rollbar guess which frames the error was thrown from
             // when the browser does not provide line and column numbers.
             guess_uncaught_frames: true
@@ -108,6 +107,12 @@ module.exports = function(environment) {
       'wss://chunderw-vpc-gll.twilio.com/signal',
       'https://eventgw.twilio.com/v1/EndpointEvents'
     ].join(' ');
+  }
+
+  if (process.env.SOURCE_VERSION) {
+    let packageJson = require('../package.json');
+    let gitHash = process.env.SOURCE_VERSION.substr(0, 7);
+    ENV.emberRollbarClient.payload.client.javascript['code_version'] = `${packageJson.version}+${gitHash}`;
   }
 
   if (environment === 'test') {
