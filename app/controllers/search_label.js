@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
   fetchMoreResult: true,
   searchPlaceholder: t("search.placeholder"),
   i18n: Ember.inject.service(),
+  pkgTypes: [],
 
   allPackageTypes: Ember.computed("fetchMoreResult", function(){
     return this.store.peekAll('package_type').filterBy('visibleInSelects', true);
@@ -32,22 +33,21 @@ export default Ember.Controller.extend({
 
   filteredResults: Ember.computed('filter', 'fetchMoreResult', 'allPackageTypes.[]', function(){
     var filter = Ember.$.trim(this.get('filter').toLowerCase());
-    var types = [];
     var matchFilter = value => (value || "").toLowerCase().indexOf(filter) !== -1;
 
     if (filter.length > 0) {
       this.get('allPackageTypes').forEach(function(type) {
         if (matchFilter(type.get('name')) || matchFilter(type.get('otherTerms'))) {
-          types.push(type);
+          this.get("pkgTypes").push(type);
         }
       });
       Ember.run.later(this, this.highlight);
     } else {
-      types = types.concat(this.get('allPackageTypes').toArray());
+      this.get("pkgTypes", this.get("pkgTypes").concat(this.get('allPackageTypes').toArray()));
       this.clearHiglight();
     }
 
-    return types.sortBy("name").uniq();
+    return this.get("pkgTypes").sortBy("name").uniq();
   }),
 
   highlight() {
