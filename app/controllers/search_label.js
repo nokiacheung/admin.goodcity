@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
       });
       Ember.run.later(this, this.highlight);
     } else {
-      this.get("pkgTypes", this.get("pkgTypes").concat(this.get('allPackageTypes').toArray()));
+      this.set("pkgTypes", this.get("pkgTypes").concat(this.get('allPackageTypes').toArray()));
       this.clearHiglight();
     }
 
