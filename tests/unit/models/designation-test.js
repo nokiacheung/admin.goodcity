@@ -2,7 +2,7 @@ import { test, moduleForModel } from 'ember-qunit';
 import Ember from 'ember';
 
 moduleForModel('designation', 'Designation Model', {
-  needs: ['model:orders_package', 'model:package']
+  needs: ['model:orders_package', 'model:item']
 });
 
 test('check attributes', function(assert){
@@ -64,7 +64,7 @@ test('check dispatchedOrdersPackages returns only dispatched orders_packages', f
   store = this.store();
 
   Ember.run(function(){
-    orders_package1 = store.createRecord('ordersPackage', {id: 1, state: 'dispatched'});
+    orders_package1 = store.createRecord('orders_package', {id: 1, state: 'dispatched'});
     orders_package2 = store.createRecord('orders_package', {id: 2, state: 'dispatched'});
     orders_package3 = store.createRecord('orders_package', {id: 3, state: 'designated'});
     model.get('ordersPackages').pushObjects([orders_package1, orders_package2, orders_package3]);
