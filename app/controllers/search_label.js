@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
       this.clearHiglight();
     }
 
-    return types;
+    return types.sortBy("name").uniq();
   }),
 
   highlight() {
