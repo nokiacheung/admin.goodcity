@@ -21,7 +21,9 @@
           <ul class="list list-activity list-offer-items">
             {{#each filteredResults as |type|}}
               <li {{action "assignItemLabel" type}}>
-                <div class="package_name">{{type.name}}</div>
+                {{#if type.name}}
+                  <div class="package_name">{{type.name}}</div>
+                {{/if}}
                 <div>{{type.otherTerms}}</div>
               </li>
             {{/each}}
