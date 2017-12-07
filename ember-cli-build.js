@@ -5,7 +5,7 @@ var webRelease = process.env.EMBER_CLI_CORDOVA === '0' && ['production', 'stagin
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     sourcemaps: {
-      enabled: false,
+      enabled: true,
       extensions: ['js']
     },
     minifyJS: {
