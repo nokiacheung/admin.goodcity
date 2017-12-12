@@ -36,7 +36,6 @@ module.exports = function(defaults) {
 
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/moment/locale/zh-tw.js');
-  app.import('bower_components/airbrake-js/dist/client.js');
   app.import('bower_components/pickadate/lib/picker.js');
   app.import('bower_components/pickadate/lib/picker.date.js');
   app.import('bower_components/pickadate/lib/picker.time.js');

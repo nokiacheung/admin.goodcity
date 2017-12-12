@@ -58,11 +58,7 @@ module.exports = function(environment) {
       PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "location", "cancellation_reason", "holiday"],
       SHA: process.env.APP_SHA || "00000000",
       SHARED_SHA:  process.env.APP_SHARED_SHA || "00000000",
-      VERSION: process.env.VERSION || "1.0.0",
-
-      AIRBRAKE_HOST: "https://errbit.crossroads.org.hk",
-      AIRBRAKE_PROJECT_ID: "55263f256572721acb000000",
-      AIRBRAKE_PROJECT_KEY: "6d0f1e945f5fdba56d9fe043684f2b7a"
+      VERSION: process.env.VERSION || "1.0.0"
     },
 
     cordova: {
