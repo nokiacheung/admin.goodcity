@@ -14,6 +14,7 @@ export default SelectList.extend( {
     if ( this.get('pkg') !== null && this.get('pkg.item.packageType') !== null){
       if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0) {
         this.set('pkg.notes', this.get('pkg.item.packageType.name'));
+        this.set('pkg.packageType', this.get('pkg.item.packageType'));
       }
       Ember.$("textarea#"+this.get('index')).val(this.get('pkg.notes'));
       this.set('allowValueSet', false);
