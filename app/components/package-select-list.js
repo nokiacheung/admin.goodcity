@@ -13,7 +13,7 @@ export default SelectList.extend( {
     this._super(...arguments);
     if ( this.get('pkg') !== null && this.get('pkg.item.packageType') !== null){
       if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0) {
-        this.set('pkg.notes', this.get('pkg.packageType.name'));
+        this.set('pkg.notes', this.get('pkg.item.packageType.name'));
       }
       Ember.$("textarea#"+this.get('index')).val(this.get('pkg.notes'));
       this.set('allowValueSet', false);
