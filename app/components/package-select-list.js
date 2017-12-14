@@ -11,7 +11,7 @@ export default SelectList.extend( {
 
   didRender() {
     this._super(...arguments);
-    if ( this.get('pkg') !== null && this.get('pkg.packageType') !== null && this.get('allowValueSet') === true){
+    if ( this.get('pkg') !== null && this.get('pkg.item.packageType') !== null && this.get('allowValueSet') === true){
       if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0) {
         this.set('pkg.notes', this.get('pkg.packageType.name'));
       }
