@@ -12,7 +12,7 @@ export default SelectList.extend( {
   didRender() {
     this._super(...arguments);
     if ( this.get('pkg') !== null && this.get('pkg.item.packageType') !== null){
-      if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0) {
+      if(this.get('pkg.notes') === null || this.get('pkg.notes.length') === 0 || (this.get('pkg.packageType') && this.get('pkg.packageType.name') !== this.get('pkg.item.packageType.name'))) {
         this.set('pkg.notes', this.get('pkg.item.packageType.name'));
         this.set('pkg.packageType', this.get('pkg.item.packageType'));
       }
