@@ -23,7 +23,7 @@ export default SelectList.extend( {
   didUpdate() {
     this._super(...arguments);
     this.set('pkg.notes', this.get('pkg.packageType.name'));
-        this.set('pkg.packageType', this.get('pkg.packageType'));
+    this.set('pkg.packageType', this.get('pkg.packageType'));
     this.set('didUpdatedOnce', true);
   },
 
