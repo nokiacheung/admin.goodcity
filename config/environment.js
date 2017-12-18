@@ -10,8 +10,8 @@ module.exports = function(environment) {
     'emberRollbarClient': {
       enabled: environment !== 'test' && environment !== 'development',
       accessToken: 'e0c3ee33bdc049fbbdecbad844c552da',
-      captureUncaught: false,
-      captureUnhandledRejections: false,
+      verbose: true,
+      ignoredMessages: ["TransitionAborted"],
       payload: {
         client: {
           javascript: {
