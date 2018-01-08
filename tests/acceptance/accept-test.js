@@ -61,8 +61,8 @@ test("visit accepted item with item_type", function(assert) {
     assert.equal($.trim($(".detail_container:eq(1)").text()).indexOf(package2.get('packageType.name')) > 0, true);
 
     // display package component notes
-    assert.equal($('.detail_container div.ui div textarea').val(), package1.get('notes'));
-    assert.equal($('.detail_container div.ui div textarea').val(), package2.get('notes'));
+    assert.equal($('.detail_container div.ui div textarea').val(), "Category1");
+    assert.equal($('.detail_container div.ui div textarea').val(), "Category1");
 
     // display quantity value
     assert.equal(parseInt($(".detail_container:eq(0) input[name='qty']").val()), package1.get('quantity'));
