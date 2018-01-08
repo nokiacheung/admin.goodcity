@@ -33,7 +33,7 @@ test("redirect to finished offers page", function(assert) {
 
     var assertions = function() {
       assert.equal(currentURL(), "/offers/finished/received");
-      assert.equal(find("ul.list li").length, 1);
+      assert.equal(find("ul.list li").length, 2);
       assert.equal(find("ul.list img").length, 1);
 
       // under-review status
@@ -54,7 +54,7 @@ test("redirect to cancelled offers page", function(assert) {
 
   andThen(function(){
     assert.equal(currentURL(), "/offers/finished/cancelled");
-    assert.equal(find("ul.list li").length, 1);
+    assert.equal(find("ul.list li").length, 2);
     assert.equal(find("ul.list img").length, 1);
 
     // cancelled status
