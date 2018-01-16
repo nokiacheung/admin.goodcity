@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import syncDataStub from '../helpers/empty-sync-data-stub';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import { module, test } from 'qunit';
@@ -11,7 +10,6 @@ module('Subscriptions', {
   beforeEach: function() {
     App = startApp();
     TestHelper.setup();
-    syncDataStub(TestHelper);
   },
   afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });

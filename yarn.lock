@@ -5404,13 +5404,6 @@ setprototypeof@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
 
-"shared-goodcity@git://github.com/crossroads/shared.goodcity.git#master":
-  version "0.0.0"
-  resolved "git://github.com/crossroads/shared.goodcity.git#dbba47e625c798421cc635f4725652100232cf30"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-coffeescript "^1.13.2"
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
@@ -5476,7 +5469,7 @@ slide@^1.1.5:
 
 "smoke-and-mirrors@https://github.com/crossroads/smoke-and-mirrors.git#master":
   version "0.5.2"
-  resolved "https://github.com/crossroads/smoke-and-mirrors.git#0c8804334131f40c98748ce8d8fc9b5cb9a2f8f8"
+  resolved "https://github.com/crossroads/smoke-and-mirrors.git#a2ea92d7a1a729b35c1518180dff842d88a6d651"
   dependencies:
     ember-cli-babel "^5.1.5"
     ember-cli-htmlbars "^1.0.1"

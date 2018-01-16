@@ -76,7 +76,7 @@ export default Ember.Controller.extend({
 
   actions: {
     clearText(index) {
-      if(index != null){
+      if(index !== null){
         Ember.$("#"+index).val("");
       }
     },

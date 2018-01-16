@@ -4,9 +4,17 @@ var webRelease = process.env.EMBER_CLI_CORDOVA === '0' && ['production', 'stagin
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    sourcemaps: ['js', 'css'],
+    sourcemaps: {
+      enabled: true,
+      extensions: ['js']
+    },
+    minifyJS: {
+      options: {
+        exclude: ["**/goodcity.js"]
+      }
+    },
     fingerprint: {
-      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map'],
+      extensions: ['css', 'png', 'jpg', 'gif', 'map'],
       enabled: webRelease
     },
     gzip: {
@@ -15,9 +23,6 @@ module.exports = function(defaults) {
       enabled: webRelease
     }
   });
-
-  app.import('bower_components/raven-js/dist/raven.js');
-  app.import('bower_components/raven-js/dist/plugins/ember.js');
 
   app.import('bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
   app.import('bower_components/blueimp-file-upload/js/jquery.iframe-transport.js');
@@ -31,7 +36,6 @@ module.exports = function(defaults) {
 
   app.import('bower_components/moment/moment.js');
   app.import('bower_components/moment/locale/zh-tw.js');
-  app.import('bower_components/airbrake-js/dist/client.js');
   app.import('bower_components/pickadate/lib/picker.js');
   app.import('bower_components/pickadate/lib/picker.date.js');
   app.import('bower_components/pickadate/lib/picker.time.js');

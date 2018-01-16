@@ -6,6 +6,26 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     defaultLocationType: 'auto',
+
+    'emberRollbarClient': {
+      enabled: environment !== 'test' && environment !== 'development',
+      accessToken: 'e0c3ee33bdc049fbbdecbad844c552da',
+      verbose: true,
+      ignoredMessages: ["TransitionAborted"],
+      payload: {
+        client: {
+          javascript: {
+            source_map_enabled: true, //this is now true by default
+            code_version: require('child_process').execSync('git rev-parse HEAD').toString().trim(),
+            // Optionally have Rollbar guess which frames the error was thrown from
+            // when the browser does not provide line and column numbers.
+            environment: environment,
+            guess_uncaught_frames: false
+          }
+        }
+      }
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -40,11 +60,7 @@ module.exports = function(environment) {
       PRELOAD_AUTHORIZED_TYPES: ["package_type","donor_condition","rejection_reason","permission", "timeslot", "gogovan_transport", "crossroads_transport", "location", "cancellation_reason", "holiday"],
       SHA: process.env.APP_SHA || "00000000",
       SHARED_SHA:  process.env.APP_SHARED_SHA || "00000000",
-      VERSION: process.env.VERSION || "1.0.0",
-
-      AIRBRAKE_HOST: "https://errbit.crossroads.org.hk",
-      AIRBRAKE_PROJECT_ID: "55263f256572721acb000000",
-      AIRBRAKE_PROJECT_KEY: "6d0f1e945f5fdba56d9fe043684f2b7a"
+      VERSION: process.env.VERSION || "1.0.0"
     },
 
     cordova: {
@@ -56,6 +72,7 @@ module.exports = function(environment) {
     coffeeOptions: {
       blueprints: false
     },
+
     i18n: {
       defaultLocale: 'en'
     }

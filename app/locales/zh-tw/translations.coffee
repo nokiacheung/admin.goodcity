@@ -282,4 +282,7 @@ I18nTranslationsZhTw =
       "donor_message": "選擇捐獻人士取消的原因"
       "cancel": "取消捐獻"
 
+    "customized_variables":
+      "click_here": "點擊這裏"
+
 `export default I18nTranslationsZhTw`

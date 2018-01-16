@@ -281,4 +281,7 @@ I18nTranslationsEn =
       "donor_message": "Choose why the donor wishes to cancel this offer."
       "cancel": "Cancel Offer"
 
+    "customized_variables":
+      "click_here": "click here"
+
 `export default I18nTranslationsEn`

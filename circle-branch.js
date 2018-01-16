@@ -36,7 +36,7 @@ https.get(options, function(res) {
 function setBranch(branches) {
   var matched = JSON.parse(branches)
     .map(function(b) { return b.name; })
-    .filter(function(name) { return name.indexOf(currentBranch) == 0; });
+    .filter(function(name) { return name.indexOf(currentBranch) === 0; });
 
   var branchToUse = matched[0] || defaultBranch;
   console.log(sharedGoodCityRepo + " using " + branchToUse);

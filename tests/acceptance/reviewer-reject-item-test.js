@@ -29,7 +29,7 @@ test("visit rejected item without item_type", function(assert) {
   visit("/offers/" + offer.id + "/review_item/" + item2.id + "/reject");
   andThen(function() {
     assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item2.id + "/reject");
-    assert.equal($('input[disabled]').val(), "");
+    assert.equal($('.item_lable_input input').val(), "");
     assert.equal($('p.no-items').text(), "Please choose Item Type first!");
   });
 });
@@ -39,7 +39,7 @@ testSkip("visit rejected item with item_type", function(assert) {
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/reject");
   andThen(function() {
     assert.equal(currentURL(), "/offers/" + offer.id + "/review_item/" + item1.id + "/reject");
-    assert.equal($('input[disabled]').val(), item1.get('packageType.name'));
+    assert.equal($('.item_lable_input input').val(), item1.get('packageType.name'));
     assert.equal($(".reject-offer ul li").length, 4);
 
     //placeholder message in recjectio comments textarea

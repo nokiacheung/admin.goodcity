@@ -52,7 +52,7 @@ export default DS.Model.extend({
 
   packageTypeObject: Ember.computed('packageType', function(){
     var obj = this.get('packageType').getProperties('id', 'name', 'isItemTypeNode');
-    obj.id = obj.packageTypeId = parseInt(obj.id);
+    obj.id = obj.packageTypeId = parseInt(obj.id, 10);
     return obj;
   }),
 
@@ -85,12 +85,12 @@ export default DS.Model.extend({
     return (dispatchedOrdersPackages.get("length") > 1 || dispatchedOrdersPackages.get("length") === 0) ? false : dispatchedOrdersPackages[0];
   }),
 
-  remainingQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.[]", "ordersPackages.@each.state", function() {
+  remainingQty: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.[]", "ordersPackages.@each.state", "receivedQuantity", function() {
     var qty = 0;
     this.get('ordersPackages').forEach(record => {
       if(record && record.get("state") !== "cancelled") {
         this.store.findRecord('ordersPackage', record.get("id")).then(
-        qty += parseInt(record.get("quantity")));
+        qty += parseInt(record.get("quantity"), 10));
       }
     });
     return (this.get("receivedQuantity") - qty) || 0;
@@ -98,12 +98,14 @@ export default DS.Model.extend({
 
   hasAllPackagesDispatched: Ember.computed("ordersPackages.@each.quantity", "ordersPackages.@each.state", "ordersPackages.[]", function() {
     var ordersPackages = this.store.query("ordersPackage", { search_by_package_id: this.get("id") });
+    var packagesLocations = this.store.query("packagesLocation", { search_by_package_id: this.get("id") });
+    this.store.pushPayload(packagesLocations);
     this.store.pushPayload(ordersPackages);
     var received_quantity = this.get("receivedQuantity");
     var totalDispatchedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
     dispatchedOrdersPackages.forEach(record => {
-      totalDispatchedQty += parseInt(record.get("quantity"));
+      totalDispatchedQty += parseInt(record.get("quantity"), 10);
     });
     return (totalDispatchedQty === received_quantity) ? true : false;
   }),
@@ -113,7 +115,7 @@ export default DS.Model.extend({
     var totalDesignatedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
     dispatchedOrdersPackages.forEach(record => {
-      totalDesignatedQty += parseInt(record.get("quantity"));
+      totalDesignatedQty += parseInt(record.get("quantity"), 10);
     });
     return (totalDesignatedQty === received_quantity) ? true : false;
   }),
@@ -130,7 +132,7 @@ export default DS.Model.extend({
     var totalDispatchedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "dispatched");
     dispatchedOrdersPackages.forEach(record => {
-      totalDispatchedQty += parseInt(record.get("quantity"));
+      totalDispatchedQty += parseInt(record.get("quantity"), 10);
     });
     return totalDispatchedQty;
   }),
@@ -139,7 +141,7 @@ export default DS.Model.extend({
     var totalDesignatedQty = 0;
     var dispatchedOrdersPackages = this.get("ordersPackages").filterBy("state", "designated");
     dispatchedOrdersPackages.forEach(record => {
-      totalDesignatedQty += parseInt(record.get("quantity"));
+      totalDesignatedQty += parseInt(record.get("quantity"), 10);
     });
     return totalDesignatedQty;
   }),
