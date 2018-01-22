@@ -2,7 +2,7 @@ import { test, moduleForModel } from 'ember-qunit';
 import Ember from 'ember';
 
 moduleForModel('designation', 'Designation Model', {
-  needs: ['model:orders_package']
+  needs: ['model:package', 'model:orders-package']
 });
 
 test('check attributes', function(assert){
@@ -35,4 +35,23 @@ test('Relationships with other models', function(assert){
 
   assert.equal(relationshipsWithDistrict.key, 'ordersPackages');
   assert.equal(relationshipsWithDistrict.kind, 'hasMany');
+});
+
+test('check designatedOrdersPackages returns only designated orders_packages', function(assert){
+  assert.expect(2);
+  var orders_package1, orders_package2, orders_package3, designatedOrdersPackagesIds, model, store;
+  model = this.subject();
+  store = this.store();
+
+  Ember.run(function(){
+    orders_package1 = store.createRecord('orders_package', {id: 1, state: 'designated'});
+    orders_package2 = store.createRecord('orders_package', {id: 2, state: 'designated'});
+    orders_package3 = store.createRecord('orders_package', {id: 3, state: 'dispatched'});
+    model.get('ordersPackages').pushObjects([orders_package1, orders_package2, orders_package3]);
+  });
+
+  designatedOrdersPackagesIds = model.get('designatedOrdersPackages').getEach('id');
+
+  assert.equal(designatedOrdersPackagesIds.get('length'),2);
+  assert.equal(Ember.compare(designatedOrdersPackagesIds, [orders_package1.get('id'), orders_package2.get('id')]), 0);
 });
