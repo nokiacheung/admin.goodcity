@@ -10,8 +10,8 @@ FactoryGuy.define('orders_package',{
     id:              FactoryGuy.generate('id'),
     quantity:        1,
     sentOn:          '',
-    state:           ''
-    //item:            FactoryGuy.belongsTo('item'),
+    state:           '',
+    package:            FactoryGuy.belongsTo('package')
     //designation:     FactoryGuy.belongsTo('designation'),
   }
 });

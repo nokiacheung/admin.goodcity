@@ -16,6 +16,8 @@ FactoryGuy.define('package', {
     height:   10,
     item:     FactoryGuy.belongsTo('item'),
     packageType:  FactoryGuy.belongsTo('package_type'),
+    ordersPackages: FactoryGuy.hasMany('orders_package'),
+    packagesLocations: FactoryGuy.hasMany('packages_location'),
     notes:    "example",
   }
 });

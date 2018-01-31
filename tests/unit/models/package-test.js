@@ -1,8 +1,22 @@
 import { test, moduleForModel } from 'ember-qunit';
+import FactoryGuy from 'ember-data-factory-guy';
+import startApp from '../../helpers/start-app';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import Ember from 'ember';
 
+var App;
+
 moduleForModel('package', 'Package Model', {
-  needs: ['model:item', 'model:package_type', 'model:designation', 'model:location', 'model:donor_condition', 'model:orders_package', 'model:package_image', 'model:packages_location']
+  needs: ['model:item', 'model:package_type', 'model:designation', 'model:location', 'model:donor_condition', 'model:orders-package', 'model:package_image', 'model:packages-location'],
+
+  beforeEach: function() {
+    App = startApp({}, 2);
+    TestHelper.setup();
+  },
+  afterEach: function() {
+    Ember.run(function() { TestHelper.teardown(); });
+    Ember.run(App, 'destroy');
+  }
 });
 
 test('check attributes', function(assert){
@@ -80,4 +94,28 @@ test('Relationships with other models', function(assert){
 
   assert.equal(relationshipsWithItem.key, 'item');
   assert.equal(relationshipsWithItem.kind, 'belongsTo');
+});
+
+test('dispatchedItemCount returns ordersPackages count having state as dispatched', function(assert){
+  var ordersPackages = FactoryGuy.makeList('orders_package', 2, { state: 'dispatched'});
+
+  var model = this.subject({ ordersPackages: ordersPackages});
+
+  assert.equal(model.get('dispatchedItemCount'), 2);
+});
+
+test('cancelledItemCount returns ordersPackages count having state as cancelled', function(assert){
+  var ordersPackages = FactoryGuy.makeList('orders_package', 2, { state: 'cancelled'});
+
+  var model = this.subject({ ordersPackages: ordersPackages});
+
+  assert.equal(model.get('cancelledItemCount'), 2);
+});
+
+test('firstLocationName returns first location name', function(assert){
+  var packagesLocation = FactoryGuy.make('packages_location');
+
+  var model = this.subject({ packagesLocations: [packagesLocation]});
+
+  assert.equal(model.get('firstLocationName'), packagesLocation.get('location.name'));
 });
