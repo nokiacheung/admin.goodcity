@@ -14,6 +14,8 @@
 
         <div class={{if invalidDescription 'show-error' 'no-error'}}>{{t "receive_package.invalid_description"}}</div>
 
+        <div class={{if invalidLocation 'show-error' 'no-error'}}>{{t "receive_package.invalid_location"}}</div>
+
         {{#each package.errors.messages as |message|}}
           <div class='show-error'>{{message}}</div>
         {{/each}}
