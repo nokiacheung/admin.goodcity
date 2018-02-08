@@ -100,7 +100,7 @@ export default Ember.Controller.extend({
     }
   }),
 
-  invalidLocation: Ember.computed({
+  invalidLocation: Ember.computed('locationId', {
     get: function() {
       return this.get("locationId") === undefined;
     },
