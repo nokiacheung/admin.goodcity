@@ -82,7 +82,7 @@ export default Ember.Controller.extend({
     }
   }),
 
-  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo', 'invalidDescription', 'watchErrors', {
+  hasErrors: Ember.computed('invalidQuantity', 'invalidInventoryNo', 'invalidDescription', 'invalidLocation', 'watchErrors', {
     get: function() {
       return this.get("invalidQuantity") || this.get("invalidInventoryNo") || this.get("invalidDescription") || this.get("invalidLocation");
     },
@@ -102,7 +102,7 @@ export default Ember.Controller.extend({
 
   invalidLocation: Ember.computed({
     get: function() {
-      return this.get("locationId") == undefined;
+      return this.get("locationId") === undefined;
     },
     set: function(key, value) {
       return value;
