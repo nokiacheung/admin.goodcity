@@ -92,7 +92,6 @@ export default Ember.Component.extend({
       if(optionsLink.length) {
         Ember.$('.receive-options').not('.hidden').toggleClass('hidden');
         Ember.$('.options-link-open.hidden').toggleClass('hidden');
-        //this.toggleItemClass();
         return false;
       } else if(itemOptionsLink) {
         this.toggleItemClass();
