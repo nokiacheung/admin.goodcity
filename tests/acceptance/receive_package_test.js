@@ -32,7 +32,7 @@ test("expecting, Location can't be blank when location not selected", function(a
   andThen(function(){
     Ember.$('.confirmLink').click();
     andThen(function(){
-      assert.equal($('.show-error').text().trim().includes("Location can not be blank"), true);
+      assert.equal($('.show-error').text().trim(), "Inventory number is invalid.Location can not be blank");
     });
   });
 });
