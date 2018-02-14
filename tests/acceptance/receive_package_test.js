@@ -16,7 +16,7 @@ module('Receive package', {
     package1 = FactoryGuy.make("package", { offerId: parseInt(offer1.id), state: "received", item: item1});
   },
   afterEach: function() {
-    Em.run(function() { TestHelper.teardown(); });
+    Ember.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
@@ -32,7 +32,7 @@ test("expecting, Location can't be blank when location not selected", function(a
   andThen(function(){
     Ember.$('.confirmLink').click();
     andThen(function(){
-      assert.equal($('.show-error').text().trim(), "Inventory number is invalid.Location can not be blank");
+      assert.equal($('.show-error').text().trim(), "Inventory number is invalid.Location can not be blank.");
     });
   });
 });
