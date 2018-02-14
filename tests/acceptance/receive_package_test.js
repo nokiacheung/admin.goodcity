@@ -16,7 +16,7 @@ module('Receive package', {
     package1 = FactoryGuy.make("package", { offerId: parseInt(offer1.id), state: "received", item: item1});
   },
   afterEach: function() {
-    Ember.run(function() { TestHelper.teardown(); });
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
