@@ -23,7 +23,7 @@ module('Received Offers', {
 
   },
   afterEach: function() {
-    Em.run(function() { TestHelper.teardown(); });
+    Ember.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
