@@ -97,6 +97,15 @@ test("visit accepted item with item_type", function(assert) {
   });
 });
 
+test("selecting main package type populate sub package type", function(assert){
+  assert.expect(2);
+  visit("/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
+
+  andThen(function() {
+    assert.equal($('.ember-view select').text().trim().substr(0, 12), "Package Type");
+  });
+});
+
 test("visit submitted item with item_type", function(assert) {
   assert.expect(6);
   visit("/offers/" + offer.id + "/review_item/" + item3.id + "/accept");
