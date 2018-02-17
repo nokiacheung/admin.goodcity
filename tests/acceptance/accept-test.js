@@ -98,7 +98,7 @@ test("visit accepted item with item_type", function(assert) {
 });
 
 test("selecting main package type populate sub package type", function(assert){
-  assert.expect(2);
+  assert.expect(1);
   visit("/offers/" + offer.id + "/review_item/" + item1.id + "/accept");
 
   andThen(function() {
