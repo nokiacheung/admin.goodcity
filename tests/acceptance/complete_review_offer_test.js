@@ -8,20 +8,19 @@ import '../factories/offer';
 import '../factories/item';
 import '../factories/packages_location';
 
-var App, offer1, reviewer, reviewerName, offer2, item1, item2, packages_location;
+var App, offer1, reviewer, reviewerName, item1, item2, packages_location;
 
 module('In Review Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     reviewer = FactoryGuy.make('user', { id: 3 });
-    offer1 = FactoryGuy.make("offer_with_items", { state:"under_review", reviewedBy: reviewer});
+    offer1 = FactoryGuy.make("offer", { state:"under_review", reviewedBy: reviewer});
+    item1 = FactoryGuy.make("item", { state:"accepted", offer: offer1 });
+    item2 = FactoryGuy.make("item", { state:"accepted", offer: offer1 });
     reviewerName = reviewer.get('firstName') + " " + reviewer.get('lastName');
     packages_location = FactoryGuy.make("packages_location");
 
-    offer2 = FactoryGuy.make("offer",{state:"reviewed", reviewedBy: reviewer});
-    item1 = FactoryGuy.make("item", { state:"accepted", offer: offer2 });
-    item2 = FactoryGuy.make("item", { state:"rejected", offer: offer2 });
     $.mockjax({url: '/api/v1/packages_location*', type: 'GET', status: 200,responseText: {
         packages_locations: [packages_location.toJSON({includeId: true})]
       }
@@ -33,16 +32,20 @@ module('In Review Offers', {
   }
 });
 
-test("convert [click_here|transport_page] to proper link", function(assert){
-  visit("/offers/"+ offer1.id +"/donor_messages");
+test("check offer-messages replace [click_here|transport] to click_here link", function(assert) {
+  assert.expect(2);
+  visit('/offers/' + offer1.id + "/supervisor_messages")
 
-  andThen(function(){
-    fillIn('.ember-text-area', "[click here|transport_page]");
-    Ember.$('.button').click();
-
+  andThen(function() {
+    assert.equal(currentURL(), "/offers/" + offer1.id + "/supervisor_messages");
     andThen(function(){
-      assert.equal($('.my_message a').text().trim(), "hello");
-    })
-
+      fillIn('.ember-text-area', "[click here|transport_page]");
+      andThen(function(){
+        click('.ember-view button');
+        andThen(function(){
+          assert.equal($('.message_details:last').parent().text().trim().split(" ").splice(-1)[0], "click here");
+        })
+      });
+    });
   });
 });
