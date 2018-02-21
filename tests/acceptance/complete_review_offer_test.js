@@ -38,7 +38,7 @@ test("check offer-messages replace [click_here|transport] to click_here link", f
   andThen(function() {
     assert.equal(currentURL(), url);
     andThen(function(){
-      fillIn('.ember-text-area', "[click_here|transport_page]");
+      fillIn('.message-base textarea', "[click_here|transport_page]");
       andThen(function(){
         click('.message-base button');
         andThen(function(){
