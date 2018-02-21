@@ -32,7 +32,7 @@ module('In Review Offers', {
 
 test("check offer-messages replace [click_here|transport] to click_here link", function(assert) {
   assert.expect(2);
-  var url = '/offers/' + offer1.id + "/supervisor_messages"
+  var url = '/offers/' + offer1.id + "/supervisor_messages";
   visit(url);
 
   andThen(function() {
