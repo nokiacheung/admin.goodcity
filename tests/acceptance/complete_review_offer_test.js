@@ -34,17 +34,17 @@ module('In Review Offers', {
 
 test("check offer-messages replace [click_here|transport] to click_here link", function(assert) {
   assert.expect(2);
-  visit('/offers/' + offer1.id + "/supervisor_messages")
+  visit('/offers/' + offer1.id + "/supervisor_messages");
 
   andThen(function() {
     assert.equal(currentURL(), "/offers/" + offer1.id + "/supervisor_messages");
     andThen(function(){
-      fillIn('.ember-text-area', "[click here|transport_page]");
+      fillIn('.ember-text-area', "[click_here|transport_page]");
       andThen(function(){
         click('.ember-view button');
         andThen(function(){
-          assert.equal($('.message_details:last').parent().text().trim().split(" ").splice(-1)[0], "click here");
-        })
+          assert.equal($('.message_details:last').parent().text().trim().split(" ").splice(-1)[0], "click_here");
+        });
       });
     });
   });
