@@ -8,20 +8,18 @@ import '../factories/offer';
 import '../factories/item';
 import '../factories/packages_location';
 
-var App, offer1, reviewer, reviewerName, item1, item2, packages_location;
+var App, offer1, reviewer, item1, packages_location;
 
 module('In Review Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     reviewer = FactoryGuy.make('user', { id: 3 });
-    offer1 = FactoryGuy.make("offer", { state:"under_review", reviewedBy: reviewer});
-    item1 = FactoryGuy.make("item", { state:"accepted", offer: offer1 });
-    item2 = FactoryGuy.make("item", { state:"accepted", offer: offer1 });
-    reviewerName = reviewer.get('firstName') + " " + reviewer.get('lastName');
+    offer1 = FactoryGuy.make("offer", { state: "under_review", reviewedBy: reviewer});
+    item1 = FactoryGuy.make("item", { state: "accepted", offer: offer1 });
     packages_location = FactoryGuy.make("packages_location");
 
-    $.mockjax({url: '/api/v1/packages_location*', type: 'GET', status: 200,responseText: {
+    $.mockjax({url: '/api/v1/packages_location*', type: 'GET', status: 200, responseText: {
         packages_locations: [packages_location.toJSON({includeId: true})]
       }
     });
@@ -34,16 +32,17 @@ module('In Review Offers', {
 
 test("check offer-messages replace [click_here|transport] to click_here link", function(assert) {
   assert.expect(2);
-  visit('/offers/' + offer1.id + "/supervisor_messages");
+  var url = '/offers/' + offer1.id + "/supervisor_messages"
+  visit(url);
 
   andThen(function() {
-    assert.equal(currentURL(), "/offers/" + offer1.id + "/supervisor_messages");
+    assert.equal(currentURL(), url);
     andThen(function(){
       fillIn('.ember-text-area', "[click_here|transport_page]");
       andThen(function(){
-        click('.ember-view button');
+        click('.message-base button');
         andThen(function(){
-          assert.equal($('.message_details:last').parent().text().trim().split(" ").splice(-1)[0], "click_here");
+          assert.equal($('.my_message').text().trim().split(" ").splice(-1)[0], "click_here");
         });
       });
     });
