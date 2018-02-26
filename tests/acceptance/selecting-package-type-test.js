@@ -7,7 +7,7 @@ import '../factories/package';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, offer, item1, item2, package1, package2, item2, packageType;
+var App, offer, item1, item2, package1, package2, packageType;
 
 module('Reviewer: Accept Item Tab', {
   beforeEach: function() {
@@ -22,7 +22,7 @@ module('Reviewer: Accept Item Tab', {
     package2 = FactoryGuy.make("package", { item: item1, packageType: packageType});
 
     $.mockjax({url: '/api/v1/package_types', type: 'GET', status: 200, responseText: {
-        package_types: [packageType.toJSON({includeId: true}), packageType.toJSON({includeId: true})]
+        package_types: [packageType.toJSON({includeId: true})]
       }
     });
   },
