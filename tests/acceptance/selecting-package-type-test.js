@@ -14,15 +14,15 @@ module('Reviewer: Accept Item Tab', {
     App = startApp({}, 2);
     TestHelper.setup();
 
-    offer = FactoryGuy.make("offer", { state:"under_review"});
-    item1 = FactoryGuy.make("item_with_type", { state: "accepted"});
-    item2 = FactoryGuy.make("item", { offer: offer});
+    offer = FactoryGuy.make("offer", { state:"under_review" });
+    item1 = FactoryGuy.make("item_with_type", { state: "accepted" });
+    item2 = FactoryGuy.make("item", { offer: offer });
     packageType = item1.get('packageType');
-    package1 = FactoryGuy.make("package", { item: item1, packageType: packageType});
-    package2 = FactoryGuy.make("package", { item: item1, packageType: packageType});
+    package1 = FactoryGuy.make("package", { item: item1, packageType: packageType });
+    package2 = FactoryGuy.make("package", { item: item1, packageType: packageType });
 
     $.mockjax({url: '/api/v1/package_types', type: 'GET', status: 200, responseText: {
-        package_types: [packageType.toJSON({includeId: true})]
+        package_types: [packageType.toJSON({ includeId: true })]
       }
     });
   },
