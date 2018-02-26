@@ -260,6 +260,7 @@ I18nTranslationsZhTw =
       "invalid_inventory": "存貨號碼不正確"
       "invalid_quantity": "空格不能留空"
       "invalid_description": "空格不能留空"
+      "invalid_location": "Location can not be blank."
       "receive": "接收"
       "cancel": "取消"
       "enter_barcode": "輸入條碼"
