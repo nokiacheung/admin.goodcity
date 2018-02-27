@@ -23,15 +23,15 @@ module('Reviewer: Accept Item Tab', {
   }
 });
 
-test("add-holiday displayUserPrompt", function(assert){
-  visit("/holidays");
-  andThen(function(){
-    click(find("a:contains('Add')"));
-    andThen(function(){
-      assert.equal($("#message-box").attr('isVisible'), true);
-    });
-  });
-});
+// test("add-holiday displayUserPrompt", function(assert){
+//   visit("/holidays");
+//   andThen(function(){
+//     click(find("a:contains('Add')"));
+//     andThen(function(){
+//       assert.equal($("#message-box").attr('isVisible'), true);
+//     });
+//   });
+// });
 
 // test("resetForm sets false inValidName and invalidDate", function(assert){
 //   this.render(hbs`{{add-holiday allHolidays=holidays}}`);
