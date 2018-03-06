@@ -5,16 +5,16 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
-var App, locations, location;
+var App, locations, location1;
 
 moduleForComponent('radio-text-input', 'Integration | Component | radio text input', {
   integration: true,
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
-    location = FactoryGuy.make("location");
-    locations = [location];
-    this.render(hbs`{{custom-select2 content=[location] record=location recordId=location.id}}`);
+    location1 = FactoryGuy.make("location");
+    locations = [location1];
+    this.render(hbs`{{custom-select2 content=locations record=location1 recordId=location1.id}}`);
   },
   afterEach: function() {
     Ember.run(function() { TestHelper.teardown(); });
