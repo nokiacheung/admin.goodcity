@@ -14,8 +14,7 @@ moduleForComponent('radio-text-input', 'Integration | Component | radio text inp
     TestHelper.setup();
     location = FactoryGuy.make("location");
     locations = [location];
-    this.render(hbs`{{custom-select2 content=locations record=location recordId=location.id}}`);
-    // {{custom-select2 content=locations record=location recordId=locationId placeholder=(t "receive_package.add_location")}}
+    this.render(hbs`{{custom-select2 content=[location] record=location recordId=location.id}}`);
   },
   afterEach: function() {
     Ember.run(function() { TestHelper.teardown(); });
