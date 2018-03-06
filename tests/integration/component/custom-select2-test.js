@@ -7,7 +7,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 var App, locations, location1;
 
-moduleForComponent('radio-text-input', 'Integration | Component | radio text input', {
+moduleForComponent('custom-select2', 'Integration | Component | custom select2', {
   integration: true,
   beforeEach: function() {
     App = startApp({}, 2);
