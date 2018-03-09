@@ -12,7 +12,7 @@ export default SelectList.extend( {
   didRender() {
     this._super(...arguments);
     if (!this.get('didUpdatedOnce') && this.get('pkg') !== null && this.get('pkg.item.packageType') !== null){
-        var packageType = this.get('pkg.item.packageType') || this.get('pkg.packageType');
+        var packageType = this.get('pkg.packageType') || this.get('pkg.item.packageType');
         this.set('pkg.notes', packageType.get('name'));
         this.set('pkg.packageType', packageType);
       Ember.$("textarea#"+this.get('index')).val(this.get('pkg.notes'));

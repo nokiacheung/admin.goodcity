@@ -2,7 +2,6 @@
   <div class="row ">
     {{#if itemType}}
       {{#validatable-form class="form-horizontal" action="save" on="submit"}}
-
         {{#each packages key="@index" as |pkg index|}}
           <div class="details row">
             <div class="small-2 icon-center columns">
@@ -24,7 +23,6 @@
                         content=subPackageTypes
                         on-change=(action (mut pkg.packageTypeId))
                         selectedValue=pkg.packageType
-                        prompt=(t 'placeholder.package_type')
                         required='true'
                         index=(concat 'comment' index)
                         pkg=pkg
