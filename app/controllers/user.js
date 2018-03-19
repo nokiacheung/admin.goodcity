@@ -9,6 +9,10 @@ export default Ember.Controller.extend({
     return this.store.peekAll("permission").rejectBy("name", "System").sortBy('name');
   }),
 
+  roles: Ember.computed(function(){
+    return this.store.peekAll("role");
+  }),
+
   actions: {
     saveUser(){
       var user = this.get("model");
