@@ -1,17 +1,24 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import '../factories/offer';
+import '../factories/role';
 import '../factories/user';
 import startApp from '../helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, offer, offer1, reviewer1;
+var App, offer, offer1, reviewer1, role;
 
 module('App Menu', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     reviewer1 = FactoryGuy.make("user", {isReviwer: true});
     window.localStorage.currentUserId = reviewer1.id;
