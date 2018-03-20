@@ -4,8 +4,9 @@ import '../factories/offer';
 import startApp from '../helpers/start-app';
 import testSkip from '../helpers/test-skip';
 import FactoryGuy from 'ember-data-factory-guy';
+import '../factories/role';
 
-var App, offer, t;
+var App, offer, t, role;
 
 module('Display not found error', {
   beforeEach: function() {
@@ -14,6 +15,11 @@ module('Display not found error', {
     offer = FactoryGuy.make("offer");
     var i18n = App.__container__.lookup('service:i18n');
     t = i18n.t.bind(i18n);
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
     App.__container__.lookup("service:logger").error = () => {};
   },
   afterEach: function() {
