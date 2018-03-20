@@ -18,8 +18,8 @@ module('Reviewer: Accept Item Tab', {
     role = FactoryGuy.make("role");
     $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
       roles: [role.toJSON({includeId: true})]
-    }
-  });
+      }
+    });
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item1 = FactoryGuy.make("item_with_type", { offer: offer, state: "accepted"});
