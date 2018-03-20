@@ -3,14 +3,19 @@ import startApp from '../helpers/start-app';
 import { module, test } from 'qunit';
 import '../factories/offer';
 import FactoryGuy from 'ember-data-factory-guy';
+import '../factories/role';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, offer;
+var App, offer, role;
 
 module('Add new Item', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
     offer = FactoryGuy.make("offer_with_items", { state:"under_review"});
   },
   afterEach: function() {
