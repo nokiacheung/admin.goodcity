@@ -9,15 +9,22 @@ import '../factories/item';
 import '../factories/schedule';
 import '../factories/gogovan_order';
 import '../factories/delivery';
+import '../factories/role';
 
 
 var App, offer, item1, item2, item3,
-  message1, message2, donor, msg_time;
+  message1, message2, donor, msg_time, role;
 
 module('Reviewer: Display Offer Tab', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     msg_time = new Date().setHours(0,0,0);
