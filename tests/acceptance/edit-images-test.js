@@ -12,6 +12,7 @@ module('Add new Item', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+    role = FactoryGuy.make("role");
     $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
       roles: [role.toJSON({includeId: true})]
       }

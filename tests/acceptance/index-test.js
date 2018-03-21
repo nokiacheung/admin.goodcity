@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
+import FactoryGuy from 'ember-data-factory-guy';
 import '../factories/role';
 
 var App, role;

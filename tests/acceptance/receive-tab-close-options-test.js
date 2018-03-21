@@ -17,6 +17,7 @@ module('Received Tab close options', {
     item = FactoryGuy.make("item", {state: "accepted"});
     ofr1 = FactoryGuy.make("offer", { state: "received", items: [item] });
     packages_location = FactoryGuy.make("packages_location");
+    role = FactoryGuy.make("role");
     $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
       roles: [role.toJSON({includeId: true})]
       }

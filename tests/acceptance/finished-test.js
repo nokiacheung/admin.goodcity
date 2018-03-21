@@ -14,6 +14,7 @@ module('Finished Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+    role = FactoryGuy.make("role");
     reviewer = FactoryGuy.make('user', { id: 3 });
     $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
       roles: [role.toJSON({includeId: true})]
