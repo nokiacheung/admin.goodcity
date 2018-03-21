@@ -9,16 +9,23 @@ import '../factories/item';
 import '../factories/schedule';
 import '../factories/gogovan_order';
 import '../factories/delivery';
+import '../factories/role';
 
 var App, offer1, offer2, reviewer, reviewerName,
   offer7, offer3, offer4, delivery1, delivery2, offer5, delivery3, offer6,
   offer8, item8, offer9, item9, offer10, schedule, ggv_order11, delivery11,
-  offer11, offer12;
+  offer11, offer12, role;
 
 module('Reviewer: Display Offer Status', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     reviewer = FactoryGuy.make("user");
     offer1 = FactoryGuy.make("offer_with_items", {state:"submitted"});
