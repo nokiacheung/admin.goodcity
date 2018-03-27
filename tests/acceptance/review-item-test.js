@@ -1,12 +1,19 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import { module, test } from 'qunit';
+import '../factories/role';
+import FactoryGuy from 'ember-data-factory-guy';
 
-var App;
+var App, role;
 
 module('Display review Item', {
   beforeEach: function() {
     App = startApp({}, 2);
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
   },
   afterEach: function() {
     Ember.run(App, 'destroy');

@@ -7,13 +7,19 @@ import { module, test } from 'qunit';
 import '../factories/offer';
 import '../factories/item';
 import '../factories/packages_location';
+import '../factories/role';
 
-var App, offer1, reviewer, reviewerName, offer2, item1, item2, packages_location;
+var App, offer1, reviewer, reviewerName, offer2, item1, item2, packages_location, role;
 
 module('In Review Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
     reviewer = FactoryGuy.make('user', { id: 3 });
     offer1 = FactoryGuy.make("offer_with_items", { state:"under_review", reviewedBy: reviewer});
     reviewerName = reviewer.get('firstName') + " " + reviewer.get('lastName');

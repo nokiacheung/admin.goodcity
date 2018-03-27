@@ -4,9 +4,10 @@ import startApp from '../helpers/start-app';
 import '../factories/offer';
 import '../factories/item';
 import FactoryGuy from 'ember-data-factory-guy';
+import '../factories/role';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, offer, item;
+var App, offer, item, role;
 
 module('Closed Offer', {
   beforeEach: function() {
@@ -14,6 +15,11 @@ module('Closed Offer', {
     TestHelper.setup();
     offer = FactoryGuy.make("offer", { state: "closed" });
     item = FactoryGuy.make("item", { state: "rejected", offer: offer });
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
   },
   afterEach: function() {
     Em.run(function() { TestHelper.teardown(); });

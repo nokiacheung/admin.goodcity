@@ -10,14 +10,21 @@ import '../factories/item';
 import '../factories/schedule';
 import '../factories/gogovan_order';
 import '../factories/delivery';
+import '../factories/role';
 
 var App, offer1, delivery1, offer2, delivery2, offer3,
-  delivery3, schedule4, offer4, delivery4, ggv_order;
+  delivery3, schedule4, offer4, delivery4, ggv_order, role;
 
 module('Scheduled Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     delivery1 = FactoryGuy.make('delivery', {deliveryType: "Gogovan"});
     offer1 = FactoryGuy.make("offer_with_items", { state: "scheduled", delivery: delivery1 });

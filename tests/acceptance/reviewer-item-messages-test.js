@@ -6,14 +6,19 @@ import { module, test } from 'qunit';
 import '../factories/message';
 import '../factories/offer';
 import '../factories/item';
+import '../factories/role';
 
-var App, offer, item, message1, message2, message3;
+var App, offer, item, message1, message2, message3, role;
 
 module('Reviewer: Display Item Messages', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
-
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item = FactoryGuy.make("item", { state:"submitted", offer: offer});
     message1 = FactoryGuy.make("message", { offer: offer, item: item, createdAt: new Date("2015/1/1")});
