@@ -20,10 +20,9 @@
             Donor
           </label>
         </li>
-
         {{#each roles as |role|}}
           <li class="radio">
-            {{checkbox-button name="permission" selection=selectedId value = role.id user= user id=role.id}}
+            {{checkbox-button name="permission" selection=selectedId value=role.id collected=userRoleIds id=role.id}}
             <label class="radio-wrap small-only-text-center" for={{role.id}}>
               {{role.name}}
             </label>

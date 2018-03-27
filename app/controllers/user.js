@@ -13,6 +13,11 @@ export default Ember.Controller.extend({
     return this.store.peekAll("role");
   }),
 
+  userRoleIds: Ember.computed(function(){
+    // return this.store.peekAll("userRole").filterBy("userId", this.get('user').id).mapBy('roleId');
+    return [1,4,5];
+  }),
+
   actions: {
     saveUser(){
       var user = this.get("model");
