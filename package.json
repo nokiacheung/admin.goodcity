@@ -64,14 +64,13 @@
     "loader.js": "4.1.0",
     "smoke-and-mirrors": "https://github.com/crossroads/smoke-and-mirrors.git#master",
     "xml2js": "^0.4.12"
-
   },
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
     "ember-cli-test-loader": "^1.1.0",
     "phantomjs-prebuilt": "^2.1.14",
     "azure-api": "git://github.com/crossroads/azure-api.git#master",
-    "shared-goodcity": "git://github.com/crossroads/shared.goodcity.git#master",
+    "shared-goodcity": "git://github.com/crossroads/shared.goodcity.git#GCW-1774-permissions-enhancement",
     "slick-carousel": "^1.5.8",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.0"
