@@ -22,10 +22,10 @@ export default Ember.Controller.extend({
       }
     },
 
-    saveUser(info){
+    saveUser(){
       var user = this.get("model");
       if(this.get('selectedRoleIds.length')) {
-        var loadingView = getOwner(this).lookup('component:loading').append()
+        var loadingView = getOwner(this).lookup('component:loading').append();
         user.set('userRoleIds', this.get('selectedRoleIds'));
         user.save()
           .then(() => loadingView.destroy())
