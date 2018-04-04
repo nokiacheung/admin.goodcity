@@ -9,9 +9,4 @@ export default AuthorizeRoute.extend({
   afterModel(model) {
     return this.store.query('userRole', { search_by_user_id: model.id });
   }
-
-  // setupController(controller, model) {
-  //   this._super(controller, model);
-  // }
-
 });
