@@ -5,19 +5,24 @@ import { module, test } from 'qunit';
 import '../factories/message';
 import '../factories/offer';
 import '../factories/item';
+import '../factories/role';
 import '../factories/gogovan_order';
 import '../factories/delivery';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import '../helpers/custom-helpers';
 // import syncDataStub from '../helpers/empty-sync-data-stub';
 
-var App, offer, item, message1, message2, message3, message4, message5;
+var App, offer, item, message1, message2, message3, message4, message5, role;
 
 module('Reviewer: Notifications', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
-
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item = FactoryGuy.make("item", { state:"submitted", offer: offer});
     message1 = FactoryGuy.make("message", { offer: offer, item: item });

@@ -10,8 +10,11 @@
     <li>{{#link-to 'scheduled'}}{{t "inbox.scheduled_offers"}} ({{scheduledCount}}){{/link-to}}</li>
     <li>{{#link-to 'offers.receiving'}}{{t "inbox.receiving"}} ({{receivingOffersCount}}){{/link-to}}</li>
     <li>{{#link-to 'finished'}}{{t "inbox.finished"}}{{/link-to}}</li>
-    {{#if session.currentUser.isSupervisor}}
+    {{#if session.currentUser.canManageUsers}}
       <li>{{#link-to 'users'}}{{t "inbox.users"}}{{/link-to}}</li>
+    {{/if}}
+
+    {{#if session.currentUser.isSupervisor}}
       <li>{{#link-to 'holidays'}}{{t "inbox.holidays"}}{{/link-to}}</li>
     {{/if}}
   </ul>

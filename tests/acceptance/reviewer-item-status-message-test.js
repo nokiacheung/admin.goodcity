@@ -5,14 +5,20 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import { module, test } from 'qunit';
 import '../factories/offer';
 import '../factories/item';
+import '../factories/role';
 
 var App, offer1, offer2, item2, item1, item3, item4,
-  offer3, item5;
+  offer3, item5, role;
 
 module('Reviewer: Display Item Status', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     offer1 = FactoryGuy.make("offer", {state:"submitted"});
     item1 = FactoryGuy.make("item", {offer: offer1, state:"submitted"});
