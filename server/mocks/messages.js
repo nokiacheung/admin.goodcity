@@ -23,7 +23,7 @@ module.exports = function(app) {
   });
 
   messagesRouter.post('/', function(req, res) {
-    res.send({ 'message': {"id":1,"body":"example4", "state": "read"}});
+    res.send({ 'message': {"id":1,"body":"click_here", "state": "read"}});
   });
 
   app.use('/api/v1/messages', messagesRouter);

@@ -77,9 +77,28 @@ export default Ember.Component.extend({
 
   confirmReceivingEvent: null,
 
+  toggleItemClass() {
+    var item = this.get("package");
+    Ember.$('.receive-options.' + item.id).toggleClass("hidden");
+    Ember.$('.options-link-open.' + item.id).toggleClass("hidden");
+  },
+
   actions: {
     toggle(hidden) {
       this.set("hidden", hidden);
+      var item = this.get("package");
+      var itemOptionsLink = Ember.$('.options-link-open.' + item.id)[0];
+      var optionsLink = Ember.$('.options-link-open.hidden');
+      if(optionsLink.length) {
+        Ember.$('.receive-options').not('.hidden').toggleClass('hidden');
+        Ember.$('.options-link-open.hidden').toggleClass('hidden');
+        return false;
+      } else if(itemOptionsLink) {
+        this.toggleItemClass();
+        return false;
+      } else {
+        return true;
+      }
     },
 
     checkReceiving(event) {
