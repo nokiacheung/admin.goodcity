@@ -1,15 +1,25 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import '../helpers/custom-helpers';
+import FactoryGuy from 'ember-data-factory-guy';
+import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import { module, test } from 'qunit';
 
-var App;
+var App, role;
 
 module('Submitted Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
+    TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
   },
   afterEach: function() {
+    Em.run(function() { TestHelper.teardown(); });
     Ember.run(App, 'destroy');
   }
 });
