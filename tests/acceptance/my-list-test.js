@@ -11,15 +11,19 @@ import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 var App, offer1, reviewer, reviewerName, offer2, item1, item2,
-  delivery, offer3, item3, item4, offer4, item5, ggv_order, role;
+  delivery, offer3, item3, item4, offer4, item5, ggv_order, role, permission, rolePermission;
 
 module('My Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     role = FactoryGuy.make("role");
+    permission = FactoryGuy.make("permission");
+    rolePermission = FactoryGuy.make("role_permission", { roleId: role.get('id'), permissionId: permission.get('id')});
     $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
-      roles: [role.toJSON({includeId: true})]
+      roles: [role.toJSON({includeId: true})],
+      role_permissions: [rolePermission.toJSON({includeId: true})],
+      permissions: [permission.toJSON({includeId: true})]
       }
     });
     reviewer = FactoryGuy.make('user', { id: 3 });
