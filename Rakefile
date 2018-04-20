@@ -125,6 +125,9 @@ namespace :cordova do
     log("Preparing app for #{platform}")
     Dir.chdir(CORDOVA_PATH) do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
+      if environment == "staging"
+        system({"ENVIRONMENT" => environment}, "cordova-hcp build")
+      end
       unless platform == "ios"
         sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
       end

@@ -6,6 +6,9 @@
   <icon src="www/assets/images/goodcity-icon-128.png"/>
   <content src="index.html"/>
   <hook src="scripts/update_build_number.py" type="before_prepare" />
+  <chcp>
+    <config-file url="https://admin-staging.goodcity.hk/cordova/chcp.json" />
+  </chcp>
   <platform name="android">
     <hook type="after_prepare" src="scripts/copyAndroidAssets.js"/>
     <preference name="LoadUrlTimeoutValue" value="120000"/>
@@ -84,5 +87,6 @@
   <plugin name="phonegap-plugin-barcodescanner" spec="https://github.com/Telerik-Verified-Plugins/BarcodeScanner.git"/>
   <plugin name="com.phonegap.plugins.twilioclient" spec="https://github.com/crossroads/twilio_client_phonegap.git"/>
   <plugin name="cordova-plugin-ios-no-export-compliance" spec="https://github.com/mikaoelitiana/cordova-plugin-ios-no-export-compliance.git" />
+  <plugin name="cordova-hot-code-push" spec="https://github.com/nordnet/cordova-hot-code-push" />
   <plugins></plugins>
 </widget>
