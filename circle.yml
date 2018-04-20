@@ -55,7 +55,7 @@ deployment:
       - bundle exec rake staging android app:build
       - fastlane android staging
       - bundle exec rake staging ios app:build
-      - scp -P 59207 /Users/distiller/app.goodcity/cordova/ deployer@app-staging.goodcity.hk:/var/www/html/app.goodcity.hk/
+      # - scp -P 59207 /Users/distiller/app.goodcity/cordova/ deployer@app-staging.goodcity.hk:/var/www/html/app.goodcity.hk/
       - fastlane ios staging
       - curl https://api.rollbar.com/api/1/sourcemap/download -F access_token=$ROLLBAR_KEY -F version=$APP_VERSION -F minified_url=https://admin-staging.goodcity.hk/assets/goodcity.js
   production:
