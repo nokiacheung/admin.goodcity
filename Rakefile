@@ -130,7 +130,7 @@ namespace :cordova do
       end
       # unless platform == "ios"
       #   sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
-      end
+      # end
     end
     if platform == "ios"
       Dir.chdir(CORDOVA_PATH) do
