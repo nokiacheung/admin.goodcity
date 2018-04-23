@@ -129,6 +129,7 @@ namespace :cordova do
       if environment == "staging"
         log("running cordova-hcp build")
         system({"ENVIRONMENT" => environment}, "cordova-hcp build")
+        log("#{ls}")
       end
       # unless platform == "ios"
       #   sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
