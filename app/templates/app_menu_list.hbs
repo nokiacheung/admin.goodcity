@@ -14,9 +14,9 @@
       <li>{{#link-to 'users'}}{{t "inbox.users"}}{{/link-to}}</li>
     {{/if}}
 
-    {{#if session.currentUser.isSupervisor}}
+    {{!-- {{#if session.currentUser.isSupervisor}}
       <li>{{#link-to 'holidays'}}{{t "inbox.holidays"}}{{/link-to}}</li>
-    {{/if}}
+    {{/if}} --}}
   </ul>
 
   {{partial "app_version"}}
