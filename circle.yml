@@ -54,9 +54,9 @@ deployment:
     commands:
       - bundle exec cap staging deploy
       - bundle exec rake staging android app:build
-      - scp -r -o "StrictHostKeyChecking=no" -P 59207 /Users/distiller/admin.goodcity/cordova deployer@admin-staging.goodcity.hk:/var/www/html/admin.goodcity.hk/
       - fastlane android staging
       - bundle exec rake staging ios app:build
+      - scp -r -o "StrictHostKeyChecking=no" -P 59207 /Users/distiller/admin.goodcity/cordova deployer@admin-staging.goodcity.hk:/var/www/html/admin.goodcity.hk/
       - fastlane ios staging
       - curl https://api.rollbar.com/api/1/sourcemap/download -F access_token=$ROLLBAR_KEY -F version=$APP_VERSION -F minified_url=https://admin-staging.goodcity.hk/assets/goodcity.js
   production:
