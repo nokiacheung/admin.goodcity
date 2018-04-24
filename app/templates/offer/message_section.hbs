@@ -1,21 +1,19 @@
 <div class="tabs-content item-content">
-  {{#change-li-position-in-ul}}
-    <ul class="list list-offer-items">
+  <ul class="list list-offer-items">
 
-      {{#each sortedItems as |item|}}
-        <li class={{if item.isOffer 'general_messages'}}>
-          {{#if item.isOffer}}
-            {{#link-to 'offer.donor_messages' model}}
-              {{partial 'offer/recent_offer_message'}}
-            {{/link-to}}
-          {{else}}
-            {{#link-to item.pageLink item}}
-              {{partial 'offer/recent_item_message'}}
-            {{/link-to}}
-          {{/if}}
-        </li>
-      {{/each}}
+    {{#each sortedItems as |item|}}
+      <li>
+        {{#if item.isOffer}}
+          {{#link-to 'offer.donor_messages' model}}
+            {{partial 'offer/recent_offer_message'}}
+          {{/link-to}}
+        {{else}}
+          {{#link-to item.pageLink item}}
+            {{partial 'offer/recent_item_message'}}
+          {{/link-to}}
+        {{/if}}
+      </li>
+    {{/each}}
 
-    </ul>
-  {{/change-li-position-in-ul}}
+  </ul>
 </div>
