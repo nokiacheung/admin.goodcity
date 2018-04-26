@@ -24,9 +24,12 @@ export default Ember.Controller.extend({
 
     saveUser(){
       var user = this.get("model");
-      if(this.get('selectedRoleIds.length')) {
         var loadingView = getOwner(this).lookup('component:loading').append();
-        user.set('userRoleIds', this.get('selectedRoleIds'));
+        if(this.get('selectedRoleIds.length')){
+          user.set('userRoleIds', this.get('selectedRoleIds'));
+        } else {
+          user.set('userRoleIds',[]);
+        }
         user.save()
           .then(() => loadingView.destroy())
           .catch(error => {
@@ -34,7 +37,7 @@ export default Ember.Controller.extend({
             loadingView.destroy();
             throw error;
           });
-      }
+      // }
     }
   }
 });
