@@ -6,9 +6,6 @@
   <icon src="www/assets/images/goodcity-icon-128.png"/>
   <content src="index.html"/>
   <hook src="scripts/update_build_number.py" type="before_prepare" />
-  <chcp>
-    <config-file url="https://app-staging.goodcity.hk/cordova/www/chcp.json" />
-  </chcp>
 
   <platform name="android">
     <hook type="after_prepare" src="scripts/copyAndroidAssets.js"/>
