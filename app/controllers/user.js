@@ -16,9 +16,9 @@ export default Ember.Controller.extend({
   actions: {
     setSelecteIds(id, isSelected) {
       if(isSelected){
-        this.get('selectedRoleIds').push(id);
+        this.get('selectedRoleIds').pushObject(id);
       } else {
-        this.get('selectedRoleIds').pop(id);
+        this.get('selectedRoleIds').removeObject(id);
       }
     },
 
