@@ -1,5 +1,5 @@
 {{#if session.isLoggedIn}}
-  <a href="#" {{action "displayNotification"}} class='all_unread_messages_count'>
+  <a href="#" {{action "displayNotification"}} class='all_unread_messages_count' style="margin-top: -12px;">
     <i class="fa fa-bell-o"></i>
     {{#if model.length }}
       <span class="unread">
