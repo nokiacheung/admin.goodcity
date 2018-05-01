@@ -7,6 +7,8 @@ export default AuthorizeRoute.extend({
   },
 
   afterModel(model) {
-    return this.store.query('userRole', { search_by_user_id: model.id });
-  }
+    if(model) {
+      return this.store.query('userRole', { search_by_user_id: model.id });
+    }
+   }
 });
