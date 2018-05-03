@@ -25,6 +25,7 @@ export default Ember.Controller.extend({
     saveUser(){
       var store = this.store;
       var user = this.get("model");
+      var self = this;
         var loadingView = getOwner(this).lookup('component:loading').append();
         if(this.get('selectedRoleIds.length')){
           user.set('userRoleIds', this.get('selectedRoleIds'));
@@ -39,6 +40,7 @@ export default Ember.Controller.extend({
               }
             });
             loadingView.destroy();
+            self.transitionToRoute('users');
           })
           .catch(error => {
             user.rollbackAttributes();
