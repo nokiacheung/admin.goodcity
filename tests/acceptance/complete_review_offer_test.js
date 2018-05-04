@@ -8,7 +8,7 @@ import '../factories/offer';
 import '../factories/item';
 import '../factories/packages_location';
 
-var App, offer1, reviewer, item1, packages_location;
+var App, offer1, reviewer, item1, packages_location, role;
 
 module('In Review Offers', {
   beforeEach: function() {
@@ -18,6 +18,12 @@ module('In Review Offers', {
     offer1 = FactoryGuy.make("offer", { state: "under_review", reviewedBy: reviewer});
     item1 = FactoryGuy.make("item", { state: "accepted", offer: offer1 });
     packages_location = FactoryGuy.make("packages_location");
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     $.mockjax({url: '/api/v1/packages_location*', type: 'GET', status: 200, responseText: {
         packages_locations: [packages_location.toJSON({includeId: true})]

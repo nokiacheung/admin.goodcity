@@ -10,15 +10,21 @@ import '../factories/contact';
 import '../factories/gogovan_order';
 import '../factories/delivery';
 import '../factories/address';
+import '../factories/role';
 
-
-var App, offer, user, ggvOrder, delivery, address, contact, item;
+var App, offer, user, ggvOrder, delivery, address, contact, item, role;
 
 module('Search Offers', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
     Ember.run.debounce = (context, func) => func.call(context);
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     user  = FactoryGuy.make("user", { firstName: "John", mobile: "99999999" });
     offer = FactoryGuy.make("offer_with_items", { state: "scheduled", createdBy: user });

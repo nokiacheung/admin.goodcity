@@ -64,7 +64,6 @@
     "loader.js": "4.1.0",
     "smoke-and-mirrors": "https://github.com/crossroads/smoke-and-mirrors.git#master",
     "xml2js": "^0.4.12"
-
   },
   "dependencies": {
     "ember-cli-babel": "^5.1.7",

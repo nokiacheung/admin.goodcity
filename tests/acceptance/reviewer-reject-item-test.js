@@ -5,13 +5,20 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 import testSkip from '../helpers/test-skip';
 import { module, test } from 'qunit';
 import '../factories/offer';
+import '../factories/role';
 
-var App, offer, item1, item2;
+var App, offer, item1, item2, role;
 
 module('Reviewer: Rejct Item Tab', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item1 = FactoryGuy.make("item_with_type", { offer: offer});

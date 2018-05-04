@@ -3,6 +3,7 @@ import startApp from '../helpers/start-app';
 import { module, test } from 'qunit';
 import '../factories/user';
 import '../factories/offer';
+import '../factories/role';
 import '../factories/item';
 import '../factories/gogovan_order';
 import '../factories/delivery';
@@ -11,7 +12,7 @@ import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 var App, offer, item, reviewer, offer2, item2, offer3, item3,
   delivery1, ggv_order1, offer5, item5, delivery2, ggv_order2,
-  offer6, item6, offer7, t;
+  offer6, item6, offer7, t, role;
 
 module('Review Offer Logistics', {
   beforeEach: function() {
@@ -20,6 +21,12 @@ module('Review Offer Logistics', {
     lookup('service:session').set('isAdmin', true);
     var i18n = App.__container__.lookup('service:i18n');
     t = i18n.t.bind(i18n);
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     reviewer = FactoryGuy.make("user");
     offer = FactoryGuy.make("offer", { state: "under_review", reviewedBy:  reviewer });

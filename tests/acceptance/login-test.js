@@ -2,15 +2,22 @@ import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import { module, test } from 'qunit';
 import '../factories/user_profile';
+import '../factories/role';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
-var App, hk_user, non_hk_user;
+var App, hk_user, non_hk_user, role;
 
 module('Acceptance: Login', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     hk_user = FactoryGuy.make('with_hk_mobile');
     non_hk_user = FactoryGuy.make('with_non_hk_mobile');

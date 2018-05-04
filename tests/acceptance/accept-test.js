@@ -3,17 +3,23 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import '../factories/offer';
 import '../factories/item';
+import '../factories/role';
 import '../factories/package';
 import FactoryGuy from 'ember-data-factory-guy';
 import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 var App, offer, item1, item2, package1, package2, item3, package3,
-  item4, package4;
+  item4, package4, role;
 
 module('Reviewer: Accept Item Tab', {
   beforeEach: function() {
     App = startApp({}, 2);
     TestHelper.setup();
+    role = FactoryGuy.make("role");
+    $.mockjax({url: '/api/v1/role*', type: 'GET', status: 200,responseText: {
+      roles: [role.toJSON({includeId: true})]
+      }
+    });
 
     offer = FactoryGuy.make("offer", { state:"under_review"});
     item1 = FactoryGuy.make("item_with_type", { offer: offer, state: "accepted"});

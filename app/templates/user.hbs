@@ -11,21 +11,14 @@
 <section class="main-section user-profile">
   <div class="row">
     <div class="small-12 columns ui">
-      <span class="form-label">{{t "user.permission"}}:</span>
+      <span class="form-label headline"> Assign Roles: </span>
 
       <ul class="radio-buttons">
-        <li class="radio">
-          {{radio-button name="permission" selection=selectedId value="-1" id="-1" }}
-          <label class="radio-wrap small-only-text-center" for="-1">
-            Donor
-          </label>
-        </li>
-
-        {{#each permissions as |permission|}}
+        {{#each roles as |role|}}
           <li class="radio">
-            {{radio-button name="permission" selection=selectedId value=permission.id id=permission.id }}
-            <label class="radio-wrap small-only-text-center" for={{permission.id}}>
-              {{permission.name}}
+            {{check-box selected=role.id id=role.id value=role.id selection=user.roleIds action="setSelecteIds"}}
+            <label class="radio-wrap small-only-text-center" for={{role.id}}>
+              {{role.name}}
             </label>
           </li>
         {{/each}}
