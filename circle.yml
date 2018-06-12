@@ -62,7 +62,7 @@ deployment:
     commands:
       - bundle exec cap production deploy
       - bundle exec rake production android app:build
-      # - fastlane android beta
+      - fastlane android beta
       - bundle exec rake production ios app:build
       - fastlane ios beta
       - curl https://api.rollbar.com/api/1/sourcemap/download -F access_token=$ROLLBAR_KEY -F version=$APP_VERSION -F minified_url=https://admin.goodcity.hk/assets/goodcity.js
