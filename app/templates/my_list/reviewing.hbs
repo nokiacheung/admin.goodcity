@@ -8,6 +8,7 @@
       {{#vertical-collection
         content=(js-x "p0 || p1" filteredOffers (js-x "p0 || p1" arrangedContent model))
         defaultHeight=90
+        estimateHeight=90
         alwaysUseDefaultHeight=true
         containerSelector="body"
         as |offer|
