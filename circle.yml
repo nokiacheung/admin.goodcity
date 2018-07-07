@@ -1,4 +1,7 @@
 machine:
+  xcode:
+    version: '9.2'
+
   environment:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
     XCODE_SCHEME: admin.goodcity
