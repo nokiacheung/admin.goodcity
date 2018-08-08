@@ -1,0 +1,103 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:boron
+  working_directory: ~/code
+
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/code
+
+  package_dependencies:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      # - restore_cache:
+      #     key: v1-bower-packages-{{ checksum "bower.json" }}
+      # - run: bower install
+      # - save_cache:
+      #     key: v1-bower-packages-{{ checksum "bower.json" }}
+      #     paths:
+      #       - ~/code/bower_components
+
+  ember_build:
+    <<: *defaults
+    steps:
+      - run: echo "Ember build!"
+
+  tests:
+    <<: *defaults
+    steps:
+      - run: echo "Tests!"
+
+  android_build:
+    <<: *defaults
+    steps:
+      - run: echo "Android build!"
+
+  android_deploy:
+    <<: *defaults
+    steps:
+      - run: echo "Android deploy!"
+
+  ios_build:
+    <<: *defaults
+    steps:
+      - run: echo "iOS build!"
+
+  ios_deploy:
+    <<: *defaults
+    steps:
+      - run: echo "iOS deploy!"
+
+  www_deploy:
+    <<: *defaults
+    steps:
+      - run: echo "www deploy!"
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - checkout_code
+      - package_dependencies:
+          requires:
+            - checkout_code
+      - ember_build:
+          requires:
+            - package_dependencies
+      - tests:
+          requires:
+            - ember_build
+      - android_build:
+          requires:
+            - ember_build
+      - android_deploy:
+          requires:
+            - android_build
+            - tests
+      - ios_build:
+          requires:
+            - ember_build
+      - ios_deploy:
+          requires:
+            - ios_build
+            - tests
+      - www_deploy:
+          requires:
+            - tests
