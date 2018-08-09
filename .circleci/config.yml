@@ -22,7 +22,7 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1-yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
       - save_cache:
           key: v1-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
