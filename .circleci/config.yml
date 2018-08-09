@@ -18,6 +18,13 @@ aliases:
     |
       yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
 
+  - &restore-bower-cache
+      key: v1-bower-components-{{ checksum "bower.json" }}
+  - &save-bower-cache
+      paths:
+        - bower_components
+      key: v1-bower-components-{{ checksum "bower.json" }}
+
 jobs:
   checkout_code:
     <<: *defaults
@@ -36,13 +43,9 @@ jobs:
       - restore-cache: *restore-yarn-cache
       - run: *yarn
       - save-cache: *save-yarn-cache
-      # - restore_cache:
-      #     key: v1-bower-packages-{{ checksum "bower.json" }}
-      # - run: bower install
-      # - save_cache:
-      #     key: v1-bower-packages-{{ checksum "bower.json" }}
-      #     paths:
-      #       - ~/code/bower_components
+      - restore-cache: *restore-bower-cache
+      - run: bower install
+      - save-cache: *save-bower-cache
 
   ember_build:
     <<: *defaults
