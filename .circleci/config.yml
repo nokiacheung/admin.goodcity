@@ -1,3 +1,6 @@
+# Required environment variables
+# CODECLIMATE_REPO_TOKEN  - for reporting code climate statistics
+
 version: 2
 
 aliases:
@@ -79,6 +82,21 @@ jobs:
           command: yarn run ember test
           environment:
             COVERAGE: true
+      - persist_to_workspace:
+          root: coverage
+          paths:
+            - lcov*
+
+  upload-coverage:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/code
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            yarn run ember coverage-merge
+            yarn run codeclimate-test-reporter < coverage/lcov.info
 
   android_build:
     <<: *defaults
@@ -119,6 +137,10 @@ workflows:
       - tests:
           requires:
             - package_dependencies
+      - upload-coverage:
+          requires:
+            - tests
+            
       # - android_build:
       #     requires:
       #       - ember_build

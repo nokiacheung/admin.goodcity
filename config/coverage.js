@@ -2,5 +2,6 @@ module.exports = {
   excludes: [
     '*/routes/**/*', '*/**/router.js'
   ],
-  coverageFolder: 'coverage'
+  coverageFolder: 'coverage',
+  parallel: true
 }
