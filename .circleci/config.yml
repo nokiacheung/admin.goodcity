@@ -54,7 +54,7 @@ jobs:
       - persist_to_workspace:
           root: dist
           paths:
-            - *
+            - '*'
 
   tests:
     <<: *defaults
