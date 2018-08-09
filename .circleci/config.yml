@@ -71,10 +71,14 @@ jobs:
           name: Start Ember test server
           command: yarn run ember server --port 4201
           background: true
-      - run: sleep 5
+      - run:
+          name: Wait for Ember test server to start
+          command: dockerize -wait tcp://localhost:4201 -timeout 1m
       - run:
           name: Run Ember tests
           command: yarn run ember test
+          environment:
+            COVERAGE: true
 
   android_build:
     <<: *defaults
