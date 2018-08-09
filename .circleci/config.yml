@@ -44,13 +44,13 @@ jobs:
       - run: *yarn
       - save-cache: *save-yarn-cache
       - restore-cache: *restore-bower-cache
-      - run: bower install
+      - run: yarn run bower install
       - save-cache: *save-bower-cache
 
   ember_build:
     <<: *defaults
     steps:
-      - run: echo "Ember build!"
+      - run: ember build
 
   tests:
     <<: *defaults
@@ -95,21 +95,21 @@ workflows:
             - package_dependencies
       - tests:
           requires:
-            - ember_build
-      - android_build:
-          requires:
-            - ember_build
-      - android_deploy:
-          requires:
-            - android_build
-            - tests
-      - ios_build:
-          requires:
-            - ember_build
-      - ios_deploy:
-          requires:
-            - ios_build
-            - tests
-      - www_deploy:
-          requires:
-            - tests
+            - package_dependencies
+      # - android_build:
+      #     requires:
+      #       - ember_build
+      # - android_deploy:
+      #     requires:
+      #       - android_build
+      #       - tests
+      # - ios_build:
+      #     requires:
+      #       - ember_build
+      # - ios_deploy:
+      #     requires:
+      #       - ios_build
+      #       - tests
+      # - www_deploy:
+      #     requires:
+      #       - tests
