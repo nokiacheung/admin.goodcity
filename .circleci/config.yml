@@ -50,12 +50,23 @@ jobs:
   ember_build:
     <<: *defaults
     steps:
-      - run: ember build
+      - run: yarn run ember build
+      - persist_to_workspace:
+          root: dist
+          paths:
+            - *
 
   tests:
     <<: *defaults
     steps:
-      - run: echo "Tests!"
+      - run:
+          name: Start Ember test server
+          command: yarn run ember server --port 4201
+          background: true
+      - run: sleep 5
+      - run:
+          name: Run Ember tests
+          command: yarn run ember test
 
   android_build:
     <<: *defaults
