@@ -5,6 +5,17 @@ defaults: &defaults
     - image: circleci/node:boron
   working_directory: ~/code
 
+aliases:
+  - restore-yarn-cache: &restore-yarn-cache
+      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+  - save-yarn-cache: &save-yarn-cache
+      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+      paths:
+        - node_modules
+        - ~/.cache/yarn
+    - &yarn |
+        yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
+
 jobs:
   checkout_code:
     <<: *defaults
@@ -20,13 +31,9 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
-      - save_cache:
-          key: v1-yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - restore-cache: *restore-yarn-cache
+      - run: *yarn
+      - save-cache: *save-yarn-cache
       # - restore_cache:
       #     key: v1-bower-packages-{{ checksum "bower.json" }}
       # - run: bower install
