@@ -1,20 +1,22 @@
 version: 2
 
-defaults: &defaults
-  docker:
-    - image: circleci/node:boron
-  working_directory: ~/code
-
 aliases:
-  - restore-yarn-cache: &restore-yarn-cache
+
+  - defaults: &defaults
+      docker:
+        - image: circleci/node:boron
+      working_directory: ~/code
+
+  - &restore-yarn-cache
       key: v1-yarn-packages-{{ checksum "yarn.lock" }}
-  - save-yarn-cache: &save-yarn-cache
-      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+  - &save-yarn-cache
       paths:
         - node_modules
         - ~/.cache/yarn
-    - &yarn |
-        yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
+      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+  - &yarn
+    |
+      yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
 
 jobs:
   checkout_code:
