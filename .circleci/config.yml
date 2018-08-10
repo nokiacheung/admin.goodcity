@@ -144,9 +144,9 @@ jobs:
       - run: yarn run ember build --environment=production
       - run: mv dist/ dist-www
       - persist_to_workspace:
-          root: dist-www
+          root: .
           paths:
-            - '*'
+            - dist-www/
 
   www_deploy:
     <<: *defaults
@@ -158,8 +158,8 @@ jobs:
       - run: bundle check --path=vendor/bundle || bundle install --deployment --jobs=4 --retry=3
       - save-cache: *save-bundler-cache
       - attach_workspace:
-          at: ~/code/dist
-      - run: mv ~/code/dist/dist-www/* ~/code/dist/
+          at: ~/code
+      - run: mv ~/code/dist-www ~/code/dist
       - run:
           name: Setup Environment
           command: |
