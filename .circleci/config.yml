@@ -128,7 +128,7 @@ jobs:
           name: Setup Environment variables
           command: |
             echo 'export APP_SHA=$(echo $CIRCLE_SHA1 | cut -c1-7)' >> $BASH_ENV
-            echo 'export APP_SHARED_SHA=$(node -pe 'JSON.parse(process.argv[1]).gitHead' "$(cat $CIRCLE_WORKING_DIRECTORY/node_modules/shared-goodcity/package.json)" | cut -c1-7)' >> $BASH_ENV
+            echo 'export APP_SHARED_SHA=$(node -pe "JSON.parse(process.argv[1]).gitHead" "$(cat $CIRCLE_WORKING_DIRECTORY/node_modules/shared-goodcity/package.json)" | cut -c1-7)' >> $BASH_ENV
             echo 'export staging=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
       - run:
           name: Print Environment Variables
