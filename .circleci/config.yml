@@ -1,6 +1,7 @@
 # Required environment variables
 # CODECLIMATE_REPO_TOKEN  - for reporting code climate statistics
 # ROLLBAR_ACCESS_TOKEN    - for reporting code deployments
+# APP_VERSION             - version of the app that is being deployed
 
 version: 2
 
@@ -78,6 +79,8 @@ jobs:
           command: yarn run ember test
           environment:
             COVERAGE: true
+      # - store_test_results:
+      #     path: where-are-they
       - persist_to_workspace:
           root: coverage
           paths:
@@ -134,10 +137,11 @@ jobs:
       - run:
           name: Print Environment Variables
           command: |
+            echo EMBER_CLI_CORDOVA=$EMBER_CLI_CORDOVA
             echo APP_SHA=$APP_SHA
             echo APP_SHARED_SHA=$APP_SHARED_SHA
             echo staging=$staging
-      - run: ember build --environment=production
+      - run: yarn run ember build --environment=production
       - run: mv dist/ dist-www
       - persist_to_workspace:
           root: dist-www
@@ -155,6 +159,7 @@ jobs:
       - save-cache: *save-bundler-cache
       - attach_workspace:
           at: ~/code/dist
+      - run: mv ~/code/dist/dist-www/* ~/code/dist/
       - run:
           name: Setup Environment
           command: |
