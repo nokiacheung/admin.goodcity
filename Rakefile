@@ -48,6 +48,17 @@ TESTFAIRY_PLUGIN_NAME = "com.testfairy.cordova-plugin"
 SPLUNKMINT_PLUGIN_URL = "https://github.com/crossroads/cordova-plugin-splunkmint.git"
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore"
 BUILD_JSON_FILE = "#{CORDOVA_PATH}/build.json"
+IOS_SIGNING_STYLE = false
+IOS_DEBUGMODE_BUILDCONF = {
+  code_signing: "\'iPhone Developer\'",
+  package_type: 'development',
+  icloud_container_environment: 'Development'
+}.freeze
+IOS_RELEASEMODE_BUILDCONF = {
+  code_signing: "\'iPhone Distribution\'",
+  package_type: 'app-store',
+  icloud_container_environment: 'Production'
+}.freeze
 
 # Default task
 task default: %w(app:build)
@@ -110,8 +121,12 @@ end
 namespace :cordova do
   desc "Install cordova package globally"
   task :install do
-    sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@6.5.0; fi }
-    sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
+    if platform == 'android'
+      sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@6.5.0; fi }
+    else
+      sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@7.1.0; fi }
+    end
+      sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
   end
   desc "Cordova prepare {platform}"
   task :prepare do
@@ -127,6 +142,7 @@ namespace :cordova do
       system({"ENVIRONMENT" => environment}, "cordova prepare #{platform}")
       unless platform == "ios"
         sh %{ cordova plugin add #{SPLUNKMINT_PLUGIN_URL} --variable MINT_APIKEY="#{splunk_mint_key}" }
+        sh %{ cordova plugin add cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=27 }
       end
     end
     if platform == "ios"
@@ -139,11 +155,9 @@ namespace :cordova do
   desc "Cordova build {platform}"
   task build: :prepare do
     Dir.chdir(CORDOVA_PATH) do
-      team_id = ENV['IOS_DEVELOPMENT_TEAM_ID']
-      provisioning_profile = ENV['PROVISIONING_PROFILE_STAGING']
-      provisioning_profile = ENV['PROVISIONING_PROFILE_PROD'] if(environment === 'production')
-      build = environment == 'staging' && platform == 'android' ? 'debug' : 'release'
-      system({ 'ENVIRONMENT' => environment }, "cordova compile #{platform} --#{build} --device  --codeSignIdentity='iPhone Developer' --developmentTeam=#{team_id} --provisioningProfile=#{provisioning_profile}")
+      build = (environment == "staging" && platform == 'android') ? "debug" : "release"
+      extra_params = (platform === "android") ? '' : ios_build_config
+      system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device #{extra_params}")
     end
     # Copy build artifacts
     if ENV["CI"]
@@ -278,6 +292,25 @@ def app_version
     print "Enter GoodCity app version: "
     @ver = STDIN.gets.strip
   end
+end
+
+def ios_build_config
+  signing_style = IOS_SIGNING_STYLE
+  team_id = ENV['IOS_DEVELOPMENT_TEAM_ID']
+
+  if(environment === 'production')
+    provisioning_profile = ENV['PROVISIONING_PROFILE_ADMIN_PROD']
+    code_signing = IOS_RELEASEMODE_BUILDCONF[:code_signing]
+    package_type = IOS_RELEASEMODE_BUILDCONF[:package_type]
+    icloud_container_environment = IOS_RELEASEMODE_BUILDCONF[:icloud_container_environment]
+  else
+    provisioning_profile = ENV['PROVISIONING_PROFILE_ADMIN_STAGING']
+    code_signing = IOS_DEBUGMODE_BUILDCONF[:code_signing]
+    package_type = IOS_DEBUGMODE_BUILDCONF[:package_type]
+    icloud_container_environment = IOS_DEBUGMODE_BUILDCONF[:icloud_container_environment]
+  end
+
+  " --codeSignIdentity=#{code_signing} --developmentTeam=#{team_id} --packageType=#{package_type} --provisioningProfile=\'#{provisioning_profile}\' --automaticProvisionin=#{signing_style} --icloud_container_environment=#{icloud_container_environment}"
 end
 
 def testfairy_upload_script
