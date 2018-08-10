@@ -1,7 +1,6 @@
 # Required environment variables
 # CODECLIMATE_REPO_TOKEN  - for reporting code climate statistics
 # ROLLBAR_ACCESS_TOKEN    - for reporting code deployments
-# APP_VERSION             - version of the app that is being deployed
 
 version: 2
 
@@ -164,7 +163,7 @@ jobs:
           name: Setup Environment
           command: |
             echo 'export STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
-            # echo 'export APP_VERSION=$(ruby -e 'require "nokogiri"; puts Nokogiri::XML(File.open("#{ENV["CIRCLE_WORKING_DIRECTORY"]}/cordova/config.xml")).css("widget").attr("version").content')' >> $BASH_ENV
+            echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
       - run:
           name: Print Environment Variables
           command: |
