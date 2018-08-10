@@ -159,7 +159,7 @@ jobs:
       - save-cache: *save-bundler-cache
       - attach_workspace:
           at: ~/code
-      - run: mv ~/code/dist-www ~/code/dist
+      - run: mv dist-www/ dist
       - run:
           name: Setup Environment
           command: |
@@ -170,7 +170,7 @@ jobs:
           command: |
             echo STAGE=$STAGE
             echo APP_VERSION=$APP_VERSION
-      - run: echo bundle exec cap $STAGE deploy:upload
+      - run: bundle exec cap $STAGE deploy:upload
       - run:
           name: Upload Source Map to Rollbar
           command: |
