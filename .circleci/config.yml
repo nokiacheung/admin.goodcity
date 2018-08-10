@@ -1,6 +1,11 @@
 # Required environment variables
-# CODECLIMATE_REPO_TOKEN  - for reporting code climate statistics
-# ROLLBAR_ACCESS_TOKEN    - for reporting code deployments
+# CODECLIMATE_REPO_TOKEN      - for reporting code climate statistics
+# ROLLBAR_ACCESS_TOKEN        - for reporting code deployments
+# GOODCITY_KEYSTORE_PASSWORD  - password for goodcity.keystore file
+# GOOGLE_PLAY_KEY_FILE        - private key for Fastlane to upload to Google Play Store
+# AZURE_HOST                  - URL of azure storage blob
+# AZURE_SHARE                 - Name of share inside Azure storage blob
+# AZURE_SAS_TOKEN             - Access token for Azure storage blob
 
 version: 2
 
@@ -15,7 +20,8 @@ aliases:
       key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 
   - &restore-yarn-cache
-      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+      keys:
+        - v1-yarn-packages-{{ checksum "yarn.lock" }}
   - &save-yarn-cache
       key: v1-yarn-packages-{{ checksum "yarn.lock" }}
       paths:
@@ -96,11 +102,75 @@ jobs:
             yarn run ember coverage-merge
             yarn run codeclimate-test-reporter < coverage/lcov.info
 
+  ember_cordova_build:
+    <<: *defaults
+    environment:
+        EMBER_CLI_CORDOVA: "1"
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - restore-cache: *restore-bower-cache
+      - run:
+          name: Setup Environment variables
+          command: |
+            echo 'export APP_SHA=$(echo $CIRCLE_SHA1 | cut -c1-7)' >> $BASH_ENV
+            echo 'if [ -z "$APP_SHARED_SHA" ]; then export APP_SHARED_SHA=$( git ls-remote --heads https://github.com/crossroads/shared.goodcity.git $CIRCLE_BRANCH | cut -c1-7); fi' >> $BASH_ENV
+            echo 'if [ -z "$APP_SHARED_SHA" ]; then export APP_SHARED_SHA=$( git ls-remote --heads https://github.com/crossroads/shared.goodcity.git master | cut -c1-7); fi' >> $BASH_ENV
+            echo 'export staging=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
+            echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
+      - run:
+          name: Print Environment Variables
+          command: |
+            echo EMBER_CLI_CORDOVA=$EMBER_CLI_CORDOVA
+            echo APP_SHA=$APP_SHA
+            echo APP_SHARED_SHA=$APP_SHARED_SHA
+            echo staging=$staging
+            echo APP_VERSION=$APP_VERSION
+      - run: yarn run ember build --environment=production
+      - run: mv dist/ dist-cordova
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist-cordova/
+  
   android_build:
     <<: *defaults
     docker:
       - image: circleci/android:api-23-node8-alpha
+    environment:
+      KEYSTORE: goodcity.keystore
+      GOODCITY_KEYSTORE_ALIAS: "GoodCity Admin"
     steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - attach_workspace:
+          at: ~/code
+      - run: mv dist-cordova/ cordova/www
+      - run:
+          name: Setup Environment variables
+          command: |
+            echo 'export $APP_NAME=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo Admin GoodCity; else echo S. Admin GoodCity; fi)' >> $BASH_ENV
+            echo 'export $APP_ID=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo hk.goodcity.admin; else echo hk.goodcity.adminstaging; fi)' >> $BASH_ENV
+            echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
+            echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+      - run:
+          name: Download Keystore File
+          command: yarn run azure-filestore download -f $KEYSTORE
+          working_directory: cordova
+      - run:
+          name: Download Google Play Store Key file
+          command: yarn run azure-filestore download -d google-play -f $GOOGLE_PLAY_KEY_FILE
+          working_directory: fastlane
+      - run:
+          name: Apply App settings
+          command: yarn run cordova-update-config --appname $APP_NAME --appid $APP_ID --appversion $APP_VERSION
+          working_directory: cordova
+      - run:
+          name: Cordova Prepare
+          command: yarn run cordova prepare android
+          working_directory: cordova
+      - run: |
+          cordova run android --release -- --keystore=$KEYSTORE --storePassword=$GOODCITY_KEYSTORE_PASSWORD --alias=$GOODCITY_KEYSTORE_ALIAS --password=$GOODCITY_KEYSTORE_PASSWORD
       - run: echo "Android build!"
 
   android_deploy:
@@ -189,9 +259,19 @@ workflows:
       # - upload-coverage:
       #     requires:
       #       - tests
-      # - android_build:
-      #     requires:
-      #       - tests
+      - ember_cordova_build:
+          requires:
+            - package_dependencies #tests
+          filters:
+            branches:
+              only: /^(master|live|circle2)$/
+      - android_build:
+          requires:
+            - ember_cordova_build
+          context: goodcity
+          filters:
+            branches:
+              only: /^(master|live|circle2)$/
       # - android_deploy:
       #     requires:
       #       - android_build
@@ -208,10 +288,10 @@ workflows:
             - package_dependencies #tests
           filters:
             branches:
-              only: /^(master|live|circle2)$/
+              only: /^(master|live)$/
       - www_deploy:
           requires:
             - www_build
           filters:
             branches:
-              only: /^(master|live|circle2)$/
+              only: /^(master|live)$/
