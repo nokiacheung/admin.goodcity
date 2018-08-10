@@ -1,5 +1,6 @@
 # Required environment variables
 # CODECLIMATE_REPO_TOKEN  - for reporting code climate statistics
+# ROLLBAR_ACCESS_TOKEN    - for reporting code deployments
 
 version: 2
 
@@ -16,10 +17,10 @@ aliases:
   - &restore-yarn-cache
       key: v1-yarn-packages-{{ checksum "yarn.lock" }}
   - &save-yarn-cache
+      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
         - ~/.cache/yarn
-      key: v1-yarn-packages-{{ checksum "yarn.lock" }}
   - &yarn
     |
       yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
@@ -27,9 +28,16 @@ aliases:
   - &restore-bower-cache
       key: v1-bower-components-{{ checksum "bower.json" }}
   - &save-bower-cache
+      key: v1-bower-components-{{ checksum "bower.json" }}
       paths:
         - bower_components
-      key: v1-bower-components-{{ checksum "bower.json" }}
+      
+  - &restore-bundler-cache
+      key: v1-bundle-{{ checksum "Gemfile.lock" }}
+  - &save-bundler-cache
+      key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
 
 jobs:
   checkout_code:
@@ -51,18 +59,6 @@ jobs:
       - restore-cache: *restore-bower-cache
       - run: yarn run bower install
       - save-cache: *save-bower-cache
-
-  ember_build:
-    <<: *defaults
-    steps:
-      - restore-cache: *restore-repo-cache
-      - restore-cache: *restore-yarn-cache
-      - restore-cache: *restore-bower-cache
-      - run: yarn run ember build
-      - persist_to_workspace:
-          root: dist
-          paths:
-            - '*'
 
   tests:
     <<: *defaults
@@ -100,6 +96,8 @@ jobs:
 
   android_build:
     <<: *defaults
+    docker:
+      - image: circleci/android:api-23-node8-alpha
     steps:
       - run: echo "Android build!"
 
@@ -118,10 +116,59 @@ jobs:
     steps:
       - run: echo "iOS deploy!"
 
+  www_build:
+    <<: *defaults
+    environment:
+        EMBER_CLI_CORDOVA: "0"
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - restore-cache: *restore-bower-cache
+      - run:
+          name: Setup Environment variables
+          command: |
+            echo 'export APP_SHA=$(echo $CIRCLE_SHA1 | cut -c1-7)' >> $BASH_ENV
+            echo 'export APP_SHARED_SHA=$(node -pe 'JSON.parse(process.argv[1]).gitHead' "$(cat $CIRCLE_WORKING_DIRECTORY/node_modules/shared-goodcity/package.json)" | cut -c1-7)' >> $BASH_ENV
+            echo 'export staging=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
+      - run:
+          name: Print Environment Variables
+          command: |
+            echo APP_SHA=$APP_SHA
+            echo APP_SHARED_SHA=$APP_SHARED_SHA
+            echo staging=$staging
+      - run: ember build --environment=production
+      - run: mv dist/ dist-www
+      - persist_to_workspace:
+          root: dist-www
+          paths:
+            - '*'
+
   www_deploy:
     <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5.1-node
     steps:
-      - run: echo "www deploy!"
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-bundler-cache
+      - run: bundle check --path=vendor/bundle || bundle install --deployment --jobs=4 --retry=3
+      - save-cache: *save-bundler-cache
+      - attach_workspace:
+          at: ~/code/dist
+      - run:
+          name: Setup Environment
+          command: |
+            echo 'export STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+            echo 'export APP_VERSION=$(ruby -e 'require "nokogiri"; puts Nokogiri::XML(File.open("#{ENV["CIRCLE_WORKING_DIRECTORY"]}/cordova/config.xml")).css("widget").attr("version").content')' >> $BASH_ENV
+      - run:
+          name: Print Environment Variables
+          command: |
+            echo STAGE=$STAGE
+            echo APP_VERSION=$APP_VERSION
+      - run: echo bundle exec cap $STAGE deploy:upload
+      - run:
+          name: Upload Source Map to Rollbar
+          command: |
+            curl https://api.rollbar.com/api/1/sourcemap/download -F access_token=$ROLLBAR_ACCESS_TOKEN -F version=$APP_VERSION -F minified_url=https://admin-staging.goodcity.hk/assets/goodcity.js
 
 workflows:
   version: 2
@@ -131,19 +178,15 @@ workflows:
       - package_dependencies:
           requires:
             - checkout_code
-      - ember_build:
-          requires:
-            - package_dependencies
-      - tests:
-          requires:
-            - package_dependencies
-      - upload-coverage:
-          requires:
-            - tests
-            
+      # - tests:
+      #     requires:
+      #       - package_dependencies
+      # - upload-coverage:
+      #     requires:
+      #       - tests
       # - android_build:
       #     requires:
-      #       - ember_build
+      #       - tests
       # - android_deploy:
       #     requires:
       #       - android_build
@@ -155,6 +198,15 @@ workflows:
       #     requires:
       #       - ios_build
       #       - tests
-      # - www_deploy:
-      #     requires:
-      #       - tests
+      - www_build:
+          requires:
+            - package_dependencies #tests
+          filters:
+            branches:
+              only: /^(master|live|circle2)$/
+      - www_deploy:
+          requires:
+            - www_build
+          filters:
+            branches:
+              only: /^(master|live|circle2)$/
