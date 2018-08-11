@@ -150,8 +150,8 @@ jobs:
       - run:
           name: Setup Environment variables
           command: |
-            echo 'export $APP_NAME=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo \"Admin GoodCity\"; else echo \"S. Admin GoodCity\"; fi)' >> $BASH_ENV
-            echo 'export $APP_ID=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo \"hk.goodcity.admin\"; else echo \"hk.goodcity.adminstaging\"; fi)' >> $BASH_ENV
+            echo 'export APP_NAME=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo \"Admin GoodCity\"; else echo \"S. Admin GoodCity\"; fi)' >> $BASH_ENV
+            echo 'export APP_ID=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo \"hk.goodcity.admin\"; else echo \"hk.goodcity.adminstaging\"; fi)' >> $BASH_ENV
             echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
@@ -177,8 +177,10 @@ jobs:
 
   android_deploy:
     <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5.1-node
     steps:
-      - run: echo "Android deploy!"
+      - run: bundle exec fastlane android staging
 
   ios_build:
     <<: *defaults
