@@ -140,7 +140,6 @@ jobs:
     environment:
       KEYSTORE: goodcity.keystore
       GOODCITY_KEYSTORE_ALIAS: "GoodCity Admin"
-      SPLUNKMINT_PLUGIN_URL: ""
     steps:
       - restore-cache: *restore-repo-cache
       - restore-cache: *restore-yarn-cache
@@ -150,17 +149,17 @@ jobs:
       - run:
           name: Setup Environment variables
           command: |
-            echo 'export APP_NAME=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo \"Admin GoodCity\"; else echo \"S. Admin GoodCity\"; fi)' >> $BASH_ENV
-            echo 'export APP_ID=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo \"hk.goodcity.admin\"; else echo \"hk.goodcity.adminstaging\"; fi)' >> $BASH_ENV
+            echo 'export APP_NAME=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo Admin GoodCity; else echo S. Admin GoodCity; fi)' >> $BASH_ENV
+            echo 'export APP_ID=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo hk.goodcity.admin; else echo hk.goodcity.adminstaging; fi)' >> $BASH_ENV
             echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
             echo 'export BUILD=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo --release; else echo --debug; fi)' >> $BASH_ENV
-      - run: azure-filestore download -f $KEYSTORE && mv $KEYSTORE cordova/
-      - run: azure-filestore download -d google-play -f $GOOGLE_PLAY_KEY_FILE && mv $GOOGLE_PLAY_KEY_FILE fastlane/
+      - run: azure-filestore download -f "${KEYSTORE}" && mv "${KEYSTORE}" cordova/
+      - run: azure-filestore download -d google-play -f "${GOOGLE_PLAY_KEY_FILE}" && mv "${GOOGLE_PLAY_KEY_FILE}" fastlane/
       - run:
           name: Apply App settings
-          command: cordova-update-config --appname $APP_NAME --appid $APP_ID --appversion $APP_VERSION
+          command: cordova-update-config --appname "${APP_NAME}" --appid "${APP_ID}" --appversion "${APP_VERSION}"
           working_directory: cordova
       - run:
           name: Cordova Prepare
@@ -169,8 +168,8 @@ jobs:
       - run:
           name: Cordova Compile
           command: |
-            cordova compile android $BUILD --device -- --keystore=$KEYSTORE --storePassword=$GOODCITY_KEYSTORE_PASSWORD \
-              --alias=$GOODCITY_KEYSTORE_ALIAS --password=$GOODCITY_KEYSTORE_PASSWORD
+            cordova compile android "${BUILD}" --device -- --keystore="${KEYSTORE}" --storePassword="${GOODCITY_KEYSTORE_PASSWORD}" \
+              --alias="${GOODCITY_KEYSTORE_ALIAS}" --password="${GOODCITY_KEYSTORE_PASSWORD}"
           working_directory: cordova
       - store_artifacts:
           path: /home/circleci/code/cordova/platforms/android/build/outputs/apk/
