@@ -9,9 +9,9 @@ I18nTranslationsZhTw =
     "submitted": "已提交"
     "messages_title" : "信息"
     "select": "選擇"
-    "QuotaExceededError": "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='https://itunes.apple.com/in/app/goodcityadmin.hk/id1013288708?mt=8' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>"
+    "QuotaExceededError": "抱歉，此網站未能支援Safari <b>private mode.</b> 請嘗試</br><ul><li><a href='https://itunes.apple.com/in/app/goodcityadmin.hk/id1013288708?mt=8' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>"
     "search_item_label": "搜尋物資標籤"
-    "designated_dispatched_error": "You cannot edit designated/dispatched items."
+    "designated_dispatched_error": "抱歉，您無法編輯已分配的項目"
     "search":
       "no_results": "抱歉，未能找到結果"
       "server_search": "於服務器上尋找更多資訊"
@@ -21,12 +21,12 @@ I18nTranslationsZhTw =
       "search": "搜尋使用者"
 
     "holiday":
-      "name": "Holiday Name"
-      "date": "Date"
-      "add": "Add"
-      "manage": "Manage Holidays"
-      "description": "Donors will not be able to book a delivery or drop-off on the 'holiday' dates listed below."
-      "delete_confirm": "Are you sure you wish to delete this holiday?"
+      "name": "假期名稱"
+      "date": "日期"
+      "add": "增加"
+      "manage": "管理假期"
+      "description": "捐贈者將無法於'假期'內預約送貨"
+      "delete_confirm": "你確定要刪除此項假期嗎?"
 
     "offer":
       "title": "捐獻細節"
@@ -63,13 +63,13 @@ I18nTranslationsZhTw =
         "inactive": "列作暫停"
 
     "items":
-      "add_item":
+      "add_item": "增加項目"
         "description_placeholder" : "這是甚麼？有多少件物資？物資大小？"
 
     "item":
-      "accepted": "Accepted"
-      "multiple_designation": "designated"
-      "all_dispatched": "Out of stock"
+      "accepted": "已接受"
+      "multiple_designation": "已分配"
+      "all_dispatched": "缺貨"
       "submitted_status": "這項物品正在等候審查。"
       "in_review_status": "正在審查這項物品。"
       "accepted_status": "已接受這項物品。"
@@ -93,7 +93,7 @@ I18nTranslationsZhTw =
       "closed_offers": "已完成"
       "receiving": "正在接收"
       "users": "使用者"
-      "holidays": "Holidays"
+      "holidays": "假期"
       "search_offer_message": "只顯示最近更新的捐贈項目，請使用搜尋功能檢閱過往項目。"
 
     "my_notifications":
@@ -167,10 +167,10 @@ I18nTranslationsZhTw =
       "crossroads_requirement": "要求十字路會運送"
       "complete_review": "完成審查"
       "ggv_hire": "要求租用GoGoVan"
-      "portion_for_crossroads_truck": "這項捐獻需要佔用十字路會貨車多少空間？"
+      "portion_for_crossroads_truck": "這項捐獻預計需要佔用貨車多少空間？"
       "goods_received" : "物資接收日期"
       "arrange_transport": "安排運輸"
-      "van": "麵包車"
+      "van": "小型貨車"
       "receiving" : "正在接收這項捐獻"
       "offer_cancelled_by": "這項捐獻由 {{lastName}} {{firstName}} 取消"
       "complete_review_message": "已完成審查閣下的捐獻項目， 請 [click_here|transport_page] 安排遞送服務。"
@@ -186,14 +186,14 @@ I18nTranslationsZhTw =
       "reject" : "不接受"
       "reject_item" : "拒絕物品"
       "not_now" : "暫不決定"
-      "donor_message" : "捐贈者信息"
-      "supervisor_message" : "監察員信息"
+      "donor_message" : "捐贈者訊息"
+      "supervisor_message" : "指導員訊息"
       "view_lable_guide": "檢閱決定準則"
       "condition": "狀況"
       "add_component": "增加配件"
       "add_item_label": "增加物品標籤"
-      "assign": "Assign"
-      "select_package_image": "Choose the favourite image for this package:"
+      "assign": "指派"
+      "select_package_image": "請選擇此項目最合適的相片:"
 
     "reject":
       "select_type": "請先選取物資類型！"
@@ -221,8 +221,8 @@ I18nTranslationsZhTw =
       "missing": "遺失"
       "receive": "接收"
       "inventory": "存貨"
-      "label": "Label"
-      "resubmit": "To receive this offer, please re-submit and review the offer."
+      "label": "標籤"
+      "resubmit": "若你接受此項目,請重新提交及審查物資"
       "receiving":
         "header": "開始接收捐獻項目"
         "cant_modify_note": "提示：一旦捐獻項目狀態改成「正在接收」，將無法還原，捐獻人士亦無法更改物資資料。"
@@ -260,7 +260,7 @@ I18nTranslationsZhTw =
       "invalid_inventory": "存貨號碼不正確"
       "invalid_quantity": "空格不能留空"
       "invalid_description": "空格不能留空"
-      "invalid_location": "Location can not be blank."
+      "invalid_location": "抱歉，你必須輸入地址！"
       "receive": "接收"
       "cancel": "取消"
       "enter_barcode": "輸入條碼"
